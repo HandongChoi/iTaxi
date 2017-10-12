@@ -15,9 +15,22 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class SelectAndSortingPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    
+  selectOptions: any;
+  e1: any;
+  e2: any;
 
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.selectOptions = {
+    title: '목적지',
+    subTitle: '원하시는 목적지를 체크해주세요.',
+    mode: 'md'
+    };
+    console.log("Working?!?!");
+  }
+
+  IonChange(selectedValue){
+    console.log("Selected:",selectedValue);
+    this.e1=selectedValue;
   }
 
   ionViewDidLoad() {
