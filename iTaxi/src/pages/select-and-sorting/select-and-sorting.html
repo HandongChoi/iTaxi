@@ -17,30 +17,30 @@
 
 
 <ion-content padding>
+  <ion-item>
+    <ion-label>Gender</ion-label>
+    <ion-select [selectOptions]="selectOptions" [(ngModel)]="gender" multiple="true">
+      <ion-option value="f">Female</ion-option>
+      <ion-option value="m">Male</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-list>
     <ion-item>
-      <ion-label>Gender</ion-label>
-      <ion-select [selectOptions]="selectOptions" [(ngModel)]="gender" multiple="true">
-        <ion-option value="f">Female</ion-option>
-        <ion-option value="m">Male</ion-option>
+      <ion-label>Select Hive</ion-label>
+      <ion-select #newSelect [(ngModel)]="carbrand" multiple="true" (ionChange)="IonChange(carbrand)">
+        <ion-option value="Porsche" checked="true">Porsche</ion-option>
+        <ion-option value="Mercedes" >Mercedes</ion-option>
+        <ion-option value="Buggati">Buggati</ion-option>
+        <ion-option value="Lamborghini">Lamborghini</ion-option>
+        <ion-option value="Domster">Domster</ion-option>
       </ion-select>
     </ion-item>
-
-    <ion-list>
-      <ion-item>
-        <ion-label>Select Hive</ion-label>
-        <ion-select #newSelect [(ngModel)]="carbrand" multiple="true" (ionChange)="IonChange(carbrand)">
-          <ion-option value="Porsche" checked="true">Porsche</ion-option>
-          <ion-option value="Mercedes" >Mercedes</ion-option>
-          <ion-option value="Buggati">Buggati</ion-option>
-          <ion-option value="Lamborghini">Lamborghini</ion-option>
-          <ion-option value="Domster">Domster</ion-option>
-        </ion-select>
-      </ion-item>
-    </ion-list>
-    
-    <ion-list>
-      <button menuClose ion-item *ngFor="let time of e1">
-        {{e1}}
-      </button>
-    </ion-list>
+  </ion-list>
+  
+  <ion-list>
+    <button menuClose ion-item *ngFor="let time of e1">
+      {{e1}}
+    </button>
+  </ion-list>
 </ion-content>

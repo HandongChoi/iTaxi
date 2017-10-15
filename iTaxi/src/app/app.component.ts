@@ -6,6 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { SelectAndSortingPage } from '../pages/select-and-sorting/select-and-sorting'
+import { MakeRoomPage } from '../pages/makeRoom/makeRoom'
 
 @Component({
   templateUrl: 'app.html'
@@ -25,6 +26,7 @@ export class MyApp {
       { title: 'Home', component: HomePage },
       { title: 'List', component: ListPage },
       { title: 'Select testing', component: SelectAndSortingPage},
+      { title: 'MakeRoom', component: MakeRoomPage},
     ];
 
   }

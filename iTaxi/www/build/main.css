@@ -25511,3 +25511,79 @@ ion-navbar.toolbar {
   height: calc(46px + constant(safe-area-inset-top));
   min-height: calc(46px + constant(safe-area-inset-top));
 }
+
+.room_button {
+  text-align: center;
+}
+
+.button.customBtn {
+  width: 230px;
+  font-size: 17px;
+  background-color: #3C89C9;
+}
+
+.start-date {
+  color: #29B5EF;
+}
+
+.my-select {
+  max-width: 100%;
+  min-width: 100%;
+  font-size: 15px;
+  position: absolute;
+}
+
+.start-time {
+  color: #29B5EF;
+}
+
+.sidebar-top {
+  background-color: #29B5EF;
+}
+
+.custom-alert button.alert-button-group {
+  width: 50%;
+}
+
+.custom-alert .alert-button-group .button-inner {
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.custom-alert .alert-button-group-vertical {
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  flex-direction: row;
+}
+
+.custom-alert .people-button {
+  background-image: url("../assets/img/p1.png");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.custom-alert .people-two-button {
+  background-image: url("../assets/img/p2.png");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.custom-alert .people-three-button {
+  background-image: url("../assets/img/p3.png");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.custom-alert .people-four-button {
+  background-image: url("../assets/img/p4.png");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}

@@ -6,6 +6,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { SelectAndSortingPage } from '../pages/select-and-sorting/select-and-sorting'
+import { MakeRoomPage } from '../pages/makeRoom/makeRoom'
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -16,6 +17,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     HomePage,
     ListPage,
     SelectAndSortingPage,
+    MakeRoomPage,
   ],
   imports: [
     BrowserModule,
@@ -27,6 +29,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     HomePage,
     ListPage,
     SelectAndSortingPage,
+    MakeRoomPage,
   ],
   providers: [
     StatusBar,
