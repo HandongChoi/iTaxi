@@ -1,34 +1,34 @@
-# Specifies intentionally untracked files to ignore when using Git
-# http://git-scm.com/docs/gitignore
+#Specifies intentionally untracked files to ignore when using Git
+#http://git-scm.com/docs/gitignore
 
-iTaxi//*~
-iTaxi/*.sw[mnpcod]
-iTaxi/*.log
-iTaxi/*.tmp
-iTaxi/*.tmp.*
-iTaxi/log.txt
-iTaxi/*.sublime-project
-iTaxi/*.sublime-workspace
-iTaxi/.vscode/
-iTaxi/npm-debug.log*
+*~
+*.sw[mnpcod]
+*.log
+*.tmp
+*.tmp.*
+log.txt
+*.sublime-project
+*.sublime-workspace
+.vscode/
+npm-debug.log*
 
-iTaxi/.idea/
-iTaxi/.sourcemaps/
-iTaxi/.sass-cache/
-iTaxi/.tmp/
-iTaxi/.versions/
-iTaxi/coverage/
-iTaxi/dist/
-iTaxi/node_modules/
-iTaxi/tmp/
-iTaxi/temp/
-iTaxi/hooks/
-iTaxi/platforms/
-iTaxi/plugins/
-iTaxi/plugins/android.json
-iTaxi/plugins/ios.json
-iTaxi/www/
-iTaxi/$RECYCLE.BIN/
+.idea/
+.sourcemaps/
+.sass-cache/
+.tmp/
+.versions/
+coverage/
+dist/
+node_modules/
+tmp/
+temp/
+hooks/
+platforms/
+plugins/
+plugins/android.json
+plugins/ios.json
+www/
+$RECYCLE.BIN/
 
 .DS_Store
 Thumbs.db
