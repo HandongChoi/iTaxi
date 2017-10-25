@@ -25587,3 +25587,37 @@ ion-navbar.toolbar {
   background-size: contain;
   background-repeat: no-repeat;
 }
+
+table.small-table {
+  cellspacing: 10;
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  bgcolor: blue;
+  table-layout: fixed;
+  color: white;
+  font-style: bold;
+}
+
+.labels {
+  color: gray;
+  font-size: 12px;
+  height: 14px;
+}
+
+table.main-table {
+  cellspacing: 4;
+  padding: 0;
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  table-layout: fixed;
+  color: #616161;
+  overflow: hidden;
+  height: 20px;
+  font-size: 14px;
+}
+
+table.main-table > td {
+  padding-bottom: 5em;
+}
