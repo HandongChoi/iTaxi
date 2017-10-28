@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-  <script data-ionic="inject">
-    (function(w){var i=w.Ionic=w.Ionic||{};i.version='3.7.1';i.angular='4.4.3';i.staticDir='build/';})(window);
-  </script>
   <meta charset="UTF-8">
   <title>Ionic App</title>
   <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -18,6 +15,21 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
+
+  <!--Firebase-->
+  <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-database.js"></script>
+ <!--<script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-messaging.js"></script> -->
+  <script src="/firebase/init.js"></script>
+
+
+  <!--Kakao-->
+  <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+  <script src="/login.js"></script>
+
+
   <!-- cordova.js required for cordova apps -->
   <script src="cordova.js"></script>
 
@@ -31,6 +43,8 @@
   </script>-->
 
   <link href="build/main.css" rel="stylesheet">
+
+
 
 </head>
 <body>
