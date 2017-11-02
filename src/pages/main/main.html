@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-navbar color = "primary">
+    <button ion-button end menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>i-Taxi</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="card-background-page">
+  <button ion-item color="light2" style="font-size: 1.3rem" (click)="openTaxiList()" >
+    <ion-icon name="ios-information-circle-outline" item-start></ion-icon>
+    공지사항입니다. 공지사항입니다.
+  </button>
+
+  <ion-card (click)="openTaxiList()">
+    <img src="../../assets/imgs/taxi.png"/>
+    <div class="card-title">i-Taxi</div>
+    <div class="card-subtitle">타러가기</div>
+  </ion-card>
+  <ion-card (click)="openTaxiList()">
+    <img src="../../assets/imgs/taxi.png"/>
+    <div class="card-title">i-Taxi</div>
+    <div class="card-subtitle">타러가기</div>
+  </ion-card>
+
+  <ion-buttons>
+  <!-- full button -->
+      <!-- <button ion-button large full icon-left (click)="openTaxiList()" >
+        <ion-icon name="car"></ion-icon>
+        i-Taxi 탑승
+      </button>
+      <button ion-button large full color="secondary" icon-left (click)="openTaxiList()" >
+        <ion-icon name="car"></ion-icon>
+        카풀 탑승
+      </button>
+      <button ion-button large full color="tertiary" icon-left (click)="openTaxiList()" >
+        <ion-icon name="person"></ion-icon>
+        마이페이지
+      </button> -->
+  <!-- round button -->
+    <!-- <ion-grid>
+      <ion-row justify-content-center style="padding: 10px 0; margin-top: 25px">
+        <button ion-button round class="customBtn" icon-left (click)="openTaxiList()" >
+          i-Taxi 탑승
+        </button>
+      </ion-row>
+      <ion-row justify-content-center style="padding: 10px 0">
+        <button ion-button round class="customBtn" color="secondary" icon-left (click)="openTaxiList()" >
+          카풀 탑승
+        </button>
+      </ion-row>
+      <ion-row justify-content-center style="padding: 10px 0">
+        <button ion-button round class="customBtn" color="tertiary" icon-left (click)="openTaxiList()" >
+          마이페이지
+        </button>
+      </ion-row>
+    </ion-grid> -->
+  </ion-buttons>
+
+  <!-- my Ticket -->
+  <ion-card style="border-radius:5px; margin-top:30px">
+    <ion-row style="background-color:#0054a6; color:white; padding:5px 0 5px 15px">
+      2017.9.1 (토)
+    </ion-row>
+    <ion-row>
+      <ion-col col-4 text-center style="border-right: 1px solid #ddd9d9">
+        <h3>Taxi</h3>
+        <p style = "font-size: 9px">현 2/4 명</p>
+      </ion-col>
+      <ion-col text-center>
+        <h3>한동대학교 <ion-icon name="arrow-forward"></ion-icon> 양덕 하나로마트</h3>
+        <p padding-left style = "font-size: 10px">8:30</p>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+  <!-- <button ion-button secondary menuToggle>Toggle Menu</button> -->
+</ion-content>

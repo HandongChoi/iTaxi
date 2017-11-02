@@ -1,0 +1,52 @@
+<!--
+  Generated template for the SettingPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color = "primary">
+    <button ion-button end menuToggle >
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>설정</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-list-header> 내정보 </ion-list-header>
+      <ion-item>
+        <ion-row>
+          <ion-avatar item-start>
+            <img src="../../assets/imgs/woody.jpeg">
+          </ion-avatar>
+          <h2>류여진</h2> &nbsp; <h4>010-1111-2222</h4>
+        </ion-row>
+        <ion-row justify-content-center>
+              <button ion-button color="primary" small round outline >개인정보 수정</button>
+              <button ion-button color="primary" small round outline >회원탈퇴</button>
+        </ion-row>
+      </ion-item>
+
+    <ion-list-header> PUSH알림 </ion-list-header>
+      <ion-item>
+        <ion-label>메세지 알림</ion-label>
+        <ion-toggle checked="true"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>공지 알림</ion-label>
+        <ion-toggle checked="true"></ion-toggle>
+      </ion-item>
+
+    <ion-list-header> 문의 </ion-list-header>
+      <ion-item>
+        hguitaxi@gmail.com
+      </ion-item>
+
+    <ion-list-header> 버전 </ion-list-header>
+      <ion-item>
+        1
+      </ion-item>
+  </ion-list>
+</ion-content>
