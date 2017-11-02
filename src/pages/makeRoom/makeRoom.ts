@@ -6,16 +6,15 @@ import { AlertController } from 'ionic-angular';
   templateUrl: 'makeRoom.html',
 })
 
-
-
 export class MakeRoomPage {
-  start: string = "";
-  arrive: string = "";
+  start: string = "한동대학교";
+  start2: string = ""
+  arrive: string = "포항역";
   arrive2: string ="";
   start_list: Array<{start_list:string, value:string}>;
   swap: string ="";
-  startDate: string ="";
-  startTime: string = "";       
+  startDate: string = new Date().toISOString();
+  startTime: string = new Date().toISOString();       
 
   constructor(public alertCtrl: AlertController){
     this.start_list = [
@@ -26,6 +25,7 @@ export class MakeRoomPage {
       {start_list:'시외버스터미널', value:'시외버스터미널'},
       {start_list:'북부해수욕장', value:'북부해수욕장'},
       {start_list:'육거리',value:'육거리'},
+      {start_list:'직접입력',value:this.start2},
     ];
   }
 
@@ -68,6 +68,22 @@ export class MakeRoomPage {
   }
 
   swap_position(){
+    if (this.arrive2){
+      this.swap = this.start;
+      this.start2 = this.arrive2;
+      this.arrive2 = this.swap;}
+
+    else if(this.start2){
+      this.swap = this.arrive;
+      this.arrive2 = this.start2;
+      this.start2 = this.swap;}
+    /*
+    else if(this.arrive2 && this.start2){
+      this.swap = this.arrive2;
+      this.arrive2 = this.start2;
+      this.start2 = this.arrive2;
+    }*/
+
     this.swap = this.start;
     this.start = this.arrive;
     this.arrive = this.swap; 
