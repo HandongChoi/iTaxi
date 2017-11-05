@@ -1,34 +1,27 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, NavController, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
-import { SelectAndSortingPage } from '../pages/select-and-sorting/select-and-sorting'
-import { MakeRoomPage } from '../pages/makeRoom/makeRoom'
+import { MakeTaxiRoomPage } from '../pages/makeTaxiRoom/makeTaxiRoom';
+import { TaxiListPage } from '../pages/taxi-list/taxi-list';
+import { SelectAndSortingPage } from '../pages/select-and-sorting/select-and-sorting';
+import { ChatRoomPage } from '../pages/chatroom/chatroom';
+import { MainPage } from '../pages/main/main';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  @ViewChild(Nav) nav: Nav;
+  @ViewChild(Nav) navCtrl: NavController;
 
-  rootPage: any = SelectAndSortingPage;
-
-  pages: Array<{title: string, component: any}>;
+  rootPage:any = HomePage;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage },
-      { title: 'Select testing', component: SelectAndSortingPage},
-      { title: 'MakeRoom', component: MakeRoomPage},
-    ];
-
   }
 
   initializeApp() {
@@ -40,9 +33,35 @@ export class MyApp {
     });
   }
 
-  openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+  inviteFriend(){
+    alert('invite friend');
+  }
+
+  leaveRoom(){
+    alert('leave');
+  }
+
+  goTaxiListPage(){
+    this.navCtrl.push(TaxiListPage, {});
+  }
+  
+  goMakeTaxiRoomPage(){
+    this.navCtrl.push(MakeTaxiRoomPage, {});
+  }
+
+  goCarpoolListPage(){
+    alert('Carpool Page');
+  }
+
+  goMakeCarpoolRoomPage(){
+    alert('Make Carpool Room Page');
+  }
+
+  goBoardingListPage(){
+    alert('Boarding List Page');
+  }
+
+  goEditMyInfoPage(){
+    alert('Edit My Info Page');
   }
 }
