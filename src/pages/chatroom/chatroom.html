@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Chat Room
+    </ion-title>
+  </ion-navbar >
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let chat of chats | async; let last = last">
+      {{chat.user_id}} : {{chat.content}}
+      {{last ? scrollBottom() : ''}}
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-item>  
+    <ion-input [(ngModel)]="chat_content" fixed type="text"></ion-input>
+    <button ion-button clear item-right (click)="send()" (click)="scrollBottom()"> send </button>
+  </ion-item>
+</ion-footer>
