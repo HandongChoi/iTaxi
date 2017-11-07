@@ -21,7 +21,6 @@ export class MakeTaxiRoomPage {
     startTime: string = "";
 
     chatrooms: FirebaseListObservable<any[]>;
-    af: any;
     user_id: string;       
 
     constructor(public alertCtrl: AlertController, public navParams: NavParams, public navCtrl:NavController, public af: AngularFireDatabase){
