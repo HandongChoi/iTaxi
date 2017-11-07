@@ -29,184 +29,34 @@
     </tbody>
   </table>
 
-  <ion-item-group>
-    <ion-item-divider class="item item-divider item-sm item-divider-md item-md-light item-divider-sm-light" color="light">
-     <ion-label class="label label-sm labels">2017년 12월 21일</ion-label>
+
+  <ion-item-group *ngFor = "let dates of dates_array">
+    <ion-item-divider class="item item-divider item-sm item-divider-md item-md-light item-divider-sm-light" color="light" *ngFor = "let date of dates">
+     <ion-label class="label label-sm labels">{{date.$key}}</ion-label>
     <div class="button-effect"></div>
     </ion-item-divider>
 
-    <ion-item class="item item-block item-sm">
-      <div class="input-wrapper"><!---->
+    <button ion-button class="item item-block item-sm" (click)="goChatroom($event, date)" *ngFor = "let chatroom of chatrooms">
+      <div class="input-wrapper">
         <table class="main-table">
             <tr>
-              <td><h6>9:50 AM  </h6></td>
-              <td><h6> 한동대</h6></td>
-              <td><h6> 포항역</h6></td>
+              <td><h6> {{chatroom.time}}  </h6></td>
+              <td><h6> {{chatroom.departure}}</h6></td>
+              <td><h6> {{chatroom.destination}} </h6></td>
               <td><ion-img width="50" height="20" src="img.png"></ion-img></td>
             </tr>
         </table>
       </div>
      <div class="button-effect"></div>
-    </ion-item>
-  
-    <ion-item class="item item-block item-sm">
-  
-      <div class="input-wrapper"><!---->
-        <table class="main-table">
-            <tr>
-              <td><h6>1:50 PM  </h6></td>
-              <td><h6> 포항역</h6></td>
-              <td><h6> 양덕</h6></td>
-              <td><ion-img width="50" height="20" src="img.png"></ion-img></td>
-            </tr>
-        </table>
-       </div>
-     <div class="button-effect"></div>
-    </ion-item>
-  
-    <ion-item class="item item-block item-sm">
-      <div class="input-wrapper"><!---->
-        <table class="main-table">
-          <tbody>
-            <tr>
-              <td><h6>9:30 PM  </h6></td>
-              <td><h6> 한동대 </h6></td>
-              <td><h6> 고터</h6></td>
-              <td><ion-img width="50" height="20" src="img.png"></ion-img></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-     <div class="button-effect"></div>
-    </ion-item>
-    <ion-item class="item item-block item-sm">
-      <div class="input-wrapper"><!---->
-        <table class="main-table">
-          <tbody>
-            <tr>
-              <td><h6>11:00 PM  </h6></td>
-              <td><h6> 한동대 </h6></td>
-              <td><h6> 고터</h6></td>
-              <td><ion-img width="50" height="20" src="img.png"></ion-img></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-     <div class="button-effect"></div>
-    </ion-item>
-
-  </ion-item-group>
-
- <ion-item-group>
-    <ion-item-divider class="item item-divider item-sm item-divider-md item-md-light item-divider-sm-light" color="light">
-     <ion-label class="label label-sm labels">2017년 12월 21일</ion-label>
-    <div class="button-effect"></div>
-    </ion-item-divider>
-
-    <ion-item class="item item-block item-sm">
-      <div class="input-wrapper"><!---->
-        <table class="main-table">
-            <tr>
-              <td><h6>9:50 AM  </h6></td>
-              <td><h6> 한동대</h6></td>
-              <td><h6> 포항역</h6></td>
-              <td><ion-img width="50" height="20" src="img.png"></ion-img></td>
-            </tr>
-        </table>
-      </div>
-     <div class="button-effect"></div>
-    </ion-item>
-  
-    <ion-item class="item item-block item-sm">
-  
-      <div class="input-wrapper"><!---->
-        <table class="main-table">
-            <tr>
-              <td><h6>1:50 PM  </h6></td>
-              <td><h6> 포항역</h6></td>
-              <td><h6> 양덕</h6></td>
-              <td><ion-img width="50" height="20" src="img.png"></ion-img></td>
-            </tr>
-        </table>
-       </div>
-     <div class="button-effect"></div>
-    </ion-item>
-  
-    <ion-item class="item item-block item-sm">
-      <div class="input-wrapper"><!---->
-        <table class="main-table">
-          <tbody>
-            <tr>
-              <td><h6>9:30 PM  </h6></td>
-              <td><h6> 한동대 </h6></td>
-              <td><h6> 고터</h6></td>
-              <td><ion-img width="50" height="20" src="img.png"></ion-img></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-     <div class="button-effect"></div>
-    </ion-item>
+    </button>
   </ion-item-group>  
-<ion-item-group>
-    <ion-item-divider class="item item-divider item-sm item-divider-md item-md-light item-divider-sm-light" color="light">
-     <ion-label class="label label-sm labels">2017년 12월 21일</ion-label>
-    <div class="button-effect"></div>
-    </ion-item-divider>
 
-    <ion-item class="item item-block item-sm">
-      <div class="input-wrapper"><!---->
-        <table class="main-table">
-            <tr>
-              <td><h6>9:50 AM  </h6></td>
-              <td><h6> 한동대</h6></td>
-              <td><h6> 포항역</h6></td>
-              <td><ion-img width="50" height="20" src="img.png"></ion-img></td>
-            </tr>
-        </table>
-      </div>
-     <div class="button-effect"></div>
-    </ion-item>
-  
-    <ion-item class="item item-block item-sm">
-  
-      <div class="input-wrapper"><!---->
-        <table class="main-table">
-            <tr>
-              <td><h6>1:50 PM  </h6></td>
-              <td><h6> 포항역</h6></td>
-              <td><h6> 양덕</h6></td>
-              <td><ion-img width="50" height="20" src="img.png"></ion-img></td>
-            </tr>
-        </table>
-       </div>
-     <div class="button-effect"></div>
-    </ion-item>
-  
-    <ion-item class="item item-block item-sm">
-      <div class="input-wrapper"><!---->
-        <table class="main-table">
-          <tbody>
-            <tr>
-              <td><h6>9:30 PM  </h6></td>
-              <td><h6> 한동대 </h6></td>
-              <td><h6> 고터</h6></td>
-              <td><ion-img width="50" height="20" src="img.png"></ion-img></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-     <div class="button-effect"></div>
-    </ion-item>
-  </ion-item-group>
-  
-  </div>
-
+</div>
 
   <div class="fixed-content" style="margin-top: 85px;">
 
   <ion-fab bottom="" right="">
-      <button color="dark" ion-fab="" class="fab fab-md fab-md-dark">
+      <button color="dark" ion-fab="" class="fab fab-md fab-md-dark" (click)="makeRoom()">
         <ion-icon class="fab-close-icon icon icon-md ion-md-close" name="close" role="img" aria-label="close"></ion-icon>
         <span class="button-inner">
           <ion-icon name="add" role="img" class="icon icon-md ion-md-add" aria-label="add" ></ion-icon>

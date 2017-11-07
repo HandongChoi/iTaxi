@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
+
+import { ChatRoomPage } from '../chatroom/chatroom';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 @Component({
   templateUrl: 'makeRoom.html',
@@ -16,7 +19,11 @@ export class MakeRoomPage {
   startDate: string = new Date().toISOString();
   startTime: string = new Date().toISOString();       
 
-  constructor(public alertCtrl: AlertController){
+  chatrooms: FirebaseListObservable<any[]>;
+  user_id: string;    
+
+  constructor(public alertCtrl: AlertController, public navParams: NavParams,
+               public navCtrl:NavController, public af: AngularFireDatabase){
     this.start_list = [
       {start_list:'한동대학교', value:'한동대학교'},
       {start_list:'포항역', value:'포항역'},
@@ -27,6 +34,8 @@ export class MakeRoomPage {
       {start_list:'육거리',value:'육거리'},
       {start_list:'직접입력',value:this.start2},
     ];
+
+    this.user_id = navParams.data.user_id;
   }
 
   showPeopleAlert(){
@@ -52,11 +61,30 @@ export class MakeRoomPage {
       alert.addButton({
         text: 'OK',
         handler: data => {
-          console.log("출발지: " + this.start + " 도착지: " + this.arrive);
-          console.log("출발시간: " + this.startTime + " 출발날짜: " + this.startDate);
-          console.log(data);
+          if (this.arrive2)
+              this.arrive = this.arrive2;
+  
+          let participants_list = [];
+          participants_list.push(this.user_id);
+  
+          let url;
+  
+          this.chatrooms = this.af.list('/chatrooms/' + "2017-11-09"); //이 부분 날짜 수정
+  
+          url = this.chatrooms.push(
+              {
+                  departure: this.start,
+                  destination: this.arrive,
+                  depart_time: this.startTime,
+                  depart_date: this.startDate,
+                  capacity: 3, //여기 해결하기.
+                  host: this.user_id,
+                  participants: participants_list
+              }
+          );
+        
+          this.navCtrl.push(ChatRoomPage, {chat_room_id: url.key, user_id: this.user_id});                
         }
-          
       });
 
       alert.setTitle('탑승인원');
@@ -113,13 +141,30 @@ export class MakeRoomPage {
       text: 'OK',
       handler: data => {
         if (this.arrive2)
-          this.arrive = this.arrive2;
+            this.arrive = this.arrive2;
 
-        console.log("출발지: " + this.start + " 도착지: " + this.arrive);
-        console.log("출발시간: " + this.startTime + " 출발날짜: " + this.startDate);
-        console.log(data);
-        }          
-      });
+        let participants_list = [];
+        participants_list.push(this.user_id);
+
+        let url;
+
+        this.chatrooms = this.af.list('/chatrooms/' + this.startDate);
+
+        url = this.chatrooms.push(
+            {
+                departure: this.start,
+                destination: this.arrive,
+                depart_time: this.startTime,
+                depart_date: this.startDate,
+                capacity: data,
+                host: this.user_id,
+                participants: participants_list
+            }
+        );
+      
+        this.navCtrl.push(ChatRoomPage, {chat_room_id: url.key, user_id: this.user_id});                
+      }
+    });
     alert.present();
   };
 

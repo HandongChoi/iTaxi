@@ -1,9 +1,11 @@
 page-main {
+
+}
+page-home {
     .large_button {
       line-height: 100vh !important;
       width:100%;
     }
-
     .customBtn{
       width:70%;
     }
@@ -13,7 +15,6 @@ page-main {
         position: relative;
         text-align: center;
       }
-
       .card-title {
         position: absolute;
         top: 36%;
@@ -22,7 +23,6 @@ page-main {
         font-weight: bold;
         color: #fff;
       }
-
       .card-subtitle {
         font-size: 1.0em;
         position: absolute;

@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, NavController, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -11,12 +11,13 @@ import { MakeRoomPage } from '../pages/makeRoom/makeRoom'
 import { TaxiListPage } from '../pages/taxi-list/taxi-list'
 import { SettingPage } from '../pages/setting/setting';
 import { PersonalInfoPage } from '../pages/personal-info/personal-info';
+import { ChatRoomPage } from '../pages/chatroom/chatroom';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  @ViewChild(Nav) nav: Nav;
+  @ViewChild(Nav) navCtrl: NavController;
 
   rootPage: any = MainPage;
 
@@ -28,7 +29,8 @@ export class MyApp {
   private taxiListPage;
   private settingPage;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen
+              ) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -45,7 +47,6 @@ export class MyApp {
     this.listPage = ListPage;
     this.taxiListPage = TaxiListPage;
     this.settingPage = SettingPage;
-
   }
 
   initializeApp() {
@@ -61,6 +62,38 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     //this.nav.setRoot(page.component);
-    this.nav.setRoot(page);
+    //this.nav.setRoot(page);
+  }  
+  
+  inviteFriend(){
+    alert('invite friend');
+  }
+
+  leaveRoom(){
+    alert('leave');
+  }
+
+  goTaxiListPage(){
+    this.navCtrl.push(TaxiListPage, {});
+  }
+  
+  goMakeTaxiRoomPage(){
+    this.navCtrl.push(MakeRoomPage, {});
+  }
+
+  goCarpoolListPage(){
+    alert('Carpool Page');
+  }
+
+  goMakeCarpoolRoomPage(){
+    alert('Make Carpool Room Page');
+  }
+
+  goBoardingListPage(){
+    alert('Boarding List Page');
+  }
+
+  goEditMyInfoPage(){
+    alert('Edit My Info Page');
   }
 }

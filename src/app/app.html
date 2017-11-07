@@ -1,49 +1,49 @@
 <ion-menu [content]="content"  persistent="true" side="right">
-  <ion-header>
-    <ion-toolbar padding>
-      <ion-title>류여진 님</ion-title>
-      <ion-buttons right >
-        <button ion-button icon-only menuClose (click)="openPage(settingPage)">
-            <ion-icon name="settings" ></ion-icon>
-        </button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-header>
-
-  <ion-content>
-    <ion-grid style="background-color:#29B5EF; color:white;">
-      <ion-row justify-content-left padding-left style="padding-top:6px">
-        잠만보 (3/4)
-      </ion-row>
-      <ion-row justify-content-center padding-top>
-        10월 25일 09시 45분
-      </ion-row>
-      <ion-row justify-content-center >
-          한동대학교 &nbsp; <ion-icon name="arrow-forward"></ion-icon> &nbsp; 양덕 하나로마트
-      </ion-row>
-      <ion-row padding justify-content-center padding>
-            <button ion-button color="light" small round outline>친구 초대</button>
-            <button ion-button color="light" small round outline >방나가기</button>
-      </ion-row>
-    </ion-grid>
-    <ion-list>
-      <ion-list-header> 택시 </ion-list-header>
-      <button menuClose ion-item class="sidemenu-items" (click)="openPage(mainPage)">조회</button>
-      <button menuClose ion-item class="sidemenu-items" (click)="openPage(homePage)">모집</button>
-      <ion-list-header> 카풀 </ion-list-header>
-      <button menuClose ion-item class="sidemenu-items" (click)="openPage(listPage)">조회</button>
-      <button menuClose ion-item class="sidemenu-items" (click)="openPage(listPage)">모집</button>
-      <ion-list-header> 마이페이지 </ion-list-header>
-      <button menuClose ion-item class="sidemenu-items" (click)="openPage(taxiListPage)">탑승내역</button>
-      <button menuClose ion-item class="sidemenu-items" (click)="openPage(taxiListPage)">내정보수정</button>
-
-      <!-- <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        {{p.title}}
-      </button> -->
-    </ion-list>
-  </ion-content>
-
-</ion-menu>
-
-<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
-<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
+    <ion-header>
+      <ion-toolbar padding>
+        <ion-title>류여진 님</ion-title>
+        <ion-buttons right >
+          <button ion-button icon-only>
+              <ion-icon name="settings"></ion-icon>
+          </button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+  
+    <ion-content>
+      <ion-grid style="background-color:#29B5EF; color:white;">
+        <ion-row justify-content-left padding-left style="padding-top:6px">
+          잠만보 (3/4)
+        </ion-row>
+        <ion-row justify-content-center padding-top>
+          10월 25일 09시 45분
+        </ion-row>
+        <ion-row justify-content-center >
+            한동대학교 &nbsp; <ion-icon name="arrow-forward"></ion-icon> &nbsp; 양덕 하나로마트
+        </ion-row>
+        <ion-row padding justify-content-center padding>
+              <button ion-button color="light" small round outline (click)="inviteFriend()">친구 초대</button>
+              <button ion-button color="light" small round outline (click)="leaveRoom()">방나가기</button>
+        </ion-row>
+      </ion-grid>
+      <ion-list>
+        <ion-list-header> 택시 </ion-list-header>
+        <button menuClose ion-item class="sidemenu-items" (click)="goTaxiListPage()">조회</button>
+        <button menuClose ion-item class="sidemenu-items" (click)="goMakeTaxiRoomPage()">모집</button>
+        <ion-list-header> 카풀 </ion-list-header>
+        <button menuClose ion-item class="sidemenu-items" (click)="goCarpoolListPage()">조회</button>
+        <button menuClose ion-item class="sidemenu-items" (click)="goMakeCarpoolRoomPage()">모집</button>
+        <ion-list-header> 마이페이지 </ion-list-header>
+        <button menuClose ion-item class="sidemenu-items" (click)="goBoardingListPage()">탑승내역</button>
+        <button menuClose ion-item class="sidemenu-items" (click)="goEditMyInfoPage()">내정보수정</button>
+  
+        <!-- <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+          {{p.title}}
+        </button> -->
+      </ion-list>
+    </ion-content>
+  
+  </ion-menu>
+  
+  <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+  <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

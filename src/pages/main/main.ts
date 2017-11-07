@@ -7,7 +7,7 @@ import { TaxiListPage } from '../taxi-list/taxi-list';
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
- */
+*/
 
 @IonicPage()
 @Component({
@@ -24,4 +24,15 @@ export class MainPage {
     this.navCtrl.push(TaxiListPage)
   }
 
+  goTaxiListPage(){
+    this.navCtrl.push(TaxiListPage, {});
+  }
+
+  goCarpoolListPage(){
+    alert('Carpool Page');
+  }
+
+  goMyPage(){
+    alert('MyPage');
+  }
 }
