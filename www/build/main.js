@@ -1,6 +1,51 @@
 webpackJsonp([2],{
 
-/***/ 108:
+/***/ 100:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TaxiListPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(24);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+/**
+ * Generated class for the TaxiListPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var TaxiListPage = (function () {
+    function TaxiListPage(navCtrl, navParams) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+    }
+    TaxiListPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad TaxiListPage');
+    };
+    return TaxiListPage;
+}());
+TaxiListPage = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+        selector: 'page-taxi-list',template:/*ion-inline-start:"/Users/Hyoeun/Documents/CRA/iTaxi/src/pages/taxi-list/taxi-list.html"*/'<!--\n  Generated template for the TaxiListPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>iTaxi >> 택시조회</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content class="content content-sm padding">\n <div class="fixed-content"></div>\n\n<div class="scroll-content">\n\n  <table class = "small-table" bgcolor="#947794">\n    <tbody>\n      <tr>\n        <td><h6> 시간 </h6></td>\n        <td><h6> 출발 ▽ </h6></td>\n        <td><h6> 도착 ▽ </h6></td>\n        <td><h6> 현원 </h6></td>    \n      </tr>\n    </tbody>\n  </table>\n\n  <ion-item-group>\n    <ion-item-divider class="item item-divider item-sm item-divider-md item-md-light item-divider-sm-light" color="light">\n     <ion-label class="label label-sm labels">2017년 12월 21일</ion-label>\n    <div class="button-effect"></div>\n    </ion-item-divider>\n\n    <ion-item class="item item-block item-sm">\n      <div class="input-wrapper"><!---->\n        <table class="main-table">\n            <tr>\n              <td><h6>9:50 AM  </h6></td>\n              <td><h6> 한동대</h6></td>\n              <td><h6> 포항역</h6></td>\n              <td><ion-img width="50" height="20" src="img.png"></ion-img></td>\n            </tr>\n        </table>\n      </div>\n     <div class="button-effect"></div>\n    </ion-item>\n  \n    <ion-item class="item item-block item-sm">\n  \n      <div class="input-wrapper"><!---->\n        <table class="main-table">\n            <tr>\n              <td><h6>1:50 PM  </h6></td>\n              <td><h6> 포항역</h6></td>\n              <td><h6> 양덕</h6></td>\n              <td><ion-img width="50" height="20" src="img.png"></ion-img></td>\n            </tr>\n        </table>\n       </div>\n     <div class="button-effect"></div>\n    </ion-item>\n  \n    <ion-item class="item item-block item-sm">\n      <div class="input-wrapper"><!---->\n        <table class="main-table">\n          <tbody>\n            <tr>\n              <td><h6>9:30 PM  </h6></td>\n              <td><h6> 한동대 </h6></td>\n              <td><h6> 고터</h6></td>\n              <td><ion-img width="50" height="20" src="img.png"></ion-img></td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n     <div class="button-effect"></div>\n    </ion-item>\n    <ion-item class="item item-block item-sm">\n      <div class="input-wrapper"><!---->\n        <table class="main-table">\n          <tbody>\n            <tr>\n              <td><h6>11:00 PM  </h6></td>\n              <td><h6> 한동대 </h6></td>\n              <td><h6> 고터</h6></td>\n              <td><ion-img width="50" height="20" src="img.png"></ion-img></td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n     <div class="button-effect"></div>\n    </ion-item>\n\n  </ion-item-group>\n\n <ion-item-group>\n    <ion-item-divider class="item item-divider item-sm item-divider-md item-md-light item-divider-sm-light" color="light">\n     <ion-label class="label label-sm labels">2017년 12월 21일</ion-label>\n    <div class="button-effect"></div>\n    </ion-item-divider>\n\n    <ion-item class="item item-block item-sm">\n      <div class="input-wrapper"><!---->\n        <table class="main-table">\n            <tr>\n              <td><h6>9:50 AM  </h6></td>\n              <td><h6> 한동대</h6></td>\n              <td><h6> 포항역</h6></td>\n              <td><ion-img width="50" height="20" src="img.png"></ion-img></td>\n            </tr>\n        </table>\n      </div>\n     <div class="button-effect"></div>\n    </ion-item>\n  \n    <ion-item class="item item-block item-sm">\n  \n      <div class="input-wrapper"><!---->\n        <table class="main-table">\n            <tr>\n              <td><h6>1:50 PM  </h6></td>\n              <td><h6> 포항역</h6></td>\n              <td><h6> 양덕</h6></td>\n              <td><ion-img width="50" height="20" src="img.png"></ion-img></td>\n            </tr>\n        </table>\n       </div>\n     <div class="button-effect"></div>\n    </ion-item>\n  \n    <ion-item class="item item-block item-sm">\n      <div class="input-wrapper"><!---->\n        <table class="main-table">\n          <tbody>\n            <tr>\n              <td><h6>9:30 PM  </h6></td>\n              <td><h6> 한동대 </h6></td>\n              <td><h6> 고터</h6></td>\n              <td><ion-img width="50" height="20" src="img.png"></ion-img></td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n     <div class="button-effect"></div>\n    </ion-item>\n  </ion-item-group>  \n<ion-item-group>\n    <ion-item-divider class="item item-divider item-sm item-divider-md item-md-light item-divider-sm-light" color="light">\n     <ion-label class="label label-sm labels">2017년 12월 21일</ion-label>\n    <div class="button-effect"></div>\n    </ion-item-divider>\n\n    <ion-item class="item item-block item-sm">\n      <div class="input-wrapper"><!---->\n        <table class="main-table">\n            <tr>\n              <td><h6>9:50 AM  </h6></td>\n              <td><h6> 한동대</h6></td>\n              <td><h6> 포항역</h6></td>\n              <td><ion-img width="50" height="20" src="img.png"></ion-img></td>\n            </tr>\n        </table>\n      </div>\n     <div class="button-effect"></div>\n    </ion-item>\n  \n    <ion-item class="item item-block item-sm">\n  \n      <div class="input-wrapper"><!---->\n        <table class="main-table">\n            <tr>\n              <td><h6>1:50 PM  </h6></td>\n              <td><h6> 포항역</h6></td>\n              <td><h6> 양덕</h6></td>\n              <td><ion-img width="50" height="20" src="img.png"></ion-img></td>\n            </tr>\n        </table>\n       </div>\n     <div class="button-effect"></div>\n    </ion-item>\n  \n    <ion-item class="item item-block item-sm">\n      <div class="input-wrapper"><!---->\n        <table class="main-table">\n          <tbody>\n            <tr>\n              <td><h6>9:30 PM  </h6></td>\n              <td><h6> 한동대 </h6></td>\n              <td><h6> 고터</h6></td>\n              <td><ion-img width="50" height="20" src="img.png"></ion-img></td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n     <div class="button-effect"></div>\n    </ion-item>\n  </ion-item-group>\n  \n  </div>\n\n\n\n  <div class="fixed-content" style="margin-top: 85px;">\n\n  <ion-fab bottom="" right="">\n\n      <button color="dark" ion-fab="" class="fab fab-md fab-md-dark"><ion-icon class="fab-close-icon icon icon-md ion-md-close" name="close" role="img" aria-label="close"></ion-icon><span class="button-inner"><ion-icon name="add" role="img" class="icon icon-md ion-md-add" aria-label="add"></ion-icon></span><div class="button-effect" style="transform: translate3d(-19px, -13px, 0px) scale(1); height: 87px; width: 87px; opacity: 0; transition: transform 301ms, opacity 211ms 90ms;"></div></button>\n     \n    </ion-fab></div>\n\n\n</ion-content>'/*ion-inline-end:"/Users/Hyoeun/Documents/CRA/iTaxi/src/pages/taxi-list/taxi-list.html"*/,
+    }),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]])
+], TaxiListPage);
+
+//# sourceMappingURL=taxi-list.js.map
+
+/***/ }),
+
+/***/ 109:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -13,11 +58,11 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 108;
+webpackEmptyAsyncContext.id = 109;
 
 /***/ }),
 
-/***/ 149:
+/***/ 150:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
@@ -41,12 +86,12 @@ function webpackAsyncContext(req) {
 webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 	return Object.keys(map);
 };
-webpackAsyncContext.id = 149;
+webpackAsyncContext.id = 150;
 module.exports = webpackAsyncContext;
 
 /***/ }),
 
-/***/ 193:
+/***/ 194:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -81,7 +126,7 @@ HomePage = __decorate([
 
 /***/ }),
 
-/***/ 194:
+/***/ 195:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -137,7 +182,7 @@ var ListPage_1;
 
 /***/ }),
 
-/***/ 195:
+/***/ 196:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -261,51 +306,6 @@ MakeRoomPage = __decorate([
 
 /***/ }),
 
-/***/ 196:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TaxiListPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(24);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-/**
- * Generated class for the TaxiListPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-var TaxiListPage = (function () {
-    function TaxiListPage(navCtrl, navParams) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-    }
-    TaxiListPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad TaxiListPage');
-    };
-    return TaxiListPage;
-}());
-TaxiListPage = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-taxi-list',template:/*ion-inline-start:"/Users/Hyoeun/Documents/CRA/iTaxi/src/pages/taxi-list/taxi-list.html"*/'<!--\n  Generated template for the TaxiListPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>iTaxi >> 택시조회</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content class="content content-sm padding">\n <div class="fixed-content"></div>\n\n<div class="scroll-content">\n\n  <table class = "small-table" bgcolor="#947794">\n    <tbody>\n      <tr>\n        <td><h6> 시간 </h6></td>\n        <td><h6> 출발 ▽ </h6></td>\n        <td><h6> 도착 ▽ </h6></td>\n        <td><h6> 현원 </h6></td>    \n      </tr>\n    </tbody>\n  </table>\n\n  <ion-item-group>\n    <ion-item-divider class="item item-divider item-sm item-divider-md item-md-light item-divider-sm-light" color="light">\n     <ion-label class="label label-sm labels">2017년 12월 21일</ion-label>\n    <div class="button-effect"></div>\n    </ion-item-divider>\n\n    <ion-item class="item item-block item-sm">\n      <div class="input-wrapper"><!---->\n        <table class="main-table">\n            <tr>\n              <td><h6>9:50 AM  </h6></td>\n              <td><h6> 한동대</h6></td>\n              <td><h6> 포항역</h6></td>\n              <td><ion-img width="50" height="20" src="img.png"></ion-img></td>\n            </tr>\n        </table>\n      </div>\n     <div class="button-effect"></div>\n    </ion-item>\n  \n    <ion-item class="item item-block item-sm">\n  \n      <div class="input-wrapper"><!---->\n        <table class="main-table">\n            <tr>\n              <td><h6>1:50 PM  </h6></td>\n              <td><h6> 포항역</h6></td>\n              <td><h6> 양덕</h6></td>\n              <td><ion-img width="50" height="20" src="img.png"></ion-img></td>\n            </tr>\n        </table>\n       </div>\n     <div class="button-effect"></div>\n    </ion-item>\n  \n    <ion-item class="item item-block item-sm">\n      <div class="input-wrapper"><!---->\n        <table class="main-table">\n          <tbody>\n            <tr>\n              <td><h6>9:30 PM  </h6></td>\n              <td><h6> 한동대 </h6></td>\n              <td><h6> 고터</h6></td>\n              <td><ion-img width="50" height="20" src="img.png"></ion-img></td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n     <div class="button-effect"></div>\n    </ion-item>\n    <ion-item class="item item-block item-sm">\n      <div class="input-wrapper"><!---->\n        <table class="main-table">\n          <tbody>\n            <tr>\n              <td><h6>11:00 PM  </h6></td>\n              <td><h6> 한동대 </h6></td>\n              <td><h6> 고터</h6></td>\n              <td><ion-img width="50" height="20" src="img.png"></ion-img></td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n     <div class="button-effect"></div>\n    </ion-item>\n\n  </ion-item-group>\n\n <ion-item-group>\n    <ion-item-divider class="item item-divider item-sm item-divider-md item-md-light item-divider-sm-light" color="light">\n     <ion-label class="label label-sm labels">2017년 12월 21일</ion-label>\n    <div class="button-effect"></div>\n    </ion-item-divider>\n\n    <ion-item class="item item-block item-sm">\n      <div class="input-wrapper"><!---->\n        <table class="main-table">\n            <tr>\n              <td><h6>9:50 AM  </h6></td>\n              <td><h6> 한동대</h6></td>\n              <td><h6> 포항역</h6></td>\n              <td><ion-img width="50" height="20" src="img.png"></ion-img></td>\n            </tr>\n        </table>\n      </div>\n     <div class="button-effect"></div>\n    </ion-item>\n  \n    <ion-item class="item item-block item-sm">\n  \n      <div class="input-wrapper"><!---->\n        <table class="main-table">\n            <tr>\n              <td><h6>1:50 PM  </h6></td>\n              <td><h6> 포항역</h6></td>\n              <td><h6> 양덕</h6></td>\n              <td><ion-img width="50" height="20" src="img.png"></ion-img></td>\n            </tr>\n        </table>\n       </div>\n     <div class="button-effect"></div>\n    </ion-item>\n  \n    <ion-item class="item item-block item-sm">\n      <div class="input-wrapper"><!---->\n        <table class="main-table">\n          <tbody>\n            <tr>\n              <td><h6>9:30 PM  </h6></td>\n              <td><h6> 한동대 </h6></td>\n              <td><h6> 고터</h6></td>\n              <td><ion-img width="50" height="20" src="img.png"></ion-img></td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n     <div class="button-effect"></div>\n    </ion-item>\n  </ion-item-group>  \n<ion-item-group>\n    <ion-item-divider class="item item-divider item-sm item-divider-md item-md-light item-divider-sm-light" color="light">\n     <ion-label class="label label-sm labels">2017년 12월 21일</ion-label>\n    <div class="button-effect"></div>\n    </ion-item-divider>\n\n    <ion-item class="item item-block item-sm">\n      <div class="input-wrapper"><!---->\n        <table class="main-table">\n            <tr>\n              <td><h6>9:50 AM  </h6></td>\n              <td><h6> 한동대</h6></td>\n              <td><h6> 포항역</h6></td>\n              <td><ion-img width="50" height="20" src="img.png"></ion-img></td>\n            </tr>\n        </table>\n      </div>\n     <div class="button-effect"></div>\n    </ion-item>\n  \n    <ion-item class="item item-block item-sm">\n  \n      <div class="input-wrapper"><!---->\n        <table class="main-table">\n            <tr>\n              <td><h6>1:50 PM  </h6></td>\n              <td><h6> 포항역</h6></td>\n              <td><h6> 양덕</h6></td>\n              <td><ion-img width="50" height="20" src="img.png"></ion-img></td>\n            </tr>\n        </table>\n       </div>\n     <div class="button-effect"></div>\n    </ion-item>\n  \n    <ion-item class="item item-block item-sm">\n      <div class="input-wrapper"><!---->\n        <table class="main-table">\n          <tbody>\n            <tr>\n              <td><h6>9:30 PM  </h6></td>\n              <td><h6> 한동대 </h6></td>\n              <td><h6> 고터</h6></td>\n              <td><ion-img width="50" height="20" src="img.png"></ion-img></td>\n            </tr>\n          </tbody>\n        </table>\n      </div>\n     <div class="button-effect"></div>\n    </ion-item>\n  </ion-item-group>\n  \n  </div>\n\n\n\n  <div class="fixed-content" style="margin-top: 85px;">\n\n  <ion-fab bottom="" right="">\n\n      <button color="dark" ion-fab="" class="fab fab-md fab-md-dark"><ion-icon class="fab-close-icon icon icon-md ion-md-close" name="close" role="img" aria-label="close"></ion-icon><span class="button-inner"><ion-icon name="add" role="img" class="icon icon-md ion-md-add" aria-label="add"></ion-icon></span><div class="button-effect" style="transform: translate3d(-19px, -13px, 0px) scale(1); height: 87px; width: 87px; opacity: 0; transition: transform 301ms, opacity 211ms 90ms;"></div></button>\n     \n    </ion-fab></div>\n\n\n</ion-content>'/*ion-inline-end:"/Users/Hyoeun/Documents/CRA/iTaxi/src/pages/taxi-list/taxi-list.html"*/,
-    }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]])
-], TaxiListPage);
-
-//# sourceMappingURL=taxi-list.js.map
-
-/***/ }),
-
 /***/ 197:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -329,13 +329,13 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(257);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(193);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_list_list__ = __webpack_require__(194);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(194);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_list_list__ = __webpack_require__(195);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_select_and_sorting_select_and_sorting__ = __webpack_require__(99);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_makeRoom_makeRoom__ = __webpack_require__(195);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_taxi_list_taxi_list__ = __webpack_require__(196);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_status_bar__ = __webpack_require__(189);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_splash_screen__ = __webpack_require__(192);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_makeRoom_makeRoom__ = __webpack_require__(196);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_taxi_list_taxi_list__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_status_bar__ = __webpack_require__(190);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_splash_screen__ = __webpack_require__(193);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -405,13 +405,13 @@ AppModule = __decorate([
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(24);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(189);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(192);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(193);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_list_list__ = __webpack_require__(194);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(190);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(193);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(194);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_list_list__ = __webpack_require__(195);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_select_and_sorting_select_and_sorting__ = __webpack_require__(99);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_makeRoom_makeRoom__ = __webpack_require__(195);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_taxi_list_taxi_list__ = __webpack_require__(196);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_makeRoom_makeRoom__ = __webpack_require__(196);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_taxi_list_taxi_list__ = __webpack_require__(100);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -464,15 +464,14 @@ var MyApp = (function () {
 }());
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_14" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Nav */]),
-    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Nav */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Nav */]) === "function" && _a || Object)
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Nav */])
 ], MyApp.prototype, "nav", void 0);
 MyApp = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"/Users/Hyoeun/Documents/CRA/iTaxi/src/app/app.html"*/'<ion-menu [content]="content">\n  <ion-header>\n    <ion-toolbar>\n      <ion-title>Menu</ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-content>\n    <ion-list>\n      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">\n        {{p.title}}\n      </button>\n    </ion-list>\n  </ion-content>\n\n</ion-menu>\n\n<!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>'/*ion-inline-end:"/Users/Hyoeun/Documents/CRA/iTaxi/src/app/app.html"*/
     }),
-    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Platform */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]) === "function" && _d || Object])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
 ], MyApp);
 
-var _a, _b, _c, _d;
 //# sourceMappingURL=app.component.js.map
 
 /***/ }),

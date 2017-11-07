@@ -4,10 +4,13 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
+import { MainPage } from '../pages/main/main';
 import { ListPage } from '../pages/list/list';
 import { SelectAndSortingPage } from '../pages/select-and-sorting/select-and-sorting'
 import { MakeRoomPage } from '../pages/makeRoom/makeRoom'
-import {TaxiListPage} from '../pages/taxi-list/taxi-list'
+import { TaxiListPage } from '../pages/taxi-list/taxi-list'
+import { SettingPage } from '../pages/setting/setting';
+import { PersonalInfoPage } from '../pages/personal-info/personal-info';
 
 @Component({
   templateUrl: 'app.html'
@@ -15,9 +18,15 @@ import {TaxiListPage} from '../pages/taxi-list/taxi-list'
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = SelectAndSortingPage;
+  rootPage: any = HomePage;
 
   pages: Array<{title: string, component: any}>;
+
+  private homePage;
+  private listPage;
+  private mainPage;
+  private taxiListPage;
+  private settingPage;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
@@ -30,6 +39,12 @@ export class MyApp {
       { title: 'MakeRoom', component: MakeRoomPage},
       { title: 'TaxiList', component: TaxiListPage},
     ];
+
+    this.homePage = HomePage;
+    this.mainPage = MainPage;
+    this.listPage = ListPage;
+    this.taxiListPage = TaxiListPage;
+    this.settingPage = SettingPage;
 
   }
 
@@ -45,6 +60,7 @@ export class MyApp {
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+    //this.nav.setRoot(page.component);
+    this.nav.setRoot(page);
   }
 }
