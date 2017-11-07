@@ -18,7 +18,7 @@ import { PersonalInfoPage } from '../pages/personal-info/personal-info';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any = MainPage;
 
   pages: Array<{title: string, component: any}>;
 
