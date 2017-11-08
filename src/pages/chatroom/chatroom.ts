@@ -9,7 +9,6 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
   templateUrl: 'chatroom.html'
 })
 export class ChatRoomPage {
-
   @ViewChild(Content) content: Content;
 
   chats: FirebaseListObservable<any[]>;
@@ -17,7 +16,6 @@ export class ChatRoomPage {
 
   chat_user_id: any;
   chat_content: any;
-
   chat_room_id: any;
 
   constructor(public navCtrl: NavController, public af:AngularFireDatabase, 
@@ -42,14 +40,17 @@ export class ChatRoomPage {
     else{
       alert("Please input any text!");
     }
+    console.log("send at chatroom.ts");
   }
 
   quit(){
     //this.chats.remove()
     alert('방에서 나가셨습니다.');
+    console.log("quit at chatroom.ts");
   }
 
   scrollBottom(){
     this.content.scrollToBottom();
+    console.log("scroolBottom at chatroom.ts");
   }
 }

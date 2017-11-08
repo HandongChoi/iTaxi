@@ -66,9 +66,7 @@ export class MakeRoomPage {
   
           let participants_list = [];
           participants_list.push(this.user_id);
-  
           let url;
-  
           this.chatrooms = this.af.list('/chatrooms/' + "2017-11-09"); //이 부분 날짜 수정
   
           url = this.chatrooms.push(
@@ -82,13 +80,12 @@ export class MakeRoomPage {
                   participants: participants_list
               }
           );
-        
-          this.navCtrl.push(ChatRoomPage, {chat_room_id: url.key, user_id: this.user_id});                
+          this.navCtrl.setRoot(ChatRoomPage, {chat_room_id: url.key, user_id: this.user_id});  
         }
       });
-
       alert.setTitle('탑승인원');
       alert.present();
+      console.log("showPeopleAlert at makeRoom.ts");
   };
 
   labelClick(){
@@ -145,11 +142,8 @@ export class MakeRoomPage {
 
         let participants_list = [];
         participants_list.push(this.user_id);
-
         let url;
-
         this.chatrooms = this.af.list('/chatrooms/' + this.startDate);
-
         url = this.chatrooms.push(
             {
                 departure: this.start,
@@ -161,11 +155,11 @@ export class MakeRoomPage {
                 participants: participants_list
             }
         );
-      
-        this.navCtrl.push(ChatRoomPage, {chat_room_id: url.key, user_id: this.user_id});                
+       this.navCtrl.setRoot(ChatRoomPage, {chat_room_id: url.key, user_id: this.user_id});
       }
     });
     alert.present();
+    console.log("showRadioAlert at makeRoom.ts");
   };
 
 }

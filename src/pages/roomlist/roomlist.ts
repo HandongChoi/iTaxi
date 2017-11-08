@@ -33,7 +33,8 @@ export class RoomListPage {
     // 참여자이면 그냥 enter
     // full 인원이면 deny
     
-    this.navCtrl.push(ChatRoomPage, {chat_room_id: chat_room_id_val, user_id: this.user_id});
+   this.navCtrl.setRoot(ChatRoomPage, {chat_room_id: chat_room_id_val, user_id: this.user_id});
+    console.log("goChatroom at roomlist.ts");
   }
 
   createRoom(){
