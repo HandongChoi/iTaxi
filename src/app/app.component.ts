@@ -41,6 +41,7 @@ export class MyApp {
       { title: 'Select testing', component: SelectAndSortingPage},
       { title: 'MakeRoom', component: MakeRoomPage},
       { title: 'TaxiList', component: TaxiListPage},
+      { title: 'Setting', component: SettingPage},
     ];
 
     this.homePage = HomePage;
@@ -63,7 +64,7 @@ export class MyApp {
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    this.navCtrl.setRoot(page.component);
+    //this.navCtrl.setRoot(page.component);
     this.navCtrl.setRoot(page);
     console.log("openPage");
   }  
@@ -76,6 +77,11 @@ export class MyApp {
   leaveRoom(){
     alert('leave');
     console.log("leaveRoom() at app.componenent.ts");
+  }
+
+  goSettingPage(){
+    this.navCtrl.setRoot(SettingPage);
+    console.log("goTaxiListPage() at app.componenent.ts");
   }
 
   goTaxiListPage(){

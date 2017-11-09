@@ -1,9 +1,9 @@
-<ion-menu [content]="content"  persistent="true" side="right">
+<ion-menu [content]="content"  persistent="true">
     <ion-header>
       <ion-toolbar padding>
         <ion-title>류여진 님</ion-title>
         <ion-buttons right >
-          <button ion-button icon-only>
+          <button menuClose ion-button icon-only (click)="goSettingPage()">
               <ion-icon name="settings"></ion-icon>
           </button>
         </ion-buttons>
