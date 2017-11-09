@@ -29,7 +29,8 @@ export class MyApp {
   private taxiListPage;
   private settingPage;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen
+  constructor(public platform: Platform, public statusBar: StatusBar, 
+    public splashScreen: SplashScreen
               ) {
     this.initializeApp();
 
@@ -40,6 +41,7 @@ export class MyApp {
       { title: 'Select testing', component: SelectAndSortingPage},
       { title: 'MakeRoom', component: MakeRoomPage},
       { title: 'TaxiList', component: TaxiListPage},
+      { title: 'Setting', component: SettingPage},
     ];
 
     this.homePage = HomePage;
@@ -56,44 +58,64 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+    console.log("initailizeApp at app.component.ts");
   }
 
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    //this.nav.setRoot(page.component);
-    //this.nav.setRoot(page);
+    //this.navCtrl.setRoot(page.component);
+    this.navCtrl.setRoot(page);
+    console.log("openPage");
   }  
   
   inviteFriend(){
     alert('invite friend');
+    console.log("inviteFriend() at app.componenent.ts");
   }
 
   leaveRoom(){
     alert('leave');
+    console.log("leaveRoom() at app.componenent.ts");
+  }
+
+  goSettingPage(){
+    this.navCtrl.setRoot(SettingPage);
+    console.log("goTaxiListPage() at app.componenent.ts");
   }
 
   goTaxiListPage(){
-    this.navCtrl.push(TaxiListPage, {});
+    this.navCtrl.setRoot(TaxiListPage);
+    console.log("goTaxiListPage() at app.componenent.ts");
   }
   
   goMakeTaxiRoomPage(){
-    this.navCtrl.push(MakeRoomPage, {});
+    this.navCtrl.setRoot(MakeRoomPage);
+    console.log("goMakeTaxiRoomPage() at app.componenent.ts");
   }
 
   goCarpoolListPage(){
     alert('Carpool Page');
+    console.log("goCarpoolListPage() at app.componenent.ts");
   }
 
   goMakeCarpoolRoomPage(){
     alert('Make Carpool Room Page');
+    console.log("goMakeCarpoolRoomPage() at app.componenent.ts");
   }
 
   goBoardingListPage(){
     alert('Boarding List Page');
+    console.log("goBoardingListPage() at app.componenent.ts");
   }
 
   goEditMyInfoPage(){
     alert('Edit My Info Page');
+    console.log("goEditMyInfoPage() at app.componenent.ts");
+  }
+
+  goMainPage(){
+    this.navCtrl.setRoot(MainPage);
+    console.log("goMainPage() at app.componenent.ts");
   }
 }

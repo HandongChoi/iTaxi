@@ -21,18 +21,22 @@ export class MainPage {
 
   openTaxiList() {
     //manages the stack
-    this.navCtrl.push(TaxiListPage)
+    this.navCtrl.setRoot(TaxiListPage);
+    console.log("openTaxiList at main.ts");
   }
 
   goTaxiListPage(){
-    this.navCtrl.push(TaxiListPage, {});
+    this.navCtrl.setRoot(TaxiListPage);
+    console.log("goTaxiListPage at main.ts");
   }
 
   goCarpoolListPage(){
     alert('Carpool Page');
+    console.log("goCarpoolListPage at main.ts");
   }
 
   goMyPage(){
     alert('MyPage');
+    console.log("goMyPage at main.ts");
   }
 }

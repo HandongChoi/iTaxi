@@ -3,15 +3,16 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 
-import { HomePage } from '../pages/home/home';
-import { MainPage } from '../pages/main/main';
-import { ListPage } from '../pages/list/list';
-import { SelectAndSortingPage } from '../pages/select-and-sorting/select-and-sorting'
-import { MakeRoomPage } from '../pages/makeRoom/makeRoom'
-import { TaxiListPage } from '../pages/taxi-list/taxi-list'
-import { SettingPage } from '../pages/setting/setting';
-import { PersonalInfoPage } from '../pages/personal-info/personal-info';
 import { ChatRoomPage } from '../pages/chatroom/chatroom';
+import { HomePage } from '../pages/home/home';
+import { ListPage } from '../pages/list/list';
+import { MainPage } from '../pages/main/main';
+import { MakeRoomPage } from '../pages/makeRoom/makeRoom'
+import { PersonalInfoPage } from '../pages/personal-info/personal-info';
+import { RoomListPage } from '../pages/roomlist/roomlist';
+import { SelectAndSortingPage } from '../pages/select-and-sorting/select-and-sorting'
+import { SettingPage } from '../pages/setting/setting';
+import { TaxiListPage } from '../pages/taxi-list/taxi-list'
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -32,37 +33,36 @@ export const firebaseConfig = {
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
-    MainPage,
-    ListPage,
-    SelectAndSortingPage,
-    MakeRoomPage,
-    TaxiListPage,
-    SettingPage,
-    PersonalInfoPage,
     ChatRoomPage,
+    HomePage,
+    ListPage,
+    MainPage,
+    MakeRoomPage,
+    PersonalInfoPage,
+    RoomListPage,
+    SelectAndSortingPage,
+    SettingPage,
+    TaxiListPage,
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp, {
-      iconMode:'ios',
-      mode:'ios'
-    }),
+    IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
-    MainPage,
-    ListPage,
-    SelectAndSortingPage,
-    MakeRoomPage,
-    TaxiListPage,
-    SettingPage,
-    PersonalInfoPage,
     ChatRoomPage,
+    HomePage,
+    ListPage,
+    MainPage,
+    MakeRoomPage,
+    PersonalInfoPage,
+    RoomListPage,
+    SelectAndSortingPage,
+    SettingPage,
+    TaxiListPage,
   ],
   providers: [
     StatusBar,
