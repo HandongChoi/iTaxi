@@ -5,7 +5,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { MainPage } from '../pages/main/main';
-import { ListPage } from '../pages/list/list';
 import { SelectAndSortingPage } from '../pages/select-and-sorting/select-and-sorting'
 import { MakeRoomPage } from '../pages/makeRoom/makeRoom'
 import { TaxiListPage } from '../pages/taxi-list/taxi-list'
@@ -19,12 +18,11 @@ import { ChatRoomPage } from '../pages/chatroom/chatroom';
 export class MyApp {
   @ViewChild(Nav) navCtrl: NavController;
 
-  rootPage: any = MainPage;
+  rootPage: any = TaxiListPage;
 
   pages: Array<{title: string, component: any}>;
 
   private homePage;
-  private listPage;
   private mainPage;
   private taxiListPage;
   private settingPage;
@@ -37,7 +35,6 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage },
       { title: 'Select testing', component: SelectAndSortingPage},
       { title: 'MakeRoom', component: MakeRoomPage},
       { title: 'TaxiList', component: TaxiListPage},
@@ -46,7 +43,6 @@ export class MyApp {
 
     this.homePage = HomePage;
     this.mainPage = MainPage;
-    this.listPage = ListPage;
     this.taxiListPage = TaxiListPage;
     this.settingPage = SettingPage;
   }

@@ -22,14 +22,29 @@ export class TaxiListPage {
   chatrooms: FirebaseListObservable<any[]>;
   user_id: any;  
   dates_array: Array<any> = [];
+  chatrooms_array: Array<any> =[];
+  
+  forDate: any = new Date();
+  nowDate: string = this.forDate.getFullYear() + "-" + (this.forDate.getMonth()+1) + "-" + this.forDate.getDate();
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase) {
     this.dates = af.list('/chatrooms');
     this.dates.subscribe(data =>{
       this.dates_array.push(data);
+      console.log("Test : " + data[1].$key);  
+    });
+    //여기까지가 모든 date들의 object를 다 가져온 것이다.
+    //this.user_id = prompt("Input ID");
+    this.user_id = "testing";
+
+    //현재 날짜에 관한 chatroom들 정보 모두 가져오기.
+    this.chatrooms = this.af.list('/chatrooms/'+this.nowDate);
+    this.chatrooms.subscribe(data =>{
+      this.chatrooms_array.push(data);  
     });
 
-    this.user_id = prompt("Input ID");
+//    let chat_room_id_val = (this.chatrooms[0]).$key;
+    //console.log("Test : " + this.chatrooms[0].$key);
   }
   
   goChatroom($event, date) {

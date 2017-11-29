@@ -71,7 +71,8 @@
       <div class="start-date">
         <!--<ion-label align="center" color="primary" fixed>출발날짜</ion-label>-->
         <ion-item>       
-          <ion-datetime displayFormat="YYYY MM DD" pickerFormat="YYYY MM DD" [(ngModel)]="startDate"></ion-datetime>
+          <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD" min={{minYear}} max={{maxYear}} 
+                        placeholder={{nowDate}} [(ngModel)]="bookingDate"></ion-datetime>
         </ion-item>
       </div>
     </ion-col>
@@ -79,12 +80,12 @@
       <div class="start-time">
           <!--<ion-label align="center" color="primary" fixed>출발시간</ion-label>-->
         <ion-item >           
-          <ion-datetime displayFormat="h:mm A" pickerFomat="h mm A" [(ngModel)]="startTime"></ion-datetime>
+          <!-- 지금 여기 밑에 placeholder가 제대로 작동하지 않는다. 이상하게 9시간의 시차 차이가 난다-->
+          <ion-datetime displayFormat="h:mm A" pickerFomat="h mm A" placeholder={{nowTime}} [(ngModel)]="bookingTime"></ion-datetime>
         </ion-item>
       </div>
     </ion-col>
   </ion-row>
-
   <!--
   <div class="room_button"> 
     <button class="swap-button" ion-button clear large icon-only (click)="swap_position()">
@@ -93,7 +94,7 @@
   </div>-->
 
   <div class="room_button">          
-    <button style="margin-top:10%" class="button customBtn" ion-button round (click)="showPeopleAlert()">방만들기</button>
+    <button style="margin-top:10%" class="button customBtn" ion-button round (click)="showRadioAlert()">방만들기</button>
   </div>
  
 </ion-content>

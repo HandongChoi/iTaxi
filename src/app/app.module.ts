@@ -5,7 +5,6 @@ import { MyApp } from './app.component';
 
 import { ChatRoomPage } from '../pages/chatroom/chatroom';
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 import { MainPage } from '../pages/main/main';
 import { MakeRoomPage } from '../pages/makeRoom/makeRoom'
 import { PersonalInfoPage } from '../pages/personal-info/personal-info';
@@ -35,7 +34,6 @@ export const firebaseConfig = {
     MyApp,
     ChatRoomPage,
     HomePage,
-    ListPage,
     MainPage,
     MakeRoomPage,
     PersonalInfoPage,
@@ -55,7 +53,6 @@ export const firebaseConfig = {
     MyApp,
     ChatRoomPage,
     HomePage,
-    ListPage,
     MainPage,
     MakeRoomPage,
     PersonalInfoPage,
