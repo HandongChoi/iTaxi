@@ -8,7 +8,6 @@ import { HomePage } from '../pages/home/home';
 import { MainPage } from '../pages/main/main';
 import { MakeRoomPage } from '../pages/makeRoom/makeRoom'
 import { PersonalInfoPage } from '../pages/personal-info/personal-info';
-import { RoomListPage } from '../pages/roomlist/roomlist';
 import { SelectAndSortingPage } from '../pages/select-and-sorting/select-and-sorting'
 import { SettingPage } from '../pages/setting/setting';
 import { TaxiListPage } from '../pages/taxi-list/taxi-list'
@@ -37,7 +36,6 @@ export const firebaseConfig = {
     MainPage,
     MakeRoomPage,
     PersonalInfoPage,
-    RoomListPage,
     SelectAndSortingPage,
     SettingPage,
     TaxiListPage,
@@ -56,7 +54,6 @@ export const firebaseConfig = {
     MainPage,
     MakeRoomPage,
     PersonalInfoPage,
-    RoomListPage,
     SelectAndSortingPage,
     SettingPage,
     TaxiListPage,

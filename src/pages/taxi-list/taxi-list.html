@@ -18,20 +18,27 @@
       <ion-row>
         <ion-col col-6>
           <ion-item>
-          <ion-select #newSelect [(ngModel)]="carbrand" multiple="true" placeholder="Begin">
-            <ion-option value="Porsche" checked="true">Porsche</ion-option>
-            <ion-option value="Mercedes" >Mercedes</ion-option>
-            <ion-option value="Buggati">Buggati</ion-option>
-            <ion-option value="Lamborghini">Lamborghini</ion-option>
-            <ion-option value="Domster">Domster</ion-option>
+          <ion-select #newSelect [(ngModel)]="carbrand" multiple="true" placeholder="전체보기">
+            <ion-option value="All" checked="true">전체보기</ion-option>  
+            <ion-option value="Handong">한동대학교</ion-option>
+            <ion-option value="Yangduck" >양덕</ion-option>
+            <ion-option value="Go">고속버스터미널</ion-option>
+            <ion-option value="Si">시외버스터미널</ion-option>
+            <ion-option value="Buckbu">북부해수욕장</ion-option>
+            <ion-option value="Yuck">육거리</ion-option>
           </ion-select>
           </ion-item>
         </ion-col>
         <ion-col col-6>
           <ion-item>
-          <ion-select [(ngModel)]="gender" multiple="true">
-            <ion-option value="f">Female</ion-option>
-            <ion-option value="m">Male</ion-option>
+          <ion-select [(ngModel)]="gender" multiple="true" placeholder="전체보기">
+            <ion-option value="All" checked="true">전체보기</ion-option>  
+            <ion-option value="Handong">한동대학교</ion-option>
+            <ion-option value="Yangduck" >양덕</ion-option>
+            <ion-option value="Go">고속버스터미널</ion-option>
+            <ion-option value="Si">시외버스터미널</ion-option>
+            <ion-option value="Buckbu">북부해수욕장</ion-option>
+            <ion-option value="Yuck">육거리</ion-option>
           </ion-select>
           </ion-item>
         </ion-col>
@@ -48,7 +55,6 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-        
   </table>
 
   <ion-grid>
