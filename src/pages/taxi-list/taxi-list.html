@@ -48,12 +48,23 @@
         
   </table>
 
-
+  <ion-grid>
   <ion-item-group *ngFor = "let dates of dates_array">
     <ion-item-divider class="item item-divider item-sm item-divider-md item-md-light item-divider-sm-light" color="light"
       *ngFor = "let date of dates">
-      
-      
+      <ion-row>
+        <ion-col col-3>
+          <p>{{date.depart_date}}</p>
+          <p>{{date.depart_time}}</p>      
+        </ion-col>
+        <ion-col col-6>
+          <p>{{date.departure}}</p>
+          <p>>{{date.destination}}</p>
+        </ion-col>
+        <ion-col col-3>
+          {{date.capacity}}
+        </ion-col>
+      </ion-row>
       <!-- 은비 작업 물 <ion-label class="label label-sm labels">{{date.$key}}</ion-label> -->
      
     <div class="button-effect"></div>
@@ -73,7 +84,8 @@
      <div class="button-effect"></div>
     </button>
 -->
-  </ion-item-group>  
+  </ion-item-group>
+  </ion-grid>  
 </div>
 
   <div class="fixed-content" style="margin-top: 85px;">
