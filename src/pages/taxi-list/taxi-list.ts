@@ -31,7 +31,6 @@ export class TaxiListPage {
     this.dates = af.list('/chatrooms');
     this.dates.subscribe(data =>{
       this.dates_array.push(data);
-      console.log("Test : " + data[1].$key);  
     });
     //여기까지가 모든 date들의 object를 다 가져온 것이다.
     //this.user_id = prompt("Input ID");
@@ -39,6 +38,8 @@ export class TaxiListPage {
 
     //현재 날짜에 관한 chatroom들 정보 모두 가져오기.
     this.chatrooms = this.af.list('/chatrooms/'+this.nowDate);
+    console.log(this.chatrooms);
+
     this.chatrooms.subscribe(data =>{
       this.chatrooms_array.push(data);  
     });
