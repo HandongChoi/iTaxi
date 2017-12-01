@@ -28,28 +28,19 @@ export class TaxiListPage {
   nowDate: string = this.forDate.getFullYear() + "-" + (this.forDate.getMonth()+1) + "-" + this.forDate.getDate();
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase) {
+    //기본적으로 오늘 날짜 기준으로 data 불러오기.
     this.dates = af.list('/chatrooms/'+this.nowDate);
-    
     this.dates.subscribe(data =>{
       this.dates_array.push(data);
     });
-
-    //여기까지가 모든 date들의 object를 다 가져온 것이다.
     //this.user_id = prompt("Input ID");
     this.user_id = "testing";
-
-    //현재 날짜에 관한 chatroom들 정보 모두 가져오기.
-    this.chatrooms = this.af.list('/chatrooms/'+this.nowDate);
-    console.log(this.chatrooms);
-
-    this.chatrooms.subscribe(data =>{
-      this.chatrooms_array.push(data);  
-    });
-
+    
 //    let chat_room_id_val = (this.chatrooms[0]).$key;
     //console.log("Test : " + this.chatrooms[0].$key);
-  }
   
+  }
+
   goChatroom($event, date) {
     console.log('hi');
       this.chatrooms = this.af.list('/chatrooms/'+date);
