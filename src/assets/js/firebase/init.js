@@ -2,10 +2,10 @@
   // TODO: Replace with your project's customized code snippet
 
     var config = {
-      apiKey: "AIzaSyCdEGrIp-vZipTaVj-ftFGPYJ7nWGZ3m1Y",
-      authDomain: "itaxi-6fe12.firebaseapp.com",
-      databaseURL: "https://itaxi-6fe12.firebaseio.com",
-      projectId: "itaxi-6fe12",
+      apiKey: "AIzaSyANvht7J2MNX6x47mglqfJk74yZQ9u0qUk",
+      authDomain: "itaxi-54bdc.firebaseapp.com",
+      databaseURL: "https://itaxi-54bdc.firebaseio.com",
+      projectId: "itaxi-54bdc",
       //storageBucket: "itaxi-6fe12.appspot.com",
       //messagingSenderId: "715994569718"
     };
