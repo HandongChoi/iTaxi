@@ -12,12 +12,13 @@ function loginWithKakao() {
   Kakao.Auth.login({
     success: function(authObj) {
 
-    	 Kakao.API.request({
+       Kakao.API.request({
           url: '/v1/user/me',
 
           success: function(res) {
-		      	var sData = JSON.stringify(res);
-            alert(sData);
+            var sData = JSON.stringify(res);
+           // alert(sData);
+           // alert("ready");
             //"kaccount_email
             sData = JSON.parse(sData);
             var route = "kakao"
@@ -26,23 +27,36 @@ function loginWithKakao() {
             kaccount_email=sData.kaccount_email;
             thumbnail_image=sData.properties.thumbnail_image;
 
+            //login check storage
+            localStorage.setItem('uid',uid);
+            // if(localStorage.getItem('uid'))
+            // {
+            //   alert("not null"); 
+            // }
+            // else
+            // {
+            //   alert("NULL"); 
+            // }
+            // localStorage.clear();
+
+
             firebase.database().ref('users/'+uid).set({
-            	nickname:nickname,
-				      kaccount_email:kaccount_email,
-        	    thumbnail_image:thumbnail_image
+              nickname:nickname,
+              kaccount_email:kaccount_email,
+              thumbnail_image:thumbnail_image
             })
 
-            alert(uid);
+            //alert(uid);
 
           },
           fail: function(error) {
             alert(JSON.stringify(error));
           }
 
-		});
+    });
 
 
-		
+    
     },
     fail: function(err) {
       alert(JSON.stringify(err));
