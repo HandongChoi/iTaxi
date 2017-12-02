@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'; 
-import { IonicPage, NavController,Loading, LoadingController, Alert, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Loading, LoadingController, Alert, AlertController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'; 
 import { AuthProvider } from '../../providers/auth/auth';
 import { EmailValidator } from '../../validators/email';
@@ -15,7 +15,7 @@ export class SignupPage {
   public signupForm:FormGroup;
   public loading:Loading;
   
-  constructor(public navCtrl:NavController, public authProvider:AuthProvider, public loadingCtrl:LoadingController,
+  constructor(public navCtrl:NavController, public navParams: NavParams, public authProvider:AuthProvider, public loadingCtrl:LoadingController,
     public alertCtrl:AlertController, formBuilder:FormBuilder) {
     this.signupForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required,
