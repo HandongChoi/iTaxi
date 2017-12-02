@@ -89,7 +89,7 @@ export class MakeRoomPage {
           console.log("Error"); 
         }
         else{
-          this.chatrooms = this.af.list('/chatrooms/' + this.bookingDate);
+          this.chatrooms = this.af.list('/chatrooms/' + "2017-11-30");
           url = this.chatrooms.push(
               {
                   departure: this.start,

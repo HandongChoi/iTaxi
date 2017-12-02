@@ -29,7 +29,7 @@ export class TaxiListPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase) {
     //기본적으로 오늘 날짜 기준으로 data 불러오기.
-    this.dates = af.list('/chatrooms/'+this.nowDate);
+    this.dates = af.list('/chatrooms/'+"2017-11-30");
     this.dates.subscribe(data =>{
       this.dates_array.push(data);
     });
