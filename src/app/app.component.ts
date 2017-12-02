@@ -3,14 +3,28 @@ import { Nav, NavController, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { HomePage } from '../pages/home/home';
-import { MainPage } from '../pages/main/main';
-import { SelectAndSortingPage } from '../pages/select-and-sorting/select-and-sorting'
-import { MakeRoomPage } from '../pages/makeRoom/makeRoom'
-import { TaxiListPage } from '../pages/taxi-list/taxi-list'
-import { SettingPage } from '../pages/setting/setting';
-import { PersonalInfoPage } from '../pages/personal-info/personal-info';
 import { ChatRoomPage } from '../pages/chatroom/chatroom';
+import { HomePage } from '../pages/home/home';
+import { LoginPage } from '../pages/login/login';
+import { MainPage } from '../pages/main/main';
+import { MakeRoomPage } from '../pages/makeRoom/makeRoom';
+import { PersonalInfoPage } from '../pages/personal-info/personal-info';
+import { ResetPasswordPage } from '../pages/reset-password/reset-password';
+import { SelectAndSortingPage } from '../pages/select-and-sorting/select-and-sorting';
+import { SettingPage } from '../pages/setting/setting';
+import { SignupPage } from '../pages/signup/signup';
+import { TaxiListPage } from '../pages/taxi-list/taxi-list';
+
+import firebase from 'firebase';
+
+firebase.initializeApp({ 
+  apiKey: "AIzaSyANvht7J2MNX6x47mglqfJk74yZQ9u0qUk",
+  authDomain: "itaxi-54bdc.firebaseapp.com",
+  databaseURL: "https://itaxi-54bdc.firebaseio.com",
+  projectId: "itaxi-54bdc",
+  storageBucket: "itaxi-54bdc.appspot.com",
+  messagingSenderId: "208976127032"
+});
 
 @Component({
   templateUrl: 'app.html'
@@ -18,8 +32,7 @@ import { ChatRoomPage } from '../pages/chatroom/chatroom';
 export class MyApp {
   @ViewChild(Nav) navCtrl: NavController;
 
-  rootPage: any = TaxiListPage;
-
+  rootPage: any;
   pages: Array<{title: string, component: any}>;
 
   private homePage;
@@ -45,6 +58,16 @@ export class MyApp {
     this.mainPage = MainPage;
     this.taxiListPage = TaxiListPage;
     this.settingPage = SettingPage;
+
+    const unsubscribe = firebase.auth().onAuthStateChanged( user => { 
+      if(!user){
+        this.rootPage = SignupPage;
+        unsubscribe(); 
+      } else{
+        this.rootPage = MainPage; unsubscribe();
+      }
+    });
+    
   }
 
   initializeApp() {

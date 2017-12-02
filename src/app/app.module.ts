@@ -5,18 +5,22 @@ import { MyApp } from './app.component';
 
 import { ChatRoomPage } from '../pages/chatroom/chatroom';
 import { HomePage } from '../pages/home/home';
+import { LoginPage } from '../pages/login/login';
 import { MainPage } from '../pages/main/main';
-import { MakeRoomPage } from '../pages/makeRoom/makeRoom'
+import { MakeRoomPage } from '../pages/makeRoom/makeRoom';
 import { PersonalInfoPage } from '../pages/personal-info/personal-info';
-import { SelectAndSortingPage } from '../pages/select-and-sorting/select-and-sorting'
+import { ResetPasswordPage } from '../pages/reset-password/reset-password';
+import { SelectAndSortingPage } from '../pages/select-and-sorting/select-and-sorting';
 import { SettingPage } from '../pages/setting/setting';
-import { TaxiListPage } from '../pages/taxi-list/taxi-list'
+import { SignupPage } from '../pages/signup/signup';
+import { TaxiListPage } from '../pages/taxi-list/taxi-list';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { AuthProvider } from '../providers/auth/auth';
 
 
 export const firebaseConfig = {
@@ -33,11 +37,14 @@ export const firebaseConfig = {
     MyApp,
     ChatRoomPage,
     HomePage,
+    LoginPage,
     MainPage,
     MakeRoomPage,
     PersonalInfoPage,
+    ResetPasswordPage,
     SelectAndSortingPage,
     SettingPage,
+    SignupPage,
     TaxiListPage,
   ],
   imports: [
@@ -51,17 +58,21 @@ export const firebaseConfig = {
     MyApp,
     ChatRoomPage,
     HomePage,
+    LoginPage,
     MainPage,
     MakeRoomPage,
     PersonalInfoPage,
+    ResetPasswordPage,
     SelectAndSortingPage,
     SettingPage,
+    SignupPage,
     TaxiListPage,
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    AuthProvider
   ]
 })
 export class AppModule {}
