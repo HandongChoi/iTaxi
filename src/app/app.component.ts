@@ -14,6 +14,8 @@ import { SettingPage } from '../pages/setting/setting';
 import { SignupPage } from '../pages/signup/signup';
 import { TaxiListPage } from '../pages/taxi-list/taxi-list';
 
+import { AuthProvider } from '../providers/auth/auth';
+
 import firebase from 'firebase';
 
 firebase.initializeApp({ 
@@ -36,12 +38,16 @@ export class MyApp {
   rootPage: any;
   pages: Array<{title: string, component: any}>;
 
+  user_email: any;
+
   private homePage;
   private mainPage;
   private taxiListPage;
   private settingPage;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public fcm:FCM) {
+
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
+              public authProvider:AuthProvider, public fcm:FCM) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -50,6 +56,7 @@ export class MyApp {
       { title: 'MakeRoom', component: MakeRoomPage},
       { title: 'TaxiList', component: TaxiListPage},
       { title: 'Setting', component: SettingPage},
+      { title: 'SignupPage', component: SignupPage},
     ];
 
     this.homePage = HomePage;
@@ -59,10 +66,12 @@ export class MyApp {
 
     const unsubscribe = firebase.auth().onAuthStateChanged( user => { 
       if(!user){
-        this.rootPage = SignupPage;
+        this.rootPage = LoginPage;
         unsubscribe(); 
       } else{
         this.rootPage = MainPage; unsubscribe();
+        this.user_email = user.email;
+        console.log("user_id : " + this.user_email);
       }
     });
   }
@@ -160,5 +169,11 @@ export class MyApp {
   goMainPage(){
     this.navCtrl.setRoot(MainPage);
     console.log("goMainPage() at app.componenent.ts");
+  }
+
+  logout(){
+    this.authProvider.logoutUser();
+    this.navCtrl.setRoot(LoginPage);
+    console.log("Logout");
   }
 }
