@@ -31,9 +31,6 @@ export class TaxiListPage {
     });
     this.user_id = "testing";
     
-    //let chat_room_id_val = (this.chatrooms[0]).$key;
-    //console.log("Test : " + this.chatrooms[0].$key);
-  
     this.departOptions = {
       title: '출발지',
       subTitle: '원하시는 출발지를 체크해주세요.',

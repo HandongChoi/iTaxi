@@ -34,6 +34,8 @@ export class MyApp {
   rootPage: any;
   pages: Array<{title: string, component: any}>;
 
+  user_email: any;
+
   private homePage;
   private mainPage;
   private taxiListPage;
@@ -48,6 +50,7 @@ export class MyApp {
       { title: 'MakeRoom', component: MakeRoomPage},
       { title: 'TaxiList', component: TaxiListPage},
       { title: 'Setting', component: SettingPage},
+      { title: 'SignupPage', component: SignupPage},
     ];
 
     this.homePage = HomePage;
@@ -57,10 +60,12 @@ export class MyApp {
 
     const unsubscribe = firebase.auth().onAuthStateChanged( user => { 
       if(!user){
-        this.rootPage = TaxiListPage;
+        this.rootPage = LoginPage;
         unsubscribe(); 
       } else{
         this.rootPage = MainPage; unsubscribe();
+        this.user_email = user.email;
+        console.log("user_id : " + this.user_email);
       }
     });
     
