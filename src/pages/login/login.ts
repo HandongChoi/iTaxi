@@ -1,17 +1,9 @@
 import { Component } from '@angular/core'; 
-import {
-  IonicPage, Loading, LoadingController, NavController, Alert,
-  AlertController } from 'ionic-angular';
+import { IonicPage, Loading, LoadingController, NavController, Alert, AlertController } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms'; 
 import { EmailValidator } from '../../validators/email';
 import { AuthProvider } from '../../providers/auth/auth';
-import { HomePage } from '../home/home';
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { MainPage } from '../main/main';
 
 @IonicPage()
 @Component({
@@ -24,14 +16,12 @@ export class LoginPage {
   public loading:Loading;
 
   constructor(public navCtrl:NavController,public loadingCtrl:LoadingController, public alertCtrl:AlertController,
-    public authProvider:AuthProvider, formBuilder:FormBuilder) {
-
+              public authProvider:AuthProvider, formBuilder:FormBuilder) {
+    
     this.loginForm = formBuilder.group({
-      email: ['', Validators.compose([Validators.required,
-      EmailValidator.isValid])],
-      password: ['', Validators.compose([Validators.required,
-      Validators.minLength(6)])] });
-
+      email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
+      password: ['', Validators.compose([Validators.required, Validators.minLength(6)])] 
+    });
   }
 
   ionViewDidLoad() {
@@ -47,7 +37,7 @@ export class LoginPage {
       
       this.authProvider.loginUser(email, password).then( authData =>  { 
         this.loading.dismiss().then( () => {
-          this.navCtrl.setRoot(HomePage); 
+          this.navCtrl.setRoot(MainPage); 
         });
       }, error => { 
         this.loading.dismiss().then( () => {

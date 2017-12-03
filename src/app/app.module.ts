@@ -20,6 +20,8 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AuthProvider } from '../providers/auth/auth';
+import { SignupPageModule } from '../pages/signup/signup.module';
+import { ResetPasswordPageModule } from '../pages/reset-password/reset-password.module';
 
 
 export const firebaseConfig = {
@@ -40,16 +42,16 @@ export const firebaseConfig = {
     MainPage,
     MakeRoomPage,
     PersonalInfoPage,
-    ResetPasswordPage,
     SettingPage,
-    SignupPage,
     TaxiListPage,
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    SignupPageModule,
+    ResetPasswordPageModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [

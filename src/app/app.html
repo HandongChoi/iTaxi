@@ -1,7 +1,7 @@
 <ion-menu [content]="content"  persistent="true">
     <ion-header>
       <ion-toolbar padding>
-        <ion-title>류여진 님</ion-title>
+        <ion-title>{{user_email}} 님</ion-title>
         <ion-buttons right >
           <button menuClose ion-button icon-only (click)="goSettingPage()">
               <ion-icon name="settings"></ion-icon>
@@ -38,6 +38,8 @@
         <button menuClose ion-item class="sidemenu-items" (click)="goPersonalInfoPage()">내정보수정</button>
         <ion-list-header> 메인페이지 </ion-list-header>
         <button menuClose ion-item class="sidemenu-items" (click)="goMainPage()">메인페이지</button>
+        
+        <button menuClose ion-item class="sidemuenu-items" (click)="logout()">로그아웃</button>
         <!-- <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
           {{p.title}}
         </button> -->
