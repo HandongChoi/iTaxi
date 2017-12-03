@@ -3,14 +3,27 @@ import { Nav, NavController, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { HomePage } from '../pages/home/home';
-import { MainPage } from '../pages/main/main';
-import { SelectAndSortingPage } from '../pages/select-and-sorting/select-and-sorting'
-import { MakeRoomPage } from '../pages/makeRoom/makeRoom'
-import { TaxiListPage } from '../pages/taxi-list/taxi-list'
-import { SettingPage } from '../pages/setting/setting';
-import { PersonalInfoPage } from '../pages/personal-info/personal-info';
 import { ChatRoomPage } from '../pages/chatroom/chatroom';
+import { HomePage } from '../pages/home/home';
+import { LoginPage } from '../pages/login/login';
+import { MainPage } from '../pages/main/main';
+import { MakeRoomPage } from '../pages/makeRoom/makeRoom';
+import { PersonalInfoPage } from '../pages/personal-info/personal-info';
+import { ResetPasswordPage } from '../pages/reset-password/reset-password';
+import { SettingPage } from '../pages/setting/setting';
+import { SignupPage } from '../pages/signup/signup';
+import { TaxiListPage } from '../pages/taxi-list/taxi-list';
+
+import firebase from 'firebase';
+
+firebase.initializeApp({ 
+  apiKey: "AIzaSyANvht7J2MNX6x47mglqfJk74yZQ9u0qUk",
+  authDomain: "itaxi-54bdc.firebaseapp.com",
+  databaseURL: "https://itaxi-54bdc.firebaseio.com",
+  projectId: "itaxi-54bdc",
+  storageBucket: "itaxi-54bdc.appspot.com",
+  messagingSenderId: "208976127032"
+});
 
 import {FCM, NotificationData} from '@ionic-native/fcm';
 
@@ -22,8 +35,7 @@ import {FCM, NotificationData} from '@ionic-native/fcm';
 export class MyApp {
   @ViewChild(Nav) navCtrl: NavController;
 
-  rootPage: any = TaxiListPage;
-
+  rootPage: any;
   pages: Array<{title: string, component: any}>;
 
   private homePage;
@@ -31,13 +43,16 @@ export class MyApp {
   private taxiListPage;
   private settingPage;
 
+<<<<<<< HEAD
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public fcm:FCM) {
+=======
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+>>>>>>> master
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: HomePage },
-      { title: 'Select testing', component: SelectAndSortingPage},
       { title: 'MakeRoom', component: MakeRoomPage},
       { title: 'TaxiList', component: TaxiListPage},
       { title: 'Setting', component: SettingPage},
@@ -47,6 +62,16 @@ export class MyApp {
     this.mainPage = MainPage;
     this.taxiListPage = TaxiListPage;
     this.settingPage = SettingPage;
+
+    const unsubscribe = firebase.auth().onAuthStateChanged( user => { 
+      if(!user){
+        this.rootPage = SignupPage;
+        unsubscribe(); 
+      } else{
+        this.rootPage = MainPage; unsubscribe();
+      }
+    });
+    
   }
 
   initializeApp() {
@@ -92,8 +117,8 @@ export class MyApp {
     //this.navCtrl.setRoot(page.component);
     this.navCtrl.setRoot(page);
     console.log("openPage");
-  }  
-  
+  }
+
   inviteFriend(){
     alert('invite friend');
     console.log("inviteFriend() at app.componenent.ts");
@@ -113,7 +138,7 @@ export class MyApp {
     this.navCtrl.setRoot(TaxiListPage);
     console.log("goTaxiListPage() at app.componenent.ts");
   }
-  
+
   goMakeTaxiRoomPage(){
     this.navCtrl.setRoot(MakeRoomPage);
     console.log("goMakeTaxiRoomPage() at app.componenent.ts");
@@ -134,9 +159,9 @@ export class MyApp {
     console.log("goBoardingListPage() at app.componenent.ts");
   }
 
-  goEditMyInfoPage(){
-    alert('Edit My Info Page');
-    console.log("goEditMyInfoPage() at app.componenent.ts");
+  goPersonalInfoPage(){
+    this.navCtrl.setRoot(PersonalInfoPage);
+    console.log("goPersonalInfoPage() at app.componenent.ts");
   }
 
   goMainPage(){

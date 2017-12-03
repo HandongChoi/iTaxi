@@ -4,13 +4,6 @@ import { ChatRoomPage } from '../chatroom/chatroom';
 import { MakeRoomPage } from '../makeRoom/makeRoom';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
-/**
- * Generated class for the TaxiListPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-taxi-list',
@@ -25,9 +18,13 @@ export class TaxiListPage {
   chatrooms_array: Array<any> =[];
   
   forDate: any = new Date();
-  nowDate: string = this.forDate.getFullYear() + "-" + (this.forDate.getMonth()+1) + "-" + this.forDate.getDate();
+  nowDate: string = new Date().toISOString().substr(0, 10);
+
+  departOptions: any;
+  destinationOptions: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase) {
+    //기본적으로 오늘 날짜 기준으로 data 불러오기.
     this.dates = af.list('/chatrooms/'+this.nowDate);
     console.log('database load success');
     this.dates.subscribe(data =>{
@@ -38,20 +35,24 @@ export class TaxiListPage {
     //여기까지가 모든 date들의 object를 다 가져온 것이다.
     //this.user_id = prompt("Input ID");
     this.user_id = "testing";
-
-    //현재 날짜에 관한 chatroom들 정보 모두 가져오기.
-  /*  this.chatrooms = this.af.list('/chatrooms/'+this.nowDate);
-    console.log(this.chatrooms);
-
-    this.chatrooms.subscribe(data =>{
-      this.chatrooms_array.push(data);  
-    });
-    */
-
-//    let chat_room_id_val = (this.chatrooms[0]).$key;
+    
+    //let chat_room_id_val = (this.chatrooms[0]).$key;
     //console.log("Test : " + this.chatrooms[0].$key);
-  }
   
+    this.departOptions = {
+      title: '출발지',
+      subTitle: '원하시는 출발지를 체크해주세요.',
+      mode: 'md'
+    };
+
+    this.destinationOptions = {
+      title: '도착지',
+      subTitle: '원하시는 도착지를 체크해주세요.',
+      mode: 'md'
+    };
+
+  }
+
   goChatroom($event, date) {
     console.log('hi');
       this.chatrooms = this.af.list('/chatrooms/'+date);
