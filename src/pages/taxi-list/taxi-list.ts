@@ -4,13 +4,6 @@ import { ChatRoomPage } from '../chatroom/chatroom';
 import { MakeRoomPage } from '../makeRoom/makeRoom';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
-/**
- * Generated class for the TaxiListPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-taxi-list',
@@ -25,7 +18,10 @@ export class TaxiListPage {
   chatrooms_array: Array<any> =[];
   
   forDate: any = new Date();
-  nowDate: string = this.forDate.getFullYear() + "-" + (this.forDate.getMonth()+1) + "-" + this.forDate.getDate();
+  nowDate: string = new Date().toISOString().substr(0, 10);
+
+  departOptions: any;
+  destinationOptions: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase) {
     //기본적으로 오늘 날짜 기준으로 data 불러오기.
@@ -33,12 +29,23 @@ export class TaxiListPage {
     this.dates.subscribe(data =>{
       this.dates_array.push(data);
     });
-    //this.user_id = prompt("Input ID");
     this.user_id = "testing";
     
-//    let chat_room_id_val = (this.chatrooms[0]).$key;
+    //let chat_room_id_val = (this.chatrooms[0]).$key;
     //console.log("Test : " + this.chatrooms[0].$key);
   
+    this.departOptions = {
+      title: '출발지',
+      subTitle: '원하시는 출발지를 체크해주세요.',
+      mode: 'md'
+    };
+
+    this.destinationOptions = {
+      title: '도착지',
+      subTitle: '원하시는 도착지를 체크해주세요.',
+      mode: 'md'
+    };
+
   }
 
   goChatroom($event, date) {
