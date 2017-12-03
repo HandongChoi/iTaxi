@@ -40,9 +40,7 @@ export class MyApp {
   private taxiListPage;
   private settingPage;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, 
-    public splashScreen: SplashScreen
-              ) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -86,8 +84,8 @@ export class MyApp {
     //this.navCtrl.setRoot(page.component);
     this.navCtrl.setRoot(page);
     console.log("openPage");
-  }  
-  
+  }
+
   inviteFriend(){
     alert('invite friend');
     console.log("inviteFriend() at app.componenent.ts");
@@ -107,7 +105,7 @@ export class MyApp {
     this.navCtrl.setRoot(TaxiListPage);
     console.log("goTaxiListPage() at app.componenent.ts");
   }
-  
+
   goMakeTaxiRoomPage(){
     this.navCtrl.setRoot(MakeRoomPage);
     console.log("goMakeTaxiRoomPage() at app.componenent.ts");

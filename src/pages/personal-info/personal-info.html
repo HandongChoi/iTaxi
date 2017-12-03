@@ -5,14 +5,47 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>personalInfo</ion-title>
+  <ion-navbar  color = "primary">
+    <ion-title>개인정보 수정</ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <span ion-text showWhen="ios">Cancel</span>
+        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding>
-  개인정보 수정페이지
+
+    <ion-item>
+      <ion-label stacked>이름</ion-label>
+      <ion-input type="text" placeholder="류여진"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>학번</ion-label>
+      <ion-input type="text" placeholder="21400111"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>전화번호</ion-label>
+      <ion-input type="text" placeholder="010-8222-3574"></ion-input> <!-- placeholder에 기존 전화번호 뿌리기  -->
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>새로운 비밀번호</ion-label>
+      <ion-input type="password"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>비밀번호 확인</ion-label>
+      <ion-input type="password"></ion-input>
+    </ion-item>
+
+
+  <div padding>
+    <button ion-button block (click)="showAlert()">변경하기</button>
+  </div>
 </ion-content>
