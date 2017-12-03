@@ -57,7 +57,7 @@ export class MyApp {
 
     const unsubscribe = firebase.auth().onAuthStateChanged( user => { 
       if(!user){
-        this.rootPage = SignupPage;
+        this.rootPage = MakeRoomPage;
         unsubscribe(); 
       } else{
         this.rootPage = MainPage; unsubscribe();
