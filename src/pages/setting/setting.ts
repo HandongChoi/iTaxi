@@ -13,7 +13,8 @@ export class SettingPage {
   isNotiToggled: boolean;
   isPushToggled: boolean;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public platform:Platform) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private modalCtrl: ModalController,
+              public alertCtrl: AlertController, public platform:Platform) {
     this.platform.ready().then(() =>{
       NativeStorage.getItem('notification').then(data =>{
         console.log(this.isNotiToggled);
