@@ -14,6 +14,8 @@ import { SettingPage } from '../pages/setting/setting';
 import { SignupPage } from '../pages/signup/signup';
 import { TaxiListPage } from '../pages/taxi-list/taxi-list';
 
+import { AuthProvider } from '../providers/auth/auth';
+
 import firebase from 'firebase';
 
 firebase.initializeApp({ 
@@ -41,7 +43,8 @@ export class MyApp {
   private taxiListPage;
   private settingPage;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
+              public authProvider:AuthProvider) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -137,5 +140,11 @@ export class MyApp {
   goMainPage(){
     this.navCtrl.setRoot(MainPage);
     console.log("goMainPage() at app.componenent.ts");
+  }
+
+  logout(){
+    this.authProvider.logoutUser();
+    this.navCtrl.setRoot(LoginPage);
+    console.log("Logout");
   }
 }
