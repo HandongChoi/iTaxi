@@ -10,7 +10,6 @@ import { MainPage } from '../pages/main/main';
 import { MakeRoomPage } from '../pages/makeRoom/makeRoom';
 import { PersonalInfoPage } from '../pages/personal-info/personal-info';
 import { ResetPasswordPage } from '../pages/reset-password/reset-password';
-import { SelectAndSortingPage } from '../pages/select-and-sorting/select-and-sorting';
 import { SettingPage } from '../pages/setting/setting';
 import { SignupPage } from '../pages/signup/signup';
 import { TaxiListPage } from '../pages/taxi-list/taxi-list';
@@ -42,7 +41,6 @@ export const firebaseConfig = {
     MakeRoomPage,
     PersonalInfoPage,
     ResetPasswordPage,
-    SelectAndSortingPage,
     SettingPage,
     SignupPage,
     TaxiListPage,
@@ -63,7 +61,6 @@ export const firebaseConfig = {
     MakeRoomPage,
     PersonalInfoPage,
     ResetPasswordPage,
-    SelectAndSortingPage,
     SettingPage,
     SignupPage,
     TaxiListPage,

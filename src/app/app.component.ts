@@ -10,7 +10,6 @@ import { MainPage } from '../pages/main/main';
 import { MakeRoomPage } from '../pages/makeRoom/makeRoom';
 import { PersonalInfoPage } from '../pages/personal-info/personal-info';
 import { ResetPasswordPage } from '../pages/reset-password/reset-password';
-import { SelectAndSortingPage } from '../pages/select-and-sorting/select-and-sorting';
 import { SettingPage } from '../pages/setting/setting';
 import { SignupPage } from '../pages/signup/signup';
 import { TaxiListPage } from '../pages/taxi-list/taxi-list';
@@ -46,7 +45,6 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: HomePage },
-      { title: 'Select testing', component: SelectAndSortingPage},
       { title: 'MakeRoom', component: MakeRoomPage},
       { title: 'TaxiList', component: TaxiListPage},
       { title: 'Setting', component: SettingPage},
