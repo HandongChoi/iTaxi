@@ -22,6 +22,8 @@ export class ChatRoomPage {
   chat_room_id: any;
   bookingDate: String;
   
+  
+
   room_depart: String;
   room_dest: String;
   room_capacity: String;
@@ -51,6 +53,8 @@ export class ChatRoomPage {
       this.room_participants = data[6];
       
     });
+
+
   }
 
   goBack(){
@@ -95,12 +99,16 @@ export class ChatRoomPage {
       this.navCtrl.setRoot(TaxiListPage);
     }// 방장이 아닌 다른 사람이 나갈 경우
     else{
-
-
+      //방장이고, 방에 사람이 없을 때
+      if(this.room_participants.length == 0)
+        this.room_object.remove();
       // 방 삭제?, 아니면 남겨둠?
+      else if(this.room_participants.length == 1){
+        
+      }
       this.navCtrl.setRoot(TaxiListPage);
     }
-    //방장이 나갈 경우
+    //방장 다음 사람으로 옮기기
   }
 
   scrollBottom(){

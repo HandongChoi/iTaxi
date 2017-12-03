@@ -100,7 +100,7 @@ export class MakeRoomPage {
           console.log("Error"); 
         }
         else{
-          this.chatrooms = this.af.list('/chatrooms/' + this.nowDate);
+          this.chatrooms = this.af.list('/chatrooms/' + this.bookingDate);
           url = this.chatrooms.push(
               {
                   departure: this.start,
@@ -112,6 +112,9 @@ export class MakeRoomPage {
                   participants: participants_list
               }
           );
+
+          console.log()
+
           this.navCtrl.setRoot(ChatRoomPage, {chat_room_id: url.key, bookingDate:this.bookingDate, user_id: this.user_id});
         }
       }
