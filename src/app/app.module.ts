@@ -10,10 +10,12 @@ import { MakeRoomPage } from '../pages/makeRoom/makeRoom'
 import { PersonalInfoPage } from '../pages/personal-info/personal-info';
 import { SelectAndSortingPage } from '../pages/select-and-sorting/select-and-sorting'
 import { SettingPage } from '../pages/setting/setting';
-import { TaxiListPage } from '../pages/taxi-list/taxi-list'
+import { TaxiListPage } from '../pages/taxi-list/taxi-list';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+
+import { FCM } from '@ionic-native/fcm';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -61,7 +63,8 @@ export const firebaseConfig = {
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    FCM
   ]
 })
 export class AppModule {}

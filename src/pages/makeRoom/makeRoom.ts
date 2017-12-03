@@ -23,14 +23,14 @@ export class MakeRoomPage {
   nowTime: string = this.forDate.getHours() + ":" + this.forDate.getMinutes();       
   
   bookingTime: string;
-  bookingDate: string; 
+  bookingDate: string = "2017-12-4"; 
 
   //1년치만 예약 가능하도록 만들었다.
   minYear: string = this.forDate.getFullYear() + "-" + (this.forDate.getMonth()+1) + "-" + this.forDate.getDate();
   maxYear: string = (this.forDate.getFullYear()+1) + "-" + (this.forDate.getMonth()+1) + "-" + this.forDate.getDate();
 
   chatrooms: FirebaseListObservable<any[]>;
-  user_id: string;    
+  user_id: string;  
 
   constructor(public alertCtrl: AlertController, public navParams: NavParams,
                public navCtrl:NavController, public af: AngularFireDatabase){
@@ -85,10 +85,13 @@ export class MakeRoomPage {
         console.log("Check : " + this.bookingTime);
 
         //지금 시간 보다 전 시간으로 예약하는 경우 처리
-        if((this.nowDate+this.nowTime)>(this.bookingDate+this.bookingTime)){
+
+        console.log(this.nowDate+this.nowTime, this.bookingDate + this.bookingTime, (this.nowDate+this.nowTime > this.bookingDate+this.bookingTime))
+        
+        /*if((this.nowDate+this.nowTime)>(this.bookingDate+this.bookingTime)){
           console.log("Error"); 
         }
-        else{
+        else{*/
           this.chatrooms = this.af.list('/chatrooms/' + this.bookingDate);
           url = this.chatrooms.push(
               {
@@ -101,8 +104,8 @@ export class MakeRoomPage {
                   participants: participants_list
               }
           );
-        this.navCtrl.setRoot(ChatRoomPage, {chat_room_id: url.key, user_id: this.user_id});
-        }
+          this.navCtrl.setRoot(ChatRoomPage, {chat_room_id: url.key, bookingDate:this.bookingDate, user_id: this.user_id});
+        //}
       }
     });
     alert.present();
@@ -151,7 +154,7 @@ export class MakeRoomPage {
                   participants: participants_list
               }
           );
-          this.navCtrl.setRoot(ChatRoomPage, {chat_room_id: url.key, user_id: this.user_id});  
+          this.navCtrl.setRoot(ChatRoomPage, {chat_room_id: url.key, bookingDate:this.bookingDate, user_id: this.user_id});  
         }
       });
       alert.setTitle('탑승인원');

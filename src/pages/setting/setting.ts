@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform} from 'ionic-angular';
+import { NativeStorage } from 'ionic-native';
 
 /**
  * Generated class for the SettingPage page.
@@ -15,11 +16,32 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class SettingPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  isNotiToggled: boolean;
+  isPushToggled: boolean;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public platform:Platform) {
+    this.platform.ready().then(() =>{
+      NativeStorage.getItem('notification').then(data =>{
+        console.log(this.isNotiToggled);
+        this.isNotiToggled = data;
+      });
+
+      NativeStorage.getItem('push').then(data =>{
+        console.log(this.isPushToggled);
+        this.isPushToggled = data;
+      });
+    });
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SettingPage');
   }
 
+  NotiToggle(){
+    NativeStorage.setItem('notification', this.isNotiToggled);
+  }
+
+  PushToggle(){
+    NativeStorage.setItem('push', this.isPushToggled);
+  }
 }

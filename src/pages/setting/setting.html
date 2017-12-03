@@ -32,11 +32,11 @@
     <ion-list-header> PUSH알림 </ion-list-header>
       <ion-item>
         <ion-label>메세지 알림</ion-label>
-        <ion-toggle checked="true"></ion-toggle>
+        <ion-toggle [(ngModel)]="isPushToggled" (ionChange)="PushToggle()" checked="true"></ion-toggle>
       </ion-item>
       <ion-item>
         <ion-label>공지 알림</ion-label>
-        <ion-toggle checked="true"></ion-toggle>
+        <ion-toggle [(ngModel)]="isNotiToggled" (ionChange)="NotiToggle()" checked="true"></ion-toggle>
       </ion-item>
 
     <ion-list-header> 문의 </ion-list-header>

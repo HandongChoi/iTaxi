@@ -12,6 +12,10 @@ import { SettingPage } from '../pages/setting/setting';
 import { PersonalInfoPage } from '../pages/personal-info/personal-info';
 import { ChatRoomPage } from '../pages/chatroom/chatroom';
 
+import {FCM, NotificationData} from '@ionic-native/fcm';
+
+
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -27,9 +31,7 @@ export class MyApp {
   private taxiListPage;
   private settingPage;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, 
-    public splashScreen: SplashScreen
-              ) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public fcm:FCM) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -53,10 +55,37 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+
+      this.fcm.getToken()
+        .then((token:String) =>{
+          console.log("The token is ", token);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+      
+      this.fcm.onTokenRefresh().subscribe(
+        (token:string) => console.log("New Token", token),
+        error => console.error(error)
+      );
+      
+      this.fcm.onNotification().subscribe(
+        (data:NotificationData)=>{
+          if(data.wasTapped){
+            console.log("Received in background", JSON.stringify(data));
+          }
+          else{
+            console.log("Received in foreground", JSON.stringify(data))
+          }
+        }, error=>{
+          console.error("Error in notification", error);
+        }
+      )
     });
     console.log("initailizeApp at app.component.ts");
   }
 
+ 
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario

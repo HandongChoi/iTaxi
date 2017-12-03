@@ -1,10 +1,23 @@
-<ion-header>
+x<ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Chat Room</ion-title>
-    </ion-navbar >
+
+    <ion-buttons left>
+      <button ion-button (click)='goBack()'>
+        <ion-icon name = "ios-arrow-back"></ion-icon>
+      </button>
+      <button ion-button (click)='quit()'>
+        나가기
+      </button>    
+    </ion-buttons>
+    
+    <ion-title> {{room_depart}} -> {{room_dest}} </ion-title>
+    <ion-buttons right>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>          
+    </ion-buttons>
+    
+  </ion-navbar>
 </ion-header>
 
 <ion-content>
@@ -18,7 +31,7 @@
 
 <ion-footer>
   <ion-item>  
-    <ion-input [(ngModel)]="chat_content" fixed type="text"></ion-input>
+    <ion-input [(ngModel)]="chat_content" fixed type="text" (keyup.enter) = "send()"></ion-input>
     <button ion-button clear item-right (click)="send()" (click)="scrollBottom()"> send </button>
   </ion-item>
 </ion-footer>
