@@ -17,7 +17,7 @@ import { TaxiListPage } from '../pages/taxi-list/taxi-list';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 
-import { FCM } from '@ionic-native/fcm';
+import { Push } from '@ionic-native/push';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -71,7 +71,7 @@ export const firebaseConfig = {
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    FCM,
+    Push,
     AuthProvider,
   ]
 })

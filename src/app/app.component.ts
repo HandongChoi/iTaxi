@@ -15,6 +15,7 @@ import { SignupPage } from '../pages/signup/signup';
 import { TaxiListPage } from '../pages/taxi-list/taxi-list';
 
 import firebase from 'firebase';
+import { Push, PushObject, PushOptions } from '@ionic-native/push';
 
 firebase.initializeApp({ 
   apiKey: "AIzaSyANvht7J2MNX6x47mglqfJk74yZQ9u0qUk",
@@ -24,8 +25,6 @@ firebase.initializeApp({
   storageBucket: "itaxi-54bdc.appspot.com",
   messagingSenderId: "208976127032"
 });
-
-import {FCM, NotificationData} from '@ionic-native/fcm';
 
 @Component({
   templateUrl: 'app.html'
@@ -41,7 +40,7 @@ export class MyApp {
   private taxiListPage;
   private settingPage;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public fcm:FCM) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public push:Push) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -74,35 +73,39 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
 
-      this.fcm.getToken()
-        .then((token:String) =>{
-          console.log("The token is ", token);
-        })
-        .catch(error => {
-          console.error(error);
-        });
+      this.pushSetup();
       
-      this.fcm.onTokenRefresh().subscribe(
-        (token:string) => console.log("New Token", token),
-        error => console.error(error)
-      );
-      
-      this.fcm.onNotification().subscribe(
-        (data:NotificationData)=>{
-          if(data.wasTapped){
-            console.log("Received in background", JSON.stringify(data));
-          }
-          else{
-            console.log("Received in foreground", JSON.stringify(data))
-          }
-        }, error=>{
-          console.error("Error in notification", error);
-        }
-      )
     });
     console.log("initailizeApp at app.component.ts");
   }
 
+  pushSetup(){
+    let options: PushOptions = {
+      android:{      
+      },
+      ios:{
+        alert: 'true',
+        badge: true,
+        sound:'false'
+      },
+      windows:{
+
+      }
+    };
+    
+    const pushObject: PushObject = this.push.init(options);
+
+    pushObject.on('notification').subscribe((notification:any) =>{
+      if(notification.additionalData.foreground){
+        alert(notification.additionalData.foreground);
+        //message 수신
+        alert(notification.additionalData.background);
+      }
+    });
+    pushObject.on('registration').subscribe((registration:any) => console.log('Device Registered', registration));
+    pushObject.on('error').subscribe((error:any) => console.log('Error with Push Plug-in', error));
+    
+  }
  
   openPage(page) {
     // Reset the content nav to have just this page
