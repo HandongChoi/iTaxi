@@ -69,7 +69,7 @@ export class MyApp {
         this.rootPage = LoginPage;
         unsubscribe();
       } else{
-        this.rootPage = MainPage; unsubscribe();
+        this.rootPage = MakeRoomPage; unsubscribe();
         this.user_email = user.email;
         console.log("user_id : " + this.user_email);
       }
