@@ -57,7 +57,7 @@ export class MyApp {
 
     const unsubscribe = firebase.auth().onAuthStateChanged( user => { 
       if(!user){
-        this.rootPage = TaxiListPage;
+        this.rootPage = SignupPage;
         unsubscribe(); 
       } else{
         this.rootPage = MainPage; unsubscribe();
@@ -124,9 +124,9 @@ export class MyApp {
     console.log("goBoardingListPage() at app.componenent.ts");
   }
 
-  goEditMyInfoPage(){
-    alert('Edit My Info Page');
-    console.log("goEditMyInfoPage() at app.componenent.ts");
+  goPersonalInfoPage(){
+    this.navCtrl.setRoot(PersonalInfoPage);
+    console.log("goPersonalInfoPage() at app.componenent.ts");
   }
 
   goMainPage(){
