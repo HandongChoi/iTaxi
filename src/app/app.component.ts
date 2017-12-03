@@ -27,8 +27,6 @@ firebase.initializeApp({
 
 import {FCM, NotificationData} from '@ionic-native/fcm';
 
-
-
 @Component({
   templateUrl: 'app.html'
 })
@@ -43,11 +41,7 @@ export class MyApp {
   private taxiListPage;
   private settingPage;
 
-<<<<<<< HEAD
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public fcm:FCM) {
-=======
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
->>>>>>> master
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -71,7 +65,6 @@ export class MyApp {
         this.rootPage = MainPage; unsubscribe();
       }
     });
-    
   }
 
   initializeApp() {
