@@ -16,6 +16,8 @@ import { TaxiListPage } from '../pages/taxi-list/taxi-list';
 
 import { AuthProvider } from '../providers/auth/auth';
 
+import {FCM, NotificationData} from '@ionic-native/fcm';
+
 import firebase from 'firebase';
 
 firebase.initializeApp({ 
@@ -26,8 +28,6 @@ firebase.initializeApp({
   storageBucket: "itaxi-54bdc.appspot.com",
   messagingSenderId: "208976127032"
 });
-
-import {FCM, NotificationData} from '@ionic-native/fcm';
 
 @Component({
   templateUrl: 'app.html'

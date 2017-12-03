@@ -23,6 +23,7 @@ import { AuthProvider } from '../providers/auth/auth';
 import { SignupPageModule } from '../pages/signup/signup.module';
 import { ResetPasswordPageModule } from '../pages/reset-password/reset-password.module';
 
+import { FCM } from '@ionic-native/fcm';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyANvht7J2MNX6x47mglqfJk74yZQ9u0qUk",
@@ -71,7 +72,8 @@ export const firebaseConfig = {
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthProvider
+    AuthProvider,
+    FCM,
   ]
 })
 export class AppModule {}
