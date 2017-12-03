@@ -1,14 +1,11 @@
 <ion-header>
   <ion-navbar color="primary">
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
     <ion-title>Log In</ion-title> 
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <img src="http://placehold.it/300x100" />
+  <img src="../../assets/imgs/logo.png"/>
   <form [formGroup]="loginForm" (submit)="loginUser()" novalidate>
     <ion-item>
       <ion-label stacked>Email</ion-label> 
