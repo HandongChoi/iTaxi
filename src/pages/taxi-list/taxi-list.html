@@ -18,7 +18,7 @@
       <ion-row>
         <ion-col col-6>
           <ion-item>
-          <ion-select #newSelect [(ngModel)]="carbrand" multiple="true" placeholder="전체보기">
+          <ion-select #newSelect [selectOptions]="departOptions" [(ngModel)]="carbrand" multiple="true" placeholder="전체보기">
             <ion-option value="All" checked="true">전체보기</ion-option>  
             <ion-option value="Handong">한동대학교</ion-option>
             <ion-option value="Yangduck" >양덕</ion-option>

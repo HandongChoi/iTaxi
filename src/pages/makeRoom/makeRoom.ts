@@ -17,18 +17,20 @@ export class MakeRoomPage {
   start_list: Array<{start_list:string, value:string}>;
   swap: string ="";
   
+  testDate: string = new Date().toISOString().substr(0, 16).replace('T', ' ');
   
   forDate: any = new Date();
-  nowDate: string = this.forDate.getFullYear() + "-" + (this.forDate.getMonth()+1) + "-" + this.forDate.getDate();
-  nowTime: string = this.forDate.getHours() + ":" + this.forDate.getMinutes();       
+  nowDate: string = new Date().toISOString().substr(0, 10);
+  nowTime: string = this.forDate.getHours() + ":" + this.addZ(this.forDate.getMinutes()); //이것도 slice로 구현해볼려고 하는데 안 된다.      
   
   bookingTime: string;
   bookingDate: string; 
 
   //1년치만 예약 가능하도록 만들었다.
-  minYear: string = this.forDate.getFullYear() + "-" + (this.forDate.getMonth()+1) + "-" + this.forDate.getDate();
-  maxYear: string = (this.forDate.getFullYear()+1) + "-" + (this.forDate.getMonth()+1) + "-" + this.forDate.getDate();
-
+  minYear: string = new Date().toISOString().substr(0, 10);
+  maxYear: string = (this.forDate.getFullYear()+1) + "-" + this.addZ(this.forDate.getMonth()+1) + "-" + this.addZ(this.forDate.getDate());
+  //getDate같은 것들은 1일을 1로 반환하기에 우리는 01로 고쳐줘야한다.(addZ의 역할.) ISOstring이 01의 형식으로 다 구성되어 있기 때문.
+  
   chatrooms: FirebaseListObservable<any[]>;
   user_id: string;    
 
@@ -44,7 +46,16 @@ export class MakeRoomPage {
       {start_list:'육거리',value:'육거리'},
       {start_list:'직접입력',value:this.start2},
     ];
-    this.user_id = navParams.data.user_id;
+    this.user_id = navParams.data.user_id; //이게 파라미터로 자꾸 받으면 중간에 데이터가 손실되지 않도록 유지시켜줘야 한다.
+    this.user_id = "testing";
+
+    console.log("min : " + this.minYear);
+    console.log("max : " + this.maxYear);
+    console.log("testDate : " + this.testDate);
+  }
+
+  addZ(n) {
+    return n < 10 ? '0' + n : '' + n;
   }
 
   showRadioAlert(){
@@ -82,14 +93,14 @@ export class MakeRoomPage {
         participants_list.push(this.user_id);
         let url;
 
-        console.log("Check : " + this.bookingTime);
-
         //지금 시간 보다 전 시간으로 예약하는 경우 처리
         if((this.nowDate+this.nowTime)>(this.bookingDate+this.bookingTime)){
+          console.log("nowDate : " + this.nowDate+this.nowTime);
+          console.log("bookingDate : " + this.bookingDate+this.bookingTime);
           console.log("Error"); 
         }
         else{
-          this.chatrooms = this.af.list('/chatrooms/' + "2017-11-30");
+          this.chatrooms = this.af.list('/chatrooms/' + this.nowDate);
           url = this.chatrooms.push(
               {
                   departure: this.start,
