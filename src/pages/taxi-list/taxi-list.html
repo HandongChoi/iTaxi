@@ -16,10 +16,10 @@
     
     <ion-grid>
       <ion-row>
-        <ion-col col-6>
-          <ion-item>
-          <ion-select #newSelect [selectOptions]="departOptions" [(ngModel)]="departFilter" multiple="false" 
-                      placeholder="전체보기" (ionChange)="clickOption()">
+
+        <ion-col col-5>
+          <ion-item class = "formRound">
+          <ion-select #newSelect [selectOptions]="departOptions" [(ngModel)]="carbrand" multiple="true" placeholder="전체보기" (ionChange)="clickOption()">
             <ion-option value="All" checked="true">전체보기</ion-option>  
             <ion-option value="한동">한동대학교</ion-option>
             <ion-option value="양덕" >양덕</ion-option>
@@ -30,9 +30,12 @@
           </ion-select>
           </ion-item>
         </ion-col>
-        <ion-col col-6>
-          <ion-item>
-          <ion-select [selectOptions]="destinationOptions" [(ngModel)]="arriveFilter" multiple="false" placeholder="전체보기">
+        <ion-col col-2>
+        <h6> > </h6>              
+        </ion-col>
+        <ion-col col-5>
+          <ion-item  class = "formRound">
+          <ion-select [selectOptions]="destinationOptions" [(ngModel)]="gender" multiple="true" placeholder="전체보기" >
             <ion-option value="All" checked="true">전체보기</ion-option>  
             <ion-option value="한동">한동대학교</ion-option>
             <ion-option value="양덕" >양덕</ion-option>
@@ -46,14 +49,23 @@
       </ion-row>
       <ion-row>
         <ion-col col-2>
-            <h6>시간</h6>
-        </ion-col>
-        <ion-col col-8>
-            <h6>출발지</h6>
+            <h6>오늘</h6>
         </ion-col>
         <ion-col col-2>
-            <h6>현원</h6>
+            <h6>25</h6>
         </ion-col>
+        <ion-col col-2>
+            <h6>26</h6>
+        </ion-col>
+        <ion-col col-2>
+            <h6>27</h6>
+        </ion-col>
+        <ion-col col-2>
+            <h6>28</h6>
+        </ion-col>
+        <ion-col col-2>
+            <h6>더보기</h6>
+        </ion-col>        
       </ion-row>
     </ion-grid>
   </table>
