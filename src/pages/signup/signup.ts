@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, Loading, LoadingController, Alert,
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'; 
 import { AuthProvider } from '../../providers/auth/auth';
 import { EmailValidator } from '../../validators/email';
-import { HomePage } from '../home/home';
+import { MainPage } from '../main/main';
   
 import { AngularFireDatabase } from 'angularfire2/database';
 
@@ -38,12 +38,12 @@ export class SignupPage {
 
       this.authProvider.signupUser(email, password).then( user => { 
         this.loading.dismiss().then( () => {
-
           this.firestore = firebase.database().ref('/userProfile/'+ firebase.auth().currentUser.uid);
           
           this.tokenSetup().then((token) => {
             this.storetoken(token);
           });
+          this.navCtrl.setRoot(MainPage);
         });
       }, error => {
         this.loading.dismiss().then( () => {
@@ -65,7 +65,7 @@ export class SignupPage {
       devtoken:t
     }).then(()=>{
       alert('Token Stored');
-      this.navCtrl.setRoot(HomePage);
+      this.navCtrl.setRoot(MainPage);
     }).catch(()=>{
       alert('Token not sotred');
     });

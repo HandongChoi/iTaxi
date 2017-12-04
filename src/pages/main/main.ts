@@ -1,13 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { TaxiListPage } from '../taxi-list/taxi-list';
-
-/**
- * Generated class for the MainPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
-*/
+import { PersonalInfoPage } from '../personal-info/personal-info';
 
 @IonicPage()
 @Component({
@@ -16,17 +10,17 @@ import { TaxiListPage } from '../taxi-list/taxi-list';
 })
 export class MainPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+  user: any;
+  user_id: string;
 
-  openTaxiList() {
-    //manages the stack
-    this.navCtrl.setRoot(TaxiListPage);
-    console.log("openTaxiList at main.ts");
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.user = firebase.auth().currentUser;
+    this.user_id = this.user.email;
+    console.log("Main user : "+this.user_id);
   }
 
   goTaxiListPage(){
-    this.navCtrl.setRoot(TaxiListPage);
+    this.navCtrl.setRoot(TaxiListPage, {user_id: this.user_id});
     console.log("goTaxiListPage at main.ts");
   }
 
@@ -36,7 +30,7 @@ export class MainPage {
   }
 
   goMyPage(){
-    alert('MyPage');
+    this.navCtrl.setRoot(PersonalInfoPage, {user_id: this.user_id});
     console.log("goMyPage at main.ts");
   }
 }
