@@ -10,20 +10,19 @@ exports.ChatMessageTrigger= functions.database.ref('/chats/{roomId}/{chatId}').o
 	
 	var wroteRoom = event.data.ref.parent.key;
 
-	admin.database().ref('/chatrooms/2017-12-04/' + wroteRoom).on('value', function(snapshot){
+	admin.database().ref('/chatrooms/2017-12-06/' + wroteRoom).on('value', function(snapshot){
 		var participants = snapshot.val().participants;
 
 		// 
-		count = 1;
-		total = 0;
+		var count = 1;
 		var tokens = [];
-		total = participants.length;
+		var total = participants.length;
 		for(participant of participants){
 			admin.database().ref('/userProfile').orderByChild('email').equalTo(participant).once('child_added', function(data){
 				tokens.push(data.val().devtoken);
-				console.log('token_list in getTokens', tokens);
+				console.log('token_list in getTokens', tokens);				
 				
-				if(count == total){
+				if(count === total){
 					console.log('from getTokens() function: ', tokens);
 					var payload ={
 						'notification' : {
@@ -46,7 +45,9 @@ exports.ChatMessageTrigger= functions.database.ref('/chats/{roomId}/{chatId}').o
 					})
 				}
 				count++;
-			});
+			});			
 		}
+
+		console.log(participants.length);
 	});
 });
