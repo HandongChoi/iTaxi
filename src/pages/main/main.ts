@@ -9,19 +9,23 @@ import { TaxiListPage } from '../taxi-list/taxi-list';
 })
 export class MainPage {
 
+  user: any;
+  user_id: string;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-
-
+    this.user = firebase.auth().currentUser;
+    this.user_id = this.user.email;
+    console.log("Main user : "+this.user_id);
   }
 
   openTaxiList() {
     //manages the stack
-    this.navCtrl.setRoot(TaxiListPage);
+    this.navCtrl.setRoot(TaxiListPage, {user_id: this.user_id});
     console.log("openTaxiList at main.ts");
   }
 
   goTaxiListPage(){
-    this.navCtrl.setRoot(TaxiListPage);
+    this.navCtrl.setRoot(TaxiListPage, {user_id: this.user_id});
     console.log("goTaxiListPage at main.ts");
   }
 
