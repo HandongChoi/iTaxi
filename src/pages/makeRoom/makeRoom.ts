@@ -110,15 +110,7 @@ export class MakeRoomPage {
                   participants: participants_list,
               }
           );
-<<<<<<< HEAD
-
-          console.log()
-
           this.navCtrl.setRoot(ChatRoomPage, {chat_room_id: url.key, bookingDate:this.bookingDate, user_id: this.user_id, whichPage: "makeRoom"});
-=======
-          console.log("Wh!! " + (4-data));
-          this.navCtrl.setRoot(ChatRoomPage, {chat_room_id: url.key, bookingDate: this.bookingDate, user_id: this.user_id});
->>>>>>> 20310f966996196a278fab0c630c8c9dd627bcd2
         }
       }
     });

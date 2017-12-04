@@ -51,16 +51,14 @@ export class RideHistoryPage {
   }
 
   goChatroom(chatroomDatum_temp) {
-    let chat_room_id_val = chatroomDatum_temp.$key;
-    console.log(chatroomDatum_temp.$ref.ref.key);
+    let chat_room_id_val = chatroomDatum_temp.roomId;
     let bookingDate_val= chatroomDatum_temp.roomDate;
-    console.log(bookingDate_val);
+
     //participant array에 push
     // 참여자가 아니고, 인원 full 아니면 push
     // 참여자이면 그냥 enter
     // full 인원이면 deny  
-    console.log(this.user_id);
-
+    
     
     this.navCtrl.setRoot(ChatRoomPage, {chat_room_id: chat_room_id_val, bookingDate: bookingDate_val, user_id: this.user_id});
   }
