@@ -27,7 +27,6 @@ export class SignupPage {
       password: ['', Validators.compose([Validators.minLength(6), Validators.required])]
     });
   }
-
   signupUser():void {
     if(!this.signupForm.valid){
       console.log(`Need to complete the form: ${this.signupForm.value}`);
@@ -52,10 +51,8 @@ export class SignupPage {
       this.loading.present();
     }
   }
-
   goLoginPage(){
     this.navCtrl.setRoot(LoginPage);
     console.log("goLoginPage at signup.ts");
   }
-  
 }
