@@ -23,6 +23,8 @@ export class TaxiListPage {
   departOptions: any;
   destinationOptions: any;
 
+  test: any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase) {
     
     this.user_id = navParams.data.user_id;
@@ -32,8 +34,8 @@ export class TaxiListPage {
     console.log('database load success');
     this.dates.subscribe(data =>{
       this.dates_array.push(data);
+      console.log('subscribe success');  
     });
-    console.log('subscribe success');
     
     this.departOptions = {
       title: '출발지',
@@ -47,13 +49,22 @@ export class TaxiListPage {
       mode: 'md'
     };
 
+    this.test = firebase.database().ref().child('chatrooms').push().key;
+
+    console.log("Test : "+this.test);
+
   }
 
   goChatroom(date) {
+<<<<<<< HEAD
     let chat_room_id_val = date.$key;
     console.log(date.$key)
     let bookingDate_val= date.depart_date;
     console.log(bookingDate_val);
+=======
+    let chat_room_id_val = date.$key; 
+    
+>>>>>>> fa5c02feabba990aecee4fa5af26cf4805f81a66
     //participant array에 push
     // 참여자가 아니고, 인원 full 아니면 push
     // 참여자이면 그냥 enter
