@@ -104,7 +104,8 @@ export class MakeRoomPage {
                   participants: participants_list,
               }
           );
-          this.navCtrl.setRoot(ChatRoomPage, {chat_room_id: url.key, bookingDate: this.bookingDate, user_id: this.user_id});
+          this.navCtrl.setRoot(ChatRoomPage, {chat_room_id: url.key, bookingDate:this.bookingDate, user_id: this.user_id, whichPage: "makeRoom"});
+
         }
       }
     });
