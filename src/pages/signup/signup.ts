@@ -43,6 +43,12 @@ export class SignupPage {
 
       this.authProvider.signupUser(email, password, name, phoneNumber, studentID).then( user => {
         this.loading.dismiss().then( () => {
+          this.firestore = firebase.database().ref('/userProfile/'+ firebase.auth().currentUser.uid);
+
+          this.tokenSetup().then((token) => {
+            this.storetoken(token);
+          });
+
           this.navCtrl.setRoot(MainPage, {user_id: email});
         });
       }, error => {
@@ -63,4 +69,29 @@ export class SignupPage {
     this.navCtrl.setRoot(MainPage);
     console.log("goLoginPage at signup.ts");
   }
+
+  storetoken(t){
+    this.firestore.update({
+      email: firebase.auth().currentUser.email,
+      devtoken:t
+    }).then(()=>{
+      alert('Token Stored');
+      this.navCtrl.setRoot(MainPage);
+    }).catch(()=>{
+      alert('Token not sotred');
+    });
+  }
+
+  tokenSetup(){
+    var promise = new Promise((resolve, reject) => {
+      FCMPlugin.getToken(function(token){
+        resolve(token);
+      }, (err)=>{
+      reject(err); 
+      });
+    });
+
+    return promise;
+  }
+
 }
