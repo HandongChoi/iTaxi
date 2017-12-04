@@ -20,10 +20,8 @@ export class SignupPage {
   public signupForm:FormGroup;
   public loading:Loading;
   
-  firestore;
-
   constructor(public navCtrl:NavController, public navParams: NavParams, public authProvider:AuthProvider, public loadingCtrl:LoadingController,
-    public alertCtrl:AlertController, formBuilder:FormBuilder, public af: AngularFireDatabase) {
+    public alertCtrl:AlertController, formBuilder:FormBuilder) {
     this.signupForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
       password: ['', Validators.compose([Validators.minLength(6), Validators.required])]
@@ -39,12 +37,7 @@ export class SignupPage {
 
       this.authProvider.signupUser(email, password).then( user => {
         this.loading.dismiss().then( () => {
-          this.firestore = firebase.database().ref('/userProfile/'+ firebase.auth().currentUser.uid);
-          
-          this.tokenSetup().then((token) => {
-            this.storetoken(token);
-          });
-          this.navCtrl.setRoot(MainPage);
+          this.navCtrl.setRoot(MainPage, {user_id: email});
         });
       }, error => {
         this.loading.dismiss().then( () => {
@@ -64,29 +57,5 @@ export class SignupPage {
     this.navCtrl.setRoot(LoginPage);
     console.log("goLoginPage at signup.ts");
   }
-
-  storetoken(t){
-    this.firestore.update({
-      email: firebase.auth().currentUser.email,
-      devtoken:t
-    }).then(()=>{
-      alert('Token Stored');
-      this.navCtrl.setRoot(MainPage);
-    }).catch(()=>{
-      alert('Token not sotred');
-    });
-  }
-
-
-  tokenSetup(){
-    var promise = new Promise((resolve, reject) => {
-      FCMPlugin.getToken(function(token){
-        resolve(token);
-      }, (err)=>{
-      reject(err); 
-      });
-    });
-
-    return promise;
-  }
+  
 }

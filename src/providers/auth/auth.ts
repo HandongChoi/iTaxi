@@ -15,8 +15,15 @@ export class AuthProvider {
    
   signupUser(email:string, password:string):firebase.Promise<any> { 
     return firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then( newUser => { firebase.database().ref(`/userProfile/${newUser.uid}/email`)
-    .set(email)
+    .then( newUser => { 
+      firebase.database().ref(`/userProfile/${newUser.uid}/email`).set(email);
+      firebase.database().ref(`/userProfile/${newUser.uid}/nickname`).set("");
+      firebase.database().ref(`/userProfile/${newUser.uid}/studentID`).set("");
+      firebase.database().ref(`/userProfile/${newUser.uid}/phoneNumber`).set("");
+      firebase.database().ref(`/userProfile/${newUser.uid}/devtoken`).set("");
+      firebase.database().ref(`/userProfile/${newUser.uid}/question`).set("");
+      firebase.database().ref(`/userProfile/${newUser.uid}/answer`).set("");
+      firebase.database().ref(`/userProfile/${newUser.uid}/name`).set("");
     }).catch( error => console.error(error) );
   }
 
