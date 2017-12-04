@@ -62,8 +62,8 @@ export class MyApp {
     ];
     let forDate = new Date();
     let nowDate = new Date().toISOString().substr(0, 10);
-    let nowTime = this.forDate.getHours() + ":" + this.addZ(this.forDate.getMinutes());
-    this.af.database.ref('/chatrooms/' + this.).
+    let nowTime = forDate.getHours() + ":" + this.addZ(forDate.getMinutes());
+    this.af.database.ref('/chatrooms/' + nowDate);
 
     this.homePage = HomePage;
     this.mainPage = MainPage;
@@ -156,7 +156,7 @@ export class MyApp {
     this.navCtrl.setRoot(LoginPage, {user_id: this.user_id});
     console.log("Logout");
   }
-  
+
   addZ(n) {
     return n < 10 ? '0' + n : '' + n;
   }
