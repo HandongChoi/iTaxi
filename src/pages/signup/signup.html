@@ -4,35 +4,105 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>
-      Create an Account 
+      회원가입
     </ion-title>
-  </ion-navbar> 
+  </ion-navbar>
+  <ion-toolbar no-border-top>
+    <ion-segment [(ngModel)]="procedure">
+      <ion-segment-button value="terms">
+        약관확인
+      </ion-segment-button>
+      <ion-segment-button value="info">
+        정보입력
+      </ion-segment-button>
+      <ion-segment-button value="complete">
+        가입완료
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 </ion-header>
-    
-<ion-content padding>
-  <img src="http://placehold.it/300x100">
-  <form [formGroup]="signupForm" (submit)="signupUser()" novalidate>
-    <ion-item>
-      <ion-label stacked>Email</ion-label> 
-      <ion-input formControlName="email" type="email" placeholder="Your email address" 
-        [class.invalid]="!signupForm.controls.email.valid && signupForm.controls.email.dirty">
-      </ion-input>
-    </ion-item>
-    <ion-item class="error-message" *ngIf="!signupForm.controls.email.valid && signupForm.controls.email.dirty">
-      <p>Please enter a valid email.</p> 
-    </ion-item>
 
-    <ion-item>
-      <ion-label stacked>Password</ion-label>
-      <ion-input formControlName="password" type="password" placeholder="Your password"
-        [class.invalid]="!signupForm.controls.password.valid && signupForm.controls.password.dirty"> 
-      </ion-input>
-    </ion-item>
-    <ion-item class="error-message" *ngIf="!signupForm.controls.password.valid && signupForm.controls.password.dirty">
-      <p>Your password needs more than 6 characters.</p>
-    </ion-item>
-    
-    <button ion-button block type="submit" [disabled]="!signupForm.valid"> Create an Account
-    </button> 
-  </form>
+  <ion-content padding>
+    <div [ngSwitch]="procedure">
+
+      <div *ngSwitchCase="'terms'">
+        <div class="terms_wrap">
+          <ion-card class="terms_content">
+            longtext
+          </ion-card>
+          <div ion-item class = "agree_check">
+            <ion-label>약관을 모두 읽었으며 동의합니다.</ion-label>
+            <ion-checkbox color="dark" checked="false"></ion-checkbox>
+          </div>
+          <ion-card class="terms_content">
+            longtext
+          </ion-card>
+          <div ion-item class = "agree_check">
+            <ion-label>약관을 모두 읽었으며 동의합니다.</ion-label>
+            <ion-checkbox color="dark" checked="false"></ion-checkbox>
+          </div>
+
+          <button ion-button small color="primary" round (click)="procedure= 'info'">
+            다음단계
+          </button>
+        </div>
+      </div>
+
+      <!-- <ion-list *ngSwitchCase="'info'"> -->
+      <form [formGroup]="signupForm" (submit)="procedure= 'complete'" novalidate *ngSwitchCase="'info'"> <!-- 누르면 세그먼트 이동하게 수정해놓음-->
+        <ion-item>
+          <ion-label stacked>이름</ion-label>
+          <ion-input type="text" placeholder="류여진"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>학번</ion-label>
+          <ion-input type="text" placeholder="21400111"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>전화번호</ion-label>
+          <ion-input type="text" placeholder="010-8222-3574"></ion-input> <!-- placeholder에 기존 전화번호 뿌리기  -->
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>이메일</ion-label>
+          <ion-input formControlName="email" type="email" placeholder="Your email address"
+            [class.invalid]="!signupForm.controls.email.valid && signupForm.controls.email.dirty">
+          </ion-input>
+        </ion-item>
+        <ion-item class="error-message" *ngIf="!signupForm.controls.email.valid && signupForm.controls.email.dirty">
+          <p>Please enter a valid email.</p>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>비밀번호</ion-label>
+          <ion-input formControlName="password" type="password" placeholder="Your password"
+            [class.invalid]="!signupForm.controls.password.valid && signupForm.controls.password.dirty">
+          </ion-input>
+        </ion-item>
+        <ion-item class="error-message" *ngIf="!signupForm.controls.password.valid && signupForm.controls.password.dirty">
+          <p>Your password needs more than 6 characters.</p>
+        </ion-item>
+
+        <ion-item>
+          <ion-label stacked>비밀번호 확인</ion-label>
+          <ion-input type="password"></ion-input>
+        </ion-item>
+
+        <button ion-button block type="submit" [disabled]="!signupForm.valid"> 가입하기
+        </button>
+      </form>
+      <!-- </ion-list> -->
+
+      <div *ngSwitchCase="'complete'">
+        <ion-card class="terms_content">
+          회원가입이 완료되었습니다
+        </ion-card>
+        <button ion-button small color="primary" round (click)="goLoginPage()">
+          다음단계
+        </button>
+      </div>
+
+    </div>
 </ion-content>

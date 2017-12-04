@@ -59,10 +59,10 @@ export class MyApp {
 
     const unsubscribe = firebase.auth().onAuthStateChanged( user => {
       if(!user){
-        this.rootPage = ChatRoomPage;
+        this.rootPage = LoginPage;
         unsubscribe();
       } else{
-        this.rootPage = ChatRoomPage; unsubscribe();
+        this.rootPage = LoginPage; unsubscribe();
       }
     });
 
