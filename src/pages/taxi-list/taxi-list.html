@@ -18,27 +18,28 @@
       <ion-row>
         <ion-col col-6>
           <ion-item>
-          <ion-select #newSelect [selectOptions]="departOptions" [(ngModel)]="carbrand" multiple="true" placeholder="전체보기">
+          <ion-select #newSelect [selectOptions]="departOptions" [(ngModel)]="departFilter" multiple="false" 
+                      placeholder="전체보기" (ionChange)="clickOption()">
             <ion-option value="All" checked="true">전체보기</ion-option>  
-            <ion-option value="Handong">한동대학교</ion-option>
-            <ion-option value="Yangduck" >양덕</ion-option>
-            <ion-option value="Go">고속버스터미널</ion-option>
-            <ion-option value="Si">시외버스터미널</ion-option>
-            <ion-option value="Buckbu">북부해수욕장</ion-option>
-            <ion-option value="Yuck">육거리</ion-option>
+            <ion-option value="한동">한동대학교</ion-option>
+            <ion-option value="양덕" >양덕</ion-option>
+            <ion-option value="고터">고속버스터미널</ion-option>
+            <ion-option value="시터">시외버스터미널</ion-option>
+            <ion-option value="북부">북부해수욕장</ion-option>
+            <ion-option value="육거리">육거리</ion-option>
           </ion-select>
           </ion-item>
         </ion-col>
         <ion-col col-6>
           <ion-item>
-          <ion-select [selectOptions]="destinationOptions" [(ngModel)]="gender" multiple="true" placeholder="전체보기">
+          <ion-select [selectOptions]="destinationOptions" [(ngModel)]="arriveFilter" multiple="false" placeholder="전체보기">
             <ion-option value="All" checked="true">전체보기</ion-option>  
-            <ion-option value="Handong">한동대학교</ion-option>
-            <ion-option value="Yangduck" >양덕</ion-option>
-            <ion-option value="Go">고속버스터미널</ion-option>
-            <ion-option value="Si">시외버스터미널</ion-option>
-            <ion-option value="Buckbu">북부해수욕장</ion-option>
-            <ion-option value="Yuck">육거리</ion-option>
+            <ion-option value="한동">한동대학교</ion-option>
+            <ion-option value="양덕" >양덕</ion-option>
+            <ion-option value="고터">고속버스터미널</ion-option>
+            <ion-option value="시터">시외버스터미널</ion-option>
+            <ion-option value="북부">북부해수욕장</ion-option>
+            <ion-option value="육거리">육거리</ion-option>
           </ion-select>
           </ion-item>
         </ion-col>

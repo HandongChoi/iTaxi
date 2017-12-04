@@ -23,6 +23,9 @@ export class TaxiListPage {
   departOptions: any;
   destinationOptions: any;
 
+  departFilter: string;
+  arriveFilter: string;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase) {
     
     this.user_id = navParams.data.user_id;
@@ -65,6 +68,10 @@ export class TaxiListPage {
   makeRoom(){
     this.navCtrl.setRoot(MakeRoomPage, {user_id: this.user_id});
     console.log("makeRoom function into taxi-list.tx");
+  }
+
+  clickOption(){
+    console.log("What? "+this.departFilter);
   }
 
   ionViewDidLoad() {

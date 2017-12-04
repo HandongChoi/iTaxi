@@ -16,9 +16,8 @@ export class LoginPage {
 
   public loginForm:FormGroup;
   public loading:Loading;
-
   firestore;
-
+  
   constructor(public navCtrl:NavController,public loadingCtrl:LoadingController, public alertCtrl:AlertController,
               public authProvider:AuthProvider, formBuilder:FormBuilder) {
     
