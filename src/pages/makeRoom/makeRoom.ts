@@ -23,6 +23,8 @@ export class MakeRoomPage {
   nowDate: string = new Date().toISOString().substr(0, 10);
   nowTime: string = this.addZ(this.forDate.getHours()) + ":" + this.addZ(this.forDate.getMinutes()); //이것도 slice로 구현해볼려고 하는데 안 된다.      
   
+//
+
   bookingTime: string;
   bookingDate: string; 
 
@@ -60,7 +62,7 @@ export class MakeRoomPage {
 
   showRadioAlert(){
     let alert = this.alertCtrl.create();
-    alert.setTitle('탑승인원');
+    alert.setTitle('최대탑승인원');
     alert.addInput({
       type: 'radio',
       label: '1명',
@@ -76,11 +78,6 @@ export class MakeRoomPage {
       type: 'radio',
       label: '3명',
       value: '3',
-    });
-    alert.addInput({
-      type: 'radio',
-      label: '4명',
-      value: '4',
     });
     alert.addButton('Cancel');
     alert.addButton({
@@ -105,17 +102,23 @@ export class MakeRoomPage {
               {
                   departure: this.start,
                   destination: this.arrive,
-                  depart_time: this.bookingTime,
                   depart_date: this.bookingDate,
+                  depart_time: this.bookingTime,
                   capacity: data,
+                  currentPeople: 4-data,
                   host: this.user_id,
-                  participants: participants_list
+                  participants: participants_list,
               }
           );
+<<<<<<< HEAD
 
           console.log()
 
           this.navCtrl.setRoot(ChatRoomPage, {chat_room_id: url.key, bookingDate:this.bookingDate, user_id: this.user_id, whichPage: "makeRoom"});
+=======
+          console.log("Wh!! " + (4-data));
+          this.navCtrl.setRoot(ChatRoomPage, {chat_room_id: url.key, bookingDate: this.bookingDate, user_id: this.user_id});
+>>>>>>> 20310f966996196a278fab0c630c8c9dd627bcd2
         }
       }
     });

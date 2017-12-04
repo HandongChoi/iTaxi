@@ -50,10 +50,10 @@ export class RideHistoryPage {
     return parsedID;
   }
 
-  goChatroom(date) {
-    let chat_room_id_val = date.$key;
-    console.log(date.$key);
-    let bookingDate_val= date.depart_date;
+  goChatroom(chatroomDatum_temp) {
+    let chat_room_id_val = chatroomDatum_temp.$key;
+    console.log(chatroomDatum_temp.$ref.ref.key);
+    let bookingDate_val= chatroomDatum_temp.roomDate;
     console.log(bookingDate_val);
     //participant array에 push
     // 참여자가 아니고, 인원 full 아니면 push

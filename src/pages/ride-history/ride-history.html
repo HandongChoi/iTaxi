@@ -18,7 +18,7 @@
   <div class="scroll-content">
     <ion-grid>
       <ion-item-group *ngFor = "let chatroomDatum of chatroomData; async">
-        <ion-item-divider class="item item-divider item-sm item-divider-md item-md-light item-divider-sm-light" color="light" (click)="goChatroom(date)">
+        <ion-item-divider class="item item-divider item-sm item-divider-md item-md-light item-divider-sm-light" color="light" (click)="goChatroom(chatroomDatum)">
           <ion-row>
             <ion-col col-3>
               <p>{{chatroomDatum.roomDate}}</p>
