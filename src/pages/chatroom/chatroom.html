@@ -5,90 +5,89 @@
           <ion-icon name = "ios-arrow-back"></ion-icon>
         </button>
     </ion-buttons>
-    
-    <button ion-button (click)='quit()'>
-        나가기
-    </button>
+
     <ion-buttons right>
         <button ion-button menuToggle>
           <ion-icon name="menu"></ion-icon>
         </button>      
     </ion-buttons>
           
-    <ion-title>꼬부기 ({{room_participants.length}}/{{room_capacity}})  {{room_depart}} -> {{room_dest}} </ion-title> <!-- 방이름/인원 -->
+    <ion-title> 꼬부기 ({{room_participants.length}}/{{room_capacity}}) </ion-title> <!-- 방이름/인원 -->
     </ion-navbar >
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <!-- 원래 있던거.. 지워도되나? -->
+
+    <!--
     <ion-item *ngFor="let chat of chats | async; let last = last">
       {{chat.user_id}} : {{chat.content}}
       {{last ? scrollBottom() : ''}}
     </ion-item>
+    -->
 
     <!-- 방 정보 -->
     <ion-grid class="room-info">
       <ion-row>
         <ion-col justify-content-center padding-left>
-          {{room_depart_date}}월 {{room_depart_date}}일 {{room_depart_time}}시 {{room_depart_time}}분
-          <p><b>{{room_departure}} &nbsp; <ion-icon name="arrow-forward"></ion-icon> &nbsp; {{room_destination}}</b></p>
+          {{room_month}}월 {{room_day}}일 {{room_hour}}시 {{room_minute}}분
+          <p><b>{{room_depart}} &nbsp; <ion-icon name="arrow-forward"></ion-icon> &nbsp; {{room_dest}}</b></p>
         </ion-col>
         <ion-col col-auto>
-          <ion-buttons right icon-only><ion-icon name="log-out"></ion-icon></ion-buttons>
+          <ion-buttons right icon-only (click)='quit()'><ion-icon name="log-out"></ion-icon></ion-buttons>
         </ion-col>
       </ion-row>
     </ion-grid>
 
     <!-- 참여자 정보  -->
     <ion-item class="user-name" padding>류여진</ion-item>
-
-    <div class="message-wrap">
+    <div class="message-wrap" *ngFor="let chat of chats | async; let last = last">
     <!-- 밑에 주석처리 되어있는 부분이 내가 말한 내용이면 오른쪽, 상대가 말한 내용이면 왼쪽 선택하게한다. -->
       <!-- <div *ngFor="let msg of msgList"
            class="message"
            [class.left]=" msg.userId === toUser.id "
            [class.right]=" msg.userId === user.id "> -->
-       <div class="message left">
+       <div class="message right" *ngIf="chat.user_id == chat_user_id">
            <!-- <img class="user-img" [src]="msg.userAvatar" alt="" src=""> 이거는 프로필사진-->
            <div class="msg-detail">
                <div class="msg-content">
                  <div class="msg-info">
                    <p>
                      <!-- 사용자 아이디, 메세지 작성시간 {{msg.userName}}&nbsp;&nbsp;&nbsp;{{msg.time | relativeTime}}</p> -->
-                     <ion-icon name="star"></ion-icon>현동이&nbsp;&nbsp;&nbsp;오후11:39</p>
+                     <ion-icon *ngIf="isHost == false" name="star"></ion-icon>{{chat.user_id}}&nbsp;&nbsp;&nbsp;{{chat.date_time | slice:12:21}}</p>
                    </div>
                    <span class="triangle"></span>
-                   <p class="line-breaker ">안녕하세요 택시 타시나요?</p>  <!-- {{msg.message}} -->
+                   <p class="line-breaker">{{chat.content}}</p>  <!-- {{msg.message}} -->
                </div>
            </div>
        </div>
 
       <!-- 불필요 / 보여주기용  -->
-       <div class="message right">
+       <div class="message left" *ngIf="chat.user_id != chat_user_id">
            <!-- <img class="user-img" alt="" src=""> -->
            <div class="msg-detail">
                <div class="msg-content">
                  <div class="msg-info">
                    <p>
                      <!-- {{msg.userName}}&nbsp;&nbsp;&nbsp;{{msg.time | relativeTime}}</p> -->
-                     한동이&nbsp;&nbsp;&nbsp;오후11:40</p>
+                     <ion-icon *ngIf="isHost == true" name="star"></ion-icon>{{chat.user_id}}&nbsp;&nbsp;&nbsp;{{chat.date_time | slice:12:21}}</p>
                    </div>
                    <span class="triangle"></span>
-                   <p class="line-breaker">네네 탑니다! 어디로 갈까요?</p>
+                   <p class="line-breaker">{{chat.content}}</p>
                </div>
            </div>
        </div>
 
-      <!-- 입장/퇴장/택시비 정산 등등 공지 -->
+      <!-- 입장/퇴장/택시비 정산 등등 공지 >
        <div class="message-notice">한동이 님이 퇴장하셨습니다.</div>
+      -->
     </div>
   </ion-list>
 </ion-content>
 
 <ion-footer>
   <ion-item>  
-    <ion-input [(ngModel)]="chat_content" fixed type="text" (keyup.enter) = "send()"></ion-input>
+    <ion-input [(ngModel)]="chat_content" fixed type="text" (keyup.enter) = "send()" (click)="scrollBottom()"></ion-input>
     <button ion-button clear item-right (click)="send()" (click)="scrollBottom()"> send </button>
   </ion-item>
 </ion-footer>

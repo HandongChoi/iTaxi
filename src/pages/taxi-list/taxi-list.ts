@@ -61,7 +61,8 @@ export class TaxiListPage {
     // 참여자가 아니고, 인원 full 아니면 push
     // 참여자이면 그냥 enter
     // full 인원이면 deny  
-    console.log(this.user_id)
+    console.log(this.user_id);
+
     this.navCtrl.setRoot(ChatRoomPage, {chat_room_id: chat_room_id_val, bookingDate: bookingDate_val, user_id: this.user_id});
   }
 

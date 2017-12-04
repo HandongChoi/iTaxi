@@ -41,12 +41,14 @@ export class LoginPage {
       this.authProvider.loginUser(email, password).then( authData =>  { 
         this.loading.dismiss().then( () => {
 
-          FCMPlugin.onTokenRefresh(function(token){
-            if(token){
-              this.firestore = firebase.database().ref('/userProfile/'+ firebase.auth().currentUser.uid);
-              this.storetoken(token);
-            }
-          });
+          if(FCMPlugin !== undefined){
+            FCMPlugin.onTokenRefresh(function(token){
+              if(token){
+                this.firestore = firebase.database().ref('/userProfile/'+ firebase.auth().currentUser.uid);
+                this.storetoken(token);
+              }
+            });
+          }
           
           this.navCtrl.setRoot(MainPage, {user_id: email}); 
         });
@@ -76,7 +78,7 @@ export class LoginPage {
       FCMPlugin.getToken(function(token){
         resolve(token);
       }, (err)=>{
-      reject(err); 
+        reject(err); 
       });
     });
 

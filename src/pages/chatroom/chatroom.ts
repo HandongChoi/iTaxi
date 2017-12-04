@@ -25,13 +25,20 @@ export class ChatRoomPage {
   chat_room_id: any;
   bookingDate: String;
 
-  room_depart: String;
-  room_dest: String;
-  room_capacity: String;
-  room_depart_date: String;
-  room_depart_time: String;
-  room_host: String;
-  room_participants:  Array<String> = [];
+  room_depart: string;
+  room_dest: string;
+  room_capacity: string;
+  room_depart_date: string;
+  room_depart_time: string;
+  room_host: string;
+  room_participants:  Array<string> = [];
+  room_month: string;
+  room_day: string;
+  room_hour: string;
+  room_minute:string;
+  roomKey: string;
+
+  isHost: boolean;
 
   page_info: String;
 
@@ -55,10 +62,47 @@ export class ChatRoomPage {
         this.room_dest = data[4].$value;
         this.room_host = data[5].$value;
         this.room_participants = data[6];
+        this.room_month = (this.room_depart_date[5] + this.room_depart_date[6]);
+        this.room_day= (this.room_depart_date[8] + this.room_depart_date[9]);
+        this.room_hour= (this.room_depart_time[0] + this.room_depart_time[1]);
+        this.room_minute=(this.room_depart_time[3]+this.room_depart_time[4]);
+      
+        console.log(this.room_host);
+        console.log(this.chat_user_id);
+        this.roomKey = this.room.$ref.ref.parent.key;
+        console.log(this.roomKey);
+
+        if(this.room_host === this.chat_user_id)
+          this.isHost = true;
+        else 
+          this.isHost = false;
+        
+          console.log(this.room_participants);
+        
+        var isExist = this.room_participants.indexOf(this.chat_user_id);
+        console.log(isExist);
+        if(isExist === -1){
+          this.room_participants.push(this.chat_user_id);
+          console.log(this.room_participants);
+          if(parseInt(this.room_capacity) != this.room_participants.length){
+            this.room_object.update({
+              capacity: this.room_capacity, 
+              depart_date: this.room_depart_date,
+              depart_time: this.room_depart_time,
+              departure: this.room_depart,
+              destination: this.room_dest,
+              host: this.room_host,
+              participants: this.room_participants
+            });
+          }
+          else{
+              this.goBack();  
+          }
+        };   
       }
       count++;
+          
     });
-
   }
 
   goBack(){
@@ -70,7 +114,8 @@ export class ChatRoomPage {
       this.chats.push({
         user_id: this.chat_user_id,
         content: this.chat_content,
-        date_time: new Date().toLocaleString()
+        date_time: new Date().toLocaleString(),
+        dateKey: this.roomKey
       });
 
       this.chat_content = '';
@@ -134,7 +179,7 @@ export class ChatRoomPage {
           alert("background: ");
         }
         else{
-          alert("foreground: ");
+          alert(data.sendername + ': ' + data.message);
         }
       });
     }
