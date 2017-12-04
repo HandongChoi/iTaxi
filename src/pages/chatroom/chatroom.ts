@@ -32,6 +32,13 @@ export class ChatRoomPage {
   room_depart_time: String;
   room_host: String;
   room_participants:  Array<String> = [];
+  room_month: String;
+  room_day: String;
+  room_hour: String;
+  room_minute:String;
+  roomKey: String;
+
+  isHost: boolean;
 
   page_info: String;
 
@@ -55,10 +62,24 @@ export class ChatRoomPage {
         this.room_dest = data[4].$value;
         this.room_host = data[5].$value;
         this.room_participants = data[6];
+        this.room_month = (this.room_depart_date[5] + this.room_depart_date[6]);
+        this.room_day= (this.room_depart_date[8] + this.room_depart_date[9]);
+        this.room_hour= (this.room_depart_time[0] + this.room_depart_time[1]);
+        this.room_minute=(this.room_depart_time[3]+this.room_depart_time[4]);
+      
+        console.log(this.room_host);
+        console.log(this.chat_user_id);
+        this.roomKey = this.room.$ref.ref.parent.key;
+        console.log(this.roomKey);
+
+        if(this.room_host === this.chat_user_id)
+          this.isHost = true;
+        else 
+          this.isHost = false;
       }
+
       count++;
     });
-
   }
 
   goBack(){
@@ -70,7 +91,8 @@ export class ChatRoomPage {
       this.chats.push({
         user_id: this.chat_user_id,
         content: this.chat_content,
-        date_time: new Date().toLocaleString()
+        date_time: new Date().toLocaleString(),
+        dateKey: this.roomKey
       });
 
       this.chat_content = '';
