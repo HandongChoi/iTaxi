@@ -17,7 +17,7 @@ import { TaxiListPage } from '../pages/taxi-list/taxi-list';
 
 import firebase from 'firebase';
 
-firebase.initializeApp({ 
+firebase.initializeApp({
   apiKey: "AIzaSyANvht7J2MNX6x47mglqfJk74yZQ9u0qUk",
   authDomain: "itaxi-54bdc.firebaseapp.com",
   databaseURL: "https://itaxi-54bdc.firebaseio.com",
@@ -57,15 +57,15 @@ export class MyApp {
     this.taxiListPage = TaxiListPage;
     this.settingPage = SettingPage;
 
-    const unsubscribe = firebase.auth().onAuthStateChanged( user => { 
+    const unsubscribe = firebase.auth().onAuthStateChanged( user => {
       if(!user){
-        this.rootPage = SignupPage;
-        unsubscribe(); 
+        this.rootPage = ChatRoomPage;
+        unsubscribe();
       } else{
-        this.rootPage = MainPage; unsubscribe();
+        this.rootPage = ChatRoomPage; unsubscribe();
       }
     });
-    
+
   }
 
   initializeApp() {
