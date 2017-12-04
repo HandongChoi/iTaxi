@@ -84,7 +84,8 @@ export class ChatRoomPage {
         if(isExist === -1){
           this.room_participants.push(this.chat_user_id);
           console.log(this.room_participants);
-          if(parseInt(this.room_capacity) != this.room_participants.length){
+          
+          if(parseInt(this.room_capacity) >= this.room_participants.length){
             this.room_object.update({
               capacity: this.room_capacity, 
               depart_date: this.room_depart_date,

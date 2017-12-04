@@ -16,6 +16,8 @@ import { TaxiListPage } from '../pages/taxi-list/taxi-list';
 
 import { AuthProvider } from '../providers/auth/auth';
 
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+
 import firebase from 'firebase';
 
 firebase.initializeApp({
@@ -42,10 +44,11 @@ export class MyApp {
   private mainPage;
   private taxiListPage;
   private settingPage;
+  public room: FirebaseListObservable<any[]>;
 
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
-              public authProvider:AuthProvider, public alertCtrl: AlertController) {
+              public authProvider:AuthProvider, public alertCtrl: AlertController, public af: AngularFireDatabase) {
 
     this.initializeApp();
 
@@ -57,6 +60,10 @@ export class MyApp {
       { title: 'Setting', component: SettingPage},
       { title: 'SignupPage', component: SignupPage},
     ];
+    let forDate = new Date();
+    let nowDate = new Date().toISOString().substr(0, 10);
+    let nowTime = this.forDate.getHours() + ":" + this.addZ(this.forDate.getMinutes());
+    this.af.database.ref('/chatrooms/' + this.).
 
     this.homePage = HomePage;
     this.mainPage = MainPage;
@@ -148,5 +155,9 @@ export class MyApp {
     this.authProvider.logoutUser();
     this.navCtrl.setRoot(LoginPage, {user_id: this.user_id});
     console.log("Logout");
+  }
+  
+  addZ(n) {
+    return n < 10 ? '0' + n : '' + n;
   }
 }
