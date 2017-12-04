@@ -18,7 +18,7 @@ import { AuthProvider } from '../providers/auth/auth';
 
 import firebase from 'firebase';
 
-firebase.initializeApp({ 
+firebase.initializeApp({
   apiKey: "AIzaSyANvht7J2MNX6x47mglqfJk74yZQ9u0qUk",
   authDomain: "itaxi-54bdc.firebaseapp.com",
   databaseURL: "https://itaxi-54bdc.firebaseio.com",
@@ -36,7 +36,7 @@ export class MyApp {
   rootPage: any;
   pages: Array<{title: string, component: any}>;
 
-  user_email: any;
+  user_id: any;
 
   private homePage;
   private mainPage;
@@ -63,14 +63,14 @@ export class MyApp {
     this.taxiListPage = TaxiListPage;
     this.settingPage = SettingPage;
 
-    const unsubscribe = firebase.auth().onAuthStateChanged( user => { 
+    const unsubscribe = firebase.auth().onAuthStateChanged( user => {
       if(!user){
         this.rootPage = LoginPage;
         unsubscribe(); 
       } else{
         this.rootPage = MainPage; unsubscribe();
-        this.user_email = user.email;
-        console.log("user_id : " + this.user_email);
+        this.user_id = user.email;
+        console.log("user_id : " + this.user_id);
       }
     });
   }
@@ -105,17 +105,17 @@ export class MyApp {
   }
 
   goSettingPage(){
-    this.navCtrl.setRoot(SettingPage);
+    this.navCtrl.setRoot(SettingPage, {user_id: this.user_id});
     console.log("goTaxiListPage() at app.componenent.ts");
   }
 
   goTaxiListPage(){
-    this.navCtrl.setRoot(TaxiListPage);
+    this.navCtrl.setRoot(TaxiListPage, {user_id: this.user_id});
     console.log("goTaxiListPage() at app.componenent.ts");
   }
 
   goMakeTaxiRoomPage(){
-    this.navCtrl.setRoot(MakeRoomPage);
+    this.navCtrl.setRoot(MakeRoomPage, {user_id: this.user_id});
     console.log("goMakeTaxiRoomPage() at app.componenent.ts");
   }
 
@@ -135,18 +135,18 @@ export class MyApp {
   }
 
   goPersonalInfoPage(){
-    this.navCtrl.setRoot(PersonalInfoPage);
-    console.log("goPersonalInfoPage() at app.componenent.ts");
+    this.navCtrl.setRoot(PersonalInfoPage, {user_id: this.user_id});
+    console.log("goEditMyInfoPage() at app.componenent.ts");
   }
 
   goMainPage(){
-    this.navCtrl.setRoot(MainPage);
+    this.navCtrl.setRoot(MainPage, {user_id: this.user_id});
     console.log("goMainPage() at app.componenent.ts");
   }
 
   logout(){
     this.authProvider.logoutUser();
-    this.navCtrl.setRoot(LoginPage);
+    this.navCtrl.setRoot(LoginPage, {user_id: this.user_id});
     console.log("Logout");
   }
 }
