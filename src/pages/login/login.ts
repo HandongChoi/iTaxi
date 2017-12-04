@@ -72,6 +72,18 @@ export class LoginPage {
     this.navCtrl.push('ResetPasswordPage');
   }
 
+  tokenSetup(){
+    var promise = new Promise((resolve, reject) => {
+      FCMPlugin.getToken(function(token){
+        resolve(token);
+      }, (err)=>{
+      reject(err); 
+      });
+    });
+
+    return promise;
+  }
+
   storetoken(t){
     this.firestore.update({
       email: firebase.auth().currentUser.email,

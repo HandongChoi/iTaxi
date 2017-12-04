@@ -1,17 +1,21 @@
 <ion-header>
   <ion-navbar color = "primary">
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
     <ion-buttons left>
         <button ion-button (click)='goBack()'>
           <ion-icon name = "ios-arrow-back"></ion-icon>
         </button>
-        <button ion-button (click)='quit()'>
-          나가기
-        </button>    
-      </ion-buttons>
-    <ion-title>꼬부기 (3/3) {{room_depart}} -> {{room_dest}} </ion-title> <!-- 방이름/인원 -->
+    </ion-buttons>
+    
+    <button ion-button (click)='quit()'>
+        나가기
+    </button>
+    <ion-buttons right>
+        <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>      
+    </ion-buttons>
+          
+    <ion-title>꼬부기 ({{room_participants.length}}/{{room_capacity}})  {{room_depart}} -> {{room_dest}} </ion-title> <!-- 방이름/인원 -->
     </ion-navbar >
 </ion-header>
 
@@ -27,8 +31,8 @@
     <ion-grid class="room-info">
       <ion-row>
         <ion-col justify-content-center padding-left>
-          10월 25일 09시 45분
-          <p><b>한동대학교 &nbsp; <ion-icon name="arrow-forward"></ion-icon> &nbsp; 양덕 하나로마트</b></p>
+          {{room_depart_date}}월 {{room_depart_date}}일 {{room_depart_time}}시 {{room_depart_time}}분
+          <p><b>{{room_departure}} &nbsp; <ion-icon name="arrow-forward"></ion-icon> &nbsp; {{room_destination}}</b></p>
         </ion-col>
         <ion-col col-auto>
           <ion-buttons right icon-only><ion-icon name="log-out"></ion-icon></ion-buttons>
