@@ -32,11 +32,15 @@ export class TaxiListPage {
     
     //기본적으로 오늘 날짜 기준으로 data 불러오기.
     this.dates = af.list('/chatrooms/'+this.nowDate);
-    console.log('database load success');
+    console.log('before subscribe: ');
+    console.log(this.dates);
     this.dates.subscribe(data =>{
       this.dates_array.push(data);
+      console.log(data);
+      console.log(this.dates_array);
     });
-    console.log('subscribe success');
+    console.log('after subscribe: ');
+    console.log(this.dates);
     
     this.departOptions = {
       title: '출발지',
