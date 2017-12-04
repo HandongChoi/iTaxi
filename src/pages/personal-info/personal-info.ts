@@ -9,7 +9,10 @@ import { SettingPage } from '../setting/setting';
 })
 export class PersonalInfoPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, 
+              public alertCtrl: AlertController) {
+  
+                
   }
 
   ionViewDidLoad() {
