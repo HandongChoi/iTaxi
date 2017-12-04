@@ -24,7 +24,7 @@ export class MakeRoomPage {
   nowTime: string = this.forDate.getHours() + ":" + this.addZ(this.forDate.getMinutes()); //이것도 slice로 구현해볼려고 하는데 안 된다.      
   
   bookingTime: string;
-  bookingDate: string = "2017-12-4"; 
+  bookingDate: string = "2017-12-04"; 
 
   //1년치만 예약 가능하도록 만들었다.
   minYear: string = new Date().toISOString().substr(0, 10);

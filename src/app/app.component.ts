@@ -71,7 +71,6 @@ export class MyApp {
         this.rootPage = MainPage; unsubscribe();
         this.user_id = user.email;
         console.log("user_id : " + this.user_id);
-
       }
     });
   }
