@@ -5,6 +5,8 @@ import { EmailValidator } from '../../validators/email';
 import { AuthProvider } from '../../providers/auth/auth';
 import { MainPage } from '../main/main';
 
+declare var FCMPlugin;
+
 @IonicPage()
 @Component({
   selector: 'page-login',
@@ -14,6 +16,8 @@ export class LoginPage {
 
   public loginForm:FormGroup;
   public loading:Loading;
+
+  firestore;
 
   constructor(public navCtrl:NavController,public loadingCtrl:LoadingController, public alertCtrl:AlertController,
               public authProvider:AuthProvider, formBuilder:FormBuilder) {
@@ -37,7 +41,15 @@ export class LoginPage {
       
       this.authProvider.loginUser(email, password).then( authData =>  { 
         this.loading.dismiss().then( () => {
-          this.navCtrl.setRoot(MainPage); 
+
+          FCMPlugin.onTokenRefresh(function(token){
+            if(token){
+              this.firestore = firebase.database().ref('/userProfile/'+ firebase.auth().currentUser.uid);
+              this.storetoken(token);
+            }
+          });
+          
+          this.navCtrl.setRoot(MainPage, {user_id: email}); 
         });
       }, error => { 
         this.loading.dismiss().then( () => {
@@ -58,5 +70,16 @@ export class LoginPage {
 
   goToResetPassword():void { 
     this.navCtrl.push('ResetPasswordPage');
+  }
+
+  storetoken(t){
+    this.firestore.update({
+      email: firebase.auth().currentUser.email,
+      devtoken:t
+    }).then(()=>{
+      alert('Token Stored');
+    }).catch(()=>{
+      alert('Token not sotred');
+    });
   }
 }

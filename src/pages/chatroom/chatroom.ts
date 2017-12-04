@@ -1,9 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, Content, NavParams } from 'ionic-angular';
 
+import firebase from 'firebase';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 
 import { TaxiListPage } from '../../pages/taxi-list/taxi-list';
+
+declare var FCMPlugin;
 
 @Component({
   selector: 'page-chatroom',
@@ -12,7 +15,7 @@ import { TaxiListPage } from '../../pages/taxi-list/taxi-list';
 export class ChatRoomPage {
 
   @ViewChild(Content) content: Content;
-
+  
   chats: FirebaseListObservable<any[]>;
   room: FirebaseListObservable<any[]>;
   room_object:FirebaseObjectObservable<any[]>;
@@ -21,8 +24,6 @@ export class ChatRoomPage {
   chat_content: any;
   chat_room_id: any;
   bookingDate: String;
-  
-  
 
   room_depart: String;
   room_dest: String;
@@ -35,6 +36,7 @@ export class ChatRoomPage {
   page_info: String;
 
   constructor(public navCtrl: NavController, public af:AngularFireDatabase, public navParams: NavParams) {
+
     this.bookingDate = navParams.data.bookingDate;
     this.chat_room_id = navParams.data.chat_room_id;
     this.chat_user_id = navParams.data.user_id;
@@ -44,6 +46,7 @@ export class ChatRoomPage {
     this.chats = af.list(('/chats/'+ this.chat_room_id));
     this.room_object = af.object('/chatrooms/' + this.bookingDate + '/' + this.chat_room_id);
     this.room.forEach(data =>{
+
       this.room_capacity = data[0].$value;
       this.room_depart_date = data[1].$value;
       this.room_depart_time = data[2].$value;
@@ -53,8 +56,6 @@ export class ChatRoomPage {
       this.room_participants = data[6];
       
     });
-
-
   }
 
   goBack(){
@@ -80,12 +81,12 @@ export class ChatRoomPage {
     let new_participants: Array<String> =[];
     console.log(this.chat_user_id, this.room_participants);
 
+    this.room_participants.forEach(data =>{
+      if(data !== this.chat_user_id)
+        new_participants.push(data);
+    });
+
     if(this.chat_user_id !== this.room_participants[0]){
-      
-      this.room_participants.forEach(data =>{
-        if(data !== this.chat_user_id)
-          new_participants.push(data);
-      });
 
       this.room_object.update({
         capacity: this.room_capacity, 
@@ -96,19 +97,37 @@ export class ChatRoomPage {
         host: this.room_host,
         participants: new_participants
       });
-      this.navCtrl.setRoot(TaxiListPage);
     }// 방장이 아닌 다른 사람이 나갈 경우
     else{
       //방장이고, 방에 사람이 없을 때
-      if(this.room_participants.length == 0)
+      if(this.room_participants.length == 1)
         this.room_object.remove();
-      // 방 삭제?, 아니면 남겨둠?
-      else if(this.room_participants.length == 1){
-        
+      
+      else if(this.room_participants.length > 1){
+        this.room_object.update({
+          capacity: this.room_capacity, 
+          depart_date: this.room_depart_date,
+          depart_time: this.room_depart_time,
+          departure: this.room_depart,
+          destination: this.room_dest,
+          host: new_participants[0],
+          participants: new_participants
+        });
       }
       this.navCtrl.setRoot(TaxiListPage);
     }
     //방장 다음 사람으로 옮기기
+  }
+
+  ionViewDidLoad(){
+    FCMPlugin.onNotification(function(data){
+      if(data.wasTrapped){
+        alert("background: ");
+      }
+      else{
+        alert("foreground: ");
+      }
+    });
   }
 
   scrollBottom(){

@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, NavController, Platform } from 'ionic-angular';
+import { Nav, NavController, Platform, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -17,7 +17,6 @@ import { TaxiListPage } from '../pages/taxi-list/taxi-list';
 import { AuthProvider } from '../providers/auth/auth';
 
 import firebase from 'firebase';
-import { Push, PushObject, PushOptions } from '@ionic-native/push';
 
 firebase.initializeApp({ 
   apiKey: "AIzaSyANvht7J2MNX6x47mglqfJk74yZQ9u0qUk",
@@ -44,13 +43,10 @@ export class MyApp {
   private taxiListPage;
   private settingPage;
 
-<<<<<<< HEAD
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public push:Push) {
-=======
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
-              public authProvider:AuthProvider, public fcm:FCM) {
->>>>>>> 7a75188f84783400a5bf0ee5599e66700e8cb9b5
+              public authProvider:AuthProvider, public alertCtrl: AlertController) {
+
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -85,39 +81,9 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-
-      this.pushSetup();
       
     });
     console.log("initailizeApp at app.component.ts");
-  }
-
-  pushSetup(){
-    let options: PushOptions = {
-      android:{      
-      },
-      ios:{
-        alert: 'true',
-        badge: true,
-        sound:'false'
-      },
-      windows:{
-
-      }
-    };
-    
-    const pushObject: PushObject = this.push.init(options);
-
-    pushObject.on('notification').subscribe((notification:any) =>{
-      if(notification.additionalData.foreground){
-        alert(notification.additionalData.foreground);
-        //message 수신
-        alert(notification.additionalData.background);
-      }
-    });
-    pushObject.on('registration').subscribe((registration:any) => console.log('Device Registered', registration));
-    pushObject.on('error').subscribe((error:any) => console.log('Error with Push Plug-in', error));
-    
   }
  
   openPage(page) {

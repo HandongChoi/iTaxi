@@ -34,7 +34,6 @@ export class TaxiListPage {
     console.log('subscribe success');
     //여기까지가 모든 date들의 object를 다 가져온 것이다.
     //this.user_id = prompt("Input ID");
-    this.user_id = "testing";
     
     this.departOptions = {
       title: '출발지',

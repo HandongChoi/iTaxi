@@ -47,7 +47,7 @@ export class MakeRoomPage {
       {start_list:'직접입력',value:this.start2},
     ];
     this.user_id = navParams.data.user_id; //이게 파라미터로 자꾸 받으면 중간에 데이터가 손실되지 않도록 유지시켜줘야 한다.
-    this.user_id = "testing";
+    this.user_id = "g@g.com";
 
     console.log("min : " + this.minYear);
     console.log("max : " + this.maxYear);

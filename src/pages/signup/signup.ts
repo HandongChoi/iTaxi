@@ -5,6 +5,10 @@ import { AuthProvider } from '../../providers/auth/auth';
 import { EmailValidator } from '../../validators/email';
 import { HomePage } from '../home/home';
   
+import { AngularFireDatabase } from 'angularfire2/database';
+
+declare var FCMPlugin;
+
 @IonicPage() 
 @Component({
   selector: 'page-signup',
@@ -15,8 +19,10 @@ export class SignupPage {
   public signupForm:FormGroup;
   public loading:Loading;
   
+  firestore;
+
   constructor(public navCtrl:NavController, public navParams: NavParams, public authProvider:AuthProvider, public loadingCtrl:LoadingController,
-    public alertCtrl:AlertController, formBuilder:FormBuilder) {
+    public alertCtrl:AlertController, formBuilder:FormBuilder, public af: AngularFireDatabase) {
     this.signupForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
       password: ['', Validators.compose([Validators.minLength(6), Validators.required])]
@@ -32,7 +38,12 @@ export class SignupPage {
 
       this.authProvider.signupUser(email, password).then( user => { 
         this.loading.dismiss().then( () => {
-          this.navCtrl.setRoot(HomePage);
+
+          this.firestore = firebase.database().ref('/userProfile/'+ firebase.auth().currentUser.uid);
+          
+          this.tokenSetup().then((token) => {
+            this.storetoken(token);
+          });
         });
       }, error => {
         this.loading.dismiss().then( () => {
@@ -47,5 +58,29 @@ export class SignupPage {
       this.loading.present();
     }  
   }
-  
+
+  storetoken(t){
+    this.firestore.update({
+      email: firebase.auth().currentUser.email,
+      devtoken:t
+    }).then(()=>{
+      alert('Token Stored');
+      this.navCtrl.setRoot(HomePage);
+    }).catch(()=>{
+      alert('Token not sotred');
+    });
+  }
+
+
+  tokenSetup(){
+    var promise = new Promise((resolve, reject) => {
+      FCMPlugin.getToken(function(token){
+        resolve(token);
+      }, (err)=>{
+      reject(err); 
+      });
+    });
+
+    return promise;
+  }
 }
