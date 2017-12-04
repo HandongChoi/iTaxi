@@ -45,20 +45,20 @@
       </div>
 
       <!-- <ion-list *ngSwitchCase="'info'"> -->
-      <form [formGroup]="signupForm" (submit)="procedure= 'complete'" novalidate *ngSwitchCase="'info'"> <!-- 누르면 세그먼트 이동하게 수정해놓음-->
+      <form [formGroup]="signupForm" (submit)="signupUser()" novalidate *ngSwitchCase="'info'"> <!-- 누르면 세그먼트 이동하게 수정해놓음-->
         <ion-item>
           <ion-label stacked>이름</ion-label>
-          <ion-input type="text" placeholder="류여진"></ion-input>
+          <ion-input formControlName="name" type="name" placeholder="최효은"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label stacked>학번</ion-label>
-          <ion-input type="text" placeholder="21400111"></ion-input>
+          <ion-input formControlName="studentID" type="studentID" placeholder="21000763"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label stacked>전화번호</ion-label>
-          <ion-input type="text" placeholder="010-8222-3574"></ion-input> <!-- placeholder에 기존 전화번호 뿌리기  -->
+          <ion-input formControlName="phoneNumber" type="phoneNumber" placeholder="010-7766-2016"></ion-input> <!-- placeholder에 기존 전화번호 뿌리기  -->
         </ion-item>
 
         <ion-item>
@@ -90,7 +90,7 @@
         </button>
       </form>
       <!-- </ion-list> -->
-
+    <!--
       <div *ngSwitchCase="'complete'">
         <ion-card class="terms_content">
           회원가입이 완료되었습니다
@@ -99,6 +99,6 @@
           다음단계
         </button>
       </div>
-
+    -->
     </div>
 </ion-content>

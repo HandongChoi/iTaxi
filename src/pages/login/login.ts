@@ -40,7 +40,6 @@ export class LoginPage {
       
       this.authProvider.loginUser(email, password).then( authData =>  { 
         this.loading.dismiss().then( () => {
-
           if(typeof(FCMPlugin) != 'undefined'){
             FCMPlugin.onTokenRefresh(function(token){
               if(token){
@@ -49,7 +48,6 @@ export class LoginPage {
               }
             });
           }
-          
           this.navCtrl.setRoot(MainPage, {user_id: email}); 
         });
       }, error => { 

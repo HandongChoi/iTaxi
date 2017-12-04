@@ -20,13 +20,13 @@
         <ion-col col-5>
           <ion-item class = "formRound">
           <ion-select #newSelect [selectOptions]="departOptions" [(ngModel)]="departFilter" multiple="false" 
-                      placeholder="전체보기" (ionChange)="clickOption()">
+                      placeholder="전체보기" (ionChange)="clickOption(departFilter)">
             <ion-option value="All" checked="true">전체보기</ion-option>  
-            <ion-option value="한동">한동대학교</ion-option>
+            <ion-option value="한동대학교">한동대학교</ion-option>
             <ion-option value="양덕" >양덕</ion-option>
-            <ion-option value="고터">고속버스터미널</ion-option>
-            <ion-option value="시터">시외버스터미널</ion-option>
-            <ion-option value="북부">북부해수욕장</ion-option>
+            <ion-option value="고속버스터미널">고속버스터미널</ion-option>
+            <ion-option value="시외버스터미널">시외버스터미널</ion-option>
+            <ion-option value="북부해수욕장">북부해수욕장</ion-option>
             <ion-option value="육거리">육거리</ion-option>
           </ion-select>
           </ion-item>
