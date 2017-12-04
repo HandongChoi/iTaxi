@@ -24,17 +24,24 @@ export class SignupPage {
     public alertCtrl:AlertController, formBuilder:FormBuilder) {
     this.signupForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
-      password: ['', Validators.compose([Validators.minLength(6), Validators.required])]
+      password: ['', Validators.compose([Validators.minLength(6), Validators.required])],
+      name: ['', Validators.compose([Validators.minLength(6), Validators.required])],
+      phoneNumber: ['', Validators.compose([Validators.minLength(6), Validators.required])],
+      studentID: ['', Validators.compose([Validators.minLength(6), Validators.required])],
     });
   }
+
   signupUser():void {
     if(!this.signupForm.valid){
       console.log(`Need to complete the form: ${this.signupForm.value}`);
     } else {
       const email:string = this.signupForm.value.email;
       const password:string = this.signupForm.value.password;
+      const name:string = this.signupForm.value.name;
+      const phoneNumber:string = this.signupForm.value.phoneNumber;
+      const studentID:string = this.signupForm.value.studentID;
 
-      this.authProvider.signupUser(email, password).then( user => {
+      this.authProvider.signupUser(email, password, name, phoneNumber, studentID).then( user => {
         this.loading.dismiss().then( () => {
           this.navCtrl.setRoot(MainPage, {user_id: email});
         });
@@ -51,8 +58,9 @@ export class SignupPage {
       this.loading.present();
     }
   }
+
   goLoginPage(){
-    this.navCtrl.setRoot(LoginPage);
+    this.navCtrl.setRoot(MainPage);
     console.log("goLoginPage at signup.ts");
   }
 }

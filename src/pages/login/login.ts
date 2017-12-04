@@ -40,18 +40,7 @@ export class LoginPage {
       
       this.authProvider.loginUser(email, password).then( authData =>  { 
         this.loading.dismiss().then( () => {
-
-          if(FCMPlugin != 'undefined'){
-            
-            FCMPlugin.onTokenRefresh(function(token){
-              if(token){
-                this.firestore = firebase.database().ref('/userProfile/'+ firebase.auth().currentUser.uid);
-                this.storetoken(token);
-              }
-            });
-          }
-          
-          this.navCtrl.setRoot(MainPage, {user_id: email}); 
+        this.navCtrl.setRoot(MainPage, {user_id: email}); 
         });
       }, error => { 
         this.loading.dismiss().then( () => {

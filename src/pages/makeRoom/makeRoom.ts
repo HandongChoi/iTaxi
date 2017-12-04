@@ -23,8 +23,6 @@ export class MakeRoomPage {
   nowDate: string = new Date().toISOString().substr(0, 10);
   nowTime: string = this.addZ(this.forDate.getHours()) + ":" + this.addZ(this.forDate.getMinutes()); //이것도 slice로 구현해볼려고 하는데 안 된다.      
   
-//
-
   bookingTime: string;
   bookingDate: string; 
 
@@ -50,10 +48,6 @@ export class MakeRoomPage {
     ];
     this.user_id = navParams.data.user_id; //이게 파라미터로 자꾸 받으면 중간에 데이터가 손실되지 않도록 유지시켜줘야 한다.
 
-    console.log("min : " + this.minYear);
-    console.log("max : " + this.maxYear);
-    console.log("testDate : " + this.testDate);
-    console.log("user_id : "+this.user_id);
   }
 
   addZ(n) {
@@ -110,7 +104,6 @@ export class MakeRoomPage {
                   participants: participants_list,
               }
           );
-          console.log("Wh!! " + (4-data));
           this.navCtrl.setRoot(ChatRoomPage, {chat_room_id: url.key, bookingDate: this.bookingDate, user_id: this.user_id});
         }
       }

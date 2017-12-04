@@ -75,9 +75,9 @@ export class MyApp {
         this.rootPage = LoginPage;
         unsubscribe(); 
       } else{
-        this.rootPage = MainPage; unsubscribe();
         this.user_id = user.email;
-        console.log("user_id : " + this.user_id);
+        this.rootPage = MainPage; 
+        unsubscribe();
       }
     });
   }
@@ -87,7 +87,7 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
-      this.splashScreen.hide();
+      this.splashScreen.show();
       
     });
     console.log("initailizeApp at app.component.ts");

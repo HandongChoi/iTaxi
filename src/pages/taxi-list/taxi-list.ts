@@ -71,8 +71,19 @@ export class TaxiListPage {
     console.log("makeRoom function into taxi-list.tx");
   }
 
-  clickOption(){
-    console.log("What? "+this.departFilter);
+  clickOption(departFilter){
+    this.dates = this.af.list('/chatrooms/'+this.nowDate, {
+      query: {
+        equalTo: 'departFilter'
+      }
+    });
+    this.dates.subscribe(data =>{
+      this.dates_array.push(data);
+      console.log("!! " + data);
+    });
+    console.log('test '+this.dates.$ref);
+    console.log('database load success');
+    console.log("What? "+departFilter);
   }
 
   ionViewDidLoad() {
