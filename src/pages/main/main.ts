@@ -14,9 +14,12 @@ export class MainPage {
   user_id: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.user = firebase.auth().currentUser.uid;
-    this.user_id = this.user.email;
+    
+    let userInfo = firebase.auth().currentUser;
+    this.user = userInfo.uid
+    this.user_id = userInfo.email;
     console.log("Main user : "+this.user);
+    console.log("Main user_id :"+this.user_id);
   }
 
   goTaxiListPage(){

@@ -91,6 +91,7 @@ export class MakeRoomPage {
           console.log("Error"); 
         }
         else{
+          console.log(this.user_id);
           this.chatrooms = this.af.list('/chatrooms/' + this.bookingDate);
           url = this.chatrooms.push(
               {
