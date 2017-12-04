@@ -21,7 +21,7 @@ export class MakeRoomPage {
   
   forDate: any = new Date();
   nowDate: string = new Date().toISOString().substr(0, 10);
-  nowTime: string = this.forDate.getHours() + ":" + this.addZ(this.forDate.getMinutes()); //이것도 slice로 구현해볼려고 하는데 안 된다.      
+  nowTime: string = this.addZ(this.forDate.getHours()) + ":" + this.addZ(this.forDate.getMinutes()); //이것도 slice로 구현해볼려고 하는데 안 된다.      
   
   bookingTime: string;
   bookingDate: string; 
@@ -115,7 +115,7 @@ export class MakeRoomPage {
 
           console.log()
 
-          this.navCtrl.setRoot(ChatRoomPage, {chat_room_id: url.key, bookingDate:this.bookingDate, user_id: this.user_id});
+          this.navCtrl.setRoot(ChatRoomPage, {chat_room_id: url.key, bookingDate:this.bookingDate, user_id: this.user_id, whichPage: "makeRoom"});
         }
       }
     });

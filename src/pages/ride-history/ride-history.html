@@ -5,14 +5,37 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>i-Taxi >> 탑승내역조회</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content class="content content-sm padding">
+  <div class="scroll-content">
+    <ion-grid>
+      <ion-item-group *ngFor = "let chatroomDatum of chatroomData; async">
+        <ion-item-divider class="item item-divider item-sm item-divider-md item-md-light item-divider-sm-light" color="light" (click)="goChatroom(date)">
+          <ion-row>
+            <ion-col col-3>
+              <p>{{chatroomDatum.roomDate}}</p>
+              <p>{{chatroomDatum.roomTime}}</p>      
+            </ion-col>
+            <ion-col col-7>
+              <p>{{chatroomDatum.roomDepart}}</p>
+              <p>>{{chatroomDatum.roomDest}}</p>
+            </ion-col>
+            <ion-col col-2>
+              <p>{{chatroomDatum.roomParticipants.length}} / {{chatroomDatum.roomCapacity}}</p>
+              <p>참여중</p>
+            </ion-col>
+          </ion-row>
+        <div class="button-effect"></div>
+        </ion-item-divider>
+      </ion-item-group>
+    </ion-grid>  
+  </div>
 </ion-content>

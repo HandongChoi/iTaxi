@@ -41,8 +41,7 @@ export class LoginPage {
       this.authProvider.loginUser(email, password).then( authData =>  { 
         this.loading.dismiss().then( () => {
 
-          if(FCMPlugin != 'undefined'){
-            
+          if(typeof(FCMPlugin) != 'undefined'){
             FCMPlugin.onTokenRefresh(function(token){
               if(token){
                 this.firestore = firebase.database().ref('/userProfile/'+ firebase.auth().currentUser.uid);
@@ -76,11 +75,14 @@ export class LoginPage {
 
   tokenSetup(){
     var promise = new Promise((resolve, reject) => {
-      FCMPlugin.getToken(function(token){
-        resolve(token);
-      }, (err)=>{
-        reject(err); 
-      });
+      if(typeof(FCMPlugin) != 'undefined'){
+        
+        FCMPlugin.getToken(function(token){
+          resolve(token);
+        }, (err)=>{
+          reject(err); 
+        });
+      }
     });
 
     return promise;

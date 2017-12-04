@@ -18,6 +18,7 @@ export class ChatRoomPage {
   
   chats: FirebaseListObservable<any[]>;
   room: FirebaseListObservable<any[]>;
+  rideHistory: FirebaseListObservable<any[]>;
   room_object:FirebaseObjectObservable<any[]>;
   
   chat_user_id: any;
@@ -47,10 +48,15 @@ export class ChatRoomPage {
     this.bookingDate = navParams.data.bookingDate;
     this.chat_room_id = navParams.data.chat_room_id;
     this.chat_user_id = navParams.data.user_id;
+    let whichPage = navParams.data.whichPage;
 
     this.room = af.list('/chatrooms/' + this.bookingDate + '/' + this.chat_room_id);
     this.chats = af.list(('/chats/'+ this.chat_room_id));
     this.room_object = af.object('/chatrooms/' + this.bookingDate + '/' + this.chat_room_id);
+    
+    let parsedID = this.stringParser(this.chat_user_id)
+    console.log(parsedID);
+    this.rideHistory = af.list('/rideHistory/'+ parsedID);
     let count = 0;
     this.room.forEach(data =>{
 
@@ -67,25 +73,39 @@ export class ChatRoomPage {
         this.room_hour= (this.room_depart_time[0] + this.room_depart_time[1]);
         this.room_minute=(this.room_depart_time[3]+this.room_depart_time[4]);
       
-        console.log(this.room_host);
-        console.log(this.chat_user_id);
         this.roomKey = this.room.$ref.ref.parent.key;
-        console.log(this.roomKey);
-
         if(this.room_host === this.chat_user_id)
           this.isHost = true;
         else 
           this.isHost = false;
         
-          console.log(this.room_participants);
+        var isExist = false;
+
+        for(let i = 0; i < this.room_participants.length; i++){
+          if(this.room_participants[i] === this.chat_user_id){
+            isExist = true;
+            break;
+          }
+        }
+
+        if(whichPage === 'makeRoom'){
+          this.rideHistory.push({
+            roomId: this.chat_room_id,
+            roomDate: this.room_depart_date,
+            roomTime: this.room_depart_time,
+            roomDepart: this.room_depart,
+            roomDest: this.room_dest,
+            roomCapacity: this.room_capacity,
+            roomParticipants: this.room_participants
+          });
+        }
+
+        if(isExist === false){
+          console.log()
         
-        var isExist = this.room_participants.indexOf(this.chat_user_id);
-        console.log(isExist);
-        if(isExist === -1){
-          this.room_participants.push(this.chat_user_id);
-          console.log(this.room_participants);
-          
-          if(parseInt(this.room_capacity) >= this.room_participants.length){
+          if(parseInt(this.room_capacity) > this.room_participants.length){
+            this.room_participants.push(this.chat_user_id);
+            
             this.room_object.update({
               capacity: this.room_capacity, 
               depart_date: this.room_depart_date,
@@ -94,16 +114,29 @@ export class ChatRoomPage {
               destination: this.room_dest,
               host: this.room_host,
               participants: this.room_participants
+            })
+            this.rideHistory.push({
+              roomId: this.chat_room_id,
+              roomDate: this.room_depart_date,
+              roomTime: this.room_depart_time,
+              roomDepart: this.room_depart,
+              roomDest: this.room_dest,
+              roomCapacity: this.room_capacity,
+              roomParticipants: this.room_participants
             });
-          }
-          else{
-              this.goBack();  
           }
         };   
       }
       count++;
           
     });
+  }
+
+  stringParser(sentence){
+    let parsedID = sentence.replace('@', '');
+    parsedID = parsedID.replace('.', '');
+    
+    return parsedID;
   }
 
   goBack(){
@@ -135,7 +168,7 @@ export class ChatRoomPage {
           new_participants.push(data);
       });
     
-      console.log(this.room_participants);
+      console.log(new_participants);
 
       if(this.chat_user_id !== this.room_participants[0]){
 
@@ -148,13 +181,17 @@ export class ChatRoomPage {
           host: this.room_host,
           participants: new_participants
         });
+        
+        this.rideHistory.remove();
+        this.navCtrl.setRoot(TaxiListPage, {user_id: this.chat_user_id});
       }// 방장이 아닌 다른 사람이 나갈 경우
       else{
         //방장이고, 방에 사람이 없을 때
+        console.log(this.room_participants);
         if(this.room_participants.length === 1){
           this.room_object.remove();
+          this.rideHistory.remove();
         }
-        
         else if(this.room_participants.length > 1){
           this.room_object.update({
             capacity: this.room_capacity, 
@@ -165,6 +202,8 @@ export class ChatRoomPage {
             host: new_participants[0],
             participants: new_participants
           });
+          
+          this.rideHistory.remove();
         }
         this.navCtrl.setRoot(TaxiListPage, {user_id: this.chat_user_id});
       }
