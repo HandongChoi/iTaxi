@@ -41,7 +41,8 @@ export class LoginPage {
       this.authProvider.loginUser(email, password).then( authData =>  { 
         this.loading.dismiss().then( () => {
 
-          if(FCMPlugin !== undefined){
+          if(FCMPlugin != 'undefined'){
+            
             FCMPlugin.onTokenRefresh(function(token){
               if(token){
                 this.firestore = firebase.database().ref('/userProfile/'+ firebase.auth().currentUser.uid);
