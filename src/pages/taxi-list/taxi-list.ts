@@ -63,6 +63,7 @@ export class TaxiListPage {
     // full 인원이면 deny  
     console.log(this.user_id);
 
+    
     this.navCtrl.setRoot(ChatRoomPage, {chat_room_id: chat_room_id_val, bookingDate: bookingDate_val, user_id: this.user_id});
   }
 

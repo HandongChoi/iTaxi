@@ -40,7 +40,7 @@ exports.ChatMessageTrigger= functions.database.ref('/chats/{roomId}/{chatId}').o
 		// 
 		var count = 1;
 		var tokens = [];
-		var total = participants.length -1;
+		var total = participants.length; //-1
 		console.log(participants, wroteUser);
 		for(participant of participants){
 			if(participant !== wroteUser){

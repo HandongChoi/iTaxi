@@ -13,6 +13,7 @@ import { ResetPasswordPage } from '../pages/reset-password/reset-password';
 import { SettingPage } from '../pages/setting/setting';
 import { SignupPage } from '../pages/signup/signup';
 import { TaxiListPage } from '../pages/taxi-list/taxi-list';
+import { RideHistoryPage } from '../pages/ride-history/ride-history';
 
 import { AuthProvider } from '../providers/auth/auth';
 
@@ -63,7 +64,7 @@ export class MyApp {
     let forDate = new Date();
     let nowDate = new Date().toISOString().substr(0, 10);
     let nowTime = forDate.getHours() + ":" + this.addZ(forDate.getMinutes());
-    this.af.database.ref('/chatrooms/' + nowDate);
+    this.af.database.ref('/chatrooms/' + nowDate).child('kl');
 
     this.homePage = HomePage;
     this.mainPage = MainPage;
@@ -137,7 +138,7 @@ export class MyApp {
   }
 
   goBoardingListPage(){
-    alert('Boarding List Page');
+    this.navCtrl.setRoot(RideHistoryPage, {user_id: this.user_id});
     console.log("goBoardingListPage() at app.componenent.ts");
   }
 

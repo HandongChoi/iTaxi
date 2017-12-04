@@ -13,6 +13,7 @@ import { ResetPasswordPage } from '../pages/reset-password/reset-password';
 import { SettingPage } from '../pages/setting/setting';
 import { SignupPage } from '../pages/signup/signup';
 import { TaxiListPage } from '../pages/taxi-list/taxi-list';
+import { RideHistoryPage } from '../pages/ride-history/ride-history';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -44,6 +45,7 @@ export const firebaseConfig = {
     PersonalInfoPage,
     SettingPage,
     TaxiListPage,
+    RideHistoryPage,
   ],
   imports: [
     BrowserModule,
@@ -66,6 +68,7 @@ export const firebaseConfig = {
     SettingPage,
     SignupPage,
     TaxiListPage,
+    RideHistoryPage,
   ],
   providers: [
     StatusBar,
