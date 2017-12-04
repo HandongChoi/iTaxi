@@ -1,7 +1,7 @@
 <ion-menu [content]="content"  persistent="true">
   <ion-header>
     <ion-toolbar padding>
-      <ion-title>{{user_email}}님</ion-title>
+      <ion-title>{{user_id}}님</ion-title>
       <ion-buttons right >
         <button menuClose ion-button icon-only (click)="goSettingPage()">
             <ion-icon name="settings"></ion-icon>
@@ -35,7 +35,7 @@
       <button menuClose ion-item class="sidemenu-items" (click)="goMakeCarpoolRoomPage()">모집</button>
       <ion-list-header> 마이페이지 </ion-list-header>
       <button menuClose ion-item class="sidemenu-items" (click)="goBoardingListPage()">탑승내역</button>
-      <button menuClose ion-item class="sidemenu-items" (click)="goEditMyInfoPage()">내정보수정</button>
+      <button menuClose ion-item class="sidemenu-items" (click)="goPersonalInfoPage()">내정보수정</button>
       <ion-list-header> 메인페이지 </ion-list-header>
       <button menuClose ion-item class="sidemenu-items" (click)="goMainPage()">메인페이지</button>
       

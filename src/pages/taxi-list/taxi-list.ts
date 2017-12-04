@@ -24,15 +24,15 @@ export class TaxiListPage {
   destinationOptions: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase) {
+    
+    this.user_id = navParams.data.user_id;
+    
     //기본적으로 오늘 날짜 기준으로 data 불러오기.
     this.dates = af.list('/chatrooms/'+this.nowDate);
     this.dates.subscribe(data =>{
       this.dates_array.push(data);
-      console.log("data :" + data);
     });
-    this.user_id = "testing";
-    console.log("nowDate : "+this.nowDate);
-    
+ 
     this.departOptions = {
       title: '출발지',
       subTitle: '원하시는 출발지를 체크해주세요.',

@@ -13,6 +13,7 @@
     공지사항입니다. 공지사항입니다.
   </button>
 
+  <!--
   <ion-card (click)="openTaxiList()">
     <img src="../../assets/imgs/taxi.png"/>
     <div class="card-title">i-Taxi</div>
@@ -22,21 +23,24 @@
     <img src="../../assets/imgs/taxi.png"/>
     <div class="card-title">i-Taxi</div>
     <div class="card-subtitle">타러가기</div>
-  </ion-card>
-  <!-- <ion-buttons>
-  full button
-      <button ion-button large full icon-left (click)="openTaxiList()" >
-        <ion-icon name="car"></ion-icon>
-        i-Taxi 탑승
-      </button>
-      <button ion-button large full color="secondary" icon-left (click)="openTaxiList()" >
-        <ion-icon name="car"></ion-icon>
-        카풀 탑승
-      </button>
-      <button ion-button large full color="tertiary" icon-left (click)="openTaxiList()" >
-        <ion-icon name="person"></ion-icon>
-        마이페이지
-      </button>
+  </ion-card> -->
+
+
+  <ion-buttons>
+    <button ion-button large full icon-left (click)="goTaxiListPage()" >
+      <ion-icon name="car"></ion-icon>
+      i-Taxi 탑승
+    </button>
+    <button ion-button large full color="secondary" icon-left (click)="goCarpoolListPage()" >
+      <ion-icon name="car"></ion-icon>
+      카풀 탑승
+    </button>
+    <button ion-button large full color="tertiary" icon-left (click)="goMyPage()" >
+      <ion-icon name="person"></ion-icon>
+      마이페이지
+    </button>
+
+      <!--
   round button
     <ion-grid>
       <ion-row justify-content-center style="padding: 10px 0; margin-top: 25px">
@@ -55,7 +59,9 @@
         </button>
       </ion-row>
     </ion-grid>
-  </ion-buttons> -->
+  -->
+  </ion-buttons>
+  
 
   <!-- my Ticket -->
   <ion-card style="border-radius:5px; margin-top:30px">

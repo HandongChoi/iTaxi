@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { TaxiListPage } from '../taxi-list/taxi-list';
+import { PersonalInfoPage } from '../personal-info/personal-info';
 
 @IonicPage()
 @Component({
@@ -18,12 +19,6 @@ export class MainPage {
     console.log("Main user : "+this.user_id);
   }
 
-  openTaxiList() {
-    //manages the stack
-    this.navCtrl.setRoot(TaxiListPage, {user_id: this.user_id});
-    console.log("openTaxiList at main.ts");
-  }
-
   goTaxiListPage(){
     this.navCtrl.setRoot(TaxiListPage, {user_id: this.user_id});
     console.log("goTaxiListPage at main.ts");
@@ -35,7 +30,7 @@ export class MainPage {
   }
 
   goMyPage(){
-    alert('MyPage');
+    this.navCtrl.setRoot(PersonalInfoPage, {user_id: this.user_id});
     console.log("goMyPage at main.ts");
   }
 }
