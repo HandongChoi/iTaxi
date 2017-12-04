@@ -25,18 +25,18 @@ export class ChatRoomPage {
   chat_room_id: any;
   bookingDate: String;
 
-  room_depart: String;
-  room_dest: String;
-  room_capacity: String;
-  room_depart_date: String;
-  room_depart_time: String;
-  room_host: String;
-  room_participants:  Array<String> = [];
-  room_month: String;
-  room_day: String;
-  room_hour: String;
-  room_minute:String;
-  roomKey: String;
+  room_depart: string;
+  room_dest: string;
+  room_capacity: string;
+  room_depart_date: string;
+  room_depart_time: string;
+  room_host: string;
+  room_participants:  Array<string> = [];
+  room_month: string;
+  room_day: string;
+  room_hour: string;
+  room_minute:string;
+  roomKey: string;
 
   isHost: boolean;
 
@@ -76,9 +76,32 @@ export class ChatRoomPage {
           this.isHost = true;
         else 
           this.isHost = false;
+        
+          console.log(this.room_participants);
+        
+        var isExist = this.room_participants.indexOf(this.chat_user_id);
+        console.log(isExist);
+        if(isExist === -1){
+          this.room_participants.push(this.chat_user_id);
+          console.log(this.room_participants);
+          if(parseInt(this.room_capacity) != this.room_participants.length){
+            this.room_object.update({
+              capacity: this.room_capacity, 
+              depart_date: this.room_depart_date,
+              depart_time: this.room_depart_time,
+              departure: this.room_depart,
+              destination: this.room_dest,
+              host: this.room_host,
+              participants: this.room_participants
+            });
+          }
+          else{
+              this.goBack();  
+          }
+        };   
       }
-
       count++;
+          
     });
   }
 
@@ -156,7 +179,7 @@ export class ChatRoomPage {
           alert("background: ");
         }
         else{
-          alert("foreground: ");
+          alert(data.sendername + ': ' + data.message);
         }
       });
     }
