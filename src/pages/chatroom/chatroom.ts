@@ -47,14 +47,14 @@ export class ChatRoomPage {
     let count = 0;
     this.room.forEach(data =>{
 
-      if(count == 0){
+      if(count == 0){ 
         this.room_capacity = data[0].$value;
         this.room_depart_date = data[1].$value;
         this.room_depart_time = data[2].$value;
         this.room_depart = data[3].$value;
         this.room_dest = data[4].$value;
         this.room_host = data[5].$value;
-        this.room_participants = data[6][0];
+        this.room_participants = data[6];
       }
       count++;
     });

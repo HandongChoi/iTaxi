@@ -9,7 +9,9 @@ exports.ChatMessageTrigger= functions.database.ref('/chats/{roomId}/{chatId}').o
 	var wroteContent = event.data.val().content;
 	
 	var wroteRoom = event.data.ref.parent.key;
-
+	
+	var thisDate
+	
 	admin.database().ref('/chatrooms/2017-12-06/' + wroteRoom).on('value', function(snapshot){
 		var participants = snapshot.val().participants;
 
