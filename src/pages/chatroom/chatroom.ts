@@ -50,6 +50,8 @@ export class ChatRoomPage {
     this.chat_user_id = navParams.data.user_id;
     let whichPage = navParams.data.whichPage;
 
+    console.log(this.bookingDate, this.chat_room_id, this.chat_user_id);
+
     this.room = af.list('/chatrooms/' + this.bookingDate + '/' + this.chat_room_id);
     this.chats = af.list(('/chats/'+ this.chat_room_id));
     this.room_object = af.object('/chatrooms/' + this.bookingDate + '/' + this.chat_room_id);
@@ -57,23 +59,26 @@ export class ChatRoomPage {
     let parsedID = this.stringParser(this.chat_user_id)
     console.log(parsedID);
     this.rideHistory = af.list('/rideHistory/'+ parsedID);
+    console.log('hi', this.rideHistory.$ref.ref.key);
     let count = 0;
     this.room.forEach(data =>{
 
       if(count == 0){ 
         this.room_capacity = data[0].$value;
-        this.room_depart_date = data[1].$value;
-        this.room_depart_time = data[2].$value;
-        this.room_depart = data[3].$value;
-        this.room_dest = data[4].$value;
-        this.room_host = data[5].$value;
-        this.room_participants = data[6];
+        this.room_depart_date = data[2].$value;
+        this.room_depart_time = data[3].$value;
+        this.room_depart = data[4].$value;
+        this.room_dest = data[5].$value;
+        this.room_host = data[6].$value;
+        this.room_participants = data[7];
+
         this.room_month = (this.room_depart_date[5] + this.room_depart_date[6]);
         this.room_day= (this.room_depart_date[8] + this.room_depart_date[9]);
         this.room_hour= (this.room_depart_time[0] + this.room_depart_time[1]);
         this.room_minute=(this.room_depart_time[3]+this.room_depart_time[4]);
       
         this.roomKey = this.room.$ref.ref.parent.key;
+        console.log(this.roomKey);
         if(this.room_host === this.chat_user_id)
           this.isHost = true;
         else 
