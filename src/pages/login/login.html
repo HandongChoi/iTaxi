@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>Log In</ion-title> 
+    <ion-title>로그인</ion-title> 
   </ion-navbar>
 </ion-header>
 
@@ -10,8 +10,7 @@
     <ion-item>
       <ion-label stacked>Email</ion-label> 
       <ion-input formControlName="email" type="email" placeholder="Your email address"
-        [class.invalid]="!loginForm.controls.email.valid &&
-        loginForm.controls.email.dirty"> 
+        [class.invalid]="!loginForm.controls.email.valid && loginForm.controls.email.dirty"> 
       </ion-input>
     </ion-item>
     <ion-item class="error-message" *ngIf="!loginForm.controls.email.valid && loginForm.controls.email.dirty"> 
@@ -30,10 +29,10 @@
       Log In </button>
   </form>
 
-  <button ion-button block clear (click)="goToSignup()"> Create a new account
+  <button ion-button block clear (click)="goToSignup()"> 계정 만들기
   </button>
 
   <button ion-button block clear (click)="goToResetPassword()">
-    I forgot my password :( </button>
+    비밀번호 찾기 </button>
     
 </ion-content>
