@@ -19,7 +19,8 @@
 
         <ion-col col-5>
           <ion-item class = "formRound">
-          <ion-select #newSelect [selectOptions]="departOptions" [(ngModel)]="carbrand" multiple="true" placeholder="전체보기" (ionChange)="clickOption()">
+          <ion-select #newSelect [selectOptions]="departOptions" [(ngModel)]="departFilter" multiple="false" 
+                      placeholder="전체보기" (ionChange)="clickOption()">
             <ion-option value="All" checked="true">전체보기</ion-option>  
             <ion-option value="한동">한동대학교</ion-option>
             <ion-option value="양덕" >양덕</ion-option>
@@ -35,7 +36,7 @@
         </ion-col>
         <ion-col col-5>
           <ion-item  class = "formRound">
-          <ion-select [selectOptions]="destinationOptions" [(ngModel)]="gender" multiple="true" placeholder="전체보기" >
+          <ion-select [selectOptions]="destinationOptions" [(ngModel)]="arriveFilter" multiple="false" placeholder="전체보기" >
             <ion-option value="All" checked="true">전체보기</ion-option>  
             <ion-option value="한동">한동대학교</ion-option>
             <ion-option value="양덕" >양덕</ion-option>
