@@ -60,7 +60,7 @@
   <ion-grid>
   <ion-item-group *ngFor = "let dates of dates_array">
     <ion-item-divider class="item item-divider item-sm item-divider-md item-md-light item-divider-sm-light" color="light"
-      *ngFor = "let date of dates">
+      *ngFor = "let date of dates" (click)="goChatroom(date)">
       <ion-row>
         <ion-col col-3>
           <p>{{date.depart_date}}</p>
