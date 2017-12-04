@@ -41,21 +41,23 @@ export class ChatRoomPage {
     this.chat_room_id = navParams.data.chat_room_id;
     this.chat_user_id = navParams.data.user_id;
     
+
     console.log('/chatrooms/' + this.bookingDate + '/' + this.chat_room_id);
     this.room = af.list('/chatrooms/' + this.bookingDate + '/' + this.chat_room_id);
     this.chats = af.list(('/chats/'+ this.chat_room_id));
     this.room_object = af.object('/chatrooms/' + this.bookingDate + '/' + this.chat_room_id);
     this.room.forEach(data =>{
 
-      this.room_capacity = data[0].$value;
-      this.room_depart_date = data[1].$value;
-      this.room_depart_time = data[2].$value;
-      this.room_depart = data[3].$value;
-      this.room_dest = data[4].$value;
-      this.room_host = data[5].$value;
-      this.room_participants = data[6];
+    this.room_capacity = data[0].$value;
+    this.room_depart_date = data[1].$value;
+    this.room_depart_time = data[2].$value;
+    this.room_depart = data[3].$value;
+    this.room_dest = data[4].$value;
+    this.room_host = data[5].$value;
+    this.room_participants = data[6];
       
     });
+
   }
 
   goBack(){
