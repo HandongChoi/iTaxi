@@ -1,23 +1,78 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color = "primary">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Chat Room</ion-title>
+    <ion-title>꼬부기 (3/3)</ion-title> <!-- 방이름/인원 -->
     </ion-navbar >
 </ion-header>
 
 <ion-content>
   <ion-list>
+    <!-- 원래 있던거.. 지워도되나? -->
     <ion-item *ngFor="let chat of chats | async; let last = last">
       {{chat.user_id}} : {{chat.content}}
       {{last ? scrollBottom() : ''}}
     </ion-item>
+
+    <!-- 방 정보 -->
+    <ion-grid class="room-info">
+      <ion-row>
+        <ion-col justify-content-center padding-left>
+          10월 25일 09시 45분
+          <p><b>한동대학교 &nbsp; <ion-icon name="arrow-forward"></ion-icon> &nbsp; 양덕 하나로마트</b></p>
+        </ion-col>
+        <ion-col col-auto>
+          <ion-buttons right icon-only><ion-icon name="log-out"></ion-icon></ion-buttons>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <div class="message-wrap">
+    <!-- 밑에 주석처리 되어있는 부분이 내가 말한 내용이면 오른쪽, 상대가 말한 내용이면 왼쪽 선택하게한다. -->
+      <!-- <div *ngFor="let msg of msgList"
+           class="message"
+           [class.left]=" msg.userId === toUser.id "
+           [class.right]=" msg.userId === user.id "> -->
+       <div class="message left">
+           <!-- <img class="user-img" [src]="msg.userAvatar" alt="" src=""> 이거는 프로필사진-->
+           <div class="msg-detail">
+               <div class="msg-content">
+                 <div class="msg-info">
+                   <p>
+                     <!-- 사용자 아이디, 메세지 작성시간 {{msg.userName}}&nbsp;&nbsp;&nbsp;{{msg.time | relativeTime}}</p> -->
+                     <ion-icon name="star"></ion-icon>현동이&nbsp;&nbsp;&nbsp;오후11:39</p>
+                   </div>
+                   <span class="triangle"></span>
+                   <p class="line-breaker ">안녕하세요 택시 타시나요?</p>  <!-- {{msg.message}} -->
+               </div>
+           </div>
+       </div>
+
+      <!-- 불필요 / 보여주기용  -->
+       <div class="message right">
+           <!-- <img class="user-img" alt="" src=""> -->
+           <div class="msg-detail">
+               <div class="msg-content">
+                 <div class="msg-info">
+                   <p>
+                     <!-- {{msg.userName}}&nbsp;&nbsp;&nbsp;{{msg.time | relativeTime}}</p> -->
+                     한동이&nbsp;&nbsp;&nbsp;오후11:40</p>
+                   </div>
+                   <span class="triangle"></span>
+                   <p class="line-breaker">네네 탑니다! 어디로 갈까요?</p>
+               </div>
+           </div>
+       </div>
+
+      <!-- 입장/퇴장/택시비 정산 등등 공지 -->
+       <div class="message-notice">한동이 님이 퇴장하셨습니다.</div>
+    </div>
   </ion-list>
 </ion-content>
 
 <ion-footer>
-  <ion-item>  
+  <ion-item>
     <ion-input [(ngModel)]="chat_content" fixed type="text"></ion-input>
     <button ion-button clear item-right (click)="send()" (click)="scrollBottom()"> send </button>
   </ion-item>
