@@ -19,6 +19,8 @@ declare var FCMPlugin;
 export class SignupPage {
   public signupForm:FormGroup;
   public loading:Loading;
+
+  firestore;
   
   constructor(public navCtrl:NavController, public navParams: NavParams, public authProvider:AuthProvider, public loadingCtrl:LoadingController,
     public alertCtrl:AlertController, formBuilder:FormBuilder) {
