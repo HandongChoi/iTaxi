@@ -10,7 +10,6 @@ import { MainPage } from '../pages/main/main';
 import { MakeRoomPage } from '../pages/makeRoom/makeRoom';
 import { PersonalInfoPage } from '../pages/personal-info/personal-info';
 import { ResetPasswordPage } from '../pages/reset-password/reset-password';
-import { SelectAndSortingPage } from '../pages/select-and-sorting/select-and-sorting';
 import { SettingPage } from '../pages/setting/setting';
 import { SignupPage } from '../pages/signup/signup';
 import { TaxiListPage } from '../pages/taxi-list/taxi-list';
@@ -21,6 +20,8 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AuthProvider } from '../providers/auth/auth';
+import { SignupPageModule } from '../pages/signup/signup.module';
+import { ResetPasswordPageModule } from '../pages/reset-password/reset-password.module';
 
 
 export const firebaseConfig = {
@@ -41,17 +42,16 @@ export const firebaseConfig = {
     MainPage,
     MakeRoomPage,
     PersonalInfoPage,
-    ResetPasswordPage,
-    SelectAndSortingPage,
     SettingPage,
-    SignupPage,
     TaxiListPage,
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    SignupPageModule,
+    ResetPasswordPageModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -63,7 +63,6 @@ export const firebaseConfig = {
     MakeRoomPage,
     PersonalInfoPage,
     ResetPasswordPage,
-    SelectAndSortingPage,
     SettingPage,
     SignupPage,
     TaxiListPage,
@@ -72,7 +71,7 @@ export const firebaseConfig = {
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthProvider
+    AuthProvider,
   ]
 })
 export class AppModule {}

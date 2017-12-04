@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, NavController, Platform } from 'ionic-angular';
+import { Nav, NavController, Platform, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -10,10 +10,11 @@ import { MainPage } from '../pages/main/main';
 import { MakeRoomPage } from '../pages/makeRoom/makeRoom';
 import { PersonalInfoPage } from '../pages/personal-info/personal-info';
 import { ResetPasswordPage } from '../pages/reset-password/reset-password';
-import { SelectAndSortingPage } from '../pages/select-and-sorting/select-and-sorting';
 import { SettingPage } from '../pages/setting/setting';
 import { SignupPage } from '../pages/signup/signup';
 import { TaxiListPage } from '../pages/taxi-list/taxi-list';
+
+import { AuthProvider } from '../providers/auth/auth';
 
 import firebase from 'firebase';
 
@@ -35,21 +36,26 @@ export class MyApp {
   rootPage: any;
   pages: Array<{title: string, component: any}>;
 
+  user_id: any;
+
   private homePage;
   private mainPage;
   private taxiListPage;
   private settingPage;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
+              public authProvider:AuthProvider, public alertCtrl: AlertController) {
+
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: HomePage },
-      { title: 'Select testing', component: SelectAndSortingPage},
       { title: 'MakeRoom', component: MakeRoomPage},
       { title: 'TaxiList', component: TaxiListPage},
       { title: 'Setting', component: SettingPage},
+      { title: 'SignupPage', component: SignupPage},
     ];
 
     this.homePage = HomePage;
@@ -60,12 +66,13 @@ export class MyApp {
     const unsubscribe = firebase.auth().onAuthStateChanged( user => {
       if(!user){
         this.rootPage = LoginPage;
-        unsubscribe();
+        unsubscribe(); 
       } else{
-        this.rootPage = LoginPage; unsubscribe();
+        this.rootPage = MainPage; unsubscribe();
+        this.user_id = user.email;
+        console.log("user_id : " + this.user_id);
       }
     });
-
   }
 
   initializeApp() {
@@ -74,10 +81,11 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      
     });
     console.log("initailizeApp at app.component.ts");
   }
-
+ 
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
@@ -97,17 +105,17 @@ export class MyApp {
   }
 
   goSettingPage(){
-    this.navCtrl.setRoot(SettingPage);
+    this.navCtrl.setRoot(SettingPage, {user_id: this.user_id});
     console.log("goTaxiListPage() at app.componenent.ts");
   }
 
   goTaxiListPage(){
-    this.navCtrl.setRoot(TaxiListPage);
+    this.navCtrl.setRoot(TaxiListPage, {user_id: this.user_id});
     console.log("goTaxiListPage() at app.componenent.ts");
   }
 
   goMakeTaxiRoomPage(){
-    this.navCtrl.setRoot(MakeRoomPage);
+    this.navCtrl.setRoot(MakeRoomPage, {user_id: this.user_id});
     console.log("goMakeTaxiRoomPage() at app.componenent.ts");
   }
 
@@ -126,13 +134,19 @@ export class MyApp {
     console.log("goBoardingListPage() at app.componenent.ts");
   }
 
-  goEditMyInfoPage(){
-    alert('Edit My Info Page');
+  goPersonalInfoPage(){
+    this.navCtrl.setRoot(PersonalInfoPage, {user_id: this.user_id});
     console.log("goEditMyInfoPage() at app.componenent.ts");
   }
 
   goMainPage(){
-    this.navCtrl.setRoot(MainPage);
+    this.navCtrl.setRoot(MainPage, {user_id: this.user_id});
     console.log("goMainPage() at app.componenent.ts");
+  }
+
+  logout(){
+    this.authProvider.logoutUser();
+    this.navCtrl.setRoot(LoginPage, {user_id: this.user_id});
+    console.log("Logout");
   }
 }

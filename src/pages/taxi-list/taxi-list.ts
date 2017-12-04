@@ -4,13 +4,6 @@ import { ChatRoomPage } from '../chatroom/chatroom';
 import { MakeRoomPage } from '../makeRoom/makeRoom';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
-/**
- * Generated class for the TaxiListPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-taxi-list',
@@ -25,33 +18,48 @@ export class TaxiListPage {
   chatrooms_array: Array<any> =[];
   
   forDate: any = new Date();
-  nowDate: string = this.forDate.getFullYear() + "-" + (this.forDate.getMonth()+1) + "-" + this.forDate.getDate();
+  nowDate: string = new Date().toISOString().substr(0, 10);
+
+  departOptions: any;
+  destinationOptions: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase) {
+    
+    this.user_id = navParams.data.user_id;
+    
     //기본적으로 오늘 날짜 기준으로 data 불러오기.
     this.dates = af.list('/chatrooms/'+this.nowDate);
+    console.log('database load success');
     this.dates.subscribe(data =>{
       this.dates_array.push(data);
     });
-    //this.user_id = prompt("Input ID");
-    this.user_id = "testing";
+    console.log('subscribe success');
     
-//    let chat_room_id_val = (this.chatrooms[0]).$key;
-    //console.log("Test : " + this.chatrooms[0].$key);
-  
+    this.departOptions = {
+      title: '출발지',
+      subTitle: '원하시는 출발지를 체크해주세요.',
+      mode: 'md'
+    };
+
+    this.destinationOptions = {
+      title: '도착지',
+      subTitle: '원하시는 도착지를 체크해주세요.',
+      mode: 'md'
+    };
+
   }
 
-  goChatroom($event, date) {
-    console.log('hi');
-      this.chatrooms = this.af.list('/chatrooms/'+date);
-        let chat_room_id_val = (this.chatrooms[1]).$key;
-        console.log(chat_room_id_val);
-        //participant array에 push
-        // 참여자가 아니고, 인원 full 아니면 push
-        // 참여자이면 그냥 enter
-        // full 인원이면 deny
-        
-      this.navCtrl.setRoot(ChatRoomPage, {chat_room_id: chat_room_id_val, user_id: this.user_id});
+  goChatroom(date) {
+    let chat_room_id_val = date.$key;
+    console.log(date.$key);
+    let bookingDate_val= date.depart_date;
+    console.log(bookingDate_val);
+    //participant array에 push
+    // 참여자가 아니고, 인원 full 아니면 push
+    // 참여자이면 그냥 enter
+    // full 인원이면 deny  
+    console.log(this.user_id)
+    this.navCtrl.setRoot(ChatRoomPage, {chat_room_id: chat_room_id_val, bookingDate: bookingDate_val, user_id: this.user_id});
   }
 
   makeRoom(){

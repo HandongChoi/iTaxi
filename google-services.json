@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "208976127032",
+    "firebase_url": "https://itaxi-54bdc.firebaseio.com",
+    "project_id": "itaxi-54bdc",
+    "storage_bucket": "itaxi-54bdc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:208976127032:android:af6d23e980ab678c",
+        "android_client_info": {
+          "package_name": "com.itaxi.push"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "208976127032-9spu449h5i7rhrct23m2brchomhvf83h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6GK1xlEzh7Z1D3YQSbRKcxaDwZFIVu1M"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

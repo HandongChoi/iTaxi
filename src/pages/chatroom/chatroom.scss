@@ -1,4 +1,21 @@
 page-chatroom {
+    ion-header {
+        .button-md {
+          box-shadow: none;
+        }
+      
+        .toolbar-title {
+          display: -webkit-flex;
+          display: flex;
+          -webkit-flex-direction: row;
+          flex-direction: row;
+          -webkit-align-items: center;
+          align-items: center;
+          -webkit-justify-content: center;
+          justify-content: center;
+          font-size: 15px;
+        }
+      }
     $userBackgroundColor: #29B5EF;
     $toUserBackgroundColor: #fff;
 
@@ -11,10 +28,9 @@ page-chatroom {
       border-radius: 45px;
       width: 45px;
       height: 45px;
-      margin: 5px;
+      margin: 4px;
       box-shadow: 0 0 2px rgba(0, 0, 0, 0.36);
       text-align: center;
-      padding: 0;
       //font-size: .5em;
     }
 
@@ -181,5 +197,4 @@ page-chatroom {
       }
 
     }
-
 }

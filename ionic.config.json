@@ -1,6 +1,8 @@
 {
   "name": "iTaxi",
-  "app_id": "963b8b0a",
+  "app_id": "53cfe3dd",
   "type": "ionic-angular",
-  "integrations": {}
+  "integrations": {
+    "cordova": {}
+  }
 }

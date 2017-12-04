@@ -18,7 +18,7 @@
       <ion-row>
         <ion-col col-6>
           <ion-item>
-          <ion-select #newSelect [(ngModel)]="carbrand" multiple="true" placeholder="전체보기">
+          <ion-select #newSelect [selectOptions]="departOptions" [(ngModel)]="carbrand" multiple="true" placeholder="전체보기">
             <ion-option value="All" checked="true">전체보기</ion-option>  
             <ion-option value="Handong">한동대학교</ion-option>
             <ion-option value="Yangduck" >양덕</ion-option>
@@ -31,7 +31,7 @@
         </ion-col>
         <ion-col col-6>
           <ion-item>
-          <ion-select [(ngModel)]="gender" multiple="true" placeholder="전체보기">
+          <ion-select [selectOptions]="destinationOptions" [(ngModel)]="gender" multiple="true" placeholder="전체보기">
             <ion-option value="All" checked="true">전체보기</ion-option>  
             <ion-option value="Handong">한동대학교</ion-option>
             <ion-option value="Yangduck" >양덕</ion-option>
@@ -60,7 +60,7 @@
   <ion-grid>
   <ion-item-group *ngFor = "let dates of dates_array">
     <ion-item-divider class="item item-divider item-sm item-divider-md item-md-light item-divider-sm-light" color="light"
-      *ngFor = "let date of dates">
+      *ngFor = "let date of dates" (click)="goChatroom(date)">
       <ion-row>
         <ion-col col-3>
           <p>{{date.depart_date}}</p>
