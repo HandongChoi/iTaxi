@@ -40,10 +40,11 @@ exports.ChatMessageTrigger= functions.database.ref('/chats/{roomId}/{chatId}').o
 		// 
 		var count = 1;
 		var tokens = [];
-		var total = participants.length; //-1
+		var total = participants.length -1;
+		console.log;
 		console.log(participants, wroteUser);
 		for(participant of participants){
-			if(participant !== wroteUser){
+			//if(participant !== wroteUser){
 				admin.database().ref('/userProfile').orderByChild('email').equalTo(participant).once('child_added', function(data){
 					tokens.push(data.val().devtoken);
 					console.log('token_list in getTokens', tokens);				
@@ -73,7 +74,7 @@ exports.ChatMessageTrigger= functions.database.ref('/chats/{roomId}/{chatId}').o
 				
 					count++;
 				});	
-			}	
+			//}	
 		}
 
 		console.log(participants.length);
