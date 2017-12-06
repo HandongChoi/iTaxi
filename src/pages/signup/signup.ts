@@ -47,10 +47,12 @@ export class SignupPage {
         this.loading.dismiss().then( () => {
           this.firestore = firebase.database().ref('/userProfile/'+ firebase.auth().currentUser.uid);
 
-          this.tokenSetup().then((token) => {
-            this.storetoken(token);
-          });
-
+          if(typeof(FCMPlugin) != 'undefined'){
+            this.tokenSetup().then((token) => {
+              this.storetoken(token);
+              this.navCtrl.setRoot(MainPage, {user_id: email});
+            });
+          }
           this.navCtrl.setRoot(MainPage, {user_id: email});
         });
       }, error => {

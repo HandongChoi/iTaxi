@@ -26,8 +26,6 @@ export class PersonalInfoPage {
       name: ['', Validators.compose([Validators.required])],
       phoneNumber: ['', Validators.compose([Validators.required])],
       studentID: ['', Validators.compose([Validators.required])],
-      newPassword: ['', Validators.compose([Validators.required])],
-      newPasswordCheck: ['', Validators.compose([Validators.required])],
        
     }); 
     this.user = firebase.auth().currentUser;

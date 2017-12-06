@@ -31,7 +31,7 @@ export class LoginPage {
     console.log('ionViewDidLoad LoginPage');
   }
 
-  loginUser():void { 
+  loginUser():void {
     if(!this.loginForm.valid){
       console.log(`Form isn't valid yet, value: ${this.loginForm.value}`); 
     }else{
