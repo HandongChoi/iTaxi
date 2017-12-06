@@ -41,12 +41,7 @@ export class MyApp {
 
   user_id: any;
 
-  private homePage;
-  private mainPage;
-  private taxiListPage;
-  private settingPage;
   public room: FirebaseListObservable<any[]>;
-
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
               public authProvider:AuthProvider, public alertCtrl: AlertController, public af: AngularFireDatabase) {
@@ -61,23 +56,14 @@ export class MyApp {
       { title: 'Setting', component: SettingPage},
       { title: 'SignupPage', component: SignupPage},
     ];
-    let forDate = new Date();
-    let nowDate = new Date().toISOString().substr(0, 10);
-    let nowTime = forDate.getHours() + ":" + this.addZ(forDate.getMinutes());
-    this.af.database.ref('/chatrooms/' + nowDate).child('kl');
-
-    this.homePage = HomePage;
-    this.mainPage = MainPage;
-    this.taxiListPage = TaxiListPage;
-    this.settingPage = SettingPage;
-
+    
     const unsubscribe = firebase.auth().onAuthStateChanged( user => {
       if(!user){
         this.rootPage = LoginPage;
         unsubscribe(); 
       } else{
         this.user_id = user.email;
-        this.rootPage = MakeRoomPage; 
+        this.rootPage = TaxiListPage; 
         unsubscribe();
       }
     });
@@ -89,16 +75,12 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.show();
-      
     });
     console.log("initailizeApp at app.component.ts");
   }
  
   openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    //this.navCtrl.setRoot(page.component);
-    this.navCtrl.setRoot(page);
+    this.navCtrl.setRoot(page.componenent, {user_id: this.user_id});
     console.log("openPage");
   }
 
@@ -158,7 +140,4 @@ export class MyApp {
     console.log("Logout");
   }
 
-  addZ(n) {
-    return n < 10 ? '0' + n : '' + n;
-  }
 }
