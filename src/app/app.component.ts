@@ -77,7 +77,7 @@ export class MyApp {
         unsubscribe(); 
       } else{
         this.user_id = user.email;
-        this.rootPage = MainPage; 
+        this.rootPage = MakeRoomPage; 
         unsubscribe();
       }
     });

@@ -17,19 +17,16 @@ export class MakeRoomPage {
   start_list: Array<{start_list:string, value:string}>;
   swap: string ="";
   
-  testDate: string = new Date().toISOString().substr(0, 16).replace('T', ' ');
+
+  nowDate: string = new Date().toLocaleDateString().replace(/\./g,'').replace(/ /g,'-');
+  nowTime: string = new Date().toLocaleTimeString('en-US',{hour12:false}).substr(0,5); //이것도 slice로 구현해볼려고 하는데 안 된다.      
   
-  forDate: any = new Date();
-  nowDate: string = new Date().toISOString().substr(0, 10);
-  nowTime: string = this.addZ(this.forDate.getHours()) + ":" + this.addZ(this.forDate.getMinutes()); //이것도 slice로 구현해볼려고 하는데 안 된다.      
-  
-  bookingTime: string;
-  bookingDate: string; 
+  bookingDate: string = this.nowDate;
+  bookingTime: string = this.nowTime; 
 
   //1년치만 예약 가능하도록 만들었다.
-  minYear: string = new Date().toISOString().substr(0, 10);
-  maxYear: string = (this.forDate.getFullYear()+1) + "-" + this.addZ(this.forDate.getMonth()+1) + "-" + this.addZ(this.forDate.getDate());
-  //getDate같은 것들은 1일을 1로 반환하기에 우리는 01로 고쳐줘야한다.(addZ의 역할.) ISOstring이 01의 형식으로 다 구성되어 있기 때문.
+  minYear: string = new Date().toLocaleDateString().replace(/\./g,'').replace(/ /g,'-');
+  maxYear: string = (parseInt(this.minYear.substr(0,4))+1)+this.minYear.substr(4,this.minYear.length);
   
   chatrooms: FirebaseListObservable<any[]>;
   user_id: string;  
@@ -86,12 +83,11 @@ export class MakeRoomPage {
 
         //지금 시간 보다 전 시간으로 예약하는 경우 처리
         if((this.nowDate+this.nowTime)>(this.bookingDate+this.bookingTime)){
-          console.log("nowDate : " + this.nowDate+this.nowTime);
-          console.log("bookingDate : " + this.bookingDate+this.bookingTime);
+          console.log("nowDate : " + this.nowDate+" "+this.nowTime);
+          console.log("bookingDate : " + this.bookingDate+" "+this.bookingTime);
           console.log("Error"); 
         }
         else{
-          console.log(this.user_id);
           this.chatrooms = this.af.list('/chatrooms/' + this.bookingDate);
           url = this.chatrooms.push(
               {
