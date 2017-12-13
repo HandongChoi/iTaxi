@@ -17,8 +17,7 @@ export class TaxiListPage {
   dates_array: Array<any> = [];
   chatrooms_array: Array<any> =[];
   
-  forDate: any = new Date();
-  nowDate: string = new Date().toISOString().substr(0, 10);
+  nowDate: string = new Date().toLocaleDateString().replace(/\./g,'').replace(/ /g,'-');
 
   departOptions: any;
   destinationOptions: any;
