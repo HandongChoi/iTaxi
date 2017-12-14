@@ -18,6 +18,9 @@ export class TaxiListPage {
   chatrooms_array: Array<any> =[];
   
   nowDate: string = new Date().toLocaleDateString().replace(/\./g,'').replace(/ /g,'-');
+  nowDay: string = this.nowDate.substr(8,2);
+  days: Array<string>;
+
   departOptions: any;
   destinationOptions: any;
 
@@ -32,6 +35,13 @@ export class TaxiListPage {
     
     this.spotList = ["한동대학교", "포항역", "고속버스터미널", "시외버스터미널", "북부해수욕장", "육거리"];
     console.log("Now : " + this.nowDate);
+    console.log("Day: "+this.nowDay);
+
+    for(let i=0;i<5;i++){
+      
+    }
+
+    this.days.push()
 
     //기본적으로 오늘 날짜 기준으로 data 불러오기.
     this.dates = af.list('/chatrooms/'+this.nowDate);

@@ -19,7 +19,7 @@ export class MakeRoomPage {
   
 
   nowDate: string = new Date().toLocaleDateString().replace(/\./g,'').replace(/ /g,'-');
-  nowTime: string = new Date().toLocaleTimeString('en-US',{hour12:false}).substr(0,5); //이것도 slice로 구현해볼려고 하는데 안 된다.      
+  nowTime: string = new Date().toLocaleTimeString('en-US',{hour12:false}).substr(0,5);      
   
   bookingDate: string = this.nowDate;
   bookingTime: string = this.nowTime; 

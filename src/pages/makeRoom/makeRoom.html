@@ -39,15 +39,7 @@
       <!--<ion-label align="center" color="primary" (click)="labelClick()" fixed>도착장소</ion-label>-->
       <ion-item>
         <ion-select class="my-select" interface="popover" *ngIf="arrive!='직접입력'" [(ngModel)]="arrive">
-                
-          <ion-option value="한동대학교">한동대학교</ion-option>
-          <ion-option value="포항역">포항역</ion-option>
-          <ion-option value="양덕">양덕</ion-option>
-          <ion-option value="고속버스터미널">고속버스터미널</ion-option>'
-          <ion-option value="시외버스터미널">시외버스터미널</ion-option>
-          <ion-option value="북부해수욕장">북부해수욕장</ion-option>
-          <ion-option value="육거리">육거리</ion-option>
-          <ion-option value="직접입력" >직접입력</ion-option>
+          <ion-option *ngFor = "let spot of spotList" value={{spot}}>{{spot}}</ion-option>
                     
         </ion-select> 
         <ion-input  style="position:absolute" *ngIf="arrive=='직접입력'" [(ngModel)]="arrive2" type="text" placeholder="기타장소"></ion-input>  
