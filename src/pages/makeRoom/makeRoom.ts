@@ -16,7 +16,8 @@ export class MakeRoomPage {
   arrive2: string ="";
   start_list: Array<{start_list:string, value:string}>;
   swap: string ="";
-  
+
+  spotList: Array<string>;
 
   nowDate: string = new Date().toLocaleDateString().replace(/\./g,'').replace(/ /g,'-');
   nowTime: string = new Date().toLocaleTimeString('en-US',{hour12:false}).substr(0,5);      
@@ -43,6 +44,9 @@ export class MakeRoomPage {
       {start_list:'육거리',value:'육거리'},
       {start_list:'직접입력',value:this.start2},
     ];
+
+    this.spotList = ["한동대학교", "포항역", "양덕", "고속버스터미널", "시외버스터미널", "북부해수욕장", "육거리", "직접입력"];
+    
     this.user_id = navParams.data.user_id; //이게 파라미터로 자꾸 받으면 중간에 데이터가 손실되지 않도록 유지시켜줘야 한다.
 
   }

@@ -19,7 +19,7 @@ export class TaxiListPage {
   
   nowDate: string = new Date().toLocaleDateString().replace(/\./g,'').replace(/ /g,'-');
   nowDay: string = this.nowDate.substr(8,2);
-  days: Array<string>;
+  days: Array<string> = [];
 
   departOptions: any;
   destinationOptions: any;
@@ -27,22 +27,22 @@ export class TaxiListPage {
   departFilter: string;
   arriveFilter: string;
 
-  spotList: Array<string>;
+  spotList: Array<string> = ["한동대학교", "포항역", "고속버스터미널", "시외버스터미널", "북부해수욕장", "육거리"];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase) {
     
     this.user_id = navParams.data.user_id;
     
-    this.spotList = ["한동대학교", "포항역", "고속버스터미널", "시외버스터미널", "북부해수욕장", "육거리"];
-    console.log("Now : " + this.nowDate);
-    console.log("Day: "+this.nowDay);
-
-    for(let i=0;i<5;i++){
-      
+    let temp =  new Date();
+    for(let i=0;i<4;i++){ 
+      temp.setDate(temp.getDate()+1);
+      let sub_temp = temp.toLocaleDateString().substr(6);
+      //let temp_month = sub_temp.substr(0,sub_temp.indexOf('.'));
+      let temp_day = sub_temp.substr(sub_temp.indexOf('.')+1);
+      temp_day = temp_day.substr(0,temp_day.indexOf('.'));
+      this.days.push(temp_day);
     }
-
-    this.days.push()
-
+  
     //기본적으로 오늘 날짜 기준으로 data 불러오기.
     this.dates = af.list('/chatrooms/'+this.nowDate);
     this.dates.subscribe(data =>{
@@ -60,6 +60,14 @@ export class TaxiListPage {
       mode: 'md'
     };
 
+  }
+
+  showChatroom(date) {
+    this.dates = this.af.list('/chatrooms/'+date);
+    this.dates.subscribe(data =>{
+      this.dates_array.push(data);
+    });
+    console.log(date);
   }
 
   goChatroom(date) {
