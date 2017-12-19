@@ -3,20 +3,22 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ChatRoomPage } from '../chatroom/chatroom';
 import { MakeRoomPage } from '../makeRoom/makeRoom';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { DatePicker, DatePickerOption } from 'ionic2-date-picker';
 
 @IonicPage()
 @Component({
   selector: 'page-taxi-list',
   templateUrl: 'taxi-list.html',
+  providers: [ DatePicker ],
 })
 export class TaxiListPage {
 
   dates: FirebaseListObservable<any[]>;
   chatrooms: FirebaseListObservable<any[]>;
-  user_id: any;  
+  user_id: any;
   dates_array: Array<any> = [];
   chatrooms_array: Array<any> =[];
-  
+
   nowDate: string = new Date().toLocaleDateString().replace(/\./g,'').replace(/ /g,'-');
   nowDay: string = this.nowDate.substr(8,2);
   days: Array<string> = [];
@@ -29,12 +31,13 @@ export class TaxiListPage {
 
   spotList: Array<string> = ["한동대학교", "포항역", "고속버스터미널", "시외버스터미널", "북부해수욕장", "육거리"];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase) {
-    
+  constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase,
+  public datePicker: DatePicker) {
+
     this.user_id = navParams.data.user_id;
-    
+
     let temp =  new Date();
-    for(let i=0;i<4;i++){ 
+    for(let i=0;i<4;i++){
       temp.setDate(temp.getDate()+1);
       let sub_temp = temp.toLocaleDateString().substr(6);
       //let temp_month = sub_temp.substr(0,sub_temp.indexOf('.'));
@@ -42,7 +45,7 @@ export class TaxiListPage {
       temp_day = temp_day.substr(0,temp_day.indexOf('.'));
       this.days.push(temp_day);
     }
-  
+
     //기본적으로 오늘 날짜 기준으로 data 불러오기.
     this.dates = af.list('/chatrooms/'+this.nowDate);
     this.dates.subscribe(data =>{
@@ -60,6 +63,16 @@ export class TaxiListPage {
       mode: 'md'
     };
 
+    this.datePicker = new DatePicker(<any>this.datePicker.modalCtrl, <any>this.datePicker.viewCtrl);
+    this.datePicker.onDateSelected.subscribe((date) => { console.log(date);} );
+
+  }
+
+  showCalendar() {
+    let datePickerOption: DatePickerOption = {
+      minimumDate: new Date(),
+    }
+    this.datePicker.showCalendar(datePickerOption);
   }
 
   showChatroom(date) {
@@ -76,7 +89,7 @@ export class TaxiListPage {
     //participant array에 push
     // 참여자가 아니고, 인원 full 아니면 push
     // 참여자이면 그냥 enter
-    // full 인원이면 deny 
+    // full 인원이면 deny
     this.navCtrl.setRoot(ChatRoomPage, {chat_room_id: chat_room_id_val, bookingDate: bookingDate_val, user_id: this.user_id});
   }
 
