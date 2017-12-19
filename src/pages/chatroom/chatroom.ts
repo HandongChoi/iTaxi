@@ -5,6 +5,7 @@ import firebase from 'firebase';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 
 import { TaxiListPage } from '../../pages/taxi-list/taxi-list';
+import * as $ from 'jquery';
 
 declare var FCMPlugin;
 
@@ -15,12 +16,12 @@ declare var FCMPlugin;
 export class ChatRoomPage {
 
   @ViewChild(Content) content: Content;
-  
+
   chats: FirebaseListObservable<any[]>;
   room: FirebaseListObservable<any[]>;
   rideHistory: FirebaseListObservable<any[]>;
   room_object:FirebaseObjectObservable<any[]>;
-  
+
   chat_user_id: any;
   chat_content: any;
   chat_room_id: any;
@@ -55,7 +56,7 @@ export class ChatRoomPage {
     this.room = af.list('/chatrooms/' + this.bookingDate + '/' + this.chat_room_id);
     this.chats = af.list(('/chats/'+ this.chat_room_id));
     this.room_object = af.object('/chatrooms/' + this.bookingDate + '/' + this.chat_room_id);
-    
+
     let parsedID = this.stringParser(this.chat_user_id)
     console.log(parsedID);
     this.rideHistory = af.list('/rideHistory/'+ parsedID);
@@ -63,7 +64,7 @@ export class ChatRoomPage {
     let count = 0;
     this.room.forEach(data =>{
 
-      if(count == 0){ 
+      if(count == 0){
         this.room_capacity = data[0].$value;
         this.room_depart_date = data[2].$value;
         this.room_depart_time = data[3].$value;
@@ -76,14 +77,14 @@ export class ChatRoomPage {
         this.room_day= (this.room_depart_date[8] + this.room_depart_date[9]);
         this.room_hour= (this.room_depart_time[0] + this.room_depart_time[1]);
         this.room_minute=(this.room_depart_time[3]+this.room_depart_time[4]);
-      
+
         this.roomKey = this.room.$ref.ref.parent.key;
         console.log(this.roomKey);
         if(this.room_host === this.chat_user_id)
           this.isHost = true;
-        else 
+        else
           this.isHost = false;
-        
+
         var isExist = false;
 
         for(let i = 0; i < this.room_participants.length; i++){
@@ -107,12 +108,12 @@ export class ChatRoomPage {
 
         if(isExist === false){
           console.log()
-        
+
           if(parseInt(this.room_capacity) > this.room_participants.length){
             this.room_participants.push(this.chat_user_id);
-            
+
             this.room_object.update({
-              capacity: this.room_capacity, 
+              capacity: this.room_capacity,
               depart_date: this.room_depart_date,
               depart_time: this.room_depart_time,
               departure: this.room_depart,
@@ -130,17 +131,18 @@ export class ChatRoomPage {
               roomParticipants: this.room_participants
             });
           }
-        };   
+        };
       }
       count++;
-          
+
     });
+    console.log(this.room_participants);
   }
 
   stringParser(sentence){
     let parsedID = sentence.replace('@', '');
     parsedID = parsedID.replace('.', '');
-    
+
     return parsedID;
   }
 
@@ -172,13 +174,13 @@ export class ChatRoomPage {
         if(data !== this.chat_user_id)
           new_participants.push(data);
       });
-    
+
       console.log(new_participants);
 
       if(this.chat_user_id !== this.room_participants[0]){
 
         this.room_object.update({
-          capacity: this.room_capacity, 
+          capacity: this.room_capacity,
           depart_date: this.room_depart_date,
           depart_time: this.room_depart_time,
           departure: this.room_depart,
@@ -186,7 +188,7 @@ export class ChatRoomPage {
           host: this.room_host,
           participants: new_participants
         });
-        
+
         this.rideHistory.remove();
         this.navCtrl.setRoot(TaxiListPage, {user_id: this.chat_user_id});
       }// 방장이 아닌 다른 사람이 나갈 경우
@@ -199,7 +201,7 @@ export class ChatRoomPage {
         }
         else if(this.room_participants.length > 1){
           this.room_object.update({
-            capacity: this.room_capacity, 
+            capacity: this.room_capacity,
             depart_date: this.room_depart_date,
             depart_time: this.room_depart_time,
             departure: this.room_depart,
@@ -207,7 +209,7 @@ export class ChatRoomPage {
             host: new_participants[0],
             participants: new_participants
           });
-          
+
           this.rideHistory.remove();
         }
         this.navCtrl.setRoot(TaxiListPage, {user_id: this.chat_user_id});
@@ -232,5 +234,20 @@ export class ChatRoomPage {
 
   scrollBottom(){
     this.content.scrollToBottom();
+  }
+
+  show(index) {
+    $(".user-name").eq(index).siblings().animate({width: 'toggle'}, 70);
+  }
+
+  native(index, number) {
+    switch(number) {
+    case 1:
+      console.log("call");
+      break;
+    case 2:
+      console.log("message");
+      break;
+    }
   }
 }

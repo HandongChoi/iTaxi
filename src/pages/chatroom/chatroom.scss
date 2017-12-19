@@ -3,7 +3,7 @@ page-chatroom {
         .button-md {
           box-shadow: none;
         }
-      
+
         .toolbar-title {
           display: -webkit-flex;
           display: flex;
@@ -23,15 +23,44 @@ page-chatroom {
       background-color: #f5f5f5;
     }
 
-    .user-name {
-      //position: absolute;
-      border-radius: 45px;
-      width: 45px;
-      height: 45px;
-      margin: 4px;
-      box-shadow: 0 0 2px rgba(0, 0, 0, 0.36);
-      text-align: center;
-      //font-size: .5em;
+    .users {
+      display: flex;
+
+      .user {
+        background-color: #3C89C9;
+        border-radius: 45px;
+        margin-left: 10px;
+      }
+
+      .user-name {
+        //position: absolute;
+        border-radius: 45px;
+        width: 45px;
+        height: 45px;
+        margin: 4px;
+        box-shadow: 0 0 2px rgba(0, 0, 0, 0.36);
+        text-align: center;
+        background-color: white;
+        color: #3C89C9;
+        //font-size: .5em;
+
+        :hover {
+          color: white;
+        }
+      }
+
+      .user-call {
+        padding: 0 5px;
+        font-size: 2em;
+        display: none;
+      }
+
+      .user-mail {
+        padding: 0 5px;
+        font-size: 2em;
+        margin-right: 15px;
+        display: none;
+      }
     }
 
     .room-info{
