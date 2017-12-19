@@ -37,8 +37,8 @@
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col col-2><ion-item (click)="showChatroom(nowDay)"><h6>{{nowDay}}</h6></ion-item></ion-col>
-        <ion-col col-2 *ngFor = "let next of days"><ion-item (click)="showChatroom(next)"><h6>{{next}}</h6></ion-item></ion-col>
+        <ion-col col-2><ion-item (ionChange)="showChatroom(nowDay)"><h6>{{nowDay}}</h6></ion-item></ion-col>
+        <ion-col col-2 *ngFor = "let day of days"><ion-item (click)="showChatroom(day)"><h6>{{day}}</h6></ion-item></ion-col>
         <ion-col col-2><ion-item><h6>더보기</h6></ion-item></ion-col>        
       </ion-row>
     </ion-grid>
