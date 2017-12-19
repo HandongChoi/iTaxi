@@ -18,6 +18,7 @@ import { RideHistoryPage } from '../pages/ride-history/ride-history';
 import { AuthProvider } from '../providers/auth/auth';
 
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { FCM, NotificationData } from '@ionic-native/fcm';
 
 import firebase from 'firebase';
 
@@ -43,9 +44,9 @@ export class MyApp {
 
   public room: FirebaseListObservable<any[]>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
-              public authProvider:AuthProvider, public alertCtrl: AlertController, public af: AngularFireDatabase) {
 
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
+              public authProvider:AuthProvider, public alertCtrl: AlertController, public af: AngularFireDatabase, public fcm:FCM) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -56,11 +57,10 @@ export class MyApp {
       { title: 'Setting', component: SettingPage},
       { title: 'SignupPage', component: SignupPage},
     ];
-    
     const unsubscribe = firebase.auth().onAuthStateChanged( user => {
       if(!user){
         this.rootPage = LoginPage;
-        unsubscribe(); 
+        unsubscribe();
       } else{
         this.user_id = user.email;
         this.rootPage = TaxiListPage; 
@@ -74,11 +74,37 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
-      this.splashScreen.show();
+      this.splashScreen.hide();
+
+      this.fcm.getToken()
+        .then((token:String) =>{
+          console.log("The token is ", token);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+      
+      this.fcm.onTokenRefresh().subscribe(
+        (token:string) => console.log("New Token", token),
+        error => console.error(error)
+      );
+      
+      this.fcm.onNotification().subscribe(
+        (data:NotificationData)=>{
+          if(data.wasTapped){
+            console.log("Received in background", JSON.stringify(data));
+          }
+          else{
+            console.log("Received in foreground", JSON.stringify(data))
+          }
+        }, error=>{
+          console.error("Error in notification", error);
+        }
+      )
     });
     console.log("initailizeApp at app.component.ts");
   }
- 
+
   openPage(page) {
     this.navCtrl.setRoot(page.componenent, {user_id: this.user_id});
     console.log("openPage");
