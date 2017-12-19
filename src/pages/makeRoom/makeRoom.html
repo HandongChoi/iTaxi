@@ -10,36 +10,37 @@
 <ion-content>
   <ion-row style="border:1px solid; border-color:#29B5EF; height:8%">
     <ion-col>
-      <ion-label color="primary" display="flex" align="center" fixed>출발장소</ion-label>
+      <ion-label color="primary" display="flex" align="center" (click)="startClick()" fixed>출발장소</ion-label>
     </ion-col>
     <ion-col>
       <div class="room_button"> 
-        <button style="margin-top:-7%" class="swap-button" ion-button clear large icon-only (click)="swap_position()">
+        <button style="margin-top:6%; margin-right:6%" class="swap-button" ion-button clear large icon-only (click)="swap_position()">
           <ion-icon name="swap"></ion-icon>
         </button>
       </div>
     </ion-col>
     <ion-col>
-      <ion-label style="margin-left:-38%" color="primary" align="center" fixed>도착장소</ion-label>
+      <ion-label style="margin-left:-38%" color="primary" align="center" (click)="labelClick()" fixed>도착장소</ion-label>
     </ion-col>
   </ion-row>
 
   <ion-row>
     <ion-col style="border:1px solid; border-color:#29B5EF;">
-      <!--<ion-label align="center" color="primary" fixed>출발장소</ion-label> -->  
-      <ion-item>
+      <ion-item >
         <ion-select class="my-select" [(ngModel)]="start" interface="popover" *ngIf="start!='직접입력'">
           <ion-option *ngFor="let start_list of start_list">{{start_list.start_list}}</ion-option>
         </ion-select>
-        <ion-input  style="position:absolute" *ngIf="start=='직접입력'" [(ngModel)]="start2" type="text" placeholder="기타장소"></ion-input>  
+        <ion-input style="position:absolute" *ngIf="start=='직접입력'" [(ngModel)]="start2" type="text" placeholder="기타장소"></ion-input>  
       </ion-item>
     </ion-col>
 
     <ion-col style="border:1px solid; border-color:#29B5EF;">
-      <!--<ion-label align="center" color="primary" (click)="labelClick()" fixed>도착장소</ion-label>-->
       <ion-item>
-        <ion-select class="my-select" interface="popover" *ngIf="arrive!='직접입력'" [(ngModel)]="arrive">
-                
+        <ion-select class="my-select" [(ngModel)]="arrive" interface="popover" *ngIf="arrive!='직접입력'">
+          <ion-option *ngFor="let arrive_list of arrive_list">{{arrive_list.arrive_list}}</ion-option>
+        </ion-select>
+        <!--
+        <ion-select class="my-select" interface="popover" *ngIf="arrive!='직접입력'" [(ngModel)]="arrive">           
           <ion-option value="한동대학교">한동대학교</ion-option>
           <ion-option value="포항역">포항역</ion-option>
           <ion-option value="양덕">양덕</ion-option>
@@ -47,10 +48,10 @@
           <ion-option value="시외버스터미널">시외버스터미널</ion-option>
           <ion-option value="북부해수욕장">북부해수욕장</ion-option>
           <ion-option value="육거리">육거리</ion-option>
-          <ion-option value="직접입력" >직접입력</ion-option>
-                    
-        </ion-select> 
-        <ion-input  style="position:absolute" *ngIf="arrive=='직접입력'" [(ngModel)]="arrive2" type="text" placeholder="기타장소"></ion-input>  
+          <ion-option value="직접입력" >직접입력</ion-option>                
+        </ion-select>
+        --> 
+        <ion-input style="position:absolute" *ngIf="arrive=='직접입력'" [(ngModel)]="arrive2" type="text" placeholder="기타장소"></ion-input>  
                     
       </ion-item>
               
@@ -62,7 +63,7 @@
       <ion-label color="primary" display="flex" align="center" fixed>출발날짜</ion-label>
     </ion-col>
     <ion-col>
-      <ion-label color="primary" align="center" fixed>출발시간</ion-label>
+      <ion-label align="center" color="primary" fixed>출발시간</ion-label>
     </ion-col>
   </ion-row>
 
@@ -71,7 +72,7 @@
       <div class="start-date">
         <!--<ion-label align="center" color="primary" fixed>출발날짜</ion-label>-->
         <ion-item>       
-          <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD" min={{minYear}} max={{maxYear}} 
+          <ion-datetime  displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD" min={{minYear}} max={{maxYear}} 
                         placeholder={{nowDate}} [(ngModel)]="bookingDate"></ion-datetime>
         </ion-item>
       </div>
@@ -79,22 +80,17 @@
     <ion-col style="border:1px solid; border-color:#29B5EF;">
       <div class="start-time">
           <!--<ion-label align="center" color="primary" fixed>출발시간</ion-label>-->
-        <ion-item >           
-          <!-- 지금 여기 밑에 placeholder가 제대로 작동하지 않는다. 이상하게 9시간의 시차 차이가 난다-->
-          <ion-datetime displayFormat="h:mm A" pickerFomat="h mm A" placeholder={{nowTime}} [(ngModel)]="bookingTime"></ion-datetime>
+        <ion-item>           
+          <!-- 지금 여기 밑에 placeholder가 제대로 작동하지 않는다. 이상하게 9시간의 시차 차이가 난다 -->
+          <!-- displayFormat 과 default 값을 바꾸어 주어 시간 이상한거 해결 -->
+          <ion-datetime  displayFormat="HH:mm A" pickerFomat="HH mm A" placeholder={{nowTime}} [(ngModel)]="bookingTime"></ion-datetime>
         </ion-item>
       </div>
     </ion-col>
   </ion-row>
-  <!--
-  <div class="room_button"> 
-    <button class="swap-button" ion-button clear large icon-only (click)="swap_position()">
-      <ion-icon name="swap"></ion-icon>
-    </button>
-  </div>-->
-
+  
   <div class="room_button">          
-    <button style="margin-top:10%" class="button customBtn" ion-button round (click)="showRadioAlert()">방만들기</button>
+    <button style="margin-top:10%" class="button customBtn" ion-button round (click)="showRadioAlert()" >방만들기</button>
   </div>
  
 </ion-content>

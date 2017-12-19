@@ -63,10 +63,10 @@ export class MyApp {
 
     const unsubscribe = firebase.auth().onAuthStateChanged( user => { 
       if(!user){
-        this.rootPage = LoginPage;
+        this.rootPage = MakeRoomPage;
         unsubscribe(); 
       } else{
-        this.rootPage = MainPage; unsubscribe();
+        this.rootPage = MakeRoomPage; unsubscribe();
         this.user_email = user.email;
         console.log("user_id : " + this.user_email);
       }
