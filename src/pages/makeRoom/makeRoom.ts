@@ -11,10 +11,11 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 
 export class MakeRoomPage {
   start: string = "한동대학교";
-  start2: string = ""
+  start2: string = "";
   arrive: string = "포항역";
   arrive2: string ="";
   start_list: Array<{start_list:string, value:string}>;
+  arrive_list: Array<{arrive_list:string, value:string}>;
   swap: string ="";
 
   spotList: Array<string>;
@@ -46,9 +47,7 @@ export class MakeRoomPage {
     ];
 
     this.spotList = ["한동대학교", "포항역", "양덕", "고속버스터미널", "시외버스터미널", "북부해수욕장", "육거리", "직접입력"];
-    
     this.user_id = navParams.data.user_id; //이게 파라미터로 자꾸 받으면 중간에 데이터가 손실되지 않도록 유지시켜줘야 한다.
-
   }
 
   addZ(n) {
@@ -75,43 +74,79 @@ export class MakeRoomPage {
       value: '3',
     });
     alert.addButton('Cancel');
-    alert.addButton({
-      text: 'OK',
-      handler: data => {
-        if (this.arrive2)
-            this.arrive = this.arrive2;
 
-        let participants_list = [];
-        participants_list.push(this.user_id);
-        let url;
-
-        //지금 시간 보다 전 시간으로 예약하는 경우 처리
-        if((this.nowDate+this.nowTime)>(this.bookingDate+this.bookingTime)){
-          console.log("nowDate : " + this.nowDate+" "+this.nowTime);
-          console.log("bookingDate : " + this.bookingDate+" "+this.bookingTime);
-          console.log("Error"); 
+    if (this.bookingDate == this.nowDate && this.nowTime > this.bookingTime)
+    {
+      alert.setSubTitle('잘못된 시간입니다. 현재시간보다 뒤에 시간을 입력하여주세요.');
+      alert.addButton({
+        text: 'OK'
+      })
+    }
+    else {
+      alert.setTitle('탑승인원');
+      alert.addInput({
+        type: 'radio',
+        label: '1명',
+        value: '1',
+        checked: true,
+      });
+      alert.addInput({
+        type: 'radio',
+        label: '2명',
+        value: '2',
+      });
+      alert.addInput({
+        type: 'radio',
+        label: '3명',
+        value: '3',
+      });
+      alert.addInput({
+        type: 'radio',
+        label: '4명',
+        value: '4',
+      });
+      alert.addButton('Cancel');
+      alert.addButton({
+        text: 'OK',
+        handler: data => {
+          if (this.arrive2)
+              this.arrive = this.arrive2;
+  
+          let participants_list = [];
+          participants_list.push(this.user_id);
+          let url;
+  
+          //지금 시간 보다 전 시간으로 예약하는 경우 처리
+          if((this.nowDate+this.nowTime)>(this.bookingDate+this.bookingTime)){
+            console.log("nowDate : " + this.nowDate+this.nowTime);
+            console.log("bookingDate : " + this.bookingDate+this.bookingTime);
+            console.log("Error"); 
+          }
+          else{
+            this.chatrooms = this.af.list('/chatrooms/' + this.bookingDate);
+            url = this.chatrooms.push(
+                {
+                    departure: this.start,
+                    destination: this.arrive,
+                    depart_date: this.bookingDate,
+                    depart_time: this.bookingTime,
+                    capacity: data,
+                    currentPeople: 4-data,
+                    host: this.user_id,
+                    participants: participants_list,
+                }
+            );
+            this.navCtrl.setRoot(ChatRoomPage, {chat_room_id: url.key, bookingDate:this.bookingDate, user_id: this.user_id, whichPage: "makeRoom"});
+          }
         }
-        else{
-          this.chatrooms = this.af.list('/chatrooms/' + this.bookingDate);
-          url = this.chatrooms.push(
-              {
-                  departure: this.start,
-                  destination: this.arrive,
-                  depart_date: this.bookingDate,
-                  depart_time: this.bookingTime,
-                  capacity: data,
-                  currentPeople: 4-data,
-                  host: this.user_id,
-                  participants: participants_list,
-              }
-          );
-          this.navCtrl.setRoot(ChatRoomPage, {chat_room_id: url.key, bookingDate:this.bookingDate, user_id: this.user_id, whichPage: "makeRoom"});
+      });
+    }
 
-        }
-      }
-    });
+   
+
     alert.present();
     console.log("showRadioAlert at makeRoom.ts");
+
   };
 
   showPeopleAlert(){
@@ -164,28 +199,56 @@ export class MakeRoomPage {
       console.log("showPeopleAlert at makeRoom.ts");
   };
 
-  labelClick(){
-    this.arrive = "한동대학교";
+  startClick(){
+    this.start = "한동대학교";
+    this.start2 = "";
   }
 
+  labelClick(){
+    this.arrive = "한동대학교";
+    this.arrive2 = "";
+  }
+  
   swap_position(){
-    if (this.arrive2){
+    // arrive만 input 일 때,
+    if (this.arrive == "직접입력" && this.start != "직접입력"){
+      console.log("arrive 가 input 일 때")
+      console.log("select 도착 : ",this.arrive,"input 도착 : ",this.arrive2)
+      console.log("select 출발 : ",this.start,"input 출발 : ",this.start2)
       this.swap = this.start;
-      this.start2 = this.arrive2;
-      this.arrive2 = this.swap;}
+      this.start = "직접입력";
+      this.start2 = this.arrive2
+      this.arrive = this.swap;
+    }
 
-    else if(this.start2){
+    // start만 input 일 때, 
+    else if(this.start == "직접입력" && this.arrive != "직접입력"){
+      console.log("start 가 input 일 때")
+      console.log("select 도착 : ",this.arrive,"input 도착 : ",this.arrive2)
+      console.log("select 출발 : ",this.start,"input 출발 : ",this.start2)
       this.swap = this.arrive;
+      this.arrive = "직접입력"
       this.arrive2 = this.start2;
-      this.start2 = this.swap;}
-    /*
-    else if(this.arrive2 && this.start2){
-      this.swap = this.arrive2;
-      this.arrive2 = this.start2;
+      this.start = this.swap;
+    }
+    
+    // start, arrive 가 둘 다 input 일 때,
+    else if(this.arrive == "직접입력" && this.start == "직접입력"){
+      console.log("start, arrive 둘 다 input 일 때")
+      console.log("select 도착 : ",this.arrive,"inpupt 도착 : ", this.arrive2)
+      console.log("select 출발 : ",this.start,"input 출발 : ", this.start2)
+      this.swap = this.start2;
       this.start2 = this.arrive2;
-    }*/
-    this.swap = this.start;
-    this.start = this.arrive;
-    this.arrive = this.swap; 
+      this.arrive2 = this.swap;
+    }
+    // start, arrive 가 둘 다 select 일 때,
+    else {
+      console.log("start, arrive 가 둘 다 select 일 때")
+      console.log("select 도착 : ",this.arrive,"input 도착 : ", this.arrive2)
+      console.log("select 출발 : ",this.start,"input 출발 : ",this.start2)
+      this.swap = this.start;
+      this.start = this.arrive;
+      this.arrive = this.swap; 
+    }
   };
 }
