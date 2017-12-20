@@ -1,44 +1,58 @@
 page-taxi-list {
-   
-    
-    table.small-table{
-        cellspacing: 10;
-        width: 100%;
-    
-        border-collapse: collapse;
-        text-align: center;
-        bgcolor: blue;
-        table-layout: fixed;
-        color:white;
-        font-style: bold;
-    }
-    
-    .labels{
-        color: gray;
-        font-size: 12px;
-        height: 14px;
-    }
-    
-    table.main-table
-    {
-        cellspacing: 4;
-    //	cellpadding: 4; 
-        padding: 0;
-        width: 100%;
-        border-collapse: collapse;
-        text-align: center;
-        table-layout: fixed;
-        color:#616161;
-        overflow:hidden;
-        height: 20px;
-        font-size: 14px;
-    }   
-    
-    table.main-table>td{
-        padding-bottom: 5em;
-    }
+  ion-fab {
+    margin-bottom: 2px;
+    margin-right: 15px;
+  }
 
-.formRound{border-radius:5px;border:1px; }
+  ion-select {
+    max-width: none;
+  }
 
+  .days {
+    text-align: center;
+  }
+
+  .small-table {
+    background-color: #947794;
+  }
+
+  .pointer {
+    cursor: pointer;
+  }
+
+  .labels{
+    color: gray;
+    font-size: 12px;
+    height: 14px;
+  }
+
+  .formRound{
+    border-radius: 5px;
+    border: 1px;
+  }
+
+  .rightArrow {
+    text-align: center;
+    color: white;
+  }
+
+  .mainGrid {
+    padding: 0;
+  }
+
+  .exist {
+    background-color: #bb9497;
+  }
+
+  .line {
+    background-color: white;
+
+    p {
+      color: black;
+    }
+  }
+
+  .full {
+    background-color: #f4f4f4;
+  }
 }
-

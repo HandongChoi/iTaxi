@@ -11,19 +11,13 @@ import { PersonalInfoPage } from '../personal-info/personal-info';
 export class MainPage {
 
   user: any;
-  user_id: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    
-    let userInfo = firebase.auth().currentUser;
     this.user = firebase.auth().currentUser.uid;
-    this.user_id = userInfo.email;
-    console.log("Main user : "+this.user);
-    console.log("Main user_id :"+this.user_id);
   }
 
   goTaxiListPage(){
-    this.navCtrl.setRoot(TaxiListPage, {user_id: this.user_id});
+    this.navCtrl.setRoot(TaxiListPage, {user_id: this.user});
     console.log("goTaxiListPage at main.ts");
   }
 
@@ -33,7 +27,7 @@ export class MainPage {
   }
 
   goMyPage(){
-    this.navCtrl.setRoot(PersonalInfoPage, {user_id: this.user_id});
+    this.navCtrl.setRoot(PersonalInfoPage, {user_id: this.user});
     console.log("goMyPage at main.ts");
   }
 }
