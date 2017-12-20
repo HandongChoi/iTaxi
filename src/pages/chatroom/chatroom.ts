@@ -39,8 +39,8 @@ export class ChatRoomPage {
   room_hour: string;
   room_minute:string;
   roomKey: string;
-
-  isHost: boolean;
+  
+  user_name: string;
 
   page_info: String;
 
@@ -56,6 +56,7 @@ export class ChatRoomPage {
     this.room = af.list('/chatrooms/' + this.bookingDate + '/' + this.chat_room_id);
     this.chats = af.list(('/chats/'+ this.chat_room_id));
     this.room_object = af.object('/chatrooms/' + this.bookingDate + '/' + this.chat_room_id);
+    af.list('/userProfile/' + this.chat_user_id).subscribe(data => { this.user_name = data[3].$value });
 
     let parsedID = this.stringParser(this.chat_user_id)
     console.log(parsedID);
@@ -80,15 +81,11 @@ export class ChatRoomPage {
 
         this.roomKey = this.room.$ref.ref.parent.key;
         console.log(this.roomKey);
-        if(this.room_host === this.chat_user_id)
-          this.isHost = true;
-        else
-          this.isHost = false;
 
         var isExist = false;
 
         for(let i = 0; i < this.room_participants.length; i++){
-          if(this.room_participants[i] === this.chat_user_id){
+          if(this.room_participants[i].uid === this.chat_user_id){
             isExist = true;
             break;
           }
@@ -110,7 +107,7 @@ export class ChatRoomPage {
           console.log()
 
           if(parseInt(this.room_capacity) > this.room_participants.length){
-            this.room_participants.push(this.chat_user_id);
+            this.room_participants.push({"uid": this.chat_user_id, "name": this.user_name});
 
             this.room_object.update({
               capacity: this.room_capacity,
@@ -154,6 +151,7 @@ export class ChatRoomPage {
     if(this.chat_content !== ''){
       this.chats.push({
         user_id: this.chat_user_id,
+        user_name: this.user_name,
         content: this.chat_content,
         date_time: new Date().toLocaleString(),
         dateKey: this.roomKey
@@ -171,13 +169,13 @@ export class ChatRoomPage {
     console.log("quit(): ", this.room_participants);
     if(this.room_participants){
       this.room_participants.forEach(data =>{
-        if(data !== this.chat_user_id)
+        if(data.uid !== this.chat_user_id)
           new_participants.push(data);
       });
 
       console.log(new_participants);
 
-      if(this.chat_user_id !== this.room_participants[0]){
+      if(this.chat_user_id !== this.room_participants[0].uid){
 
         this.room_object.update({
           capacity: this.room_capacity,

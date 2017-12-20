@@ -38,7 +38,7 @@
     <ion-row>
       <ion-col class="users">
         <div class="user" *ngFor="let member of room_participants; let i = index">
-          <button ion-button class="user-name" (click)="show(i)" >{{ member }}</button>
+          <button ion-button class="user-name" (click)="show(i)" >{{ member.name }}</button>
           <button ion-button class="user-call" (click)="native(i, 1)"><ion-icon name="ios-call-outline"></ion-icon></button>
           <button ion-button class="user-mail" (click)="native(i, 2)"><ion-icon name="ios-mail-outline"></ion-icon></button>
         </div>
@@ -70,7 +70,7 @@
             <div class="msg-info">
               <p>
                 <!-- 사용자 아이디, 메세지 작성시간 {{msg.userName}}&nbsp;&nbsp;&nbsp;{{msg.time | relativeTime}}</p> -->
-                <ion-icon *ngIf="isHost == false" name="star"></ion-icon>{{chat.user_id}}&nbsp;&nbsp;&nbsp;{{chat.date_time | slice:12:21}}</p>
+                <ion-icon *ngIf="chat.user_id == room_host" name="star"></ion-icon>{{chat.user_name}}&nbsp;&nbsp;&nbsp;{{chat.date_time | slice:12:21}}</p>
             </div>
             <span class="triangle"></span>
             <p class="line-breaker">{{chat.content}}</p>
@@ -86,7 +86,7 @@
             <div class="msg-info">
               <p>
                 <!-- {{msg.userName}}&nbsp;&nbsp;&nbsp;{{msg.time | relativeTime}}</p> -->
-                <ion-icon *ngIf="isHost == true" name="star"></ion-icon>{{chat.user_id}}&nbsp;&nbsp;&nbsp;{{chat.date_time | slice:12:21}}</p>
+                <ion-icon *ngIf="chat.user_id == room_host" name="star"></ion-icon>{{chat.user_name}}&nbsp;&nbsp;&nbsp;{{chat.date_time | slice:12:21}}</p>
             </div>
             <span class="triangle"></span>
             <p class="line-breaker">{{chat.content}}</p>

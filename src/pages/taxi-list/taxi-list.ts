@@ -120,7 +120,7 @@ export class TaxiListPage {
 
   isExist(users: Array<string>): boolean {
     for (let i = 0; i < users.length; i++) {
-      if (users[i] == this.user_id)
+      if (users[i].uid == this.user_id)
         return true;
     }
     return false;
