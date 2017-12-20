@@ -63,7 +63,7 @@ export class MyApp {
         unsubscribe();
       } else{
         this.user_id = user.email;
-        this.rootPage = TaxiListPage; 
+        this.rootPage = MainPage; 
         unsubscribe();
       }
     });
@@ -83,12 +83,12 @@ export class MyApp {
         .catch(error => {
           console.error(error);
         });
-      
+
       this.fcm.onTokenRefresh().subscribe(
         (token:string) => console.log("New Token", token),
         error => console.error(error)
       );
-      
+
       this.fcm.onNotification().subscribe(
         (data:NotificationData)=>{
           if(data.wasTapped){
