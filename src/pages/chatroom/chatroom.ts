@@ -237,6 +237,7 @@ export class ChatRoomPage {
   }
 
   show(index) {
+    $(".user-name").eq(index).parent().siblings().children('.user-name').siblings().animate({width: 'hide'}, 70);
     $(".user-name").eq(index).siblings().animate({width: 'toggle'}, 70);
   }
 
