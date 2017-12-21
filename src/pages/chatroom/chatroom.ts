@@ -39,7 +39,7 @@ export class ChatRoomPage {
   room_hour: string;
   room_minute:string;
   roomKey: string;
-  
+
   user_name: string;
 
   page_info: String;
@@ -58,9 +58,7 @@ export class ChatRoomPage {
     this.room_object = af.object('/chatrooms/' + this.bookingDate + '/' + this.chat_room_id);
     af.list('/userProfile/' + this.chat_user_id).subscribe(data => { this.user_name = data[3].$value });
 
-    let parsedID = this.stringParser(this.chat_user_id)
-    console.log(parsedID);
-    this.rideHistory = af.list('/rideHistory/'+ parsedID);
+    this.rideHistory = af.list('/rideHistory/'+ this.chat_user_id);
     console.log('hi', this.rideHistory.$ref.ref.key);
     let count = 0;
     this.room.forEach(data =>{
@@ -134,13 +132,6 @@ export class ChatRoomPage {
 
     });
     console.log(this.room_participants);
-  }
-
-  stringParser(sentence){
-    let parsedID = sentence.replace('@', '');
-    parsedID = parsedID.replace('.', '');
-
-    return parsedID;
   }
 
   goBack(){

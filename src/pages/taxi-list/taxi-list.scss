@@ -13,7 +13,7 @@ page-taxi-list {
   }
 
   .small-table {
-    background-color: #947794;
+    background-color: #C9C9CA;
   }
 
   .pointer {
@@ -28,11 +28,16 @@ page-taxi-list {
 
   .formRound{
     border-radius: 5px;
-    border: 1px;
+    border: 1px solid #DEDEDE;
+  }
+
+  .item-inner {
+    border-bottom: none !important;
   }
 
   .rightArrow {
     text-align: center;
+    font-size: 1.5em;
     color: white;
   }
 
@@ -49,10 +54,10 @@ page-taxi-list {
   }
 
   .full {
-    background-color: #f4f4f4;
+    background-color: #EEEFEF;
   }
 
   .exist {
-    background-color: #bb9497;
+    background-color: #29B5EF;
   }
 }

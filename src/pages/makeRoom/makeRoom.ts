@@ -59,24 +59,6 @@ export class MakeRoomPage {
 
   showRadioAlert(){
     let alert = this.alertCtrl.create();
-    alert.setTitle('최대탑승인원');
-    alert.addInput({
-      type: 'radio',
-      label: '1명',
-      value: '1',
-      checked: true,
-    });
-    alert.addInput({
-      type: 'radio',
-      label: '2명',
-      value: '2',
-    });
-    alert.addInput({
-      type: 'radio',
-      label: '3명',
-      value: '3',
-    });
-    alert.addButton('Cancel');
 
     if (this.bookingDate == this.nowDate && this.nowTime > this.bookingTime)
     {

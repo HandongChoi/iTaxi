@@ -16,7 +16,6 @@ export class TaxiListPage {
   dates: FirebaseListObservable<any[]>;
   user_id: any;
 
-  dates_array: Array<any> = [];
   days: Array<Date> = [];
   nowDate: Date = new Date();
   selectedDate: Date = new Date();
@@ -66,10 +65,6 @@ export class TaxiListPage {
   showChatroom(date) {
     this.selectedDate = date;
     this.dates = this.af.list('/chatrooms/' + this.makeStringFromDate(date));
-    this.dates_array.splice(0, this.dates_array.length);
-    this.dates.subscribe(data =>{
-      this.dates_array.push(data);
-    });
   }
 
   goChatroom(date) {
@@ -94,10 +89,6 @@ export class TaxiListPage {
         equalTo: departFilter
       }
     });
-    this.dates_array.splice(0, this.dates_array.length);
-    this.dates.subscribe(data =>{
-      this.dates_array.push(data);
-    });
   }
 
   filterDestination(destinationFilter){
@@ -107,10 +98,6 @@ export class TaxiListPage {
         orderByChild: 'destination',
         equalTo: destinationFilter
       }
-    });
-    this.dates_array.splice(0, this.dates_array.length);
-    this.dates.subscribe(data =>{
-      this.dates_array.push(data);
     });
   }
 

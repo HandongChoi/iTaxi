@@ -41,6 +41,7 @@ export class MyApp {
   pages: Array<{title: string, component: any}>;
 
   user_id: any;
+  user_name: any;
 
   public room: FirebaseListObservable<any[]>;
 
@@ -62,8 +63,9 @@ export class MyApp {
         this.rootPage = LoginPage;
         unsubscribe();
       } else{
-        this.user_id = user.email;
-        this.rootPage = MainPage; 
+        this.user_id = user.uid;
+        this.user_name = user.email;
+        this.rootPage = MainPage;
         unsubscribe();
       }
     });

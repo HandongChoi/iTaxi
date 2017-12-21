@@ -18,24 +18,24 @@
   <form [formGroup]="updateForm" (submit)="updateUserInfo()" novalidate>
     <ion-item>
       <ion-label stacked>이름</ion-label>
-      <ion-input formControlName="name" type="name" placeholder="강민수"></ion-input>
+      <ion-input formControlName="name" type="name" placeholder="{{user_dic.name}}"></ion-input>
     </ion-item>
-  
+
     <ion-item>
       <ion-label stacked>학번</ion-label>
-      <ion-input formControlName="studentID" type="studentID" placeholder="21400111"></ion-input>
+      <ion-input formControlName="studentID" type="studentID" placeholder="{{user_dic.studentID}}"></ion-input>
     </ion-item>
-  
+
     <ion-item>
       <ion-label stacked>전화번호</ion-label>
-      <ion-input formControlName="phoneNumber" type="phoneNumber" placeholder="010-8222-3574"></ion-input> <!-- placeholder에 기존 전화번호 뿌리기  -->
+      <ion-input formControlName="phoneNumber" type="phoneNumber" placeholder="{{user_dic.phoneNumber}}"></ion-input> <!-- placeholder에 기존 전화번호 뿌리기  -->
     </ion-item>
   <!--
     <ion-item>
       <ion-label stacked>새로운 비밀번호</ion-label>
       <ion-input formControlName="newPassword" type="newPassword"></ion-input>
     </ion-item>
-  
+
     <ion-item>
       <ion-label stacked>비밀번호 확인</ion-label>
       <ion-input formControlName="newPasswordCheck" type="newPasswordCheck"></ion-input>
@@ -45,5 +45,5 @@
       <button ion-button block type="submit" (click)="showAlert()">변경하기</button>
     </div>
   </form>
-  
+
 </ion-content>
