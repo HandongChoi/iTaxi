@@ -33,7 +33,7 @@ export class ChatRoomPage {
   room_depart_date: string;
   room_depart_time: string;
   room_host: string;
-  room_participants:  Array<string> = [];
+  room_participants:  Array<any> = [];
   room_month: string;
   room_day: string;
   room_hour: string;

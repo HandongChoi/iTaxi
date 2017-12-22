@@ -105,7 +105,7 @@ export class TaxiListPage {
     console.log('ionViewDidLoad TaxiListPage');
   }
 
-  isExist(users: Array<string>): boolean {
+  isExist(users: Array<any>): boolean {
     for (let i = 0; i < users.length; i++) {
       if (users[i].uid == this.user_id)
         return true;
