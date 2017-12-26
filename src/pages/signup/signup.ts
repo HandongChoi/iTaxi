@@ -19,11 +19,13 @@ declare var FCMPlugin;
 export class SignupPage {
   public signupForm:FormGroup;
   public loading:Loading;
+  procedure: string;
 
   firestore;
   
   constructor(public navCtrl:NavController, public navParams: NavParams, public authProvider:AuthProvider, public loadingCtrl:LoadingController,
     public alertCtrl:AlertController, formBuilder:FormBuilder) {
+      this.procedure = 'terms';
     this.signupForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
       password: ['', Validators.compose([Validators.minLength(6), Validators.required])],
