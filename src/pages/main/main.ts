@@ -15,8 +15,6 @@ export class MainPage {
   nowDate: string = new Date().toLocaleDateString().replace(/\./g,'').replace(/ /g,'-');
   dates_array: Array<any> = [];
   days: Array<string> = [];
-
-
   user: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase) {
@@ -27,14 +25,20 @@ export class MainPage {
     console.log("Main user : "+this.user);
     console.log("Main user_id :"+this.user_id);
 
-    this.dates = af.list('/rideHistory/'+this.user);
+    let parsedUserId = this.stringParser(this.user_id);
+    this.dates = af.list('/rideHistory/'+parsedUserId);
     this.dates.subscribe(data =>{
       this.dates_array.push(data);
     });
 
   }
 
+  stringParser(sentence){
+    let parsedID = sentence.replace('@', '');
+    parsedID = parsedID.replace('.', '');
 
+    return parsedID;
+  }
   goTaxiListPage(){
     this.navCtrl.setRoot(TaxiListPage, {user_id: this.user});
     console.log("goTaxiListPage at main.ts");

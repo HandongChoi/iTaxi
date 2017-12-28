@@ -80,33 +80,9 @@
   </ion-card>
   
   <!-- Recently booked list -->
-  <ion-grid style="border-radius:5px; margin-top:30px">
-    <ion-item-group *ngFor = "let dates of dates_array">
-      <ion-item-divider class="item item-divider item-sm item-divider-md item-md-light item-divider-sm-light" color="light"
-        *ngFor = "let date of dates">
-        <ion-row>
-          <ion-col col-3>
-            <p>{{date.depart_date}}</p>
-            <p>{{date.depart_time}}</p>
-          </ion-col>
-          <ion-col col-7>
-            <p>{{date.departure}}</p>
-            <p>>{{date.destination}}</p>
-          </ion-col>
-          <ion-col col-2>
-            <p>{{date.participants.length}} / {{date.capacity}}</p>
-            <p>참여 가능</p>
-          </ion-col>
-        </ion-row>
-      <div class="button-effect"></div>
-      
-      </ion-item-divider>
-    </ion-item-group>
-  </ion-grid>
-
   <ion-grid>
     <ion-item-group *ngFor = "let dates of dates_array">
-      <ion-item-divider class="item item-divider item-sm item-divider-md item-md-light item-divider-sm-light" color="light"
+        <ion-item-divider class="item item-divider item-sm item-divider-md item-md-light item-divider-sm-light" color="light"
         *ngFor = "let date of dates">
         <ion-row>
           <ion-col col-3>
@@ -115,7 +91,7 @@
           </ion-col>
           <ion-col col-7>
             <p>{{date.roomDepart}}</p>
-            <p>>{{date.roomDest}}</p>
+            <p>{{date.roomDest}}</p>
           </ion-col>
           <ion-col col-2>
             <p>{{date.roomParticipants.length}} / {{date.roomCapacity}}</p>
