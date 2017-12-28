@@ -63,11 +63,7 @@ export class MyApp {
         unsubscribe();
       } else{
         this.user_id = user.email;
-<<<<<<< HEAD
         this.rootPage = MainPage;
-=======
-        this.rootPage = MainPage; 
->>>>>>> main to root page
         unsubscribe();
       }
     });
