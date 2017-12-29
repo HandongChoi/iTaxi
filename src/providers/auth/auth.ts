@@ -7,6 +7,7 @@ import firebase from 'firebase';
 @Injectable()
 export class AuthProvider {
   constructor() {
+    
   }
 
   loginUser(email:string, password:string):firebase.Promise<any> { 
@@ -26,7 +27,15 @@ export class AuthProvider {
       firebase.database().ref(`/userProfile/${newUser.uid}/name`).set(name);
     }).catch( error => console.error(error) );
   }
-
+  delete(){
+    var user = firebase.auth().currentUser;
+ 
+    user.delete().then(function() {
+      // User deleted.
+    }).catch(function(error) {
+      // An error happened.
+    });
+  }
   resetPassword(email:string):firebase.Promise<void> { 
     return firebase.auth().sendPasswordResetEmail(email);
   }
