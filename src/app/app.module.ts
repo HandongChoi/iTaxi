@@ -27,6 +27,8 @@ import { DatePicker } from 'ionic2-date-picker';
 
 import { FCM } from '@ionic-native/fcm';
 
+import { DatePipe } from '../pipes/date-pipe'
+
 export const firebaseConfig = {
   apiKey: "AIzaSyANvht7J2MNX6x47mglqfJk74yZQ9u0qUk",
   authDomain: "itaxi-54bdc.firebaseapp.com",
@@ -49,6 +51,7 @@ export const firebaseConfig = {
     TaxiListPage,
     RideHistoryPage,
     DatePicker,
+    DatePipe,
   ],
   imports: [
     BrowserModule,

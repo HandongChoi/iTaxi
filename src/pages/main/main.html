@@ -59,8 +59,7 @@
     <ion-grid>
       <ion-item-group *ngFor = "let dates of dates_array">
           <ion-item-divider class="item item-divider item-sm item-divider-md item-md-light item-divider-sm-light" color="light"
-          *ngFor = "let date of dates">
-          <ng-container *ngIf = "checkDate(date)">
+          *ngFor = "let date of dates | DatePipe">
           <ion-row>
             <ion-col col-3>
               <p>{{selectedDate}}</p>----
@@ -77,8 +76,6 @@
               <p>참여 가능</p>
             </ion-col>
           </ion-row>
-        <div class="button-effect"></div>
-        </ng-container>
         </ion-item-divider>
       </ion-item-group>
       </ion-grid>

@@ -4,6 +4,7 @@ import { TaxiListPage } from '../taxi-list/taxi-list';
 import { PersonalInfoPage } from '../personal-info/personal-info';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
+
 @IonicPage()
 @Component({
   selector: 'page-main',
