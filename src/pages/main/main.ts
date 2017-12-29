@@ -15,6 +15,9 @@ export class MainPage {
   nowDate: string = new Date().toLocaleDateString().replace(/\./g,'').replace(/ /g,'-');
   dates_array: Array<any> = [];
   days: Array<string> = [];
+  selectedDate: Date;
+  currentDate: Date = new Date();
+
   user: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase) {
@@ -38,6 +41,11 @@ export class MainPage {
     parsedID = parsedID.replace('.', '');
 
     return parsedID;
+  }
+
+  checkDate(date){
+    this.selectedDate = new Date(date.roomDate+"T"+date.roomTime+":00");
+    return this.selectedDate >= this.currentDate;
   }
   goTaxiListPage(){
     this.navCtrl.setRoot(TaxiListPage, {user_id: this.user});

@@ -1,108 +1,88 @@
 <ion-header>
-  <ion-navbar color = "primary">
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>i-Taxi</ion-title>
-  </ion-navbar>
-
-  <button ion-item color="light2" style="font-size: 1.3rem" (click)="openTaxiList()" >
-    <ion-icon name="ios-information-circle-outline" item-start></ion-icon>
-    공지사항입니다. 공지사항입니다.
-  </button>
-  <!--
-  <ion-card (click)="openTaxiList()">
-    <img src="../../assets/imgs/taxi.png"/>
-    <div class="card-title">i-Taxi</div>
-    <div class="card-subtitle">타러가기</div>
-  </ion-card>
-  <ion-card (click)="openTaxiList()">
-    <img src="../../assets/imgs/taxi.png"/>
-    <div class="card-title">i-Taxi</div>
-    <div class="card-subtitle">타러가기</div>
-  </ion-card> -->
 
 
-  <ion-buttons>
-    <button ion-button large full icon-left (click)="goTaxiListPage()" >
-      <ion-icon name="car"></ion-icon>
-      i-Taxi 탑승
-    </button>
-    <button ion-button large full color="secondary" icon-left (click)="goCarpoolListPage()" >
-      <ion-icon name="car"></ion-icon>
-      카풀 탑승
-    </button>
-    <button ion-button large full color="tertiary" icon-left (click)="goMyPage()" >
-      <ion-icon name="person"></ion-icon>
-      마이페이지
-    </button>
+    <ion-buttons>
+      <button ion-button large full icon-left (click)="goTaxiListPage()" >
+        <ion-icon name="car"></ion-icon>
+        i-Taxi 탑승
+      </button>
+      <button ion-button large full color="secondary" icon-left (click)="goCarpoolListPage()" >
+        <ion-icon name="car"></ion-icon>
+        카풀 탑승
+      </button>
+      <button ion-button large full color="tertiary" icon-left (click)="goMyPage()" >
+        <ion-icon name="person"></ion-icon>
+        마이페이지
+      </button>
 
-      <!--
-  round button
-    <ion-grid>
-      <ion-row justify-content-center style="padding: 10px 0; margin-top: 25px">
-        <button ion-button round class="customBtn" icon-left (click)="goTaxiListPage()" >
-          i-Taxi 탑승
-        </button>
-      </ion-row>
-      <ion-row justify-content-center style="padding: 10px 0">
-        <button ion-button round class="customBtn" color="secondary" icon-left (click)="goCarpoolListPage()">
-          카풀 탑승
-        </button>
-      </ion-row>
-      <ion-row justify-content-center style="padding: 10px 0">
-        <button ion-button round class="customBtn" color="tertiary" icon-left (click)="goMyPage()" >
-          마이페이지
-        </button>
-      </ion-row>
-    </ion-grid>
-  -->
-  </ion-buttons>
-</ion-header>
-
-<ion-content class="card-background-page">
-
-  <!-- my Ticket -->
-  <ion-card style="border-radius:5px; margin-top:30px">
-    <ion-row style="background-color:#0054a6; color:white; padding:5px 0 5px 15px">
-      2017.12.5 (화)
-    </ion-row>
-    <ion-row>
-      <ion-col col-4 text-center style="border-right: 1px solid #ddd9d9">
-        <h3>Taxi</h3>
-        <p style = "font-size: 9px">현 2/2 명</p>
-      </ion-col>
-      <ion-col text-center>
-        <h3>한동대학교 <ion-icon name="arrow-forward"></ion-icon>포항역</h3>
-        <p padding-left style = "font-size: 10px">15:00</p>
-      </ion-col>
-    </ion-row>
-  </ion-card>
-  
-  <!-- Recently booked list -->
-  <ion-grid>
-    <ion-item-group *ngFor = "let dates of dates_array">
-        <ion-item-divider class="item item-divider item-sm item-divider-md item-md-light item-divider-sm-light" color="light"
-        *ngFor = "let date of dates">
-        <ion-row>
-          <ion-col col-3>
-            <p>{{date.roomDate}}</p>
-            <p>{{date.roomTime}}</p>
-          </ion-col>
-          <ion-col col-7>
-            <p>{{date.roomDepart}}</p>
-            <p>{{date.roomDest}}</p>
-          </ion-col>
-          <ion-col col-2>
-            <p>{{date.roomParticipants.length}} / {{date.roomCapacity}}</p>
-            <p>참여 가능</p>
-          </ion-col>
+        <!--
+    round button
+      <ion-grid>
+        <ion-row justify-content-center style="padding: 10px 0; margin-top: 25px">
+          <button ion-button round class="customBtn" icon-left (click)="goTaxiListPage()" >
+            i-Taxi 탑승
+          </button>
         </ion-row>
-      <div class="button-effect"></div>
-      </ion-item-divider>
-    </ion-item-group>
-    </ion-grid>
+        <ion-row justify-content-center style="padding: 10px 0">
+          <button ion-button round class="customBtn" color="secondary" icon-left (click)="goCarpoolListPage()">
+            카풀 탑승
+          </button>
+        </ion-row>
+        <ion-row justify-content-center style="padding: 10px 0">
+          <button ion-button round class="customBtn" color="tertiary" icon-left (click)="goMyPage()" >
+            마이페이지
+          </button>
+        </ion-row>
+      </ion-grid>
+    -->
+    </ion-buttons>
 
+
+    <!-- my Ticket -->
+    <ion-card style="border-radius:5px; margin-top:30px">
+      <ion-row style="background-color:#0054a6; color:white; padding:5px 0 5px 15px">
+        2017.12.5 (화)
+      </ion-row>
+      <ion-row>
+        <ion-col col-4 text-center style="border-right: 1px solid #ddd9d9">
+          <h3>Taxi</h3>
+          <p style = "font-size: 9px">현 2/2 명</p>
+        </ion-col>
+        <ion-col text-center>
+          <h3>한동대학교 <ion-icon name="arrow-forward"></ion-icon>포항역</h3>
+          <p padding-left style = "font-size: 10px">15:00</p>
+        </ion-col>
+      </ion-row>
+    </ion-card>
     
-  <!-- <button ion-button secondary menuToggle>Toggle Menu</button> -->
-</ion-content>
+    <!-- Recently booked list -->
+    <ion-grid>
+      <ion-item-group *ngFor = "let dates of dates_array">
+          <ion-item-divider class="item item-divider item-sm item-divider-md item-md-light item-divider-sm-light" color="light"
+          *ngFor = "let date of dates">
+          <ng-container *ngIf = "checkDate(date)">
+          <ion-row>
+            <ion-col col-3>
+              <p>{{selectedDate}}</p>----
+              <p>{{currentDate}}</p>----
+              <p>{{date.roomDate}}</p>----
+              <p>{{date.roomTime}}</p>
+            </ion-col>
+            <ion-col col-7>
+              <p>{{date.roomDepart}}</p>
+              <p>{{date.roomDest}}</p>
+            </ion-col>
+            <ion-col col-2>
+              <p>{{date.roomParticipants.length}} / {{date.roomCapacity}}</p>
+              <p>참여 가능</p>
+            </ion-col>
+          </ion-row>
+        <div class="button-effect"></div>
+        </ng-container>
+        </ion-item-divider>
+      </ion-item-group>
+      </ion-grid>
+
+
+    <!-- <button ion-button secondary menuToggle>Toggle Menu</button> -->
+  </ion-content>
