@@ -5,17 +5,22 @@ import {Injectable, Pipe, PipeTransform} from '@angular/core';
 })
 @Injectable()
 export class DatePipe implements PipeTransform {
-    transform(array: Array<any>, args: string): Array<any> {
-        // if (typeof args[0] === "undefined") {
-        //     return array;
-        // }
-        // let direction = args[0][0];
-        // let column = args.replace('-','');
-        // array.sort((a: any, b: any) => {
-        //     let left = Number(new Date(a[column]));
-        //     let right = Number(new Date(b[column]));
-        //     return (direction === "-") ? right - left : left - right;
-        // });
-        return array;
+    transform(dates: Array<any>, args: string): Array<any> {
+        let afterNow:Array<any>;
+        afterNow = dates.filter(date => new Date(date.roomDate+"T"+date.roomTime+":00") >= new Date());
+
+        afterNow.sort((a: any, b: any) => {
+            if (new Date(a.roomDate+"T"+a.roomTime+":00") < new Date(b.roomDate+"T"+b.roomTime+":00")) {
+              return -1;
+            } else if (new Date(a.roomDate+"T"+a.roomTime+":00") > new Date(b.roomDate+"T"+b.roomTime+":00")) {
+              return 1;
+            } else {
+              return 0;
+            }
+        });
+        if(afterNow.length == 0)
+            return afterNow;
+            
+        return afterNow.slice(0,1);
     }
 }

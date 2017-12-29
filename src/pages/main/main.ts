@@ -44,10 +44,6 @@ export class MainPage {
     return parsedID;
   }
 
-  checkDate(date){
-    this.selectedDate = new Date(date.roomDate+"T"+date.roomTime+":00");
-    return this.selectedDate >= this.currentDate;
-  }
   goTaxiListPage(){
     this.navCtrl.setRoot(TaxiListPage, {user_id: this.user});
     console.log("goTaxiListPage at main.ts");
