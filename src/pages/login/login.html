@@ -1,33 +1,29 @@
 <ion-header>
-  <ion-navbar color="primary">
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Log In</ion-title>
-  </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <img src="http://placehold.it/300x100" />
+  <img class="logo" src="http://placehold.it/300x100" />
   <form [formGroup]="loginForm" (submit)="loginUser()" novalidate>
     <ion-item>
-      <ion-label stacked>Email</ion-label>
+      <ion-label>Email</ion-label>
       <ion-input formControlName="email" type="email" placeholder="Your email address"
         [class.invalid]="!loginForm.controls.email.valid &&
         loginForm.controls.email.dirty">
       </ion-input>
     </ion-item>
     <ion-item class="error-message" *ngIf="!loginForm.controls.email.valid && loginForm.controls.email.dirty">
-      <p>Please enter a valid email address.</p>
+      <!-- <p>Please enter a valid email address.</p> -->
+      <p>사용가능한 이메일주소를 입력하세요.</p>
     </ion-item>
     <ion-item>
-      <ion-label stacked>Password</ion-label>
+      <ion-label>Password</ion-label>
       <ion-input formControlName="password" type="password" placeholder="Your password"
         [class.invalid]="!loginForm.controls.password.valid && loginForm.controls.password.dirty">
       </ion-input>
     </ion-item>
     <ion-item class="error-message" *ngIf="!loginForm.controls.password.valid && loginForm.controls.password.dirty">
-      <p>Your password needs more than 6 characters.</p>
+      <!-- <p>Your password needs more than 6 characters.</p> -->
+      <p>비밀번호는 6자 이상의 영문자이어야합니다.</p>
     </ion-item>
     <button ion-button full medium round type="submit" color="secondary" [disabled]="!loginForm.valid">
       로그인 </button>
@@ -35,8 +31,12 @@
 
   <ion-grid>
     <ion-row justify-content-center>
-        <button ion-button round small color="tertiary" outline (click)="goToSignup()"> 회원가입 </button>
-        <button ion-button round small color="tertiary" outline (click)="goToResetPassword()"> 비밀번호찾기 </button>
+      <ion-col col-6>
+        <button ion-button medium round color="tertiary" outline (click)="goToSignup()"> 회원가입 </button>
+      </ion-col>
+      <ion-col col-6>
+        <button ion-button medium round color="tertiary" outline (click)="goToResetPassword()"> 비밀번호찾기 </button>
+      </ion-col>
     </ion-row>
   </ion-grid>
 

@@ -1,16 +1,18 @@
 page-login {
-    img{
+    .logo {
       display: block;
       margin: auto;
-      padding-top: 50px;
+      padding-top: 120px;
     }
     form {
         //margin-bottom: 32px;
-        margin: 0 20px;
+        margin: 40px 20px 0px 20px;
+        ion-item{
+          padding-left: 10px !important;
+        }
         button {
-            display: block;
-            margin-top: 20px !important;
-
+          display: block;
+          margin-top: 30px !important;
         }
     }
     p{
@@ -19,6 +21,7 @@ page-login {
     }
     ion-label {
         margin-left: 5px;
+        color: secondary;
     }
     ion-input {
       padding: 5px;
@@ -29,7 +32,17 @@ page-login {
     .error-message .item-inner {
         border-bottom: 0 !important;
     }
-    button {
-
+    ion-grid{
+      display: table;
+      padding: 0px 16px !important;
+      ion-col{
+        padding: 0px;
+      }
+      button {
+        font-size: 1.3rem !important;
+        background-color: #f7f7f7 !important;
+        display: table-cell;
+        width: 100%;
+      }
     }
 }
