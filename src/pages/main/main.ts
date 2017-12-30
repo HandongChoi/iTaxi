@@ -13,7 +13,7 @@ export class MainPage {
   user: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.user = firebase.auth().currentUser.uid;
+    this.user = firebase.auth().currentUser.email;
   }
 
   goTaxiListPage(){

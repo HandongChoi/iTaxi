@@ -25,10 +25,12 @@ export class RideHistoryPage {
   chatroomData: Array<any[]> = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase) {
-    this.user_id = navParams.data.user_id;
-    this.rideHistory = af.list('/rideHistory/'+ this.user_id);
+    this.user_id = this.navParams.data.user_id;
+    console.log(this.user_id);
+    this.rideHistory = af.list('/rideHistory/'+ this.stringParser(this.user_id));
 
     this.rideHistory.$ref.orderByChild('roomDate').on('child_added', data =>{
+        console.log(data);
         this.chatroomData.push(data.val());
       /*let chatroom = this.af.list('/chatrooms/' + data.val().roomDate + '/' + data.val().roomId);
 
@@ -40,6 +42,13 @@ export class RideHistoryPage {
 
       console.log(this.chatroomData);
     });
+  }
+
+  stringParser(sentence){
+    let parsedID = sentence.replace('@', '');
+    parsedID = parsedID.replace('.', '');
+
+    return parsedID;
   }
 
   goChatroom(chatroomDatum_temp) {

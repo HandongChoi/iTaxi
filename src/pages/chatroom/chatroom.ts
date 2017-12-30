@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, Content, NavParams, Platform } from 'ionic-angular';
 
-import firebase from 'firebase';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 
 import { TaxiListPage } from '../../pages/taxi-list/taxi-list';
@@ -33,14 +32,14 @@ export class ChatRoomPage {
   room_depart_date: string;
   room_depart_time: string;
   room_host: string;
-  room_participants:  Array<any> = [];
+  room_participants:  Array<string> = [];
   room_month: string;
   room_day: string;
   room_hour: string;
   room_minute:string;
   roomKey: string;
 
-  user_name: string;
+  isHost: boolean;
 
   page_info: String;
 
@@ -56,9 +55,10 @@ export class ChatRoomPage {
     this.room = af.list('/chatrooms/' + this.bookingDate + '/' + this.chat_room_id);
     this.chats = af.list(('/chats/'+ this.chat_room_id));
     this.room_object = af.object('/chatrooms/' + this.bookingDate + '/' + this.chat_room_id);
-    af.list('/userProfile/' + this.chat_user_id).subscribe(data => { this.user_name = data[3].$value });
 
-    this.rideHistory = af.list('/rideHistory/'+ this.chat_user_id);
+    let parsedID = this.stringParser(this.chat_user_id)
+    console.log(parsedID);
+    this.rideHistory = af.list('/rideHistory/'+ parsedID);
     console.log('hi', this.rideHistory.$ref.ref.key);
     let count = 0;
     this.room.forEach(data =>{
@@ -79,11 +79,15 @@ export class ChatRoomPage {
 
         this.roomKey = this.room.$ref.ref.parent.key;
         console.log(this.roomKey);
+        if(this.room_host === this.chat_user_id)
+          this.isHost = true;
+        else
+          this.isHost = false;
 
         var isExist = false;
 
         for(let i = 0; i < this.room_participants.length; i++){
-          if(this.room_participants[i].uid === this.chat_user_id){
+          if(this.room_participants[i] === this.chat_user_id){
             isExist = true;
             break;
           }
@@ -105,7 +109,7 @@ export class ChatRoomPage {
           console.log()
 
           if(parseInt(this.room_capacity) > this.room_participants.length){
-            this.room_participants.push({"uid": this.chat_user_id, "name": this.user_name});
+            this.room_participants.push(this.chat_user_id);
 
             this.room_object.update({
               capacity: this.room_capacity,
@@ -131,7 +135,13 @@ export class ChatRoomPage {
       count++;
 
     });
-    console.log(this.room_participants);
+  }
+
+  stringParser(sentence){
+    let parsedID = sentence.replace('@', '');
+    parsedID = parsedID.replace('.', '');
+
+    return parsedID;
   }
 
   goBack(){
@@ -142,7 +152,6 @@ export class ChatRoomPage {
     if(this.chat_content !== ''){
       this.chats.push({
         user_id: this.chat_user_id,
-        user_name: this.user_name,
         content: this.chat_content,
         date_time: new Date().toLocaleString(),
         dateKey: this.roomKey
@@ -160,13 +169,13 @@ export class ChatRoomPage {
     console.log("quit(): ", this.room_participants);
     if(this.room_participants){
       this.room_participants.forEach(data =>{
-        if(data.uid !== this.chat_user_id)
+        if(data !== this.chat_user_id)
           new_participants.push(data);
       });
 
       console.log(new_participants);
 
-      if(this.chat_user_id !== this.room_participants[0].uid){
+      if(this.chat_user_id !== this.room_participants[0]){
 
         this.room_object.update({
           capacity: this.room_capacity,
@@ -228,16 +237,5 @@ export class ChatRoomPage {
   show(index) {
     $(".user-name").eq(index).parent().siblings().children('.user-name').siblings().animate({width: 'hide'}, 70);
     $(".user-name").eq(index).siblings().animate({width: 'toggle'}, 70);
-  }
-
-  native(index, number) {
-    switch(number) {
-    case 1:
-      console.log("call");
-      break;
-    case 2:
-      console.log("message");
-      break;
-    }
   }
 }
