@@ -13,6 +13,7 @@ import { LoginPage } from '../login/login';
 })
 
 export class SignupPage {
+  procedure: string = "terms";
   public signupForm:FormGroup;
   public loading:Loading;
 
