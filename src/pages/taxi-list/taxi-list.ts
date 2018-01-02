@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { ChatRoomPage } from '../chatroom/chatroom';
 import { MakeRoomPage } from '../makeRoom/makeRoom';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-import { DatePicker, DatePickerOption } from 'ionic2-date-picker';
+import { DatePickerProvider, DatePickerOption } from 'ionic2-date-picker';
 
 @IonicPage()
 @Component({
   selector: 'page-taxi-list',
   templateUrl: 'taxi-list.html',
-  providers: [ DatePicker ],
 })
 export class TaxiListPage {
 
@@ -26,7 +25,7 @@ export class TaxiListPage {
   spotList: Array<string> = ["한동대학교", "포항역", "고속버스터미널", "시외버스터미널", "북부해수욕장", "육거리"];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase,
-  public datePicker: DatePicker) {
+  public datePickerProvider: DatePickerProvider, public modalCtrl: ModalController) {
 
     this.user_id = navParams.data.user_id;
 
@@ -50,20 +49,22 @@ export class TaxiListPage {
       subTitle: '원하시는 도착지를 체크해주세요.',
       mode: 'md'
     };
-
-    this.datePicker = new DatePicker(<any>this.datePicker.modalCtrl, <any>this.datePicker.viewCtrl);
-    this.datePicker.onDateSelected.subscribe((date) => { this.showChatroom(date);} );
   }
 
   showCalendar() {
+    var now = new Date();
     let datePickerOption: DatePickerOption = {
-      minimumDate: new Date(),
+      minimumDate: now,
+      maximumDate: new Date(now.getFullYear(), now.getMonth() + 1, now.getDate())
     }
-    this.datePicker.showCalendar(datePickerOption);
+
+    const dateSelected = this.datePickerProvider.showCalendar(this.modalCtrl, datePickerOption);
+    dateSelected.subscribe(date => {this.showChatroom(date);});
   }
 
   showChatroom(date) {
     this.selectedDate = date;
+    console.log(this.makeStringFromDate(date));
     this.dates = this.af.list('/chatrooms/' + this.makeStringFromDate(date));
   }
 
@@ -83,22 +84,32 @@ export class TaxiListPage {
   }
 
   filterDeparture(departFilter){
-    this.dates = this.af.list('/chatrooms/'+ this.makeStringFromDate(this.selectedDate), {
-      query: {
-        orderByChild: 'departure',
-        equalTo: departFilter
-      }
-    });
+    if (departFilter == "All") {
+      this.dates = this.af.list('/chatrooms/'+ this.makeStringFromDate(this.selectedDate));
+    }
+    else {
+      this.dates = this.af.list('/chatrooms/'+ this.makeStringFromDate(this.selectedDate), {
+        query: {
+          orderByChild: 'departure',
+          equalTo: departFilter
+        }
+      });
+    }
   }
 
   filterDestination(destinationFilter){
     console.log("Des: "+destinationFilter);
-    this.dates = this.af.list('/chatrooms/'+ this.makeStringFromDate(this.selectedDate), {
-      query: {
-        orderByChild: 'destination',
-        equalTo: destinationFilter
-      }
-    });
+    if (destinationFilter == "All") {
+      this.dates = this.af.list('/chatrooms/'+ this.makeStringFromDate(this.selectedDate));
+    }
+    else {
+      this.dates = this.af.list('/chatrooms/'+ this.makeStringFromDate(this.selectedDate), {
+        query: {
+          orderByChild: 'destination',
+          equalTo: destinationFilter
+        }
+      });
+    }
   }
 
   ionViewDidLoad() {
@@ -114,7 +125,15 @@ export class TaxiListPage {
   }
 
   private makeStringFromDate(date: Date): string {
-    return date.toLocaleDateString().replace(/\./g,'').replace(/ /g,'-');
+    var d = new Date(date);
+    let month = "" + (d.getMonth() + 1);
+    let day = "" + d.getDate();
+    let year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
   }
 
 }

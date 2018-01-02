@@ -23,13 +23,10 @@ export class MainPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase) {
 
-    let userInfo = firebase.auth().currentUser;
-    this.user = firebase.auth().currentUser.uid;
-    this.user_id = userInfo.email;
+    this.user = firebase.auth().currentUser.email;
     console.log("Main user : "+this.user);
-    console.log("Main user_id :"+this.user_id);
 
-    let parsedUserId = this.stringParser(this.user_id);
+    let parsedUserId = this.stringParser(this.user);
     this.dates = af.list('/rideHistory/'+parsedUserId);
     this.dates.subscribe(data =>{
       this.dates_array.push(data);

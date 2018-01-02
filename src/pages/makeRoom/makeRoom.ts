@@ -15,20 +15,19 @@ export class MakeRoomPage {
   arrive: string = "포항역";
   arrive2: string ="";
   start_list: Array<{start_list:string, value:string}>;
-  arrive_list: Array<{arrive_list:string, value:string}>;
   swap: string ="";
 
   spotList: Array<string>;
 
-  nowDate: string = new Date().toLocaleDateString().replace(/\./g,'').replace(/ /g,'-');
+  nowDate: string = this.formatDate(new Date());
   nowTime: string = new Date().toLocaleTimeString('en-US',{hour12:false}).substr(0,5);
 
   bookingDate: string = this.nowDate;
   bookingTime: string = this.nowTime;
 
   //1년치만 예약 가능하도록 만들었다.
-  minYear: string = new Date().toLocaleDateString().replace(/\./g,'').replace(/ /g,'-');
-  maxYear: string = (parseInt(this.minYear.substr(0,4))+1)+this.minYear.substr(4,this.minYear.length);
+  minYear: string;
+  maxYear: string;
 
   chatrooms: FirebaseListObservable<any[]>;
   user_id: string;
@@ -48,6 +47,22 @@ export class MakeRoomPage {
 
     this.spotList = ["한동대학교", "포항역", "양덕", "고속버스터미널", "시외버스터미널", "북부해수욕장", "육거리", "직접입력"];
     this.user_id = navParams.data.user_id; //이게 파라미터로 자꾸 받으면 중간에 데이터가 손실되지 않도록 유지시켜줘야 한다.
+
+    let now = new Date();
+    this.minYear = this.formatDate(now);
+    this.maxYear = this.formatDate(new Date(now.getFullYear() + 1, now.getMonth(), now.getDate()));
+  }
+
+  formatDate(date) {
+    var d = new Date(date);
+    let month = "" + (d.getMonth() + 1);
+    let day = "" + d.getDate();
+    let year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
   }
 
   addZ(n) {

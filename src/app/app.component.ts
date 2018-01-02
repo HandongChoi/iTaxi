@@ -42,6 +42,7 @@ export class MyApp {
   dates_array: Array<any> = [];
   user_id: any;
 
+
   public room: FirebaseListObservable<any[]>;
 
 
@@ -64,7 +65,7 @@ export class MyApp {
       } else{
         this.user_id = user.email;
         this.rootPage = MainPage;
-        
+
         //for showing the most recent reservation list in side bar
         let dates: FirebaseListObservable<any[]>;
         let parsedUserId = this.stringParser(user.email);

@@ -23,7 +23,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { AuthProvider } from '../providers/auth/auth';
 import { SignupPageModule } from '../pages/signup/signup.module';
 import { ResetPasswordPageModule } from '../pages/reset-password/reset-password.module';
-import { DatePicker } from 'ionic2-date-picker';
+import { DatePickerModule } from 'ionic2-date-picker';
 
 import { FCM } from '@ionic-native/fcm';
 
@@ -50,7 +50,6 @@ export const firebaseConfig = {
     SettingPage,
     TaxiListPage,
     RideHistoryPage,
-    DatePicker,
     DatePipe,
   ],
   imports: [
@@ -60,6 +59,7 @@ export const firebaseConfig = {
     AngularFireDatabaseModule,
     SignupPageModule,
     ResetPasswordPageModule,
+    DatePickerModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -75,7 +75,6 @@ export const firebaseConfig = {
     SignupPage,
     TaxiListPage,
     RideHistoryPage,
-    DatePicker,
   ],
   providers: [
     StatusBar,

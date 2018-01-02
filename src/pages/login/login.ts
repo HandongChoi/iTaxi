@@ -46,14 +46,13 @@ export class LoginPage {
                 this.firestore = firebase.database().ref('/userProfile/'+ firebase.auth().currentUser.uid);
                 this.storetoken(token);
               }
-              this.navCtrl.setRoot(MainPage);
             });
           }
           else {
             console.log("FCMPlugin type is undefined!");
-            this.navCtrl.setRoot(MainPage);
           }
-
+        }).then(() => {
+          this.navCtrl.setRoot(MainPage);
         });
       }, error => {
         this.loading.dismiss().then( () => {
