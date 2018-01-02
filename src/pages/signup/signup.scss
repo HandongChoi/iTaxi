@@ -1,17 +1,23 @@
 page-signup {
-  $terms_text-color: #29B5EF;
+  $terms_text-color: #3C89C9;
+  $input_text_color: #29B5EF;
+  $infoPage_label_text_color: #595757;
+  $text-input-highlight-color-valid: #29B5EF;
 
   form {
     margin-right: 15px;
     button { margin-top: 20px; }
+    ion-label {
+      color: $infoPage_label_text_color;
+    }
   }
 
   .terms_content {
     position: relative;
     margin: 5px;
     border-radius: 20px;
-    padding: 10px;
-    //border: 1px solid #ddd;
+    padding: 15px;
+    border: 1px solid $terms_text-color;
     color: $terms_text-color;
     font-size: 1em;
     width: auto;
@@ -25,7 +31,7 @@ page-signup {
     margin-bottom: 20px;
   }
 
-  .terms_wrap button {
+  .wrap button {
     display: block;
     margin: auto;
   }
@@ -34,9 +40,14 @@ page-signup {
     font-size: 0.8em; color: #d2d2d2;
   }
 
-  ion-label { margin-left: 5px; }
+  ion-label {
+    color: $terms_text-color;
+    margin-left: 5px;
+  }
 
-  ion-input { padding: 5px; }
+  ion-input {
+    color: $input_text_color;
+  }
 
   .invalid { border-bottom: 1px solid #FF6153; }
 

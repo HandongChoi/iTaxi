@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { TaxiListPage } from '../taxi-list/taxi-list';
 import { PersonalInfoPage } from '../personal-info/personal-info';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+
 
 @IonicPage()
 @Component({
@@ -10,20 +12,37 @@ import { PersonalInfoPage } from '../personal-info/personal-info';
 })
 export class MainPage {
 
-  user: any;
-  user_id: string;
+  dates: FirebaseListObservable<any[]>;
+  nowDate: string = new Date().toLocaleDateString().replace(/\./g,'').replace(/ /g,'-');
+  dates_array: Array<any> = [];
+  days: Array<string> = [];
+  selectedDate: Date;
+  currentDate: Date = new Date();
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    
-    let userInfo = firebase.auth().currentUser;
-    this.user = firebase.auth().currentUser.uid;
-    this.user_id = userInfo.email;
+  user: any;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase) {
+
+    this.user = firebase.auth().currentUser.email;
     console.log("Main user : "+this.user);
-    console.log("Main user_id :"+this.user_id);
+
+    let parsedUserId = this.stringParser(this.user);
+    this.dates = af.list('/rideHistory/'+parsedUserId);
+    this.dates.subscribe(data =>{
+      this.dates_array.push(data);
+    });
+
+  }
+
+  stringParser(sentence){
+    let parsedID = sentence.replace('@', '');
+    parsedID = parsedID.replace('.', '');
+
+    return parsedID;
   }
 
   goTaxiListPage(){
-    this.navCtrl.setRoot(TaxiListPage, {user_id: this.user_id});
+    this.navCtrl.setRoot(TaxiListPage, {user_id: this.user});
     console.log("goTaxiListPage at main.ts");
   }
 
@@ -33,7 +52,7 @@ export class MainPage {
   }
 
   goMyPage(){
-    this.navCtrl.setRoot(PersonalInfoPage, {user_id: this.user_id});
+    this.navCtrl.setRoot(PersonalInfoPage, {user_id: this.user});
     console.log("goMyPage at main.ts");
   }
 }

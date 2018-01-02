@@ -39,8 +39,9 @@ export class MyApp {
 
   rootPage: any;
   pages: Array<{title: string, component: any}>;
-
+  dates_array: Array<any> = [];
   user_id: any;
+
 
   public room: FirebaseListObservable<any[]>;
 
@@ -63,7 +64,21 @@ export class MyApp {
         unsubscribe();
       } else{
         this.user_id = user.email;
-        this.rootPage = TaxiListPage; 
+        this.rootPage = MainPage;
+
+        //for showing the most recent reservation list in side bar
+        let dates: FirebaseListObservable<any[]>;
+        let parsedUserId = this.stringParser(user.email);
+        dates = af.list('/rideHistory/'+parsedUserId);
+        dates.subscribe(data =>{
+          if(this.dates_array){
+            this.dates_array.pop();
+            this.dates_array.push(data);
+          }
+          else
+            this.dates_array.push(data);
+        });
+
         unsubscribe();
       }
     });
@@ -83,12 +98,12 @@ export class MyApp {
         .catch(error => {
           console.error(error);
         });
-      
+
       this.fcm.onTokenRefresh().subscribe(
         (token:string) => console.log("New Token", token),
         error => console.error(error)
       );
-      
+
       this.fcm.onNotification().subscribe(
         (data:NotificationData)=>{
           if(data.wasTapped){
@@ -108,6 +123,13 @@ export class MyApp {
   openPage(page) {
     this.navCtrl.setRoot(page.componenent, {user_id: this.user_id});
     console.log("openPage");
+  }
+
+  stringParser(sentence){
+    let parsedID = sentence.replace('@', '');
+    parsedID = parsedID.replace('.', '');
+
+    return parsedID;
   }
 
   inviteFriend(){

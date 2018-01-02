@@ -11,20 +11,22 @@
   </ion-header>
 
   <ion-content>
-    <ion-grid style="background-color:#29B5EF; color:white;">
+    <ion-grid style="background-color:#29B5EF; color:white;" *ngFor = "let dates of dates_array">
+      <div *ngFor = "let date of dates | DatePipe">
       <ion-row justify-content-left padding-left style="padding-top:6px">
-        꼬부기 (2/2)
+       꼬부기? {{date.length}} ({{date.roomParticipants.length}} / {{date.roomCapacity}})
       </ion-row>
       <ion-row justify-content-center padding-top>
-        12월 5일 15시 30분
+          {{date.roomDate}} {{date.roomTime}}
       </ion-row>
       <ion-row justify-content-center >
-          한동대학교 &nbsp; <ion-icon name="arrow-forward"></ion-icon> &nbsp; 양덕
+          {{date.roomDepart}} &nbsp; <ion-icon name="arrow-forward"></ion-icon> &nbsp; {{date.roomDest}}
       </ion-row>
       <ion-row padding justify-content-center padding>
             <button ion-button color="light" small round outline (click)="inviteFriend()">친구 초대</button>
             <button ion-button color="light" small round outline (click)="leaveRoom()">방나가기</button>
       </ion-row>
+      </div>
     </ion-grid>
     <ion-list>
       <ion-list-header> 택시 </ion-list-header>
@@ -38,15 +40,15 @@
       <button menuClose ion-item class="sidemenu-items" (click)="goPersonalInfoPage()">내정보수정</button>
       <ion-list-header> 메인페이지 </ion-list-header>
       <button menuClose ion-item class="sidemenu-items" (click)="goMainPage()">메인페이지</button>
-      
+
       <button menuClose ion-item class="sidemuenu-items" (click)="logout()">로그아웃</button>
       <!-- <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
         {{p.title}}
       </button> -->
     </ion-list>
   </ion-content>
-  
+
 </ion-menu>
-  
+
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
