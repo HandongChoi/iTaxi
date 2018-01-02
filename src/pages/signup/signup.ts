@@ -17,6 +17,7 @@ declare var FCMPlugin;
 })
 
 export class SignupPage {
+  procedure: string = "terms";
   public signupForm:FormGroup;
   public loading:Loading;
   procedure: string;
