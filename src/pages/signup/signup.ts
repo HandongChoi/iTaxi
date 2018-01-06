@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Loading, LoadingController, Alert, AlertController } from 'ionic-angular';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ValidatorFn } from '@angular/forms';
 import { AuthProvider } from '../../providers/auth/auth';
 import { EmailValidator } from '../../validators/email';
 import { MainPage } from '../main/main';
 import { LoginPage } from '../login/login';
 
 import { AngularFireDatabase } from 'angularfire2/database';
+import { AbstractControl } from '@angular/forms/src/model';
 
 declare var FCMPlugin;
 
@@ -29,10 +30,23 @@ export class SignupPage {
     this.signupForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
       password: ['', Validators.compose([Validators.minLength(6), Validators.required])],
+      password2: ['', Validators.compose([Validators.required, this.equalTo('password')])],
       name: ['', Validators.compose([Validators.minLength(2), Validators.required])],
       phoneNumber: ['', Validators.compose([Validators.minLength(6), Validators.required])],
-      studentID: ['', Validators.compose([Validators.minLength(6), Validators.required])],
+      studentID: ['', Validators.compose([Validators.minLength(6), Validators.required])]
     });
+  }
+
+  private equalTo(field_name): ValidatorFn {
+    return (control: AbstractControl): {[key: string]: any} => {
+      let input = control.value;
+      let isValid = control.root.value[field_name] === input;
+      
+      if (!isValid)
+        return { 'equalTo': {isValid} }
+      else
+        return null;
+    };
   }
 
   signupUser():void {
