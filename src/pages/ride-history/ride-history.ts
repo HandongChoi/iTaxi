@@ -17,9 +17,9 @@ import {ChatRoomPage} from '../chatroom/chatroom';
   templateUrl: 'ride-history.html',
 })
 export class RideHistoryPage {
-  
+
   rideHistory: FirebaseListObservable<any[]>;
-  
+
   user_id: string;
   nowDate: string = new Date().toISOString().substr(0, 10);
   chatroomData: Array<any[]> = [];
@@ -30,6 +30,7 @@ export class RideHistoryPage {
     this.rideHistory = af.list('/rideHistory/'+ this.stringParser(this.user_id));
 
     this.rideHistory.$ref.orderByChild('roomDate').on('child_added', data =>{
+        console.log(data);
         this.chatroomData.push(data.val());
       /*let chatroom = this.af.list('/chatrooms/' + data.val().roomDate + '/' + data.val().roomId);
 
@@ -46,7 +47,7 @@ export class RideHistoryPage {
   stringParser(sentence){
     let parsedID = sentence.replace('@', '');
     parsedID = parsedID.replace('.', '');
-    
+
     return parsedID;
   }
 
@@ -57,9 +58,9 @@ export class RideHistoryPage {
     //participant array에 push
     // 참여자가 아니고, 인원 full 아니면 push
     // 참여자이면 그냥 enter
-    // full 인원이면 deny  
-    
-    
+    // full 인원이면 deny
+
+
     this.navCtrl.setRoot(ChatRoomPage, {chat_room_id: chat_room_id_val, bookingDate: bookingDate_val, user_id: this.user_id});
   }
 }

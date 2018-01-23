@@ -1,85 +1,96 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>iTaxi >> 택시조회</ion-title>
+    <ion-title class = "top-title">택시조회</ion-title>
   </ion-navbar>
+
+  <ion-grid class="small-table">
+    <ion-row>
+        <ion-col col-5>
+          <ion-grid>
+            <ion-row class = "rowUnderline">
+              <ion-col col-11>
+                <ion-item class="selectWrapper">
+                  <ion-select #newSelect [(ngModel)]="departFilter" interface="popover" placeholder="전체보기" (ionChange)="filterDeparture(departFilter)">
+                    <ion-option value="All" checked="true">전체보기</ion-option>
+                    <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+              <ion-col col-1> 
+                <p class = "selectIcon">▼</p>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-col>
+
+        <ion-col col-2 class = "rightArrow">  
+          <ion-icon name="arrow-round-forward"></ion-icon>
+        </ion-col>
+
+        <ion-col col-5>
+          <ion-grid>
+            <ion-row class = "rowUnderline">
+              <ion-col col-11>
+                <ion-item class="selectWrapper">
+                  <ion-select [selectOptions]="destinationOptions" [(ngModel)]="destinationFilter" placeholder="전체보기" interface="popover" (ionChange)="filterDestination(destinationFilter)">
+                    <ion-option value="All" checked="true">전체보기</ion-option>
+                    <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+              <ion-col col-1> 
+                <p class = "selectIcon">▼</p>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-col>  
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-2 *ngFor="let day of days" class="pointer">
+        <ion-item class="days" (click)="showChatroom(day)">
+          <p>{{day|date: "dd"}}</p>
+        </ion-item>
+      </ion-col>
+      <ion-col col-2 class="pointer">
+        <ion-item class="days_icon" (click)="showCalendar()" >
+          <p> + </p>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-header>
 
-<ion-content class="content content-sm padding">
- <div class="fixed-content"></div>
-
-<div class="scroll-content">
-  <table class = "small-table" bgcolor="#947794">
-    <ion-grid>
-      <ion-row>
-        <ion-col col-5>
-          <ion-item class = "formRound">
-          <ion-select #newSelect [(ngModel)]="departFilter" interface="popover"
-                      placeholder="전체보기" (ionChange)="filterDeparture(departFilter)">
-            <ion-option value="All" checked="true">전체보기</ion-option>
-            <ion-option *ngFor = "let spot of spotList" value={{spot}}>{{spot}}</ion-option>
-          </ion-select>
-          </ion-item>
-        </ion-col>
-        <ion-col col-2>
-        <h6> > </h6>
-        </ion-col>
-        <ion-col col-5>
-          <ion-item  class = "formRound">
-          <ion-select [selectOptions]="destinationOptions" [(ngModel)]="destinationFilter" placeholder="전체보기"
-                      interface="popover" (ionChange)="filterDestination(destinationFilter)">
-            <ion-option value="All" checked="true">전체보기</ion-option>
-            <ion-option *ngFor = "let spot of spotList" value={{spot}}>{{spot}}</ion-option>
-          </ion-select>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col col-2><ion-item (click)="showChatroom(nowDay)"><h6>{{nowDay}}</h6></ion-item></ion-col>
-        <ion-col col-2 *ngFor = "let day of days"><ion-item (click)="showChatroom(day)"><h6>{{day}}</h6></ion-item></ion-col>
-        <ion-col col-2><ion-item (click)="showCalendar()"><h6>더보기</h6></ion-item></ion-col>        
-      </ion-row>
+<ion-content>
+  <div>
+    <ion-grid class="mainGrid">
+      <ion-item-group>
+        <ion-item-divider *ngFor="let date of dates | async" (click)="goChatroom(date)" class="line"
+        [ngClass]="{full: date.participants.length >= date.capacity, exist: isExist(date.participants)}">
+          <ion-row>
+            <ion-col col-3>
+              <p>{{date.depart_date}}</p>
+              <p>{{date.depart_time}}</p>
+            </ion-col>
+            <ion-col col-7>
+              <p>{{date.departure}}</p>
+              <p>>{{date.destination}}</p>
+            </ion-col>
+            <ion-col col-2>
+              <p>{{date.participants.length}} / {{date.capacity}}</p>
+              <p>참여 {{ date.participants.length >= date.capacity ? "불가" : "가능" }}</p>
+            </ion-col>
+          </ion-row>
+        </ion-item-divider>
+      </ion-item-group>
     </ion-grid>
-  </table>
-
-  <ion-grid>
-  <ion-item-group *ngFor = "let dates of dates_array">
-    <ion-item-divider class="item item-divider item-sm item-divider-md item-md-light item-divider-sm-light" color="light"
-      *ngFor = "let date of dates" (click)="goChatroom(date)">
-      <ion-row>
-        <ion-col col-3>
-          <p>{{date.depart_date}}</p>
-          <p>{{date.depart_time}}</p>
-        </ion-col>
-        <ion-col col-7>
-          <p>{{date.departure}}</p>
-          <p>>{{date.destination}}</p>
-        </ion-col>
-        <ion-col col-2>
-          <p>{{date.participants.length}} / {{date.capacity}}</p>
-          <p>참여 가능</p>
-        </ion-col>
-      </ion-row>
-    <div class="button-effect"></div>
-    </ion-item-divider>
-  </ion-item-group>
-  </ion-grid>
-</div>
-
-  <div class="fixed-content" style="margin-top: 85px;">
-    <ion-fab bottom="" right="">
-      <button color="dark" ion-fab="" class="fab fab-md fab-md-dark" (click)="makeRoom()">
-        <ion-icon class="fab-close-icon icon icon-md ion-md-close" name="close" role="img" aria-label="close"></ion-icon>
-        <span class="button-inner">
-          <ion-icon name="add" role="img" class="icon icon-md ion-md-add" aria-label="add" ></ion-icon>
-        </span>
-        <div class="button-effect" style="transform: translate3d(-19px, -13px, 0px) scale(1);
-        height: 87px; width: 87px; opacity: 0; transition: transform 301ms, opacity 211ms 90ms;">
-      </div>
-      </button>
-    </ion-fab>
   </div>
+
+  <ion-fab right bottom>
+    <button color="dark" ion-fab (click)="makeRoom()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
 
 </ion-content>

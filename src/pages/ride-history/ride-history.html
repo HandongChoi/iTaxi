@@ -5,7 +5,7 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -14,15 +14,15 @@
 </ion-header>
 
 
-<ion-content class="content content-sm padding">
-  <div class="scroll-content">
+<ion-content>
+  <div>
     <ion-grid>
-      <ion-item-group *ngFor = "let chatroomDatum of chatroomData; async">
-        <ion-item-divider class="item item-divider item-sm item-divider-md item-md-light item-divider-sm-light" color="light" (click)="goChatroom(chatroomDatum)">
+      <ion-item-group *ngFor = "let chatroomDatum of chatroomData;">
+        <ion-item-divider color="light" (click)="goChatroom(chatroomDatum)">
           <ion-row>
             <ion-col col-3>
               <p>{{chatroomDatum.roomDate}}</p>
-              <p>{{chatroomDatum.roomTime}}</p>      
+              <p>{{chatroomDatum.roomTime}}</p>
             </ion-col>
             <ion-col col-7>
               <p>{{chatroomDatum.roomDepart}}</p>
@@ -36,6 +36,6 @@
         <div class="button-effect"></div>
         </ion-item-divider>
       </ion-item-group>
-    </ion-grid>  
+    </ion-grid>
   </div>
 </ion-content>

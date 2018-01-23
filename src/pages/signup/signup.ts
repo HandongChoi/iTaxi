@@ -4,26 +4,28 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthProvider } from '../../providers/auth/auth';
 import { EmailValidator } from '../../validators/email';
 import { MainPage } from '../main/main';
-import { LoginPage } from '../login/login';  
+import { LoginPage } from '../login/login';
 
 import { AngularFireDatabase } from 'angularfire2/database';
 
 declare var FCMPlugin;
 
-@IonicPage() 
+@IonicPage()
 @Component({
   selector: 'page-signup',
   templateUrl: 'signup.html',
 })
 
 export class SignupPage {
+  procedure: string = "terms";
   public signupForm:FormGroup;
   public loading:Loading;
 
   firestore;
-  
+
   constructor(public navCtrl:NavController, public navParams: NavParams, public authProvider:AuthProvider, public loadingCtrl:LoadingController,
     public alertCtrl:AlertController, formBuilder:FormBuilder) {
+      this.procedure = 'terms';
     this.signupForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
       password: ['', Validators.compose([Validators.minLength(6), Validators.required])],
@@ -45,15 +47,27 @@ export class SignupPage {
 
       this.authProvider.signupUser(email, password, name, phoneNumber, studentID).then( user => {
         this.loading.dismiss().then( () => {
-          this.firestore = firebase.database().ref('/userProfile/'+ firebase.auth().currentUser.uid);
+          this.authProvider.loginUser(email, password).then( user => {
+            this.loading.dismiss().then( () => {
+              this.firestore = firebase.database().ref('/userProfile/'+ firebase.auth().currentUser.uid);
 
-          if(typeof(FCMPlugin) != 'undefined'){
-            this.tokenSetup().then((token) => {
-              this.storetoken(token);
+              if(typeof(FCMPlugin) != 'undefined'){
+                this.tokenSetup().then((token) => {
+                  this.storetoken(token);
+                  this.navCtrl.setRoot(MainPage, {user_id: email});
+                });
+              }
               this.navCtrl.setRoot(MainPage, {user_id: email});
             });
-          }
-          this.navCtrl.setRoot(MainPage, {user_id: email});
+          }, error => {
+            this.loading.dismiss().then( () => {
+              const alert:Alert = this.alertCtrl.create({
+               message: error.message,
+               buttons: [{ text: "Ok", role: 'cancel'}]
+              });
+              alert.present()
+            });
+          });
         });
       }, error => {
         this.loading.dismiss().then( () => {
@@ -91,7 +105,7 @@ export class SignupPage {
       FCMPlugin.getToken(function(token){
         resolve(token);
       }, (err)=>{
-      reject(err); 
+      reject(err);
       });
     });
 

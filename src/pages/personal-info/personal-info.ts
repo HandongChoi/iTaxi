@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,  ViewController, AlertController} from 'ionic-angular';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'; 
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SettingPage } from '../setting/setting';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+
+import { MainPage } from '../main/main';
 
 @IonicPage()
 @Component({
@@ -14,21 +16,27 @@ export class PersonalInfoPage {
   public updateForm:FormGroup;
 
   user: any;
+  user_dic: { [key: string]: string } = {};
   uid: any;
-  
+
   user_object:FirebaseObjectObservable<any[]>;
 
-  
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, 
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,
               public alertCtrl: AlertController, public af:AngularFireDatabase, formBuilder:FormBuilder) {
-    
+
     this.updateForm = formBuilder.group({
       name: ['', Validators.compose([Validators.required])],
       phoneNumber: ['', Validators.compose([Validators.required])],
       studentID: ['', Validators.compose([Validators.required])],
-       
-    }); 
+
+    });
     this.user = firebase.auth().currentUser;
+    af.list('/userProfile/' + this.user.uid).subscribe(data => {
+      data.forEach(data => {
+        this.user_dic[data.$key] = data.$value;
+      });
+    });
   }
 
   updateUserInfo(){
@@ -36,10 +44,9 @@ export class PersonalInfoPage {
     const revise_phoneNumber:string = this.updateForm.value.phoneNumber;
     const revise_studentID:string = this.updateForm.value.studentID;
 
-    this.user_object = this.af.object('/userProfile/' + firebase.auth().currentUser.uid);
-
+    this.user_object = this.af.object('/userProfile/' + this.user.uid);
     this.user_object.update({
-      name: revise_name, 
+      name: revise_name,
       phoneNumber: revise_phoneNumber,
       studentID: revise_studentID,
     });
@@ -63,6 +70,7 @@ export class PersonalInfoPage {
       buttons: ['확인']
     });
     alert.present();
+    this.navCtrl.setRoot(MainPage);
   }
 
 }

@@ -25,6 +25,8 @@ export class AuthProvider {
       firebase.database().ref(`/userProfile/${newUser.uid}/question`).set("");
       firebase.database().ref(`/userProfile/${newUser.uid}/answer`).set("");
       firebase.database().ref(`/userProfile/${newUser.uid}/name`).set(name);
+      firebase.database().ref(`/userProfile/${newUser.uid}/isPush`).set(true);
+      firebase.database().ref(`/userProfile/${newUser.uid}/isNoti`).set(true);
     }).catch( error => console.error(error) );
   }
   delete(){

@@ -1,44 +1,98 @@
 page-taxi-list {
-   
-    
-    table.small-table{
-        cellspacing: 10;
-        width: 100%;
-    
-        border-collapse: collapse;
-        text-align: center;
-        bgcolor: blue;
-        table-layout: fixed;
-        color:white;
-        font-style: bold;
-    }
-    
-    .labels{
-        color: gray;
-        font-size: 12px;
-        height: 14px;
-    }
-    
-    table.main-table
-    {
-        cellspacing: 4;
-    //	cellpadding: 4; 
-        padding: 0;
-        width: 100%;
-        border-collapse: collapse;
-        text-align: center;
-        table-layout: fixed;
-        color:#616161;
-        overflow:hidden;
-        height: 20px;
-        font-size: 14px;
-    }   
-    
-    table.main-table>td{
-        padding-bottom: 5em;
-    }
+  ion-fab {
+    margin-bottom: 2px;
+    margin-right: 15px;
+  }
 
-.formRound{border-radius:5px;border:1px; }
+  ion-select {
+    max-width: none;
+    font-size:14px;
+  }
+
+  .days {
+    text-align: center;
+    color: #595757;
+  }
+
+  .days_icon {
+    text-align: center;
+    font-style: bold;
+    color: #595757;
+  }
+
+
+  .small-table {
+    border-bottom: 1pt solid #9F9FA0;
+  }
+
+  .pointer {
+    cursor: pointer;
+    font-size: 150%;
+    font-style: bold;
+  }
+
+  .labels{
+    color: gray;
+    font-size: 12px;
+    height: 14px;
+  }
+
+  .item-inner {
+    border-bottom: none !important;
+  }
+
+  .rightArrow {
+    text-align: center;
+    font-size: 2.0em;
+    color: #3C89C9;
+  }
+
+  .mainGrid {
+    padding: 0;
+  }
+
+  .line {
+    background-color: white;
+
+    p {
+      color: black;
+    }
+  }
+
+  .full {
+    background-color: #EEEFEF;
+  }
+
+  .exist {
+    background-color: #29B5EF;
+  }
+
+  .top-title{
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0 90px 1px;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  }
+
+  .selectWrapper {
+    .select-icon {
+      visibility: hidden;
+    }
+    text-align: left;
+  }
+  
+  .selectIcon
+  {
+    color: #C9C9CA;
+    font-size: 0.7em;
+  }
+
+  .rowUnderline{
+  border-bottom:1pt solid #C9C9CA;
+  }
+
 
 }
-

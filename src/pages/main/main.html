@@ -1,18 +1,15 @@
 <ion-header>
-  <ion-navbar color = "primary">
+  <ion-navbar color="primary">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>i-Taxi</ion-title>
   </ion-navbar>
-</ion-header>
 
-<ion-content class="card-background-page">
-  <button ion-item color="light2" style="font-size: 1.3rem" (click)="openTaxiList()" >
+  <button ion-item color="light2" style="font-size: 1.3rem" (click)="openTaxiList()">
     <ion-icon name="ios-information-circle-outline" item-start></ion-icon>
     공지사항입니다. 공지사항입니다.
   </button>
-
   <!--
   <ion-card (click)="openTaxiList()">
     <img src="../../assets/imgs/taxi.png"/>
@@ -24,23 +21,24 @@
     <div class="card-title">i-Taxi</div>
     <div class="card-subtitle">타러가기</div>
   </ion-card> -->
-
+</ion-header>
+<ion-content>
 
   <ion-buttons>
-    <button ion-button large full icon-left (click)="goTaxiListPage()" >
+    <button ion-button large full icon-left (click)="goTaxiListPage()">
       <ion-icon name="car"></ion-icon>
       i-Taxi 탑승
     </button>
-    <button ion-button large full color="secondary" icon-left (click)="goCarpoolListPage()" >
+    <button ion-button large full color="secondary" icon-left (click)="goCarpoolListPage()">
       <ion-icon name="car"></ion-icon>
       카풀 탑승
     </button>
-    <button ion-button large full color="tertiary" icon-left (click)="goMyPage()" >
+    <button ion-button large full color="tertiary" icon-left (click)="goMyPage()">
       <ion-icon name="person"></ion-icon>
       마이페이지
     </button>
 
-      <!--
+    <!--
   round button
     <ion-grid>
       <ion-row justify-content-center style="padding: 10px 0; margin-top: 25px">
@@ -61,23 +59,27 @@
     </ion-grid>
   -->
   </ion-buttons>
-  
 
   <!-- my Ticket -->
-  <ion-card style="border-radius:5px; margin-top:30px">
-    <ion-row style="background-color:#0054a6; color:white; padding:5px 0 5px 15px">
-      2017.12.5 (화)
-    </ion-row>
-    <ion-row>
-      <ion-col col-4 text-center style="border-right: 1px solid #ddd9d9">
-        <h3>Taxi</h3>
-        <p style = "font-size: 9px">현 2/2 명</p>
-      </ion-col>
-      <ion-col text-center>
-        <h3>한동대학교 <ion-icon name="arrow-forward"></ion-icon>포항역</h3>
-        <p padding-left style = "font-size: 10px">15:00</p>
-      </ion-col>
-    </ion-row>
-  </ion-card>
+  <div *ngFor="let dates of dates_array">
+    <ion-card style="border-radius:5px; margin-top:30px" *ngFor="let date of dates | DatePipe">
+      <ion-row style="background-color:#0054a6; color:white; padding:5px 0 5px 15px">
+        {{date.roomDate}}
+      </ion-row>
+      <ion-row>
+        <ion-col col-4 text-center style="border-right: 1px solid #ddd9d9">
+          <h3>Taxi</h3>
+          <p style="font-size: 9px">현 {{date.roomParticipants.length}}/{{date.roomCapacity}} 명</p>
+        </ion-col>
+        <ion-col text-center>
+          <h3>{{date.roomDepart}} <ion-icon name="arrow-forward"></ion-icon>{{date.roomDest}}</h3>
+          <p padding-left style="font-size: 10px">{{date.roomTime}}</p>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </div>
+
+
+
   <!-- <button ion-button secondary menuToggle>Toggle Menu</button> -->
 </ion-content>
