@@ -47,15 +47,27 @@ export class SignupPage {
 
       this.authProvider.signupUser(email, password, name, phoneNumber, studentID).then( user => {
         this.loading.dismiss().then( () => {
-          this.firestore = firebase.database().ref('/userProfile/'+ firebase.auth().currentUser.uid);
+          this.authProvider.loginUser(email, password).then( user => {
+            this.loading.dismiss().then( () => {
+              this.firestore = firebase.database().ref('/userProfile/'+ firebase.auth().currentUser.uid);
 
-          if(typeof(FCMPlugin) != 'undefined'){
-            this.tokenSetup().then((token) => {
-              this.storetoken(token);
+              if(typeof(FCMPlugin) != 'undefined'){
+                this.tokenSetup().then((token) => {
+                  this.storetoken(token);
+                  this.navCtrl.setRoot(MainPage, {user_id: email});
+                });
+              }
               this.navCtrl.setRoot(MainPage, {user_id: email});
             });
-          }
-          this.navCtrl.setRoot(MainPage, {user_id: email});
+          }, error => {
+            this.loading.dismiss().then( () => {
+              const alert:Alert = this.alertCtrl.create({
+               message: error.message,
+               buttons: [{ text: "Ok", role: 'cancel'}]
+              });
+              alert.present()
+            });
+          });
         });
       }, error => {
         this.loading.dismiss().then( () => {

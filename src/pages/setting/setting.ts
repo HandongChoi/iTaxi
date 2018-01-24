@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform} from 'ionic-angular';
-import { NativeStorage } from 'ionic-native';
 import { AuthProvider } from '../../providers/auth/auth';
 import { LoginPage } from '../login/login'; 
+
+import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 
 @IonicPage()
 @Component({
@@ -11,23 +12,21 @@ import { LoginPage } from '../login/login';
 })
 export class SettingPage {
 
+  user: any;
+  userData: FirebaseObjectObservable<any>;
   isNotiToggled: boolean;
   isPushToggled: boolean;
   firestore;
+  
   constructor(public navCtrl: NavController, public navParams: NavParams, 
-    public platform:Platform, public authProvider:AuthProvider) {
-
-    this.platform.ready().then(() =>{
-      NativeStorage.getItem('notification').then(data =>{
-        console.log(this.isNotiToggled);
-        this.isNotiToggled = data;
-      });
-
-      NativeStorage.getItem('push').then(data =>{
-        console.log(this.isPushToggled);
-        this.isPushToggled = data;
-      });
-    });
+    public platform:Platform, public authProvider:AuthProvider, public af:AngularFireDatabase) {
+    let user_id = firebase.auth().currentUser.uid;
+    this.userData = af.object(`/userProfile/${user_id}`);
+    this.userData.subscribe(data => {
+      this.user = data;
+      this.isNotiToggled = data.isNoti;
+      this.isPushToggled = data.isPush;
+    })
   }
 
   ionViewDidLoad() {
@@ -35,11 +34,11 @@ export class SettingPage {
   }
 
   NotiToggle(){
-    NativeStorage.setItem('notification', this.isNotiToggled);
+    this.userData.update({ isNoti: this.isNotiToggled });
   }
 
   PushToggle(){
-    NativeStorage.setItem('push', this.isPushToggled);
+    this.userData.update({ isPush: this.isPushToggled });
   }
 
   delete_user():void {
