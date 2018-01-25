@@ -15,13 +15,92 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
-.row{
-  align-items: center;
+.sidemenu-content{
+  font-family: "Open Sans";
+  position: relative;
+  top: -50px;
+}
+.sidemenu-div{
+  background-color:#2C88AD;
+  color: white;
+  border-radius: 5px;
+  padding-top:6px;
 }
 
-.sidemenu-items{
-    font-size: 14px
+.sidemenu-row{
+  align-items: center;
+  background-color:#29B5EF;
+  color:white;
+  border-radius: 5px;
+  position: relative;
+  top: 5px;  
+  padding-top:6px;
+  padding-bottom: 6px;
 }
+.sidemenu-userid{
+  font-size: 16px;
+  color: #29B5EF;
+  position: relative;
+  top: 35px;
+  left: 35px;
+  margin-top: 40px;
+}
+.sidemenu-hr{
+  position: relative;
+  top: -5px;
+  height: 1.5px;
+  width: 90%;
+}
+.sidemenu-grid{
+  width: 90%;
+}
+.sidemenu-header-top{
+  font-size: 18px;
+  margin-bottom: 20px;
+  border-width: 2px;
+
+}
+.sidemenu-header{
+  font-size: 18px;
+  margin-bottom: 20px;
+  border-color: white;
+
+}
+.sidemenu-items{
+    font-size: 14px;
+    position: relative;
+    top: -25px;
+    left: 40px;
+    background-color: #F4EFEF;
+    width: 70%;
+    margin-bottom: 5px;
+    
+  }
+.sidemenu-button{
+  background-color: rgba(255,255,255,0);
+  color: #29B5EF;
+  margin-bottom: 10px;
+}
+.sidemenu-button2{
+  background-color: rgba(255,255,255,0);
+  color: white;
+  position: relative;
+  left: 80%;
+}
+
+.sidemenu-list{
+  position: relative;
+  left: 20px;
+  border-bottom: 0px;
+
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../assets/fonts/SourceHanSansK-Normal.otf');
+}
+
 
 //
 // .list .item.item-accordion {

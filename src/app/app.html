@@ -1,54 +1,46 @@
-<ion-menu id = "myMenu" [content]="content"  persistent="true">
-  <ion-header>
-    <ion-toolbar padding>
-      <ion-title>{{user_id}}님</ion-title>
-      <ion-buttons right >
-        <button menuClose ion-button icon-only (click)="goSettingPage()">
-            <ion-icon name="settings"></ion-icon>
+<ion-menu [content]="content"  persistent="true">
+  
+    <ion-content class="sidemenu-content">
+      <p class="sidemenu-userid"><ion-icon name="person"></ion-icon>&nbsp;&nbsp;{{user_id}}</p> 
+      <ion-buttons right > 
+        <button  class="sidemenu-button" menuClose icon-only (click)="goSettingPage()">
+          <ion-icon name="settings"></ion-icon>
         </button>
       </ion-buttons>
-    </ion-toolbar>
-  </ion-header>
-
-  <ion-content>
-    <ion-grid style="background-color:#29B5EF; color:white;" *ngFor = "let dates of dates_array">
-      <div *ngFor = "let date of dates | DatePipe">
-      <ion-row justify-content-left padding-left style="padding-top:6px">
-       꼬부기? {{date.length}} ({{date.roomParticipants.length}} / {{date.roomCapacity}})
+      <hr class="sidemenu-hr" style="background-color:#29B5EF">
+      <ion-grid class="sidemenu-grid"  *ngFor = "let dates of dates_array">
+        <div class="sidemenu-div" *ngFor = "let date of dates | DatePipe">
+        &nbsp;&nbsp;꼬부기 {{date.length}} ({{date.roomParticipants.length}} / {{date.roomCapacity}})
+        <ion-row class="sidemenu-row" justify-content-left padding-left style="border-top-color: white">
+        {{date.roomDate}} &nbsp;&nbsp;|&nbsp;&nbsp; {{date.roomTime}}<br>
+        {{date.roomDepart}} &nbsp;&nbsp; > &nbsp;&nbsp; {{date.roomDest}}
+      <ion-buttons right > 
+        <button  class="sidemenu-button2" menuClose icon-only (click)="Idontknow()">
+          <ion-icon name="log-out"></ion-icon>
+        </button>
+      </ion-buttons>
       </ion-row>
-      <ion-row justify-content-center padding-top>
-          {{date.roomDate}} {{date.roomTime}}
-      </ion-row>
-      <ion-row justify-content-center >
-          {{date.roomDepart}} &nbsp; <ion-icon name="arrow-forward"></ion-icon> &nbsp; {{date.roomDest}}
-      </ion-row>
-      <ion-row padding justify-content-center padding>
-            <button ion-button color="light" small round outline (click)="inviteFriend()">친구 초대</button>
-            <button ion-button color="light" small round outline (click)="leaveRoom()">방나가기</button>
-      </ion-row>
-      </div>
-    </ion-grid>
-    <ion-list>
-      <ion-list-header> 택시 </ion-list-header>
-      <button menuClose ion-item class="sidemenu-items" (click)="goTaxiListPage()">조회</button>
-      <button menuClose ion-item class="sidemenu-items" (click)="goMakeTaxiRoomPage()">모집</button>
-      <ion-list-header> 카풀 </ion-list-header>
-      <button menuClose ion-item class="sidemenu-items" (click)="goCarpoolListPage()">조회</button>
-      <button menuClose ion-item class="sidemenu-items" (click)="goMakeCarpoolRoomPage()">모집</button>
-      <ion-list-header> 마이페이지 </ion-list-header>
-      <button menuClose ion-item class="sidemenu-items" (click)="goBoardingListPage()">탑승내역</button>
-      <button menuClose ion-item class="sidemenu-items" (click)="goPersonalInfoPage()">내정보수정</button>
-      <ion-list-header> 메인페이지 </ion-list-header>
-      <button menuClose ion-item class="sidemenu-items" (click)="goMainPage()">메인페이지</button>
-
-      <button menuClose ion-item class="sidemuenu-items" (click)="logout()">로그아웃</button>
-      <!-- <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        {{p.title}}
-      </button> -->
-    </ion-list>
-  </ion-content>
-
-</ion-menu>
-
-<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
-<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
+        </div>
+      </ion-grid>
+      
+      <ion-list class="sidemenu-list">
+          <ion-list-header class="sidemenu-header"> <ion-icon name="ios-car"></ion-icon> &nbsp;&nbsp;택시 </ion-list-header>
+          <button menuClose ion-item class="sidemenu-items" (click)="goTaxiListPage()">조회</button>
+          <button menuClose ion-item class="sidemenu-items" (click)="goMakeTaxiRoomPage()">모집</button>
+          <ion-list-header class="sidemenu-header"> <ion-icon name="car"></ion-icon>  &nbsp;&nbsp;카풀 </ion-list-header>
+          <button menuClose ion-item class="sidemenu-items" (click)="goCarpoolListPage()">조회</button>
+          <button menuClose ion-item class="sidemenu-items" (click)="goMakeCarpoolRoomPage()">모집</button>
+          <ion-list-header class="sidemenu-header"> <ion-icon name="person"></ion-icon>&nbsp;&nbsp;마이페이지 </ion-list-header>
+          <button menuClose ion-item class="sidemenu-items" (click)="goBoardingListPage()">탑승내역</button>
+          <button menuClose ion-item class="sidemenu-items" (click)="goPersonalInfoPage()">내정보수정</button>
+          <ion-list-header class="sidemenu-header"> <ion-icon name="home"></ion-icon>  &nbsp;&nbsp;메인페이지 </ion-list-header>
+          <button menuClose ion-item class="sidemenu-items" (click)="goMainPage()">메인페이지</button>  
+          <button menuClose ion-item class="sidemenu-items" (click)="logout()">로그아웃</button>
+      </ion-list>
+    </ion-content>
+  
+  </ion-menu>
+  
+  <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+  <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
+  
