@@ -27,7 +27,9 @@ import { DatePickerModule } from 'ionic2-date-picker';
 
 import { FCM } from '@ionic-native/fcm';
 
-import { DatePipe } from '../pipes/date-pipe'
+import { DatePipe } from '../pipes/date-pipe';
+import { DateProvider } from '../providers/date/date';
+import { UsersProvider } from '../providers/users/users';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyANvht7J2MNX6x47mglqfJk74yZQ9u0qUk",
@@ -82,6 +84,8 @@ export const firebaseConfig = {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
     FCM,
+    DateProvider,
+    UsersProvider,
   ]
 })
 export class AppModule {}

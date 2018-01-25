@@ -3,13 +3,12 @@ import { IonicPage, NavController, NavParams, Loading, LoadingController, Alert,
 import { FormBuilder, FormGroup, Validators, ValidatorFn } from '@angular/forms';
 import { AuthProvider } from '../../providers/auth/auth';
 import { EmailValidator } from '../../validators/email';
+import { PhoneValidator } from '../../validators/phone';
+import { StudentIDValidator } from '../../validators/studentID';
 import { MainPage } from '../main/main';
 import { LoginPage } from '../login/login';
 
-import { AngularFireDatabase } from 'angularfire2/database';
 import { AbstractControl } from '@angular/forms/src/model';
-
-declare var FCMPlugin;
 
 @IonicPage()
 @Component({
@@ -22,19 +21,21 @@ export class SignupPage {
   public signupForm:FormGroup;
   public loading:Loading;
 
-  firestore;
+  termsFlag: boolean = false;
+  infoFlag: boolean = true;
+  completeFlag: boolean = true;
 
-  constructor(public navCtrl:NavController, public navParams: NavParams, public authProvider:AuthProvider, public loadingCtrl:LoadingController,
-    public alertCtrl:AlertController, formBuilder:FormBuilder) {
+  constructor(public navCtrl:NavController, public navParams: NavParams, public authProvider:AuthProvider, 
+    public loadingCtrl:LoadingController, public alertCtrl:AlertController, formBuilder:FormBuilder) {
       this.procedure = 'terms';
-    this.signupForm = formBuilder.group({
-      email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
-      password: ['', Validators.compose([Validators.minLength(6), Validators.required])],
-      password2: ['', Validators.compose([Validators.required, this.equalTo('password')])],
-      name: ['', Validators.compose([Validators.minLength(2), Validators.required])],
-      phoneNumber: ['', Validators.compose([Validators.minLength(6), Validators.required])],
-      studentID: ['', Validators.compose([Validators.minLength(6), Validators.required])]
-    });
+      this.signupForm = formBuilder.group({
+        email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
+        password: ['', Validators.compose([Validators.minLength(6), Validators.required])],
+        password2: ['', Validators.compose([Validators.required, this.equalTo('password')])],
+        name: ['', Validators.compose([Validators.minLength(2), Validators.required])],
+        phoneNumber: ['', Validators.compose([Validators.required, PhoneValidator.isValid])],
+        studentID: ['', Validators.compose([Validators.required, StudentIDValidator.isValid])]
+      });
   }
 
   private equalTo(field_name): ValidatorFn {
@@ -60,28 +61,12 @@ export class SignupPage {
       const studentID:string = this.signupForm.value.studentID;
 
       this.authProvider.signupUser(email, password, name, phoneNumber, studentID).then( user => {
+        console.log("강민수");
         this.loading.dismiss().then( () => {
-          this.authProvider.loginUser(email, password).then( user => {
-            this.loading.dismiss().then( () => {
-              this.firestore = firebase.database().ref('/userProfile/'+ firebase.auth().currentUser.uid);
-
-              if(typeof(FCMPlugin) != 'undefined'){
-                this.tokenSetup().then((token) => {
-                  this.storetoken(token);
-                  this.navCtrl.setRoot(MainPage, {user_id: email});
-                });
-              }
-              this.navCtrl.setRoot(MainPage, {user_id: email});
-            });
-          }, error => {
-            this.loading.dismiss().then( () => {
-              const alert:Alert = this.alertCtrl.create({
-               message: error.message,
-               buttons: [{ text: "Ok", role: 'cancel'}]
-              });
-              alert.present()
-            });
-          });
+          console.log("여기까지 왔도다");
+          console.log(user);
+          console.log(email);
+          this.navCtrl.setRoot(MainPage);
         });
       }, error => {
         this.loading.dismiss().then( () => {
@@ -97,33 +82,30 @@ export class SignupPage {
     }
   }
 
+  TermFlagUp(){
+    this.procedure='term';
+    this.termsFlag=false;
+    this.infoFlag=true;
+    this.completeFlag=true;
+  }
+
+  InfoFlagUp(){
+    this.procedure='info';
+    this.termsFlag=true;
+    this.infoFlag=false;
+    this.completeFlag=true;
+  }
+
+  CompleteFlagUp(){
+    this.procedure='complete';
+    this.termsFlag=true;
+    this.infoFlag=true;
+    this.completeFlag=false;
+    this.signupUser();
+  }
+
   goLoginPage(){
-    this.navCtrl.setRoot(MainPage);
+    this.navCtrl.setRoot(LoginPage);
     console.log("goLoginPage at signup.ts");
   }
-
-  storetoken(t){
-    this.firestore.update({
-      email: firebase.auth().currentUser.email,
-      devtoken:t
-    }).then(()=>{
-      alert('Token Stored');
-      this.navCtrl.setRoot(MainPage);
-    }).catch(()=>{
-      alert('Token not sotred');
-    });
-  }
-
-  tokenSetup(){
-    var promise = new Promise((resolve, reject) => {
-      FCMPlugin.getToken(function(token){
-        resolve(token);
-      }, (err)=>{
-      reject(err);
-      });
-    });
-
-    return promise;
-  }
-
 }

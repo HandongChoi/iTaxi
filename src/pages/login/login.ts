@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, Loading, LoadingController, NavController, Alert, AlertController } from 'ionic-angular';
+import { IonicPage, Loading, LoadingController, NavController, NavParams, Alert, AlertController, MenuController } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { EmailValidator } from '../../validators/email';
 import { AuthProvider } from '../../providers/auth/auth';
@@ -16,11 +16,16 @@ export class LoginPage {
 
   public loginForm:FormGroup;
   public loading:Loading;
-  firestore;
+  firestore: any;
 
-  constructor(public navCtrl:NavController,public loadingCtrl:LoadingController, public alertCtrl:AlertController,
-              public authProvider:AuthProvider, formBuilder:FormBuilder) {
+  constructor(public navCtrl:NavController, public navParams: NavParams, public loadingCtrl:LoadingController, public alertCtrl:AlertController,
+              public authProvider:AuthProvider, formBuilder:FormBuilder, public menu: MenuController) {
+    
+    //왼쪽 사이드바 메뉴 안 보이게 하는 역할
+    this.menu=menu;
+    this.menu.enable(false,'myMenu');
 
+    //로그인시 제한 조건 걸어놓기
     this.loginForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
       password: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
@@ -76,9 +81,8 @@ export class LoginPage {
   }
 
   tokenSetup(){
-    var promise = new Promise((resolve, reject) => {
+    var promise = new Promise((resolve, reject)=>{
       if(typeof(FCMPlugin) != 'undefined'){
-
         FCMPlugin.getToken(function(token){
           resolve(token);
         }, (err)=>{
@@ -86,14 +90,12 @@ export class LoginPage {
         });
       }
     });
-
     return promise;
   }
 
-  storetoken(t){
+  storetoken(token){
     this.firestore.update({
-      email: firebase.auth().currentUser.email,
-      devtoken:t
+      devtoken:token
     }).then(()=>{
       alert('Token Stored');
     }).catch(()=>{

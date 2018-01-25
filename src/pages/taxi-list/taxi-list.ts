@@ -5,6 +5,8 @@ import { MakeRoomPage } from '../makeRoom/makeRoom';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { DatePickerProvider, DatePickerOption } from 'ionic2-date-picker';
 
+import { UsersProvider } from '../../providers/users/users';
+
 @IonicPage()
 @Component({
   selector: 'page-taxi-list',
@@ -25,9 +27,10 @@ export class TaxiListPage {
   spotList: Array<string> = ["한동대학교", "포항역", "고속버스터미널", "시외버스터미널", "북부해수욕장", "육거리"];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase,
-  public datePickerProvider: DatePickerProvider, public modalCtrl: ModalController) {
+  public datePickerProvider: DatePickerProvider, public modalCtrl: ModalController, public usersService: UsersProvider) {
 
-    this.user_id = navParams.data.user_id;
+    this.user_id = this.usersService.getEmail();
+    console.log("ThaTha : "+this.user_id);
 
     for(let i = 0; i < 5; i++){
       let temp = new Date(this.nowDate.getTime());

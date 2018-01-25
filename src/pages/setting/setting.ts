@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform} from 'ionic-angular';
-import { NativeStorage } from 'ionic-native';
 import { AuthProvider } from '../../providers/auth/auth';
 import { LoginPage } from '../login/login'; 
 import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';

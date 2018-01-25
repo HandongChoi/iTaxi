@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { TaxiListPage } from '../taxi-list/taxi-list';
 import { PersonalInfoPage } from '../personal-info/personal-info';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
+import { UsersProvider } from '../../providers/users/users';
 
 @IonicPage()
 @Component({
@@ -20,17 +21,25 @@ export class MainPage {
   currentDate: Date = new Date();
 
   user: any;
+  user_id: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase,
+     public menu: MenuController, public userServices: UsersProvider) {
 
-    this.user = firebase.auth().currentUser.email;
+    //여기서부터는 로그인 및 회원가입 페이지를 넘어서 사이드 메뉴를 볼 수 있도록 만들기.
+    this.menu=menu;
+    this.menu.enable(true,'myMenu');
+
+    //일단 지금 user의 정보를 email로 받아오고 있다.
+    this.user = this.userServices.getEmail();
     console.log("Main user : "+this.user);
 
-    let parsedUserId = this.stringParser(this.user);
-    this.dates = af.list('/rideHistory/'+parsedUserId);
-    this.dates.subscribe(data =>{
-      this.dates_array.push(data);
-    });
+    // //이메일 이전것으로 pasrse 해서 탑승내역에 저장중.
+    // let parsedUserId = this.stringParser(this.user);
+    // this.dates = af.list('/rideHistory/'+parsedUserId);
+    // this.dates.subscribe(data =>{
+    //   this.dates_array.push(data);
+    // });
 
   }
 

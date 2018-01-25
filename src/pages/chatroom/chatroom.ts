@@ -217,7 +217,6 @@ export class ChatRoomPage {
   }
 
   ionViewDidLoad(){
-
     if(typeof(FCMPlugin) != 'undefined'){
       FCMPlugin.onNotification(function(data){
         if(data.wasTrapped){

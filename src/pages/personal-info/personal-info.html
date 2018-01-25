@@ -13,7 +13,6 @@
   </ion-navbar>
 </ion-header>
 
-
 <ion-content padding>
   <form [formGroup]="updateForm" (submit)="updateUserInfo()" novalidate>
     <ion-item>
@@ -28,7 +27,7 @@
 
     <ion-item>
       <ion-label stacked>전화번호</ion-label>
-      <ion-input formControlName="phoneNumber" type="phoneNumber" value="{{user_dic.phoneNumber}}"></ion-input> <!-- placeholder에 기존 전화번호 뿌리기  -->
+      <ion-input formControlName="phoneNumber" type="phoneNumber" value="{{user_dic.phoneNumber}}"></ion-input>
     </ion-item>
   <!--
     <ion-item>
