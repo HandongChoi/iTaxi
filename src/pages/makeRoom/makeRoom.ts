@@ -6,47 +6,83 @@ import { ChatRoomPage } from '../chatroom/chatroom';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 @Component({
+  selector: 'page-make-room',
   templateUrl: 'makeRoom.html',
 })
 
 export class MakeRoomPage {
   start: string = "한동대학교";
   start2: string = "";
+  depart: string = "";
+
   arrive: string = "포항역";
   arrive2: string ="";
+  arrival: string = "";
+
   start_list: Array<{start_list:string, value:string}>;
   arrive_list: Array<{arrive_list:string, value:string}>;
+
   swap: string ="";
 
-  spotList: Array<string>;
+  maxPeople: string = "4"; 
 
-  nowDate: string = new Date().toLocaleDateString().replace(/\./g,'').replace(/ /g,'-');
+  msg: string="";
+
+  forDate: any = new Date();
+  kDate: any = new Date();
+
+  testYear: string = this.forDate.getFullYear();
+  testMonth: string = this.addZ(this.forDate.getMonth()+1);
+  testDay: string = this.addZ(this.forDate.getDate());
+
+  test: string = this.testYear + "-" + this.testMonth + "-" + this.testDay;
+
+  //이전 방식에서 해가 바뀔 때 null 오류가 발생하여 수정.
+  //nowDate: string = new Date().toLocaleDateString().replace(/\./g,'').replace(/ /g,'-');
+  nowDate: string = this.test;
   nowTime: string = new Date().toLocaleTimeString('en-US',{hour12:false}).substr(0,5);      
   
   bookingDate: string = this.nowDate;
   bookingTime: string = this.nowTime; 
 
-  //1년치만 예약 가능하도록 만들었다.
-  minYear: string = new Date().toLocaleDateString().replace(/\./g,'').replace(/ /g,'-');
+  //1년치만 예약 가능하도록 만들었다. 이전 방식에서 해가 바뀔 때 null 오류가 발생하여 수정.
+  //minYear: string = new Date().toLocaleDateString().replace(/\./g,'').replace(/ /g,'-');
+  minYear: string = this.test;
   maxYear: string = (parseInt(this.minYear.substr(0,4))+1)+this.minYear.substr(4,this.minYear.length);
+
+  week: Array<string> = new Array('일','월','화','수','목','금','토');
+  today: string = this.week[this.forDate.getDay()];
   
   chatrooms: FirebaseListObservable<any[]>;
-  user_id: string;  
+  user_id: string; 
 
+  
   constructor(public alertCtrl: AlertController, public navParams: NavParams,
                public navCtrl:NavController, public af: AngularFireDatabase){
     this.start_list = [
       {start_list:'한동대학교', value:'한동대학교'},
       {start_list:'포항역', value:'포항역'},
-      {start_list:'양덕', value:'양덕'},
+      {start_list:'양덕', value:'양덕',},
       {start_list:'고속버스터미널', value:'고속버스터미널'},
       {start_list:'시외버스터미널', value:'시외버스터미널'},
       {start_list:'북부해수욕장', value:'북부해수욕장'},
-      {start_list:'육거리',value:'육거리'},
+      {start_list:'육거리',value:'육거리' },
       {start_list:'직접입력',value:this.start2},
     ];
 
-    this.spotList = ["한동대학교", "포항역", "양덕", "고속버스터미널", "시외버스터미널", "북부해수욕장", "육거리", "직접입력"];
+    this.arrive_list = [
+      {arrive_list:'한동대학교', value:'한동대학교'},
+      {arrive_list:'포항역', value:'포항역'},
+      {arrive_list:'양덕', value:'양덕'},
+      {arrive_list:'고속버스터미널', value:'고속버스터미널'},
+      {arrive_list:'시외버스터미널', value:'시외버스터미널'},
+      {arrive_list:'북부해수욕장', value:'북부해수욕장'},
+      {arrive_list:'육거리',value:'육거리'},
+      {arrive_list:'직접입력',value:this.arrive2},
+    ];
+
+    // this.spotList = ["한동대학교", "포항역", "양덕", "고속버스터미널", "시외버스터미널", "북부해수욕장", "육거리", "직접입력"];
+    
     this.user_id = navParams.data.user_id; //이게 파라미터로 자꾸 받으면 중간에 데이터가 손실되지 않도록 유지시켜줘야 한다.
   }
 
@@ -54,27 +90,106 @@ export class MakeRoomPage {
     return n < 10 ? '0' + n : '' + n;
   }
 
+  showConfirmAlert(){
+    if (this.arrive2 && this.start2)
+    {
+      this.depart = this.start2;
+      this.arrival = this.arrive2;
+      //this.arrive = this.arrive2;
+      //this.start = this.start2;
+    }
+    else if (this.arrive2 && !this.start2)
+      this.arrival = this.arrive2;
+      //this.arrive = this.arrive2;
+    else if (this.start2 && !this.arrive2)
+      this.depart = this.start2;
+      //this.start = this.start2;
+    else{
+      this.depart = this.start;
+      this.arrival = this.arrive;
+    }
+    
+    //전달할 메시지
+    this.msg = "<br>" + "출발지 : " + this.depart + "<br>" + 
+              "도착지 : " + this.arrival + "<br>" + 
+              "출발날짜 : " + this.bookingDate + "(" + this.week[new Date(this.bookingDate).getDay()] + ")" + "<br>" + 
+              "출발시간 : " + this.bookingTime + "<br>" +
+              "최대탑승인원 : " + this.maxPeople + "명" + "<br>" ;
+
+    if (this.start == this.arrive || this.start == this.arrive2 || this.start2 == this.arrive)
+    {
+      console.log("출발1 / 출발2 / 도착1 / 도착 2 ",this.start,this.start2,this.arrive,this.arrive2);
+      let alert = this.alertCtrl.create({
+        message: "출발지와 도착지를 다르게 입력하여 주세요.",
+        buttons: [{
+          text: '확인',
+          handler: () => {
+            console.log('Okay');
+          }
+        }
+        ]
+      });
+      alert.present(); 
+      /*
+      if (this.arrive2 && this.start2){
+        this.arrive ="직접입력";
+        this.start ="직접입력";
+      }
+      else if (this.arrive2) {
+        this.arrive ="직접입력";
+      }
+      else if (this.start2) {
+        this.start ="직접입력";
+      }
+      */
+    }
+
+    else if(this.start2 && this.arrive2 && this.start2 == this.arrive2) {
+      console.log("출발1 / 출발2 / 도착1 / 도착 2 ",this.start,this.start2,this.arrive,this.arrive2);
+      let alert = this.alertCtrl.create({
+        message: "출발지와 도착지를 다르게 입력하여 주세요.",
+        buttons: [{
+          text: '확인',
+          handler: () => {
+            console.log('Okay');
+          }
+        }
+        ]
+      });
+      alert.present(); 
+    }
+
+    else{
+      let alert = this.alertCtrl.create({
+        //title: '방만들기',
+        subTitle: '방을 만드시겠습니까?',  
+        message: this.msg,
+        cssClass: 'custom-alrt',
+        buttons: [
+          {
+            text: '취소',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
+          },
+          {
+            text: '확인',
+            handler: () => {
+              console.log('Okay');
+            }
+          }
+        ]
+      });
+      alert.present();
+    }
+                
+    
+  }
+
   showRadioAlert(){
     let alert = this.alertCtrl.create();
     alert.setTitle('최대탑승인원');
-    alert.addInput({
-      type: 'radio',
-      label: '1명',
-      value: '1',
-      checked: true,
-    });
-    alert.addInput({
-      type: 'radio',
-      label: '2명',
-      value: '2',
-    });
-    alert.addInput({
-      type: 'radio',
-      label: '3명',
-      value: '3',
-    });
-    alert.addButton('Cancel');
-
     if (this.bookingDate == this.nowDate && this.nowTime > this.bookingTime)
     {
       alert.setSubTitle('잘못된 시간입니다. 현재시간보다 뒤에 시간을 입력하여주세요.');
@@ -142,6 +257,7 @@ export class MakeRoomPage {
       });
     }
 
+    
    
 
     alert.present();
@@ -149,55 +265,29 @@ export class MakeRoomPage {
 
   };
 
-  showPeopleAlert(){
-    let alert = this.alertCtrl.create({
-      cssClass:'custom-alert',
-      buttons:[
-        {
-          cssClass:"people-button",                 
-        },
-        {
-          cssClass:"people-two-button",
-        },
-        {
-          cssClass:"people-three-button",
-        },
-        {
-          cssClass:"people-four-button",
-        },
-      ]
-          
-      });
-      alert.addButton('Cancel');
-      alert.addButton({
-        text: 'OK',
-        handler: data => {
-          if (this.arrive2)
-              this.arrive = this.arrive2;
-  
-          let participants_list = [];
-          participants_list.push(this.user_id);
-          let url;
-          this.chatrooms = this.af.list('/chatrooms/' + this.nowDate); //이 부분 날짜 수정
-  
-          url = this.chatrooms.push(
-              {
-                  departure: this.start,
-                  destination: this.arrive,
-                  depart_time: this.nowTime,
-                  depart_date: this.nowDate,
-                  capacity: 3, //여기 해결하기.
-                  host: this.user_id,
-                  participants: participants_list
-              }
-          );
-          this.navCtrl.setRoot(ChatRoomPage, {chat_room_id: url.key, bookingDate:this.bookingDate, user_id: this.user_id});  
-        }
-      });
-      alert.setTitle('탑승인원');
-      alert.present();
-      console.log("showPeopleAlert at makeRoom.ts");
-  };
+  getKday(){
+    this.today = this.week[new Date(this.bookingDate).getDay()];
+  }
+
+
+  showTestAlert(){
+    if (this.arrive2 && this.start2)
+    {
+      this.arrive = this.arrive2;
+      this.start = this.start2;
+    }
+    else if (this.arrive2 && !this.start2)
+      this.arrive = this.arrive2;
+    else if (this.start2 && !this.arrive2)
+      this.start = this.start2;
+
+    console.log("출발지 : ",this.start);
+    console.log("도착지 : ",this.arrive);
+    console.log("출발날짜 : ",this.bookingDate);
+    console.log("출발시간 : ",this.bookingTime);
+    console.log("오늘 요일 : " , this.week[this.forDate.getDay()]);
+    console.log("최대탑승인원 : ",this.maxPeople);
+  }
 
   startClick(){
     this.start = "한동대학교";
@@ -205,7 +295,7 @@ export class MakeRoomPage {
   }
 
   labelClick(){
-    this.arrive = "한동대학교";
+    this.arrive = "포항역";
     this.arrive2 = "";
   }
   
