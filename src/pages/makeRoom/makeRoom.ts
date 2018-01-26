@@ -5,6 +5,11 @@ import { AlertController } from 'ionic-angular';
 import { ChatRoomPage } from '../chatroom/chatroom';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
+import { UsersProvider } from '../../providers/users/users';
+import { DateProvider } from '../../providers/date/date';
+
+import { DatabaseQuery } from 'angularfire2/interfaces';
+
 @Component({
   selector: 'page-make-room',
   templateUrl: 'makeRoom.html',
@@ -23,32 +28,16 @@ export class MakeRoomPage {
   arrive_list: Array<{arrive_list:string, value:string}>;
 
   swap: string ="";
-
   maxPeople: string = "4"; 
-
   msg: string="";
 
   forDate: any = new Date();
   kDate: any = new Date();
 
-  testYear: string = this.forDate.getFullYear();
-  testMonth: string = this.addZ(this.forDate.getMonth()+1);
-  testDay: string = this.addZ(this.forDate.getDate());
-
-  test: string = this.testYear + "-" + this.testMonth + "-" + this.testDay;
-
-  //이전 방식에서 해가 바뀔 때 null 오류가 발생하여 수정.
-  //nowDate: string = new Date().toLocaleDateString().replace(/\./g,'').replace(/ /g,'-');
-  nowDate: string = this.test;
-  nowTime: string = new Date().toLocaleTimeString('en-US',{hour12:false}).substr(0,5);      
-  
+  nowDate: string = this.dateServices.nowDate;
+  nowTime: string = this.dateServices.nowTime;
   bookingDate: string = this.nowDate;
   bookingTime: string = this.nowTime;
-
-  //1년치만 예약 가능하도록 만들었다. 이전 방식에서 해가 바뀔 때 null 오류가 발생하여 수정.
-  //minYear: string = new Date().toLocaleDateString().replace(/\./g,'').replace(/ /g,'-');
-  minYear: string = this.test;
-  maxYear: string = (parseInt(this.minYear.substr(0,4))+1)+this.minYear.substr(4,this.minYear.length);
 
   week: Array<string> = new Array('일','월','화','수','목','금','토');
   today: string = this.week[this.forDate.getDay()];
@@ -57,10 +46,9 @@ export class MakeRoomPage {
   user_id: string; 
 
   spotList: any;
-
   
-  constructor(public alertCtrl: AlertController, public navParams: NavParams,
-               public navCtrl:NavController, public af: AngularFireDatabase){
+  constructor(public alertCtrl: AlertController, public navParams: NavParams, public dateServices: DateProvider,
+               public navCtrl:NavController, public af: AngularFireDatabase, public userServices: UsersProvider){
     this.start_list = [
       {start_list:'한동대학교', value:'한동대학교'},
       {start_list:'포항역', value:'포항역'},
@@ -71,7 +59,6 @@ export class MakeRoomPage {
       {start_list:'육거리',value:'육거리' },
       {start_list:'직접입력',value:this.start2},
     ];
-
     this.arrive_list = [
       {arrive_list:'한동대학교', value:'한동대학교'},
       {arrive_list:'포항역', value:'포항역'},
@@ -82,31 +69,11 @@ export class MakeRoomPage {
       {arrive_list:'육거리',value:'육거리'},
       {arrive_list:'직접입력',value:this.arrive2},
     ];
-
     this.spotList = ["한동대학교", "포항역", "양덕", "고속버스터미널", "시외버스터미널", "북부해수욕장", "육거리", "직접입력"];
-    
-    this.user_id = navParams.data.user_id; //이게 파라미터로 자꾸 받으면 중간에 데이터가 손실되지 않도록 유지시켜줘야 한다.
-
-    let now = new Date();
-    this.minYear = this.formatDate(now);
-    this.maxYear = this.formatDate(new Date(now.getFullYear() + 1, now.getMonth(), now.getDate()));
+  
+    this.user_id = this.userServices.getName();
   }
 
-  formatDate(date) {
-    var d = new Date(date);
-    let month = "" + (d.getMonth() + 1);
-    let day = "" + d.getDate();
-    let year = d.getFullYear();
-
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
-
-    return [year, month, day].join('-');
-  }
-
-  addZ(n) {
-    return n < 10 ? '0' + n : '' + n;
-  }
 
   showConfirmAlert(){
     if (this.arrive2 && this.start2)
@@ -201,8 +168,6 @@ export class MakeRoomPage {
       });
       alert.present();
     }
-                
-    
   }
 
   showRadioAlert(){
@@ -217,22 +182,6 @@ export class MakeRoomPage {
     }
     else {
       alert.setTitle('탑승인원');
-      alert.addInput({
-        type: 'radio',
-        label: '1명',
-        value: '1',
-        checked: true,
-      });
-      alert.addInput({
-        type: 'radio',
-        label: '2명',
-        value: '2',
-      });
-      alert.addInput({
-        type: 'radio',
-        label: '3명',
-        value: '3',
-      });
       alert.addInput({
         type: 'radio',
         label: '4명',
@@ -274,10 +223,6 @@ export class MakeRoomPage {
         }
       });
     }
-
-    
-   
-
     alert.present();
     console.log("showRadioAlert at makeRoom.ts");
 
