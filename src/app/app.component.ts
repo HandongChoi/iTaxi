@@ -16,6 +16,7 @@ import { TaxiListPage } from '../pages/taxi-list/taxi-list';
 import { RideHistoryPage } from '../pages/ride-history/ride-history';
 
 import { AuthProvider } from '../providers/auth/auth';
+import { UsersProvider } from '../providers/users/users';
 
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { FCM, NotificationData } from '@ionic-native/fcm';
@@ -47,7 +48,8 @@ export class MyApp {
 
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
-              public authProvider:AuthProvider, public alertCtrl: AlertController, public af: AngularFireDatabase, public fcm:FCM) {
+              public authProvider:AuthProvider, public alertCtrl: AlertController, public af: AngularFireDatabase,
+              public fcm:FCM, public userServices:UsersProvider) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -58,6 +60,7 @@ export class MyApp {
       { title: 'Setting', component: SettingPage},
       { title: 'SignupPage', component: SignupPage},
     ];
+
     const unsubscribe = firebase.auth().onAuthStateChanged( user => {
       if(!user){
         this.rootPage = LoginPage;
@@ -142,19 +145,14 @@ export class MyApp {
     console.log("leaveRoom() at app.componenent.ts");
   }
 
-  goSettingPage(){
-    this.navCtrl.setRoot(SettingPage, {user_id: this.user_id});
-    console.log("goTaxiListPage() at app.componenent.ts");
+  setPage(page){
+    this.navCtrl.setRoot(page);
+    console.log(page+" set at app.component.ts");
   }
 
-  goTaxiListPage(){
-    this.navCtrl.setRoot(TaxiListPage, {user_id: this.user_id});
-    console.log("goTaxiListPage() at app.componenent.ts");
-  }
-
-  goMakeTaxiRoomPage(){
-    this.navCtrl.setRoot(MakeRoomPage, {user_id: this.user_id});
-    console.log("goMakeTaxiRoomPage() at app.componenent.ts");
+  pushPage(page){
+    this.navCtrl.push(page, {user_id: this.user_id});
+    console.log(page+" push at app.component.ts");
   }
 
   goCarpoolListPage(){
@@ -165,21 +163,6 @@ export class MyApp {
   goMakeCarpoolRoomPage(){
     alert('Make Carpool Room Page');
     console.log("goMakeCarpoolRoomPage() at app.componenent.ts");
-  }
-
-  goBoardingListPage(){
-    this.navCtrl.setRoot(RideHistoryPage, {user_id: this.user_id});
-    console.log("goBoardingListPage() at app.componenent.ts");
-  }
-
-  goPersonalInfoPage(){
-    this.navCtrl.setRoot(PersonalInfoPage, {user_id: this.user_id});
-    console.log("goEditMyInfoPage() at app.componenent.ts");
-  }
-
-  goMainPage(){
-    this.navCtrl.setRoot(MainPage, {user_id: this.user_id});
-    console.log("goMainPage() at app.componenent.ts");
   }
 
   logout(){

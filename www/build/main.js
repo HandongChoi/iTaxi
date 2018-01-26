@@ -1,5 +1,92 @@
 webpackJsonp([6],{
 
+/***/ 121:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PersonalInfoPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__main_main__ = __webpack_require__(40);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var PersonalInfoPage = (function () {
+    function PersonalInfoPage(navCtrl, navParams, viewCtrl, alertCtrl, af, formBuilder) {
+        var _this = this;
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.viewCtrl = viewCtrl;
+        this.alertCtrl = alertCtrl;
+        this.af = af;
+        this.user_dic = {};
+        this.updateForm = formBuilder.group({
+            name: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required])],
+            phoneNumber: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required])],
+            studentID: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required])],
+        });
+        this.user = firebase.auth().currentUser;
+        af.list('/userProfile/' + this.user.uid).subscribe(function (data) {
+            data.forEach(function (data) {
+                _this.user_dic[data.$key] = data.$value;
+            });
+        });
+    }
+    PersonalInfoPage.prototype.updateUserInfo = function () {
+        var revise_name = this.updateForm.value.name;
+        var revise_phoneNumber = this.updateForm.value.phoneNumber;
+        var revise_studentID = this.updateForm.value.studentID;
+        this.user_object = this.af.object('/userProfile/' + this.user.uid);
+        this.user_object.update({
+            name: revise_name,
+            phoneNumber: revise_phoneNumber,
+            studentID: revise_studentID,
+        });
+        console.log("Success Update");
+    };
+    PersonalInfoPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad PersonalInfoPage');
+    };
+    PersonalInfoPage.prototype.dismiss = function () {
+        this.viewCtrl.dismiss();
+        console.log('dismiss page');
+    };
+    PersonalInfoPage.prototype.showAlert = function () {
+        var alert = this.alertCtrl.create({
+            title: '개인정보 수정',
+            subTitle: '개인정보가 성공적으로 변경되었습니다.',
+            buttons: ['확인']
+        });
+        alert.present();
+        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_4__main_main__["a" /* MainPage */]);
+    };
+    return PersonalInfoPage;
+}());
+PersonalInfoPage = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'page-personal-info',template:/*ion-inline-start:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/personal-info/personal-info.html"*/'<ion-header>\n  <ion-navbar  color = "primary">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>개인정보 수정</ion-title>\n    <ion-buttons start>\n      <button ion-button (click)="dismiss()">\n        <span ion-text showWhen="ios">Cancel</span>\n        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>\n      </button>\n    </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <form [formGroup]="updateForm" (submit)="updateUserInfo()" novalidate>\n    <ion-item>\n      <ion-label stacked>이름</ion-label>\n      <ion-input formControlName="name" type="name" value="{{user_dic.name}}"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label stacked>학번</ion-label>\n      <ion-input formControlName="studentID" type="studentID" value="{{user_dic.studentID}}"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label stacked>전화번호</ion-label>\n      <ion-input formControlName="phoneNumber" type="phoneNumber" value="{{user_dic.phoneNumber}}"></ion-input>\n    </ion-item>\n  <!--\n    <ion-item>\n      <ion-label stacked>새로운 비밀번호</ion-label>\n      <ion-input formControlName="newPassword" type="newPassword"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label stacked>비밀번호 확인</ion-label>\n      <ion-input formControlName="newPasswordCheck" type="newPasswordCheck"></ion-input>\n    </ion-item>\n  -->\n    <div padding>\n      <button ion-button block type="submit" (click)="showAlert()">변경하기</button>\n    </div>\n  </form>\n\n</ion-content>\n'/*ion-inline-end:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/personal-info/personal-info.html"*/,
+    }),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["ViewController"],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["AlertController"], __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__["a" /* AngularFireDatabase */], __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]])
+], PersonalInfoPage);
+
+//# sourceMappingURL=personal-info.js.map
+
+/***/ }),
+
 /***/ 122:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -64,11 +151,12 @@ var RideHistoryPage = (function () {
 }());
 RideHistoryPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-ride-history',template:/*ion-inline-start:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/ride-history/ride-history.html"*/'<!--\n  Generated template for the RideHistoryPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar color="primary">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>i-Taxi >> 탑승내역조회</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content>\n  <div>\n    <ion-grid>\n      <ion-item-group *ngFor = "let chatroomDatum of chatroomData;">\n        <ion-item-divider color="light" (click)="goChatroom(chatroomDatum)">\n          <ion-row>\n            <ion-col col-3>\n              <p>{{chatroomDatum.roomDate}}</p>\n              <p>{{chatroomDatum.roomTime}}</p>\n            </ion-col>\n            <ion-col col-7>\n              <p>{{chatroomDatum.roomDepart}}</p>\n              <p>>{{chatroomDatum.roomDest}}</p>\n            </ion-col>\n            <ion-col col-2>\n              <p>{{chatroomDatum.roomParticipants.length}} / {{chatroomDatum.roomCapacity}}</p>\n              <p>참여중</p>\n            </ion-col>\n          </ion-row>\n        <div class="button-effect"></div>\n        </ion-item-divider>\n      </ion-item-group>\n    </ion-grid>\n  </div>\n</ion-content>\n'/*ion-inline-end:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/ride-history/ride-history.html"*/,
+        selector: 'page-ride-history',template:/*ion-inline-start:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/ride-history/ride-history.html"*/'<ion-header>\n  <ion-navbar color="primary">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>i-Taxi >> 탑승내역조회</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content>\n  <div>\n    <ion-grid>\n      <ion-item-group *ngFor = "let chatroomDatum of chatroomData;">\n        <ion-item-divider color="light" (click)="goChatroom(chatroomDatum)">\n          <ion-row>\n            <ion-col col-3>\n              <p>{{chatroomDatum.roomDate}}</p>\n              <p>{{chatroomDatum.roomTime}}</p>\n            </ion-col>\n            <ion-col col-7>\n              <p>{{chatroomDatum.roomDepart}}</p>\n              <p>>{{chatroomDatum.roomDest}}</p>\n            </ion-col>\n            <ion-col col-2>\n              <p>{{chatroomDatum.roomParticipants.length}} / {{chatroomDatum.roomCapacity}}</p>\n              <p>참여중</p>\n            </ion-col>\n          </ion-row>\n        <div class="button-effect"></div>\n        </ion-item-divider>\n      </ion-item-group>\n    </ion-grid>\n  </div>\n</ion-content>\n'/*ion-inline-end:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/ride-history/ride-history.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"], __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["a" /* AngularFireDatabase */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["a" /* AngularFireDatabase */]) === "function" && _c || Object])
 ], RideHistoryPage);
 
+var _a, _b, _c;
 //# sourceMappingURL=ride-history.js.map
 
 /***/ }),
@@ -81,7 +169,7 @@ RideHistoryPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__login_login__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__login_login__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__ = __webpack_require__(20);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -178,34 +266,29 @@ webpackEmptyAsyncContext.id = 131;
 
 var map = {
 	"../pages/login/login.module": [
-		450,
-		5
+		450
 	],
 	"../pages/main/main.module": [
 		451,
 		4
 	],
 	"../pages/personal-info/personal-info.module": [
-		452,
-		3
+		452
 	],
 	"../pages/reset-password/reset-password.module": [
-		305
+		184
 	],
 	"../pages/ride-history/ride-history.module": [
-		453,
-		2
+		453
 	],
 	"../pages/setting/setting.module": [
-		454,
-		1
+		454
 	],
 	"../pages/signup/signup.module": [
 		307
 	],
 	"../pages/taxi-list/taxi-list.module": [
-		455,
-		0
+		455
 	]
 };
 function webpackAsyncContext(req) {
@@ -224,7 +307,7 @@ module.exports = webpackAsyncContext;
 
 /***/ }),
 
-/***/ 305:
+/***/ 184:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -232,7 +315,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ResetPasswordPageModule", function() { return ResetPasswordPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__reset_password__ = __webpack_require__(306);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__reset_password__ = __webpack_require__(185);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -262,7 +345,7 @@ ResetPasswordPageModule = __decorate([
 
 /***/ }),
 
-/***/ 306:
+/***/ 185:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -342,7 +425,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SignupPageModule", function() { return SignupPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__signup__ = __webpack_require__(98);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__signup__ = __webpack_require__(97);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -431,38 +514,34 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(437);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_chatroom_chatroom__ = __webpack_require__(59);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_home_home__ = __webpack_require__(350);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_login_login__ = __webpack_require__(50);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_main_main__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_makeRoom_makeRoom__ = __webpack_require__(95);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_personal_info_personal_info__ = __webpack_require__(64);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_reset_password_reset_password__ = __webpack_require__(306);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_setting_setting__ = __webpack_require__(123);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_signup_signup__ = __webpack_require__(98);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_taxi_list_taxi_list__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_ride_history_ride_history__ = __webpack_require__(122);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_angularfire2__ = __webpack_require__(446);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_angularfire2_database__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__ionic_native_status_bar__ = __webpack_require__(347);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ionic_native_splash_screen__ = __webpack_require__(349);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__providers_auth_auth__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_signup_signup_module__ = __webpack_require__(307);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_reset_password_reset_password_module__ = __webpack_require__(305);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22_ionic2_date_picker__ = __webpack_require__(184);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22_ionic2_date_picker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_22_ionic2_date_picker__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__ionic_native_fcm__ = __webpack_require__(351);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__pipes_date_pipe__ = __webpack_require__(447);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__providers_date_date__ = __webpack_require__(448);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__providers_users_users__ = __webpack_require__(97);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(350);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_makeRoom_makeRoom__ = __webpack_require__(95);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_main_main__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angularfire2__ = __webpack_require__(446);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2_database__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_status_bar__ = __webpack_require__(347);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_splash_screen__ = __webpack_require__(349);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__providers_auth_auth__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_ionic2_date_picker__ = __webpack_require__(186);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_ionic2_date_picker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12_ionic2_date_picker__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_taxi_list_taxi_list_module__ = __webpack_require__(455);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_chatroom_chatroom_module__ = __webpack_require__(456);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_login_login_module__ = __webpack_require__(450);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_personal_info_personal_info_module__ = __webpack_require__(452);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_setting_setting_module__ = __webpack_require__(454);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_signup_signup_module__ = __webpack_require__(307);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_reset_password_reset_password_module__ = __webpack_require__(184);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_ride_history_ride_history_module__ = __webpack_require__(453);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__ionic_native_fcm__ = __webpack_require__(351);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pipes_date_pipe__ = __webpack_require__(447);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__providers_date_date__ = __webpack_require__(448);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__providers_users_users__ = __webpack_require__(49);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
-
 
 
 
@@ -505,16 +584,10 @@ AppModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["NgModule"])({
         declarations: [
             __WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* MyApp */],
-            __WEBPACK_IMPORTED_MODULE_4__pages_chatroom_chatroom__["a" /* ChatRoomPage */],
-            __WEBPACK_IMPORTED_MODULE_5__pages_home_home__["a" /* HomePage */],
-            __WEBPACK_IMPORTED_MODULE_6__pages_login_login__["a" /* LoginPage */],
-            __WEBPACK_IMPORTED_MODULE_7__pages_main_main__["a" /* MainPage */],
-            __WEBPACK_IMPORTED_MODULE_8__pages_makeRoom_makeRoom__["a" /* MakeRoomPage */],
-            __WEBPACK_IMPORTED_MODULE_9__pages_personal_info_personal_info__["a" /* PersonalInfoPage */],
-            __WEBPACK_IMPORTED_MODULE_11__pages_setting_setting__["a" /* SettingPage */],
-            __WEBPACK_IMPORTED_MODULE_13__pages_taxi_list_taxi_list__["a" /* TaxiListPage */],
-            __WEBPACK_IMPORTED_MODULE_14__pages_ride_history_ride_history__["a" /* RideHistoryPage */],
-            __WEBPACK_IMPORTED_MODULE_24__pipes_date_pipe__["a" /* DatePipe */],
+            __WEBPACK_IMPORTED_MODULE_4__pages_home_home__["a" /* HomePage */],
+            __WEBPACK_IMPORTED_MODULE_5__pages_makeRoom_makeRoom__["a" /* MakeRoomPage */],
+            __WEBPACK_IMPORTED_MODULE_22__pipes_date_pipe__["a" /* DatePipe */],
+            __WEBPACK_IMPORTED_MODULE_6__pages_main_main__["a" /* MainPage */],
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -530,35 +603,33 @@ AppModule = __decorate([
                     { loadChildren: '../pages/taxi-list/taxi-list.module#TaxiListPageModule', name: 'TaxiListPage', segment: 'taxi-list', priority: 'low', defaultHistory: [] }
                 ]
             }),
-            __WEBPACK_IMPORTED_MODULE_15_angularfire2__["a" /* AngularFireModule */].initializeApp(firebaseConfig),
-            __WEBPACK_IMPORTED_MODULE_16_angularfire2_database__["b" /* AngularFireDatabaseModule */],
-            __WEBPACK_IMPORTED_MODULE_20__pages_signup_signup_module__["SignupPageModule"],
-            __WEBPACK_IMPORTED_MODULE_21__pages_reset_password_reset_password_module__["ResetPasswordPageModule"],
-            __WEBPACK_IMPORTED_MODULE_22_ionic2_date_picker__["DatePickerModule"],
+            __WEBPACK_IMPORTED_MODULE_7_angularfire2__["a" /* AngularFireModule */].initializeApp(firebaseConfig),
+            __WEBPACK_IMPORTED_MODULE_8_angularfire2_database__["b" /* AngularFireDatabaseModule */],
+            __WEBPACK_IMPORTED_MODULE_12_ionic2_date_picker__["DatePickerModule"],
+            __WEBPACK_IMPORTED_MODULE_14__pages_chatroom_chatroom_module__["a" /* ChatRoomPageModule */],
+            __WEBPACK_IMPORTED_MODULE_15__pages_login_login_module__["LoginPageModule"],
+            __WEBPACK_IMPORTED_MODULE_13__pages_taxi_list_taxi_list_module__["TaxiListPageModule"],
+            __WEBPACK_IMPORTED_MODULE_16__pages_personal_info_personal_info_module__["PersonalInfoPageModule"],
+            __WEBPACK_IMPORTED_MODULE_17__pages_setting_setting_module__["SettingPageModule"],
+            __WEBPACK_IMPORTED_MODULE_18__pages_signup_signup_module__["SignupPageModule"],
+            __WEBPACK_IMPORTED_MODULE_19__pages_reset_password_reset_password_module__["ResetPasswordPageModule"],
+            __WEBPACK_IMPORTED_MODULE_20__pages_ride_history_ride_history_module__["RideHistoryPageModule"],
         ],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["IonicApp"]],
         entryComponents: [
             __WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* MyApp */],
-            __WEBPACK_IMPORTED_MODULE_4__pages_chatroom_chatroom__["a" /* ChatRoomPage */],
-            __WEBPACK_IMPORTED_MODULE_5__pages_home_home__["a" /* HomePage */],
-            __WEBPACK_IMPORTED_MODULE_6__pages_login_login__["a" /* LoginPage */],
-            __WEBPACK_IMPORTED_MODULE_7__pages_main_main__["a" /* MainPage */],
-            __WEBPACK_IMPORTED_MODULE_8__pages_makeRoom_makeRoom__["a" /* MakeRoomPage */],
-            __WEBPACK_IMPORTED_MODULE_9__pages_personal_info_personal_info__["a" /* PersonalInfoPage */],
-            __WEBPACK_IMPORTED_MODULE_10__pages_reset_password_reset_password__["a" /* ResetPasswordPage */],
-            __WEBPACK_IMPORTED_MODULE_11__pages_setting_setting__["a" /* SettingPage */],
-            __WEBPACK_IMPORTED_MODULE_12__pages_signup_signup__["a" /* SignupPage */],
-            __WEBPACK_IMPORTED_MODULE_13__pages_taxi_list_taxi_list__["a" /* TaxiListPage */],
-            __WEBPACK_IMPORTED_MODULE_14__pages_ride_history_ride_history__["a" /* RideHistoryPage */],
+            __WEBPACK_IMPORTED_MODULE_4__pages_home_home__["a" /* HomePage */],
+            __WEBPACK_IMPORTED_MODULE_5__pages_makeRoom_makeRoom__["a" /* MakeRoomPage */],
+            __WEBPACK_IMPORTED_MODULE_6__pages_main_main__["a" /* MainPage */],
         ],
         providers: [
-            __WEBPACK_IMPORTED_MODULE_17__ionic_native_status_bar__["a" /* StatusBar */],
-            __WEBPACK_IMPORTED_MODULE_18__ionic_native_splash_screen__["a" /* SplashScreen */],
+            __WEBPACK_IMPORTED_MODULE_9__ionic_native_status_bar__["a" /* StatusBar */],
+            __WEBPACK_IMPORTED_MODULE_10__ionic_native_splash_screen__["a" /* SplashScreen */],
             { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["ErrorHandler"], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["IonicErrorHandler"] },
-            __WEBPACK_IMPORTED_MODULE_19__providers_auth_auth__["a" /* AuthProvider */],
-            __WEBPACK_IMPORTED_MODULE_23__ionic_native_fcm__["a" /* FCM */],
-            __WEBPACK_IMPORTED_MODULE_25__providers_date_date__["a" /* DateProvider */],
-            __WEBPACK_IMPORTED_MODULE_26__providers_users_users__["a" /* UsersProvider */],
+            __WEBPACK_IMPORTED_MODULE_11__providers_auth_auth__["a" /* AuthProvider */],
+            __WEBPACK_IMPORTED_MODULE_21__ionic_native_fcm__["a" /* FCM */],
+            __WEBPACK_IMPORTED_MODULE_23__providers_date_date__["a" /* DateProvider */],
+            __WEBPACK_IMPORTED_MODULE_24__providers_users_users__["a" /* UsersProvider */],
         ]
     })
 ], AppModule);
@@ -620,8 +691,6 @@ var AuthProvider = (function () {
     };
     AuthProvider.prototype.logoutUser = function () {
         var userId = __WEBPACK_IMPORTED_MODULE_2_firebase___default.a.auth().currentUser.uid;
-        console.log("auth Test!!");
-        console.log(__WEBPACK_IMPORTED_MODULE_2_firebase___default.a.auth().currentUser.uid);
         __WEBPACK_IMPORTED_MODULE_2_firebase___default.a.database().ref("/userProfile/" + userId).off();
         return __WEBPACK_IMPORTED_MODULE_2_firebase___default.a.auth().signOut();
     };
@@ -643,10 +712,8 @@ AuthProvider = __decorate([
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MainPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__taxi_list_taxi_list__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__personal_info_personal_info__ = __webpack_require__(64);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_users_users__ = __webpack_require__(97);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_users_users__ = __webpack_require__(49);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -656,8 +723,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
-
 
 
 
@@ -686,277 +751,276 @@ var MainPage = (function () {
         //   this.dates_array.push(data);
         // });
     }
+    MainPage.prototype.ioniViewDidLoad = function () {
+        console.log("ionViewDidLoad at main.ts");
+    };
     MainPage.prototype.stringParser = function (sentence) {
         var parsedID = sentence.replace('@', '');
         parsedID = parsedID.replace('.', '');
         return parsedID;
     };
-    MainPage.prototype.goTaxiListPage = function () {
-        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__taxi_list_taxi_list__["a" /* TaxiListPage */], { user_id: this.user });
-        console.log("goTaxiListPage at main.ts");
+    MainPage.prototype.setPage = function (page) {
+        this.navCtrl.setRoot(page, { user_id: this.user });
+        console.log(page + " at main.ts");
     };
     MainPage.prototype.goCarpoolListPage = function () {
         alert('Carpool Page');
         console.log("goCarpoolListPage at main.ts");
     };
-    MainPage.prototype.goMyPage = function () {
-        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__personal_info_personal_info__["a" /* PersonalInfoPage */], { user_id: this.user });
-        console.log("goMyPage at main.ts");
-    };
     return MainPage;
 }());
 MainPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-main',template:/*ion-inline-start:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/main/main.html"*/'<ion-header>\n  <ion-navbar color="primary">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>i-Taxi</ion-title>\n  </ion-navbar>\n\n  <button ion-item color="light2" style="font-size: 1.3rem" (click)="openTaxiList()">\n    <ion-icon name="ios-information-circle-outline" item-start></ion-icon>\n    공지사항입니다. 공지사항입니다.\n  </button>\n  <!--\n  <ion-card (click)="openTaxiList()">\n    <img src="../../assets/imgs/taxi.png"/>\n    <div class="card-title">i-Taxi</div>\n    <div class="card-subtitle">타러가기</div>\n  </ion-card>\n  <ion-card (click)="openTaxiList()">\n    <img src="../../assets/imgs/taxi.png"/>\n    <div class="card-title">i-Taxi</div>\n    <div class="card-subtitle">타러가기</div>\n  </ion-card> -->\n</ion-header>\n<ion-content>\n\n  <ion-buttons>\n    <button ion-button large full icon-left (click)="goTaxiListPage()">\n      <ion-icon name="car"></ion-icon>\n      i-Taxi 탑승\n    </button>\n    <button ion-button large full color="secondary" icon-left (click)="goCarpoolListPage()">\n      <ion-icon name="car"></ion-icon>\n      카풀 탑승\n    </button>\n    <button ion-button large full color="tertiary" icon-left (click)="goMyPage()">\n      <ion-icon name="person"></ion-icon>\n      마이페이지\n    </button>\n\n    <!--\n  round button\n    <ion-grid>\n      <ion-row justify-content-center style="padding: 10px 0; margin-top: 25px">\n        <button ion-button round class="customBtn" icon-left (click)="goTaxiListPage()" >\n          i-Taxi 탑승\n        </button>\n      </ion-row>\n      <ion-row justify-content-center style="padding: 10px 0">\n        <button ion-button round class="customBtn" color="secondary" icon-left (click)="goCarpoolListPage()">\n          카풀 탑승\n        </button>\n      </ion-row>\n      <ion-row justify-content-center style="padding: 10px 0">\n        <button ion-button round class="customBtn" color="tertiary" icon-left (click)="goMyPage()" >\n          마이페이지\n        </button>\n      </ion-row>\n    </ion-grid>\n  -->\n  </ion-buttons>\n\n  <!-- my Ticket -->\n  <div *ngFor="let dates of dates_array">\n    <ion-card style="border-radius:5px; margin-top:30px" *ngFor="let date of dates | DatePipe">\n      <ion-row style="background-color:#0054a6; color:white; padding:5px 0 5px 15px">\n        {{date.roomDate}}\n      </ion-row>\n      <ion-row>\n        <ion-col col-4 text-center style="border-right: 1px solid #ddd9d9">\n          <h3>Taxi</h3>\n          <p style="font-size: 9px">현 {{date.roomParticipants.length}}/{{date.roomCapacity}} 명</p>\n        </ion-col>\n        <ion-col text-center>\n          <h3>{{date.roomDepart}} <ion-icon name="arrow-forward"></ion-icon>{{date.roomDest}}</h3>\n          <p padding-left style="font-size: 10px">{{date.roomTime}}</p>\n        </ion-col>\n      </ion-row>\n    </ion-card>\n  </div>\n\n\n\n  <!-- <button ion-button secondary menuToggle>Toggle Menu</button> -->\n</ion-content>\n'/*ion-inline-end:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/main/main.html"*/,
+        selector: 'page-main',template:/*ion-inline-start:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/main/main.html"*/'<ion-header>\n  <ion-navbar color="primary">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>i-Taxi</ion-title>\n  </ion-navbar>\n\n  <button ion-item color="light2" style="font-size: 1.3rem" (click)="openTaxiList()">\n    <ion-icon name="ios-information-circle-outline" item-start></ion-icon>\n    공지사항입니다. 공지사항입니다.\n  </button>\n  <!--\n  <ion-card (click)="openTaxiList()">\n    <img src="../../assets/imgs/taxi.png"/>\n    <div class="card-title">i-Taxi</div>\n    <div class="card-subtitle">타러가기</div>\n  </ion-card>\n  <ion-card (click)="openTaxiList()">\n    <img src="../../assets/imgs/taxi.png"/>\n    <div class="card-title">i-Taxi</div>\n    <div class="card-subtitle">타러가기</div>\n  </ion-card> -->\n</ion-header>\n<ion-content>\n\n  <ion-buttons>\n    <button ion-button large full icon-left (click)="setPage(\'TaxiListPage\')">\n      <ion-icon name="car"></ion-icon>\n      i-Taxi 탑승\n    </button>\n    <button ion-button large full color="secondary" icon-left (click)="setPage(\'TaxiListPage\')">\n      <ion-icon name="car"></ion-icon>\n      카풀 탑승\n    </button>\n    <button ion-button large full color="tertiary" icon-left (click)="setPage(\'PersonalInfoPage\')">\n      <ion-icon name="person"></ion-icon>\n      마이페이지\n    </button>\n\n    <!--\n  round button\n    <ion-grid>\n      <ion-row justify-content-center style="padding: 10px 0; margin-top: 25px">\n        <button ion-button round class="customBtn" icon-left (click)="goTaxiListPage()" >\n          i-Taxi 탑승\n        </button>\n      </ion-row>\n      <ion-row justify-content-center style="padding: 10px 0">\n        <button ion-button round class="customBtn" color="secondary" icon-left (click)="goCarpoolListPage()">\n          카풀 탑승\n        </button>\n      </ion-row>\n      <ion-row justify-content-center style="padding: 10px 0">\n        <button ion-button round class="customBtn" color="tertiary" icon-left (click)="goMyPage()" >\n          마이페이지\n        </button>\n      </ion-row>\n    </ion-grid>\n  -->\n  </ion-buttons>\n\n  <!-- my Ticket -->\n  <div *ngFor="let dates of dates_array">\n    <ion-card style="border-radius:5px; margin-top:30px" *ngFor="let date of dates | DatePipe">\n      <ion-row style="background-color:#0054a6; color:white; padding:5px 0 5px 15px">\n        {{date.roomDate}}\n      </ion-row>\n      <ion-row>\n        <ion-col col-4 text-center style="border-right: 1px solid #ddd9d9">\n          <h3>Taxi</h3>\n          <p style="font-size: 9px">현 {{date.roomParticipants.length}}/{{date.roomCapacity}} 명</p>\n        </ion-col>\n        <ion-col text-center>\n          <h3>{{date.roomDepart}} <ion-icon name="arrow-forward"></ion-icon>{{date.roomDest}}</h3>\n          <p padding-left style="font-size: 10px">{{date.roomTime}}</p>\n        </ion-col>\n      </ion-row>\n    </ion-card>\n  </div>\n\n\n\n  <!-- <button ion-button secondary menuToggle>Toggle Menu</button> -->\n</ion-content>\n'/*ion-inline-end:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/main/main.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"], __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__["a" /* AngularFireDatabase */],
-        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["MenuController"], __WEBPACK_IMPORTED_MODULE_5__providers_users_users__["a" /* UsersProvider */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["a" /* AngularFireDatabase */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["MenuController"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["MenuController"]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__providers_users_users__["a" /* UsersProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_users_users__["a" /* UsersProvider */]) === "function" && _e || Object])
 ], MainPage);
 
+var _a, _b, _c, _d, _e;
 //# sourceMappingURL=main.js.map
 
 /***/ }),
 
-/***/ 414:
+/***/ 413:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./af": 187,
-	"./af.js": 187,
-	"./ar": 188,
-	"./ar-dz": 189,
-	"./ar-dz.js": 189,
-	"./ar-kw": 190,
-	"./ar-kw.js": 190,
-	"./ar-ly": 191,
-	"./ar-ly.js": 191,
-	"./ar-ma": 192,
-	"./ar-ma.js": 192,
-	"./ar-sa": 193,
-	"./ar-sa.js": 193,
-	"./ar-tn": 194,
-	"./ar-tn.js": 194,
-	"./ar.js": 188,
-	"./az": 195,
-	"./az.js": 195,
-	"./be": 196,
-	"./be.js": 196,
-	"./bg": 197,
-	"./bg.js": 197,
-	"./bm": 198,
-	"./bm.js": 198,
-	"./bn": 199,
-	"./bn.js": 199,
-	"./bo": 200,
-	"./bo.js": 200,
-	"./br": 201,
-	"./br.js": 201,
-	"./bs": 202,
-	"./bs.js": 202,
-	"./ca": 203,
-	"./ca.js": 203,
-	"./cs": 204,
-	"./cs.js": 204,
-	"./cv": 205,
-	"./cv.js": 205,
-	"./cy": 206,
-	"./cy.js": 206,
-	"./da": 207,
-	"./da.js": 207,
-	"./de": 208,
-	"./de-at": 209,
-	"./de-at.js": 209,
-	"./de-ch": 210,
-	"./de-ch.js": 210,
-	"./de.js": 208,
-	"./dv": 211,
-	"./dv.js": 211,
-	"./el": 212,
-	"./el.js": 212,
-	"./en-au": 213,
-	"./en-au.js": 213,
-	"./en-ca": 214,
-	"./en-ca.js": 214,
-	"./en-gb": 215,
-	"./en-gb.js": 215,
-	"./en-ie": 216,
-	"./en-ie.js": 216,
-	"./en-nz": 217,
-	"./en-nz.js": 217,
-	"./eo": 218,
-	"./eo.js": 218,
-	"./es": 219,
-	"./es-do": 220,
-	"./es-do.js": 220,
-	"./es-us": 221,
-	"./es-us.js": 221,
-	"./es.js": 219,
-	"./et": 222,
-	"./et.js": 222,
-	"./eu": 223,
-	"./eu.js": 223,
-	"./fa": 224,
-	"./fa.js": 224,
-	"./fi": 225,
-	"./fi.js": 225,
-	"./fo": 226,
-	"./fo.js": 226,
-	"./fr": 227,
-	"./fr-ca": 228,
-	"./fr-ca.js": 228,
-	"./fr-ch": 229,
-	"./fr-ch.js": 229,
-	"./fr.js": 227,
-	"./fy": 230,
-	"./fy.js": 230,
-	"./gd": 231,
-	"./gd.js": 231,
-	"./gl": 232,
-	"./gl.js": 232,
-	"./gom-latn": 233,
-	"./gom-latn.js": 233,
-	"./gu": 234,
-	"./gu.js": 234,
-	"./he": 235,
-	"./he.js": 235,
-	"./hi": 236,
-	"./hi.js": 236,
-	"./hr": 237,
-	"./hr.js": 237,
-	"./hu": 238,
-	"./hu.js": 238,
-	"./hy-am": 239,
-	"./hy-am.js": 239,
-	"./id": 240,
-	"./id.js": 240,
-	"./is": 241,
-	"./is.js": 241,
-	"./it": 242,
-	"./it.js": 242,
-	"./ja": 243,
-	"./ja.js": 243,
-	"./jv": 244,
-	"./jv.js": 244,
-	"./ka": 245,
-	"./ka.js": 245,
-	"./kk": 246,
-	"./kk.js": 246,
-	"./km": 247,
-	"./km.js": 247,
-	"./kn": 248,
-	"./kn.js": 248,
-	"./ko": 249,
-	"./ko.js": 249,
-	"./ky": 250,
-	"./ky.js": 250,
-	"./lb": 251,
-	"./lb.js": 251,
-	"./lo": 252,
-	"./lo.js": 252,
-	"./lt": 253,
-	"./lt.js": 253,
-	"./lv": 254,
-	"./lv.js": 254,
-	"./me": 255,
-	"./me.js": 255,
-	"./mi": 256,
-	"./mi.js": 256,
-	"./mk": 257,
-	"./mk.js": 257,
-	"./ml": 258,
-	"./ml.js": 258,
-	"./mr": 259,
-	"./mr.js": 259,
-	"./ms": 260,
-	"./ms-my": 261,
-	"./ms-my.js": 261,
-	"./ms.js": 260,
-	"./my": 262,
-	"./my.js": 262,
-	"./nb": 263,
-	"./nb.js": 263,
-	"./ne": 264,
-	"./ne.js": 264,
-	"./nl": 265,
-	"./nl-be": 266,
-	"./nl-be.js": 266,
-	"./nl.js": 265,
-	"./nn": 267,
-	"./nn.js": 267,
-	"./pa-in": 268,
-	"./pa-in.js": 268,
-	"./pl": 269,
-	"./pl.js": 269,
-	"./pt": 270,
-	"./pt-br": 271,
-	"./pt-br.js": 271,
-	"./pt.js": 270,
-	"./ro": 272,
-	"./ro.js": 272,
-	"./ru": 273,
-	"./ru.js": 273,
-	"./sd": 274,
-	"./sd.js": 274,
-	"./se": 275,
-	"./se.js": 275,
-	"./si": 276,
-	"./si.js": 276,
-	"./sk": 277,
-	"./sk.js": 277,
-	"./sl": 278,
-	"./sl.js": 278,
-	"./sq": 279,
-	"./sq.js": 279,
-	"./sr": 280,
-	"./sr-cyrl": 281,
-	"./sr-cyrl.js": 281,
-	"./sr.js": 280,
-	"./ss": 282,
-	"./ss.js": 282,
-	"./sv": 283,
-	"./sv.js": 283,
-	"./sw": 284,
-	"./sw.js": 284,
-	"./ta": 285,
-	"./ta.js": 285,
-	"./te": 286,
-	"./te.js": 286,
-	"./tet": 287,
-	"./tet.js": 287,
-	"./th": 288,
-	"./th.js": 288,
-	"./tl-ph": 289,
-	"./tl-ph.js": 289,
-	"./tlh": 290,
-	"./tlh.js": 290,
-	"./tr": 291,
-	"./tr.js": 291,
-	"./tzl": 292,
-	"./tzl.js": 292,
-	"./tzm": 293,
-	"./tzm-latn": 294,
-	"./tzm-latn.js": 294,
-	"./tzm.js": 293,
-	"./uk": 295,
-	"./uk.js": 295,
-	"./ur": 296,
-	"./ur.js": 296,
-	"./uz": 297,
-	"./uz-latn": 298,
-	"./uz-latn.js": 298,
-	"./uz.js": 297,
-	"./vi": 299,
-	"./vi.js": 299,
-	"./x-pseudo": 300,
-	"./x-pseudo.js": 300,
-	"./yo": 301,
-	"./yo.js": 301,
-	"./zh-cn": 302,
-	"./zh-cn.js": 302,
-	"./zh-hk": 303,
-	"./zh-hk.js": 303,
-	"./zh-tw": 304,
-	"./zh-tw.js": 304
+	"./af": 189,
+	"./af.js": 189,
+	"./ar": 190,
+	"./ar-dz": 191,
+	"./ar-dz.js": 191,
+	"./ar-kw": 192,
+	"./ar-kw.js": 192,
+	"./ar-ly": 193,
+	"./ar-ly.js": 193,
+	"./ar-ma": 194,
+	"./ar-ma.js": 194,
+	"./ar-sa": 195,
+	"./ar-sa.js": 195,
+	"./ar-tn": 196,
+	"./ar-tn.js": 196,
+	"./ar.js": 190,
+	"./az": 197,
+	"./az.js": 197,
+	"./be": 198,
+	"./be.js": 198,
+	"./bg": 199,
+	"./bg.js": 199,
+	"./bm": 200,
+	"./bm.js": 200,
+	"./bn": 201,
+	"./bn.js": 201,
+	"./bo": 202,
+	"./bo.js": 202,
+	"./br": 203,
+	"./br.js": 203,
+	"./bs": 204,
+	"./bs.js": 204,
+	"./ca": 205,
+	"./ca.js": 205,
+	"./cs": 206,
+	"./cs.js": 206,
+	"./cv": 207,
+	"./cv.js": 207,
+	"./cy": 208,
+	"./cy.js": 208,
+	"./da": 209,
+	"./da.js": 209,
+	"./de": 210,
+	"./de-at": 211,
+	"./de-at.js": 211,
+	"./de-ch": 212,
+	"./de-ch.js": 212,
+	"./de.js": 210,
+	"./dv": 213,
+	"./dv.js": 213,
+	"./el": 214,
+	"./el.js": 214,
+	"./en-au": 215,
+	"./en-au.js": 215,
+	"./en-ca": 216,
+	"./en-ca.js": 216,
+	"./en-gb": 217,
+	"./en-gb.js": 217,
+	"./en-ie": 218,
+	"./en-ie.js": 218,
+	"./en-nz": 219,
+	"./en-nz.js": 219,
+	"./eo": 220,
+	"./eo.js": 220,
+	"./es": 221,
+	"./es-do": 222,
+	"./es-do.js": 222,
+	"./es-us": 223,
+	"./es-us.js": 223,
+	"./es.js": 221,
+	"./et": 224,
+	"./et.js": 224,
+	"./eu": 225,
+	"./eu.js": 225,
+	"./fa": 226,
+	"./fa.js": 226,
+	"./fi": 227,
+	"./fi.js": 227,
+	"./fo": 228,
+	"./fo.js": 228,
+	"./fr": 229,
+	"./fr-ca": 230,
+	"./fr-ca.js": 230,
+	"./fr-ch": 231,
+	"./fr-ch.js": 231,
+	"./fr.js": 229,
+	"./fy": 232,
+	"./fy.js": 232,
+	"./gd": 233,
+	"./gd.js": 233,
+	"./gl": 234,
+	"./gl.js": 234,
+	"./gom-latn": 235,
+	"./gom-latn.js": 235,
+	"./gu": 236,
+	"./gu.js": 236,
+	"./he": 237,
+	"./he.js": 237,
+	"./hi": 238,
+	"./hi.js": 238,
+	"./hr": 239,
+	"./hr.js": 239,
+	"./hu": 240,
+	"./hu.js": 240,
+	"./hy-am": 241,
+	"./hy-am.js": 241,
+	"./id": 242,
+	"./id.js": 242,
+	"./is": 243,
+	"./is.js": 243,
+	"./it": 244,
+	"./it.js": 244,
+	"./ja": 245,
+	"./ja.js": 245,
+	"./jv": 246,
+	"./jv.js": 246,
+	"./ka": 247,
+	"./ka.js": 247,
+	"./kk": 248,
+	"./kk.js": 248,
+	"./km": 249,
+	"./km.js": 249,
+	"./kn": 250,
+	"./kn.js": 250,
+	"./ko": 251,
+	"./ko.js": 251,
+	"./ky": 252,
+	"./ky.js": 252,
+	"./lb": 253,
+	"./lb.js": 253,
+	"./lo": 254,
+	"./lo.js": 254,
+	"./lt": 255,
+	"./lt.js": 255,
+	"./lv": 256,
+	"./lv.js": 256,
+	"./me": 257,
+	"./me.js": 257,
+	"./mi": 258,
+	"./mi.js": 258,
+	"./mk": 259,
+	"./mk.js": 259,
+	"./ml": 260,
+	"./ml.js": 260,
+	"./mr": 261,
+	"./mr.js": 261,
+	"./ms": 262,
+	"./ms-my": 263,
+	"./ms-my.js": 263,
+	"./ms.js": 262,
+	"./my": 264,
+	"./my.js": 264,
+	"./nb": 265,
+	"./nb.js": 265,
+	"./ne": 266,
+	"./ne.js": 266,
+	"./nl": 267,
+	"./nl-be": 268,
+	"./nl-be.js": 268,
+	"./nl.js": 267,
+	"./nn": 269,
+	"./nn.js": 269,
+	"./pa-in": 270,
+	"./pa-in.js": 270,
+	"./pl": 271,
+	"./pl.js": 271,
+	"./pt": 272,
+	"./pt-br": 273,
+	"./pt-br.js": 273,
+	"./pt.js": 272,
+	"./ro": 274,
+	"./ro.js": 274,
+	"./ru": 275,
+	"./ru.js": 275,
+	"./sd": 276,
+	"./sd.js": 276,
+	"./se": 277,
+	"./se.js": 277,
+	"./si": 278,
+	"./si.js": 278,
+	"./sk": 279,
+	"./sk.js": 279,
+	"./sl": 280,
+	"./sl.js": 280,
+	"./sq": 281,
+	"./sq.js": 281,
+	"./sr": 282,
+	"./sr-cyrl": 283,
+	"./sr-cyrl.js": 283,
+	"./sr.js": 282,
+	"./ss": 284,
+	"./ss.js": 284,
+	"./sv": 285,
+	"./sv.js": 285,
+	"./sw": 286,
+	"./sw.js": 286,
+	"./ta": 287,
+	"./ta.js": 287,
+	"./te": 288,
+	"./te.js": 288,
+	"./tet": 289,
+	"./tet.js": 289,
+	"./th": 290,
+	"./th.js": 290,
+	"./tl-ph": 291,
+	"./tl-ph.js": 291,
+	"./tlh": 292,
+	"./tlh.js": 292,
+	"./tr": 293,
+	"./tr.js": 293,
+	"./tzl": 294,
+	"./tzl.js": 294,
+	"./tzm": 295,
+	"./tzm-latn": 296,
+	"./tzm-latn.js": 296,
+	"./tzm.js": 295,
+	"./uk": 297,
+	"./uk.js": 297,
+	"./ur": 298,
+	"./ur.js": 298,
+	"./uz": 299,
+	"./uz-latn": 300,
+	"./uz-latn.js": 300,
+	"./uz.js": 299,
+	"./vi": 301,
+	"./vi.js": 301,
+	"./x-pseudo": 302,
+	"./x-pseudo.js": 302,
+	"./yo": 303,
+	"./yo.js": 303,
+	"./zh-cn": 304,
+	"./zh-cn.js": 304,
+	"./zh-hk": 305,
+	"./zh-hk.js": 305,
+	"./zh-tw": 306,
+	"./zh-tw.js": 306
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -972,7 +1036,7 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 414;
+webpackContext.id = 413;
 
 /***/ }),
 
@@ -1036,19 +1100,18 @@ var StudentIDValidator = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(347);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(349);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(350);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_login_login__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_login_login__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_main_main__ = __webpack_require__(40);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_makeRoom_makeRoom__ = __webpack_require__(95);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_personal_info_personal_info__ = __webpack_require__(64);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_setting_setting__ = __webpack_require__(123);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_signup_signup__ = __webpack_require__(98);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_taxi_list_taxi_list__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_ride_history_ride_history__ = __webpack_require__(122);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__providers_auth_auth__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_angularfire2_database__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__ionic_native_fcm__ = __webpack_require__(351);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_firebase__ = __webpack_require__(173);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_16_firebase__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_setting_setting__ = __webpack_require__(123);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_signup_signup__ = __webpack_require__(97);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_taxi_list_taxi_list__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__providers_auth_auth__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__providers_users_users__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_angularfire2_database__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__ionic_native_fcm__ = __webpack_require__(351);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_firebase__ = __webpack_require__(173);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15_firebase__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1074,8 +1137,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
-__WEBPACK_IMPORTED_MODULE_16_firebase___default.a.initializeApp({
+__WEBPACK_IMPORTED_MODULE_15_firebase___default.a.initializeApp({
     apiKey: "AIzaSyANvht7J2MNX6x47mglqfJk74yZQ9u0qUk",
     authDomain: "itaxi-54bdc.firebaseapp.com",
     databaseURL: "https://itaxi-54bdc.firebaseio.com",
@@ -1084,7 +1146,7 @@ __WEBPACK_IMPORTED_MODULE_16_firebase___default.a.initializeApp({
     messagingSenderId: "208976127032"
 });
 var MyApp = (function () {
-    function MyApp(platform, statusBar, splashScreen, authProvider, alertCtrl, af, fcm) {
+    function MyApp(platform, statusBar, splashScreen, authProvider, alertCtrl, af, fcm, userServices) {
         var _this = this;
         this.platform = platform;
         this.statusBar = statusBar;
@@ -1093,17 +1155,18 @@ var MyApp = (function () {
         this.alertCtrl = alertCtrl;
         this.af = af;
         this.fcm = fcm;
+        this.userServices = userServices;
         this.dates_array = [];
         this.initializeApp();
         // used for an example of ngFor and navigation
         this.pages = [
             { title: 'Home', component: __WEBPACK_IMPORTED_MODULE_4__pages_home_home__["a" /* HomePage */] },
             { title: 'MakeRoom', component: __WEBPACK_IMPORTED_MODULE_7__pages_makeRoom_makeRoom__["a" /* MakeRoomPage */] },
-            { title: 'TaxiList', component: __WEBPACK_IMPORTED_MODULE_11__pages_taxi_list_taxi_list__["a" /* TaxiListPage */] },
-            { title: 'Setting', component: __WEBPACK_IMPORTED_MODULE_9__pages_setting_setting__["a" /* SettingPage */] },
-            { title: 'SignupPage', component: __WEBPACK_IMPORTED_MODULE_10__pages_signup_signup__["a" /* SignupPage */] },
+            { title: 'TaxiList', component: __WEBPACK_IMPORTED_MODULE_10__pages_taxi_list_taxi_list__["a" /* TaxiListPage */] },
+            { title: 'Setting', component: __WEBPACK_IMPORTED_MODULE_8__pages_setting_setting__["a" /* SettingPage */] },
+            { title: 'SignupPage', component: __WEBPACK_IMPORTED_MODULE_9__pages_signup_signup__["a" /* SignupPage */] },
         ];
-        var unsubscribe = __WEBPACK_IMPORTED_MODULE_16_firebase___default.a.auth().onAuthStateChanged(function (user) {
+        var unsubscribe = __WEBPACK_IMPORTED_MODULE_15_firebase___default.a.auth().onAuthStateChanged(function (user) {
             if (!user) {
                 _this.rootPage = __WEBPACK_IMPORTED_MODULE_5__pages_login_login__["a" /* LoginPage */];
                 unsubscribe();
@@ -1172,17 +1235,13 @@ var MyApp = (function () {
         alert('leave');
         console.log("leaveRoom() at app.componenent.ts");
     };
-    MyApp.prototype.goSettingPage = function () {
-        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_9__pages_setting_setting__["a" /* SettingPage */], { user_id: this.user_id });
-        console.log("goTaxiListPage() at app.componenent.ts");
+    MyApp.prototype.setPage = function (page) {
+        this.navCtrl.setRoot(page);
+        console.log(page + " set at app.component.ts");
     };
-    MyApp.prototype.goTaxiListPage = function () {
-        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_11__pages_taxi_list_taxi_list__["a" /* TaxiListPage */], { user_id: this.user_id });
-        console.log("goTaxiListPage() at app.componenent.ts");
-    };
-    MyApp.prototype.goMakeTaxiRoomPage = function () {
-        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_7__pages_makeRoom_makeRoom__["a" /* MakeRoomPage */], { user_id: this.user_id });
-        console.log("goMakeTaxiRoomPage() at app.componenent.ts");
+    MyApp.prototype.pushPage = function (page) {
+        this.navCtrl.push(page, { user_id: this.user_id });
+        console.log(page + " push at app.component.ts");
     };
     MyApp.prototype.goCarpoolListPage = function () {
         alert('Carpool Page');
@@ -1191,18 +1250,6 @@ var MyApp = (function () {
     MyApp.prototype.goMakeCarpoolRoomPage = function () {
         alert('Make Carpool Room Page');
         console.log("goMakeCarpoolRoomPage() at app.componenent.ts");
-    };
-    MyApp.prototype.goBoardingListPage = function () {
-        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_12__pages_ride_history_ride_history__["a" /* RideHistoryPage */], { user_id: this.user_id });
-        console.log("goBoardingListPage() at app.componenent.ts");
-    };
-    MyApp.prototype.goPersonalInfoPage = function () {
-        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_8__pages_personal_info_personal_info__["a" /* PersonalInfoPage */], { user_id: this.user_id });
-        console.log("goEditMyInfoPage() at app.componenent.ts");
-    };
-    MyApp.prototype.goMainPage = function () {
-        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_6__pages_main_main__["a" /* MainPage */], { user_id: this.user_id });
-        console.log("goMainPage() at app.componenent.ts");
     };
     MyApp.prototype.logout = function () {
         this.authProvider.logoutUser();
@@ -1213,15 +1260,15 @@ var MyApp = (function () {
 }());
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["Nav"]),
-    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"])
+    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"]) === "function" && _a || Object)
 ], MyApp.prototype, "navCtrl", void 0);
 MyApp = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({template:/*ion-inline-start:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/app/app.html"*/'<ion-menu [content]="content"  persistent="true">\n  \n    <ion-content class="sidemenu-content">\n      <p class="sidemenu-userid"><ion-icon name="person"></ion-icon>&nbsp;&nbsp;{{user_id}}</p> \n      <ion-buttons right > \n        <button  class="sidemenu-button" menuClose icon-only (click)="goSettingPage()">\n          <ion-icon name="settings"></ion-icon>\n        </button>\n      </ion-buttons>\n      <hr class="sidemenu-hr" style="background-color:#29B5EF">\n      <ion-grid class="sidemenu-grid"  *ngFor = "let dates of dates_array">\n        <div class="sidemenu-div" *ngFor = "let date of dates | DatePipe">\n        &nbsp;&nbsp;꼬부기 {{date.length}} ({{date.roomParticipants.length}} / {{date.roomCapacity}})\n        <ion-row class="sidemenu-row" justify-content-left padding-left style="border-top-color: white">\n        {{date.roomDate}} &nbsp;&nbsp;|&nbsp;&nbsp; {{date.roomTime}}<br>\n        {{date.roomDepart}} &nbsp;&nbsp; > &nbsp;&nbsp; {{date.roomDest}}\n      <ion-buttons right > \n        <button  class="sidemenu-button2" menuClose icon-only (click)="Idontknow()">\n          <ion-icon name="log-out"></ion-icon>\n        </button>\n      </ion-buttons>\n      </ion-row>\n        </div>\n      </ion-grid>\n      \n      <ion-list class="sidemenu-list">\n          <ion-list-header class="sidemenu-header"> <ion-icon name="ios-car"></ion-icon> &nbsp;&nbsp;택시 </ion-list-header>\n          <button menuClose ion-item class="sidemenu-items" (click)="goTaxiListPage()">조회</button>\n          <button menuClose ion-item class="sidemenu-items" (click)="goMakeTaxiRoomPage()">모집</button>\n          <ion-list-header class="sidemenu-header"> <ion-icon name="car"></ion-icon>  &nbsp;&nbsp;카풀 </ion-list-header>\n          <button menuClose ion-item class="sidemenu-items" (click)="goCarpoolListPage()">조회</button>\n          <button menuClose ion-item class="sidemenu-items" (click)="goMakeCarpoolRoomPage()">모집</button>\n          <ion-list-header class="sidemenu-header"> <ion-icon name="person"></ion-icon>&nbsp;&nbsp;마이페이지 </ion-list-header>\n          <button menuClose ion-item class="sidemenu-items" (click)="goBoardingListPage()">탑승내역</button>\n          <button menuClose ion-item class="sidemenu-items" (click)="goPersonalInfoPage()">내정보수정</button>\n          <ion-list-header class="sidemenu-header"> <ion-icon name="home"></ion-icon>  &nbsp;&nbsp;메인페이지 </ion-list-header>\n          <button menuClose ion-item class="sidemenu-items" (click)="goMainPage()">메인페이지</button>  \n          <button menuClose ion-item class="sidemenu-items" (click)="logout()">로그아웃</button>\n      </ion-list>\n    </ion-content>\n  \n  </ion-menu>\n  \n  <!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n  <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>\n  '/*ion-inline-end:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/app/app.html"*/
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({template:/*ion-inline-start:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/app/app.html"*/'<ion-menu [content]="content"  persistent="true">\n  \n    <ion-content class="sidemenu-content">\n      <p class="sidemenu-userid"><ion-icon name="person"></ion-icon>&nbsp;&nbsp;{{user_id}}</p> \n      <ion-buttons right > \n        <button  class="sidemenu-button" menuClose icon-only (click)="setPage(\'SettingPage\')">\n          <ion-icon name="settings"></ion-icon>\n        </button>\n      </ion-buttons>\n      <hr class="sidemenu-hr" style="background-color:#29B5EF">\n      <ion-grid class="sidemenu-grid"  *ngFor = "let dates of dates_array">\n        <div class="sidemenu-div" *ngFor = "let date of dates | DatePipe">\n        &nbsp;&nbsp;꼬부기 {{date.length}} ({{date.roomParticipants.length}} / {{date.roomCapacity}})\n        <ion-row class="sidemenu-row" justify-content-left padding-left style="border-top-color: white">\n        {{date.roomDate}} &nbsp;&nbsp;|&nbsp;&nbsp; {{date.roomTime}}<br>\n        {{date.roomDepart}} &nbsp;&nbsp; > &nbsp;&nbsp; {{date.roomDest}}\n      <ion-buttons right > \n        <button  class="sidemenu-button2" menuClose icon-only (click)="Idontknow()">\n          <ion-icon name="log-out"></ion-icon>\n        </button>\n      </ion-buttons>\n      </ion-row>\n        </div>\n      </ion-grid>\n      \n      <ion-list class="sidemenu-list">\n          <ion-list-header class="sidemenu-header"> <ion-icon name="ios-car"></ion-icon> &nbsp;&nbsp;택시 </ion-list-header>\n          <button menuClose ion-item class="sidemenu-items" (click)="setPage(\'TaxiListPage\')">조회</button>\n          <button menuClose ion-item class="sidemenu-items" (click)="setPage(\'MakeRoomPage\')">모집</button>\n          <ion-list-header class="sidemenu-header"> <ion-icon name="car"></ion-icon>  &nbsp;&nbsp;카풀 </ion-list-header>\n          <button menuClose ion-item class="sidemenu-items" (click)="goCarpoolListPage()">조회</button>\n          <button menuClose ion-item class="sidemenu-items" (click)="goMakeCarpoolRoomPage()">모집</button>\n          <ion-list-header class="sidemenu-header"> <ion-icon name="person"></ion-icon>&nbsp;&nbsp;마이페이지 </ion-list-header>\n          <button menuClose ion-item class="sidemenu-items" (click)="setPage(\'RideHistoryPage\')">탑승내역</button>\n          <button menuClose ion-item class="sidemenu-items" (click)="setPage(\'PersonalInfoPage\')">내정보수정</button>\n          <ion-list-header class="sidemenu-header"> <ion-icon name="home"></ion-icon>  &nbsp;&nbsp;메인페이지 </ion-list-header>\n          <button menuClose ion-item class="sidemenu-items" (click)="setPage(\'MainPage\')">메인페이지</button>  \n          <button menuClose ion-item class="sidemenu-items" (click)="logout()">로그아웃</button>\n      </ion-list>\n    </ion-content>\n  \n  </ion-menu>\n  \n  <!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n  <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>\n  '/*ion-inline-end:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/app/app.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["Platform"], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */],
-        __WEBPACK_IMPORTED_MODULE_13__providers_auth_auth__["a" /* AuthProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["AlertController"], __WEBPACK_IMPORTED_MODULE_14_angularfire2_database__["a" /* AngularFireDatabase */], __WEBPACK_IMPORTED_MODULE_15__ionic_native_fcm__["a" /* FCM */]])
+    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["Platform"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["Platform"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_11__providers_auth_auth__["a" /* AuthProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_11__providers_auth_auth__["a" /* AuthProvider */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["AlertController"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["AlertController"]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_13_angularfire2_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_13_angularfire2_database__["a" /* AngularFireDatabase */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_14__ionic_native_fcm__["a" /* FCM */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_14__ionic_native_fcm__["a" /* FCM */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_12__providers_users_users__["a" /* UsersProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_12__providers_users_users__["a" /* UsersProvider */]) === "function" && _j || Object])
 ], MyApp);
 
+var _a, _b, _c, _d, _e, _f, _g, _h, _j;
 //# sourceMappingURL=app.component.js.map
 
 /***/ }),
@@ -1318,7 +1365,311 @@ DateProvider = __decorate([
 
 /***/ }),
 
-/***/ 50:
+/***/ 450:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginPageModule", function() { return LoginPageModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login__ = __webpack_require__(51);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+var LoginPageModule = (function () {
+    function LoginPageModule() {
+    }
+    return LoginPageModule;
+}());
+LoginPageModule = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
+        declarations: [
+            __WEBPACK_IMPORTED_MODULE_2__login__["a" /* LoginPage */],
+        ],
+        imports: [
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["IonicPageModule"].forChild(__WEBPACK_IMPORTED_MODULE_2__login__["a" /* LoginPage */]),
+        ],
+    })
+], LoginPageModule);
+
+//# sourceMappingURL=login.module.js.map
+
+/***/ }),
+
+/***/ 452:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PersonalInfoPageModule", function() { return PersonalInfoPageModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__personal_info__ = __webpack_require__(121);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+var PersonalInfoPageModule = (function () {
+    function PersonalInfoPageModule() {
+    }
+    return PersonalInfoPageModule;
+}());
+PersonalInfoPageModule = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
+        declarations: [
+            __WEBPACK_IMPORTED_MODULE_2__personal_info__["a" /* PersonalInfoPage */],
+        ],
+        imports: [
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["IonicPageModule"].forChild(__WEBPACK_IMPORTED_MODULE_2__personal_info__["a" /* PersonalInfoPage */]),
+        ],
+    })
+], PersonalInfoPageModule);
+
+//# sourceMappingURL=personal-info.module.js.map
+
+/***/ }),
+
+/***/ 453:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RideHistoryPageModule", function() { return RideHistoryPageModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ride_history__ = __webpack_require__(122);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+var RideHistoryPageModule = (function () {
+    function RideHistoryPageModule() {
+    }
+    return RideHistoryPageModule;
+}());
+RideHistoryPageModule = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
+        declarations: [
+            __WEBPACK_IMPORTED_MODULE_2__ride_history__["a" /* RideHistoryPage */],
+        ],
+        imports: [
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["IonicPageModule"].forChild(__WEBPACK_IMPORTED_MODULE_2__ride_history__["a" /* RideHistoryPage */]),
+        ],
+    })
+], RideHistoryPageModule);
+
+//# sourceMappingURL=ride-history.module.js.map
+
+/***/ }),
+
+/***/ 454:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SettingPageModule", function() { return SettingPageModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__setting__ = __webpack_require__(123);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+//import { PersonalInfoPage } from '../pages/personal-info/personal-info';
+var SettingPageModule = (function () {
+    function SettingPageModule(modalCtrl) {
+        this.modalCtrl = modalCtrl;
+    }
+    return SettingPageModule;
+}());
+SettingPageModule = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
+        declarations: [
+            __WEBPACK_IMPORTED_MODULE_2__setting__["a" /* SettingPage */],
+        ],
+        imports: [
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["IonicPageModule"].forChild(__WEBPACK_IMPORTED_MODULE_2__setting__["a" /* SettingPage */]),
+        ],
+    }),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["ModalController"]])
+], SettingPageModule);
+
+//# sourceMappingURL=setting.module.js.map
+
+/***/ }),
+
+/***/ 455:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TaxiListPageModule", function() { return TaxiListPageModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__taxi_list__ = __webpack_require__(64);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+var TaxiListPageModule = (function () {
+    function TaxiListPageModule() {
+    }
+    return TaxiListPageModule;
+}());
+TaxiListPageModule = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
+        declarations: [
+            __WEBPACK_IMPORTED_MODULE_2__taxi_list__["a" /* TaxiListPage */],
+        ],
+        imports: [
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["IonicPageModule"].forChild(__WEBPACK_IMPORTED_MODULE_2__taxi_list__["a" /* TaxiListPage */]),
+        ],
+    })
+], TaxiListPageModule);
+
+//# sourceMappingURL=taxi-list.module.js.map
+
+/***/ }),
+
+/***/ 456:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ChatRoomPageModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__chatroom__ = __webpack_require__(59);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+var ChatRoomPageModule = (function () {
+    function ChatRoomPageModule() {
+    }
+    return ChatRoomPageModule;
+}());
+ChatRoomPageModule = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
+        declarations: [
+            __WEBPACK_IMPORTED_MODULE_2__chatroom__["a" /* ChatRoomPage */],
+        ],
+        imports: [
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["IonicPageModule"].forChild(__WEBPACK_IMPORTED_MODULE_2__chatroom__["a" /* ChatRoomPage */]),
+        ],
+    })
+], ChatRoomPageModule);
+
+//# sourceMappingURL=chatroom.module.js.map
+
+/***/ }),
+
+/***/ 49:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UsersProvider; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(93);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase_app__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_firebase_app___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_firebase_app__);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var UsersProvider = (function () {
+    function UsersProvider(af, platform, loadingCtrl) {
+        this.af = af;
+        this.platform = platform;
+        this.loadingCtrl = loadingCtrl;
+        console.log('Hello UsersProvider Provider');
+    }
+    UsersProvider.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad UsersProvider');
+    };
+    UsersProvider.prototype.test = function (uid) {
+        var _this = this;
+        return new __WEBPACK_IMPORTED_MODULE_4_firebase_app__["Promise"](function (resolve) {
+            _this.af.object('/userProfile/' + uid).subscribe(function (data) {
+                console.log(data['email']);
+            });
+        });
+    };
+    UsersProvider.prototype.setInfo = function (data) {
+        console.log('setInfo');
+        console.log(typeof data);
+        this.email = data['email'];
+        this.phoneNumber = data['phoneNumber'];
+        this.name = data['name'];
+        this.studentID = data['studentID'];
+        console.log('왔냐 ' + this.email);
+    };
+    //subscribe로 하면 우리가 조작 가능한 type으로 변환되어 나온다.
+    UsersProvider.prototype.getEmail = function () {
+        console.log("getEmail Service : " + this.email);
+        return this.email;
+    };
+    return UsersProvider;
+}());
+UsersProvider = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["a" /* AngularFireDatabase */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["Platform"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["Platform"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["LoadingController"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["LoadingController"]) === "function" && _c || Object])
+], UsersProvider);
+
+var _a, _b, _c;
+//# sourceMappingURL=users.js.map
+
+/***/ }),
+
+/***/ 51:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1328,7 +1679,9 @@ DateProvider = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__validators_email__ = __webpack_require__(92);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__main_main__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_users_users__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_angularfire2_database__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__main_main__ = __webpack_require__(40);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1344,14 +1697,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
 var LoginPage = (function () {
-    function LoginPage(navCtrl, navParams, loadingCtrl, alertCtrl, authProvider, formBuilder, menu) {
+    function LoginPage(navCtrl, navParams, loadingCtrl, alertCtrl, authProvider, formBuilder, menu, userServices, af) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.loadingCtrl = loadingCtrl;
         this.alertCtrl = alertCtrl;
         this.authProvider = authProvider;
         this.menu = menu;
+        this.userServices = userServices;
+        this.af = af;
         //왼쪽 사이드바 메뉴 안 보이게 하는 역할
         this.menu = menu;
         this.menu.enable(false, 'myMenu');
@@ -1385,8 +1742,13 @@ var LoginPage = (function () {
                     else {
                         console.log("FCMPlugin type is undefined!");
                     }
+                    console.log("Test중");
                 }).then(function () {
-                    _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_5__main_main__["a" /* MainPage */]);
+                    console.log('Then 이후');
+                    _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_7__main_main__["a" /* MainPage */]);
+                });
+                _this.userServices.test(firebase.auth().currentUser.uid).then(function (data) {
+                    console.log('test안이다', data);
                 });
             }, function (error) {
                 _this.loading.dismiss().then(function () {
@@ -1401,11 +1763,8 @@ var LoginPage = (function () {
             this.loading.present();
         }
     };
-    LoginPage.prototype.goToSignup = function () {
-        this.navCtrl.push('SignupPage');
-    };
-    LoginPage.prototype.goToResetPassword = function () {
-        this.navCtrl.push('ResetPasswordPage');
+    LoginPage.prototype.pushPage = function (name) {
+        this.navCtrl.push(name);
     };
     LoginPage.prototype.tokenSetup = function () {
         var promise = new Promise(function (resolve, reject) {
@@ -1432,164 +1791,13 @@ var LoginPage = (function () {
 }());
 LoginPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-login',template:/*ion-inline-start:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/login/login.html"*/'<ion-header>\n  <ion-navbar color="primary">\n    <ion-title>로그인</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding text-center>\n  <img src="../../assets/imgs/logo.png" align="center"/>\n  <form [formGroup]="loginForm" (submit)="loginUser()" novalidate>\n    <ion-item>\n      <ion-label>Email</ion-label>\n      <ion-input formControlName="email" type="email" placeholder="Your email address"\n        [class.invalid]="!loginForm.controls.email.valid && loginForm.controls.email.dirty">\n      </ion-input>\n    </ion-item>\n    <ion-item class="error-message" *ngIf="!loginForm.controls.email.valid && loginForm.controls.email.dirty">\n      <p>사용가능한 이메일주소를 입력하세요.</p>\n    </ion-item>\n    <ion-item>\n      <ion-label>Password</ion-label>\n      <ion-input formControlName="password" type="password" placeholder="Your password"\n        [class.invalid]="!loginForm.controls.password.valid && loginForm.controls.password.dirty">\n      </ion-input>\n    </ion-item>\n    <ion-item class="error-message" *ngIf="!loginForm.controls.password.valid && loginForm.controls.password.dirty">\n      <p>비밀번호는 6자 이상의 영문자이어야합니다.</p>\n    </ion-item>\n    <button ion-button full medium round type="submit" color="secondary" [disabled]="!loginForm.valid">\n      로그인 </button>\n  </form>\n\n  <ion-grid>\n    <ion-row justify-content-center>\n      <ion-col col-6>\n        <button ion-button medium round color="tertiary" outline (click)="goToSignup()"> 회원가입 </button>\n      </ion-col>\n      <ion-col col-6>\n        <button ion-button medium round color="tertiary" outline (click)="goToResetPassword()"> 비밀번호찾기 </button>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n  <div class="KakaoButton">\n    <a id="custom-login-btn" href="javascript:loginWithKakao()">\n      <img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="300"/>\n    </a>\n  </div>\n</ion-content>'/*ion-inline-end:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/login/login.html"*/,
+        selector: 'page-login',template:/*ion-inline-start:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/login/login.html"*/'<ion-header>\n  <ion-navbar color="primary">\n    <ion-title>로그인</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding text-center>\n  <img src="../../assets/imgs/logo.png" align="center"/>\n  <form [formGroup]="loginForm" (submit)="loginUser()" novalidate>\n    <ion-item>\n      <ion-label>Email</ion-label>\n      <ion-input formControlName="email" type="email" placeholder="Your email address"\n        [class.invalid]="!loginForm.controls.email.valid && loginForm.controls.email.dirty">\n      </ion-input>\n    </ion-item>\n    <ion-item class="error-message" *ngIf="!loginForm.controls.email.valid && loginForm.controls.email.dirty">\n      <p>사용가능한 이메일주소를 입력하세요.</p>\n    </ion-item>\n    <ion-item>\n      <ion-label>Password</ion-label>\n      <ion-input formControlName="password" type="password" placeholder="Your password"\n        [class.invalid]="!loginForm.controls.password.valid && loginForm.controls.password.dirty">\n      </ion-input>\n    </ion-item>\n    <ion-item class="error-message" *ngIf="!loginForm.controls.password.valid && loginForm.controls.password.dirty">\n      <p>비밀번호는 6자 이상의 영문자이어야합니다.</p>\n    </ion-item>\n    <button ion-button full medium round type="submit" color="secondary" [disabled]="!loginForm.valid">\n      로그인 </button>\n  </form>\n\n  <ion-grid>\n    <ion-row justify-content-center>\n      <ion-col col-6>\n        <button ion-button medium round color="tertiary" outline (click)="pushPage(\'SignupPage\')"> 회원가입 </button>\n      </ion-col>\n      <ion-col col-6>\n        <button ion-button medium round color="tertiary" outline (click)="pushPage(\'ResetPasswordPage\')"> 비밀번호찾기 </button>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n  <div class="KakaoButton">\n    <a id="custom-login-btn" href="javascript:loginWithKakao()">\n      <img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="300"/>\n    </a>\n  </div>\n</ion-content>'/*ion-inline-end:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/login/login.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["LoadingController"], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["AlertController"],
-        __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth__["a" /* AuthProvider */], __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["MenuController"]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["LoadingController"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["LoadingController"]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["AlertController"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["AlertController"]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth__["a" /* AuthProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth__["a" /* AuthProvider */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["MenuController"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["MenuController"]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_5__providers_users_users__["a" /* UsersProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__providers_users_users__["a" /* UsersProvider */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_6_angularfire2_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6_angularfire2_database__["a" /* AngularFireDatabase */]) === "function" && _j || Object])
 ], LoginPage);
 
+var _a, _b, _c, _d, _e, _f, _g, _h, _j;
 //# sourceMappingURL=login.js.map
-
-/***/ }),
-
-/***/ 51:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TaxiListPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__chatroom_chatroom__ = __webpack_require__(59);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__makeRoom_makeRoom__ = __webpack_require__(95);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ionic2_date_picker__ = __webpack_require__(184);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ionic2_date_picker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_ionic2_date_picker__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_users_users__ = __webpack_require__(97);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-
-var TaxiListPage = (function () {
-    function TaxiListPage(navCtrl, navParams, af, datePickerProvider, modalCtrl, usersService) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.af = af;
-        this.datePickerProvider = datePickerProvider;
-        this.modalCtrl = modalCtrl;
-        this.usersService = usersService;
-        this.days = [];
-        this.nowDate = new Date();
-        this.selectedDate = new Date();
-        this.spotList = ["한동대학교", "포항역", "고속버스터미널", "시외버스터미널", "북부해수욕장", "육거리"];
-        this.user_id = this.usersService.getEmail();
-        console.log("ThaTha : " + this.user_id);
-        for (var i = 0; i < 5; i++) {
-            var temp = new Date(this.nowDate.getTime());
-            temp.setDate(temp.getDate() + i);
-            this.days.push(temp);
-        }
-        //기본적으로 오늘 날짜 기준으로 data 불러오기.
-        this.showChatroom(this.nowDate);
-        this.departOptions = {
-            title: '출발지',
-            subTitle: '원하시는 출발지를 체크해주세요.',
-            mode: 'md'
-        };
-        this.destinationOptions = {
-            title: '도착지',
-            subTitle: '원하시는 도착지를 체크해주세요.',
-            mode: 'md'
-        };
-    }
-    TaxiListPage.prototype.showCalendar = function () {
-        var _this = this;
-        var now = new Date();
-        var datePickerOption = {
-            minimumDate: now,
-            maximumDate: new Date(now.getFullYear(), now.getMonth() + 1, now.getDate())
-        };
-        var dateSelected = this.datePickerProvider.showCalendar(this.modalCtrl, datePickerOption);
-        dateSelected.subscribe(function (date) { _this.showChatroom(date); });
-    };
-    TaxiListPage.prototype.showChatroom = function (date) {
-        this.selectedDate = date;
-        console.log(this.makeStringFromDate(date));
-        this.dates = this.af.list('/chatrooms/' + this.makeStringFromDate(date));
-    };
-    TaxiListPage.prototype.goChatroom = function (date) {
-        var chat_room_id_val = date.$key;
-        var bookingDate_val = date.depart_date;
-        //participant array에 push
-        // 참여자가 아니고, 인원 full 아니면 push
-        // 참여자이면 그냥 enter
-        // full 인원이면 deny
-        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__chatroom_chatroom__["a" /* ChatRoomPage */], { chat_room_id: chat_room_id_val, bookingDate: bookingDate_val, user_id: this.user_id });
-    };
-    TaxiListPage.prototype.makeRoom = function () {
-        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__makeRoom_makeRoom__["a" /* MakeRoomPage */], { user_id: this.user_id });
-        console.log("makeRoom function into taxi-list.tx");
-    };
-    TaxiListPage.prototype.filterDeparture = function (departFilter) {
-        if (departFilter == "All") {
-            this.dates = this.af.list('/chatrooms/' + this.makeStringFromDate(this.selectedDate));
-        }
-        else {
-            this.dates = this.af.list('/chatrooms/' + this.makeStringFromDate(this.selectedDate), {
-                query: {
-                    orderByChild: 'departure',
-                    equalTo: departFilter
-                }
-            });
-        }
-    };
-    TaxiListPage.prototype.filterDestination = function (destinationFilter) {
-        console.log("Des: " + destinationFilter);
-        if (destinationFilter == "All") {
-            this.dates = this.af.list('/chatrooms/' + this.makeStringFromDate(this.selectedDate));
-        }
-        else {
-            this.dates = this.af.list('/chatrooms/' + this.makeStringFromDate(this.selectedDate), {
-                query: {
-                    orderByChild: 'destination',
-                    equalTo: destinationFilter
-                }
-            });
-        }
-    };
-    TaxiListPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad TaxiListPage');
-    };
-    TaxiListPage.prototype.isExist = function (users) {
-        for (var i = 0; i < users.length; i++) {
-            if (users[i].uid == this.user_id)
-                return true;
-        }
-        return false;
-    };
-    TaxiListPage.prototype.makeStringFromDate = function (date) {
-        var d = new Date(date);
-        var month = "" + (d.getMonth() + 1);
-        var day = "" + d.getDate();
-        var year = d.getFullYear();
-        if (month.length < 2)
-            month = '0' + month;
-        if (day.length < 2)
-            day = '0' + day;
-        return [year, month, day].join('-');
-    };
-    return TaxiListPage;
-}());
-TaxiListPage = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-taxi-list',template:/*ion-inline-start:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/taxi-list/taxi-list.html"*/'<ion-header>\n  <ion-navbar color="primary">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title class = "top-title">택시조회</ion-title>\n  </ion-navbar>\n\n  <ion-grid class="small-table">\n    <ion-row>\n        <ion-col col-5>\n          <ion-grid>\n            <ion-row class = "rowUnderline">\n              <ion-col col-11>\n                <ion-item class="selectWrapper">\n                  <ion-select #newSelect [(ngModel)]="departFilter" interface="popover" placeholder="전체보기" (ionChange)="filterDeparture(departFilter)">\n                    <ion-option value="All" checked="true">전체보기</ion-option>\n                    <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>\n                  </ion-select>\n                </ion-item>\n              </ion-col>\n              <ion-col col-1> \n                <p class = "selectIcon">▼</p>\n              </ion-col>\n            </ion-row>\n          </ion-grid>\n        </ion-col>\n\n        <ion-col col-2 class = "rightArrow">  \n          <ion-icon name="arrow-round-forward"></ion-icon>\n        </ion-col>\n\n        <ion-col col-5>\n          <ion-grid>\n            <ion-row class = "rowUnderline">\n              <ion-col col-11>\n                <ion-item class="selectWrapper">\n                  <ion-select [selectOptions]="destinationOptions" [(ngModel)]="destinationFilter" placeholder="전체보기" interface="popover" (ionChange)="filterDestination(destinationFilter)">\n                    <ion-option value="All" checked="true">전체보기</ion-option>\n                    <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>\n                  </ion-select>\n                </ion-item>\n              </ion-col>\n              <ion-col col-1> \n                <p class = "selectIcon">▼</p>\n              </ion-col>\n            </ion-row>\n          </ion-grid>\n        </ion-col>  \n    </ion-row>\n\n    <ion-row>\n      <ion-col col-2 *ngFor="let day of days" class="pointer">\n        <ion-item class="days" (click)="showChatroom(day)">\n          <p>{{day|date: "dd"}}</p>\n        </ion-item>\n      </ion-col>\n      <ion-col col-2 class="pointer">\n        <ion-item class="days_icon" (click)="showCalendar()" >\n          <p> + </p>\n        </ion-item>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n</ion-header>\n\n<ion-content>\n  <div>\n    <ion-grid class="mainGrid">\n      <ion-item-group>\n        <ion-item-divider *ngFor="let date of dates | async" (click)="goChatroom(date)" class="line"\n        [ngClass]="{full: date.participants.length >= date.capacity, exist: isExist(date.participants)}">\n          <ion-row>\n            <ion-col col-3>\n              <p>{{date.depart_date}}</p>\n              <p>{{date.depart_time}}</p>\n            </ion-col>\n            <ion-col col-7>\n              <p>{{date.departure}}</p>\n              <p>>{{date.destination}}</p>\n            </ion-col>\n            <ion-col col-2>\n              <p>{{date.participants.length}} / {{date.capacity}}</p>\n              <p>참여 {{ date.participants.length >= date.capacity ? "불가" : "가능" }}</p>\n            </ion-col>\n          </ion-row>\n        </ion-item-divider>\n      </ion-item-group>\n    </ion-grid>\n  </div>\n\n  <ion-fab right bottom>\n    <button color="dark" ion-fab (click)="makeRoom()"><ion-icon name="add"></ion-icon></button>\n  </ion-fab>\n\n</ion-content>\n'/*ion-inline-end:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/taxi-list/taxi-list.html"*/,
-    }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"], __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__["a" /* AngularFireDatabase */],
-        __WEBPACK_IMPORTED_MODULE_5_ionic2_date_picker__["DatePickerProvider"], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["ModalController"], __WEBPACK_IMPORTED_MODULE_6__providers_users_users__["a" /* UsersProvider */]])
-], TaxiListPage);
-
-//# sourceMappingURL=taxi-list.js.map
 
 /***/ }),
 
@@ -1601,8 +1809,8 @@ TaxiListPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_taxi_list_taxi_list__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery__ = __webpack_require__(412);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_taxi_list_taxi_list__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery__ = __webpack_require__(417);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_jquery__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1796,15 +2004,16 @@ var ChatRoomPage = (function () {
 }());
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["Content"]),
-    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["Content"])
+    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["Content"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["Content"]) === "function" && _a || Object)
 ], ChatRoomPage.prototype, "content", void 0);
 ChatRoomPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'page-chatroom',template:/*ion-inline-start:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/chatroom/chatroom.html"*/'<ion-header>\n  <ion-navbar color="primary">\n    <ion-buttons left>\n      <button ion-button (click)=\'goBack()\'>\n          <ion-icon name = "ios-arrow-back"></ion-icon>\n        </button>\n    </ion-buttons>\n\n    <ion-buttons right>\n      <button ion-button menuToggle>\n          <ion-icon name="menu"></ion-icon>\n        </button>\n    </ion-buttons>\n\n    <ion-title> 꼬부기 ({{room_participants.length}}/{{room_capacity}}) </ion-title>\n    <!-- 방이름/인원 -->\n  </ion-navbar>\n\n  <!-- 방 정보 -->\n  <ion-grid class="room-info">\n    <ion-row>\n      <ion-col justify-content-center padding-left>\n        {{room_month}}월 {{room_day}}일 {{room_hour}}시 {{room_minute}}분\n        <p><b>{{room_depart}} &nbsp; <ion-icon name="arrow-forward"></ion-icon> &nbsp; {{room_dest}}</b></p>\n      </ion-col>\n      <ion-col col-auto>\n        <ion-buttons right icon-only>\n          <button ion-button (click)=\'quit()\'>\n              <ion-icon name="log-out"></ion-icon>\n            </button>\n        </ion-buttons>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n  <!-- 참여자 정보  -->\n  <ion-grid>\n    <ion-row>\n      <ion-col class="users">\n        <div class="user" *ngFor="let member of room_participants; let i = index">\n          <button ion-button class="user-name" (click)="show(i)" >{{ member }}</button>\n          <button ion-button class="user-call" (click)="native(i, 1)"><ion-icon name="ios-call-outline"></ion-icon></button>\n          <button ion-button class="user-mail" (click)="native(i, 2)"><ion-icon name="ios-mail-outline"></ion-icon></button>\n        </div>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n\n    <!--\n    <ion-item *ngFor="let chat of chats | async; let last = last">\n      {{chat.user_id}} : {{chat.content}}\n      {{last ? scrollBottom() : \'\'}}\n    </ion-item>\n    -->\n\n    <div class="message-wrap" *ngFor="let chat of chats | async; let last = last">\n      <!-- 밑에 주석처리 되어있는 부분이 내가 말한 내용이면 오른쪽, 상대가 말한 내용이면 왼쪽 선택하게한다. -->\n      <!-- <div *ngFor="let msg of msgList"\n           class="message"\n           [class.left]=" msg.userId === toUser.id "\n           [class.right]=" msg.userId === user.id "> -->\n      <div class="message right" *ngIf="chat.user_id == chat_user_id">\n        <!-- <img class="user-img" [src]="msg.userAvatar" alt="" src=""> 이거는 프로필사진-->\n        <div class="msg-detail">\n          <div class="msg-content">\n            <div class="msg-info">\n              <p>\n                <!-- 사용자 아이디, 메세지 작성시간 {{msg.userName}}&nbsp;&nbsp;&nbsp;{{msg.time | relativeTime}}</p> -->\n                <ion-icon *ngIf="chat.user_id == room_host" name="star"></ion-icon>{{chat.user_id}}&nbsp;&nbsp;&nbsp;{{chat.date_time | slice:12:21}}</p>\n            </div>\n            <span class="triangle"></span>\n            <p class="line-breaker">{{chat.content}}</p>\n            <!-- {{msg.message}} -->\n          </div>\n        </div>\n      </div>\n\n      <div class="message left" *ngIf="chat.user_id != chat_user_id">\n        <!-- <img class="user-img" alt="" src=""> -->\n        <div class="msg-detail">\n          <div class="msg-content">\n            <div class="msg-info">\n              <p>\n                <!-- {{msg.userName}}&nbsp;&nbsp;&nbsp;{{msg.time | relativeTime}}</p> -->\n                <ion-icon *ngIf="chat.user_id == room_host" name="star"></ion-icon>{{chat.user_name}}&nbsp;&nbsp;&nbsp;{{chat.date_time | slice:12:21}}</p>\n            </div>\n            <span class="triangle"></span>\n            <p class="line-breaker">{{chat.content}}</p>\n          </div>\n        </div>\n      </div>\n\n      <!-- 입장/퇴장/택시비 정산 등등 공지 >\n       <div class="message-notice">한동이 님이 퇴장하셨습니다.</div>\n      -->\n    </div>\n  </ion-list>\n</ion-content>\n\n<ion-footer>\n  <ion-item>\n    <ion-input [(ngModel)]="chat_content" fixed type="text" (keyup.enter)="send()" (click)="scrollBottom()"></ion-input>\n    <button ion-button clear item-right (click)="send()" (click)="scrollBottom()"> send </button>\n  </ion-item>\n</ion-footer>\n'/*ion-inline-end:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/chatroom/chatroom.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"], __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["a" /* AngularFireDatabase */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["Platform"]])
+    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["a" /* AngularFireDatabase */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["Platform"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["Platform"]) === "function" && _e || Object])
 ], ChatRoomPage);
 
+var _a, _b, _c, _d, _e;
 //# sourceMappingURL=chatroom.js.map
 
 /***/ }),
@@ -1813,12 +2022,15 @@ ChatRoomPage = __decorate([
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PersonalInfoPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TaxiListPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__main_main__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__chatroom_chatroom__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__makeRoom_makeRoom__ = __webpack_require__(95);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ionic2_date_picker__ = __webpack_require__(186);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ionic2_date_picker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_ionic2_date_picker__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_users_users__ = __webpack_require__(49);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1833,66 +2045,125 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var PersonalInfoPage = (function () {
-    function PersonalInfoPage(navCtrl, navParams, viewCtrl, alertCtrl, af, formBuilder) {
-        var _this = this;
+
+
+var TaxiListPage = (function () {
+    function TaxiListPage(navCtrl, navParams, af, datePickerProvider, modalCtrl, usersService) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.viewCtrl = viewCtrl;
-        this.alertCtrl = alertCtrl;
         this.af = af;
-        this.user_dic = {};
-        this.updateForm = formBuilder.group({
-            name: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required])],
-            phoneNumber: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required])],
-            studentID: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required])],
-        });
-        this.user = firebase.auth().currentUser;
-        af.list('/userProfile/' + this.user.uid).subscribe(function (data) {
-            data.forEach(function (data) {
-                _this.user_dic[data.$key] = data.$value;
-            });
-        });
+        this.datePickerProvider = datePickerProvider;
+        this.modalCtrl = modalCtrl;
+        this.usersService = usersService;
+        this.days = [];
+        this.nowDate = new Date();
+        this.selectedDate = new Date();
+        this.spotList = ["한동대학교", "포항역", "고속버스터미널", "시외버스터미널", "북부해수욕장", "육거리"];
+        this.user_id = this.usersService.getEmail();
+        for (var i = 0; i < 5; i++) {
+            var temp = new Date(this.nowDate.getTime());
+            temp.setDate(temp.getDate() + i);
+            this.days.push(temp);
+        }
+        //기본적으로 오늘 날짜 기준으로 data 불러오기.
+        this.showChatroom(this.nowDate);
+        this.departOptions = {
+            title: '출발지',
+            subTitle: '원하시는 출발지를 체크해주세요.',
+            mode: 'md'
+        };
+        this.destinationOptions = {
+            title: '도착지',
+            subTitle: '원하시는 도착지를 체크해주세요.',
+            mode: 'md'
+        };
     }
-    PersonalInfoPage.prototype.updateUserInfo = function () {
-        var revise_name = this.updateForm.value.name;
-        var revise_phoneNumber = this.updateForm.value.phoneNumber;
-        var revise_studentID = this.updateForm.value.studentID;
-        this.user_object = this.af.object('/userProfile/' + this.user.uid);
-        this.user_object.update({
-            name: revise_name,
-            phoneNumber: revise_phoneNumber,
-            studentID: revise_studentID,
-        });
-        console.log("Success Update");
+    TaxiListPage.prototype.showCalendar = function () {
+        var _this = this;
+        var now = new Date();
+        var datePickerOption = {
+            minimumDate: now,
+            maximumDate: new Date(now.getFullYear(), now.getMonth() + 1, now.getDate())
+        };
+        var dateSelected = this.datePickerProvider.showCalendar(this.modalCtrl, datePickerOption);
+        dateSelected.subscribe(function (date) { _this.showChatroom(date); });
     };
-    PersonalInfoPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad PersonalInfoPage');
+    TaxiListPage.prototype.showChatroom = function (date) {
+        this.selectedDate = date;
+        console.log(this.makeStringFromDate(date));
+        this.dates = this.af.list('/chatrooms/' + this.makeStringFromDate(date));
     };
-    PersonalInfoPage.prototype.dismiss = function () {
-        this.viewCtrl.dismiss();
-        console.log('dismiss page');
+    TaxiListPage.prototype.goChatroom = function (date) {
+        var chat_room_id_val = date.$key;
+        var bookingDate_val = date.depart_date;
+        //participant array에 push
+        // 참여자가 아니고, 인원 full 아니면 push
+        // 참여자이면 그냥 enter
+        // full 인원이면 deny
+        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__chatroom_chatroom__["a" /* ChatRoomPage */], { chat_room_id: chat_room_id_val, bookingDate: bookingDate_val, user_id: this.user_id });
     };
-    PersonalInfoPage.prototype.showAlert = function () {
-        var alert = this.alertCtrl.create({
-            title: '개인정보 수정',
-            subTitle: '개인정보가 성공적으로 변경되었습니다.',
-            buttons: ['확인']
-        });
-        alert.present();
-        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_4__main_main__["a" /* MainPage */]);
+    TaxiListPage.prototype.makeRoom = function () {
+        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__makeRoom_makeRoom__["a" /* MakeRoomPage */], { user_id: this.user_id });
+        console.log("makeRoom function into taxi-list.tx");
     };
-    return PersonalInfoPage;
+    TaxiListPage.prototype.filterDeparture = function (departFilter) {
+        if (departFilter == "All") {
+            this.dates = this.af.list('/chatrooms/' + this.makeStringFromDate(this.selectedDate));
+        }
+        else {
+            this.dates = this.af.list('/chatrooms/' + this.makeStringFromDate(this.selectedDate), {
+                query: {
+                    orderByChild: 'departure',
+                    equalTo: departFilter
+                }
+            });
+        }
+    };
+    TaxiListPage.prototype.filterDestination = function (destinationFilter) {
+        if (destinationFilter == "All") {
+            this.dates = this.af.list('/chatrooms/' + this.makeStringFromDate(this.selectedDate));
+        }
+        else {
+            this.dates = this.af.list('/chatrooms/' + this.makeStringFromDate(this.selectedDate), {
+                query: {
+                    orderByChild: 'destination',
+                    equalTo: destinationFilter
+                }
+            });
+        }
+    };
+    TaxiListPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad TaxiListPage');
+    };
+    TaxiListPage.prototype.isExist = function (users) {
+        for (var i = 0; i < users.length; i++) {
+            if (users[i].uid == this.user_id)
+                return true;
+        }
+        return false;
+    };
+    TaxiListPage.prototype.makeStringFromDate = function (date) {
+        var d = new Date(date);
+        var month = "" + (d.getMonth() + 1);
+        var day = "" + d.getDate();
+        var year = d.getFullYear();
+        if (month.length < 2)
+            month = '0' + month;
+        if (day.length < 2)
+            day = '0' + day;
+        return [year, month, day].join('-');
+    };
+    return TaxiListPage;
 }());
-PersonalInfoPage = __decorate([
+TaxiListPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-personal-info',template:/*ion-inline-start:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/personal-info/personal-info.html"*/'<ion-header>\n  <ion-navbar  color = "primary">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>개인정보 수정</ion-title>\n    <ion-buttons start>\n      <button ion-button (click)="dismiss()">\n        <span ion-text showWhen="ios">Cancel</span>\n        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>\n      </button>\n    </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <form [formGroup]="updateForm" (submit)="updateUserInfo()" novalidate>\n    <ion-item>\n      <ion-label stacked>이름</ion-label>\n      <ion-input formControlName="name" type="name" value="{{user_dic.name}}"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label stacked>학번</ion-label>\n      <ion-input formControlName="studentID" type="studentID" value="{{user_dic.studentID}}"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label stacked>전화번호</ion-label>\n      <ion-input formControlName="phoneNumber" type="phoneNumber" value="{{user_dic.phoneNumber}}"></ion-input>\n    </ion-item>\n  <!--\n    <ion-item>\n      <ion-label stacked>새로운 비밀번호</ion-label>\n      <ion-input formControlName="newPassword" type="newPassword"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label stacked>비밀번호 확인</ion-label>\n      <ion-input formControlName="newPasswordCheck" type="newPasswordCheck"></ion-input>\n    </ion-item>\n  -->\n    <div padding>\n      <button ion-button block type="submit" (click)="showAlert()">변경하기</button>\n    </div>\n  </form>\n\n</ion-content>\n'/*ion-inline-end:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/personal-info/personal-info.html"*/,
+        selector: 'page-taxi-list',template:/*ion-inline-start:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/taxi-list/taxi-list.html"*/'<ion-header>\n  <ion-navbar color="primary">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title class = "top-title">택시조회</ion-title>\n  </ion-navbar>\n\n  <ion-grid class="small-table">\n    <ion-row>\n        <ion-col col-5>\n          <ion-grid>\n            <ion-row class = "rowUnderline">\n              <ion-col col-11>\n                <ion-item class="selectWrapper">\n                  <ion-select #newSelect [(ngModel)]="departFilter" interface="popover" placeholder="전체보기" (ionChange)="filterDeparture(departFilter)">\n                    <ion-option value="All" checked="true">전체보기</ion-option>\n                    <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>\n                  </ion-select>\n                </ion-item>\n              </ion-col>\n              <ion-col col-1> \n                <p class = "selectIcon">▼</p>\n              </ion-col>\n            </ion-row>\n          </ion-grid>\n        </ion-col>\n\n        <ion-col col-2 class = "rightArrow">  \n          <ion-icon name="arrow-round-forward"></ion-icon>\n        </ion-col>\n\n        <ion-col col-5>\n          <ion-grid>\n            <ion-row class = "rowUnderline">\n              <ion-col col-11>\n                <ion-item class="selectWrapper">\n                  <ion-select [selectOptions]="destinationOptions" [(ngModel)]="destinationFilter" placeholder="전체보기" interface="popover" (ionChange)="filterDestination(destinationFilter)">\n                    <ion-option value="All" checked="true">전체보기</ion-option>\n                    <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>\n                  </ion-select>\n                </ion-item>\n              </ion-col>\n              <ion-col col-1> \n                <p class = "selectIcon">▼</p>\n              </ion-col>\n            </ion-row>\n          </ion-grid>\n        </ion-col>  \n    </ion-row>\n\n    <ion-row>\n      <ion-col col-2 *ngFor="let day of days" class="pointer">\n        <ion-item class="days" (click)="showChatroom(day)">\n          <p>{{day|date: "dd"}}</p>\n        </ion-item>\n      </ion-col>\n      <ion-col col-2 class="pointer">\n        <ion-item class="days_icon" (click)="showCalendar()" >\n          <p> + </p>\n        </ion-item>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n</ion-header>\n\n<ion-content>\n  <div>\n    <ion-grid class="mainGrid">\n      <ion-item-group>\n        <ion-item-divider *ngFor="let date of dates | async" (click)="goChatroom(date)" class="line"\n        [ngClass]="{full: date.participants.length >= date.capacity, exist: isExist(date.participants)}">\n          <ion-row>\n            <ion-col col-3>\n              <p>{{date.depart_date}}</p>\n              <p>{{date.depart_time}}</p>\n            </ion-col>\n            <ion-col col-7>\n              <p>{{date.departure}}</p>\n              <p>>{{date.destination}}</p>\n            </ion-col>\n            <ion-col col-2>\n              <p>{{date.participants.length}} / {{date.capacity}}</p>\n              <p>참여 {{ date.participants.length >= date.capacity ? "불가" : "가능" }}</p>\n            </ion-col>\n          </ion-row>\n        </ion-item-divider>\n      </ion-item-group>\n    </ion-grid>\n  </div>\n\n  <ion-fab right bottom>\n    <button color="dark" ion-fab (click)="makeRoom()"><ion-icon name="add"></ion-icon></button>\n  </ion-fab>\n\n</ion-content>\n'/*ion-inline-end:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/taxi-list/taxi-list.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["ViewController"],
-        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["AlertController"], __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__["a" /* AngularFireDatabase */], __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]])
-], PersonalInfoPage);
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"], __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__["a" /* AngularFireDatabase */],
+        __WEBPACK_IMPORTED_MODULE_5_ionic2_date_picker__["DatePickerProvider"], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["ModalController"], __WEBPACK_IMPORTED_MODULE_6__providers_users_users__["a" /* UsersProvider */]])
+], TaxiListPage);
 
-//# sourceMappingURL=personal-info.js.map
+//# sourceMappingURL=taxi-list.js.map
 
 /***/ }),
 
@@ -2166,60 +2437,6 @@ MakeRoomPage = __decorate([
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UsersProvider; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(93);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-var UsersProvider = (function () {
-    function UsersProvider(af, platform) {
-        var _this = this;
-        this.af = af;
-        this.platform = platform;
-        console.log('Hello UsersProvider Provider');
-        this.uid = firebase.auth().currentUser.uid;
-        this.af.object('/userProfile/' + this.uid).subscribe(function (data) {
-            _this.email = data['email'];
-            _this.phoneNumber = data['phoneNumber'];
-            _this.name = data['name'];
-            _this.studentID = data['studentID'];
-        });
-    }
-    //subscribe로 하면 우리가 조작 가능한 type으로 변환되어 나온다.
-    UsersProvider.prototype.getEmail = function () {
-        console.log("getEmail Service");
-        console.log(this.email);
-        return this.email;
-    };
-    return UsersProvider;
-}());
-UsersProvider = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["a" /* AngularFireDatabase */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["Platform"]])
-], UsersProvider);
-
-//# sourceMappingURL=users.js.map
-
-/***/ }),
-
-/***/ 98:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SignupPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
@@ -2229,7 +2446,7 @@ UsersProvider = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__validators_phone__ = __webpack_require__(418);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__validators_studentID__ = __webpack_require__(419);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__main_main__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__login_login__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__login_login__ = __webpack_require__(51);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);

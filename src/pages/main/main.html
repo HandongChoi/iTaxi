@@ -25,15 +25,15 @@
 <ion-content>
 
   <ion-buttons>
-    <button ion-button large full icon-left (click)="goTaxiListPage()">
+    <button ion-button large full icon-left (click)="setPage('TaxiListPage')">
       <ion-icon name="car"></ion-icon>
       i-Taxi 탑승
     </button>
-    <button ion-button large full color="secondary" icon-left (click)="goCarpoolListPage()">
+    <button ion-button large full color="secondary" icon-left (click)="setPage('TaxiListPage')">
       <ion-icon name="car"></ion-icon>
       카풀 탑승
     </button>
-    <button ion-button large full color="tertiary" icon-left (click)="goMyPage()">
+    <button ion-button large full color="tertiary" icon-left (click)="setPage('PersonalInfoPage')">
       <ion-icon name="person"></ion-icon>
       마이페이지
     </button>

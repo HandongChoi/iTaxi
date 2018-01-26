@@ -2,7 +2,12 @@ import { Component } from '@angular/core';
 import { IonicPage, Loading, LoadingController, NavController, NavParams, Alert, AlertController, MenuController } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { EmailValidator } from '../../validators/email';
+
 import { AuthProvider } from '../../providers/auth/auth';
+import { UsersProvider } from '../../providers/users/users';
+
+import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
+
 import { MainPage } from '../main/main';
 
 declare var FCMPlugin;
@@ -16,10 +21,13 @@ export class LoginPage {
 
   public loginForm:FormGroup;
   public loading:Loading;
+  
+  setLoading:Loading;
   firestore: any;
 
-  constructor(public navCtrl:NavController, public navParams: NavParams, public loadingCtrl:LoadingController, public alertCtrl:AlertController,
-              public authProvider:AuthProvider, formBuilder:FormBuilder, public menu: MenuController) {
+  constructor(public navCtrl:NavController, public navParams: NavParams, public loadingCtrl:LoadingController,
+              public alertCtrl:AlertController, public authProvider:AuthProvider, formBuilder:FormBuilder, 
+              public menu: MenuController, public userServices:UsersProvider, public af: AngularFireDatabase) {
     
     //왼쪽 사이드바 메뉴 안 보이게 하는 역할
     this.menu=menu;
@@ -44,6 +52,7 @@ export class LoginPage {
       const password = this.loginForm.value.password;
 
       this.authProvider.loginUser(email, password).then( authData =>  {
+        
         this.loading.dismiss().then( () => {
           if(typeof(FCMPlugin) != 'undefined'){
             FCMPlugin.onTokenRefresh(function(token){
@@ -52,12 +61,17 @@ export class LoginPage {
                 this.storetoken(token);
               }
             });
-          }
-          else {
+          } else {
             console.log("FCMPlugin type is undefined!");
           }
-        }).then(() => {
+          console.log("Test중");
+          
+        }).then(()=>{
+          console.log('Then 이후');
           this.navCtrl.setRoot(MainPage);
+        });
+        this.userServices.test(firebase.auth().currentUser.uid).then(data=>{
+          console.log('test안이다',data);
         });
       }, error => {
         this.loading.dismiss().then( () => {
@@ -68,16 +82,12 @@ export class LoginPage {
         alert.present() });
       });
       this.loading = this.loadingCtrl.create();
-      this.loading.present()
+      this.loading.present();
     }
   }
 
-  goToSignup():void {
-    this.navCtrl.push('SignupPage');
-  }
-
-  goToResetPassword():void {
-    this.navCtrl.push('ResetPasswordPage');
+  pushPage(name){
+    this.navCtrl.push(name);
   }
 
   tokenSetup(){

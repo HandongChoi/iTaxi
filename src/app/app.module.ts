@@ -3,17 +3,10 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 
-import { ChatRoomPage } from '../pages/chatroom/chatroom';
 import { HomePage } from '../pages/home/home';
-import { LoginPage } from '../pages/login/login';
-import { MainPage } from '../pages/main/main';
 import { MakeRoomPage } from '../pages/makeRoom/makeRoom';
-import { PersonalInfoPage } from '../pages/personal-info/personal-info';
-import { ResetPasswordPage } from '../pages/reset-password/reset-password';
-import { SettingPage } from '../pages/setting/setting';
-import { SignupPage } from '../pages/signup/signup';
-import { TaxiListPage } from '../pages/taxi-list/taxi-list';
-import { RideHistoryPage } from '../pages/ride-history/ride-history';
+import { MainPage } from '../pages/main/main';
+import { RideHistoryPage } from '../pages/ride-history/ride-history'
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -21,9 +14,17 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AuthProvider } from '../providers/auth/auth';
+import { DatePickerModule } from 'ionic2-date-picker';
+
+import { TaxiListPageModule } from '../pages/taxi-list/taxi-list.module'
+import { ChatRoomPageModule } from '../pages/chatroom/chatroom.module'
+import { LoginPageModule } from '../pages/login/login.module'
+import { MainPageModule } from '../pages/main/main.module'
+import { PersonalInfoPageModule } from '../pages/personal-info/personal-info.module'
+import { SettingPageModule } from '../pages/setting/setting.module'
 import { SignupPageModule } from '../pages/signup/signup.module';
 import { ResetPasswordPageModule } from '../pages/reset-password/reset-password.module';
-import { DatePickerModule } from 'ionic2-date-picker';
+import { RideHistoryPageModule } from '../pages/ride-history/ride-history.module'
 
 import { FCM } from '@ionic-native/fcm';
 
@@ -43,40 +44,32 @@ export const firebaseConfig = {
 @NgModule({
   declarations: [
     MyApp,
-    ChatRoomPage,
     HomePage,
-    LoginPage,
-    MainPage,
     MakeRoomPage,
-    PersonalInfoPage,
-    SettingPage,
-    TaxiListPage,
-    RideHistoryPage,
     DatePipe,
+    MainPage,
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
+    DatePickerModule,
+    ChatRoomPageModule,
+    LoginPageModule,
+    TaxiListPageModule,
+    PersonalInfoPageModule,
+    SettingPageModule,
     SignupPageModule,
     ResetPasswordPageModule,
-    DatePickerModule,
+    RideHistoryPageModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    ChatRoomPage,
     HomePage,
-    LoginPage,
-    MainPage,
     MakeRoomPage,
-    PersonalInfoPage,
-    ResetPasswordPage,
-    SettingPage,
-    SignupPage,
-    TaxiListPage,
-    RideHistoryPage,
+    MainPage,
   ],
   providers: [
     StatusBar,

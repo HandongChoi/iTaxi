@@ -32,8 +32,8 @@ export class MainPage {
 
     //일단 지금 user의 정보를 email로 받아오고 있다.
     this.user = this.userServices.getEmail();
-    console.log("Main user : "+this.user);
-
+    console.log("Main user : "+this.user)
+    
     // //이메일 이전것으로 pasrse 해서 탑승내역에 저장중.
     // let parsedUserId = this.stringParser(this.user);
     // this.dates = af.list('/rideHistory/'+parsedUserId);
@@ -43,6 +43,10 @@ export class MainPage {
 
   }
 
+  ioniViewDidLoad(){
+    console.log("ionViewDidLoad at main.ts");
+  }
+
   stringParser(sentence){
     let parsedID = sentence.replace('@', '');
     parsedID = parsedID.replace('.', '');
@@ -50,9 +54,9 @@ export class MainPage {
     return parsedID;
   }
 
-  goTaxiListPage(){
-    this.navCtrl.setRoot(TaxiListPage, {user_id: this.user});
-    console.log("goTaxiListPage at main.ts");
+  setPage(page){
+    this.navCtrl.setRoot(page, {user_id: this.user});
+    console.log(page+" at main.ts");
   }
 
   goCarpoolListPage(){
@@ -60,8 +64,4 @@ export class MainPage {
     console.log("goCarpoolListPage at main.ts");
   }
 
-  goMyPage(){
-    this.navCtrl.setRoot(PersonalInfoPage, {user_id: this.user});
-    console.log("goMyPage at main.ts");
-  }
 }

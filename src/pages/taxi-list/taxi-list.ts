@@ -30,7 +30,6 @@ export class TaxiListPage {
   public datePickerProvider: DatePickerProvider, public modalCtrl: ModalController, public usersService: UsersProvider) {
 
     this.user_id = this.usersService.getEmail();
-    console.log("ThaTha : "+this.user_id);
 
     for(let i = 0; i < 5; i++){
       let temp = new Date(this.nowDate.getTime());
@@ -101,7 +100,6 @@ export class TaxiListPage {
   }
 
   filterDestination(destinationFilter){
-    console.log("Des: "+destinationFilter);
     if (destinationFilter == "All") {
       this.dates = this.af.list('/chatrooms/'+ this.makeStringFromDate(this.selectedDate));
     }

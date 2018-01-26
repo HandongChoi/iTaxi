@@ -3,7 +3,7 @@
     <ion-content class="sidemenu-content">
       <p class="sidemenu-userid"><ion-icon name="person"></ion-icon>&nbsp;&nbsp;{{user_id}}</p> 
       <ion-buttons right > 
-        <button  class="sidemenu-button" menuClose icon-only (click)="goSettingPage()">
+        <button  class="sidemenu-button" menuClose icon-only (click)="setPage('SettingPage')">
           <ion-icon name="settings"></ion-icon>
         </button>
       </ion-buttons>
@@ -25,16 +25,16 @@
       
       <ion-list class="sidemenu-list">
           <ion-list-header class="sidemenu-header"> <ion-icon name="ios-car"></ion-icon> &nbsp;&nbsp;택시 </ion-list-header>
-          <button menuClose ion-item class="sidemenu-items" (click)="goTaxiListPage()">조회</button>
-          <button menuClose ion-item class="sidemenu-items" (click)="goMakeTaxiRoomPage()">모집</button>
+          <button menuClose ion-item class="sidemenu-items" (click)="setPage('TaxiListPage')">조회</button>
+          <button menuClose ion-item class="sidemenu-items" (click)="setPage('MakeRoomPage')">모집</button>
           <ion-list-header class="sidemenu-header"> <ion-icon name="car"></ion-icon>  &nbsp;&nbsp;카풀 </ion-list-header>
           <button menuClose ion-item class="sidemenu-items" (click)="goCarpoolListPage()">조회</button>
           <button menuClose ion-item class="sidemenu-items" (click)="goMakeCarpoolRoomPage()">모집</button>
           <ion-list-header class="sidemenu-header"> <ion-icon name="person"></ion-icon>&nbsp;&nbsp;마이페이지 </ion-list-header>
-          <button menuClose ion-item class="sidemenu-items" (click)="goBoardingListPage()">탑승내역</button>
-          <button menuClose ion-item class="sidemenu-items" (click)="goPersonalInfoPage()">내정보수정</button>
+          <button menuClose ion-item class="sidemenu-items" (click)="setPage('RideHistoryPage')">탑승내역</button>
+          <button menuClose ion-item class="sidemenu-items" (click)="setPage('PersonalInfoPage')">내정보수정</button>
           <ion-list-header class="sidemenu-header"> <ion-icon name="home"></ion-icon>  &nbsp;&nbsp;메인페이지 </ion-list-header>
-          <button menuClose ion-item class="sidemenu-items" (click)="goMainPage()">메인페이지</button>  
+          <button menuClose ion-item class="sidemenu-items" (click)="setPage('MainPage')">메인페이지</button>  
           <button menuClose ion-item class="sidemenu-items" (click)="logout()">로그아웃</button>
       </ion-list>
     </ion-content>
