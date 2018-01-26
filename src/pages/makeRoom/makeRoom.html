@@ -42,7 +42,7 @@
     
     <ion-col col-4.5 justify-content-center>
       <ion-item text-wrap no-lines>
-        <ion-select text-wrap class="my-select" interface="popover" *ngIf="arrive!='직접입력'" [(ngModel)]="arrive">
+        <ion-select text-wrap class="my-select" [(ngModel)]="arrive" interface="popover" *ngIf="arrive!='직접입력'">
           <ion-option text-wrap *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>
         </ion-select>
         <ion-input class="my-input" style="position:absolute" *ngIf="arrive=='직접입력'" [(ngModel)]="arrive2" type="text" placeholder="기타장소"></ion-input> 
@@ -62,7 +62,7 @@
   <div class="bottomRow">
   <ion-row justify-content-center>
           <!--<ion-label align="center" color="primary" fixed>출발날짜</ion-label>-->
-    <ion-datetime padding class="my-date" displayFormat="YYYY년 M월 D일 ({{today}})" pickerFormat="YYYY MM DD" min={{minYear}} max={{maxYear}} 
+    <ion-datetime padding class="my-date" displayFormat="YYYY년 M월 D일 ({{today}})" pickerFormat="YYYY-MM-DD" min={{minYear}} max={{maxYear}} 
                   placeholder={{nowDate}} [(ngModel)]="bookingDate" (ngModelChange)="getKday()"></ion-datetime>   
   </ion-row>
   </div>
@@ -102,10 +102,6 @@
   
   <div class="room_button">          
     <button style="margin-top:15%" class="button customBtn" ion-button round (click)="showConfirmAlert()" >값 테스트</button>
-  </div>
-  
-  <div class="room_button">          
-    <button style="margin-top:15%" class="button customBtn" ion-button round (click)="showRadioAlert()" >방만들기</button>
   </div>
 
 </ion-content>

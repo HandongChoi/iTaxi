@@ -76,7 +76,7 @@ export class MyApp {
         //여기서도 임시로 setInfo 시간을 벌어주고 Mainpage로 넘긴다.
         setTimeout(()=>{
           this.user_id = this.userServices.getName();
-          this.rootPage = MainPage;
+          this.rootPage = MakeRoomPage;
         },4000);
 
         //for showing the most recent reservation list in side bar
