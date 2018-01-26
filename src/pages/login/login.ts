@@ -9,6 +9,7 @@ import { UsersProvider } from '../../providers/users/users';
 import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 
 import { MainPage } from '../main/main';
+import { setTimeout } from 'timers';
 
 declare var FCMPlugin;
 
@@ -52,7 +53,6 @@ export class LoginPage {
       const password = this.loginForm.value.password;
 
       this.authProvider.loginUser(email, password).then( authData =>  {
-        
         this.loading.dismiss().then( () => {
           if(typeof(FCMPlugin) != 'undefined'){
             FCMPlugin.onTokenRefresh(function(token){
@@ -64,14 +64,13 @@ export class LoginPage {
           } else {
             console.log("FCMPlugin type is undefined!");
           }
-          console.log("Test중");
-          
+          this.userServices.setInfo(firebase.auth().currentUser.uid);
         }).then(()=>{
-          console.log('Then 이후');
-          this.navCtrl.setRoot(MainPage);
-        });
-        this.userServices.test(firebase.auth().currentUser.uid).then(data=>{
-          console.log('test안이다',data);
+          //현재 2초 딜레이를 걸어놓음으로써 비동기식 문제를 해결중. 임시방편이다.
+          setTimeout(()=>{
+            this.navCtrl.setRoot(MainPage);
+          },2000);
+          
         });
       }, error => {
         this.loading.dismiss().then( () => {

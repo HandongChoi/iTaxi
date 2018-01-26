@@ -42,10 +42,9 @@ export class MyApp {
   pages: Array<{title: string, component: any}>;
   dates_array: Array<any> = [];
   user_id: any;
-
+  uid: any;
 
   public room: FirebaseListObservable<any[]>;
-
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
               public authProvider:AuthProvider, public alertCtrl: AlertController, public af: AngularFireDatabase,
@@ -66,8 +65,19 @@ export class MyApp {
         this.rootPage = LoginPage;
         unsubscribe();
       } else{
-        this.user_id = user.email;
-        this.rootPage = MainPage;
+        
+        this.uid = firebase.auth().currentUser.uid;
+
+        //임시방편이다. 위에 uid 받아오는데 시간이 걸려서 setInfo로 그 값을 넘겨주기 위해서 시간을 벌 필요가 있다.
+        setTimeout(()=>{
+          this.userServices.setInfo(this.uid);
+        },2000);
+
+        //여기서도 임시로 setInfo 시간을 벌어주고 Mainpage로 넘긴다.
+        setTimeout(()=>{
+          this.user_id = this.userServices.getName();
+          this.rootPage = MainPage;
+        },4000);
 
         //for showing the most recent reservation list in side bar
         let dates: FirebaseListObservable<any[]>;
@@ -151,7 +161,7 @@ export class MyApp {
   }
 
   pushPage(page){
-    this.navCtrl.push(page, {user_id: this.user_id});
+    this.navCtrl.push(page);
     console.log(page+" push at app.component.ts");
   }
 

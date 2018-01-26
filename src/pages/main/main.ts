@@ -20,7 +20,6 @@ export class MainPage {
   selectedDate: Date;
   currentDate: Date = new Date();
 
-  user: any;
   user_id: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase,
@@ -31,8 +30,8 @@ export class MainPage {
     this.menu.enable(true,'myMenu');
 
     //일단 지금 user의 정보를 email로 받아오고 있다.
-    this.user = this.userServices.getEmail();
-    console.log("Main user : "+this.user)
+    this.user_id = this.userServices.getEmail();
+    console.log("Main user : "+this.user_id)
     
     // //이메일 이전것으로 pasrse 해서 탑승내역에 저장중.
     // let parsedUserId = this.stringParser(this.user);
@@ -55,7 +54,7 @@ export class MainPage {
   }
 
   setPage(page){
-    this.navCtrl.setRoot(page, {user_id: this.user});
+    this.navCtrl.setRoot(page);
     console.log(page+" at main.ts");
   }
 
