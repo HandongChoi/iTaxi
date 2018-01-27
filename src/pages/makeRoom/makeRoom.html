@@ -26,14 +26,14 @@
   <ion-row just-content-center>
     <ion-col col-4.5 justify-content-center>
       <ion-item text-wrap no-lines>
-        <ion-select text-wrap class="my-select" [(ngModel)]="start" interface="popover" *ngIf="start!='직접입력'">
+        <ion-select text-wrap class="my-select" [(ngModel)]="start.key" interface="popover" *ngIf="start.key!='직접입력'">
           <ion-option text-wrap *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>
         </ion-select>
-        <ion-input class="my-input" style="position:absolute" *ngIf="start=='직접입력'" [(ngModel)]="start2" type="text" placeholder="기타장소"></ion-input>
+        <ion-input class="my-input" style="position:absolute" *ngIf="start.key=='직접입력'" [(ngModel)]="start.value" type="text" placeholder="기타장소"></ion-input>
       </ion-item>
     </ion-col>
     <ion-col col-1 >
-      <button ion-button no-padding clear round class="my-btn" (click)="startClick()" *ngIf="start=='직접입력'"></button>
+      <button ion-button no-padding clear round class="my-btn" (click)="startClick()" *ngIf="start.key=='직접입력'"></button>
     </ion-col>
     
     <ion-col col-1 >
@@ -42,15 +42,15 @@
     
     <ion-col col-4.5 justify-content-center>
       <ion-item text-wrap no-lines>
-        <ion-select text-wrap class="my-select" [(ngModel)]="arrive" interface="popover" *ngIf="arrive!='직접입력'">
+        <ion-select text-wrap class="my-select" [(ngModel)]="arrive.key" interface="popover" *ngIf="arrive.key!='직접입력'">
           <ion-option text-wrap *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>
         </ion-select>
-        <ion-input class="my-input" style="position:absolute" *ngIf="arrive=='직접입력'" [(ngModel)]="arrive2" type="text" placeholder="기타장소"></ion-input> 
+        <ion-input class="my-input" style="position:absolute" *ngIf="arrive.key=='직접입력'" [(ngModel)]="arrive.value" type="text" placeholder="기타장소"></ion-input> 
       </ion-item>    
     </ion-col>
     <ion-col col-1>
         <!--<button style="margin-left:-10%;" ion-button icon-only clear *ngIf="arrive!='직접입력'" ><ion-icon name="arrow-dropdown"></ion-icon></button>-->
-        <button ion-button no-padding clear round class="my-btn" (click)="labelClick()" *ngIf="arrive=='직접입력'"></button>
+        <button ion-button no-padding clear round class="my-btn" (click)="labelClick()" *ngIf="arrive.key=='직접입력'"></button>
       </ion-col>
   </ion-row>
   </div>
@@ -87,14 +87,14 @@
     <ion-row justify-content-center>
       <form>
         <div class="cc-selector">
-          <input id="visa" type="radio" name="credit-card" value="2" [(ngModel)]="maxPeople"/>
-          <label class="drinkcard-cc visa" for="visa"></label>
+          <input id="twoButton" type="radio" name="credit-card" value=2 [(ngModel)]="maxPeople"/>
+          <label class="drinkcard-cc twoButton" for="twoButton"></label>
 
-          <input id="mastercard" type="radio" name="credit-card" value="3" [(ngModel)]="maxPeople"/>
-          <label class="drinkcard-cc mastercard"for="mastercard"></label>
+          <input id="threeButton" type="radio" name="credit-card" value=3 [(ngModel)]="maxPeople"/>
+          <label class="drinkcard-cc threeButton"for="threeButton"></label>
 
-          <input id="people" type="radio" name="credit-card" value="4" [(ngModel)]="maxPeople"/>
-          <label class="drinkcard-cc people" for="people"></label>
+          <input id="fourButton" type="radio" name="credit-card" value=4 [(ngModel)]="maxPeople"/>
+          <label class="drinkcard-cc fourButton" for="fourButton"></label>
         </div>
       </form>
     </ion-row>

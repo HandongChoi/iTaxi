@@ -137,9 +137,9 @@ page-make-room{
       -moz-appearance:none;
             appearance:none;
   }
-  .visa{background-image:url("../assets/img/max_2.png");}
-  .mastercard{background-image:url("../assets/img/max_3.png");}
-  .people{background-image:url("../assets/img/max_4.png");}
+  .twoButton{background-image:url("../assets/img/max_2.png");}
+  .threeButton{background-image:url("../assets/img/max_3.png");}
+  .fourButton{background-image:url("../assets/img/max_4.png");}
 
   .cc-selector input:active +.drinkcard-cc{opacity: .9;}
   .cc-selector input:checked +.drinkcard-cc{

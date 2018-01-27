@@ -12,7 +12,6 @@ export class UsersProvider {
   name: string;
   studentID: string;
 
-  obj: any;
   
   constructor(public af: AngularFireDatabase) {
     console.log('Hello UsersProvider Provider');       
@@ -23,6 +22,7 @@ export class UsersProvider {
   }
 
   setInfo(uid): void{
+    //subscribe로 하면 observable한 것을 받아와서 data를 통해 접근가능하게 만들어준다. 안 쓰면 observable object라서 컨트롤 안됨.
     this.af.object('/userProfile/'+uid).subscribe(data=>{
       this.email = data['email'];
       this.phoneNumber = data['phoneNumber'];
@@ -31,7 +31,6 @@ export class UsersProvider {
     });
   }
 
-  //subscribe로 하면 우리가 조작 가능한 type으로 변환되어 나온다.
   getEmail(){
     return this.email;    
   }

@@ -4,6 +4,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { ChatRoomPage } from '../chatroom/chatroom';
 
+import { UsersProvider } from '../../providers/users/users';
+
 @IonicPage()
 @Component({
   selector: 'page-ride-history',
@@ -17,8 +19,9 @@ export class RideHistoryPage {
   nowDate: string = new Date().toISOString().substr(0, 10);
   chatroomData: Array<any[]> = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase) {
-    this.user_id = this.navParams.data.user_id;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase, 
+              public userServices: UsersProvider) {
+    this.user_id = this.userServices.getEmail();
     console.log(this.user_id);
     this.rideHistory = af.list('/rideHistory/'+ this.stringParser(this.user_id));
 
