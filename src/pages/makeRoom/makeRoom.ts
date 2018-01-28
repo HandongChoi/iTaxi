@@ -110,13 +110,13 @@ export class MakeRoomPage {
       }
     }
   }
-  startClick(){
+  setDepartureDefault(){
     this.selectDeparture = {key:"한동대학교", value:""};
   }
-  labelClick(){
+  setDestinationDefault(){
     this.selectDestination = {key:"포항역", value:""};
   }
-  swap_position(){
+  swapPlace(){
     [this.selectDeparture, this.selectDestination] = [this.selectDestination, this.selectDeparture];
   }
 }
