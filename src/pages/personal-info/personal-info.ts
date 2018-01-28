@@ -20,7 +20,6 @@ export class PersonalInfoPage {
 
   user_object:FirebaseObjectObservable<any[]>;
 
-
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,
               public alertCtrl: AlertController, public af:AngularFireDatabase, formBuilder:FormBuilder) {
 

@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
-import { TaxiListPage } from '../taxi-list/taxi-list';
-import { PersonalInfoPage } from '../personal-info/personal-info';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 import { UsersProvider } from '../../providers/users/users';
+import { DateProvider } from '../../providers/date/date';
+import { DatabaseQuery } from 'angularfire2/interfaces';
 
 @IonicPage()
 @Component({
@@ -23,7 +23,7 @@ export class MainPage {
   user_id: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase,
-     public menu: MenuController, public userServices: UsersProvider) {
+     public menu: MenuController, public userServices: UsersProvider, public dateServices: DateProvider) {
 
     //여기서부터는 로그인 및 회원가입 페이지를 넘어서 사이드 메뉴를 볼 수 있도록 만들기.
     this.menu=menu;

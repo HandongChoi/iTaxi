@@ -16,30 +16,24 @@ import { DatabaseQuery } from 'angularfire2/interfaces';
 })
 
 export class MakeRoomPage {
-  start: Object = {key:"한동대학교", value:""};
-  depart: string = "";
+  selectDeparture: Object = {key:"한동대학교", value:""};
+  departure: string = "";
 
-  arrive: Object = {key:"포항역", value:""};
-  arrival: string = "";
+  selectDestination: Object = {key:"포항역", value:""};
+  destination: string = "";
 
   maxPeople: number = 4; 
   msg: string="";
 
-  forDate: any = new Date();
-  kDate: any = new Date();
-
   nowDate: string = this.dateServices.nowDate;
   nowTime: string = this.dateServices.nowTime;
+  today: string = this.dateServices.today;
   bookingDate: string = this.nowDate;
   bookingTime: string = this.nowTime;
 
-  minYear: string = this.dateServices.minYear;
-  maxYear: string = this.dateServices.maxYear;
+  min: string = this.dateServices.min;
+  max: string = this.dateServices.max;
 
-  week: Array<string> = new Array('일','월','화','수','목','금','토');
-  today: string = this.week[this.forDate.getDay()];
-  
-  chatrooms: FirebaseListObservable<any[]>;
   user_id: string; 
 
   spotList: Array<string> = ["한동대학교", "포항역", "양덕", "고속버스터미널", "시외버스터미널", "북부해수욕장", "육거리", "직접입력"];;
@@ -47,16 +41,17 @@ export class MakeRoomPage {
   constructor(public alertCtrl: AlertController, public navParams: NavParams, public dateServices: DateProvider,
                public navCtrl:NavController, public af: AngularFireDatabase, public userServices: UsersProvider){
     this.user_id = this.userServices.getName();
+    console.log('constructor makeRoom');
   }
 
-  showConfirmAlert(){
-    this.depart = this.start['key'] != '직접입력' ? this.start['key'] : this.start['value'];
-    this.arrival = this.arrive['key'] != '직접입력' ? this.arrive['key'] : this.arrive['value'];
+  makeRoom(){
+    this.departure = this.selectDeparture['key'] != '직접입력' ? this.selectDeparture['key'] : this.selectDeparture['value'];
+    this.destination = this.selectDestination['key'] != '직접입력' ? this.selectDestination['key'] : this.selectDestination['value'];
     
     //전달할 메시지
-    this.msg = "<br>" + "출발지 : " + this.depart + "<br>" + 
-              "도착지 : " + this.arrival + "<br>" + 
-              "출발날짜 : " + this.bookingDate + "(" + this.week[new Date(this.bookingDate).getDay()] + ")" + "<br>" + 
+    this.msg = "<br>" + "출발지 : " + this.departure + "<br>" + 
+              "도착지 : " + this.destination + "<br>" + 
+              "출발날짜 : " + this.bookingDate + "(" + this.dateServices.getKToday(this.bookingDate) + ")" + "<br>" + 
               "출발시간 : " + this.bookingTime + "<br>" +
               "최대탑승인원 : " + this.maxPeople + "명" + "<br>" ;
     
@@ -66,7 +61,8 @@ export class MakeRoomPage {
       console.log("bookingDate : " + this.bookingDate+this.bookingTime);
       console.log("Error");
     } else{
-      if(this.depart == this.arrival){
+      //출발지와 목적지가 같을 경우 처리
+      if(this.departure == this.destination){
         let alert = this.alertCtrl.create({
           message: "출발지와 도착지를 다르게 입력하여 주세요.",
           buttons: [{
@@ -92,22 +88,21 @@ export class MakeRoomPage {
             },
             { text: '확인',
               handler: data => {
-                let participants_list = [];
-                participants_list.push(this.user_id);
-                this.chatrooms = this.af.list('/chatrooms/' + this.bookingDate);
-                let url = this.chatrooms.push(
-                    { departure: this.start,
-                      destination: this.arrive,
-                      depart_date: this.bookingDate,
-                      depart_time: this.bookingTime,
-                      capacity: this.maxPeople,
-                      currentPeople: 4-this.maxPeople,
-                      host: this.user_id,
-                      participants: participants_list,
-                    }
-                );
+                console.log('데이타 시작');
+                console.log(data);
+                let roomObj: Object = { departureure: this.departure,
+                                        destination: this.destination,
+                                        departure_time: this.bookingTime,
+                                        capacity: this.maxPeople,
+                                        currentPeople: 4-this.maxPeople,
+                                        host: this.user_id,
+                                        participants: [this.user_id]
+                                      };
+                let chatRoomUrl = this.af.list('/chatRooms/'+this.bookingDate).push(roomObj);
+                this.af.list('/rideHistory/'+this.userServices.getUID()+'/'+chatRoomUrl.key).push(roomObj);
+                console.log(chatRoomUrl.key);
                 console.log('Okay');
-                this.navCtrl.setRoot(ChatRoomPage, {chat_room_id:url.key, bookingDate:this.bookingDate, user_id: this.user_id, whichPage: "makeRoom"});
+                this.navCtrl.setRoot(ChatRoomPage, {chat_room_id:chatRoomUrl.key, bookingDate:this.bookingDate, user_id: this.user_id, whichPage: "makeRoom"});
               }
             }]
         });
@@ -115,21 +110,13 @@ export class MakeRoomPage {
       }
     }
   }
-
-  getKday(){
-    this.today = this.week[new Date(this.bookingDate).getDay()];
-  }
-
   startClick(){
-    this.start = {key:"한동대학교", value:""};
+    this.selectDeparture = {key:"한동대학교", value:""};
   }
-
   labelClick(){
-    this.arrive = {key:"포항역", value:""};
+    this.selectDestination = {key:"포항역", value:""};
   }
-
   swap_position(){
-    [this.start, this.arrive] = [this.arrive, this.start];
+    [this.selectDeparture, this.selectDestination] = [this.selectDestination, this.selectDeparture];
   }
-    
 }

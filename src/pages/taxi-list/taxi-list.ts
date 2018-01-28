@@ -6,6 +6,7 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 import { DatePickerProvider, DatePickerOption } from 'ionic2-date-picker';
 
 import { UsersProvider } from '../../providers/users/users';
+import { DateProvider } from '../../providers/date/date';
 
 @IonicPage()
 @Component({
@@ -27,7 +28,8 @@ export class TaxiListPage {
   spotList: Array<string> = ["한동대학교", "포항역", "고속버스터미널", "시외버스터미널", "북부해수욕장", "육거리"];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase,
-  public datePickerProvider: DatePickerProvider, public modalCtrl: ModalController, public usersService: UsersProvider) {
+              public datePickerProvider: DatePickerProvider, public modalCtrl: ModalController, 
+              public usersService: UsersProvider, public dateServices: DateProvider) {
 
     this.user_id = this.usersService.getEmail();
 

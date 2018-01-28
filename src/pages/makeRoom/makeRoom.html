@@ -14,7 +14,7 @@
     </ion-col>
     <ion-col col-3 >
       <div class="swap_button">
-        <button ion-button full large clear no-padding (click)="swap_position()"></button>
+        <button ion-button full large clear no-padding (click)="swapPlace()"></button>
       </div>
     </ion-col>
     <ion-col col-3 >
@@ -26,14 +26,14 @@
   <ion-row just-content-center>
     <ion-col col-4.5 justify-content-center>
       <ion-item text-wrap no-lines>
-        <ion-select text-wrap class="my-select" [(ngModel)]="start.key" interface="popover" *ngIf="start.key!='직접입력'">
+        <ion-select text-wrap class="my-select" [(ngModel)]="selectDeparture.key" interface="popover" *ngIf="selectDeparture.key!='직접입력'">
           <ion-option text-wrap *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>
         </ion-select>
-        <ion-input class="my-input" style="position:absolute" *ngIf="start.key=='직접입력'" [(ngModel)]="start.value" type="text" placeholder="기타장소"></ion-input>
+        <ion-input class="my-input" style="position:absolute" *ngIf="selectDeparture.key=='직접입력'" [(ngModel)]="selectDeparture.value" type="text" placeholder="기타장소"></ion-input>
       </ion-item>
     </ion-col>
     <ion-col col-1 >
-      <button ion-button no-padding clear round class="my-btn" (click)="startClick()" *ngIf="start.key=='직접입력'"></button>
+      <button ion-button no-padding clear round class="my-btn" (click)="setDepartureDefault()" *ngIf="selectDeparture.key=='직접입력'"></button>
     </ion-col>
     
     <ion-col col-1 >
@@ -42,15 +42,14 @@
     
     <ion-col col-4.5 justify-content-center>
       <ion-item text-wrap no-lines>
-        <ion-select text-wrap class="my-select" [(ngModel)]="arrive.key" interface="popover" *ngIf="arrive.key!='직접입력'">
+        <ion-select text-wrap class="my-select" [(ngModel)]="selectDestination.key" interface="popover" *ngIf="selectDestination.key!='직접입력'">
           <ion-option text-wrap *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>
         </ion-select>
-        <ion-input class="my-input" style="position:absolute" *ngIf="arrive.key=='직접입력'" [(ngModel)]="arrive.value" type="text" placeholder="기타장소"></ion-input> 
+        <ion-input class="my-input" style="position:absolute" *ngIf="selectDestination.key=='직접입력'" [(ngModel)]="selectDestination.value" type="text" placeholder="기타장소"></ion-input> 
       </ion-item>    
     </ion-col>
     <ion-col col-1>
-        <!--<button style="margin-left:-10%;" ion-button icon-only clear *ngIf="arrive!='직접입력'" ><ion-icon name="arrow-dropdown"></ion-icon></button>-->
-        <button ion-button no-padding clear round class="my-btn" (click)="labelClick()" *ngIf="arrive.key=='직접입력'"></button>
+        <button ion-button no-padding clear round class="my-btn" (click)="setDestinationDefault()" *ngIf="selectDestination.key=='직접입력'"></button>
       </ion-col>
   </ion-row>
   </div>
@@ -61,9 +60,8 @@
 
   <div class="bottomRow">
   <ion-row justify-content-center>
-          <!--<ion-label align="center" color="primary" fixed>출발날짜</ion-label>-->
-    <ion-datetime padding class="my-date" displayFormat="YYYY년 M월 D일 ({{today}})" pickerFormat="YYYY-MM-DD" min={{minYear}} max={{maxYear}} 
-                  placeholder={{nowDate}} [(ngModel)]="bookingDate" (ngModelChange)="getKday()"></ion-datetime>   
+    <ion-datetime padding class="my-date" displayFormat="YYYY년 M월 D일 ({{today}})" pickerFormat="YYYY-MM-DD" min={{min}} max={{max}} 
+                  placeholder={{nowDate}} [(ngModel)]="bookingDate"></ion-datetime>   
   </ion-row>
   </div>
   
@@ -85,15 +83,29 @@
 
   <div class="bottomRow">
     <ion-row justify-content-center>
+      <!-- <div class="cc-selector">
+        <ion-list radio-group [(ngModel)]="maxPeople">
+          <ion-radio value=2>
+            <ion-label class="drinkcard-cc twoButton" for="twoButton"></label>
+          </ion-radio>
+          <ion-radio value=3>
+            <ion-label class="drinkcard-cc threeButton"for="threeButton"></label>
+          </ion-radio>
+          <ion-radio value=2>
+            <ion-label class="drinkcard-cc fourButton" for="fourButton"></label>
+          </ion-radio>
+        </ion-list>
+      </div> -->
+      
       <form>
         <div class="cc-selector">
           <input id="twoButton" type="radio" name="credit-card" value=2 [(ngModel)]="maxPeople"/>
           <label class="drinkcard-cc twoButton" for="twoButton"></label>
-
+          
           <input id="threeButton" type="radio" name="credit-card" value=3 [(ngModel)]="maxPeople"/>
           <label class="drinkcard-cc threeButton"for="threeButton"></label>
 
-          <input id="fourButton" type="radio" name="credit-card" value=4 [(ngModel)]="maxPeople"/>
+          <input id="fourButton" type="radio" name="credit-card" value=4 checked [(ngModel)]="maxPeople"/>
           <label class="drinkcard-cc fourButton" for="fourButton"></label>
         </div>
       </form>
@@ -101,7 +113,7 @@
   </div>
   
   <div class="room_button">          
-    <button style="margin-top:15%" class="button customBtn" ion-button round (click)="showConfirmAlert()" >값 테스트</button>
+    <button style="margin-top:15%" class="button customBtn" ion-button round (click)="makeRoom()" >방 만들기</button>
   </div>
 
 </ion-content>

@@ -39,4 +39,8 @@ export class UsersProvider {
     return this.name;
   }
 
+  getUID(){
+    return this.uid;
+  }
+
 }

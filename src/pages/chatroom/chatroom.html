@@ -12,7 +12,7 @@
         </button>
     </ion-buttons>
 
-    <ion-title> 꼬부기 ({{room_participants.length}}/{{room_capacity}}) </ion-title>
+    <!-- <ion-title> 꼬부기 ({{room_participants.length}}/{{room_capacity}}) </ion-title> -->
     <!-- 방이름/인원 -->
   </ion-navbar>
 
@@ -20,8 +20,8 @@
   <ion-grid class="room-info">
     <ion-row>
       <ion-col justify-content-center padding-left>
-        {{room_month}}월 {{room_day}}일 {{room_hour}}시 {{room_minute}}분
-        <p><b>{{room_depart}} &nbsp; <ion-icon name="arrow-forward"></ion-icon> &nbsp; {{room_dest}}</b></p>
+        {{displayDate}} {{displayTime}}
+        <p><b>{{roomObj.departure}} &nbsp; <ion-icon name="arrow-forward"></ion-icon> &nbsp; {{roomObj.destination}}</b></p>
       </ion-col>
       <ion-col col-auto>
         <ion-buttons right icon-only>
@@ -37,7 +37,7 @@
   <ion-grid>
     <ion-row>
       <ion-col class="users">
-        <div class="user" *ngFor="let member of room_participants; let i = index">
+        <div class="user" *ngFor="let member of roomObj.participants; let i = index">
           <button ion-button class="user-name" (click)="show(i)" >{{ member }}</button>
           <button ion-button class="user-call" (click)="native(i, 1)"><ion-icon name="ios-call-outline"></ion-icon></button>
           <button ion-button class="user-mail" (click)="native(i, 2)"><ion-icon name="ios-mail-outline"></ion-icon></button>

@@ -3,17 +3,12 @@ import { Nav, NavController, Platform, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { ChatRoomPage } from '../pages/chatroom/chatroom';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
-import { MainPage } from '../pages/main/main';
 import { MakeRoomPage } from '../pages/makeRoom/makeRoom';
-import { PersonalInfoPage } from '../pages/personal-info/personal-info';
-import { ResetPasswordPage } from '../pages/reset-password/reset-password';
 import { SettingPage } from '../pages/setting/setting';
 import { SignupPage } from '../pages/signup/signup';
 import { TaxiListPage } from '../pages/taxi-list/taxi-list';
-import { RideHistoryPage } from '../pages/ride-history/ride-history';
 
 import { AuthProvider } from '../providers/auth/auth';
 import { UsersProvider } from '../providers/users/users';

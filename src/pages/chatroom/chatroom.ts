@@ -6,6 +6,10 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable }
 import { TaxiListPage } from '../../pages/taxi-list/taxi-list';
 import * as $ from 'jquery';
 
+import { UsersProvider } from '../../providers/users/users';
+import { DateProvider } from '../../providers/date/date';
+import { RoomsProvider } from '../../providers/rooms/rooms';
+
 declare var FCMPlugin;
 
 @Component({
@@ -24,8 +28,9 @@ export class ChatRoomPage {
   chat_user_id: any;
   chat_content: any;
   chat_room_id: any;
-  bookingDate: String;
+  bookingDate: string;
 
+  roomObj: Object;
   room_depart: string;
   room_dest: string;
   room_capacity: string;
@@ -41,100 +46,143 @@ export class ChatRoomPage {
 
   isHost: boolean;
 
-  page_info: String;
+  displayDate: string;
+  displayTime: string;
 
-  constructor(public navCtrl: NavController, public af:AngularFireDatabase, public navParams: NavParams, public platform:Platform) {
+  page_info: string;
 
+  constructor(public navCtrl: NavController, public af:AngularFireDatabase, public navParams: NavParams, public platform:Platform,
+              public roomServices: RoomsProvider, public dateServices: DateProvider, public userServices: UsersProvider) {
+
+    console.log('constructor chatroom');  
+      
     this.bookingDate = navParams.data.bookingDate;
     this.chat_room_id = navParams.data.chat_room_id;
     this.chat_user_id = navParams.data.user_id;
     let whichPage = navParams.data.whichPage;
 
-    console.log(this.bookingDate, this.chat_room_id, this.chat_user_id);
+    af.object('/chatrooms/' + this.bookingDate + '/' + this.chat_room_id).subscribe(data=>{
+      this.roomObj = data;
+      console.log("시작한다");
+      this.roomServices.setRoomInfo(data);
+      this.displayDate = this.dateServices.getKMonthDay(this.bookingDate);
+      this.displayTime = this.roomObj['depart_time'];
+      console.log(this.roomObj);
+
+      //내가 방장 주인인지 아닌지 확인
+      if(this.roomObj['host'] === this.chat_user_id)
+        this.isHost = true;
+      else
+        this.isHost = false;
+
+      let isExist: boolean = false;
+
+      //목록에 있는지 없는지 여부 확인.
+      console.log(this.roomObj['participants']);
+      console.log(this.chat_user_id);
+      for(var user of this.roomObj['participants']){
+        console.log('유저다');
+        console.log(user);
+        if(user === this.chat_user_id){
+          isExist = true;
+          console.log("True? : "+isExist);        
+        }
+      }
+
+    });
+    
 
     this.room = af.list('/chatrooms/' + this.bookingDate + '/' + this.chat_room_id);
+    //content로 set해두자.
     this.chats = af.list(('/chats/'+ this.chat_room_id));
     this.room_object = af.object('/chatrooms/' + this.bookingDate + '/' + this.chat_room_id);
 
-    let parsedID = this.stringParser(this.chat_user_id)
-    console.log(parsedID);
-    this.rideHistory = af.list('/rideHistory/'+ parsedID);
-    console.log('hi', this.rideHistory.$ref.ref.key);
-    let count = 0;
-    this.room.forEach(data =>{
+    // let parsedID = this.stringParser(this.chat_user_id)
+    // console.log(parsedID);
+    // // this.rideHistory = af.list('/rideHistory/'+ parsedID);
+    // // console.log('hi', this.rideHistory.$ref.ref.key);
+    // let count = 0;
 
-      if(count == 0){
-        this.room_capacity = data[0].$value;
-        this.room_depart_date = data[2].$value;
-        this.room_depart_time = data[3].$value;
-        this.room_depart = data[4].$value;
-        this.room_dest = data[5].$value;
-        this.room_host = data[6].$value;
-        this.room_participants = data[7];
 
-        this.room_month = (this.room_depart_date[5] + this.room_depart_date[6]);
-        this.room_day= (this.room_depart_date[8] + this.room_depart_date[9]);
-        this.room_hour= (this.room_depart_time[0] + this.room_depart_time[1]);
-        this.room_minute=(this.room_depart_time[3]+this.room_depart_time[4]);
+    // this.room.forEach(data =>{
+    //   console.log("시작하자");
+    //   console.log(data);
+    //   console.log(data[0].$value);
+    //   if(count == 0){
+    //     this.room_capacity = data[0].$value;
+    //     this.room_depart_date = data[2].$value;
+    //     this.room_depart_time = data[3].$value;
+    //     this.room_depart = data[4].$value;
+    //     this.room_dest = data[5].$value;
+    //     this.room_host = data[6].$value;
+    //     this.room_participants = data[7];
 
-        this.roomKey = this.room.$ref.ref.parent.key;
-        console.log(this.roomKey);
-        if(this.room_host === this.chat_user_id)
-          this.isHost = true;
-        else
-          this.isHost = false;
+    //     this.room_month = (this.room_depart_date[5] + this.room_depart_date[6]);
+    //     this.room_day= (this.room_depart_date[8] + this.room_depart_date[9]);
+    //     this.room_hour= (this.room_depart_time[0] + this.room_depart_time[1]);
+    //     this.room_minute=(this.room_depart_time[3]+this.room_depart_time[4]);
 
-        var isExist = false;
+    //     this.roomKey = this.room.$ref.ref.parent.key;
+    //     console.log(this.roomKey);
+        // //내가 방장 주인인지 아닌지 확인
+        // if(this.room_host === this.chat_user_id)
+        //   this.isHost = true;
+        // else
+        //   this.isHost = false;
 
-        for(let i = 0; i < this.room_participants.length; i++){
-          if(this.room_participants[i] === this.chat_user_id){
-            isExist = true;
-            break;
-          }
-        }
+    //     var isExist = false;
 
-        if(whichPage === 'makeRoom'){
-          this.rideHistory.push({
-            roomId: this.chat_room_id,
-            roomDate: this.room_depart_date,
-            roomTime: this.room_depart_time,
-            roomDepart: this.room_depart,
-            roomDest: this.room_dest,
-            roomCapacity: this.room_capacity,
-            roomParticipants: this.room_participants
-          });
-        }
+    //     //목록에 있는지 없는지 여부 확인.
+    //     for(let i = 0; i < this.room_participants.length; i++){
+    //       if(this.room_participants[i] === this.chat_user_id){
+    //         isExist = true;
+    //         break;
+    //       }
+    //     }
 
-        if(isExist === false){
-          console.log()
+    //     //이거는 탑승내역을 기록하는건데 탑승 내역은 방 만들때 넣자.
+    //     //그리고 방을 들어갈때 탑승 내역을 넣자.(이때에는 탑승 했던건지 아닌지 확인하고 넣으면 된다.)
+    //     if(whichPage === 'makeRoom'){
+    //       this.rideHistory.push({
+    //         roomId: this.chat_room_id,
+    //         roomDate: this.room_depart_date,
+    //         roomTime: this.room_depart_time,
+    //         roomDepart: this.room_depart,
+    //         roomDest: this.room_dest,
+    //         roomCapacity: this.room_capacity,
+    //         roomParticipants: this.room_participants
+    //       });
+    //     }
 
-          if(parseInt(this.room_capacity) > this.room_participants.length){
-            this.room_participants.push(this.chat_user_id);
+    //     //목록에 없다면 넣는 것 같다. 방에 인원 추가하고 탑승 내역도 수정하는것 같다.
+    //     if(isExist === false){
+    //       if(parseInt(this.room_capacity) > this.room_participants.length){
+    //         this.room_participants.push(this.chat_user_id);
 
-            this.room_object.update({
-              capacity: this.room_capacity,
-              depart_date: this.room_depart_date,
-              depart_time: this.room_depart_time,
-              departure: this.room_depart,
-              destination: this.room_dest,
-              host: this.room_host,
-              participants: this.room_participants
-            })
-            this.rideHistory.push({
-              roomId: this.chat_room_id,
-              roomDate: this.room_depart_date,
-              roomTime: this.room_depart_time,
-              roomDepart: this.room_depart,
-              roomDest: this.room_dest,
-              roomCapacity: this.room_capacity,
-              roomParticipants: this.room_participants
-            });
-          }
-        };
-      }
-      count++;
+    //         this.room_object.update({
+    //           capacity: this.room_capacity,
+    //           depart_date: this.room_depart_date,
+    //           depart_time: this.room_depart_time,
+    //           departure: this.room_depart,
+    //           destination: this.room_dest,
+    //           host: this.room_host,
+    //           participants: this.room_participants
+    //         })
+    //         this.rideHistory.push({
+    //           roomId: this.chat_room_id,
+    //           roomDate: this.room_depart_date,
+    //           roomTime: this.room_depart_time,
+    //           roomDepart: this.room_depart,
+    //           roomDest: this.room_dest,
+    //           roomCapacity: this.room_capacity,
+    //           roomParticipants: this.room_participants
+    //         });
+    //       }
+    //     };
+    //   }
+      // count++;
 
-    });
+    // });
   }
 
   stringParser(sentence){

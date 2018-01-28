@@ -61,11 +61,7 @@ export class SignupPage {
       const studentID:string = this.signupForm.value.studentID;
 
       this.authProvider.signupUser(email, password, name, phoneNumber, studentID).then( user => {
-        console.log("강민수");
         this.loading.dismiss().then( () => {
-          console.log("여기까지 왔도다");
-          console.log(user);
-          console.log(email);
           this.navCtrl.setRoot(MainPage);
         });
       }, error => {
