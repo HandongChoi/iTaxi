@@ -42,9 +42,6 @@ export class LoginPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
-    setTimeout(() => {
-      console.log(this.userServices.getName());
-    }, 4000);
   }
 
   loginUser():void {
@@ -55,7 +52,6 @@ export class LoginPage {
       const password = this.loginForm.value.password;
 
       this.authProvider.loginUser(email, password).then( authData =>  {
-        console.log(authData);
         this.loading.dismiss().then( () => {
           if(typeof(FCMPlugin) != 'undefined'){
             FCMPlugin.onTokenRefresh(function(token){
@@ -67,7 +63,6 @@ export class LoginPage {
           } else {
             console.log("FCMPlugin type is undefined!");
           }
-          this.userServices.setInfo(authData.uid);
         }).then(()=>{
           this.navCtrl.setRoot(MainPage);
         });

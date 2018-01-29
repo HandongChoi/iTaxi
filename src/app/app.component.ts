@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, NavController, Platform, AlertController } from 'ionic-angular';
+import { Nav, NavController, Platform, AlertController, LoadingController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -17,6 +17,7 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 import { FCM, NotificationData } from '@ionic-native/fcm';
 
 import firebase from 'firebase';
+import { MainPage } from '../pages/main/main';
 
 firebase.initializeApp({
   apiKey: "AIzaSyANvht7J2MNX6x47mglqfJk74yZQ9u0qUk",
@@ -43,39 +44,48 @@ export class MyApp {
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
               public authProvider:AuthProvider, public alertCtrl: AlertController, public af: AngularFireDatabase,
-              public fcm:FCM, public userServices:UsersProvider) {
+              public fcm:FCM, public userServices:UsersProvider, public loadingCtrl: LoadingController) {
+    this.splashScreen.show();
+    console.log("splash screen on");
     this.initializeApp();
 
-    // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'MakeRoom', component: MakeRoomPage},
-      { title: 'TaxiList', component: TaxiListPage},
-      { title: 'Setting', component: SettingPage},
-      { title: 'SignupPage', component: SignupPage},
-    ];
+    this.userServices.initialize().then(() => {
+      // used for an example of ngFor and navigation
+      this.pages = [
+        { title: 'Home', component: HomePage },
+        { title: 'MakeRoom', component: MakeRoomPage},
+        { title: 'TaxiList', component: TaxiListPage},
+        { title: 'Setting', component: SettingPage},
+        { title: 'SignupPage', component: SignupPage},
+      ];
 
-    if (!this.userServices.isActivate()) {
-      this.rootPage = LoginPage;
-    }
-    else {
-      this.rootPage = MakeRoomPage;
-      console.log(this.userServices.getName());
-      this.user_id = this.userServices.getName();
-      this.uid = this.userServices.getUID();
+      if (!this.userServices.isActivate()) {
+        this.rootPage = LoginPage;
+      }
+      else {
+        this.rootPage = MainPage;
+        this.user_id = this.userServices.getName();
+        this.uid = this.userServices.getUID();
 
-      let dates: FirebaseListObservable<any[]>;
-      let parsedUserId = this.stringParser(this.userServices.getEmail());
-      dates = af.list('/rideHistory/'+parsedUserId);
-      dates.subscribe(data =>{
-        if(this.dates_array){
-          this.dates_array.pop();
-          this.dates_array.push(data);
-        }
-        else
-          this.dates_array.push(data);
-      });
-    }
+        let dates: FirebaseListObservable<any[]>;
+        let parsedUserId = this.stringParser(this.userServices.getEmail());
+        
+        dates = af.list('/rideHistory/'+parsedUserId);
+        dates.subscribe(data =>{
+          if(this.dates_array){
+            this.dates_array.pop();
+            this.dates_array.push(data);
+          }
+          else
+            this.dates_array.push(data);
+        });
+      }
+      
+      this.splashScreen.hide();
+      console.log("splash screen out");
+    });
+
+    
     //
     // const unsubscribe = firebase.auth().onAuthStateChanged( user => {
     //

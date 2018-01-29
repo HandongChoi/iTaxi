@@ -47,8 +47,6 @@ export const firebaseConfig = {
     MyApp,
     HomePage,
     MakeRoomPage,
-    DatePipe,
-    MainPage,
   ],
   imports: [
     BrowserModule,
@@ -64,13 +62,13 @@ export const firebaseConfig = {
     SignupPageModule,
     ResetPasswordPageModule,
     RideHistoryPageModule,
+    MainPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
     MakeRoomPage,
-    MainPage,
   ],
   providers: [
     StatusBar,
