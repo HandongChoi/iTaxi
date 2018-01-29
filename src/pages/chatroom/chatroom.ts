@@ -31,18 +31,8 @@ export class ChatRoomPage {
   bookingDate: string;
 
   roomObj: Object;
-  room_depart: string;
-  room_dest: string;
-  room_capacity: string;
-  room_depart_date: string;
-  room_depart_time: string;
   room_host: string;
   room_participants:  Array<string> = [];
-  room_month: string;
-  room_day: string;
-  room_hour: string;
-  room_minute:string;
-  roomKey: string;
 
   isHost: boolean;
 
@@ -50,6 +40,8 @@ export class ChatRoomPage {
   displayTime: string;
 
   page_info: string;
+
+  subscribe: any;
 
   constructor(public navCtrl: NavController, public af:AngularFireDatabase, public navParams: NavParams, public platform:Platform,
               public roomServices: RoomsProvider, public dateServices: DateProvider, public userServices: UsersProvider) {
@@ -61,23 +53,21 @@ export class ChatRoomPage {
     this.chat_user_id = navParams.data.user_id;
     let whichPage = navParams.data.whichPage;
 
-    af.object('/chatrooms/' + this.bookingDate + '/' + this.chat_room_id).subscribe(data=>{
+    //content로 set해두자.
+    this.chats = af.list('/chats/'+ this.chat_room_id);
+    this.room_object = af.object('/chatrooms/' + this.bookingDate + '/' + this.chat_room_id);
+
+    this.subscribe = this.room_object.subscribe(data=>{
       this.roomObj = data;
-      console.log("시작한다");
       this.roomServices.setRoomInfo(data);
       this.displayDate = this.dateServices.getKMonthDay(this.bookingDate);
-      this.displayTime = this.roomObj['depart_time'];
-      console.log(this.roomObj);
-
-      this.room_host = this.roomObj['host'];
-
+      this.displayTime = this.roomServices.room['depart_time'];
+      this.room_host = this.roomServices.room['host'];
 
       let isExist: boolean = false;
 
       //목록에 있는지 없는지 여부 확인.
-      console.log(this.roomObj['participants']);
-      console.log(this.chat_user_id);
-      for(var user of this.roomObj['participants']){
+      for(var user of this.roomServices.room['participants']){
         console.log('유저다');
         console.log(user);
         if(user === this.chat_user_id){
@@ -85,14 +75,21 @@ export class ChatRoomPage {
           console.log("True? : "+isExist);        
         }
       }
+      console.log(this.chat_user_id);
+      
+      if (isExist == false) {
+        if (this.roomServices.addParticipants(this.chat_user_id)) {
+          this.room_object.update(this.roomServices.room);
+        }
+        else {
+          console.log("사람이 꽉 차버렸어");
+          this.navCtrl.setRoot(TaxiListPage);
+        }
+      }
 
+      console.log("here?");
     });
-    
 
-    this.room = af.list('/chatrooms/' + this.bookingDate + '/' + this.chat_room_id);
-    //content로 set해두자.
-    this.chats = af.list('/chats/'+ this.chat_room_id);
-    this.room_object = af.object('/chatrooms/' + this.bookingDate + '/' + this.chat_room_id);
 
     // let parsedID = this.stringParser(this.chat_user_id)
     // console.log(parsedID);
@@ -210,50 +207,42 @@ export class ChatRoomPage {
   }
 
   quit(){
+    this.subscribe.unsubscribe();
+    let old_participants: Array<String> = this.roomServices.room['participants'];
     let new_participants: Array<String> =[];
-    console.log("quit(): ", this.room_participants);
-    if(this.room_participants){
-      this.room_participants.forEach(data =>{
+    console.log("quit(): ", old_participants);
+    if(old_participants){
+      old_participants.forEach(data =>{
         if(data !== this.chat_user_id)
           new_participants.push(data);
       });
 
       console.log(new_participants);
 
-      if(this.chat_user_id !== this.room_participants[0]){
+      if(this.chat_user_id !== this.room_host){
 
         this.room_object.update({
-          capacity: this.room_capacity,
-          depart_date: this.room_depart_date,
-          depart_time: this.room_depart_time,
-          departure: this.room_depart,
-          destination: this.room_dest,
-          host: this.room_host,
-          participants: new_participants
+          participants: new_participants,
+          currentPeople: this.roomServices.room['currentPeople'] - 1
         });
 
-        this.rideHistory.remove();
+        //this.rideHistory.remove();
         this.navCtrl.setRoot(TaxiListPage, {user_id: this.chat_user_id});
       }// 방장이 아닌 다른 사람이 나갈 경우
       else{
         //방장이고, 방에 사람이 없을 때
-        console.log(this.room_participants);
-        if(this.room_participants.length === 1){
+        if(this.roomServices.room['currentPeople'] === 1){
           this.room_object.remove();
-          this.rideHistory.remove();
+          //this.rideHistory.remove();
         }
-        else if(this.room_participants.length > 1){
+        else if(this.roomServices.room['currentPeople'] > 1){
           this.room_object.update({
-            capacity: this.room_capacity,
-            depart_date: this.room_depart_date,
-            depart_time: this.room_depart_time,
-            departure: this.room_depart,
-            destination: this.room_dest,
             host: new_participants[0],
-            participants: new_participants
+            participants: new_participants,
+            currentPeople: this.roomServices.room['currentPeople'] - 1
           });
 
-          this.rideHistory.remove();
+          //this.rideHistory.remove();
         }
         this.navCtrl.setRoot(TaxiListPage, {user_id: this.chat_user_id});
       }

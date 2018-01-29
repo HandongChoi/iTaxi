@@ -40,7 +40,7 @@ export class MakeRoomPage {
   
   constructor(public alertCtrl: AlertController, public navParams: NavParams, public dateServices: DateProvider,
                public navCtrl:NavController, public af: AngularFireDatabase, public userServices: UsersProvider){
-    this.user_id = this.userServices.getName();
+    this.user_id = this.userServices.getEmail();
     console.log('constructor makeRoom');
   }
 
@@ -92,9 +92,10 @@ export class MakeRoomPage {
                 console.log(data);
                 let roomObj: Object = { departure: this.departure,
                                         destination: this.destination,
+                                        departure_date: this.bookingDate,
                                         departure_time: this.bookingTime,
                                         capacity: this.maxPeople,
-                                        currentPeople: 4-this.maxPeople,
+                                        currentPeople: 1,
                                         host: this.user_id,
                                         participants: [this.user_id]
                                       };
