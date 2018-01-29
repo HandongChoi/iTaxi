@@ -69,11 +69,8 @@ export class ChatRoomPage {
       this.displayTime = this.roomObj['depart_time'];
       console.log(this.roomObj);
 
-      //내가 방장 주인인지 아닌지 확인
-      if(this.roomObj['host'] === this.chat_user_id)
-        this.isHost = true;
-      else
-        this.isHost = false;
+      this.room_host = this.roomObj['host'];
+
 
       let isExist: boolean = false;
 
@@ -94,7 +91,7 @@ export class ChatRoomPage {
 
     this.room = af.list('/chatrooms/' + this.bookingDate + '/' + this.chat_room_id);
     //content로 set해두자.
-    this.chats = af.list(('/chats/'+ this.chat_room_id));
+    this.chats = af.list('/chats/'+ this.chat_room_id);
     this.room_object = af.object('/chatrooms/' + this.bookingDate + '/' + this.chat_room_id);
 
     // let parsedID = this.stringParser(this.chat_user_id)
@@ -202,7 +199,7 @@ export class ChatRoomPage {
         user_id: this.chat_user_id,
         content: this.chat_content,
         date_time: new Date().toLocaleString(),
-        dateKey: this.roomKey
+        dateKey: this.chat_room_id
       });
 
       this.chat_content = '';

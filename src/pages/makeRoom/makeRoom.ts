@@ -90,7 +90,7 @@ export class MakeRoomPage {
               handler: data => {
                 console.log('데이타 시작');
                 console.log(data);
-                let roomObj: Object = { departureure: this.departure,
+                let roomObj: Object = { departure: this.departure,
                                         destination: this.destination,
                                         departure_time: this.bookingTime,
                                         capacity: this.maxPeople,
@@ -98,7 +98,7 @@ export class MakeRoomPage {
                                         host: this.user_id,
                                         participants: [this.user_id]
                                       };
-                let chatRoomUrl = this.af.list('/chatRooms/'+this.bookingDate).push(roomObj);
+                let chatRoomUrl = this.af.list('/chatrooms/'+this.bookingDate).push(roomObj);
                 this.af.list('/rideHistory/'+this.userServices.getUID()+'/'+chatRoomUrl.key).push(roomObj);
                 console.log(chatRoomUrl.key);
                 console.log('Okay');
