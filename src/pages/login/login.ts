@@ -42,6 +42,9 @@ export class LoginPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
+    setTimeout(() => {
+      console.log(this.userServices.getName());
+    }, 4000);
   }
 
   loginUser():void {

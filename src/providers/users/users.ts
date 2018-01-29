@@ -1,20 +1,44 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
+import { LoadingController } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import firebase from 'firebase';
 
 @Injectable()
 export class UsersProvider {
 
-  email: string;
-  uid: string;
-  phoneNumber: string;
-  name: string;
-  studentID: string;
+  private email: string;
+  private uid: string;
+  private phoneNumber: string;
+  private name: string;
+  private studentID: string;
+  private state: boolean = false;
 
-  
-  constructor(public af: AngularFireDatabase) {
-    console.log('Hello UsersProvider Provider');       
+  constructor(public af: AngularFireDatabase, public loadingCtrl: LoadingController) {
+    let loading = loadingCtrl.create();
+    loading.present();
+    firebase.auth().onAuthStateChanged( user => {
+      if (user) {
+        this.state = true;
+        this.uid = user.uid
+        this.af.object('/userProfile/' + this.uid).subscribe(data=>{
+          this.email = data['email'];
+          this.phoneNumber = data['phoneNumber'];
+          this.name = data['name'];
+          this.studentID = data['studentID'];
+        });
+        loading.dismiss().then(() => {
+          
+        });
+        console.log("User Login!");
+      }
+      else {
+        this.state = false;
+        loading.dismiss();
+        console.log("User Logout!");
+      }
+    });
+    console.log('Hello UsersProvider Provider');
   }
 
   ionViewDidLoad(){
@@ -31,8 +55,13 @@ export class UsersProvider {
     });
   }
 
+  isActivate() {
+    if (this.state == true) return true;
+    else return false;
+  }
+
   getEmail(){
-    return this.email;    
+    return this.email;
   }
 
   getName(){

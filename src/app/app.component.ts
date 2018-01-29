@@ -55,41 +55,60 @@ export class MyApp {
       { title: 'SignupPage', component: SignupPage},
     ];
 
-    const unsubscribe = firebase.auth().onAuthStateChanged( user => {
-      if(!user){
-        this.rootPage = LoginPage;
-        unsubscribe();
-      } else{
-        
-        this.uid = firebase.auth().currentUser.uid;
+    if (!this.userServices.isActivate()) {
+      this.rootPage = LoginPage;
+    }
+    else {
+      this.rootPage = MakeRoomPage;
+      console.log(this.userServices.getName());
+      this.user_id = this.userServices.getName();
+      this.uid = this.userServices.getUID();
 
-        //임시방편이다. 위에 uid 받아오는데 시간이 걸려서 setInfo로 그 값을 넘겨주기 위해서 시간을 벌 필요가 있다.
-        setTimeout(()=>{
-          this.userServices.setInfo(this.uid);
-        },2000);
-
-        //여기서도 임시로 setInfo 시간을 벌어주고 Mainpage로 넘긴다.
-        setTimeout(()=>{
-          this.user_id = this.userServices.getName();
-          this.rootPage = MakeRoomPage;
-        },4000);
-
-        //for showing the most recent reservation list in side bar
-        let dates: FirebaseListObservable<any[]>;
-        let parsedUserId = this.stringParser(user.email);
-        dates = af.list('/rideHistory/'+parsedUserId);
-        dates.subscribe(data =>{
-          if(this.dates_array){
-            this.dates_array.pop();
-            this.dates_array.push(data);
-          }
-          else
-            this.dates_array.push(data);
-        });
-
-        unsubscribe();
-      }
-    });
+      let dates: FirebaseListObservable<any[]>;
+      let parsedUserId = this.stringParser(this.userServices.getEmail());
+      dates = af.list('/rideHistory/'+parsedUserId);
+      dates.subscribe(data =>{
+        if(this.dates_array){
+          this.dates_array.pop();
+          this.dates_array.push(data);
+        }
+        else
+          this.dates_array.push(data);
+      });
+    }
+    //
+    // const unsubscribe = firebase.auth().onAuthStateChanged( user => {
+    //
+    //
+    //
+    //   if(!user){
+    //     this.rootPage = LoginPage;
+    //     unsubscribe();
+    //   } else{
+    //
+    //     //this.uid = this.userServices.firebases.currentUser.uid;
+    //
+    //     this.userServices.setInfo(this.uid);
+    //
+    //     this.user_id = this.userServices.getName();
+    //     this.rootPage = MakeRoomPage;
+    //
+    //     //for showing the most recent reservation list in side bar
+    //     let dates: FirebaseListObservable<any[]>;
+    //     let parsedUserId = this.stringParser(user.email);
+    //     dates = af.list('/rideHistory/'+parsedUserId);
+    //     dates.subscribe(data =>{
+    //       if(this.dates_array){
+    //         this.dates_array.pop();
+    //         this.dates_array.push(data);
+    //       }
+    //       else
+    //         this.dates_array.push(data);
+    //     });
+    //
+    //     unsubscribe();
+    //   }
+    // });
   }
 
   initializeApp() {
