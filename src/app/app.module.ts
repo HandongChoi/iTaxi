@@ -28,10 +28,10 @@ import { RideHistoryPageModule } from '../pages/ride-history/ride-history.module
 
 import { FCM } from '@ionic-native/fcm';
 
-import { DatePipe } from '../pipes/date-pipe';
 import { DateProvider } from '../providers/date/date';
 import { UsersProvider } from '../providers/users/users';
 import { RoomsProvider } from '../providers/rooms/rooms';
+import { PipesModule } from '../pipes/pipes.module';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyANvht7J2MNX6x47mglqfJk74yZQ9u0qUk",
@@ -62,7 +62,8 @@ export const firebaseConfig = {
     SignupPageModule,
     ResetPasswordPageModule,
     RideHistoryPageModule,
-    MainPageModule
+    MainPageModule,
+    PipesModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
