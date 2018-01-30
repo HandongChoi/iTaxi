@@ -9,7 +9,6 @@ import { UsersProvider } from '../../providers/users/users';
 import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 
 import { MainPage } from '../main/main';
-import { setTimeout } from 'timers';
 
 declare var FCMPlugin;
 
@@ -70,7 +69,6 @@ export class LoginPage {
           setTimeout(()=>{
             this.navCtrl.setRoot(MainPage);
           },2000);
-          
         });
       }, error => {
         this.loading.dismiss().then( () => {

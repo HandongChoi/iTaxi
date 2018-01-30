@@ -35,7 +35,7 @@
             <ion-row class = "rowUnderline">
               <ion-col col-11>
                 <ion-item class="selectWrapper">
-                  <ion-select [selectOptions]="destinationOptions" [(ngModel)]="destinationFilter" placeholder="전체보기" interface="popover" (ionChange)="filterDestination(destinationFilter)">
+                  <ion-select [(ngModel)]="destinationFilter" interface="popover" placeholder="전체보기" (ionChange)="filterDestination(destinationFilter)">
                     <ion-option value="All" checked="true">전체보기</ion-option>
                     <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>
                   </ion-select>
@@ -68,20 +68,20 @@
   <div>
     <ion-grid class="mainGrid">
       <ion-item-group>
-        <ion-item-divider *ngFor="let date of dates | async" (click)="goChatroom(date)" class="line"
-        [ngClass]="{full: date.participants.length >= date.capacity, exist: isExist(date.participants)}">
+        <ion-item-divider *ngFor="let room of dates | async" (click)="goChatroom(room)" class="line"
+        [ngClass]="{full: room.participants.length >= room.capacity, exist: isExist(room.participants)}">
           <ion-row>
             <ion-col col-3>
-              <p>{{date.depart_date}}</p>
-              <p>{{date.depart_time}}</p>
+              <p>{{room.depart_date}}</p>
+              <p>{{room.depart_time}}</p>
             </ion-col>
             <ion-col col-7>
-              <p>{{date.departure}}</p>
-              <p>>{{date.destination}}</p>
+              <p>{{room.departure}}</p>
+              <p>>{{room.destination}}</p>
             </ion-col>
             <ion-col col-2>
-              <p>{{date.participants.length}} / {{date.capacity}}</p>
-              <p>참여 {{ date.participants.length >= date.capacity ? "불가" : "가능" }}</p>
+              <p>{{room.participants.length}} / {{room.capacity}}</p>
+              <p>참여 {{ room.participants.length >= room.capacity ? "불가" : "가능" }}</p>
             </ion-col>
           </ion-row>
         </ion-item-divider>

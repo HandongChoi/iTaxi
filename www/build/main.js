@@ -1,6 +1,6 @@
 webpackJsonp([1],{
 
-/***/ 129:
+/***/ 128:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -13,16 +13,16 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 129;
+webpackEmptyAsyncContext.id = 128;
 
 /***/ }),
 
-/***/ 170:
+/***/ 169:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
 	"../pages/login/login.module": [
-		171
+		170
 	],
 	"../pages/main/main.module": [
 		456,
@@ -58,12 +58,12 @@ function webpackAsyncContext(req) {
 webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 	return Object.keys(map);
 };
-webpackAsyncContext.id = 170;
+webpackAsyncContext.id = 169;
 module.exports = webpackAsyncContext;
 
 /***/ }),
 
-/***/ 171:
+/***/ 170:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -253,6 +253,13 @@ var UsersProvider = (function () {
             _this.name = data['name'];
             _this.studentID = data['studentID'];
         });
+    };
+    UsersProvider.prototype.clear = function () {
+        this.email = '';
+        this.uid = '';
+        this.phoneNumber = '';
+        this.name = '';
+        this.studentID = '';
     };
     UsersProvider.prototype.getEmail = function () {
         return this.email;
@@ -628,7 +635,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TaxiListPageModule", function() { return TaxiListPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__taxi_list__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__taxi_list__ = __webpack_require__(95);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -718,7 +725,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(444);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(354);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_makeRoom_makeRoom__ = __webpack_require__(97);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_makeRoom_makeRoom__ = __webpack_require__(96);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_main_main__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angularfire2__ = __webpack_require__(453);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2_database__ = __webpack_require__(18);
@@ -729,7 +736,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_ionic2_date_picker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12_ionic2_date_picker__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_taxi_list_taxi_list_module__ = __webpack_require__(311);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_chatroom_chatroom_module__ = __webpack_require__(454);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_login_login_module__ = __webpack_require__(171);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_login_login_module__ = __webpack_require__(170);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_personal_info_personal_info_module__ = __webpack_require__(182);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_setting_setting_module__ = __webpack_require__(307);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_signup_signup_module__ = __webpack_require__(309);
@@ -852,7 +859,7 @@ AppModule = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase__ = __webpack_require__(172);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase__ = __webpack_require__(171);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_firebase__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1467,15 +1474,15 @@ var StudentIDValidator = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(353);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(354);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_login_login__ = __webpack_require__(59);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_makeRoom_makeRoom__ = __webpack_require__(97);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_makeRoom_makeRoom__ = __webpack_require__(96);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_setting_setting__ = __webpack_require__(308);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_signup_signup__ = __webpack_require__(310);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_taxi_list_taxi_list__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_taxi_list_taxi_list__ = __webpack_require__(95);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__providers_auth_auth__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__providers_users_users__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_angularfire2_database__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_fcm__ = __webpack_require__(355);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_firebase__ = __webpack_require__(172);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_firebase__ = __webpack_require__(171);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14_firebase__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1544,7 +1551,7 @@ var MyApp = (function () {
                 //여기서도 임시로 setInfo 시간을 벌어주고 Mainpage로 넘긴다.
                 setTimeout(function () {
                     _this.user_id = _this.userServices.getName();
-                    _this.rootPage = __WEBPACK_IMPORTED_MODULE_6__pages_makeRoom_makeRoom__["a" /* MakeRoomPage */];
+                    _this.rootPage = __WEBPACK_IMPORTED_MODULE_9__pages_taxi_list_taxi_list__["a" /* TaxiListPage */];
                 }, 4000);
                 //for showing the most recent reservation list in side bar
                 var dates = void 0;
@@ -1753,13 +1760,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var DateProvider = (function () {
     function DateProvider() {
-        //한국 시간 기준(local)으로 2018-1-1 형식 dateFormat 지정.
+        //한국 시간 기준(ISO 아님)으로 2018-1-1이 아닌 2018-01-01형식.
         this.delimiter = '-';
-        this.dateFormat = new Date().toLocaleDateString().replace(/\./g, '').replace(/ /g, this.delimiter);
-        //2018-1-1(dateFormat) => 2018-01-01 형식으로 변환.
-        this.nowYear = this.dateFormat.split(this.delimiter)[0];
-        this.nowMonth = this.addZ(this.dateFormat.split(this.delimiter)[1]);
-        this.nowDay = this.addZ(this.dateFormat.split(this.delimiter)[2]);
+        this.nowYear = new Date().getFullYear().toString();
+        this.nowMonth = this.addZ(new Date().getMonth() + 1);
+        this.nowDay = this.addZ(new Date().getDate());
         this.nowDate = [this.nowYear, this.nowMonth, this.nowDay].join(this.delimiter);
         //12시간 방식이 아닌 24시간 방식으로 변환하고 19:01:39에서 초 단위 제거.
         this.nowTime = new Date().toLocaleTimeString('en-US', { hour12: false }).substr(0, 5);
@@ -1787,6 +1792,12 @@ var DateProvider = (function () {
     DateProvider.prototype.getKYearMonthDay = function (dateWithDelimiter) {
         var splitDate = dateWithDelimiter.split(this.delimiter);
         return splitDate[0] + '년 ' + splitDate[1] + '월 ' + splitDate[2] + '일 (' + this.getKToday(dateWithDelimiter) + ')';
+    };
+    DateProvider.prototype.dateToDelimiterFormat = function (date) {
+        var year = date.getFullYear();
+        var month = this.addZ(date.getMonth() + 1);
+        var day = this.addZ(date.getDate());
+        return [year, month, day].join(this.delimiter);
     };
     return DateProvider;
 }());
@@ -1891,8 +1902,6 @@ MainPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_users_users__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_angularfire2_database__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__main_main__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_timers__ = __webpack_require__(94);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_timers___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_timers__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1902,7 +1911,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
 
 
 
@@ -1957,7 +1965,7 @@ var LoginPage = (function () {
                     _this.userServices.setInfo(firebase.auth().currentUser.uid);
                 }).then(function () {
                     //현재 2초 딜레이를 걸어놓음으로써 비동기식 문제를 해결중. 임시방편이다.
-                    Object(__WEBPACK_IMPORTED_MODULE_8_timers__["setTimeout"])(function () {
+                    setTimeout(function () {
                         _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_7__main_main__["a" /* MainPage */]);
                     }, 2000);
                 });
@@ -2021,7 +2029,7 @@ LoginPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_taxi_list_taxi_list__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_taxi_list_taxi_list__ = __webpack_require__(95);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery__ = __webpack_require__(424);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_jquery__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_users_users__ = __webpack_require__(28);
@@ -2297,7 +2305,7 @@ var EmailValidator = (function () {
 
 /***/ }),
 
-/***/ 96:
+/***/ 95:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2305,7 +2313,7 @@ var EmailValidator = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__chatroom_chatroom__ = __webpack_require__(61);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__makeRoom_makeRoom__ = __webpack_require__(97);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__makeRoom_makeRoom__ = __webpack_require__(96);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ionic2_date_picker__ = __webpack_require__(185);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ionic2_date_picker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_ionic2_date_picker__);
@@ -2342,23 +2350,14 @@ var TaxiListPage = (function () {
         this.selectedDate = new Date();
         this.spotList = ["한동대학교", "포항역", "고속버스터미널", "시외버스터미널", "북부해수욕장", "육거리"];
         this.user_id = this.usersService.getEmail();
+        // todayLocal : Sun Jan 28 2018 15:23:12 GMT+0900 형식으로 현재 한국 시간으로 나온다.
         for (var i = 0; i < 5; i++) {
-            var temp = new Date(this.nowDate.getTime());
-            temp.setDate(temp.getDate() + i);
-            this.days.push(temp);
+            var todayLocal = new Date();
+            todayLocal.setDate(todayLocal.getDate() + i);
+            this.days.push(todayLocal);
         }
         //기본적으로 오늘 날짜 기준으로 data 불러오기.
         this.showChatroom(this.nowDate);
-        this.departOptions = {
-            title: '출발지',
-            subTitle: '원하시는 출발지를 체크해주세요.',
-            mode: 'md'
-        };
-        this.destinationOptions = {
-            title: '도착지',
-            subTitle: '원하시는 도착지를 체크해주세요.',
-            mode: 'md'
-        };
     }
     TaxiListPage.prototype.showCalendar = function () {
         var _this = this;
@@ -2372,17 +2371,16 @@ var TaxiListPage = (function () {
     };
     TaxiListPage.prototype.showChatroom = function (date) {
         this.selectedDate = date;
-        console.log(this.makeStringFromDate(date));
-        this.dates = this.af.list('/chatrooms/' + this.makeStringFromDate(date));
+        this.dates = this.af.list('/chatRooms/' + this.dateServices.dateToDelimiterFormat(date));
     };
-    TaxiListPage.prototype.goChatroom = function (date) {
-        var chat_room_id_val = date.$key;
-        var bookingDate_val = date.depart_date;
+    TaxiListPage.prototype.goChatroom = function (room) {
+        var chatRoomKey = room.$key;
+        var bookingDate = room.depart_date;
         //participant array에 push
         // 참여자가 아니고, 인원 full 아니면 push
         // 참여자이면 그냥 enter
         // full 인원이면 deny
-        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__chatroom_chatroom__["a" /* ChatRoomPage */], { chat_room_id: chat_room_id_val, bookingDate: bookingDate_val, user_id: this.user_id });
+        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__chatroom_chatroom__["a" /* ChatRoomPage */], { chat_room_id: chatRoomKey, bookingDate: bookingDate, user_id: this.user_id });
     };
     TaxiListPage.prototype.makeRoom = function () {
         this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__makeRoom_makeRoom__["a" /* MakeRoomPage */], { user_id: this.user_id });
@@ -2390,10 +2388,10 @@ var TaxiListPage = (function () {
     };
     TaxiListPage.prototype.filterDeparture = function (departFilter) {
         if (departFilter == "All") {
-            this.dates = this.af.list('/chatrooms/' + this.makeStringFromDate(this.selectedDate));
+            this.dates = this.af.list('/chatRooms/' + this.dateServices.dateToDelimiterFormat(this.selectedDate));
         }
         else {
-            this.dates = this.af.list('/chatrooms/' + this.makeStringFromDate(this.selectedDate), {
+            this.dates = this.af.list('/chatRooms/' + this.dateServices.dateToDelimiterFormat(this.selectedDate), {
                 query: {
                     orderByChild: 'departure',
                     equalTo: departFilter
@@ -2403,10 +2401,10 @@ var TaxiListPage = (function () {
     };
     TaxiListPage.prototype.filterDestination = function (destinationFilter) {
         if (destinationFilter == "All") {
-            this.dates = this.af.list('/chatrooms/' + this.makeStringFromDate(this.selectedDate));
+            this.dates = this.af.list('/chatRooms/' + this.dateServices.dateToDelimiterFormat(this.selectedDate));
         }
         else {
-            this.dates = this.af.list('/chatrooms/' + this.makeStringFromDate(this.selectedDate), {
+            this.dates = this.af.list('/chatRooms/' + this.dateServices.dateToDelimiterFormat(this.selectedDate), {
                 query: {
                     orderByChild: 'destination',
                     equalTo: destinationFilter
@@ -2418,39 +2416,33 @@ var TaxiListPage = (function () {
         console.log('ionViewDidLoad TaxiListPage');
     };
     TaxiListPage.prototype.isExist = function (users) {
-        for (var i = 0; i < users.length; i++) {
-            if (users[i].uid == this.user_id)
+        for (var _i = 0, users_1 = users; _i < users_1.length; _i++) {
+            var user = users_1[_i];
+            if (user == this.usersService.getUID())
                 return true;
         }
         return false;
-    };
-    TaxiListPage.prototype.makeStringFromDate = function (date) {
-        var d = new Date(date);
-        var month = "" + (d.getMonth() + 1);
-        var day = "" + d.getDate();
-        var year = d.getFullYear();
-        if (month.length < 2)
-            month = '0' + month;
-        if (day.length < 2)
-            day = '0' + day;
-        return [year, month, day].join('-');
+        // for (let i = 0; i < users.length; i++) {
+        //   if (users[i].uid == this.user_id)
+        //     return true;
+        // }
+        // return false;
     };
     return TaxiListPage;
 }());
 TaxiListPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-taxi-list',template:/*ion-inline-start:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/taxi-list/taxi-list.html"*/'<ion-header>\n  <ion-navbar color="primary">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title class = "top-title">택시조회</ion-title>\n  </ion-navbar>\n\n  <ion-grid class="small-table">\n    <ion-row>\n        <ion-col col-5>\n          <ion-grid>\n            <ion-row class = "rowUnderline">\n              <ion-col col-11>\n                <ion-item class="selectWrapper">\n                  <ion-select #newSelect [(ngModel)]="departFilter" interface="popover" placeholder="전체보기" (ionChange)="filterDeparture(departFilter)">\n                    <ion-option value="All" checked="true">전체보기</ion-option>\n                    <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>\n                  </ion-select>\n                </ion-item>\n              </ion-col>\n              <ion-col col-1> \n                <p class = "selectIcon">▼</p>\n              </ion-col>\n            </ion-row>\n          </ion-grid>\n        </ion-col>\n\n        <ion-col col-2 class = "rightArrow">  \n          <ion-icon name="arrow-round-forward"></ion-icon>\n        </ion-col>\n\n        <ion-col col-5>\n          <ion-grid>\n            <ion-row class = "rowUnderline">\n              <ion-col col-11>\n                <ion-item class="selectWrapper">\n                  <ion-select [selectOptions]="destinationOptions" [(ngModel)]="destinationFilter" placeholder="전체보기" interface="popover" (ionChange)="filterDestination(destinationFilter)">\n                    <ion-option value="All" checked="true">전체보기</ion-option>\n                    <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>\n                  </ion-select>\n                </ion-item>\n              </ion-col>\n              <ion-col col-1> \n                <p class = "selectIcon">▼</p>\n              </ion-col>\n            </ion-row>\n          </ion-grid>\n        </ion-col>  \n    </ion-row>\n\n    <ion-row>\n      <ion-col col-2 *ngFor="let day of days" class="pointer">\n        <ion-item class="days" (click)="showChatroom(day)">\n          <p>{{day|date: "dd"}}</p>\n        </ion-item>\n      </ion-col>\n      <ion-col col-2 class="pointer">\n        <ion-item class="days_icon" (click)="showCalendar()" >\n          <p> + </p>\n        </ion-item>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n</ion-header>\n\n<ion-content>\n  <div>\n    <ion-grid class="mainGrid">\n      <ion-item-group>\n        <ion-item-divider *ngFor="let date of dates | async" (click)="goChatroom(date)" class="line"\n        [ngClass]="{full: date.participants.length >= date.capacity, exist: isExist(date.participants)}">\n          <ion-row>\n            <ion-col col-3>\n              <p>{{date.depart_date}}</p>\n              <p>{{date.depart_time}}</p>\n            </ion-col>\n            <ion-col col-7>\n              <p>{{date.departure}}</p>\n              <p>>{{date.destination}}</p>\n            </ion-col>\n            <ion-col col-2>\n              <p>{{date.participants.length}} / {{date.capacity}}</p>\n              <p>참여 {{ date.participants.length >= date.capacity ? "불가" : "가능" }}</p>\n            </ion-col>\n          </ion-row>\n        </ion-item-divider>\n      </ion-item-group>\n    </ion-grid>\n  </div>\n\n  <ion-fab right bottom>\n    <button color="dark" ion-fab (click)="makeRoom()"><ion-icon name="add"></ion-icon></button>\n  </ion-fab>\n\n</ion-content>\n'/*ion-inline-end:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/taxi-list/taxi-list.html"*/,
+        selector: 'page-taxi-list',template:/*ion-inline-start:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/taxi-list/taxi-list.html"*/'<ion-header>\n  <ion-navbar color="primary">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title class = "top-title">택시조회</ion-title>\n  </ion-navbar>\n\n  <ion-grid class="small-table">\n    <ion-row>\n        <ion-col col-5>\n          <ion-grid>\n            <ion-row class = "rowUnderline">\n              <ion-col col-11>\n                <ion-item class="selectWrapper">\n                  <ion-select #newSelect [(ngModel)]="departFilter" interface="popover" placeholder="전체보기" (ionChange)="filterDeparture(departFilter)">\n                    <ion-option value="All" checked="true">전체보기</ion-option>\n                    <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>\n                  </ion-select>\n                </ion-item>\n              </ion-col>\n              <ion-col col-1> \n                <p class = "selectIcon">▼</p>\n              </ion-col>\n            </ion-row>\n          </ion-grid>\n        </ion-col>\n\n        <ion-col col-2 class = "rightArrow">  \n          <ion-icon name="arrow-round-forward"></ion-icon>\n        </ion-col>\n\n        <ion-col col-5>\n          <ion-grid>\n            <ion-row class = "rowUnderline">\n              <ion-col col-11>\n                <ion-item class="selectWrapper">\n                  <ion-select [(ngModel)]="destinationFilter" interface="popover" placeholder="전체보기" (ionChange)="filterDestination(destinationFilter)">\n                    <ion-option value="All" checked="true">전체보기</ion-option>\n                    <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>\n                  </ion-select>\n                </ion-item>\n              </ion-col>\n              <ion-col col-1> \n                <p class = "selectIcon">▼</p>\n              </ion-col>\n            </ion-row>\n          </ion-grid>\n        </ion-col>  \n    </ion-row>\n\n    <ion-row>\n      <ion-col col-2 *ngFor="let day of days" class="pointer">\n        <ion-item class="days" (click)="showChatroom(day)">\n          <p>{{day|date: "dd"}}</p>\n        </ion-item>\n      </ion-col>\n      <ion-col col-2 class="pointer">\n        <ion-item class="days_icon" (click)="showCalendar()" >\n          <p> + </p>\n        </ion-item>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n</ion-header>\n\n<ion-content>\n  <div>\n    <ion-grid class="mainGrid">\n      <ion-item-group>\n        <ion-item-divider *ngFor="let room of dates | async" (click)="goChatroom(room)" class="line"\n        [ngClass]="{full: room.participants.length >= room.capacity, exist: isExist(room.participants)}">\n          <ion-row>\n            <ion-col col-3>\n              <p>{{room.depart_date}}</p>\n              <p>{{room.depart_time}}</p>\n            </ion-col>\n            <ion-col col-7>\n              <p>{{room.departure}}</p>\n              <p>>{{room.destination}}</p>\n            </ion-col>\n            <ion-col col-2>\n              <p>{{room.participants.length}} / {{room.capacity}}</p>\n              <p>참여 {{ room.participants.length >= room.capacity ? "불가" : "가능" }}</p>\n            </ion-col>\n          </ion-row>\n        </ion-item-divider>\n      </ion-item-group>\n    </ion-grid>\n  </div>\n\n  <ion-fab right bottom>\n    <button color="dark" ion-fab (click)="makeRoom()"><ion-icon name="add"></ion-icon></button>\n  </ion-fab>\n\n</ion-content>\n'/*ion-inline-end:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/taxi-list/taxi-list.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"], __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__["a" /* AngularFireDatabase */],
-        __WEBPACK_IMPORTED_MODULE_5_ionic2_date_picker__["DatePickerProvider"], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["ModalController"],
-        __WEBPACK_IMPORTED_MODULE_6__providers_users_users__["a" /* UsersProvider */], __WEBPACK_IMPORTED_MODULE_7__providers_date_date__["a" /* DateProvider */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__["a" /* AngularFireDatabase */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_5_ionic2_date_picker__["DatePickerProvider"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5_ionic2_date_picker__["DatePickerProvider"]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["ModalController"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["ModalController"]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_6__providers_users_users__["a" /* UsersProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__providers_users_users__["a" /* UsersProvider */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_7__providers_date_date__["a" /* DateProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__providers_date_date__["a" /* DateProvider */]) === "function" && _g || Object])
 ], TaxiListPage);
 
+var _a, _b, _c, _d, _e, _f, _g;
 //# sourceMappingURL=taxi-list.js.map
 
 /***/ }),
 
-/***/ 97:
+/***/ 96:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2493,7 +2485,7 @@ var MakeRoomPage = (function () {
         this.msg = "";
         this.nowDate = this.dateServices.nowDate;
         this.nowTime = this.dateServices.nowTime;
-        this.today = this.dateServices.today;
+        this.today = this.dateServices.today; //요일 표시
         this.bookingDate = this.nowDate;
         this.bookingTime = this.nowTime;
         this.min = this.dateServices.min;
@@ -2550,13 +2542,15 @@ var MakeRoomPage = (function () {
                             handler: function (data) {
                                 console.log('데이타 시작');
                                 console.log(data);
+                                //식별자는 uid로 만들자. 혹시라도 닉네임 및 다른거는 중복될 여지가 있기 때문이다.
                                 var roomObj = { departureure: _this.departure,
                                     destination: _this.destination,
+                                    depart_date: _this.bookingDate,
                                     departure_time: _this.bookingTime,
                                     capacity: _this.maxPeople,
                                     currentPeople: 4 - _this.maxPeople,
-                                    host: _this.user_id,
-                                    participants: [_this.user_id]
+                                    host: _this.userServices.getUID(),
+                                    participants: [_this.userServices.getUID()]
                                 };
                                 var chatRoomUrl = _this.af.list('/chatRooms/' + _this.bookingDate).push(roomObj);
                                 _this.af.list('/rideHistory/' + _this.userServices.getUID() + '/' + chatRoomUrl.key).push(roomObj);
@@ -2571,13 +2565,13 @@ var MakeRoomPage = (function () {
             }
         }
     };
-    MakeRoomPage.prototype.startClick = function () {
+    MakeRoomPage.prototype.setDepartureDefault = function () {
         this.selectDeparture = { key: "한동대학교", value: "" };
     };
-    MakeRoomPage.prototype.labelClick = function () {
+    MakeRoomPage.prototype.setDestinationDefault = function () {
         this.selectDestination = { key: "포항역", value: "" };
     };
-    MakeRoomPage.prototype.swap_position = function () {
+    MakeRoomPage.prototype.swapPlace = function () {
         _a = [this.selectDestination, this.selectDeparture], this.selectDeparture = _a[0], this.selectDestination = _a[1];
         var _a;
     };

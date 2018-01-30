@@ -6,11 +6,12 @@ import firebase from 'firebase';
 @Injectable()
 export class UsersProvider {
 
-  email: string;
-  uid: string;
-  phoneNumber: string;
-  name: string;
-  studentID: string;
+  //user 정보는 민감하기 때문에 혹시라도 밖에서 접근하는 일이 없도록 geter, seter방식으로 해둔다.
+  private email: string;
+  private uid: string;
+  private phoneNumber: string;
+  private name: string;
+  private studentID: string;
 
   
   constructor(public af: AngularFireDatabase) {
@@ -30,7 +31,13 @@ export class UsersProvider {
       this.studentID = data['studentID'];
     });
   }
-
+  clear(){
+    this.email='';
+    this.uid='';
+    this.phoneNumber='';
+    this.name='';
+    this.studentID='';
+  }
   getEmail(){
     return this.email;    
   }

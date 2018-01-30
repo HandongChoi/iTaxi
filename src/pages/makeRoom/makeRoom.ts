@@ -27,7 +27,7 @@ export class MakeRoomPage {
 
   nowDate: string = this.dateServices.nowDate;
   nowTime: string = this.dateServices.nowTime;
-  today: string = this.dateServices.today;
+  today: string = this.dateServices.today; //요일 표시
   bookingDate: string = this.nowDate;
   bookingTime: string = this.nowTime;
 
@@ -90,13 +90,15 @@ export class MakeRoomPage {
               handler: data => {
                 console.log('데이타 시작');
                 console.log(data);
+                //식별자는 uid로 만들자. 혹시라도 닉네임 및 다른거는 중복될 여지가 있기 때문이다.
                 let roomObj: Object = { departureure: this.departure,
                                         destination: this.destination,
+                                        depart_date: this.bookingDate,
                                         departure_time: this.bookingTime,
                                         capacity: this.maxPeople,
                                         currentPeople: 4-this.maxPeople,
-                                        host: this.user_id,
-                                        participants: [this.user_id]
+                                        host: this.userServices.getUID(),
+                                        participants: [this.userServices.getUID()]
                                       };
                 let chatRoomUrl = this.af.list('/chatRooms/'+this.bookingDate).push(roomObj);
                 this.af.list('/rideHistory/'+this.userServices.getUID()+'/'+chatRoomUrl.key).push(roomObj);
