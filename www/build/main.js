@@ -1,6 +1,6 @@
 webpackJsonp([1],{
 
-/***/ 129:
+/***/ 128:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -13,16 +13,16 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 129;
+webpackEmptyAsyncContext.id = 128;
 
 /***/ }),
 
-/***/ 170:
+/***/ 169:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
 	"../pages/login/login.module": [
-		171
+		170
 	],
 	"../pages/main/main.module": [
 		456,
@@ -32,13 +32,13 @@ var map = {
 		182
 	],
 	"../pages/reset-password/reset-password.module": [
-		183
+		308
 	],
 	"../pages/ride-history/ride-history.module": [
-		184
+		183
 	],
 	"../pages/setting/setting.module": [
-		307
+		306
 	],
 	"../pages/signup/signup.module": [
 		309
@@ -58,12 +58,12 @@ function webpackAsyncContext(req) {
 webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 	return Object.keys(map);
 };
-webpackAsyncContext.id = 170;
+webpackAsyncContext.id = 169;
 module.exports = webpackAsyncContext;
 
 /***/ }),
 
-/***/ 171:
+/***/ 170:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -144,48 +144,10 @@ PersonalInfoPageModule = __decorate([
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ResetPasswordPageModule", function() { return ResetPasswordPageModule; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__reset_password__ = __webpack_require__(417);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-
-
-var ResetPasswordPageModule = (function () {
-    function ResetPasswordPageModule() {
-    }
-    return ResetPasswordPageModule;
-}());
-ResetPasswordPageModule = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
-        declarations: [
-            __WEBPACK_IMPORTED_MODULE_2__reset_password__["a" /* ResetPasswordPage */],
-        ],
-        imports: [
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["IonicPageModule"].forChild(__WEBPACK_IMPORTED_MODULE_2__reset_password__["a" /* ResetPasswordPage */]),
-        ],
-    })
-], ResetPasswordPageModule);
-
-//# sourceMappingURL=reset-password.module.js.map
-
-/***/ }),
-
-/***/ 184:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RideHistoryPageModule", function() { return RideHistoryPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ride_history__ = __webpack_require__(418);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ride_history__ = __webpack_require__(417);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -274,7 +236,7 @@ UsersProvider = __decorate([
 
 /***/ }),
 
-/***/ 306:
+/***/ 305:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -326,7 +288,7 @@ RoomsProvider = __decorate([
 
 /***/ }),
 
-/***/ 307:
+/***/ 306:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -334,7 +296,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SettingPageModule", function() { return SettingPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__setting__ = __webpack_require__(308);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__setting__ = __webpack_require__(307);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -371,7 +333,7 @@ SettingPageModule = __decorate([
 
 /***/ }),
 
-/***/ 308:
+/***/ 307:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -444,13 +406,51 @@ var SettingPage = (function () {
 }());
 SettingPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-setting',template:/*ion-inline-start:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/setting/setting.html"*/'<!--\n  Generated template for the SettingPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar color = "primary">\n    <button ion-button menuToggle >\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>설정</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n    <ion-list-header> 내정보 </ion-list-header>\n      <ion-item>\n        <ion-row>\n          <ion-avatar item-start>\n            <img src="../../assets/imgs/woody.jpeg">\n          </ion-avatar>\n          <h2>류여진</h2> &nbsp; <h4>010-1111-2222</h4>\n        </ion-row>\n        <ion-row justify-content-center>\n              <button ion-button color="primary" small round outline (click)="openModal()" >개인정보 수정</button>\n              <button ion-button color="primary" small round outline (click)="delete_user()">회원탈퇴</button>\n        </ion-row>\n      </ion-item>\n\n    <ion-list-header> PUSH알림 </ion-list-header>\n      <ion-item>\n        <ion-label>메세지 알림</ion-label>\n        <ion-toggle [(ngModel)]="isPushToggled" (ionChange)="PushToggle()" checked="true"></ion-toggle>\n      </ion-item>\n      <ion-item>\n        <ion-label>공지 알림</ion-label>\n        <ion-toggle [(ngModel)]="isNotiToggled" (ionChange)="NotiToggle()" checked="true"></ion-toggle>\n      </ion-item>\n\n    <ion-list-header> 문의 </ion-list-header>\n      <ion-item>\n        hguitaxi@gmail.com\n      </ion-item>\n\n    <ion-list-header> 버전 </ion-list-header>\n      <ion-item>\n        1\n      </ion-item>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/setting/setting.html"*/,
+        selector: 'page-setting',template:/*ion-inline-start:"C:\Users\SEC\cra\iTaxi\iTaxi\src\pages\setting\setting.html"*/'<!--\n\n  Generated template for the SettingPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  <ion-navbar color = "primary">\n\n    <button ion-button menuToggle >\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>설정</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n  <ion-list>\n\n    <ion-list-header> 내정보 </ion-list-header>\n\n      <ion-item>\n\n        <ion-row>\n\n          <ion-avatar item-start>\n\n            <img src="../../assets/imgs/woody.jpeg">\n\n          </ion-avatar>\n\n          <h2>류여진</h2> &nbsp; <h4>010-1111-2222</h4>\n\n        </ion-row>\n\n        <ion-row justify-content-center>\n\n              <button ion-button color="primary" small round outline (click)="openModal()" >개인정보 수정</button>\n\n              <button ion-button color="primary" small round outline (click)="delete_user()">회원탈퇴</button>\n\n        </ion-row>\n\n      </ion-item>\n\n\n\n    <ion-list-header> PUSH알림 </ion-list-header>\n\n      <ion-item>\n\n        <ion-label>메세지 알림</ion-label>\n\n        <ion-toggle [(ngModel)]="isPushToggled" (ionChange)="PushToggle()" checked="true"></ion-toggle>\n\n      </ion-item>\n\n      <ion-item>\n\n        <ion-label>공지 알림</ion-label>\n\n        <ion-toggle [(ngModel)]="isNotiToggled" (ionChange)="NotiToggle()" checked="true"></ion-toggle>\n\n      </ion-item>\n\n\n\n    <ion-list-header> 문의 </ion-list-header>\n\n      <ion-item>\n\n        hguitaxi@gmail.com\n\n      </ion-item>\n\n\n\n    <ion-list-header> 버전 </ion-list-header>\n\n      <ion-item>\n\n        1\n\n      </ion-item>\n\n  </ion-list>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\SEC\cra\iTaxi\iTaxi\src\pages\setting\setting.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"],
         __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["Platform"], __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__["a" /* AuthProvider */], __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__["a" /* AngularFireDatabase */]])
 ], SettingPage);
 
 //# sourceMappingURL=setting.js.map
+
+/***/ }),
+
+/***/ 308:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ResetPasswordPageModule", function() { return ResetPasswordPageModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__reset_password__ = __webpack_require__(424);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+var ResetPasswordPageModule = (function () {
+    function ResetPasswordPageModule() {
+    }
+    return ResetPasswordPageModule;
+}());
+ResetPasswordPageModule = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
+        declarations: [
+            __WEBPACK_IMPORTED_MODULE_2__reset_password__["a" /* ResetPasswordPage */],
+        ],
+        imports: [
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["IonicPageModule"].forChild(__WEBPACK_IMPORTED_MODULE_2__reset_password__["a" /* ResetPasswordPage */]),
+        ],
+    })
+], ResetPasswordPageModule);
+
+//# sourceMappingURL=reset-password.module.js.map
 
 /***/ }),
 
@@ -610,7 +610,7 @@ var SignupPage = (function () {
 }());
 SignupPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-signup',template:/*ion-inline-start:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/signup/signup.html"*/'<ion-header>\n  <ion-navbar color="primary">\n    <ion-title>\n      회원가입\n    </ion-title>\n  </ion-navbar>\n\n  <ion-toolbar no-border-top>\n    <ion-segment [(ngModel)]="procedure">\n      <ion-segment-button value="terms" [disabled]=termsFlag>\n        약관확인\n      </ion-segment-button>\n      <ion-segment-button value="info" [disabled]=infoFlag>\n        정보입력\n      </ion-segment-button>\n      <ion-segment-button value="complete" [disabled]=completeFlag>\n        가입완료\n      </ion-segment-button>\n    </ion-segment>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content padding>\n  <div [ngSwitch]="procedure">\n\n    <div *ngSwitchCase="\'terms\'">\n      <div class="wrap">\n        <ion-card class="terms_content">\n          longtext\n        </ion-card>\n        <div ion-item no-lines class="agree_check">\n          <ion-label>약관을 모두 읽었으며 동의합니다.</ion-label>\n          <ion-checkbox [(ngModel)]=\'firstChecking\' color="primary" checked="false"></ion-checkbox>\n        </div>\n        <ion-card class="terms_content">\n          longtext\n        </ion-card>\n        <div ion-item no-lines class="agree_check">\n          <ion-label>약관을 모두 읽었으며 동의합니다.</ion-label>\n          <ion-checkbox [(ngModel)]=\'secondChecking\' color="primary" checked="false"></ion-checkbox>\n        </div>\n        <button ion-button medium round color="primary" [disabled]="!firstChecking || !secondChecking" round (click)="InfoFlagUp()">\n            다음단계\n          </button>\n      </div>\n    </div>\n\n    <form [formGroup]="signupForm" (submit)="signupUser()" novalidate *ngSwitchCase="\'info\'">\n      <ion-item>\n        <ion-label stacked>이름</ion-label>\n        <ion-input formControlName="name" type="name" placeholder="최효은"></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label stacked>학번</ion-label>\n        <ion-input formControlName="studentID" type="studentID" placeholder="21000763" [class.invalid]="!signupForm.controls.studentID.valid && signupForm.controls.studentID.dirty">\n        </ion-input>\n      </ion-item>\n      <ion-item class="error-message" *ngIf="!signupForm.controls.studentID.valid && signupForm.controls.studentID.dirty">\n          <p>학번 양식을 제대로 입력해주세요!</p>\n      </ion-item>\n\n      <ion-item>\n        <ion-label stacked>전화번호</ion-label>\n        <ion-input formControlName="phoneNumber" type="phoneNumber" placeholder="010-7766-2016" [class.invalid]="!signupForm.controls.phoneNumber.valid && signupForm.controls.phoneNumber.dirty">\n        </ion-input>\n      </ion-item>\n      <ion-item class="error-message" *ngIf="!signupForm.controls.phoneNumber.valid && signupForm.controls.phoneNumber.dirty">\n          <p>전화번호 양식을 제대로 입력해주세요!</p>\n      </ion-item>\n\n      <ion-item>\n        <ion-label stacked>이메일</ion-label>\n        <ion-input formControlName="email" type="email" placeholder="Your email address" [class.invalid]="!signupForm.controls.email.valid && signupForm.controls.email.dirty">\n        </ion-input>\n      </ion-item>\n      <ion-item class="error-message" *ngIf="!signupForm.controls.email.valid && signupForm.controls.email.dirty">\n        <p>이메일 양식을 제대로 입력해주세요!</p>\n      </ion-item>\n\n      <ion-item>\n        <ion-label stacked>비밀번호</ion-label>\n        <ion-input formControlName="password" type="password" placeholder="Your password" [class.invalid]="!signupForm.controls.password.valid && signupForm.controls.password.dirty">\n        </ion-input>\n      </ion-item>\n      <ion-item class="error-message" *ngIf="!signupForm.controls.password.valid && signupForm.controls.password.dirty">\n        <p>최소 6글자 이상의 비밀번호를 입력하시오.</p>\n      </ion-item>\n\n      <ion-item>\n        <ion-label stacked>비밀번호 확인</ion-label>\n        <ion-input formControlName="password2" type="password" placeholder="Repeat password here" [class.invalid]="!signupForm.controls.password2.valid && signupForm.controls.password2.dirty"></ion-input>\n      </ion-item>\n      <ion-item class="error-message" *ngIf="!signupForm.controls.password2.valid && signupForm.controls.password2.dirty">\n        <p>비밀번호가 일치 하지 않습니다. 확인해주세요.</p>\n      </ion-item>\n      <!-- 이거를 제출 버튼 옆에다가 놔두면 좋겠다.\n      <button ion-button medium round style="margin-top: 15px" (click)="TermFlagUp()">약관 확인</button>\n      -->\n      <button ion-button medium round type="submit" style="margin-top: 15px" [disabled]="!signupForm.valid" (click)="CompleteFlagUp()"> 가입하기 </button>\n      </form>\n    <div *ngSwitchCase="\'complete\'">\n      <div class="wrap">\n        <ion-card class="terms_content">\n          회원가입이 완료되었습니다\n        </ion-card>\n        <button ion-button medium round color="primary" style = "margin-top: 15px" (click)="goLoginPage()">\n          로그인하기\n        </button>\n      </div>\n    </div>\n  </div>\n</ion-content>\n'/*ion-inline-end:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/signup/signup.html"*/,
+        selector: 'page-signup',template:/*ion-inline-start:"C:\Users\SEC\cra\iTaxi\iTaxi\src\pages\signup\signup.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n    <ion-title>\n\n      회원가입\n\n    </ion-title>\n\n  </ion-navbar>\n\n\n\n  <ion-toolbar no-border-top>\n\n    <ion-segment [(ngModel)]="procedure">\n\n      <ion-segment-button value="terms" [disabled]=termsFlag>\n\n        약관확인\n\n      </ion-segment-button>\n\n      <ion-segment-button value="info" [disabled]=infoFlag>\n\n        정보입력\n\n      </ion-segment-button>\n\n      <ion-segment-button value="complete" [disabled]=completeFlag>\n\n        가입완료\n\n      </ion-segment-button>\n\n    </ion-segment>\n\n  </ion-toolbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n  <div [ngSwitch]="procedure">\n\n\n\n    <div *ngSwitchCase="\'terms\'">\n\n      <div class="wrap">\n\n        <ion-card class="terms_content">\n\n          longtext\n\n        </ion-card>\n\n        <div ion-item no-lines class="agree_check">\n\n          <ion-label>약관을 모두 읽었으며 동의합니다.</ion-label>\n\n          <ion-checkbox [(ngModel)]=\'firstChecking\' color="primary" checked="false"></ion-checkbox>\n\n        </div>\n\n        <ion-card class="terms_content">\n\n          longtext\n\n        </ion-card>\n\n        <div ion-item no-lines class="agree_check">\n\n          <ion-label>약관을 모두 읽었으며 동의합니다.</ion-label>\n\n          <ion-checkbox [(ngModel)]=\'secondChecking\' color="primary" checked="false"></ion-checkbox>\n\n        </div>\n\n        <button ion-button medium round color="primary" [disabled]="!firstChecking || !secondChecking" round (click)="InfoFlagUp()">\n\n            다음단계\n\n          </button>\n\n      </div>\n\n    </div>\n\n\n\n    <form [formGroup]="signupForm" (submit)="signupUser()" novalidate *ngSwitchCase="\'info\'">\n\n      <ion-item>\n\n        <ion-label stacked>이름</ion-label>\n\n        <ion-input formControlName="name" type="name" placeholder="최효은"></ion-input>\n\n      </ion-item>\n\n\n\n      <ion-item>\n\n        <ion-label stacked>학번</ion-label>\n\n        <ion-input formControlName="studentID" type="studentID" placeholder="21000763" [class.invalid]="!signupForm.controls.studentID.valid && signupForm.controls.studentID.dirty">\n\n        </ion-input>\n\n      </ion-item>\n\n      <ion-item class="error-message" *ngIf="!signupForm.controls.studentID.valid && signupForm.controls.studentID.dirty">\n\n          <p>학번 양식을 제대로 입력해주세요!</p>\n\n      </ion-item>\n\n\n\n      <ion-item>\n\n        <ion-label stacked>전화번호</ion-label>\n\n        <ion-input formControlName="phoneNumber" type="phoneNumber" placeholder="010-7766-2016" [class.invalid]="!signupForm.controls.phoneNumber.valid && signupForm.controls.phoneNumber.dirty">\n\n        </ion-input>\n\n      </ion-item>\n\n      <ion-item class="error-message" *ngIf="!signupForm.controls.phoneNumber.valid && signupForm.controls.phoneNumber.dirty">\n\n          <p>전화번호 양식을 제대로 입력해주세요!</p>\n\n      </ion-item>\n\n\n\n      <ion-item>\n\n        <ion-label stacked>이메일</ion-label>\n\n        <ion-input formControlName="email" type="email" placeholder="Your email address" [class.invalid]="!signupForm.controls.email.valid && signupForm.controls.email.dirty">\n\n        </ion-input>\n\n      </ion-item>\n\n      <ion-item class="error-message" *ngIf="!signupForm.controls.email.valid && signupForm.controls.email.dirty">\n\n        <p>이메일 양식을 제대로 입력해주세요!</p>\n\n      </ion-item>\n\n\n\n      <ion-item>\n\n        <ion-label stacked>비밀번호</ion-label>\n\n        <ion-input formControlName="password" type="password" placeholder="Your password" [class.invalid]="!signupForm.controls.password.valid && signupForm.controls.password.dirty">\n\n        </ion-input>\n\n      </ion-item>\n\n      <ion-item class="error-message" *ngIf="!signupForm.controls.password.valid && signupForm.controls.password.dirty">\n\n        <p>최소 6글자 이상의 비밀번호를 입력하시오.</p>\n\n      </ion-item>\n\n\n\n      <ion-item>\n\n        <ion-label stacked>비밀번호 확인</ion-label>\n\n        <ion-input formControlName="password2" type="password" placeholder="Repeat password here" [class.invalid]="!signupForm.controls.password2.valid && signupForm.controls.password2.dirty"></ion-input>\n\n      </ion-item>\n\n      <ion-item class="error-message" *ngIf="!signupForm.controls.password2.valid && signupForm.controls.password2.dirty">\n\n        <p>비밀번호가 일치 하지 않습니다. 확인해주세요.</p>\n\n      </ion-item>\n\n      <!-- 이거를 제출 버튼 옆에다가 놔두면 좋겠다.\n\n      <button ion-button medium round style="margin-top: 15px" (click)="TermFlagUp()">약관 확인</button>\n\n      -->\n\n      <button ion-button medium round type="submit" style="margin-top: 15px" [disabled]="!signupForm.valid" (click)="CompleteFlagUp()"> 가입하기 </button>\n\n      </form>\n\n    <div *ngSwitchCase="\'complete\'">\n\n      <div class="wrap">\n\n        <ion-card class="terms_content">\n\n          회원가입이 완료되었습니다\n\n        </ion-card>\n\n        <button ion-button medium round color="primary" style = "margin-top: 15px" (click)="goLoginPage()">\n\n          로그인하기\n\n        </button>\n\n      </div>\n\n    </div>\n\n  </div>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\SEC\cra\iTaxi\iTaxi\src\pages\signup\signup.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"], __WEBPACK_IMPORTED_MODULE_3__providers_auth_auth__["a" /* AuthProvider */],
         __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["LoadingController"], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["AlertController"], __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]])
@@ -628,7 +628,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TaxiListPageModule", function() { return TaxiListPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__taxi_list__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__taxi_list__ = __webpack_require__(95);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -684,7 +684,7 @@ var HomePage = (function () {
 }());
 HomePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-home',template:/*ion-inline-start:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar color = "primary">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>i-Taxi</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n<<<<<<< HEAD\n  <h3>iTAXI</h3>\n    <a id="custom-login-btn" href="javascript:loginWithKakao()">\n      <img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="300"/>\n    </a>\n=======\n  <h3>Ionic Menu Starter</h3>\n\n\n    <a id="custom-login-btn" href="javascript:loginWithKakao()">\n      <img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="300"/>\n    </a>\n\n>>>>>>> loginPage\n</ion-content>\n'/*ion-inline-end:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/home/home.html"*/
+        selector: 'page-home',template:/*ion-inline-start:"C:\Users\SEC\cra\iTaxi\iTaxi\src\pages\home\home.html"*/'<ion-header>\n\n  <ion-navbar color = "primary">\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>i-Taxi</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n<<<<<<< HEAD\n\n  <h3>iTAXI</h3>\n\n    <a id="custom-login-btn" href="javascript:loginWithKakao()">\n\n      <img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="300"/>\n\n    </a>\n\n=======\n\n  <h3>Ionic Menu Starter</h3>\n\n\n\n\n\n    <a id="custom-login-btn" href="javascript:loginWithKakao()">\n\n      <img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="300"/>\n\n    </a>\n\n\n\n>>>>>>> loginPage\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\SEC\cra\iTaxi\iTaxi\src\pages\home\home.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"]])
 ], HomePage);
@@ -718,28 +718,28 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(444);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(354);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_makeRoom_makeRoom__ = __webpack_require__(97);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_makeRoom_makeRoom__ = __webpack_require__(96);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_main_main__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angularfire2__ = __webpack_require__(453);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2_database__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_status_bar__ = __webpack_require__(351);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_splash_screen__ = __webpack_require__(353);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__providers_auth_auth__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_ionic2_date_picker__ = __webpack_require__(185);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_ionic2_date_picker__ = __webpack_require__(184);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_ionic2_date_picker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12_ionic2_date_picker__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_taxi_list_taxi_list_module__ = __webpack_require__(311);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_chatroom_chatroom_module__ = __webpack_require__(454);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_login_login_module__ = __webpack_require__(171);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_login_login_module__ = __webpack_require__(170);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_personal_info_personal_info_module__ = __webpack_require__(182);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_setting_setting_module__ = __webpack_require__(307);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_setting_setting_module__ = __webpack_require__(306);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_signup_signup_module__ = __webpack_require__(309);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_reset_password_reset_password_module__ = __webpack_require__(183);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_ride_history_ride_history_module__ = __webpack_require__(184);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_reset_password_reset_password_module__ = __webpack_require__(308);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_ride_history_ride_history_module__ = __webpack_require__(183);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__ionic_native_fcm__ = __webpack_require__(355);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pipes_date_pipe__ = __webpack_require__(455);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__providers_date_date__ = __webpack_require__(50);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__providers_users_users__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__providers_rooms_rooms__ = __webpack_require__(306);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__providers_rooms_rooms__ = __webpack_require__(305);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -801,9 +801,9 @@ AppModule = __decorate([
                     { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/main/main.module#MainPageModule', name: 'MainPage', segment: 'main', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/personal-info/personal-info.module#PersonalInfoPageModule', name: 'PersonalInfoPage', segment: 'personal-info', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/reset-password/reset-password.module#ResetPasswordPageModule', name: 'ResetPasswordPage', segment: 'reset-password', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/ride-history/ride-history.module#RideHistoryPageModule', name: 'RideHistoryPage', segment: 'ride-history', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/setting/setting.module#SettingPageModule', name: 'SettingPage', segment: 'setting', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/reset-password/reset-password.module#ResetPasswordPageModule', name: 'ResetPasswordPage', segment: 'reset-password', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/signup/signup.module#SignupPageModule', name: 'SignupPage', segment: 'signup', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/taxi-list/taxi-list.module#TaxiListPageModule', name: 'TaxiListPage', segment: 'taxi-list', priority: 'low', defaultHistory: [] }
                 ]
@@ -852,7 +852,7 @@ AppModule = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase__ = __webpack_require__(172);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase__ = __webpack_require__(171);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_firebase__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -988,7 +988,7 @@ var PersonalInfoPage = (function () {
 }());
 PersonalInfoPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-personal-info',template:/*ion-inline-start:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/personal-info/personal-info.html"*/'<ion-header>\n  <ion-navbar  color = "primary">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>개인정보 수정</ion-title>\n    <ion-buttons start>\n      <button ion-button (click)="dismiss()">\n        <span ion-text showWhen="ios">Cancel</span>\n        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>\n      </button>\n    </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <form [formGroup]="updateForm" (submit)="updateUserInfo()" novalidate>\n    <ion-item>\n      <ion-label stacked>이름</ion-label>\n      <ion-input formControlName="name" type="name" value="{{user_dic.name}}"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label stacked>학번</ion-label>\n      <ion-input formControlName="studentID" type="studentID" value="{{user_dic.studentID}}"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label stacked>전화번호</ion-label>\n      <ion-input formControlName="phoneNumber" type="phoneNumber" value="{{user_dic.phoneNumber}}"></ion-input>\n    </ion-item>\n  <!--\n    <ion-item>\n      <ion-label stacked>새로운 비밀번호</ion-label>\n      <ion-input formControlName="newPassword" type="newPassword"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label stacked>비밀번호 확인</ion-label>\n      <ion-input formControlName="newPasswordCheck" type="newPasswordCheck"></ion-input>\n    </ion-item>\n  -->\n    <div padding>\n      <button ion-button block type="submit" (click)="showAlert()">변경하기</button>\n    </div>\n  </form>\n\n</ion-content>\n'/*ion-inline-end:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/personal-info/personal-info.html"*/,
+        selector: 'page-personal-info',template:/*ion-inline-start:"C:\Users\SEC\cra\iTaxi\iTaxi\src\pages\personal-info\personal-info.html"*/'<ion-header>\n\n  <ion-navbar  color = "primary">\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>개인정보 수정</ion-title>\n\n    <ion-buttons start>\n\n      <button ion-button (click)="dismiss()">\n\n        <span ion-text showWhen="ios">Cancel</span>\n\n        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n  <form [formGroup]="updateForm" (submit)="updateUserInfo()" novalidate>\n\n    <ion-item>\n\n      <ion-label stacked>이름</ion-label>\n\n      <ion-input formControlName="name" type="name" value="{{user_dic.name}}"></ion-input>\n\n    </ion-item>\n\n\n\n    <ion-item>\n\n      <ion-label stacked>학번</ion-label>\n\n      <ion-input formControlName="studentID" type="studentID" value="{{user_dic.studentID}}"></ion-input>\n\n    </ion-item>\n\n\n\n    <ion-item>\n\n      <ion-label stacked>전화번호</ion-label>\n\n      <ion-input formControlName="phoneNumber" type="phoneNumber" value="{{user_dic.phoneNumber}}"></ion-input>\n\n    </ion-item>\n\n  <!--\n\n    <ion-item>\n\n      <ion-label stacked>새로운 비밀번호</ion-label>\n\n      <ion-input formControlName="newPassword" type="newPassword"></ion-input>\n\n    </ion-item>\n\n\n\n    <ion-item>\n\n      <ion-label stacked>비밀번호 확인</ion-label>\n\n      <ion-input formControlName="newPasswordCheck" type="newPasswordCheck"></ion-input>\n\n    </ion-item>\n\n  -->\n\n    <div padding>\n\n      <button ion-button block type="submit" (click)="showAlert()">변경하기</button>\n\n    </div>\n\n  </form>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\SEC\cra\iTaxi\iTaxi\src\pages\personal-info\personal-info.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["ViewController"],
         __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["AlertController"], __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__["a" /* AngularFireDatabase */], __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]])
@@ -999,78 +999,6 @@ PersonalInfoPage = __decorate([
 /***/ }),
 
 /***/ 417:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ResetPasswordPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_auth_auth__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__validators_email__ = __webpack_require__(93);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-var ResetPasswordPage = (function () {
-    function ResetPasswordPage(navCtrl, authProvider, alertCtrl, formBuilder) {
-        this.navCtrl = navCtrl;
-        this.authProvider = authProvider;
-        this.alertCtrl = alertCtrl;
-        this.resetPasswordForm = formBuilder.group({
-            email: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_4__validators_email__["a" /* EmailValidator */].isValid])]
-        });
-    }
-    ResetPasswordPage.prototype.resetPassword = function () {
-        var _this = this;
-        if (!this.resetPasswordForm.valid) {
-            console.log("Form isn't valid, value: " + this.resetPasswordForm.value);
-        }
-        else {
-            var email = this.resetPasswordForm.value.email;
-            this.authProvider.resetPassword(email).then(function (user) {
-                var alert = _this.alertCtrl.create({
-                    message: "Check your email for a password reset link",
-                    buttons: [{
-                            text: "Ok",
-                            role: 'cancel',
-                            handler: function () { _this.navCtrl.pop(); }
-                        }]
-                });
-                alert.present();
-            }, function (error) {
-                var errorAlert = _this.alertCtrl.create({
-                    message: error.message,
-                    buttons: [{ text: "Ok", role: "cancel" }]
-                });
-                errorAlert.present();
-            });
-        }
-    };
-    return ResetPasswordPage;
-}());
-ResetPasswordPage = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-reset-password',template:/*ion-inline-start:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/reset-password/reset-password.html"*/'<ion-header>\n  <ion-navbar color="primary">\n    <ion-title>\n      비밀번호 초기화\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <img src="../../assets/imgs/logo.png" />\n  <form [formGroup]="resetPasswordForm" (submit)="resetPassword()" novalidate> \n    <ion-item>\n     <ion-label stacked>Email</ion-label>\n     <ion-input formControlName="email" type="email" placeholder="Your email address" \n                [class.invalid]="!resetPasswordForm.controls.email.valid && resetPasswordForm.controls.email.dirty">\n     </ion-input> \n    </ion-item>\n    <ion-item class="error-message" *ngIf="!resetPasswordForm.controls.email.valid && resetPasswordForm.controls.email.dirty"> \n      <p>Please enter a valid email.</p>\n    </ion-item>\n  \n    <button ion-button block type="submit" [disabled]="!resetPasswordForm.valid">\n      비밀번호 초기화 \n    </button>\n  </form> \n</ion-content>'/*ion-inline-end:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/reset-password/reset-password.html"*/,
-    }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"], __WEBPACK_IMPORTED_MODULE_3__providers_auth_auth__["a" /* AuthProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["AlertController"], __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]])
-], ResetPasswordPage);
-
-//# sourceMappingURL=reset-password.js.map
-
-/***/ }),
-
-/***/ 418:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1137,7 +1065,7 @@ var RideHistoryPage = (function () {
 }());
 RideHistoryPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-ride-history',template:/*ion-inline-start:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/ride-history/ride-history.html"*/'<ion-header>\n  <ion-navbar color="primary">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>i-Taxi >> 탑승내역조회</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content>\n  <div>\n    <ion-grid>\n      <ion-item-group *ngFor = "let chatroomDatum of chatroomData;">\n        <ion-item-divider color="light" (click)="goChatroom(chatroomDatum)">\n          <ion-row>\n            <ion-col col-3>\n              <p>{{chatroomDatum.roomDate}}</p>\n              <p>{{chatroomDatum.roomTime}}</p>\n            </ion-col>\n            <ion-col col-7>\n              <p>{{chatroomDatum.roomDepart}}</p>\n              <p>>{{chatroomDatum.roomDest}}</p>\n            </ion-col>\n            <ion-col col-2>\n              <p>{{chatroomDatum.roomParticipants.length}} / {{chatroomDatum.roomCapacity}}</p>\n              <p>참여중</p>\n            </ion-col>\n          </ion-row>\n        <div class="button-effect"></div>\n        </ion-item-divider>\n      </ion-item-group>\n    </ion-grid>\n  </div>\n</ion-content>\n'/*ion-inline-end:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/ride-history/ride-history.html"*/,
+        selector: 'page-ride-history',template:/*ion-inline-start:"C:\Users\SEC\cra\iTaxi\iTaxi\src\pages\ride-history\ride-history.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>i-Taxi >> 탑승내역조회</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n  <div>\n\n    <ion-grid>\n\n      <ion-item-group *ngFor = "let chatroomDatum of chatroomData;">\n\n        <ion-item-divider color="light" (click)="goChatroom(chatroomDatum)">\n\n          <ion-row>\n\n            <ion-col col-3>\n\n              <p>{{chatroomDatum.roomDate}}</p>\n\n              <p>{{chatroomDatum.roomTime}}</p>\n\n            </ion-col>\n\n            <ion-col col-7>\n\n              <p>{{chatroomDatum.roomDepart}}</p>\n\n              <p>>{{chatroomDatum.roomDest}}</p>\n\n            </ion-col>\n\n            <ion-col col-2>\n\n              <p>{{chatroomDatum.roomParticipants.length}} / {{chatroomDatum.roomCapacity}}</p>\n\n              <p>참여중</p>\n\n            </ion-col>\n\n          </ion-row>\n\n        <div class="button-effect"></div>\n\n        </ion-item-divider>\n\n      </ion-item-group>\n\n    </ion-grid>\n\n  </div>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\SEC\cra\iTaxi\iTaxi\src\pages\ride-history\ride-history.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"], __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["a" /* AngularFireDatabase */],
         __WEBPACK_IMPORTED_MODULE_4__providers_users_users__["a" /* UsersProvider */]])
@@ -1147,246 +1075,246 @@ RideHistoryPage = __decorate([
 
 /***/ }),
 
-/***/ 420:
+/***/ 419:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./af": 188,
-	"./af.js": 188,
-	"./ar": 189,
-	"./ar-dz": 190,
-	"./ar-dz.js": 190,
-	"./ar-kw": 191,
-	"./ar-kw.js": 191,
-	"./ar-ly": 192,
-	"./ar-ly.js": 192,
-	"./ar-ma": 193,
-	"./ar-ma.js": 193,
-	"./ar-sa": 194,
-	"./ar-sa.js": 194,
-	"./ar-tn": 195,
-	"./ar-tn.js": 195,
-	"./ar.js": 189,
-	"./az": 196,
-	"./az.js": 196,
-	"./be": 197,
-	"./be.js": 197,
-	"./bg": 198,
-	"./bg.js": 198,
-	"./bm": 199,
-	"./bm.js": 199,
-	"./bn": 200,
-	"./bn.js": 200,
-	"./bo": 201,
-	"./bo.js": 201,
-	"./br": 202,
-	"./br.js": 202,
-	"./bs": 203,
-	"./bs.js": 203,
-	"./ca": 204,
-	"./ca.js": 204,
-	"./cs": 205,
-	"./cs.js": 205,
-	"./cv": 206,
-	"./cv.js": 206,
-	"./cy": 207,
-	"./cy.js": 207,
-	"./da": 208,
-	"./da.js": 208,
-	"./de": 209,
-	"./de-at": 210,
-	"./de-at.js": 210,
-	"./de-ch": 211,
-	"./de-ch.js": 211,
-	"./de.js": 209,
-	"./dv": 212,
-	"./dv.js": 212,
-	"./el": 213,
-	"./el.js": 213,
-	"./en-au": 214,
-	"./en-au.js": 214,
-	"./en-ca": 215,
-	"./en-ca.js": 215,
-	"./en-gb": 216,
-	"./en-gb.js": 216,
-	"./en-ie": 217,
-	"./en-ie.js": 217,
-	"./en-nz": 218,
-	"./en-nz.js": 218,
-	"./eo": 219,
-	"./eo.js": 219,
-	"./es": 220,
-	"./es-do": 221,
-	"./es-do.js": 221,
-	"./es-us": 222,
-	"./es-us.js": 222,
-	"./es.js": 220,
-	"./et": 223,
-	"./et.js": 223,
-	"./eu": 224,
-	"./eu.js": 224,
-	"./fa": 225,
-	"./fa.js": 225,
-	"./fi": 226,
-	"./fi.js": 226,
-	"./fo": 227,
-	"./fo.js": 227,
-	"./fr": 228,
-	"./fr-ca": 229,
-	"./fr-ca.js": 229,
-	"./fr-ch": 230,
-	"./fr-ch.js": 230,
-	"./fr.js": 228,
-	"./fy": 231,
-	"./fy.js": 231,
-	"./gd": 232,
-	"./gd.js": 232,
-	"./gl": 233,
-	"./gl.js": 233,
-	"./gom-latn": 234,
-	"./gom-latn.js": 234,
-	"./gu": 235,
-	"./gu.js": 235,
-	"./he": 236,
-	"./he.js": 236,
-	"./hi": 237,
-	"./hi.js": 237,
-	"./hr": 238,
-	"./hr.js": 238,
-	"./hu": 239,
-	"./hu.js": 239,
-	"./hy-am": 240,
-	"./hy-am.js": 240,
-	"./id": 241,
-	"./id.js": 241,
-	"./is": 242,
-	"./is.js": 242,
-	"./it": 243,
-	"./it.js": 243,
-	"./ja": 244,
-	"./ja.js": 244,
-	"./jv": 245,
-	"./jv.js": 245,
-	"./ka": 246,
-	"./ka.js": 246,
-	"./kk": 247,
-	"./kk.js": 247,
-	"./km": 248,
-	"./km.js": 248,
-	"./kn": 249,
-	"./kn.js": 249,
-	"./ko": 250,
-	"./ko.js": 250,
-	"./ky": 251,
-	"./ky.js": 251,
-	"./lb": 252,
-	"./lb.js": 252,
-	"./lo": 253,
-	"./lo.js": 253,
-	"./lt": 254,
-	"./lt.js": 254,
-	"./lv": 255,
-	"./lv.js": 255,
-	"./me": 256,
-	"./me.js": 256,
-	"./mi": 257,
-	"./mi.js": 257,
-	"./mk": 258,
-	"./mk.js": 258,
-	"./ml": 259,
-	"./ml.js": 259,
-	"./mr": 260,
-	"./mr.js": 260,
-	"./ms": 261,
-	"./ms-my": 262,
-	"./ms-my.js": 262,
-	"./ms.js": 261,
-	"./my": 263,
-	"./my.js": 263,
-	"./nb": 264,
-	"./nb.js": 264,
-	"./ne": 265,
-	"./ne.js": 265,
-	"./nl": 266,
-	"./nl-be": 267,
-	"./nl-be.js": 267,
-	"./nl.js": 266,
-	"./nn": 268,
-	"./nn.js": 268,
-	"./pa-in": 269,
-	"./pa-in.js": 269,
-	"./pl": 270,
-	"./pl.js": 270,
-	"./pt": 271,
-	"./pt-br": 272,
-	"./pt-br.js": 272,
-	"./pt.js": 271,
-	"./ro": 273,
-	"./ro.js": 273,
-	"./ru": 274,
-	"./ru.js": 274,
-	"./sd": 275,
-	"./sd.js": 275,
-	"./se": 276,
-	"./se.js": 276,
-	"./si": 277,
-	"./si.js": 277,
-	"./sk": 278,
-	"./sk.js": 278,
-	"./sl": 279,
-	"./sl.js": 279,
-	"./sq": 280,
-	"./sq.js": 280,
-	"./sr": 281,
-	"./sr-cyrl": 282,
-	"./sr-cyrl.js": 282,
-	"./sr.js": 281,
-	"./ss": 283,
-	"./ss.js": 283,
-	"./sv": 284,
-	"./sv.js": 284,
-	"./sw": 285,
-	"./sw.js": 285,
-	"./ta": 286,
-	"./ta.js": 286,
-	"./te": 287,
-	"./te.js": 287,
-	"./tet": 288,
-	"./tet.js": 288,
-	"./th": 289,
-	"./th.js": 289,
-	"./tl-ph": 290,
-	"./tl-ph.js": 290,
-	"./tlh": 291,
-	"./tlh.js": 291,
-	"./tr": 292,
-	"./tr.js": 292,
-	"./tzl": 293,
-	"./tzl.js": 293,
-	"./tzm": 294,
-	"./tzm-latn": 295,
-	"./tzm-latn.js": 295,
-	"./tzm.js": 294,
-	"./uk": 296,
-	"./uk.js": 296,
-	"./ur": 297,
-	"./ur.js": 297,
-	"./uz": 298,
-	"./uz-latn": 299,
-	"./uz-latn.js": 299,
-	"./uz.js": 298,
-	"./vi": 300,
-	"./vi.js": 300,
-	"./x-pseudo": 301,
-	"./x-pseudo.js": 301,
-	"./yo": 302,
-	"./yo.js": 302,
-	"./zh-cn": 303,
-	"./zh-cn.js": 303,
-	"./zh-hk": 304,
-	"./zh-hk.js": 304,
-	"./zh-tw": 305,
-	"./zh-tw.js": 305
+	"./af": 187,
+	"./af.js": 187,
+	"./ar": 188,
+	"./ar-dz": 189,
+	"./ar-dz.js": 189,
+	"./ar-kw": 190,
+	"./ar-kw.js": 190,
+	"./ar-ly": 191,
+	"./ar-ly.js": 191,
+	"./ar-ma": 192,
+	"./ar-ma.js": 192,
+	"./ar-sa": 193,
+	"./ar-sa.js": 193,
+	"./ar-tn": 194,
+	"./ar-tn.js": 194,
+	"./ar.js": 188,
+	"./az": 195,
+	"./az.js": 195,
+	"./be": 196,
+	"./be.js": 196,
+	"./bg": 197,
+	"./bg.js": 197,
+	"./bm": 198,
+	"./bm.js": 198,
+	"./bn": 199,
+	"./bn.js": 199,
+	"./bo": 200,
+	"./bo.js": 200,
+	"./br": 201,
+	"./br.js": 201,
+	"./bs": 202,
+	"./bs.js": 202,
+	"./ca": 203,
+	"./ca.js": 203,
+	"./cs": 204,
+	"./cs.js": 204,
+	"./cv": 205,
+	"./cv.js": 205,
+	"./cy": 206,
+	"./cy.js": 206,
+	"./da": 207,
+	"./da.js": 207,
+	"./de": 208,
+	"./de-at": 209,
+	"./de-at.js": 209,
+	"./de-ch": 210,
+	"./de-ch.js": 210,
+	"./de.js": 208,
+	"./dv": 211,
+	"./dv.js": 211,
+	"./el": 212,
+	"./el.js": 212,
+	"./en-au": 213,
+	"./en-au.js": 213,
+	"./en-ca": 214,
+	"./en-ca.js": 214,
+	"./en-gb": 215,
+	"./en-gb.js": 215,
+	"./en-ie": 216,
+	"./en-ie.js": 216,
+	"./en-nz": 217,
+	"./en-nz.js": 217,
+	"./eo": 218,
+	"./eo.js": 218,
+	"./es": 219,
+	"./es-do": 220,
+	"./es-do.js": 220,
+	"./es-us": 221,
+	"./es-us.js": 221,
+	"./es.js": 219,
+	"./et": 222,
+	"./et.js": 222,
+	"./eu": 223,
+	"./eu.js": 223,
+	"./fa": 224,
+	"./fa.js": 224,
+	"./fi": 225,
+	"./fi.js": 225,
+	"./fo": 226,
+	"./fo.js": 226,
+	"./fr": 227,
+	"./fr-ca": 228,
+	"./fr-ca.js": 228,
+	"./fr-ch": 229,
+	"./fr-ch.js": 229,
+	"./fr.js": 227,
+	"./fy": 230,
+	"./fy.js": 230,
+	"./gd": 231,
+	"./gd.js": 231,
+	"./gl": 232,
+	"./gl.js": 232,
+	"./gom-latn": 233,
+	"./gom-latn.js": 233,
+	"./gu": 234,
+	"./gu.js": 234,
+	"./he": 235,
+	"./he.js": 235,
+	"./hi": 236,
+	"./hi.js": 236,
+	"./hr": 237,
+	"./hr.js": 237,
+	"./hu": 238,
+	"./hu.js": 238,
+	"./hy-am": 239,
+	"./hy-am.js": 239,
+	"./id": 240,
+	"./id.js": 240,
+	"./is": 241,
+	"./is.js": 241,
+	"./it": 242,
+	"./it.js": 242,
+	"./ja": 243,
+	"./ja.js": 243,
+	"./jv": 244,
+	"./jv.js": 244,
+	"./ka": 245,
+	"./ka.js": 245,
+	"./kk": 246,
+	"./kk.js": 246,
+	"./km": 247,
+	"./km.js": 247,
+	"./kn": 248,
+	"./kn.js": 248,
+	"./ko": 249,
+	"./ko.js": 249,
+	"./ky": 250,
+	"./ky.js": 250,
+	"./lb": 251,
+	"./lb.js": 251,
+	"./lo": 252,
+	"./lo.js": 252,
+	"./lt": 253,
+	"./lt.js": 253,
+	"./lv": 254,
+	"./lv.js": 254,
+	"./me": 255,
+	"./me.js": 255,
+	"./mi": 256,
+	"./mi.js": 256,
+	"./mk": 257,
+	"./mk.js": 257,
+	"./ml": 258,
+	"./ml.js": 258,
+	"./mr": 259,
+	"./mr.js": 259,
+	"./ms": 260,
+	"./ms-my": 261,
+	"./ms-my.js": 261,
+	"./ms.js": 260,
+	"./my": 262,
+	"./my.js": 262,
+	"./nb": 263,
+	"./nb.js": 263,
+	"./ne": 264,
+	"./ne.js": 264,
+	"./nl": 265,
+	"./nl-be": 266,
+	"./nl-be.js": 266,
+	"./nl.js": 265,
+	"./nn": 267,
+	"./nn.js": 267,
+	"./pa-in": 268,
+	"./pa-in.js": 268,
+	"./pl": 269,
+	"./pl.js": 269,
+	"./pt": 270,
+	"./pt-br": 271,
+	"./pt-br.js": 271,
+	"./pt.js": 270,
+	"./ro": 272,
+	"./ro.js": 272,
+	"./ru": 273,
+	"./ru.js": 273,
+	"./sd": 274,
+	"./sd.js": 274,
+	"./se": 275,
+	"./se.js": 275,
+	"./si": 276,
+	"./si.js": 276,
+	"./sk": 277,
+	"./sk.js": 277,
+	"./sl": 278,
+	"./sl.js": 278,
+	"./sq": 279,
+	"./sq.js": 279,
+	"./sr": 280,
+	"./sr-cyrl": 281,
+	"./sr-cyrl.js": 281,
+	"./sr.js": 280,
+	"./ss": 282,
+	"./ss.js": 282,
+	"./sv": 283,
+	"./sv.js": 283,
+	"./sw": 284,
+	"./sw.js": 284,
+	"./ta": 285,
+	"./ta.js": 285,
+	"./te": 286,
+	"./te.js": 286,
+	"./tet": 287,
+	"./tet.js": 287,
+	"./th": 288,
+	"./th.js": 288,
+	"./tl-ph": 289,
+	"./tl-ph.js": 289,
+	"./tlh": 290,
+	"./tlh.js": 290,
+	"./tr": 291,
+	"./tr.js": 291,
+	"./tzl": 292,
+	"./tzl.js": 292,
+	"./tzm": 293,
+	"./tzm-latn": 294,
+	"./tzm-latn.js": 294,
+	"./tzm.js": 293,
+	"./uk": 295,
+	"./uk.js": 295,
+	"./ur": 296,
+	"./ur.js": 296,
+	"./uz": 297,
+	"./uz-latn": 298,
+	"./uz-latn.js": 298,
+	"./uz.js": 297,
+	"./vi": 299,
+	"./vi.js": 299,
+	"./x-pseudo": 300,
+	"./x-pseudo.js": 300,
+	"./yo": 301,
+	"./yo.js": 301,
+	"./zh-cn": 302,
+	"./zh-cn.js": 302,
+	"./zh-hk": 303,
+	"./zh-hk.js": 303,
+	"./zh-tw": 304,
+	"./zh-tw.js": 304
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -1402,7 +1330,79 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 420;
+webpackContext.id = 419;
+
+/***/ }),
+
+/***/ 424:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ResetPasswordPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_auth_auth__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__validators_email__ = __webpack_require__(93);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var ResetPasswordPage = (function () {
+    function ResetPasswordPage(navCtrl, authProvider, alertCtrl, formBuilder) {
+        this.navCtrl = navCtrl;
+        this.authProvider = authProvider;
+        this.alertCtrl = alertCtrl;
+        this.resetPasswordForm = formBuilder.group({
+            email: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_4__validators_email__["a" /* EmailValidator */].isValid])]
+        });
+    }
+    ResetPasswordPage.prototype.resetPassword = function () {
+        var _this = this;
+        if (!this.resetPasswordForm.valid) {
+            console.log("Form isn't valid, value: " + this.resetPasswordForm.value);
+        }
+        else {
+            var email = this.resetPasswordForm.value.email;
+            this.authProvider.resetPassword(email).then(function (user) {
+                var alert = _this.alertCtrl.create({
+                    message: "Check your email for a password reset link",
+                    buttons: [{
+                            text: "Ok",
+                            role: 'cancel',
+                            handler: function () { _this.navCtrl.pop(); }
+                        }]
+                });
+                alert.present();
+            }, function (error) {
+                var errorAlert = _this.alertCtrl.create({
+                    message: error.message,
+                    buttons: [{ text: "Ok", role: "cancel" }]
+                });
+                errorAlert.present();
+            });
+        }
+    };
+    return ResetPasswordPage;
+}());
+ResetPasswordPage = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'page-reset-password',template:/*ion-inline-start:"C:\Users\SEC\cra\iTaxi\iTaxi\src\pages\reset-password\reset-password.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n    <ion-title>\n\n      비밀번호 초기화\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n  <img src="../../assets/imgs/logo.png" />\n\n  <form [formGroup]="resetPasswordForm" (submit)="resetPassword()" novalidate> \n\n    <ion-item>\n\n     <ion-label stacked>Email</ion-label>\n\n     <ion-input formControlName="email" type="email" placeholder="Your email address" \n\n                [class.invalid]="!resetPasswordForm.controls.email.valid && resetPasswordForm.controls.email.dirty">\n\n     </ion-input> \n\n    </ion-item>\n\n    <ion-item class="error-message" *ngIf="!resetPasswordForm.controls.email.valid && resetPasswordForm.controls.email.dirty"> \n\n      <p>Please enter a valid email.</p>\n\n    </ion-item>\n\n  \n\n    <button ion-button block type="submit" [disabled]="!resetPasswordForm.valid">\n\n      비밀번호 초기화 \n\n    </button>\n\n  </form> \n\n</ion-content>'/*ion-inline-end:"C:\Users\SEC\cra\iTaxi\iTaxi\src\pages\reset-password\reset-password.html"*/,
+    }),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"], __WEBPACK_IMPORTED_MODULE_3__providers_auth_auth__["a" /* AuthProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["AlertController"], __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]])
+], ResetPasswordPage);
+
+//# sourceMappingURL=reset-password.js.map
 
 /***/ }),
 
@@ -1467,15 +1467,15 @@ var StudentIDValidator = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(353);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(354);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_login_login__ = __webpack_require__(59);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_makeRoom_makeRoom__ = __webpack_require__(97);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_setting_setting__ = __webpack_require__(308);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_makeRoom_makeRoom__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_setting_setting__ = __webpack_require__(307);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_signup_signup__ = __webpack_require__(310);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_taxi_list_taxi_list__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_taxi_list_taxi_list__ = __webpack_require__(95);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__providers_auth_auth__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__providers_users_users__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_angularfire2_database__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_fcm__ = __webpack_require__(355);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_firebase__ = __webpack_require__(172);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_firebase__ = __webpack_require__(171);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14_firebase__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1635,7 +1635,7 @@ __decorate([
     __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"])
 ], MyApp.prototype, "navCtrl", void 0);
 MyApp = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({template:/*ion-inline-start:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/app/app.html"*/'<ion-menu [content]="content"  persistent="true">\n  \n    <ion-content class="sidemenu-content">\n      <p class="sidemenu-userid"><ion-icon name="person"></ion-icon>&nbsp;&nbsp;{{user_id}}</p> \n      <ion-buttons right > \n        <button  class="sidemenu-button" menuClose icon-only (click)="setPage(\'SettingPage\')">\n          <ion-icon name="settings"></ion-icon>\n        </button>\n      </ion-buttons>\n      <hr class="sidemenu-hr" style="background-color:#29B5EF">\n      <ion-grid class="sidemenu-grid"  *ngFor = "let dates of dates_array">\n        <div class="sidemenu-div" *ngFor = "let date of dates | DatePipe">\n        &nbsp;&nbsp;꼬부기 {{date.length}} ({{date.roomParticipants.length}} / {{date.roomCapacity}})\n        <ion-row class="sidemenu-row" justify-content-left padding-left style="border-top-color: white">\n        {{date.roomDate}} &nbsp;&nbsp;|&nbsp;&nbsp; {{date.roomTime}}<br>\n        {{date.roomDepart}} &nbsp;&nbsp; > &nbsp;&nbsp; {{date.roomDest}}\n      <ion-buttons right > \n        <button  class="sidemenu-button2" menuClose icon-only (click)="Idontknow()">\n          <ion-icon name="log-out"></ion-icon>\n        </button>\n      </ion-buttons>\n      </ion-row>\n        </div>\n      </ion-grid>\n      \n      <ion-list class="sidemenu-list">\n          <ion-list-header class="sidemenu-header"> <ion-icon name="ios-car"></ion-icon> &nbsp;&nbsp;택시 </ion-list-header>\n          <button menuClose ion-item class="sidemenu-items" (click)="setPage(\'TaxiListPage\')">조회</button>\n          <button menuClose ion-item class="sidemenu-items" (click)="setPage(\'MakeRoomPage\')">모집</button>\n          <ion-list-header class="sidemenu-header"> <ion-icon name="car"></ion-icon>  &nbsp;&nbsp;카풀 </ion-list-header>\n          <button menuClose ion-item class="sidemenu-items" (click)="goCarpoolListPage()">조회</button>\n          <button menuClose ion-item class="sidemenu-items" (click)="goMakeCarpoolRoomPage()">모집</button>\n          <ion-list-header class="sidemenu-header"> <ion-icon name="person"></ion-icon>&nbsp;&nbsp;마이페이지 </ion-list-header>\n          <button menuClose ion-item class="sidemenu-items" (click)="setPage(\'RideHistoryPage\')">탑승내역</button>\n          <button menuClose ion-item class="sidemenu-items" (click)="setPage(\'PersonalInfoPage\')">내정보수정</button>\n          <ion-list-header class="sidemenu-header"> <ion-icon name="home"></ion-icon>  &nbsp;&nbsp;메인페이지 </ion-list-header>\n          <button menuClose ion-item class="sidemenu-items" (click)="setPage(\'MainPage\')">메인페이지</button>  \n          <button menuClose ion-item class="sidemenu-items" (click)="logout()">로그아웃</button>\n      </ion-list>\n    </ion-content>\n  \n  </ion-menu>\n  \n  <!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n  <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>\n  '/*ion-inline-end:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/app/app.html"*/
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({template:/*ion-inline-start:"C:\Users\SEC\cra\iTaxi\iTaxi\src\app\app.html"*/'<ion-menu [content]="content"  persistent="true">\n\n  \n\n    <ion-content class="sidemenu-content">\n\n      <p class="sidemenu-userid"><ion-icon name="person"></ion-icon>&nbsp;&nbsp;{{user_id}}</p> \n\n      <ion-buttons right > \n\n        <button  class="sidemenu-button" menuClose icon-only (click)="setPage(\'SettingPage\')">\n\n          <ion-icon name="settings"></ion-icon>\n\n        </button>\n\n      </ion-buttons>\n\n      <hr class="sidemenu-hr" style="background-color:#29B5EF">\n\n      <ion-grid class="sidemenu-grid"  *ngFor = "let dates of dates_array">\n\n        <div class="sidemenu-div" *ngFor = "let date of dates | DatePipe">\n\n        &nbsp;&nbsp;꼬부기 {{date.length}} ({{date.roomParticipants.length}} / {{date.roomCapacity}})\n\n        <ion-row class="sidemenu-row" justify-content-left padding-left style="border-top-color: white">\n\n        {{date.roomDate}} &nbsp;&nbsp;|&nbsp;&nbsp; {{date.roomTime}}<br>\n\n        {{date.roomDepart}} &nbsp;&nbsp; > &nbsp;&nbsp; {{date.roomDest}}\n\n      <ion-buttons right > \n\n        <button  class="sidemenu-button2" menuClose icon-only (click)="Idontknow()">\n\n          <ion-icon name="log-out"></ion-icon>\n\n        </button>\n\n      </ion-buttons>\n\n      </ion-row>\n\n        </div>\n\n      </ion-grid>\n\n      \n\n      <ion-list class="sidemenu-list">\n\n          <ion-list-header class="sidemenu-header"> <ion-icon name="ios-car"></ion-icon> &nbsp;&nbsp;택시 </ion-list-header>\n\n          <button menuClose ion-item class="sidemenu-items" (click)="setPage(\'TaxiListPage\')">조회</button>\n\n          <button menuClose ion-item class="sidemenu-items" (click)="setPage(\'MakeRoomPage\')">모집</button>\n\n          <ion-list-header class="sidemenu-header"> <ion-icon name="car"></ion-icon>  &nbsp;&nbsp;카풀 </ion-list-header>\n\n          <button menuClose ion-item class="sidemenu-items" (click)="goCarpoolListPage()">조회</button>\n\n          <button menuClose ion-item class="sidemenu-items" (click)="goMakeCarpoolRoomPage()">모집</button>\n\n          <ion-list-header class="sidemenu-header"> <ion-icon name="person"></ion-icon>&nbsp;&nbsp;마이페이지 </ion-list-header>\n\n          <button menuClose ion-item class="sidemenu-items" (click)="setPage(\'RideHistoryPage\')">탑승내역</button>\n\n          <button menuClose ion-item class="sidemenu-items" (click)="setPage(\'PersonalInfoPage\')">내정보수정</button>\n\n          <ion-list-header class="sidemenu-header"> <ion-icon name="home"></ion-icon>  &nbsp;&nbsp;메인페이지 </ion-list-header>\n\n          <button menuClose ion-item class="sidemenu-items" (click)="setPage(\'MainPage\')">메인페이지</button>  \n\n          <button menuClose ion-item class="sidemenu-items" (click)="logout()">로그아웃</button>\n\n      </ion-list>\n\n    </ion-content>\n\n  \n\n  </ion-menu>\n\n  \n\n  <!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n\n  <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>\n\n  '/*ion-inline-end:"C:\Users\SEC\cra\iTaxi\iTaxi\src\app\app.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["Platform"], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */],
         __WEBPACK_IMPORTED_MODULE_10__providers_auth_auth__["a" /* AuthProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["AlertController"], __WEBPACK_IMPORTED_MODULE_12_angularfire2_database__["a" /* AngularFireDatabase */],
@@ -1868,7 +1868,7 @@ var MainPage = (function () {
 }());
 MainPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-main',template:/*ion-inline-start:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/main/main.html"*/'<ion-header>\n  <ion-navbar color="primary">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>i-Taxi</ion-title>\n  </ion-navbar>\n\n  <button ion-item color="light2" style="font-size: 1.3rem" (click)="openTaxiList()">\n    <ion-icon name="ios-information-circle-outline" item-start></ion-icon>\n    공지사항입니다. 공지사항입니다.\n  </button>\n  <!--\n  <ion-card (click)="openTaxiList()">\n    <img src="../../assets/imgs/taxi.png"/>\n    <div class="card-title">i-Taxi</div>\n    <div class="card-subtitle">타러가기</div>\n  </ion-card>\n  <ion-card (click)="openTaxiList()">\n    <img src="../../assets/imgs/taxi.png"/>\n    <div class="card-title">i-Taxi</div>\n    <div class="card-subtitle">타러가기</div>\n  </ion-card> -->\n</ion-header>\n<ion-content>\n\n  <ion-buttons>\n    <button ion-button large full icon-left (click)="setPage(\'TaxiListPage\')">\n      <ion-icon name="car"></ion-icon>\n      i-Taxi 탑승\n    </button>\n    <button ion-button large full color="secondary" icon-left (click)="setPage(\'TaxiListPage\')">\n      <ion-icon name="car"></ion-icon>\n      카풀 탑승\n    </button>\n    <button ion-button large full color="tertiary" icon-left (click)="setPage(\'PersonalInfoPage\')">\n      <ion-icon name="person"></ion-icon>\n      마이페이지\n    </button>\n\n    <!--\n  round button\n    <ion-grid>\n      <ion-row justify-content-center style="padding: 10px 0; margin-top: 25px">\n        <button ion-button round class="customBtn" icon-left (click)="goTaxiListPage()" >\n          i-Taxi 탑승\n        </button>\n      </ion-row>\n      <ion-row justify-content-center style="padding: 10px 0">\n        <button ion-button round class="customBtn" color="secondary" icon-left (click)="goCarpoolListPage()">\n          카풀 탑승\n        </button>\n      </ion-row>\n      <ion-row justify-content-center style="padding: 10px 0">\n        <button ion-button round class="customBtn" color="tertiary" icon-left (click)="goMyPage()" >\n          마이페이지\n        </button>\n      </ion-row>\n    </ion-grid>\n  -->\n  </ion-buttons>\n\n  <!-- my Ticket -->\n  <div *ngFor="let dates of dates_array">\n    <ion-card style="border-radius:5px; margin-top:30px" *ngFor="let date of dates | DatePipe">\n      <ion-row style="background-color:#0054a6; color:white; padding:5px 0 5px 15px">\n        {{date.roomDate}}\n      </ion-row>\n      <ion-row>\n        <ion-col col-4 text-center style="border-right: 1px solid #ddd9d9">\n          <h3>Taxi</h3>\n          <p style="font-size: 9px">현 {{date.roomParticipants.length}}/{{date.roomCapacity}} 명</p>\n        </ion-col>\n        <ion-col text-center>\n          <h3>{{date.roomDepart}} <ion-icon name="arrow-forward"></ion-icon>{{date.roomDest}}</h3>\n          <p padding-left style="font-size: 10px">{{date.roomTime}}</p>\n        </ion-col>\n      </ion-row>\n    </ion-card>\n  </div>\n\n\n\n  <!-- <button ion-button secondary menuToggle>Toggle Menu</button> -->\n</ion-content>\n'/*ion-inline-end:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/main/main.html"*/,
+        selector: 'page-main',template:/*ion-inline-start:"C:\Users\SEC\cra\iTaxi\iTaxi\src\pages\main\main.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>i-Taxi</ion-title>\n\n  </ion-navbar>\n\n\n\n  <button ion-item color="light2" style="font-size: 1.3rem" (click)="openTaxiList()">\n\n    <ion-icon name="ios-information-circle-outline" item-start></ion-icon>\n\n    공지사항입니다. 공지사항입니다.\n\n  </button>\n\n  <!--\n\n  <ion-card (click)="openTaxiList()">\n\n    <img src="../../assets/imgs/taxi.png"/>\n\n    <div class="card-title">i-Taxi</div>\n\n    <div class="card-subtitle">타러가기</div>\n\n  </ion-card>\n\n  <ion-card (click)="openTaxiList()">\n\n    <img src="../../assets/imgs/taxi.png"/>\n\n    <div class="card-title">i-Taxi</div>\n\n    <div class="card-subtitle">타러가기</div>\n\n  </ion-card> -->\n\n</ion-header>\n\n<ion-content>\n\n\n\n  <ion-buttons>\n\n    <button ion-button large full icon-left (click)="setPage(\'TaxiListPage\')">\n\n      <ion-icon name="car"></ion-icon>\n\n      i-Taxi 탑승\n\n    </button>\n\n    <button ion-button large full color="secondary" icon-left (click)="setPage(\'TaxiListPage\')">\n\n      <ion-icon name="car"></ion-icon>\n\n      카풀 탑승\n\n    </button>\n\n    <button ion-button large full color="tertiary" icon-left (click)="setPage(\'PersonalInfoPage\')">\n\n      <ion-icon name="person"></ion-icon>\n\n      마이페이지\n\n    </button>\n\n\n\n    <!--\n\n  round button\n\n    <ion-grid>\n\n      <ion-row justify-content-center style="padding: 10px 0; margin-top: 25px">\n\n        <button ion-button round class="customBtn" icon-left (click)="goTaxiListPage()" >\n\n          i-Taxi 탑승\n\n        </button>\n\n      </ion-row>\n\n      <ion-row justify-content-center style="padding: 10px 0">\n\n        <button ion-button round class="customBtn" color="secondary" icon-left (click)="goCarpoolListPage()">\n\n          카풀 탑승\n\n        </button>\n\n      </ion-row>\n\n      <ion-row justify-content-center style="padding: 10px 0">\n\n        <button ion-button round class="customBtn" color="tertiary" icon-left (click)="goMyPage()" >\n\n          마이페이지\n\n        </button>\n\n      </ion-row>\n\n    </ion-grid>\n\n  -->\n\n  </ion-buttons>\n\n\n\n  <!-- my Ticket -->\n\n  <div *ngFor="let dates of dates_array">\n\n    <ion-card style="border-radius:5px; margin-top:30px" *ngFor="let date of dates | DatePipe">\n\n      <ion-row style="background-color:#0054a6; color:white; padding:5px 0 5px 15px">\n\n        {{date.roomDate}}\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col col-4 text-center style="border-right: 1px solid #ddd9d9">\n\n          <h3>Taxi</h3>\n\n          <p style="font-size: 9px">현 {{date.roomParticipants.length}}/{{date.roomCapacity}} 명</p>\n\n        </ion-col>\n\n        <ion-col text-center>\n\n          <h3>{{date.roomDepart}} <ion-icon name="arrow-forward"></ion-icon>{{date.roomDest}}</h3>\n\n          <p padding-left style="font-size: 10px">{{date.roomTime}}</p>\n\n        </ion-col>\n\n      </ion-row>\n\n    </ion-card>\n\n  </div>\n\n\n\n\n\n\n\n  <!-- <button ion-button secondary menuToggle>Toggle Menu</button> -->\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\SEC\cra\iTaxi\iTaxi\src\pages\main\main.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"], __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["a" /* AngularFireDatabase */],
         __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["MenuController"], __WEBPACK_IMPORTED_MODULE_3__providers_users_users__["a" /* UsersProvider */], __WEBPACK_IMPORTED_MODULE_4__providers_date_date__["a" /* DateProvider */]])
@@ -1891,8 +1891,6 @@ MainPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_users_users__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_angularfire2_database__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__main_main__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_timers__ = __webpack_require__(94);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_timers___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_timers__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1902,7 +1900,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
 
 
 
@@ -1957,7 +1954,7 @@ var LoginPage = (function () {
                     _this.userServices.setInfo(firebase.auth().currentUser.uid);
                 }).then(function () {
                     //현재 2초 딜레이를 걸어놓음으로써 비동기식 문제를 해결중. 임시방편이다.
-                    Object(__WEBPACK_IMPORTED_MODULE_8_timers__["setTimeout"])(function () {
+                    setTimeout(function () {
                         _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_7__main_main__["a" /* MainPage */]);
                     }, 2000);
                 });
@@ -2002,7 +1999,7 @@ var LoginPage = (function () {
 }());
 LoginPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-login',template:/*ion-inline-start:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/login/login.html"*/'<ion-header>\n  <ion-navbar color="primary">\n    <ion-title>로그인</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding text-center>\n  <img src="../../assets/imgs/logo.png" align="center"/>\n  <form [formGroup]="loginForm" (submit)="loginUser()" novalidate>\n    <ion-item>\n      <ion-label>Email</ion-label>\n      <ion-input formControlName="email" type="email" placeholder="Your email address"\n        [class.invalid]="!loginForm.controls.email.valid && loginForm.controls.email.dirty">\n      </ion-input>\n    </ion-item>\n    <ion-item class="error-message" *ngIf="!loginForm.controls.email.valid && loginForm.controls.email.dirty">\n      <p>사용가능한 이메일주소를 입력하세요.</p>\n    </ion-item>\n    <ion-item>\n      <ion-label>Password</ion-label>\n      <ion-input formControlName="password" type="password" placeholder="Your password"\n        [class.invalid]="!loginForm.controls.password.valid && loginForm.controls.password.dirty">\n      </ion-input>\n    </ion-item>\n    <ion-item class="error-message" *ngIf="!loginForm.controls.password.valid && loginForm.controls.password.dirty">\n      <p>비밀번호는 6자 이상의 영문자이어야합니다.</p>\n    </ion-item>\n    <button ion-button full medium round type="submit" color="secondary" [disabled]="!loginForm.valid">\n      로그인 </button>\n  </form>\n\n  <ion-grid>\n    <ion-row justify-content-center>\n      <ion-col col-6>\n        <button ion-button medium round color="tertiary" outline (click)="pushPage(\'SignupPage\')"> 회원가입 </button>\n      </ion-col>\n      <ion-col col-6>\n        <button ion-button medium round color="tertiary" outline (click)="pushPage(\'ResetPasswordPage\')"> 비밀번호찾기 </button>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n  <div class="KakaoButton">\n    <a id="custom-login-btn" href="javascript:loginWithKakao()">\n      <img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="300"/>\n    </a>\n  </div>\n</ion-content>'/*ion-inline-end:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/login/login.html"*/,
+        selector: 'page-login',template:/*ion-inline-start:"C:\Users\SEC\cra\iTaxi\iTaxi\src\pages\login\login.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n    <ion-title>로그인</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding text-center>\n\n  <img src="../../assets/imgs/logo.png" align="center"/>\n\n  <form [formGroup]="loginForm" (submit)="loginUser()" novalidate>\n\n    <ion-item>\n\n      <ion-label>Email</ion-label>\n\n      <ion-input formControlName="email" type="email" placeholder="Your email address"\n\n        [class.invalid]="!loginForm.controls.email.valid && loginForm.controls.email.dirty">\n\n      </ion-input>\n\n    </ion-item>\n\n    <ion-item class="error-message" *ngIf="!loginForm.controls.email.valid && loginForm.controls.email.dirty">\n\n      <p>사용가능한 이메일주소를 입력하세요.</p>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-label>Password</ion-label>\n\n      <ion-input formControlName="password" type="password" placeholder="Your password"\n\n        [class.invalid]="!loginForm.controls.password.valid && loginForm.controls.password.dirty">\n\n      </ion-input>\n\n    </ion-item>\n\n    <ion-item class="error-message" *ngIf="!loginForm.controls.password.valid && loginForm.controls.password.dirty">\n\n      <p>비밀번호는 6자 이상의 영문자이어야합니다.</p>\n\n    </ion-item>\n\n    <button ion-button full medium round type="submit" color="secondary" [disabled]="!loginForm.valid">\n\n      로그인 </button>\n\n  </form>\n\n\n\n  <ion-grid>\n\n    <ion-row justify-content-center>\n\n      <ion-col col-6>\n\n        <button ion-button medium round color="tertiary" outline (click)="pushPage(\'SignupPage\')"> 회원가입 </button>\n\n      </ion-col>\n\n      <ion-col col-6>\n\n        <button ion-button medium round color="tertiary" outline (click)="pushPage(\'ResetPasswordPage\')"> 비밀번호찾기 </button>\n\n      </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n\n\n\n  <div class="KakaoButton">\n\n    <a id="custom-login-btn" href="javascript:loginWithKakao()">\n\n      <img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="300"/>\n\n    </a>\n\n  </div>\n\n</ion-content>'/*ion-inline-end:"C:\Users\SEC\cra\iTaxi\iTaxi\src\pages\login\login.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["LoadingController"],
         __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["AlertController"], __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth__["a" /* AuthProvider */], __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */],
@@ -2021,12 +2018,12 @@ LoginPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_taxi_list_taxi_list__ = __webpack_require__(96);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery__ = __webpack_require__(424);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_taxi_list_taxi_list__ = __webpack_require__(95);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery__ = __webpack_require__(423);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_jquery__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_users_users__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_date_date__ = __webpack_require__(50);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_rooms_rooms__ = __webpack_require__(306);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_rooms_rooms__ = __webpack_require__(305);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2262,7 +2259,7 @@ __decorate([
 ], ChatRoomPage.prototype, "content", void 0);
 ChatRoomPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-chatroom',template:/*ion-inline-start:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/chatroom/chatroom.html"*/'<ion-header>\n  <ion-navbar color="primary">\n    <ion-buttons left>\n      <button ion-button (click)=\'goBack()\'>\n          <ion-icon name = "ios-arrow-back"></ion-icon>\n        </button>\n    </ion-buttons>\n\n    <ion-buttons right>\n      <button ion-button menuToggle>\n          <ion-icon name="menu"></ion-icon>\n        </button>\n    </ion-buttons>\n\n    <!-- <ion-title> 꼬부기 ({{room_participants.length}}/{{room_capacity}}) </ion-title> -->\n    <!-- 방이름/인원 -->\n  </ion-navbar>\n\n  <!-- 방 정보 -->\n  <ion-grid class="room-info">\n    <ion-row>\n      <ion-col justify-content-center padding-left>\n        {{displayDate}} {{displayTime}}\n        <p><b>{{roomObj.departure}} &nbsp; <ion-icon name="arrow-forward"></ion-icon> &nbsp; {{roomObj.destination}}</b></p>\n      </ion-col>\n      <ion-col col-auto>\n        <ion-buttons right icon-only>\n          <button ion-button (click)=\'quit()\'>\n              <ion-icon name="log-out"></ion-icon>\n            </button>\n        </ion-buttons>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n  <!-- 참여자 정보  -->\n  <ion-grid>\n    <ion-row>\n      <ion-col class="users">\n        <div class="user" *ngFor="let member of roomObj.participants; let i = index">\n          <button ion-button class="user-name" (click)="show(i)" >{{ member }}</button>\n          <button ion-button class="user-call" (click)="native(i, 1)"><ion-icon name="ios-call-outline"></ion-icon></button>\n          <button ion-button class="user-mail" (click)="native(i, 2)"><ion-icon name="ios-mail-outline"></ion-icon></button>\n        </div>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n\n    <!--\n    <ion-item *ngFor="let chat of chats | async; let last = last">\n      {{chat.user_id}} : {{chat.content}}\n      {{last ? scrollBottom() : \'\'}}\n    </ion-item>\n    -->\n\n    <div class="message-wrap" *ngFor="let chat of chats | async; let last = last">\n      <!-- 밑에 주석처리 되어있는 부분이 내가 말한 내용이면 오른쪽, 상대가 말한 내용이면 왼쪽 선택하게한다. -->\n      <!-- <div *ngFor="let msg of msgList"\n           class="message"\n           [class.left]=" msg.userId === toUser.id "\n           [class.right]=" msg.userId === user.id "> -->\n      <div class="message right" *ngIf="chat.user_id == chat_user_id">\n        <!-- <img class="user-img" [src]="msg.userAvatar" alt="" src=""> 이거는 프로필사진-->\n        <div class="msg-detail">\n          <div class="msg-content">\n            <div class="msg-info">\n              <p>\n                <!-- 사용자 아이디, 메세지 작성시간 {{msg.userName}}&nbsp;&nbsp;&nbsp;{{msg.time | relativeTime}}</p> -->\n                <ion-icon *ngIf="chat.user_id == room_host" name="star"></ion-icon>{{chat.user_id}}&nbsp;&nbsp;&nbsp;{{chat.date_time | slice:12:21}}</p>\n            </div>\n            <span class="triangle"></span>\n            <p class="line-breaker">{{chat.content}}</p>\n            <!-- {{msg.message}} -->\n          </div>\n        </div>\n      </div>\n\n      <div class="message left" *ngIf="chat.user_id != chat_user_id">\n        <!-- <img class="user-img" alt="" src=""> -->\n        <div class="msg-detail">\n          <div class="msg-content">\n            <div class="msg-info">\n              <p>\n                <!-- {{msg.userName}}&nbsp;&nbsp;&nbsp;{{msg.time | relativeTime}}</p> -->\n                <ion-icon *ngIf="chat.user_id == room_host" name="star"></ion-icon>{{chat.user_name}}&nbsp;&nbsp;&nbsp;{{chat.date_time | slice:12:21}}</p>\n            </div>\n            <span class="triangle"></span>\n            <p class="line-breaker">{{chat.content}}</p>\n          </div>\n        </div>\n      </div>\n\n      <!-- 입장/퇴장/택시비 정산 등등 공지 >\n       <div class="message-notice">한동이 님이 퇴장하셨습니다.</div>\n      -->\n    </div>\n  </ion-list>\n</ion-content>\n\n<ion-footer>\n  <ion-item>\n    <ion-input [(ngModel)]="chat_content" fixed type="text" (keyup.enter)="send()" (click)="scrollBottom()"></ion-input>\n    <button ion-button clear item-right (click)="send()" (click)="scrollBottom()"> send </button>\n  </ion-item>\n</ion-footer>\n'/*ion-inline-end:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/chatroom/chatroom.html"*/
+        selector: 'page-chatroom',template:/*ion-inline-start:"C:\Users\SEC\cra\iTaxi\iTaxi\src\pages\chatroom\chatroom.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n    <ion-buttons left>\n\n      <button ion-button (click)=\'goBack()\'>\n\n          <ion-icon name = "ios-arrow-back"></ion-icon>\n\n        </button>\n\n    </ion-buttons>\n\n\n\n    <ion-buttons right>\n\n      <button ion-button menuToggle>\n\n          <ion-icon name="menu"></ion-icon>\n\n        </button>\n\n    </ion-buttons>\n\n\n\n    <!-- <ion-title> 꼬부기 ({{room_participants.length}}/{{room_capacity}}) </ion-title> -->\n\n    <!-- 방이름/인원 -->\n\n  </ion-navbar>\n\n\n\n  <!-- 방 정보 -->\n\n  <ion-grid class="room-info">\n\n    <ion-row>\n\n      <ion-col justify-content-center padding-left>\n\n        {{displayDate}} {{displayTime}}\n\n        <p><b>{{roomObj.departure}} &nbsp; <ion-icon name="arrow-forward"></ion-icon> &nbsp; {{roomObj.destination}}</b></p>\n\n      </ion-col>\n\n      <ion-col col-auto>\n\n        <ion-buttons right icon-only>\n\n          <button ion-button (click)=\'quit()\'>\n\n              <ion-icon name="log-out"></ion-icon>\n\n            </button>\n\n        </ion-buttons>\n\n      </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n\n\n\n  <!-- 참여자 정보  -->\n\n  <ion-grid>\n\n    <ion-row>\n\n      <ion-col class="users">\n\n        <div class="user" *ngFor="let member of roomObj.participants; let i = index">\n\n          <button ion-button class="user-name" (click)="show(i)" >{{ member }}</button>\n\n          <button ion-button class="user-call" (click)="native(i, 1)"><ion-icon name="ios-call-outline"></ion-icon></button>\n\n          <button ion-button class="user-mail" (click)="native(i, 2)"><ion-icon name="ios-mail-outline"></ion-icon></button>\n\n        </div>\n\n      </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n\n</ion-header>\n\n\n\n<ion-content>\n\n  <ion-list>\n\n\n\n    <!--\n\n    <ion-item *ngFor="let chat of chats | async; let last = last">\n\n      {{chat.user_id}} : {{chat.content}}\n\n      {{last ? scrollBottom() : \'\'}}\n\n    </ion-item>\n\n    -->\n\n\n\n    <div class="message-wrap" *ngFor="let chat of chats | async; let last = last">\n\n      <!-- 밑에 주석처리 되어있는 부분이 내가 말한 내용이면 오른쪽, 상대가 말한 내용이면 왼쪽 선택하게한다. -->\n\n      <!-- <div *ngFor="let msg of msgList"\n\n           class="message"\n\n           [class.left]=" msg.userId === toUser.id "\n\n           [class.right]=" msg.userId === user.id "> -->\n\n      <div class="message right" *ngIf="chat.user_id == chat_user_id">\n\n        <!-- <img class="user-img" [src]="msg.userAvatar" alt="" src=""> 이거는 프로필사진-->\n\n        <div class="msg-detail">\n\n          <div class="msg-content">\n\n            <div class="msg-info">\n\n              <p>\n\n                <!-- 사용자 아이디, 메세지 작성시간 {{msg.userName}}&nbsp;&nbsp;&nbsp;{{msg.time | relativeTime}}</p> -->\n\n                <ion-icon *ngIf="chat.user_id == room_host" name="star"></ion-icon>{{chat.user_id}}&nbsp;&nbsp;&nbsp;{{chat.date_time | slice:12:21}}</p>\n\n            </div>\n\n            <span class="triangle"></span>\n\n            <p class="line-breaker">{{chat.content}}</p>\n\n            <!-- {{msg.message}} -->\n\n          </div>\n\n        </div>\n\n      </div>\n\n\n\n      <div class="message left" *ngIf="chat.user_id != chat_user_id">\n\n        <!-- <img class="user-img" alt="" src=""> -->\n\n        <div class="msg-detail">\n\n          <div class="msg-content">\n\n            <div class="msg-info">\n\n              <p>\n\n                <!-- {{msg.userName}}&nbsp;&nbsp;&nbsp;{{msg.time | relativeTime}}</p> -->\n\n                <ion-icon *ngIf="chat.user_id == room_host" name="star"></ion-icon>{{chat.user_name}}&nbsp;&nbsp;&nbsp;{{chat.date_time | slice:12:21}}</p>\n\n            </div>\n\n            <span class="triangle"></span>\n\n            <p class="line-breaker">{{chat.content}}</p>\n\n          </div>\n\n        </div>\n\n      </div>\n\n\n\n      <!-- 입장/퇴장/택시비 정산 등등 공지 >\n\n       <div class="message-notice">한동이 님이 퇴장하셨습니다.</div>\n\n      -->\n\n    </div>\n\n  </ion-list>\n\n</ion-content>\n\n\n\n<ion-footer>\n\n  <ion-item>\n\n    <ion-input [(ngModel)]="chat_content" fixed type="text" (keyup.enter)="send()" (click)="scrollBottom()"></ion-input>\n\n    <button ion-button clear item-right (click)="send()" (click)="scrollBottom()"> send </button>\n\n  </ion-item>\n\n</ion-footer>\n\n'/*ion-inline-end:"C:\Users\SEC\cra\iTaxi\iTaxi\src\pages\chatroom\chatroom.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"], __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["a" /* AngularFireDatabase */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["Platform"],
         __WEBPACK_IMPORTED_MODULE_7__providers_rooms_rooms__["a" /* RoomsProvider */], __WEBPACK_IMPORTED_MODULE_6__providers_date_date__["a" /* DateProvider */], __WEBPACK_IMPORTED_MODULE_5__providers_users_users__["a" /* UsersProvider */]])
@@ -2297,7 +2294,7 @@ var EmailValidator = (function () {
 
 /***/ }),
 
-/***/ 96:
+/***/ 95:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2305,9 +2302,9 @@ var EmailValidator = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__chatroom_chatroom__ = __webpack_require__(61);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__makeRoom_makeRoom__ = __webpack_require__(97);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__makeRoom_makeRoom__ = __webpack_require__(96);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ionic2_date_picker__ = __webpack_require__(185);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ionic2_date_picker__ = __webpack_require__(184);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ionic2_date_picker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_ionic2_date_picker__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_users_users__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_date_date__ = __webpack_require__(50);
@@ -2439,7 +2436,7 @@ var TaxiListPage = (function () {
 }());
 TaxiListPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-taxi-list',template:/*ion-inline-start:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/taxi-list/taxi-list.html"*/'<ion-header>\n  <ion-navbar color="primary">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title class = "top-title">택시조회</ion-title>\n  </ion-navbar>\n\n  <ion-grid class="small-table">\n    <ion-row>\n        <ion-col col-5>\n          <ion-grid>\n            <ion-row class = "rowUnderline">\n              <ion-col col-11>\n                <ion-item class="selectWrapper">\n                  <ion-select #newSelect [(ngModel)]="departFilter" interface="popover" placeholder="전체보기" (ionChange)="filterDeparture(departFilter)">\n                    <ion-option value="All" checked="true">전체보기</ion-option>\n                    <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>\n                  </ion-select>\n                </ion-item>\n              </ion-col>\n              <ion-col col-1> \n                <p class = "selectIcon">▼</p>\n              </ion-col>\n            </ion-row>\n          </ion-grid>\n        </ion-col>\n\n        <ion-col col-2 class = "rightArrow">  \n          <ion-icon name="arrow-round-forward"></ion-icon>\n        </ion-col>\n\n        <ion-col col-5>\n          <ion-grid>\n            <ion-row class = "rowUnderline">\n              <ion-col col-11>\n                <ion-item class="selectWrapper">\n                  <ion-select [selectOptions]="destinationOptions" [(ngModel)]="destinationFilter" placeholder="전체보기" interface="popover" (ionChange)="filterDestination(destinationFilter)">\n                    <ion-option value="All" checked="true">전체보기</ion-option>\n                    <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>\n                  </ion-select>\n                </ion-item>\n              </ion-col>\n              <ion-col col-1> \n                <p class = "selectIcon">▼</p>\n              </ion-col>\n            </ion-row>\n          </ion-grid>\n        </ion-col>  \n    </ion-row>\n\n    <ion-row>\n      <ion-col col-2 *ngFor="let day of days" class="pointer">\n        <ion-item class="days" (click)="showChatroom(day)">\n          <p>{{day|date: "dd"}}</p>\n        </ion-item>\n      </ion-col>\n      <ion-col col-2 class="pointer">\n        <ion-item class="days_icon" (click)="showCalendar()" >\n          <p> + </p>\n        </ion-item>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n</ion-header>\n\n<ion-content>\n  <div>\n    <ion-grid class="mainGrid">\n      <ion-item-group>\n        <ion-item-divider *ngFor="let date of dates | async" (click)="goChatroom(date)" class="line"\n        [ngClass]="{full: date.participants.length >= date.capacity, exist: isExist(date.participants)}">\n          <ion-row>\n            <ion-col col-3>\n              <p>{{date.depart_date}}</p>\n              <p>{{date.depart_time}}</p>\n            </ion-col>\n            <ion-col col-7>\n              <p>{{date.departure}}</p>\n              <p>>{{date.destination}}</p>\n            </ion-col>\n            <ion-col col-2>\n              <p>{{date.participants.length}} / {{date.capacity}}</p>\n              <p>참여 {{ date.participants.length >= date.capacity ? "불가" : "가능" }}</p>\n            </ion-col>\n          </ion-row>\n        </ion-item-divider>\n      </ion-item-group>\n    </ion-grid>\n  </div>\n\n  <ion-fab right bottom>\n    <button color="dark" ion-fab (click)="makeRoom()"><ion-icon name="add"></ion-icon></button>\n  </ion-fab>\n\n</ion-content>\n'/*ion-inline-end:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/taxi-list/taxi-list.html"*/,
+        selector: 'page-taxi-list',template:/*ion-inline-start:"C:\Users\SEC\cra\iTaxi\iTaxi\src\pages\taxi-list\taxi-list.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title class = "top-title">택시조회</ion-title>\n\n  </ion-navbar>\n\n\n\n  <ion-grid class="small-table">\n\n    <ion-row>\n\n        <ion-col col-5>\n\n          <ion-grid>\n\n            <ion-row class = "rowUnderline">\n\n              <ion-col col-11>\n\n                <ion-item class="selectWrapper">\n\n                  <ion-select #newSelect [(ngModel)]="departFilter" interface="popover" placeholder="전체보기" (ionChange)="filterDeparture(departFilter)">\n\n                    <ion-option value="All" checked="true">전체보기</ion-option>\n\n                    <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>\n\n                  </ion-select>\n\n                </ion-item>\n\n              </ion-col>\n\n              <ion-col col-1> \n\n                <p class = "selectIcon">▼</p>\n\n              </ion-col>\n\n            </ion-row>\n\n          </ion-grid>\n\n        </ion-col>\n\n\n\n        <ion-col col-2 class = "rightArrow">  \n\n          <ion-icon name="arrow-round-forward"></ion-icon>\n\n        </ion-col>\n\n\n\n        <ion-col col-5>\n\n          <ion-grid>\n\n            <ion-row class = "rowUnderline">\n\n              <ion-col col-11>\n\n                <ion-item class="selectWrapper">\n\n                  <ion-select [selectOptions]="destinationOptions" [(ngModel)]="destinationFilter" placeholder="전체보기" interface="popover" (ionChange)="filterDestination(destinationFilter)">\n\n                    <ion-option value="All" checked="true">전체보기</ion-option>\n\n                    <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>\n\n                  </ion-select>\n\n                </ion-item>\n\n              </ion-col>\n\n              <ion-col col-1> \n\n                <p class = "selectIcon">▼</p>\n\n              </ion-col>\n\n            </ion-row>\n\n          </ion-grid>\n\n        </ion-col>  \n\n    </ion-row>\n\n\n\n    <ion-row>\n\n      <ion-col col-2 *ngFor="let day of days" class="pointer">\n\n        <ion-item class="days" (click)="showChatroom(day)">\n\n          <p>{{day|date: "dd"}}</p>\n\n        </ion-item>\n\n      </ion-col>\n\n      <ion-col col-2 class="pointer">\n\n        <ion-item class="days_icon" (click)="showCalendar()" >\n\n          <p> + </p>\n\n        </ion-item>\n\n      </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n\n</ion-header>\n\n\n\n<ion-content>\n\n  <div>\n\n    <ion-grid class="mainGrid">\n\n      <ion-item-group>\n\n        <ion-item-divider *ngFor="let date of dates | async" (click)="goChatroom(date)" class="line"\n\n        [ngClass]="{full: date.participants.length >= date.capacity, exist: isExist(date.participants)}">\n\n          <ion-row>\n\n            <ion-col col-3>\n\n              <p>{{date.depart_date}}</p>\n\n              <p>{{date.depart_time}}</p>\n\n            </ion-col>\n\n            <ion-col col-7>\n\n              <p>{{date.departure}}</p>\n\n              <p>>{{date.destination}}</p>\n\n            </ion-col>\n\n            <ion-col col-2>\n\n              <p>{{date.participants.length}} / {{date.capacity}}</p>\n\n              <p>참여 {{ date.participants.length >= date.capacity ? "불가" : "가능" }}</p>\n\n            </ion-col>\n\n          </ion-row>\n\n        </ion-item-divider>\n\n      </ion-item-group>\n\n    </ion-grid>\n\n  </div>\n\n\n\n  <ion-fab right bottom>\n\n    <button color="dark" ion-fab (click)="makeRoom()"><ion-icon name="add"></ion-icon></button>\n\n  </ion-fab>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\SEC\cra\iTaxi\iTaxi\src\pages\taxi-list\taxi-list.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"], __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__["a" /* AngularFireDatabase */],
         __WEBPACK_IMPORTED_MODULE_5_ionic2_date_picker__["DatePickerProvider"], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["ModalController"],
@@ -2450,7 +2447,7 @@ TaxiListPage = __decorate([
 
 /***/ }),
 
-/***/ 97:
+/***/ 96:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2489,7 +2486,7 @@ var MakeRoomPage = (function () {
         this.departure = "";
         this.selectDestination = { key: "포항역", value: "" };
         this.destination = "";
-        this.maxPeople = 4;
+        this.maxPeople = "4";
         this.msg = "";
         this.nowDate = this.dateServices.nowDate;
         this.nowTime = this.dateServices.nowTime;
@@ -2554,7 +2551,7 @@ var MakeRoomPage = (function () {
                                     destination: _this.destination,
                                     departure_time: _this.bookingTime,
                                     capacity: _this.maxPeople,
-                                    currentPeople: 4 - _this.maxPeople,
+                                    currentPeople: 4 - parseInt(_this.maxPeople),
                                     host: _this.user_id,
                                     participants: [_this.user_id]
                                 };
@@ -2571,13 +2568,13 @@ var MakeRoomPage = (function () {
             }
         }
     };
-    MakeRoomPage.prototype.startClick = function () {
+    MakeRoomPage.prototype.setDepartureDefault = function () {
         this.selectDeparture = { key: "한동대학교", value: "" };
     };
-    MakeRoomPage.prototype.labelClick = function () {
+    MakeRoomPage.prototype.setDestinationDefault = function () {
         this.selectDestination = { key: "포항역", value: "" };
     };
-    MakeRoomPage.prototype.swap_position = function () {
+    MakeRoomPage.prototype.swapPlace = function () {
         _a = [this.selectDestination, this.selectDeparture], this.selectDeparture = _a[0], this.selectDestination = _a[1];
         var _a;
     };
@@ -2585,7 +2582,7 @@ var MakeRoomPage = (function () {
 }());
 MakeRoomPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-make-room',template:/*ion-inline-start:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/makeRoom/makeRoom.html"*/'<ion-header>\n  <ion-navbar color="primary">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title class="top-title">방만들기</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-row justify-content-center style="padding-top:7%; height:8%; margin-top:12px;">\n    <ion-col col-3 >\n        <p align="center" class="max-people">출발지</p>\n    </ion-col>\n    <ion-col col-3 >\n      <div class="swap_button">\n        <button ion-button full large clear no-padding (click)="swapPlace()"></button>\n      </div>\n    </ion-col>\n    <ion-col col-3 >\n      <p align="center" class="max-people">도착지</p>\n    </ion-col>\n  </ion-row>\n\n  <div class="bottomRow">\n  <ion-row just-content-center>\n    <ion-col col-4.5 justify-content-center>\n      <ion-item text-wrap no-lines>\n        <ion-select text-wrap class="my-select" [(ngModel)]="selectDeparture.key" interface="popover" *ngIf="selectDeparture.key!=\'직접입력\'">\n          <ion-option text-wrap *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>\n        </ion-select>\n        <ion-input class="my-input" style="position:absolute" *ngIf="selectDeparture.key==\'직접입력\'" [(ngModel)]="selectDeparture.value" type="text" placeholder="기타장소"></ion-input>\n      </ion-item>\n    </ion-col>\n    <ion-col col-1 >\n      <button ion-button no-padding clear round class="my-btn" (click)="setDepartureDefault()" *ngIf="selectDeparture.key==\'직접입력\'"></button>\n    </ion-col>\n    \n    <ion-col col-1 >\n      <ion-icon class="arrowIcon" ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon>\n    </ion-col>\n    \n    <ion-col col-4.5 justify-content-center>\n      <ion-item text-wrap no-lines>\n        <ion-select text-wrap class="my-select" [(ngModel)]="selectDestination.key" interface="popover" *ngIf="selectDestination.key!=\'직접입력\'">\n          <ion-option text-wrap *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>\n        </ion-select>\n        <ion-input class="my-input" style="position:absolute" *ngIf="selectDestination.key==\'직접입력\'" [(ngModel)]="selectDestination.value" type="text" placeholder="기타장소"></ion-input> \n      </ion-item>    \n    </ion-col>\n    <ion-col col-1>\n        <button ion-button no-padding clear round class="my-btn" (click)="setDestinationDefault()" *ngIf="selectDestination.key==\'직접입력\'"></button>\n      </ion-col>\n  </ion-row>\n  </div>\n  \n  <ion-row justify-content-center style="padding-top:7%; height:8%; margin-top:0px;">\n    <p class="max-people">출발날짜</p>\n  </ion-row>\n\n  <div class="bottomRow">\n  <ion-row justify-content-center>\n    <ion-datetime padding class="my-date" displayFormat="YYYY년 M월 D일 ({{today}})" pickerFormat="YYYY-MM-DD" min={{min}} max={{max}} \n                  placeholder={{nowDate}} [(ngModel)]="bookingDate"></ion-datetime>   \n  </ion-row>\n  </div>\n  \n  <ion-row justify-content-center style="padding-top:7%; height:8%; margin-top:0px;">\n    <p class="max-people">출발시간</p>\n  </ion-row>\n\n  <div class="bottomRow">\n    <ion-row justify-content-center>\n      <!-- 지금 여기 밑에 placeholder가 제대로 작동하지 않는다. 이상하게 9시간의 시차 차이가 난다 -->\n      <!-- displayFormat 과 default 값을 바꾸어 주어 시간 이상한거 해결 -->\n      <ion-datetime padding class="my-time"  displayFormat="HH:mm" pickerFomat="HH mm" placeholder={{nowTime}} [(ngModel)]="bookingTime"></ion-datetime>\n    </ion-row>\n  </div>\n\n  <ion-row justify-content-center style="padding-top:7%; height:8%; margin-top:0px;">\n    <p class="max-people">최대탑승인원</p>\n  </ion-row>\n\n  <div class="bottomRow">\n    <ion-row justify-content-center>\n      <!-- <div class="cc-selector">\n        <ion-list radio-group [(ngModel)]="maxPeople">\n          <ion-radio value=2>\n            <ion-label class="drinkcard-cc twoButton" for="twoButton"></label>\n          </ion-radio>\n          <ion-radio value=3>\n            <ion-label class="drinkcard-cc threeButton"for="threeButton"></label>\n          </ion-radio>\n          <ion-radio value=2>\n            <ion-label class="drinkcard-cc fourButton" for="fourButton"></label>\n          </ion-radio>\n        </ion-list>\n      </div> -->\n      \n      <form>\n        <div class="cc-selector">\n          <input id="twoButton" type="radio" name="credit-card" value=2 [(ngModel)]="maxPeople"/>\n          <label class="drinkcard-cc twoButton" for="twoButton"></label>\n          \n          <input id="threeButton" type="radio" name="credit-card" value=3 [(ngModel)]="maxPeople"/>\n          <label class="drinkcard-cc threeButton"for="threeButton"></label>\n\n          <input id="fourButton" type="radio" name="credit-card" value=4 checked [(ngModel)]="maxPeople"/>\n          <label class="drinkcard-cc fourButton" for="fourButton"></label>\n        </div>\n      </form>\n    </ion-row>\n  </div>\n  \n  <div class="room_button">          \n    <button style="margin-top:15%" class="button customBtn" ion-button round (click)="makeRoom()" >방 만들기</button>\n  </div>\n\n</ion-content>\n'/*ion-inline-end:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/makeRoom/makeRoom.html"*/,
+        selector: 'page-make-room',template:/*ion-inline-start:"C:\Users\SEC\cra\iTaxi\iTaxi\src\pages\makeRoom\makeRoom.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title class="top-title">방만들기</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n  <!--\n\n  <div class="bottomRow">\n\n    <ion-row>\n\n        <div>\n\n          <ion-col width-1000>\n\n            <ion-row class="main-title" justify-content-center>\n\n              <p class="depart-label">출발지</p>\n\n            </ion-row>\n\n            <ion-row>\n\n              <ion-col>\n\n                <ion-item no-lines>\n\n                  <ion-select class="my-select" [(ngModel)]="selectDeparture.key" interface="popover" *ngIf="selectDeparture.key!=\'직접입력\'">\n\n                    <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>\n\n                  </ion-select>\n\n                  <ion-input text-center class="my-input" style="position:absolute" *ngIf="selectDeparture.key==\'직접입력\'" [(ngModel)]="selectDeparture.value" type="text" placeholder="기타장소"></ion-input> \n\n                </ion-item>\n\n              </ion-col>\n\n              <ion-col>\n\n                <button ion-button no-padding clear round class="my-btn" (click)="setDepartureDefault()" *ngIf="selectDeparture.key==\'직접입력\'"></button>\n\n              </ion-col>\n\n            </ion-row>\n\n          </ion-col>\n\n        </div>\n\n        <div>\n\n          <ion-col col-auto>\n\n            <ion-row>\n\n              <button class="swap-btn" ion-button large clear no-padding (click)="swapPlace()"></button>\n\n            </ion-row>\n\n            <ion-row>\n\n              <ion-icon no-padding class="my-arrow" ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon>\n\n            </ion-row>\n\n          </ion-col>\n\n        </div>\n\n        <div>\n\n          <ion-col>\n\n            <ion-row class="main-title" justify-content-center>\n\n              <p align="center" class="arrive-label">도착지</p>\n\n            </ion-row>\n\n            <ion-row>\n\n              <ion-col> \n\n                <ion-item  no-lines>\n\n                  <ion-select  class="my-select" [(ngModel)]="selectDestination.key" interface="popover" *ngIf="selectDestination.key!=\'직접입력\'">\n\n                    <ion-option  *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>\n\n                  </ion-select>\n\n                  <ion-input class="my-input" style="position:absolute" *ngIf="selectDestination.key==\'직접입력\'" [(ngModel)]="selectDestination.value" type="text" placeholder="기타장소"></ion-input> \n\n                </ion-item>\n\n              </ion-col>\n\n              <ion-col>\n\n                <button ion-button no-padding clear round class="my-btn" (click)="setDestinationDefault()" *ngIf="selectDestination.key==\'직접입력\'"></button>\n\n              </ion-col>\n\n            </ion-row>\n\n          </ion-col>\n\n        </div>\n\n    </ion-row>\n\n  </div>\n\n-->\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  <ion-row class="main-title" justify-content-center>\n\n    <ion-col col-4.5 justify-content-center>\n\n        <p class="depart-label">출발지</p>\n\n    </ion-col>\n\n    <ion-col col-1></ion-col>\n\n    <ion-col col-auto>  \n\n      <div class="swap_button">\n\n        <button ion-button full large clear no-padding (click)="swapPlace()"></button>\n\n      </div>\n\n    </ion-col>\n\n    <ion-col col-1></ion-col>\n\n    <ion-col col-4.5>\n\n      <p align="center" class="arrive-label">도착지</p>\n\n    </ion-col>\n\n  </ion-row>\n\n\n\n  <div class="bottomRow">\n\n  <ion-row just-content-center>\n\n    <ion-col col-4.5 justify-content-center>\n\n      <ion-item no-lines> \n\n        <ion-select class="my-select" [(ngModel)]="selectDeparture.key" interface="popover" *ngIf="selectDeparture.key!=\'직접입력\'">\n\n          <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>\n\n        </ion-select>\n\n        <ion-input text-center class="my-input" *ngIf="selectDeparture.key==\'직접입력\'" [(ngModel)]="selectDeparture.value" type="text" placeholder="기타장소"></ion-input>\n\n      </ion-item>\n\n    </ion-col>\n\n\n\n    <ion-col col-1>\n\n      <button ion-button no-padding clear round class="my-btn" (click)="setDepartureDefault()" *ngIf="selectDeparture.key==\'직접입력\'"></button>\n\n    </ion-col>\n\n    \n\n    <ion-col col-auto >\n\n      <ion-icon class="arrowIcon" ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon>\n\n    </ion-col>\n\n    \n\n    <ion-col col-4.5 justify-content-center>\n\n      <ion-item no-lines>\n\n        <ion-select class="my-select-right" [(ngModel)]="selectDestination.key" interface="popover" *ngIf="selectDestination.key!=\'직접입력\'">\n\n          <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>\n\n        </ion-select>\n\n        <ion-input text-center class="my-input" *ngIf="selectDestination.key==\'직접입력\'" [(ngModel)]="selectDestination.value" type="text" placeholder="기타장소"></ion-input> \n\n      </ion-item>    \n\n    </ion-col>\n\n    <ion-col col-1>\n\n        <button ion-button no-padding clear round class="my-btn" (click)="setDestinationDefault()" *ngIf="selectDestination.key==\'직접입력\'"></button>\n\n      </ion-col>\n\n  </ion-row>\n\n  </div>\n\n  \n\n  <ion-row class="label-title" justify-content-center>\n\n    <p class="max-people">출발날짜</p>\n\n  </ion-row>\n\n\n\n  <div class="bottomRow">\n\n  <ion-row justify-content-center>\n\n    <ion-datetime padding class="my-date" displayFormat="YYYY년 M월 D일 ({{today}})" pickerFormat="YYYY-MM-DD" min={{min}} max={{max}} \n\n                  placeholder={{nowDate}} [(ngModel)]="bookingDate"></ion-datetime>   \n\n  </ion-row>\n\n  </div>\n\n  \n\n  <ion-row class="label-title" justify-content-center>\n\n    <p class="max-people">출발시간</p>\n\n  </ion-row>\n\n\n\n  <div class="bottomRow">\n\n    <ion-row justify-content-center>\n\n      <!-- 지금 여기 밑에 placeholder가 제대로 작동하지 않는다. 이상하게 9시간의 시차 차이가 난다 -->\n\n      <!-- displayFormat 과 default 값을 바꾸어 주어 시간 이상한거 해결 -->\n\n      <ion-datetime padding class="my-time"  displayFormat="HH:mm" pickerFomat="HH mm" placeholder={{nowTime}} [(ngModel)]="bookingTime"></ion-datetime>\n\n    </ion-row>\n\n  </div>\n\n\n\n  <ion-row class="label-title" justify-content-center>\n\n    <p class="max-people">최대탑승인원</p>\n\n  </ion-row>\n\n\n\n  <div class="bottomRow">\n\n    <ion-row justify-content-center>\n\n      <!-- <div class="cc-selector">\n\n        <ion-list radio-group [(ngModel)]="maxPeople">\n\n          <ion-radio value=2>\n\n            <ion-label class="drinkcard-cc twoButton" for="twoButton"></label>\n\n          </ion-radio>\n\n          <ion-radio value=3>\n\n            <ion-label class="drinkcard-cc threeButton"for="threeButton"></label>\n\n          </ion-radio>\n\n          <ion-radio value=2>\n\n            <ion-label class="drinkcard-cc fourButton" for="fourButton"></label>\n\n          </ion-radio>\n\n        </ion-list>\n\n      </div> -->\n\n      <form>\n\n        <div class="cc-selector">\n\n          <input id="twoButton" type="radio" name="max-People" value="2" [(ngModel)]="maxPeople">\n\n          <label class="maxPeople-cc twoButton" for="twoButton"></label>\n\n\n\n          <input id="threeButton" type="radio" name="max-People" value="3" [(ngModel)]="maxPeople">\n\n          <label class="maxPeople-cc threeButton"for="threeButton"></label>\n\n\n\n          <input id="fourButton" type="radio" name="max-People" value="4" [(ngModel)]="maxPeople">\n\n          <label class="maxPeople-cc fourButton" for="fourButton"></label>\n\n        </div>\n\n      </form>\n\n      \n\n    </ion-row>\n\n  </div>\n\n  \n\n  <div class="room_button">          \n\n    <button class="button customBtn" ion-button round (click)="makeRoom()" >방 만들기</button>\n\n  </div>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\SEC\cra\iTaxi\iTaxi\src\pages\makeRoom\makeRoom.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["AlertController"], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"], __WEBPACK_IMPORTED_MODULE_5__providers_date_date__["a" /* DateProvider */],
         __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"], __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__["a" /* AngularFireDatabase */], __WEBPACK_IMPORTED_MODULE_4__providers_users_users__["a" /* UsersProvider */]])

@@ -9,7 +9,6 @@ import { UsersProvider } from '../../providers/users/users';
 import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 
 import { MainPage } from '../main/main';
-import { setTimeout } from 'timers';
 
 declare var FCMPlugin;
 

@@ -9,7 +9,7 @@
 }
 
 page-make-room{
-
+  
   .top-title{
     position: absolute;
     top: 0;
@@ -20,18 +20,64 @@ page-make-room{
     text-align: center;
     font-family: 'MyFont' !important;
   }
+  .depart-place{
+    position: relative;
+    font-size : 15px;
+    color : #9F9FA0;
+    font-family: 'MyFont' !important;
+    text-align: center;
+
+  }
+  .arrive-place{
+    position: relative;
+    font-size : 15px;
+    color : #9F9FA0;
+    font-family: 'MyFont' !important;
+    text-align: center;
+  }
+  .main-title{
+    position: relative;
+    padding-top:10px; 
+    height:50px; 
+    margin-top:12px;
+    margin-bottom: 2px;
+  }
+
+  .label-title{
+    position: relative;
+    padding-top:10px; 
+    height:50px; 
+    margin-top:0px;
+  }
 
   .room_button{
     text-align: center;
   }
-
-  .swap_button{
+  .swap-btn{
+    position: relative !important;
     background-image: url("../assets/img/swap.png");
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
-    margin-top: 6%;
-    margin-left: 6%;
+    margin-left: 0px;
+    width:65px;
+    height:50px;
+    text-align: center;
+    align-self: center;
+  }
+  .swap_button{
+    position: relative !important;
+    background-image: url("../assets/img/swap.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-left: 0px;
+    width:60px;
+    height:50px;
+    padding: 0;
+    text-align: center;
+    align-self: center;
+
   }
   
   .button.customBtn{
@@ -39,13 +85,23 @@ page-make-room{
     font-size : 18px;
     font-family: 'MyFont' !important;
     background-color: #3C89C9;
+    margin-top : 50px;
   }
-  .arrowIcon{
-    align: center;
+  .my-arrow{
     text-align: center;
     color:#3C89C9;
-    margin-left: 35%;
-    margin-top: 10%;
+    margin-left: 7px;
+    padding-top: 10px;
+    //margin-top: 10px;
+    font-size: 30px;
+  }
+
+  .arrowIcon{
+    text-align: center;
+    color:#3C89C9;
+    margin-left: 7px;
+    padding-top: 10px;
+    //margin-top: 10px;
     font-size: 30px;
   }
   .resetBtn{
@@ -66,6 +122,24 @@ page-make-room{
     color : #9F9FA0;
     font-family: 'MyFont' !important;
     text-align: center;
+  }
+
+  .depart-label{
+    font-size : 15px;
+    color : #9F9FA0;
+    font-family: 'MyFont' !important;
+    text-align: right;
+    margin-right: 0px;
+    padding: 0;
+  }
+  
+  .arrive-label{
+    font-size : 15px;
+    color : #9F9FA0;
+    font-family: 'MyFont' !important;
+    text-align: left;
+    margin-left: 0px;
+    padding: 0;
   }
 
   .bottomRow{
@@ -91,8 +165,21 @@ page-make-room{
     font-family: 'MyFont' !important;
     position: absolute;
     color: #3C89C9;
-    padding: 0; 
-    text-align: center;
+    padding: 0 0 0 0;
+    //text-align: center;
+    text-align: center !important;
+    white-space: normal !important;  
+  }
+  .my-select-right{
+    max-width: 100% !important;
+    min-width: 100% !important;
+    font-size: 18px;
+    font-family: 'MyFont' !important;
+    position: absolute;
+    color: #3C89C9;
+    padding: 0 0 0 0;
+    //text-align: center;
+    text-align: center !important;
     white-space: normal !important;  
   }
 
@@ -100,15 +187,24 @@ page-make-room{
     visibility: hidden;
   }
 
+  .input[type=radio]{
+    visibility: hidden;
+  }
+
   .my-input{
-    max-width: 100%;
-    min-width: 100%;
+    max-width: 100% !important;
+    min-width: 100% !important;
     font-size: 18px;
     font-family: 'MyFont' !important;
     position: absolute;
     color: #3C89C9;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0; 
     text-align: center;
     white-space: normal !important;  
+  }
+  .btn{
+    position: absolute;
   }
   .my-btn{
     background-image: url("../assets/img/reset.png");
@@ -117,6 +213,8 @@ page-make-room{
     background-repeat: no-repeat;
     width:18px;
     height:18px;
+    margin-top: 13px;
+    position: absolute;
   }
 
   .my-date{
@@ -127,31 +225,34 @@ page-make-room{
 
   .my-time{
     font-size: 30px;
+    margin-top: -5px;
     font-family: 'DateFont' !important;
     color: #3C89C9;
   }
   
   .cc-selector input{
     margin:0;padding:5px;
-    -webkit-appearance:none;
-      -moz-appearance:none;
-            appearance:none;
+      -webkit-appearance:none;
+      -moz-appearance:none;      
+      -ms-appearance:none;
+      -o-appearance:none;
+        appearance:none;
   }
   .twoButton{background-image:url("../assets/img/max_2.png");}
   .threeButton{background-image:url("../assets/img/max_3.png");}
   .fourButton{background-image:url("../assets/img/max_4.png");}
 
-  .cc-selector input:active +.drinkcard-cc{opacity: .9;}
-  .cc-selector input:checked +.drinkcard-cc{
+  .cc-selector input:active +.maxPeople-cc{opacity: .9;}
+  .cc-selector input:checked +.maxPeople-cc{
     -webkit-filter: none;
       -moz-filter: none;
             filter: none;
   }
-  .drinkcard-cc{
+  .maxPeople-cc{
     cursor:pointer;
     background-size:contain;
     background-repeat:no-repeat;
-    margin-top:5%;
+    margin-top:15px;
     display:inline-block;
     width:65px;height:55px;
     -webkit-transition: all 100ms ease-in;
@@ -161,7 +262,7 @@ page-make-room{
       -moz-filter: brightness(1.8) grayscale(1) opacity(.7);
             filter: brightness(1.8) grayscale(1) opacity(.7);
   }
-  .drinkcard-cc:hover{
+  .maxPeople-cc:hover{
     -webkit-filter: brightness(1.2) grayscale(.5) opacity(.9);
       -moz-filter: brightness(1.2) grayscale(.5) opacity(.9);
             filter: brightness(1.2) grayscale(.5) opacity(.9);
