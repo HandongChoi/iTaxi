@@ -21,14 +21,14 @@ export class LoginPage {
 
   public loginForm:FormGroup;
   public loading:Loading;
-  
+
   setLoading:Loading;
   firestore: any;
 
   constructor(public navCtrl:NavController, public navParams: NavParams, public loadingCtrl:LoadingController,
-              public alertCtrl:AlertController, public authProvider:AuthProvider, formBuilder:FormBuilder, 
+              public alertCtrl:AlertController, public authProvider:AuthProvider, formBuilder:FormBuilder,
               public menu: MenuController, public userServices:UsersProvider, public af: AngularFireDatabase) {
-    
+
     //왼쪽 사이드바 메뉴 안 보이게 하는 역할
     this.menu=menu;
     this.menu.enable(false,'myMenu');
@@ -56,27 +56,24 @@ export class LoginPage {
           if(typeof(FCMPlugin) != 'undefined'){
             FCMPlugin.onTokenRefresh(function(token){
               if(token){
-                this.firestore = firebase.database().ref('/userProfile/'+ firebase.auth().currentUser.uid);
+                this.firestore = firebase.database().ref('/userProfile/'+ authData.uid);
                 this.storetoken(token);
               }
             });
           } else {
             console.log("FCMPlugin type is undefined!");
           }
-          this.userServices.setInfo(firebase.auth().currentUser.uid);
         }).then(()=>{
-          //현재 2초 딜레이를 걸어놓음으로써 비동기식 문제를 해결중. 임시방편이다.
-          setTimeout(()=>{
-            this.navCtrl.setRoot(MainPage);
-          },2000);
+          this.navCtrl.setRoot(MainPage);
         });
       }, error => {
         this.loading.dismiss().then( () => {
-         const alert:Alert = this.alertCtrl.create({
-           message: error.message,
-           buttons: [{ text: "Ok", role: 'cancel'}]
-         });
-        alert.present() });
+            const alert:Alert = this.alertCtrl.create({
+            message: error.message,
+            buttons: [{ text: "Ok", role: 'cancel'}]
+          });
+          alert.present();
+        });
       });
       this.loading = this.loadingCtrl.create();
       this.loading.present();

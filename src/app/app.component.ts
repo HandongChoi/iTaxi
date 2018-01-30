@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, NavController, Platform, AlertController } from 'ionic-angular';
+import { Nav, NavController, Platform, AlertController, LoadingController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -17,6 +17,7 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 import { FCM, NotificationData } from '@ionic-native/fcm';
 
 import firebase from 'firebase';
+import { MainPage } from '../pages/main/main';
 
 firebase.initializeApp({
   apiKey: "AIzaSyANvht7J2MNX6x47mglqfJk74yZQ9u0qUk",
@@ -43,39 +44,32 @@ export class MyApp {
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
               public authProvider:AuthProvider, public alertCtrl: AlertController, public af: AngularFireDatabase,
-              public fcm:FCM, public userServices:UsersProvider) {
+              public fcm:FCM, public userServices:UsersProvider, public loadingCtrl: LoadingController) {
+    this.splashScreen.show();
+    console.log("splash screen on");
     this.initializeApp();
 
-    // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'MakeRoom', component: MakeRoomPage},
-      { title: 'TaxiList', component: TaxiListPage},
-      { title: 'Setting', component: SettingPage},
-      { title: 'SignupPage', component: SignupPage},
-    ];
+    this.userServices.initialize().then(() => {
+      // used for an example of ngFor and navigation
+      this.pages = [
+        { title: 'Home', component: HomePage },
+        { title: 'MakeRoom', component: MakeRoomPage},
+        { title: 'TaxiList', component: TaxiListPage},
+        { title: 'Setting', component: SettingPage},
+        { title: 'SignupPage', component: SignupPage},
+      ];
 
-    const unsubscribe = firebase.auth().onAuthStateChanged( user => {
-      if(!user){
+      if (!this.userServices.isActivate()) {
         this.rootPage = LoginPage;
-        unsubscribe();
-      } else{
-        this.uid = firebase.auth().currentUser.uid;
+      }
+      else {
+        this.rootPage = MainPage;
+        this.user_id = this.userServices.getName();
+        this.uid = this.userServices.getUID();
 
-        //임시방편이다. 위에 uid 받아오는데 시간이 걸려서 setInfo로 그 값을 넘겨주기 위해서 시간을 벌 필요가 있다.
-        setTimeout(()=>{
-          this.userServices.setInfo(this.uid);
-        },2000);
-
-        //여기서도 임시로 setInfo 시간을 벌어주고 Mainpage로 넘긴다.
-        setTimeout(()=>{
-          this.user_id = this.userServices.getName();
-          this.rootPage = TaxiListPage;
-        },4000);
-
-        //for showing the most recent reservation list in side bar
         let dates: FirebaseListObservable<any[]>;
-        let parsedUserId = this.stringParser(user.email);
+        let parsedUserId = this.stringParser(this.userServices.getEmail());
+        
         dates = af.list('/rideHistory/'+parsedUserId);
         dates.subscribe(data =>{
           if(this.dates_array){
@@ -85,9 +79,10 @@ export class MyApp {
           else
             this.dates_array.push(data);
         });
-
-        unsubscribe();
       }
+      
+      this.splashScreen.hide();
+      console.log("splash screen out");
     });
   }
 
@@ -135,7 +130,6 @@ export class MyApp {
   stringParser(sentence){
     let parsedID = sentence.replace('@', '');
     parsedID = parsedID.replace('.', '');
-
     return parsedID;
   }
 
