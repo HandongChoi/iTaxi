@@ -50,7 +50,7 @@ export class SignupPage {
     };
   }
 
-  signupUser():void {
+  signupUser() {
     if(!this.signupForm.valid){
       console.log(`Need to complete the form: ${this.signupForm.value}`);
     } else {
@@ -61,7 +61,7 @@ export class SignupPage {
       const studentID:string = this.signupForm.value.studentID;
 
       this.authProvider.signupUser(email, password, name, phoneNumber, studentID).then( user => {
-        this.loading.dismiss();
+        this.loading.dismiss('Loading');
       }, error => {
         this.loading.dismiss().then( () => {
           const alert:Alert = this.alertCtrl.create({
@@ -91,11 +91,12 @@ export class SignupPage {
   }
 
   CompleteFlagUp(){
+    this.signupUser();
     this.procedure='complete';
     this.termsFlag=true;
     this.infoFlag=true;
     this.completeFlag=false;
-    this.signupUser();
+    
   }
 
   setPage(page){

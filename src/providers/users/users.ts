@@ -8,7 +8,6 @@ import firebase from 'firebase';
 export class UsersProvider {
 
   //user 정보는 민감하기 때문에 혹시라도 밖에서 접근하는 일이 없도록 geter, seter방식으로 해둔다.
-
   private email: string;
   private uid: string;
   private phoneNumber: string;

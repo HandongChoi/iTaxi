@@ -48,21 +48,15 @@ export class MyApp {
     this.splashScreen.show();
     console.log("splash screen on");
     this.initializeApp();
-
-    this.userServices.initialize().then(() => {
-      // used for an example of ngFor and navigation
-      this.pages = [
-        { title: 'Home', component: HomePage },
-        { title: 'MakeRoom', component: MakeRoomPage},
-        { title: 'TaxiList', component: TaxiListPage},
-        { title: 'Setting', component: SettingPage},
-        { title: 'SignupPage', component: SignupPage},
-      ];
-
+    let test = this.userServices.initialize().then;
+    test(() => {
       if (!this.userServices.isActivate()) {
         this.rootPage = LoginPage;
+        console.log("a");
+        test();
       }
       else {
+        console.log("b");
         this.rootPage = MainPage;
         this.user_id = this.userServices.getName();
         this.uid = this.userServices.getUID();
@@ -80,9 +74,9 @@ export class MyApp {
             this.dates_array.push(data);
         });
       }
-      
       this.splashScreen.hide();
       console.log("splash screen out");
+      test();
     });
 
     
@@ -160,6 +154,10 @@ export class MyApp {
   openPage(page) {
     this.navCtrl.setRoot(page.componenent, {user_id: this.user_id});
     console.log("openPage");
+  }
+
+  setUID(uid){
+    this.user_id = uid;
   }
 
   stringParser(sentence){
