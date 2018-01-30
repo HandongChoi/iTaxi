@@ -61,9 +61,7 @@ export class SignupPage {
       const studentID:string = this.signupForm.value.studentID;
 
       this.authProvider.signupUser(email, password, name, phoneNumber, studentID).then( user => {
-        this.loading.dismiss().then( () => {
-          this.navCtrl.setRoot(MainPage);
-        });
+        this.loading.dismiss();
       }, error => {
         this.loading.dismiss().then( () => {
           const alert:Alert = this.alertCtrl.create({
@@ -100,8 +98,8 @@ export class SignupPage {
     this.signupUser();
   }
 
-  goLoginPage(){
-    this.navCtrl.setRoot(LoginPage);
-    console.log("goLoginPage at signup.ts");
+  setPage(page){
+    this.navCtrl.setRoot(page);
+    console.log(page+" at singup.ts");
   }
 }
