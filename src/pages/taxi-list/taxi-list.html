@@ -68,7 +68,7 @@
   <div>
     <ion-grid class="mainGrid">
       <ion-item-group>
-        <ion-item-divider *ngFor="let room of dates | async" (click)="goChatroom(room)" class="line"
+        <ion-item-divider *ngFor="let room of rooms | async" (click)="goChatroom(room)" class="line"
         [ngClass]="{full: room.participants.length >= room.capacity, exist: isExist(room.participants)}">
           <ion-row>
             <ion-col col-3>

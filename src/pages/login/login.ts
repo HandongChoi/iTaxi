@@ -18,11 +18,9 @@ declare var FCMPlugin;
   templateUrl: 'login.html',
 })
 export class LoginPage {
-
   public loginForm:FormGroup;
   public loading:Loading;
 
-  setLoading:Loading;
   firestore: any;
 
   constructor(public navCtrl:NavController, public navParams: NavParams, public loadingCtrl:LoadingController,
@@ -65,7 +63,7 @@ export class LoginPage {
           }
         }).then(()=>{
           this.userServices.initialize().then(()=>{
-            this.navCtrl.setRoot(MainPage);
+            this.navCtrl.setRoot(MainPage)
           });
         });
       }, error => {

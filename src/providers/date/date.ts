@@ -27,9 +27,10 @@ export class DateProvider {
   addZ(n) {
     return n < 10 ? '0' + n : '' + n;
   }
+
   //input: 2018-1-23, output: 화
   getKToday(bookingDate: string): string{
-    return this.week[new Date(bookingDate).getDay()];
+    return this.week[new Date(bookingDate.toString()).getDay()];
   }
   //input: 2018-1-23, output: 1월 23일
   getKMonthDay(dateWithDelimiter: string): string{

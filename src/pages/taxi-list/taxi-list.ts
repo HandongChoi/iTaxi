@@ -7,6 +7,7 @@ import { DatePickerProvider, DatePickerOption } from 'ionic2-date-picker';
 
 import { UsersProvider } from '../../providers/users/users';
 import { DateProvider } from '../../providers/date/date';
+import { ChatRoomPageModule } from '../chatroom/chatroom.module';
 
 @IonicPage()
 @Component({
@@ -15,7 +16,7 @@ import { DateProvider } from '../../providers/date/date';
 })
 export class TaxiListPage {
 
-  dates: FirebaseListObservable<any[]>;
+  rooms: FirebaseListObservable<any[]>;
   user_id: any;
 
   days: Array<Date> = [];
@@ -51,18 +52,45 @@ export class TaxiListPage {
 
   showChatroom(date) {
     this.selectedDate = date;
-    this.dates = this.af.list('/chatRooms/' + this.dateServices.dateToDelimiterFormat(date));
+    this.rooms = this.af.list('/chatRooms/' + this.dateServices.dateToDelimiterFormat(date));
   }
 
   goChatroom(room) {
     let chatRoomKey = room.$key;
-    let bookingDate= room.depart_date;
+    let bookingDate= room.departureDate;
+    let isExist: boolean = false;
+    //목록에 있는지 없는지 여부 확인.
+    for(var user of room['participants']){
+      if(user === this.user_id){
+        isExist = true;
+      }
+    }
+    if(isExist === false){
+      if(parseInt(room['capacity']) > room['participants'].length){
+       room['participants'].push(this.usersService.getUID());
+        
+        //지금 고민인 것은 탑승 내역에 사람이 들어갔다는 걸 넣어야 되는데 넣고 나서
+        //다른 사람들을의 데이터를 어떻게 업데이트 시키냐에 대한 고민을 하는 중.
+        // this.rideHistory.push({
+        //   roomId: this.chat_room_id,
+        //   roomDate: this.room_depart_date,
+        //   roomTime: this.room_depart_time,
+        //   roomDepart: this.room_depart,
+        //   roomDest: this.room_dest,
+        //   roomCapacity: this.room_capacity,
+        //   roomParticipants: this.room_participants
+        // });
 
-    //participant array에 push
-    // 참여자가 아니고, 인원 full 아니면 push
-    // 참여자이면 그냥 enter
-    // full 인원이면 deny
-    this.navCtrl.setRoot(ChatRoomPage, {chat_room_id: chatRoomKey, bookingDate: bookingDate, user_id: this.user_id});
+        //나중에 카멜 기법으로 싹 다 바꾸자.
+        this.navCtrl.setRoot(ChatRoomPage, {chat_room_id: chatRoomKey, bookingDate: bookingDate});
+      }
+      else{
+        console.log('사람 꽉 찼다. 가라');
+      }
+    }
+    else{
+      this.navCtrl.setRoot(ChatRoomPage, {chat_room_id: chatRoomKey, bookingDate: bookingDate});  
+    }
   }
 
   makeRoom(){
@@ -72,9 +100,9 @@ export class TaxiListPage {
 
   filterDeparture(departFilter){
     if (departFilter == "All") {
-      this.dates = this.af.list('/chatRooms/'+ this.dateServices.dateToDelimiterFormat(this.selectedDate));
+      this.rooms = this.af.list('/chatRooms/'+ this.dateServices.dateToDelimiterFormat(this.selectedDate));
     } else {
-      this.dates = this.af.list('/chatRooms/'+ this.dateServices.dateToDelimiterFormat(this.selectedDate), {
+      this.rooms = this.af.list('/chatRooms/'+ this.dateServices.dateToDelimiterFormat(this.selectedDate), {
         query: {
           orderByChild: 'departure',
           equalTo: departFilter
@@ -85,9 +113,9 @@ export class TaxiListPage {
 
   filterDestination(destinationFilter){
     if (destinationFilter == "All") {
-      this.dates = this.af.list('/chatRooms/'+ this.dateServices.dateToDelimiterFormat(this.selectedDate));
+      this.rooms = this.af.list('/chatRooms/'+ this.dateServices.dateToDelimiterFormat(this.selectedDate));
     } else {
-      this.dates = this.af.list('/chatRooms/'+ this.dateServices.dateToDelimiterFormat(this.selectedDate), {
+      this.rooms = this.af.list('/chatRooms/'+ this.dateServices.dateToDelimiterFormat(this.selectedDate), {
         query: {
           orderByChild: 'destination',
           equalTo: destinationFilter
@@ -106,11 +134,5 @@ export class TaxiListPage {
         return true;  
     }
     return false;
-
-    // for (let i = 0; i < users.length; i++) {
-    //   if (users[i].uid == this.user_id)
-    //     return true;
-    // }
-    // return false;
   }
 }

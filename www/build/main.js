@@ -353,16 +353,43 @@ var TaxiListPage = (function () {
     };
     TaxiListPage.prototype.showChatroom = function (date) {
         this.selectedDate = date;
-        this.dates = this.af.list('/chatRooms/' + this.dateServices.dateToDelimiterFormat(date));
+        this.rooms = this.af.list('/chatRooms/' + this.dateServices.dateToDelimiterFormat(date));
     };
     TaxiListPage.prototype.goChatroom = function (room) {
         var chatRoomKey = room.$key;
-        var bookingDate = room.depart_date;
-        //participant array에 push
-        // 참여자가 아니고, 인원 full 아니면 push
-        // 참여자이면 그냥 enter
-        // full 인원이면 deny
-        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__chatroom_chatroom__["a" /* ChatRoomPage */], { chat_room_id: chatRoomKey, bookingDate: bookingDate, user_id: this.user_id });
+        var bookingDate = room.departureDate;
+        var isExist = false;
+        //목록에 있는지 없는지 여부 확인.
+        for (var _i = 0, _a = room['participants']; _i < _a.length; _i++) {
+            var user = _a[_i];
+            if (user === this.user_id) {
+                isExist = true;
+            }
+        }
+        if (isExist === false) {
+            if (parseInt(room['capacity']) > room['participants'].length) {
+                room['participants'].push(this.usersService.getUID());
+                //지금 고민인 것은 탑승 내역에 사람이 들어갔다는 걸 넣어야 되는데 넣고 나서
+                //다른 사람들을의 데이터를 어떻게 업데이트 시키냐에 대한 고민을 하는 중.
+                // this.rideHistory.push({
+                //   roomId: this.chat_room_id,
+                //   roomDate: this.room_depart_date,
+                //   roomTime: this.room_depart_time,
+                //   roomDepart: this.room_depart,
+                //   roomDest: this.room_dest,
+                //   roomCapacity: this.room_capacity,
+                //   roomParticipants: this.room_participants
+                // });
+                //나중에 카멜 기법으로 싹 다 바꾸자.
+                this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__chatroom_chatroom__["a" /* ChatRoomPage */], { chat_room_id: chatRoomKey, bookingDate: bookingDate });
+            }
+            else {
+                console.log('사람 꽉 찼다. 가라');
+            }
+        }
+        else {
+            this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__chatroom_chatroom__["a" /* ChatRoomPage */], { chat_room_id: chatRoomKey, bookingDate: bookingDate });
+        }
     };
     TaxiListPage.prototype.makeRoom = function () {
         this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__makeRoom_makeRoom__["a" /* MakeRoomPage */], { user_id: this.user_id });
@@ -370,10 +397,10 @@ var TaxiListPage = (function () {
     };
     TaxiListPage.prototype.filterDeparture = function (departFilter) {
         if (departFilter == "All") {
-            this.dates = this.af.list('/chatRooms/' + this.dateServices.dateToDelimiterFormat(this.selectedDate));
+            this.rooms = this.af.list('/chatRooms/' + this.dateServices.dateToDelimiterFormat(this.selectedDate));
         }
         else {
-            this.dates = this.af.list('/chatRooms/' + this.dateServices.dateToDelimiterFormat(this.selectedDate), {
+            this.rooms = this.af.list('/chatRooms/' + this.dateServices.dateToDelimiterFormat(this.selectedDate), {
                 query: {
                     orderByChild: 'departure',
                     equalTo: departFilter
@@ -383,10 +410,10 @@ var TaxiListPage = (function () {
     };
     TaxiListPage.prototype.filterDestination = function (destinationFilter) {
         if (destinationFilter == "All") {
-            this.dates = this.af.list('/chatRooms/' + this.dateServices.dateToDelimiterFormat(this.selectedDate));
+            this.rooms = this.af.list('/chatRooms/' + this.dateServices.dateToDelimiterFormat(this.selectedDate));
         }
         else {
-            this.dates = this.af.list('/chatRooms/' + this.dateServices.dateToDelimiterFormat(this.selectedDate), {
+            this.rooms = this.af.list('/chatRooms/' + this.dateServices.dateToDelimiterFormat(this.selectedDate), {
                 query: {
                     orderByChild: 'destination',
                     equalTo: destinationFilter
@@ -404,17 +431,12 @@ var TaxiListPage = (function () {
                 return true;
         }
         return false;
-        // for (let i = 0; i < users.length; i++) {
-        //   if (users[i].uid == this.user_id)
-        //     return true;
-        // }
-        // return false;
     };
     return TaxiListPage;
 }());
 TaxiListPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-taxi-list',template:/*ion-inline-start:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/taxi-list/taxi-list.html"*/'<ion-header>\n  <ion-navbar color="primary">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title class = "top-title">택시조회</ion-title>\n  </ion-navbar>\n\n  <ion-grid class="small-table">\n    <ion-row>\n        <ion-col col-5>\n          <ion-grid>\n            <ion-row class = "rowUnderline">\n              <ion-col col-11>\n                <ion-item class="selectWrapper">\n                  <ion-select #newSelect [(ngModel)]="departFilter" interface="popover" placeholder="전체보기" (ionChange)="filterDeparture(departFilter)">\n                    <ion-option value="All" checked="true">전체보기</ion-option>\n                    <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>\n                  </ion-select>\n                </ion-item>\n              </ion-col>\n              <ion-col col-1> \n                <p class = "selectIcon">▼</p>\n              </ion-col>\n            </ion-row>\n          </ion-grid>\n        </ion-col>\n\n        <ion-col col-2 class = "rightArrow">  \n          <ion-icon name="arrow-round-forward"></ion-icon>\n        </ion-col>\n\n        <ion-col col-5>\n          <ion-grid>\n            <ion-row class = "rowUnderline">\n              <ion-col col-11>\n                <ion-item class="selectWrapper">\n                  <ion-select [(ngModel)]="destinationFilter" interface="popover" placeholder="전체보기" (ionChange)="filterDestination(destinationFilter)">\n                    <ion-option value="All" checked="true">전체보기</ion-option>\n                    <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>\n                  </ion-select>\n                </ion-item>\n              </ion-col>\n              <ion-col col-1> \n                <p class = "selectIcon">▼</p>\n              </ion-col>\n            </ion-row>\n          </ion-grid>\n        </ion-col>  \n    </ion-row>\n\n    <ion-row>\n      <ion-col col-2 *ngFor="let day of days" class="pointer">\n        <ion-item class="days" (click)="showChatroom(day)">\n          <p>{{day|date: "dd"}}</p>\n        </ion-item>\n      </ion-col>\n      <ion-col col-2 class="pointer">\n        <ion-item class="days_icon" (click)="showCalendar()" >\n          <p> + </p>\n        </ion-item>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n</ion-header>\n\n<ion-content>\n  <div>\n    <ion-grid class="mainGrid">\n      <ion-item-group>\n        <ion-item-divider *ngFor="let room of dates | async" (click)="goChatroom(room)" class="line"\n        [ngClass]="{full: room.participants.length >= room.capacity, exist: isExist(room.participants)}">\n          <ion-row>\n            <ion-col col-3>\n              <p>{{room.depart_date}}</p>\n              <p>{{room.depart_time}}</p>\n            </ion-col>\n            <ion-col col-7>\n              <p>{{room.departure}}</p>\n              <p>>{{room.destination}}</p>\n            </ion-col>\n            <ion-col col-2>\n              <p>{{room.participants.length}} / {{room.capacity}}</p>\n              <p>참여 {{ room.participants.length >= room.capacity ? "불가" : "가능" }}</p>\n            </ion-col>\n          </ion-row>\n        </ion-item-divider>\n      </ion-item-group>\n    </ion-grid>\n  </div>\n\n  <ion-fab right bottom>\n    <button color="dark" ion-fab (click)="makeRoom()"><ion-icon name="add"></ion-icon></button>\n  </ion-fab>\n\n</ion-content>\n'/*ion-inline-end:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/taxi-list/taxi-list.html"*/,
+        selector: 'page-taxi-list',template:/*ion-inline-start:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/taxi-list/taxi-list.html"*/'<ion-header>\n  <ion-navbar color="primary">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title class = "top-title">택시조회</ion-title>\n  </ion-navbar>\n\n  <ion-grid class="small-table">\n    <ion-row>\n        <ion-col col-5>\n          <ion-grid>\n            <ion-row class = "rowUnderline">\n              <ion-col col-11>\n                <ion-item class="selectWrapper">\n                  <ion-select #newSelect [(ngModel)]="departFilter" interface="popover" placeholder="전체보기" (ionChange)="filterDeparture(departFilter)">\n                    <ion-option value="All" checked="true">전체보기</ion-option>\n                    <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>\n                  </ion-select>\n                </ion-item>\n              </ion-col>\n              <ion-col col-1> \n                <p class = "selectIcon">▼</p>\n              </ion-col>\n            </ion-row>\n          </ion-grid>\n        </ion-col>\n\n        <ion-col col-2 class = "rightArrow">  \n          <ion-icon name="arrow-round-forward"></ion-icon>\n        </ion-col>\n\n        <ion-col col-5>\n          <ion-grid>\n            <ion-row class = "rowUnderline">\n              <ion-col col-11>\n                <ion-item class="selectWrapper">\n                  <ion-select [(ngModel)]="destinationFilter" interface="popover" placeholder="전체보기" (ionChange)="filterDestination(destinationFilter)">\n                    <ion-option value="All" checked="true">전체보기</ion-option>\n                    <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>\n                  </ion-select>\n                </ion-item>\n              </ion-col>\n              <ion-col col-1> \n                <p class = "selectIcon">▼</p>\n              </ion-col>\n            </ion-row>\n          </ion-grid>\n        </ion-col>  \n    </ion-row>\n\n    <ion-row>\n      <ion-col col-2 *ngFor="let day of days" class="pointer">\n        <ion-item class="days" (click)="showChatroom(day)">\n          <p>{{day|date: "dd"}}</p>\n        </ion-item>\n      </ion-col>\n      <ion-col col-2 class="pointer">\n        <ion-item class="days_icon" (click)="showCalendar()" >\n          <p> + </p>\n        </ion-item>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n</ion-header>\n\n<ion-content>\n  <div>\n    <ion-grid class="mainGrid">\n      <ion-item-group>\n        <ion-item-divider *ngFor="let room of rooms | async" (click)="goChatroom(room)" class="line"\n        [ngClass]="{full: room.participants.length >= room.capacity, exist: isExist(room.participants)}">\n          <ion-row>\n            <ion-col col-3>\n              <p>{{room.depart_date}}</p>\n              <p>{{room.depart_time}}</p>\n            </ion-col>\n            <ion-col col-7>\n              <p>{{room.departure}}</p>\n              <p>>{{room.destination}}</p>\n            </ion-col>\n            <ion-col col-2>\n              <p>{{room.participants.length}} / {{room.capacity}}</p>\n              <p>참여 {{ room.participants.length >= room.capacity ? "불가" : "가능" }}</p>\n            </ion-col>\n          </ion-row>\n        </ion-item-divider>\n      </ion-item-group>\n    </ion-grid>\n  </div>\n\n  <ion-fab right bottom>\n    <button color="dark" ion-fab (click)="makeRoom()"><ion-icon name="add"></ion-icon></button>\n  </ion-fab>\n\n</ion-content>\n'/*ion-inline-end:"/Users/hyoeunchoi/Documents/CRA/iTaxi/src/pages/taxi-list/taxi-list.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"], __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__["a" /* AngularFireDatabase */],
         __WEBPACK_IMPORTED_MODULE_5_ionic2_date_picker__["DatePickerProvider"], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["ModalController"],
@@ -1920,15 +1942,11 @@ var MyApp = (function () {
         this.splashScreen.show();
         console.log("splash screen on");
         this.initializeApp();
-        var test = this.userServices.initialize().then;
-        test(function () {
+        this.userServices.initialize().then(function () {
             if (!_this.userServices.isActivate()) {
                 _this.rootPage = __WEBPACK_IMPORTED_MODULE_4__pages_login_login__["a" /* LoginPage */];
-                console.log("a");
-                test();
             }
             else {
-                console.log("b");
                 _this.rootPage = __WEBPACK_IMPORTED_MODULE_10__pages_main_main__["a" /* MainPage */];
                 _this.user_id = _this.userServices.getName();
                 _this.uid = _this.userServices.getUID();
@@ -1946,7 +1964,6 @@ var MyApp = (function () {
             }
             _this.splashScreen.hide();
             console.log("splash screen out");
-            test();
         });
         //
         // const unsubscribe = firebase.auth().onAuthStateChanged( user => {
@@ -2183,7 +2200,7 @@ var DateProvider = (function () {
     };
     //input: 2018-1-23, output: 화
     DateProvider.prototype.getKToday = function (bookingDate) {
-        return this.week[new Date(bookingDate).getDay()];
+        return this.week[new Date(bookingDate.toString()).getDay()];
     };
     //input: 2018-1-23, output: 1월 23일
     DateProvider.prototype.getKMonthDay = function (dateWithDelimiter) {
@@ -2324,51 +2341,16 @@ var ChatRoomPage = (function () {
         this.chat_user_id = navParams.data.user_id;
         af.object('/chatRooms/' + this.bookingDate + '/' + this.chat_room_id).subscribe(function (data) {
             _this.roomObj = data;
-            _this.roomServices.setRoomInfo(data);
-            _this.displayDate = _this.dateServices.getKMonthDay(_this.bookingDate);
-            _this.displayTime = _this.roomObj['depart_time'];
+            //this.roomServices.setRoomInfo(data);
+            //roobObj에 departureDate를 넣은 것은 코드를 좀 더 readable하게 만들기 위해서다. this.bookingDate써도 무방.
+            _this.displayDate = _this.dateServices.getKMonthDay(_this.roomObj['departureDate']);
+            _this.displayTime = _this.roomObj['departureTime'];
             //내가 방장 주인인지 아닌지 확인
             if (_this.roomObj['host'] === _this.chat_user_id)
                 _this.isHost = true;
             else
                 _this.isHost = false;
-            var isExist = false;
-            //목록에 있는지 없는지 여부 확인.
-            for (var _i = 0, _a = _this.roomObj['participants']; _i < _a.length; _i++) {
-                var user = _a[_i];
-                console.log(user);
-                if (user === _this.chat_user_id) {
-                    isExist = true;
-                }
-            }
         });
-        //     //목록에 없다면 넣는 것 같다. 방에 인원 추가하고 탑승 내역도 수정하는것 같다.
-        //     if(isExist === false){
-        //       if(parseInt(this.room_capacity) > this.room_participants.length){
-        //         this.room_participants.push(this.chat_user_id);
-        //         this.room_object.update({
-        //           capacity: this.room_capacity,
-        //           depart_date: this.room_depart_date,
-        //           depart_time: this.room_depart_time,
-        //           departure: this.room_depart,
-        //           destination: this.room_dest,
-        //           host: this.room_host,
-        //           participants: this.room_participants
-        //         })
-        //         this.rideHistory.push({
-        //           roomId: this.chat_room_id,
-        //           roomDate: this.room_depart_date,
-        //           roomTime: this.room_depart_time,
-        //           roomDepart: this.room_depart,
-        //           roomDest: this.room_dest,
-        //           roomCapacity: this.room_capacity,
-        //           roomParticipants: this.room_participants
-        //         });
-        //       }
-        //     };
-        //   }
-        // count++;
-        // });
     }
     ChatRoomPage.prototype.stringParser = function (sentence) {
         var parsedID = sentence.replace('@', '');

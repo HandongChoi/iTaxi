@@ -62,58 +62,17 @@ export class ChatRoomPage {
     
     af.object('/chatRooms/' + this.bookingDate + '/' + this.chat_room_id).subscribe(data=>{
       this.roomObj = data;
-      this.roomServices.setRoomInfo(data);
-      this.displayDate = this.dateServices.getKMonthDay(this.bookingDate);
-      this.displayTime = this.roomObj['depart_time'];
+      //this.roomServices.setRoomInfo(data);
+      //roobObj에 departureDate를 넣은 것은 코드를 좀 더 readable하게 만들기 위해서다. this.bookingDate써도 무방.
+      this.displayDate = this.dateServices.getKMonthDay(this.roomObj['departureDate']);
+      this.displayTime = this.roomObj['departureTime'];
 
       //내가 방장 주인인지 아닌지 확인
       if(this.roomObj['host'] === this.chat_user_id)
         this.isHost = true;
       else
         this.isHost = false;
-
-      let isExist: boolean = false;
-
-
-      //목록에 있는지 없는지 여부 확인.
-      for(var user of this.roomObj['participants']){
-        console.log(user);
-        if(user === this.chat_user_id){
-          isExist = true;
-        }
-      }
-
     });
-    
-    //     //목록에 없다면 넣는 것 같다. 방에 인원 추가하고 탑승 내역도 수정하는것 같다.
-    //     if(isExist === false){
-    //       if(parseInt(this.room_capacity) > this.room_participants.length){
-    //         this.room_participants.push(this.chat_user_id);
-
-    //         this.room_object.update({
-    //           capacity: this.room_capacity,
-    //           depart_date: this.room_depart_date,
-    //           depart_time: this.room_depart_time,
-    //           departure: this.room_depart,
-    //           destination: this.room_dest,
-    //           host: this.room_host,
-    //           participants: this.room_participants
-    //         })
-    //         this.rideHistory.push({
-    //           roomId: this.chat_room_id,
-    //           roomDate: this.room_depart_date,
-    //           roomTime: this.room_depart_time,
-    //           roomDepart: this.room_depart,
-    //           roomDest: this.room_dest,
-    //           roomCapacity: this.room_capacity,
-    //           roomParticipants: this.room_participants
-    //         });
-    //       }
-    //     };
-    //   }
-      // count++;
-
-    // });
   }
 
   stringParser(sentence){

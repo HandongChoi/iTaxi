@@ -48,15 +48,11 @@ export class MyApp {
     this.splashScreen.show();
     console.log("splash screen on");
     this.initializeApp();
-    let test = this.userServices.initialize().then;
-    test(() => {
+    this.userServices.initialize().then(() => {
       if (!this.userServices.isActivate()) {
         this.rootPage = LoginPage;
-        console.log("a");
-        test();
       }
       else {
-        console.log("b");
         this.rootPage = MainPage;
         this.user_id = this.userServices.getName();
         this.uid = this.userServices.getUID();
@@ -76,7 +72,6 @@ export class MyApp {
       }
       this.splashScreen.hide();
       console.log("splash screen out");
-      test();
     });
 
     
