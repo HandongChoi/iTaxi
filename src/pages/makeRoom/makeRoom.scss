@@ -20,22 +20,8 @@ page-make-room{
     text-align: center;
     font-family: 'MyFont' !important;
   }
-  .depart-place{
-    position: relative;
-    font-size : 15px;
-    color : #9F9FA0;
-    font-family: 'MyFont' !important;
-    text-align: center;
 
-  }
-  .arrive-place{
-    position: relative;
-    font-size : 15px;
-    color : #9F9FA0;
-    font-family: 'MyFont' !important;
-    text-align: center;
-  }
-  .main-title{
+  .top-row{
     position: relative;
     padding-top:10px; 
     height:50px; 
@@ -43,29 +29,25 @@ page-make-room{
     margin-bottom: 2px;
   }
 
-  .label-title{
-    position: relative;
-    padding-top:10px; 
-    height:50px; 
-    margin-top:0px;
+  .departure-label{
+    font-size : 15px;
+    color : #9F9FA0;
+    font-family: 'MyFont' !important;
+    text-align: right;
+    margin-right: 0px;
+    padding: 0;
+  }
+  
+  .destination-label{
+    font-size : 15px;
+    color : #9F9FA0;
+    font-family: 'MyFont' !important;
+    text-align: left;
+    margin-left: 0px;
+    padding: 0;
   }
 
-  .room_button{
-    text-align: center;
-  }
   .swap-btn{
-    position: relative !important;
-    background-image: url("../assets/img/swap.png");
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-    margin-left: 0px;
-    width:65px;
-    height:50px;
-    text-align: center;
-    align-self: center;
-  }
-  .swap_button{
     position: relative !important;
     background-image: url("../assets/img/swap.png");
     background-position: center;
@@ -77,39 +59,36 @@ page-make-room{
     padding: 0;
     text-align: center;
     align-self: center;
-
   }
-  
-  .button.customBtn{
+
+  .label-row{
+    position: relative;
+    padding-top:10px; 
+    height:50px; 
+    margin-top:0px;
+  }
+
+  .room-btn-align{
+    text-align: center;
+  }
+    
+  .room-btn{
     width : 160px;
     font-size : 18px;
     font-family: 'MyFont' !important;
     background-color: #3C89C9;
-    margin-top : 50px;
+    margin-top   : 50px;
   }
-  .my-arrow{
+
+  .arrow-icon{
     text-align: center;
     color:#3C89C9;
     margin-left: 7px;
     padding-top: 10px;
-    //margin-top: 10px;
     font-size: 30px;
   }
 
-  .arrowIcon{
-    text-align: center;
-    color:#3C89C9;
-    margin-left: 7px;
-    padding-top: 10px;
-    //margin-top: 10px;
-    font-size: 30px;
-  }
-  .resetBtn{
-    background-image: url("../assets/img/reset.png");
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-  }
+  // for typescript button css
   .custom-alrt{
     text-align: center;
     font-family: 'MyFont' !important;
@@ -117,47 +96,38 @@ page-make-room{
     margin-top: 10px;
   }
 
-  .max-people{
+  .title-label{
     font-size : 15px;
     color : #9F9FA0;
     font-family: 'MyFont' !important;
     text-align: center;
   }
 
-  .depart-label{
-    font-size : 15px;
-    color : #9F9FA0;
-    font-family: 'MyFont' !important;
-    text-align: right;
-    margin-right: 0px;
-    padding: 0;
-  }
-  
-  .arrive-label{
-    font-size : 15px;
-    color : #9F9FA0;
-    font-family: 'MyFont' !important;
-    text-align: left;
-    margin-left: 0px;
-    padding: 0;
-  }
-
-  .bottomRow{
+  .row-bottom{
     position: relative;
     border-bottom: 1px;
-    //color: #9F9FA0;
     border-bottom-color: #C9C9CA;
     border-bottom-style: inset;
     border-bottom-left-radius: 6px 8px;
     border-bottom-right-radius: 6px 8px;
-    margin : 0px 30px;
-  }
+    margin : 0px 30px;    
+
+    @supports (-webkit-text-size-adjust:none) and (not (-ms-accelerator:true)) and (not (-moz-appearance:none)){
+      .safari_only {
+        position: relative;
+        border-bottom: 1px;
+        border-bottom-color: #C9C9CA;
+        border-bottom-style: solid;
+        border-bottom-left-radius: 6px 8px;
+        border-bottom-right-radius: 6px 8px;
+        margin : 0px 30px; }}  
+    }
 
   .item-inner, ion-item {
     border-bottom-color: transparent !important;
-    box-shadow: none !important;
-    
+    box-shadow: none !important;  
   }
+
   .my-select{
     max-width: 100% !important;
     min-width: 100% !important;
@@ -166,19 +136,6 @@ page-make-room{
     position: absolute;
     color: #3C89C9;
     padding: 0 0 0 0;
-    //text-align: center;
-    text-align: center !important;
-    white-space: normal !important;  
-  }
-  .my-select-right{
-    max-width: 100% !important;
-    min-width: 100% !important;
-    font-size: 18px;
-    font-family: 'MyFont' !important;
-    position: absolute;
-    color: #3C89C9;
-    padding: 0 0 0 0;
-    //text-align: center;
     text-align: center !important;
     white-space: normal !important;  
   }
@@ -203,10 +160,8 @@ page-make-room{
     text-align: center;
     white-space: normal !important;  
   }
-  .btn{
-    position: absolute;
-  }
-  .my-btn{
+
+  .default-btn{
     background-image: url("../assets/img/reset.png");
     background-position: center;
     background-size: contain;
@@ -248,6 +203,7 @@ page-make-room{
       -moz-filter: none;
             filter: none;
   }
+
   .maxPeople-cc{
     cursor:pointer;
     background-size:contain;
@@ -262,6 +218,7 @@ page-make-room{
       -moz-filter: brightness(1.8) grayscale(1) opacity(.7);
             filter: brightness(1.8) grayscale(1) opacity(.7);
   }
+
   .maxPeople-cc:hover{
     -webkit-filter: brightness(1.2) grayscale(.5) opacity(.9);
       -moz-filter: brightness(1.2) grayscale(.5) opacity(.9);

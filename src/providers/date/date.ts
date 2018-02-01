@@ -31,6 +31,7 @@ export class DateProvider {
   }
   //input: 2018-1-23, output: 화
   getKToday(bookingDate: string): string{
+    this.today = this.week[new Date(bookingDate).getDay()];
     return this.week[new Date(bookingDate).getDay()];
   }
   //input: 2018-1-23, output: 1월 23일

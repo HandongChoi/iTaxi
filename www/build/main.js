@@ -32,13 +32,13 @@ var map = {
 		182
 	],
 	"../pages/reset-password/reset-password.module": [
-		308
-	],
-	"../pages/ride-history/ride-history.module": [
 		183
 	],
+	"../pages/ride-history/ride-history.module": [
+		184
+	],
 	"../pages/setting/setting.module": [
-		306
+		307
 	],
 	"../pages/signup/signup.module": [
 		309
@@ -144,10 +144,48 @@ PersonalInfoPageModule = __decorate([
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ResetPasswordPageModule", function() { return ResetPasswordPageModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__reset_password__ = __webpack_require__(417);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+var ResetPasswordPageModule = (function () {
+    function ResetPasswordPageModule() {
+    }
+    return ResetPasswordPageModule;
+}());
+ResetPasswordPageModule = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
+        declarations: [
+            __WEBPACK_IMPORTED_MODULE_2__reset_password__["a" /* ResetPasswordPage */],
+        ],
+        imports: [
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["IonicPageModule"].forChild(__WEBPACK_IMPORTED_MODULE_2__reset_password__["a" /* ResetPasswordPage */]),
+        ],
+    })
+], ResetPasswordPageModule);
+
+//# sourceMappingURL=reset-password.module.js.map
+
+/***/ }),
+
+/***/ 184:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RideHistoryPageModule", function() { return RideHistoryPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ride_history__ = __webpack_require__(417);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ride_history__ = __webpack_require__(418);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -236,7 +274,7 @@ UsersProvider = __decorate([
 
 /***/ }),
 
-/***/ 305:
+/***/ 306:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -288,7 +326,7 @@ RoomsProvider = __decorate([
 
 /***/ }),
 
-/***/ 306:
+/***/ 307:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -296,7 +334,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SettingPageModule", function() { return SettingPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__setting__ = __webpack_require__(307);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__setting__ = __webpack_require__(308);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -333,7 +371,7 @@ SettingPageModule = __decorate([
 
 /***/ }),
 
-/***/ 307:
+/***/ 308:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -413,44 +451,6 @@ SettingPage = __decorate([
 ], SettingPage);
 
 //# sourceMappingURL=setting.js.map
-
-/***/ }),
-
-/***/ 308:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ResetPasswordPageModule", function() { return ResetPasswordPageModule; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__reset_password__ = __webpack_require__(424);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-
-
-var ResetPasswordPageModule = (function () {
-    function ResetPasswordPageModule() {
-    }
-    return ResetPasswordPageModule;
-}());
-ResetPasswordPageModule = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
-        declarations: [
-            __WEBPACK_IMPORTED_MODULE_2__reset_password__["a" /* ResetPasswordPage */],
-        ],
-        imports: [
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["IonicPageModule"].forChild(__WEBPACK_IMPORTED_MODULE_2__reset_password__["a" /* ResetPasswordPage */]),
-        ],
-    })
-], ResetPasswordPageModule);
-
-//# sourceMappingURL=reset-password.module.js.map
 
 /***/ }),
 
@@ -725,21 +725,21 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_status_bar__ = __webpack_require__(351);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_splash_screen__ = __webpack_require__(353);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__providers_auth_auth__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_ionic2_date_picker__ = __webpack_require__(184);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_ionic2_date_picker__ = __webpack_require__(185);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_ionic2_date_picker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12_ionic2_date_picker__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_taxi_list_taxi_list_module__ = __webpack_require__(311);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_chatroom_chatroom_module__ = __webpack_require__(454);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_login_login_module__ = __webpack_require__(170);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_personal_info_personal_info_module__ = __webpack_require__(182);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_setting_setting_module__ = __webpack_require__(306);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_setting_setting_module__ = __webpack_require__(307);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_signup_signup_module__ = __webpack_require__(309);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_reset_password_reset_password_module__ = __webpack_require__(308);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_ride_history_ride_history_module__ = __webpack_require__(183);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_reset_password_reset_password_module__ = __webpack_require__(183);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_ride_history_ride_history_module__ = __webpack_require__(184);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__ionic_native_fcm__ = __webpack_require__(355);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pipes_date_pipe__ = __webpack_require__(455);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__providers_date_date__ = __webpack_require__(50);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__providers_users_users__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__providers_rooms_rooms__ = __webpack_require__(305);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__providers_rooms_rooms__ = __webpack_require__(306);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -801,9 +801,9 @@ AppModule = __decorate([
                     { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/main/main.module#MainPageModule', name: 'MainPage', segment: 'main', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/personal-info/personal-info.module#PersonalInfoPageModule', name: 'PersonalInfoPage', segment: 'personal-info', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/reset-password/reset-password.module#ResetPasswordPageModule', name: 'ResetPasswordPage', segment: 'reset-password', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/ride-history/ride-history.module#RideHistoryPageModule', name: 'RideHistoryPage', segment: 'ride-history', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/setting/setting.module#SettingPageModule', name: 'SettingPage', segment: 'setting', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/reset-password/reset-password.module#ResetPasswordPageModule', name: 'ResetPasswordPage', segment: 'reset-password', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/signup/signup.module#SignupPageModule', name: 'SignupPage', segment: 'signup', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/taxi-list/taxi-list.module#TaxiListPageModule', name: 'TaxiListPage', segment: 'taxi-list', priority: 'low', defaultHistory: [] }
                 ]
@@ -1002,6 +1002,78 @@ PersonalInfoPage = __decorate([
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ResetPasswordPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_auth_auth__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__validators_email__ = __webpack_require__(93);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var ResetPasswordPage = (function () {
+    function ResetPasswordPage(navCtrl, authProvider, alertCtrl, formBuilder) {
+        this.navCtrl = navCtrl;
+        this.authProvider = authProvider;
+        this.alertCtrl = alertCtrl;
+        this.resetPasswordForm = formBuilder.group({
+            email: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_4__validators_email__["a" /* EmailValidator */].isValid])]
+        });
+    }
+    ResetPasswordPage.prototype.resetPassword = function () {
+        var _this = this;
+        if (!this.resetPasswordForm.valid) {
+            console.log("Form isn't valid, value: " + this.resetPasswordForm.value);
+        }
+        else {
+            var email = this.resetPasswordForm.value.email;
+            this.authProvider.resetPassword(email).then(function (user) {
+                var alert = _this.alertCtrl.create({
+                    message: "Check your email for a password reset link",
+                    buttons: [{
+                            text: "Ok",
+                            role: 'cancel',
+                            handler: function () { _this.navCtrl.pop(); }
+                        }]
+                });
+                alert.present();
+            }, function (error) {
+                var errorAlert = _this.alertCtrl.create({
+                    message: error.message,
+                    buttons: [{ text: "Ok", role: "cancel" }]
+                });
+                errorAlert.present();
+            });
+        }
+    };
+    return ResetPasswordPage;
+}());
+ResetPasswordPage = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'page-reset-password',template:/*ion-inline-start:"C:\Users\SEC\cra\iTaxi\iTaxi\src\pages\reset-password\reset-password.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n    <ion-title>\n\n      비밀번호 초기화\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n  <img src="../../assets/imgs/logo.png" />\n\n  <form [formGroup]="resetPasswordForm" (submit)="resetPassword()" novalidate> \n\n    <ion-item>\n\n     <ion-label stacked>Email</ion-label>\n\n     <ion-input formControlName="email" type="email" placeholder="Your email address" \n\n                [class.invalid]="!resetPasswordForm.controls.email.valid && resetPasswordForm.controls.email.dirty">\n\n     </ion-input> \n\n    </ion-item>\n\n    <ion-item class="error-message" *ngIf="!resetPasswordForm.controls.email.valid && resetPasswordForm.controls.email.dirty"> \n\n      <p>Please enter a valid email.</p>\n\n    </ion-item>\n\n  \n\n    <button ion-button block type="submit" [disabled]="!resetPasswordForm.valid">\n\n      비밀번호 초기화 \n\n    </button>\n\n  </form> \n\n</ion-content>'/*ion-inline-end:"C:\Users\SEC\cra\iTaxi\iTaxi\src\pages\reset-password\reset-password.html"*/,
+    }),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"], __WEBPACK_IMPORTED_MODULE_3__providers_auth_auth__["a" /* AuthProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["AlertController"], __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]])
+], ResetPasswordPage);
+
+//# sourceMappingURL=reset-password.js.map
+
+/***/ }),
+
+/***/ 418:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RideHistoryPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
@@ -1075,246 +1147,246 @@ RideHistoryPage = __decorate([
 
 /***/ }),
 
-/***/ 419:
+/***/ 420:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./af": 187,
-	"./af.js": 187,
-	"./ar": 188,
-	"./ar-dz": 189,
-	"./ar-dz.js": 189,
-	"./ar-kw": 190,
-	"./ar-kw.js": 190,
-	"./ar-ly": 191,
-	"./ar-ly.js": 191,
-	"./ar-ma": 192,
-	"./ar-ma.js": 192,
-	"./ar-sa": 193,
-	"./ar-sa.js": 193,
-	"./ar-tn": 194,
-	"./ar-tn.js": 194,
-	"./ar.js": 188,
-	"./az": 195,
-	"./az.js": 195,
-	"./be": 196,
-	"./be.js": 196,
-	"./bg": 197,
-	"./bg.js": 197,
-	"./bm": 198,
-	"./bm.js": 198,
-	"./bn": 199,
-	"./bn.js": 199,
-	"./bo": 200,
-	"./bo.js": 200,
-	"./br": 201,
-	"./br.js": 201,
-	"./bs": 202,
-	"./bs.js": 202,
-	"./ca": 203,
-	"./ca.js": 203,
-	"./cs": 204,
-	"./cs.js": 204,
-	"./cv": 205,
-	"./cv.js": 205,
-	"./cy": 206,
-	"./cy.js": 206,
-	"./da": 207,
-	"./da.js": 207,
-	"./de": 208,
-	"./de-at": 209,
-	"./de-at.js": 209,
-	"./de-ch": 210,
-	"./de-ch.js": 210,
-	"./de.js": 208,
-	"./dv": 211,
-	"./dv.js": 211,
-	"./el": 212,
-	"./el.js": 212,
-	"./en-au": 213,
-	"./en-au.js": 213,
-	"./en-ca": 214,
-	"./en-ca.js": 214,
-	"./en-gb": 215,
-	"./en-gb.js": 215,
-	"./en-ie": 216,
-	"./en-ie.js": 216,
-	"./en-nz": 217,
-	"./en-nz.js": 217,
-	"./eo": 218,
-	"./eo.js": 218,
-	"./es": 219,
-	"./es-do": 220,
-	"./es-do.js": 220,
-	"./es-us": 221,
-	"./es-us.js": 221,
-	"./es.js": 219,
-	"./et": 222,
-	"./et.js": 222,
-	"./eu": 223,
-	"./eu.js": 223,
-	"./fa": 224,
-	"./fa.js": 224,
-	"./fi": 225,
-	"./fi.js": 225,
-	"./fo": 226,
-	"./fo.js": 226,
-	"./fr": 227,
-	"./fr-ca": 228,
-	"./fr-ca.js": 228,
-	"./fr-ch": 229,
-	"./fr-ch.js": 229,
-	"./fr.js": 227,
-	"./fy": 230,
-	"./fy.js": 230,
-	"./gd": 231,
-	"./gd.js": 231,
-	"./gl": 232,
-	"./gl.js": 232,
-	"./gom-latn": 233,
-	"./gom-latn.js": 233,
-	"./gu": 234,
-	"./gu.js": 234,
-	"./he": 235,
-	"./he.js": 235,
-	"./hi": 236,
-	"./hi.js": 236,
-	"./hr": 237,
-	"./hr.js": 237,
-	"./hu": 238,
-	"./hu.js": 238,
-	"./hy-am": 239,
-	"./hy-am.js": 239,
-	"./id": 240,
-	"./id.js": 240,
-	"./is": 241,
-	"./is.js": 241,
-	"./it": 242,
-	"./it.js": 242,
-	"./ja": 243,
-	"./ja.js": 243,
-	"./jv": 244,
-	"./jv.js": 244,
-	"./ka": 245,
-	"./ka.js": 245,
-	"./kk": 246,
-	"./kk.js": 246,
-	"./km": 247,
-	"./km.js": 247,
-	"./kn": 248,
-	"./kn.js": 248,
-	"./ko": 249,
-	"./ko.js": 249,
-	"./ky": 250,
-	"./ky.js": 250,
-	"./lb": 251,
-	"./lb.js": 251,
-	"./lo": 252,
-	"./lo.js": 252,
-	"./lt": 253,
-	"./lt.js": 253,
-	"./lv": 254,
-	"./lv.js": 254,
-	"./me": 255,
-	"./me.js": 255,
-	"./mi": 256,
-	"./mi.js": 256,
-	"./mk": 257,
-	"./mk.js": 257,
-	"./ml": 258,
-	"./ml.js": 258,
-	"./mr": 259,
-	"./mr.js": 259,
-	"./ms": 260,
-	"./ms-my": 261,
-	"./ms-my.js": 261,
-	"./ms.js": 260,
-	"./my": 262,
-	"./my.js": 262,
-	"./nb": 263,
-	"./nb.js": 263,
-	"./ne": 264,
-	"./ne.js": 264,
-	"./nl": 265,
-	"./nl-be": 266,
-	"./nl-be.js": 266,
-	"./nl.js": 265,
-	"./nn": 267,
-	"./nn.js": 267,
-	"./pa-in": 268,
-	"./pa-in.js": 268,
-	"./pl": 269,
-	"./pl.js": 269,
-	"./pt": 270,
-	"./pt-br": 271,
-	"./pt-br.js": 271,
-	"./pt.js": 270,
-	"./ro": 272,
-	"./ro.js": 272,
-	"./ru": 273,
-	"./ru.js": 273,
-	"./sd": 274,
-	"./sd.js": 274,
-	"./se": 275,
-	"./se.js": 275,
-	"./si": 276,
-	"./si.js": 276,
-	"./sk": 277,
-	"./sk.js": 277,
-	"./sl": 278,
-	"./sl.js": 278,
-	"./sq": 279,
-	"./sq.js": 279,
-	"./sr": 280,
-	"./sr-cyrl": 281,
-	"./sr-cyrl.js": 281,
-	"./sr.js": 280,
-	"./ss": 282,
-	"./ss.js": 282,
-	"./sv": 283,
-	"./sv.js": 283,
-	"./sw": 284,
-	"./sw.js": 284,
-	"./ta": 285,
-	"./ta.js": 285,
-	"./te": 286,
-	"./te.js": 286,
-	"./tet": 287,
-	"./tet.js": 287,
-	"./th": 288,
-	"./th.js": 288,
-	"./tl-ph": 289,
-	"./tl-ph.js": 289,
-	"./tlh": 290,
-	"./tlh.js": 290,
-	"./tr": 291,
-	"./tr.js": 291,
-	"./tzl": 292,
-	"./tzl.js": 292,
-	"./tzm": 293,
-	"./tzm-latn": 294,
-	"./tzm-latn.js": 294,
-	"./tzm.js": 293,
-	"./uk": 295,
-	"./uk.js": 295,
-	"./ur": 296,
-	"./ur.js": 296,
-	"./uz": 297,
-	"./uz-latn": 298,
-	"./uz-latn.js": 298,
-	"./uz.js": 297,
-	"./vi": 299,
-	"./vi.js": 299,
-	"./x-pseudo": 300,
-	"./x-pseudo.js": 300,
-	"./yo": 301,
-	"./yo.js": 301,
-	"./zh-cn": 302,
-	"./zh-cn.js": 302,
-	"./zh-hk": 303,
-	"./zh-hk.js": 303,
-	"./zh-tw": 304,
-	"./zh-tw.js": 304
+	"./af": 188,
+	"./af.js": 188,
+	"./ar": 189,
+	"./ar-dz": 190,
+	"./ar-dz.js": 190,
+	"./ar-kw": 191,
+	"./ar-kw.js": 191,
+	"./ar-ly": 192,
+	"./ar-ly.js": 192,
+	"./ar-ma": 193,
+	"./ar-ma.js": 193,
+	"./ar-sa": 194,
+	"./ar-sa.js": 194,
+	"./ar-tn": 195,
+	"./ar-tn.js": 195,
+	"./ar.js": 189,
+	"./az": 196,
+	"./az.js": 196,
+	"./be": 197,
+	"./be.js": 197,
+	"./bg": 198,
+	"./bg.js": 198,
+	"./bm": 199,
+	"./bm.js": 199,
+	"./bn": 200,
+	"./bn.js": 200,
+	"./bo": 201,
+	"./bo.js": 201,
+	"./br": 202,
+	"./br.js": 202,
+	"./bs": 203,
+	"./bs.js": 203,
+	"./ca": 204,
+	"./ca.js": 204,
+	"./cs": 205,
+	"./cs.js": 205,
+	"./cv": 206,
+	"./cv.js": 206,
+	"./cy": 207,
+	"./cy.js": 207,
+	"./da": 208,
+	"./da.js": 208,
+	"./de": 209,
+	"./de-at": 210,
+	"./de-at.js": 210,
+	"./de-ch": 211,
+	"./de-ch.js": 211,
+	"./de.js": 209,
+	"./dv": 212,
+	"./dv.js": 212,
+	"./el": 213,
+	"./el.js": 213,
+	"./en-au": 214,
+	"./en-au.js": 214,
+	"./en-ca": 215,
+	"./en-ca.js": 215,
+	"./en-gb": 216,
+	"./en-gb.js": 216,
+	"./en-ie": 217,
+	"./en-ie.js": 217,
+	"./en-nz": 218,
+	"./en-nz.js": 218,
+	"./eo": 219,
+	"./eo.js": 219,
+	"./es": 220,
+	"./es-do": 221,
+	"./es-do.js": 221,
+	"./es-us": 222,
+	"./es-us.js": 222,
+	"./es.js": 220,
+	"./et": 223,
+	"./et.js": 223,
+	"./eu": 224,
+	"./eu.js": 224,
+	"./fa": 225,
+	"./fa.js": 225,
+	"./fi": 226,
+	"./fi.js": 226,
+	"./fo": 227,
+	"./fo.js": 227,
+	"./fr": 228,
+	"./fr-ca": 229,
+	"./fr-ca.js": 229,
+	"./fr-ch": 230,
+	"./fr-ch.js": 230,
+	"./fr.js": 228,
+	"./fy": 231,
+	"./fy.js": 231,
+	"./gd": 232,
+	"./gd.js": 232,
+	"./gl": 233,
+	"./gl.js": 233,
+	"./gom-latn": 234,
+	"./gom-latn.js": 234,
+	"./gu": 235,
+	"./gu.js": 235,
+	"./he": 236,
+	"./he.js": 236,
+	"./hi": 237,
+	"./hi.js": 237,
+	"./hr": 238,
+	"./hr.js": 238,
+	"./hu": 239,
+	"./hu.js": 239,
+	"./hy-am": 240,
+	"./hy-am.js": 240,
+	"./id": 241,
+	"./id.js": 241,
+	"./is": 242,
+	"./is.js": 242,
+	"./it": 243,
+	"./it.js": 243,
+	"./ja": 244,
+	"./ja.js": 244,
+	"./jv": 245,
+	"./jv.js": 245,
+	"./ka": 246,
+	"./ka.js": 246,
+	"./kk": 247,
+	"./kk.js": 247,
+	"./km": 248,
+	"./km.js": 248,
+	"./kn": 249,
+	"./kn.js": 249,
+	"./ko": 250,
+	"./ko.js": 250,
+	"./ky": 251,
+	"./ky.js": 251,
+	"./lb": 252,
+	"./lb.js": 252,
+	"./lo": 253,
+	"./lo.js": 253,
+	"./lt": 254,
+	"./lt.js": 254,
+	"./lv": 255,
+	"./lv.js": 255,
+	"./me": 256,
+	"./me.js": 256,
+	"./mi": 257,
+	"./mi.js": 257,
+	"./mk": 258,
+	"./mk.js": 258,
+	"./ml": 259,
+	"./ml.js": 259,
+	"./mr": 260,
+	"./mr.js": 260,
+	"./ms": 261,
+	"./ms-my": 262,
+	"./ms-my.js": 262,
+	"./ms.js": 261,
+	"./my": 263,
+	"./my.js": 263,
+	"./nb": 264,
+	"./nb.js": 264,
+	"./ne": 265,
+	"./ne.js": 265,
+	"./nl": 266,
+	"./nl-be": 267,
+	"./nl-be.js": 267,
+	"./nl.js": 266,
+	"./nn": 268,
+	"./nn.js": 268,
+	"./pa-in": 269,
+	"./pa-in.js": 269,
+	"./pl": 270,
+	"./pl.js": 270,
+	"./pt": 271,
+	"./pt-br": 272,
+	"./pt-br.js": 272,
+	"./pt.js": 271,
+	"./ro": 273,
+	"./ro.js": 273,
+	"./ru": 274,
+	"./ru.js": 274,
+	"./sd": 275,
+	"./sd.js": 275,
+	"./se": 276,
+	"./se.js": 276,
+	"./si": 277,
+	"./si.js": 277,
+	"./sk": 278,
+	"./sk.js": 278,
+	"./sl": 279,
+	"./sl.js": 279,
+	"./sq": 280,
+	"./sq.js": 280,
+	"./sr": 281,
+	"./sr-cyrl": 282,
+	"./sr-cyrl.js": 282,
+	"./sr.js": 281,
+	"./ss": 283,
+	"./ss.js": 283,
+	"./sv": 284,
+	"./sv.js": 284,
+	"./sw": 285,
+	"./sw.js": 285,
+	"./ta": 286,
+	"./ta.js": 286,
+	"./te": 287,
+	"./te.js": 287,
+	"./tet": 288,
+	"./tet.js": 288,
+	"./th": 289,
+	"./th.js": 289,
+	"./tl-ph": 290,
+	"./tl-ph.js": 290,
+	"./tlh": 291,
+	"./tlh.js": 291,
+	"./tr": 292,
+	"./tr.js": 292,
+	"./tzl": 293,
+	"./tzl.js": 293,
+	"./tzm": 294,
+	"./tzm-latn": 295,
+	"./tzm-latn.js": 295,
+	"./tzm.js": 294,
+	"./uk": 296,
+	"./uk.js": 296,
+	"./ur": 297,
+	"./ur.js": 297,
+	"./uz": 298,
+	"./uz-latn": 299,
+	"./uz-latn.js": 299,
+	"./uz.js": 298,
+	"./vi": 300,
+	"./vi.js": 300,
+	"./x-pseudo": 301,
+	"./x-pseudo.js": 301,
+	"./yo": 302,
+	"./yo.js": 302,
+	"./zh-cn": 303,
+	"./zh-cn.js": 303,
+	"./zh-hk": 304,
+	"./zh-hk.js": 304,
+	"./zh-tw": 305,
+	"./zh-tw.js": 305
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -1330,79 +1402,7 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 419;
-
-/***/ }),
-
-/***/ 424:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ResetPasswordPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_auth_auth__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__validators_email__ = __webpack_require__(93);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-var ResetPasswordPage = (function () {
-    function ResetPasswordPage(navCtrl, authProvider, alertCtrl, formBuilder) {
-        this.navCtrl = navCtrl;
-        this.authProvider = authProvider;
-        this.alertCtrl = alertCtrl;
-        this.resetPasswordForm = formBuilder.group({
-            email: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required, __WEBPACK_IMPORTED_MODULE_4__validators_email__["a" /* EmailValidator */].isValid])]
-        });
-    }
-    ResetPasswordPage.prototype.resetPassword = function () {
-        var _this = this;
-        if (!this.resetPasswordForm.valid) {
-            console.log("Form isn't valid, value: " + this.resetPasswordForm.value);
-        }
-        else {
-            var email = this.resetPasswordForm.value.email;
-            this.authProvider.resetPassword(email).then(function (user) {
-                var alert = _this.alertCtrl.create({
-                    message: "Check your email for a password reset link",
-                    buttons: [{
-                            text: "Ok",
-                            role: 'cancel',
-                            handler: function () { _this.navCtrl.pop(); }
-                        }]
-                });
-                alert.present();
-            }, function (error) {
-                var errorAlert = _this.alertCtrl.create({
-                    message: error.message,
-                    buttons: [{ text: "Ok", role: "cancel" }]
-                });
-                errorAlert.present();
-            });
-        }
-    };
-    return ResetPasswordPage;
-}());
-ResetPasswordPage = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-reset-password',template:/*ion-inline-start:"C:\Users\SEC\cra\iTaxi\iTaxi\src\pages\reset-password\reset-password.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n    <ion-title>\n\n      비밀번호 초기화\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n  <img src="../../assets/imgs/logo.png" />\n\n  <form [formGroup]="resetPasswordForm" (submit)="resetPassword()" novalidate> \n\n    <ion-item>\n\n     <ion-label stacked>Email</ion-label>\n\n     <ion-input formControlName="email" type="email" placeholder="Your email address" \n\n                [class.invalid]="!resetPasswordForm.controls.email.valid && resetPasswordForm.controls.email.dirty">\n\n     </ion-input> \n\n    </ion-item>\n\n    <ion-item class="error-message" *ngIf="!resetPasswordForm.controls.email.valid && resetPasswordForm.controls.email.dirty"> \n\n      <p>Please enter a valid email.</p>\n\n    </ion-item>\n\n  \n\n    <button ion-button block type="submit" [disabled]="!resetPasswordForm.valid">\n\n      비밀번호 초기화 \n\n    </button>\n\n  </form> \n\n</ion-content>'/*ion-inline-end:"C:\Users\SEC\cra\iTaxi\iTaxi\src\pages\reset-password\reset-password.html"*/,
-    }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"], __WEBPACK_IMPORTED_MODULE_3__providers_auth_auth__["a" /* AuthProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["AlertController"], __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]])
-], ResetPasswordPage);
-
-//# sourceMappingURL=reset-password.js.map
+webpackContext.id = 420;
 
 /***/ }),
 
@@ -1468,7 +1468,7 @@ var StudentIDValidator = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(354);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_login_login__ = __webpack_require__(59);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_makeRoom_makeRoom__ = __webpack_require__(96);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_setting_setting__ = __webpack_require__(307);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_setting_setting__ = __webpack_require__(308);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_signup_signup__ = __webpack_require__(310);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_taxi_list_taxi_list__ = __webpack_require__(95);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__providers_auth_auth__ = __webpack_require__(39);
@@ -1776,6 +1776,7 @@ var DateProvider = (function () {
     };
     //input: 2018-1-23, output: 화
     DateProvider.prototype.getKToday = function (bookingDate) {
+        this.today = this.week[new Date(bookingDate).getDay()];
         return this.week[new Date(bookingDate).getDay()];
     };
     //input: 2018-1-23, output: 1월 23일
@@ -2019,11 +2020,11 @@ LoginPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_taxi_list_taxi_list__ = __webpack_require__(95);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery__ = __webpack_require__(423);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery__ = __webpack_require__(424);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_jquery__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_users_users__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_date_date__ = __webpack_require__(50);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_rooms_rooms__ = __webpack_require__(305);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_rooms_rooms__ = __webpack_require__(306);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2304,7 +2305,7 @@ var EmailValidator = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__chatroom_chatroom__ = __webpack_require__(61);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__makeRoom_makeRoom__ = __webpack_require__(96);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ionic2_date_picker__ = __webpack_require__(184);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ionic2_date_picker__ = __webpack_require__(185);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ionic2_date_picker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_ionic2_date_picker__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_users_users__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_date_date__ = __webpack_require__(50);
@@ -2515,11 +2516,21 @@ var MakeRoomPage = (function () {
             console.log("nowDate : " + this.nowDate + this.nowTime);
             console.log("bookingDate : " + this.bookingDate + this.bookingTime);
             console.log("Error");
+            var alert_1 = this.alertCtrl.create({
+                message: "출발시간을 현재시간 이후로 입력하여 주세요.",
+                buttons: [{
+                        text: '확인',
+                        handler: function () {
+                            console.log('Okay');
+                        }
+                    }]
+            });
+            alert_1.present();
         }
         else {
             //출발지와 목적지가 같을 경우 처리
             if (this.departure == this.destination) {
-                var alert_1 = this.alertCtrl.create({
+                var alert_2 = this.alertCtrl.create({
                     message: "출발지와 도착지를 다르게 입력하여 주세요.",
                     buttons: [{
                             text: '확인',
@@ -2528,10 +2539,22 @@ var MakeRoomPage = (function () {
                             }
                         }]
                 });
-                alert_1.present();
+                alert_2.present();
+            }
+            else if (this.departure == "" || this.destination == "") {
+                var alert_3 = this.alertCtrl.create({
+                    message: "출발지 혹은 도착지를 입력하여 주세요.",
+                    buttons: [{
+                            text: '확인',
+                            handler: function () {
+                                console.log('Okay');
+                            }
+                        }]
+                });
+                alert_3.present();
             }
             else {
-                var alert_2 = this.alertCtrl.create({
+                var alert_4 = this.alertCtrl.create({
                     title: '방만들기',
                     subTitle: '방을 만드시겠습니까?',
                     message: this.msg,
@@ -2564,7 +2587,7 @@ var MakeRoomPage = (function () {
                         }
                     ]
                 });
-                alert_2.present();
+                alert_4.present();
             }
         }
     };
@@ -2582,7 +2605,7 @@ var MakeRoomPage = (function () {
 }());
 MakeRoomPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-make-room',template:/*ion-inline-start:"C:\Users\SEC\cra\iTaxi\iTaxi\src\pages\makeRoom\makeRoom.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title class="top-title">방만들기</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n  <!--\n\n  <div class="bottomRow">\n\n    <ion-row>\n\n        <div>\n\n          <ion-col width-1000>\n\n            <ion-row class="main-title" justify-content-center>\n\n              <p class="depart-label">출발지</p>\n\n            </ion-row>\n\n            <ion-row>\n\n              <ion-col>\n\n                <ion-item no-lines>\n\n                  <ion-select class="my-select" [(ngModel)]="selectDeparture.key" interface="popover" *ngIf="selectDeparture.key!=\'직접입력\'">\n\n                    <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>\n\n                  </ion-select>\n\n                  <ion-input text-center class="my-input" style="position:absolute" *ngIf="selectDeparture.key==\'직접입력\'" [(ngModel)]="selectDeparture.value" type="text" placeholder="기타장소"></ion-input> \n\n                </ion-item>\n\n              </ion-col>\n\n              <ion-col>\n\n                <button ion-button no-padding clear round class="my-btn" (click)="setDepartureDefault()" *ngIf="selectDeparture.key==\'직접입력\'"></button>\n\n              </ion-col>\n\n            </ion-row>\n\n          </ion-col>\n\n        </div>\n\n        <div>\n\n          <ion-col col-auto>\n\n            <ion-row>\n\n              <button class="swap-btn" ion-button large clear no-padding (click)="swapPlace()"></button>\n\n            </ion-row>\n\n            <ion-row>\n\n              <ion-icon no-padding class="my-arrow" ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon>\n\n            </ion-row>\n\n          </ion-col>\n\n        </div>\n\n        <div>\n\n          <ion-col>\n\n            <ion-row class="main-title" justify-content-center>\n\n              <p align="center" class="arrive-label">도착지</p>\n\n            </ion-row>\n\n            <ion-row>\n\n              <ion-col> \n\n                <ion-item  no-lines>\n\n                  <ion-select  class="my-select" [(ngModel)]="selectDestination.key" interface="popover" *ngIf="selectDestination.key!=\'직접입력\'">\n\n                    <ion-option  *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>\n\n                  </ion-select>\n\n                  <ion-input class="my-input" style="position:absolute" *ngIf="selectDestination.key==\'직접입력\'" [(ngModel)]="selectDestination.value" type="text" placeholder="기타장소"></ion-input> \n\n                </ion-item>\n\n              </ion-col>\n\n              <ion-col>\n\n                <button ion-button no-padding clear round class="my-btn" (click)="setDestinationDefault()" *ngIf="selectDestination.key==\'직접입력\'"></button>\n\n              </ion-col>\n\n            </ion-row>\n\n          </ion-col>\n\n        </div>\n\n    </ion-row>\n\n  </div>\n\n-->\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  <ion-row class="main-title" justify-content-center>\n\n    <ion-col col-4.5 justify-content-center>\n\n        <p class="depart-label">출발지</p>\n\n    </ion-col>\n\n    <ion-col col-1></ion-col>\n\n    <ion-col col-auto>  \n\n      <div class="swap_button">\n\n        <button ion-button full large clear no-padding (click)="swapPlace()"></button>\n\n      </div>\n\n    </ion-col>\n\n    <ion-col col-1></ion-col>\n\n    <ion-col col-4.5>\n\n      <p align="center" class="arrive-label">도착지</p>\n\n    </ion-col>\n\n  </ion-row>\n\n\n\n  <div class="bottomRow">\n\n  <ion-row just-content-center>\n\n    <ion-col col-4.5 justify-content-center>\n\n      <ion-item no-lines> \n\n        <ion-select class="my-select" [(ngModel)]="selectDeparture.key" interface="popover" *ngIf="selectDeparture.key!=\'직접입력\'">\n\n          <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>\n\n        </ion-select>\n\n        <ion-input text-center class="my-input" *ngIf="selectDeparture.key==\'직접입력\'" [(ngModel)]="selectDeparture.value" type="text" placeholder="기타장소"></ion-input>\n\n      </ion-item>\n\n    </ion-col>\n\n\n\n    <ion-col col-1>\n\n      <button ion-button no-padding clear round class="my-btn" (click)="setDepartureDefault()" *ngIf="selectDeparture.key==\'직접입력\'"></button>\n\n    </ion-col>\n\n    \n\n    <ion-col col-auto >\n\n      <ion-icon class="arrowIcon" ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon>\n\n    </ion-col>\n\n    \n\n    <ion-col col-4.5 justify-content-center>\n\n      <ion-item no-lines>\n\n        <ion-select class="my-select-right" [(ngModel)]="selectDestination.key" interface="popover" *ngIf="selectDestination.key!=\'직접입력\'">\n\n          <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>\n\n        </ion-select>\n\n        <ion-input text-center class="my-input" *ngIf="selectDestination.key==\'직접입력\'" [(ngModel)]="selectDestination.value" type="text" placeholder="기타장소"></ion-input> \n\n      </ion-item>    \n\n    </ion-col>\n\n    <ion-col col-1>\n\n        <button ion-button no-padding clear round class="my-btn" (click)="setDestinationDefault()" *ngIf="selectDestination.key==\'직접입력\'"></button>\n\n      </ion-col>\n\n  </ion-row>\n\n  </div>\n\n  \n\n  <ion-row class="label-title" justify-content-center>\n\n    <p class="max-people">출발날짜</p>\n\n  </ion-row>\n\n\n\n  <div class="bottomRow">\n\n  <ion-row justify-content-center>\n\n    <ion-datetime padding class="my-date" displayFormat="YYYY년 M월 D일 ({{today}})" pickerFormat="YYYY-MM-DD" min={{min}} max={{max}} \n\n                  placeholder={{nowDate}} [(ngModel)]="bookingDate"></ion-datetime>   \n\n  </ion-row>\n\n  </div>\n\n  \n\n  <ion-row class="label-title" justify-content-center>\n\n    <p class="max-people">출발시간</p>\n\n  </ion-row>\n\n\n\n  <div class="bottomRow">\n\n    <ion-row justify-content-center>\n\n      <!-- 지금 여기 밑에 placeholder가 제대로 작동하지 않는다. 이상하게 9시간의 시차 차이가 난다 -->\n\n      <!-- displayFormat 과 default 값을 바꾸어 주어 시간 이상한거 해결 -->\n\n      <ion-datetime padding class="my-time"  displayFormat="HH:mm" pickerFomat="HH mm" placeholder={{nowTime}} [(ngModel)]="bookingTime"></ion-datetime>\n\n    </ion-row>\n\n  </div>\n\n\n\n  <ion-row class="label-title" justify-content-center>\n\n    <p class="max-people">최대탑승인원</p>\n\n  </ion-row>\n\n\n\n  <div class="bottomRow">\n\n    <ion-row justify-content-center>\n\n      <!-- <div class="cc-selector">\n\n        <ion-list radio-group [(ngModel)]="maxPeople">\n\n          <ion-radio value=2>\n\n            <ion-label class="drinkcard-cc twoButton" for="twoButton"></label>\n\n          </ion-radio>\n\n          <ion-radio value=3>\n\n            <ion-label class="drinkcard-cc threeButton"for="threeButton"></label>\n\n          </ion-radio>\n\n          <ion-radio value=2>\n\n            <ion-label class="drinkcard-cc fourButton" for="fourButton"></label>\n\n          </ion-radio>\n\n        </ion-list>\n\n      </div> -->\n\n      <form>\n\n        <div class="cc-selector">\n\n          <input id="twoButton" type="radio" name="max-People" value="2" [(ngModel)]="maxPeople">\n\n          <label class="maxPeople-cc twoButton" for="twoButton"></label>\n\n\n\n          <input id="threeButton" type="radio" name="max-People" value="3" [(ngModel)]="maxPeople">\n\n          <label class="maxPeople-cc threeButton"for="threeButton"></label>\n\n\n\n          <input id="fourButton" type="radio" name="max-People" value="4" [(ngModel)]="maxPeople">\n\n          <label class="maxPeople-cc fourButton" for="fourButton"></label>\n\n        </div>\n\n      </form>\n\n      \n\n    </ion-row>\n\n  </div>\n\n  \n\n  <div class="room_button">          \n\n    <button class="button customBtn" ion-button round (click)="makeRoom()" >방 만들기</button>\n\n  </div>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\SEC\cra\iTaxi\iTaxi\src\pages\makeRoom\makeRoom.html"*/,
+        selector: 'page-make-room',template:/*ion-inline-start:"C:\Users\SEC\cra\iTaxi\iTaxi\src\pages\makeRoom\makeRoom.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title class="top-title">방만들기</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n\n\n  <ion-row class="top-row" justify-content-center>\n\n    \n\n    <ion-col col-4.5 justify-content-center>\n\n        <p class="departure-label">출발지</p>\n\n    </ion-col>\n\n    \n\n    <ion-col col-1></ion-col>\n\n    \n\n    <ion-col col-auto>  \n\n      <div class="swap-btn">\n\n        <button ion-button full large clear no-padding (click)="swapPlace()"></button>\n\n      </div>\n\n    </ion-col>\n\n    \n\n    <ion-col col-1></ion-col>\n\n    \n\n    <ion-col col-4.5>\n\n      <p align="center" class="destination-label">도착지</p>\n\n    </ion-col>\n\n\n\n  </ion-row>\n\n\n\n  <div class="row-bottom">\n\n    <ion-row just-content-center>\n\n      \n\n      <ion-col col-4.5 justify-content-center>\n\n        <ion-item no-lines> \n\n          <ion-select class="my-select" [(ngModel)]="selectDeparture.key" interface="popover" *ngIf="selectDeparture.key!=\'직접입력\'">\n\n            <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>\n\n          </ion-select>\n\n          <ion-input text-center class="my-input" *ngIf="selectDeparture.key==\'직접입력\'" [(ngModel)]="selectDeparture.value" type="text" placeholder="기타장소"></ion-input>\n\n        </ion-item>\n\n      </ion-col>\n\n\n\n      <ion-col col-1>\n\n        <button ion-button no-padding clear round class="default-btn" (click)="setDepartureDefault()" *ngIf="selectDeparture.key==\'직접입력\'"></button>\n\n      </ion-col>\n\n      \n\n      <ion-col col-auto >\n\n        <ion-icon class="arrow-icon" ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon>\n\n      </ion-col>\n\n      \n\n      <ion-col col-4.5 justify-content-center>\n\n        <ion-item no-lines>\n\n          <ion-select class="my-select" [(ngModel)]="selectDestination.key" interface="popover" *ngIf="selectDestination.key!=\'직접입력\'">\n\n            <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>\n\n          </ion-select>\n\n          <ion-input text-center class="my-input" *ngIf="selectDestination.key==\'직접입력\'" [(ngModel)]="selectDestination.value" type="text" placeholder="기타장소"></ion-input> \n\n        </ion-item>    \n\n      </ion-col>\n\n      \n\n      <ion-col col-1>\n\n          <button ion-button no-padding clear round class="default-btn" (click)="setDestinationDefault()" *ngIf="selectDestination.key==\'직접입력\'"></button>\n\n      </ion-col>\n\n\n\n    </ion-row>\n\n  </div>\n\n  \n\n  <ion-row class="label-row" justify-content-center>\n\n    <p class="title-label">출발날짜</p>\n\n  </ion-row>\n\n\n\n  <div class="row-bottom">\n\n    <ion-row justify-content-center>\n\n      <ion-datetime padding class="my-date" displayFormat="YYYY년 M월 D일 ({{dateServices.getKToday(bookingDate)}})" pickerFormat="YYYY-MM-DD" min={{min}} max={{max}} \n\n                    placeholder={{nowDate}} [(ngModel)]="bookingDate" (ngModelChange)="dateServices.getKToday()"></ion-datetime>   \n\n    </ion-row>\n\n  </div>\n\n  \n\n  <ion-row class="label-row" justify-content-center>\n\n    <p class="title-label">출발시간</p>\n\n  </ion-row>\n\n\n\n  <div class="row-bottom">\n\n    <ion-row justify-content-center>\n\n      <!-- 지금 여기 밑에 placeholder가 제대로 작동하지 않는다. 이상하게 9시간의 시차 차이가 난다 -->\n\n      <!-- displayFormat 과 default 값을 바꾸어 주어 시간 이상한거 해결 -->\n\n      <ion-datetime padding class="my-time"  displayFormat="HH:mm" pickerFomat="HH mm" placeholder={{nowTime}} [(ngModel)]="bookingTime"></ion-datetime>\n\n    </ion-row>\n\n  </div>\n\n\n\n  <ion-row class="label-row" justify-content-center>\n\n    <p class="title-label">최대탑승인원</p>\n\n  </ion-row>\n\n\n\n  <div class="row-bottom">\n\n    <ion-row justify-content-center>\n\n      \n\n      <form>\n\n        <div class="cc-selector">\n\n          <input id="twoButton" type="radio" name="max-People" value="2" [(ngModel)]="maxPeople">\n\n          <label class="maxPeople-cc twoButton" for="twoButton"></label>\n\n\n\n          <input id="threeButton" type="radio" name="max-People" value="3" [(ngModel)]="maxPeople">\n\n          <label class="maxPeople-cc threeButton"for="threeButton"></label>\n\n\n\n          <input id="fourButton" type="radio" name="max-People" value="4" [(ngModel)]="maxPeople">\n\n          <label class="maxPeople-cc fourButton" for="fourButton"></label>\n\n        </div>\n\n      </form>\n\n      \n\n    </ion-row>\n\n  </div>\n\n  \n\n  <div class="room-btn-align">          \n\n    <button class="room-btn" ion-button round (click)="makeRoom()" >방만들기</button>\n\n  </div>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\SEC\cra\iTaxi\iTaxi\src\pages\makeRoom\makeRoom.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["AlertController"], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"], __WEBPACK_IMPORTED_MODULE_5__providers_date_date__["a" /* DateProvider */],
         __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"], __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__["a" /* AngularFireDatabase */], __WEBPACK_IMPORTED_MODULE_4__providers_users_users__["a" /* UsersProvider */]])

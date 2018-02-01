@@ -8,137 +8,81 @@
 </ion-header>
 
 <ion-content>
-  <!--
-  <div class="bottomRow">
-    <ion-row>
-        <div>
-          <ion-col width-1000>
-            <ion-row class="main-title" justify-content-center>
-              <p class="depart-label">출발지</p>
-            </ion-row>
-            <ion-row>
-              <ion-col>
-                <ion-item no-lines>
-                  <ion-select class="my-select" [(ngModel)]="selectDeparture.key" interface="popover" *ngIf="selectDeparture.key!='직접입력'">
-                    <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>
-                  </ion-select>
-                  <ion-input text-center class="my-input" style="position:absolute" *ngIf="selectDeparture.key=='직접입력'" [(ngModel)]="selectDeparture.value" type="text" placeholder="기타장소"></ion-input> 
-                </ion-item>
-              </ion-col>
-              <ion-col>
-                <button ion-button no-padding clear round class="my-btn" (click)="setDepartureDefault()" *ngIf="selectDeparture.key=='직접입력'"></button>
-              </ion-col>
-            </ion-row>
-          </ion-col>
-        </div>
-        <div>
-          <ion-col col-auto>
-            <ion-row>
-              <button class="swap-btn" ion-button large clear no-padding (click)="swapPlace()"></button>
-            </ion-row>
-            <ion-row>
-              <ion-icon no-padding class="my-arrow" ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon>
-            </ion-row>
-          </ion-col>
-        </div>
-        <div>
-          <ion-col>
-            <ion-row class="main-title" justify-content-center>
-              <p align="center" class="arrive-label">도착지</p>
-            </ion-row>
-            <ion-row>
-              <ion-col> 
-                <ion-item  no-lines>
-                  <ion-select  class="my-select" [(ngModel)]="selectDestination.key" interface="popover" *ngIf="selectDestination.key!='직접입력'">
-                    <ion-option  *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>
-                  </ion-select>
-                  <ion-input class="my-input" style="position:absolute" *ngIf="selectDestination.key=='직접입력'" [(ngModel)]="selectDestination.value" type="text" placeholder="기타장소"></ion-input> 
-                </ion-item>
-              </ion-col>
-              <ion-col>
-                <button ion-button no-padding clear round class="my-btn" (click)="setDestinationDefault()" *ngIf="selectDestination.key=='직접입력'"></button>
-              </ion-col>
-            </ion-row>
-          </ion-col>
-        </div>
-    </ion-row>
-  </div>
--->
 
-
-
-
-
-
-
-
-
-
-  <ion-row class="main-title" justify-content-center>
+  <ion-row class="top-row" justify-content-center>
+    
     <ion-col col-4.5 justify-content-center>
-        <p class="depart-label">출발지</p>
+        <p class="departure-label">출발지</p>
     </ion-col>
+    
     <ion-col col-1></ion-col>
+    
     <ion-col col-auto>  
-      <div class="swap_button">
+      <div class="swap-btn">
         <button ion-button full large clear no-padding (click)="swapPlace()"></button>
       </div>
     </ion-col>
+    
     <ion-col col-1></ion-col>
+    
     <ion-col col-4.5>
-      <p align="center" class="arrive-label">도착지</p>
+      <p align="center" class="destination-label">도착지</p>
     </ion-col>
+
   </ion-row>
 
-  <div class="bottomRow">
-  <ion-row just-content-center>
-    <ion-col col-4.5 justify-content-center>
-      <ion-item no-lines> 
-        <ion-select class="my-select" [(ngModel)]="selectDeparture.key" interface="popover" *ngIf="selectDeparture.key!='직접입력'">
-          <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>
-        </ion-select>
-        <ion-input text-center class="my-input" *ngIf="selectDeparture.key=='직접입력'" [(ngModel)]="selectDeparture.value" type="text" placeholder="기타장소"></ion-input>
-      </ion-item>
-    </ion-col>
-
-    <ion-col col-1>
-      <button ion-button no-padding clear round class="my-btn" (click)="setDepartureDefault()" *ngIf="selectDeparture.key=='직접입력'"></button>
-    </ion-col>
-    
-    <ion-col col-auto >
-      <ion-icon class="arrowIcon" ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon>
-    </ion-col>
-    
-    <ion-col col-4.5 justify-content-center>
-      <ion-item no-lines>
-        <ion-select class="my-select-right" [(ngModel)]="selectDestination.key" interface="popover" *ngIf="selectDestination.key!='직접입력'">
-          <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>
-        </ion-select>
-        <ion-input text-center class="my-input" *ngIf="selectDestination.key=='직접입력'" [(ngModel)]="selectDestination.value" type="text" placeholder="기타장소"></ion-input> 
-      </ion-item>    
-    </ion-col>
-    <ion-col col-1>
-        <button ion-button no-padding clear round class="my-btn" (click)="setDestinationDefault()" *ngIf="selectDestination.key=='직접입력'"></button>
+  <div class="row-bottom">
+    <ion-row just-content-center>
+      
+      <ion-col col-4.5 justify-content-center>
+        <ion-item no-lines> 
+          <ion-select class="my-select" [(ngModel)]="selectDeparture.key" interface="popover" *ngIf="selectDeparture.key!='직접입력'">
+            <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>
+          </ion-select>
+          <ion-input text-center class="my-input" *ngIf="selectDeparture.key=='직접입력'" [(ngModel)]="selectDeparture.value" type="text" placeholder="기타장소"></ion-input>
+        </ion-item>
       </ion-col>
-  </ion-row>
+
+      <ion-col col-1>
+        <button ion-button no-padding clear round class="default-btn" (click)="setDepartureDefault()" *ngIf="selectDeparture.key=='직접입력'"></button>
+      </ion-col>
+      
+      <ion-col col-auto >
+        <ion-icon class="arrow-icon" ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon>
+      </ion-col>
+      
+      <ion-col col-4.5 justify-content-center>
+        <ion-item no-lines>
+          <ion-select class="my-select" [(ngModel)]="selectDestination.key" interface="popover" *ngIf="selectDestination.key!='직접입력'">
+            <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>
+          </ion-select>
+          <ion-input text-center class="my-input" *ngIf="selectDestination.key=='직접입력'" [(ngModel)]="selectDestination.value" type="text" placeholder="기타장소"></ion-input> 
+        </ion-item>    
+      </ion-col>
+      
+      <ion-col col-1>
+          <button ion-button no-padding clear round class="default-btn" (click)="setDestinationDefault()" *ngIf="selectDestination.key=='직접입력'"></button>
+      </ion-col>
+
+    </ion-row>
   </div>
   
-  <ion-row class="label-title" justify-content-center>
-    <p class="max-people">출발날짜</p>
+  <ion-row class="label-row" justify-content-center>
+    <p class="title-label">출발날짜</p>
   </ion-row>
 
-  <div class="bottomRow">
-  <ion-row justify-content-center>
-    <ion-datetime padding class="my-date" displayFormat="YYYY년 M월 D일 ({{today}})" pickerFormat="YYYY-MM-DD" min={{min}} max={{max}} 
-                  placeholder={{nowDate}} [(ngModel)]="bookingDate"></ion-datetime>   
-  </ion-row>
+  <div class="row-bottom">
+    <ion-row justify-content-center>
+      <ion-datetime padding class="my-date" displayFormat="YYYY년 M월 D일 ({{dateServices.getKToday(bookingDate)}})" pickerFormat="YYYY-MM-DD" min={{min}} max={{max}} 
+                    placeholder={{nowDate}} [(ngModel)]="bookingDate" (ngModelChange)="dateServices.getKToday()"></ion-datetime>   
+    </ion-row>
   </div>
   
-  <ion-row class="label-title" justify-content-center>
-    <p class="max-people">출발시간</p>
+  <ion-row class="label-row" justify-content-center>
+    <p class="title-label">출발시간</p>
   </ion-row>
 
-  <div class="bottomRow">
+  <div class="row-bottom">
     <ion-row justify-content-center>
       <!-- 지금 여기 밑에 placeholder가 제대로 작동하지 않는다. 이상하게 9시간의 시차 차이가 난다 -->
       <!-- displayFormat 과 default 값을 바꾸어 주어 시간 이상한거 해결 -->
@@ -146,25 +90,13 @@
     </ion-row>
   </div>
 
-  <ion-row class="label-title" justify-content-center>
-    <p class="max-people">최대탑승인원</p>
+  <ion-row class="label-row" justify-content-center>
+    <p class="title-label">최대탑승인원</p>
   </ion-row>
 
-  <div class="bottomRow">
+  <div class="row-bottom">
     <ion-row justify-content-center>
-      <!-- <div class="cc-selector">
-        <ion-list radio-group [(ngModel)]="maxPeople">
-          <ion-radio value=2>
-            <ion-label class="drinkcard-cc twoButton" for="twoButton"></label>
-          </ion-radio>
-          <ion-radio value=3>
-            <ion-label class="drinkcard-cc threeButton"for="threeButton"></label>
-          </ion-radio>
-          <ion-radio value=2>
-            <ion-label class="drinkcard-cc fourButton" for="fourButton"></label>
-          </ion-radio>
-        </ion-list>
-      </div> -->
+      
       <form>
         <div class="cc-selector">
           <input id="twoButton" type="radio" name="max-People" value="2" [(ngModel)]="maxPeople">
@@ -181,8 +113,8 @@
     </ion-row>
   </div>
   
-  <div class="room_button">          
-    <button class="button customBtn" ion-button round (click)="makeRoom()" >방 만들기</button>
+  <div class="room-btn-align">          
+    <button class="room-btn" ion-button round (click)="makeRoom()" >방만들기</button>
   </div>
 
 </ion-content>
