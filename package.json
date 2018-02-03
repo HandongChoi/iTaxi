@@ -28,9 +28,9 @@
     "@ionic/storage": "2.0.1",
     "android-versions": "^1.2.1",
     "angularfire2": "^4.0.0-rc.0",
-    "cordova-android": "6.2.3",
+    "cordova-android": "6.3.0",
     "cordova-browser": "5.0.1",
-    "cordova-ios": "^4.5.1",
+    "cordova-ios": "4.5.4",
     "cordova-plugin-device": "^1.1.4",
     "cordova-plugin-fcm": "^2.1.2",
     "cordova-plugin-ionic-webview": "^1.1.16",
@@ -59,9 +59,9 @@
   "description": "An Ionic project",
   "cordova": {
     "platforms": [
-      "ios",
       "browser",
-      "android"
+      "android",
+      "ios"
     ],
     "plugins": {
       "ionic-plugin-keyboard": {},
