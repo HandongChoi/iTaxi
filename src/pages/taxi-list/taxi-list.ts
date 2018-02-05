@@ -79,8 +79,6 @@ export class TaxiListPage {
 
     // 00:40 to 2018-01-30
 
-
-
     //participant array에 push
     // 참여자가 아니고, 인원 full 아니면 push
     // 참여자이면 그냥 enter

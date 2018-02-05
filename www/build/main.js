@@ -40,10 +40,10 @@ var map = {
 		309
 	],
 	"../pages/signup/signup.module": [
-		312
+		311
 	],
 	"../pages/taxi-list/taxi-list.module": [
-		311
+		313
 	]
 };
 function webpackAsyncContext(req) {
@@ -557,7 +557,7 @@ var SettingPage = (function () {
 }());
 SettingPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-setting',template:/*ion-inline-start:"C:\Users\goodd\Desktop\CRA\itaxi\i-Taxi\src\pages\setting\setting.html"*/'<!--\n\n  Generated template for the SettingPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  <ion-navbar color = "primary">\n\n    <button ion-button menuToggle >\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>설정</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n  <ion-list>\n\n    <ion-list-header> 내정보 </ion-list-header>\n\n      <ion-item>\n\n        <ion-row>\n\n          <ion-avatar item-start>\n\n            <img src="assets/imgs/woody.jpeg">\n\n          </ion-avatar>\n\n          <h2>류여진</h2> &nbsp; <h4>010-1111-2222</h4>\n\n        </ion-row>\n\n        <ion-row justify-content-center>\n\n              <button ion-button color="primary" small round outline (click)="openModal()" >개인정보 수정</button>\n\n              <button ion-button color="primary" small round outline (click)="delete_user()">회원탈퇴</button>\n\n        </ion-row>\n\n      </ion-item>\n\n\n\n    <ion-list-header> PUSH알림 </ion-list-header>\n\n      <ion-item>\n\n        <ion-label>메세지 알림</ion-label>\n\n        <ion-toggle [(ngModel)]="isPushToggled" (ionChange)="PushToggle()" checked="true"></ion-toggle>\n\n      </ion-item>\n\n      <ion-item>\n\n        <ion-label>공지 알림</ion-label>\n\n        <ion-toggle [(ngModel)]="isNotiToggled" (ionChange)="NotiToggle()" checked="true"></ion-toggle>\n\n      </ion-item>\n\n\n\n    <ion-list-header> 문의 </ion-list-header>\n\n      <ion-item>\n\n        hguitaxi@gmail.com\n\n      </ion-item>\n\n\n\n    <ion-list-header> 버전 </ion-list-header>\n\n      <ion-item>\n\n        1\n\n      </ion-item>\n\n  </ion-list>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\goodd\Desktop\CRA\itaxi\i-Taxi\src\pages\setting\setting.html"*/,
+        selector: 'page-setting',template:/*ion-inline-start:"C:\Users\goodd\Desktop\CRA\itaxi\i-Taxi\src\pages\setting\setting.html"*/'<!--\n\n  Generated template for the SettingPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  <ion-navbar color = "primary">\n\n    <button ion-button menuToggle >\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>설정</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n  <ion-list>\n\n    <ion-list-header> 내정보 </ion-list-header>\n\n      <ion-item>\n\n        <ion-row>\n\n          <h2>류여진</h2> &nbsp; <h4>010-1111-2222</h4>\n\n        </ion-row>\n\n        <ion-row justify-content-center>\n\n              <button ion-button color="primary" small round outline (click)="openModal()" >개인정보 수정</button>\n\n              <button ion-button color="primary" small round outline (click)="delete_user()">회원탈퇴</button>\n\n        </ion-row>\n\n      </ion-item>\n\n\n\n    <ion-list-header> PUSH알림 </ion-list-header>\n\n      <ion-item>\n\n        <ion-label>메세지 알림</ion-label>\n\n        <ion-toggle [(ngModel)]="isPushToggled" (ionChange)="PushToggle()" checked="true"></ion-toggle>\n\n      </ion-item>\n\n      <ion-item>\n\n        <ion-label>공지 알림</ion-label>\n\n        <ion-toggle [(ngModel)]="isNotiToggled" (ionChange)="NotiToggle()" checked="true"></ion-toggle>\n\n      </ion-item>\n\n\n\n    <ion-list-header> 문의 </ion-list-header>\n\n      <ion-item>\n\n        hguitaxi@gmail.com\n\n      </ion-item>\n\n\n\n    <ion-list-header> 버전 </ion-list-header>\n\n      <ion-item>\n\n        1\n\n      </ion-item>\n\n  </ion-list>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\goodd\Desktop\CRA\itaxi\i-Taxi\src\pages\setting\setting.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"],
         __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["Platform"], __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__["a" /* AuthProvider */], __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__["a" /* AngularFireDatabase */]])
@@ -572,48 +572,10 @@ SettingPage = __decorate([
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TaxiListPageModule", function() { return TaxiListPageModule; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__taxi_list__ = __webpack_require__(96);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-
-
-var TaxiListPageModule = (function () {
-    function TaxiListPageModule() {
-    }
-    return TaxiListPageModule;
-}());
-TaxiListPageModule = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
-        declarations: [
-            __WEBPACK_IMPORTED_MODULE_2__taxi_list__["a" /* TaxiListPage */],
-        ],
-        imports: [
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["IonicPageModule"].forChild(__WEBPACK_IMPORTED_MODULE_2__taxi_list__["a" /* TaxiListPage */]),
-        ],
-    })
-], TaxiListPageModule);
-
-//# sourceMappingURL=taxi-list.module.js.map
-
-/***/ }),
-
-/***/ 312:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SignupPageModule", function() { return SignupPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__signup__ = __webpack_require__(313);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__signup__ = __webpack_require__(312);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -643,7 +605,7 @@ SignupPageModule = __decorate([
 
 /***/ }),
 
-/***/ 313:
+/***/ 312:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -771,6 +733,44 @@ SignupPage = __decorate([
 
 /***/ }),
 
+/***/ 313:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TaxiListPageModule", function() { return TaxiListPageModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__taxi_list__ = __webpack_require__(96);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+var TaxiListPageModule = (function () {
+    function TaxiListPageModule() {
+    }
+    return TaxiListPageModule;
+}());
+TaxiListPageModule = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
+        declarations: [
+            __WEBPACK_IMPORTED_MODULE_2__taxi_list__["a" /* TaxiListPage */],
+        ],
+        imports: [
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["IonicPageModule"].forChild(__WEBPACK_IMPORTED_MODULE_2__taxi_list__["a" /* TaxiListPage */]),
+        ],
+    })
+], TaxiListPageModule);
+
+//# sourceMappingURL=taxi-list.module.js.map
+
+/***/ }),
+
 /***/ 356:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -839,13 +839,13 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__providers_auth_auth__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_ionic2_date_picker__ = __webpack_require__(187);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_ionic2_date_picker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11_ionic2_date_picker__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_taxi_list_taxi_list_module__ = __webpack_require__(311);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_taxi_list_taxi_list_module__ = __webpack_require__(313);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_chatroom_chatroom_module__ = __webpack_require__(457);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_login_login_module__ = __webpack_require__(171);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_main_main_module__ = __webpack_require__(182);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_personal_info_personal_info_module__ = __webpack_require__(184);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_setting_setting_module__ = __webpack_require__(309);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_signup_signup_module__ = __webpack_require__(312);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_signup_signup_module__ = __webpack_require__(311);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_reset_password_reset_password_module__ = __webpack_require__(185);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_ride_history_ride_history_module__ = __webpack_require__(186);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__ionic_native_fcm__ = __webpack_require__(357);
@@ -915,8 +915,8 @@ AppModule = __decorate([
                     { loadChildren: '../pages/reset-password/reset-password.module#ResetPasswordPageModule', name: 'ResetPasswordPage', segment: 'reset-password', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/ride-history/ride-history.module#RideHistoryPageModule', name: 'RideHistoryPage', segment: 'ride-history', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/setting/setting.module#SettingPageModule', name: 'SettingPage', segment: 'setting', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/taxi-list/taxi-list.module#TaxiListPageModule', name: 'TaxiListPage', segment: 'taxi-list', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/signup/signup.module#SignupPageModule', name: 'SignupPage', segment: 'signup', priority: 'low', defaultHistory: [] }
+                    { loadChildren: '../pages/signup/signup.module#SignupPageModule', name: 'SignupPage', segment: 'signup', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/taxi-list/taxi-list.module#TaxiListPageModule', name: 'TaxiListPage', segment: 'taxi-list', priority: 'low', defaultHistory: [] }
                 ]
             }),
             __WEBPACK_IMPORTED_MODULE_6_angularfire2__["a" /* AngularFireModule */].initializeApp(firebaseConfig),
@@ -1637,7 +1637,7 @@ var StudentIDValidator = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_login_login__ = __webpack_require__(59);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_makeRoom_makeRoom__ = __webpack_require__(97);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_setting_setting__ = __webpack_require__(310);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_signup_signup__ = __webpack_require__(313);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_signup_signup__ = __webpack_require__(312);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_taxi_list_taxi_list__ = __webpack_require__(96);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__providers_auth_auth__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__providers_users_users__ = __webpack_require__(28);
