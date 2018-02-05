@@ -103,7 +103,7 @@
 
 <ion-footer>
   <ion-item>
-    <ion-input [(ngModel)]="chat_content" fixed type="text" (keyup.enter)="send()" (click)="scrollBottom()"></ion-input>
-    <button ion-button clear item-right (click)="send()" (click)="scrollBottom()"> send </button>
+    <ion-input [(ngModel)]="chatContent" fixed type="text" (keyup.enter)="send(chatContent)" (click)="scrollBottom()"></ion-input>
+    <button ion-button clear item-right (click)="send(chatContent)" (click)="scrollBottom()"> send </button>
   </ion-item>
 </ion-footer>

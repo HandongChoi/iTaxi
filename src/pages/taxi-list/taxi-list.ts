@@ -23,6 +23,8 @@ export class TaxiListPage {
   nowDate: Date = new Date();
   selectedDate: Date = new Date();
 
+  userExist: boolean;
+
   spotList: Array<string> = ["한동대학교", "포항역", "고속버스터미널", "시외버스터미널", "북부해수욕장", "육거리"];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase,
@@ -50,51 +52,45 @@ export class TaxiListPage {
     dateSelected.subscribe(date => {this.showChatroom(date);});
   }
 
+  //data는 2018-01-01 형식으로 들어 올 것.
   showChatroom(date) {
     this.selectedDate = date;
     this.rooms = this.af.list('/chatRooms/' + this.dateServices.dateToDelimiterFormat(date));
   }
 
+  //room은 firebase object로 들어온다.
   goChatroom(room) {
-    let chatRoomKey = room.$key;
     let bookingDate= room.departureDate;
     let isExist: boolean = false;
     //목록에 있는지 없는지 여부 확인.
-    for(var user of room['participants']){
-      if(user === this.user_id){
-        isExist = true;
+    this.af.object('/participants/'+room.$key).subscribe(participants=>{
+      for(var user of participants){
+        if(user === this.usersService.getEmail()){
+          isExist = true;
+        }
       }
-    }
-    if(isExist === false){
-      if(parseInt(room['capacity']) > room['participants'].length){
-       room['participants'].push(this.usersService.getUID());
-        
-        //지금 고민인 것은 탑승 내역에 사람이 들어갔다는 걸 넣어야 되는데 넣고 나서
-        //다른 사람들을의 데이터를 어떻게 업데이트 시키냐에 대한 고민을 하는 중.
-        // this.rideHistory.push({
-        //   roomId: this.chat_room_id,
-        //   roomDate: this.room_depart_date,
-        //   roomTime: this.room_depart_time,
-        //   roomDepart: this.room_depart,
-        //   roomDest: this.room_dest,
-        //   roomCapacity: this.room_capacity,
-        //   roomParticipants: this.room_participants
-        // });
-
-        //나중에 카멜 기법으로 싹 다 바꾸자.
-        this.navCtrl.setRoot(ChatRoomPage, {chat_room_id: chatRoomKey, bookingDate: bookingDate});
-      }
-      else{
-        console.log('사람 꽉 찼다. 가라');
-      }
-    }
-    else{
-      this.navCtrl.setRoot(ChatRoomPage, {chat_room_id: chatRoomKey, bookingDate: bookingDate});  
-    }
+      /////////////// 여기 뭔가 논리가 더 예쁘게 정리 될 것 같은데 나중에 시간 날 때 생각해보자 ////////////
+      if(isExist === false){
+        if(room['full'] == false){
+          participants.push(this.usersService.getEmail());
+          ///////////////////  작동하는지 확인해야된다. /////////////////// 밑에와 같은 방식으로 update되는지를 아직 잘 모른다.
+          room['participants'].push(this.usersService.getEmail());
+          room['currentPeople'] = parseInt(room['currentPeople'])+1;
+          if(room['currentPeople'] >= room['capacity'])
+            room['full']=true;
+          this.navCtrl.setRoot(ChatRoomPage, {roomObj: room});
+        } else{
+          console.log('사람 꽉 찼다. 가라');
+        }
+      } else{
+        //자기가 들어가 있는 방이니깐 그냥 입장.
+        this.navCtrl.setRoot(ChatRoomPage, {roomObj: room});  
+      } 
+    });
   }
 
   makeRoom(){
-    this.navCtrl.setRoot(MakeRoomPage, {user_id: this.user_id});
+    this.navCtrl.setRoot(MakeRoomPage);
     console.log("makeRoom function into taxi-list.tx");
   }
 
@@ -128,9 +124,10 @@ export class TaxiListPage {
     console.log('ionViewDidLoad TaxiListPage');
   }
 
-  isExist(users: Array<any>): boolean {
-    for(let user of users){
-      if(user == this.usersService.getUID())
+  // room object가 온다. 여기 때문에 불필요하게 room 안에 participants 더 넣었음.
+  isExist(participants): boolean{
+    for(let user of participants){
+      if(user == this.usersService.getEmail())
         return true;  
     }
     return false;

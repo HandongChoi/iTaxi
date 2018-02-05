@@ -69,19 +69,19 @@
     <ion-grid class="mainGrid">
       <ion-item-group>
         <ion-item-divider *ngFor="let room of rooms | async" (click)="goChatroom(room)" class="line"
-        [ngClass]="{full: room.participants.length >= room.capacity, exist: isExist(room.participants)}">
+        [ngClass]="{full: room.full, exist: isExist(room.participants)}">
           <ion-row>
             <ion-col col-3>
-              <p>{{room.depart_date}}</p>
-              <p>{{room.depart_time}}</p>
+              <p>{{room.departureDate}}</p>
+              <p>{{room.departureTime}}</p>
             </ion-col>
             <ion-col col-7>
               <p>{{room.departure}}</p>
               <p>>{{room.destination}}</p>
             </ion-col>
             <ion-col col-2>
-              <p>{{room.participants.length}} / {{room.capacity}}</p>
-              <p>참여 {{ room.participants.length >= room.capacity ? "불가" : "가능" }}</p>
+              <p>{{room.currentPeople}} / {{room.capacity}}</p>
+              <p>참여 {{ room.full ? "불가" : "가능" }}</p>
             </ion-col>
           </ion-row>
         </ion-item-divider>

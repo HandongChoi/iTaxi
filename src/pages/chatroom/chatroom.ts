@@ -27,10 +27,8 @@ export class ChatRoomPage {
 
   chat_user_id: any;
   chat_content: any;
-  chat_room_id: any;
-  bookingDate: string;
-
-  roomObj: Object;
+  
+  roomObj: FirebaseObjectObservable<any>;
   room_depart: string;
   room_dest: string;
   room_capacity: string;
@@ -53,28 +51,31 @@ export class ChatRoomPage {
 
   constructor(public navCtrl: NavController, public af:AngularFireDatabase, public navParams: NavParams, public platform:Platform,
               public roomServices: RoomsProvider, public dateServices: DateProvider, public userServices: UsersProvider) {
-
-    console.log('constructor chatroom');  
-      
-    this.bookingDate = navParams.data.bookingDate;
-    this.chat_room_id = navParams.data.chat_room_id;
-    this.chat_user_id = navParams.data.user_id;
+    console.log('constructor chatroom'); 
+    //chatRoom을 올 수 있는 방법은 탑승내역, 챗방 만들때, 리스트에서 올 수 있다. 항상 roomObj를 넘길 수 있도록 하자.  
+    this.roomObj = navParams.data.roomObj;
+    this.chat_user_id = this.userServices.getEmail();
     
-    af.object('/chatRooms/' + this.bookingDate + '/' + this.chat_room_id).subscribe(data=>{
-      this.roomObj = data;
-      //this.roomServices.setRoomInfo(data);
-      //roobObj에 departureDate를 넣은 것은 코드를 좀 더 readable하게 만들기 위해서다. this.bookingDate써도 무방.
-      this.displayDate = this.dateServices.getKMonthDay(this.roomObj['departureDate']);
-      this.displayTime = this.roomObj['departureTime'];
+    //////////////////////////// chatroom key가 안 되서 지금 send()작업 못 하는 중 ///////////////////////////////
+    /////////////////////////// 이것부터 고치고 다른 작업하시오. ////////////////////////////////////////////
 
-      //내가 방장 주인인지 아닌지 확인
-      if(this.roomObj['host'] === this.chat_user_id)
-        this.isHost = true;
-      else
-        this.isHost = false;
-    });
-  }
 
+
+
+    
+
+    //this.roomServices.setRoomInfo(data);
+    //roobObj에 departureDate를 넣은 것은 코드를 좀 더 readable하게 만들기 위해서다. this.bookingDate써도 무방.
+    this.displayDate = this.dateServices.getKMonthDay(this.roomObj['departureDate']);
+    this.displayTime = this.roomObj['departureTime'];
+
+    //내가 방장 주인인지 아닌지 확인
+    if(this.roomObj['host'] === this.chat_user_id)
+      this.isHost = true;
+    else
+      this.isHost = false;
+  }    
+  
   stringParser(sentence){
     let parsedID = sentence.replace('@', '');
     parsedID = parsedID.replace('.', '');
@@ -83,23 +84,24 @@ export class ChatRoomPage {
   }
 
   goBack(){
-      this.navCtrl.setRoot(TaxiListPage, {user_id: this.chat_user_id});
+      this.navCtrl.setRoot(TaxiListPage);
   }
 
-  send(){
-    if(this.chat_content !== ''){
-      this.chats.push({
+  send(chatContent: string): string{
+    if(chatContent != ''){
+      firebase.database().ref('/chats/'+this.roomObj.$key).push({
         user_id: this.chat_user_id,
-        content: this.chat_content,
+        content: chatContent,
         date_time: new Date().toLocaleString(),
         dateKey: this.roomKey
       });
 
-      this.chat_content = '';
     }
     else{
 
     }
+    //이게 되는지 한 번 보자.
+    return '';
   }
 
   quit(){
@@ -159,8 +161,7 @@ export class ChatRoomPage {
       FCMPlugin.onNotification(function(data){
         if(data.wasTrapped){
           alert("background: ");
-        }
-        else{
+        } else{
           alert(data.sendername + ': ' + data.message);
         }
       });

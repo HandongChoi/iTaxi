@@ -4,6 +4,10 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class DateProvider {
   
+  //provider의 맹점을 찾았다.
+  //만약에 이게 챗팅 같은거 할 때 이거 호출되고 나중 시간이 필요하면 어떻게 할꺼야?
+  //함수 다시 짤 생각해야된다. 현재 시간으로 setTime(now Date())만들 준비 해야 될듯.
+
   //한국 시간 기준(ISO 아님)으로 2018-1-1이 아닌 2018-01-01형식.
   private delimiter: string = '-';
   public nowYear: string = new Date().getFullYear().toString();

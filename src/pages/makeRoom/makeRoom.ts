@@ -57,19 +57,20 @@ export class MakeRoomPage {
     
     //지금 시간 보다 전 시간으로 예약하는 경우 처리
     if((this.nowDate+this.nowTime)>(this.bookingDate+this.bookingTime)){
-      console.log("nowDate : " + this.nowDate+this.nowTime);
-      console.log("bookingDate : " + this.bookingDate+this.bookingTime);
-      console.log("Error");
+      let alert = this.alertCtrl.create({
+        message: "현재 시간 이후로 예약해 주시기 바랍니다.",
+        buttons: [{
+          text: '확인'
+        }]
+      });
+      alert.present(); 
     } else{
       //출발지와 목적지가 같을 경우 처리
       if(this.departure == this.destination){
         let alert = this.alertCtrl.create({
           message: "출발지와 도착지를 다르게 입력하여 주세요.",
           buttons: [{
-            text: '확인',
-            handler: () => {
-              console.log('Okay');
-            }
+            text: '확인'
           }]
         });
         alert.present();     
@@ -87,22 +88,22 @@ export class MakeRoomPage {
               }
             },
             { text: '확인',
-              handler: data => {
-                //식별자는 uid로 만들자. 혹시라도 닉네임 및 다른거는 중복될 여지가 있기 때문이다.
-                let roomObj: Object = { departureure: this.departure,
+              handler: () => {
+                let roomObj: Object = { departure: this.departure,
                                         destination: this.destination,
-                                        depart_date: this.bookingDate,
-                                        departure_time: this.bookingTime,
+                                        departureDate: this.bookingDate,
+                                        departureTime: this.bookingTime,
                                         capacity: this.maxPeople,
-                                        currentPeople: 4-this.maxPeople,
-                                        host: this.userServices.getUID(),
-                                        participants: [this.userServices.getUID()]
+                                        currentPeople: 1,
+                                        host: this.userServices.getEmail(),
+                                        participants: [this.userServices.getEmail()],
+                                        full: false,
                                       };
-                let chatRoomUrl = this.af.list('/chatRooms/'+this.bookingDate).push(roomObj);
-                this.af.list('/rideHistory/'+this.userServices.getUID()+'/'+chatRoomUrl.key).push(roomObj);
-                console.log(chatRoomUrl.key);
-                console.log('Okay');
-                this.navCtrl.setRoot(ChatRoomPage, {chat_room_id:chatRoomUrl.key, bookingDate:this.bookingDate, user_id: this.user_id, whichPage: "makeRoom"});
+                // firebase 들어갈때에는 '.', '#', '$', '[', ']' 가 못들어감으로 UID로 전부 넣는걸로 한다. 나머지는 읽기 좋게 이메일로.
+                let chatRoomUrl = firebase.database().ref('/chatRooms/'+this.bookingDate).push(roomObj);
+                firebase.database().ref('/rideHistory/'+this.userServices.getUID()+'/'+chatRoomUrl.key).set(roomObj);
+                firebase.database().ref('/participants/'+chatRoomUrl.key).set([this.userServices.getEmail()]);
+                this.navCtrl.setRoot(ChatRoomPage, {roomObj: roomObj, user_id: this.user_id});
               }
             }]
         });
