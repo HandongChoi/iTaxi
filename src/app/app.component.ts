@@ -48,32 +48,37 @@ export class MyApp {
     this.splashScreen.show();
     console.log("splash screen on");
     this.initializeApp();
-    this.userServices.initialize().then(() => {
-      if (!this.userServices.isActivate()) {
-        this.rootPage = LoginPage;
+
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.userServices.initialize(user).then(() => {
+          this.user_id = this.userServices.getName();
+          this.uid = this.userServices.getUID();
+
+          let dates: FirebaseListObservable<any[]>;
+          let parsedUserId = this.stringParser(this.userServices.getEmail());
+          
+          dates = af.list('/rideHistory/'+parsedUserId);
+          dates.subscribe(data =>{
+            if(this.dates_array){
+              this.dates_array.pop();
+              this.dates_array.push(data);
+            }
+            else
+              this.dates_array.push(data);
+          });
+
+          this.rootPage = MainPage;
+        }).catch(error => {
+          alert("An error occured!" + error);
+        });
       }
       else {
-        this.rootPage = MainPage;
-        this.user_id = this.userServices.getName();
-        this.uid = this.userServices.getUID();
-
-        let dates: FirebaseListObservable<any[]>;
-        let parsedUserId = this.stringParser(this.userServices.getEmail());
-        
-        dates = af.list('/rideHistory/'+parsedUserId);
-        dates.subscribe(data =>{
-          if(this.dates_array){
-            this.dates_array.pop();
-            this.dates_array.push(data);
-          }
-          else
-            this.dates_array.push(data);
-        });
+        this.rootPage = LoginPage;
       }
       this.splashScreen.hide();
       console.log("splash screen out");
     });
-
     
     //
     // const unsubscribe = firebase.auth().onAuthStateChanged( user => {

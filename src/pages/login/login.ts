@@ -62,7 +62,7 @@ export class LoginPage {
             console.log("FCMPlugin type is undefined!");
           }
         }).then(()=>{
-          this.userServices.initialize().then(()=>{
+          this.userServices.initialize(authData).then(()=>{
             this.navCtrl.setRoot(MainPage)
           });
         });

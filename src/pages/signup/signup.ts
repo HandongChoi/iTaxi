@@ -96,7 +96,6 @@ export class SignupPage {
     this.termsFlag=true;
     this.infoFlag=true;
     this.completeFlag=false;
-    
   }
 
   setPage(page){
