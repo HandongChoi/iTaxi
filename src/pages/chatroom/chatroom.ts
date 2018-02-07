@@ -54,7 +54,7 @@ export class ChatRoomPage {
     let whichPage = navParams.data.whichPage;
 
     //content로 set해두자.
-    this.chats = af.list('/chats/'+ this.chat_room_id);
+    this.chats = af.list('/chats/'+ this.chat_room_id+ '/');
     this.room_object = af.object('/chatrooms/' + this.bookingDate + '/' + this.chat_room_id);
 
     this.subscribe = this.room_object.subscribe(data=>{

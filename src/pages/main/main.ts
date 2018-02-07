@@ -13,13 +13,6 @@ import { DatabaseQuery } from 'angularfire2/interfaces';
 })
 export class MainPage {
 
-  dates: FirebaseListObservable<any[]>;
-  nowDate: string = new Date().toLocaleDateString().replace(/\./g,'').replace(/ /g,'-');
-  dates_array: Array<any> = [];
-  days: Array<string> = [];
-  selectedDate: Date;
-  currentDate: Date = new Date();
-
   user_id: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase,
@@ -32,25 +25,11 @@ export class MainPage {
     //일단 지금 user의 정보를 email로 받아오고 있다.
     this.user_id = this.userServices.getEmail();
     console.log("Main user : "+this.user_id)
-    
-    // //이메일 이전것으로 pasrse 해서 탑승내역에 저장중.
-    // let parsedUserId = this.stringParser(this.user);
-    // this.dates = af.list('/rideHistory/'+parsedUserId);
-    // this.dates.subscribe(data =>{
-    //   this.dates_array.push(data);
-    // });
 
   }
 
   ioniViewDidLoad(){
     console.log("ionViewDidLoad at main.ts");
-  }
-
-  stringParser(sentence){
-    let parsedID = sentence.replace('@', '');
-    parsedID = parsedID.replace('.', '');
-
-    return parsedID;
   }
 
   setPage(page){

@@ -13,10 +13,12 @@ import { MainPage } from '../main/main';
 declare var FCMPlugin;
 
 @IonicPage()
+
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
 })
+
 export class LoginPage {
 
   public loginForm:FormGroup;
