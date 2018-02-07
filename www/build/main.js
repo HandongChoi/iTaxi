@@ -26,10 +26,10 @@ var map = {
 		1
 	],
 	"../pages/login/login.module": [
-		168
+		180
 	],
 	"../pages/main/main.module": [
-		180
+		168
 	],
 	"../pages/make-carpool-room/make-carpool-room.module": [
 		459,
@@ -75,49 +75,11 @@ module.exports = webpackAsyncContext;
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginPageModule", function() { return LoginPageModule; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login__ = __webpack_require__(92);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-
-
-var LoginPageModule = (function () {
-    function LoginPageModule() {
-    }
-    return LoginPageModule;
-}());
-LoginPageModule = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
-        declarations: [
-            __WEBPACK_IMPORTED_MODULE_2__login__["a" /* LoginPage */],
-        ],
-        imports: [
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["IonicPageModule"].forChild(__WEBPACK_IMPORTED_MODULE_2__login__["a" /* LoginPage */]),
-        ],
-    })
-], LoginPageModule);
-
-//# sourceMappingURL=login.module.js.map
-
-/***/ }),
-
-/***/ 180:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MainPageModule", function() { return MainPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__main__ = __webpack_require__(59);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pipes_pipes_module__ = __webpack_require__(181);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__main__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pipes_pipes_module__ = __webpack_require__(179);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -149,13 +111,13 @@ MainPageModule = __decorate([
 
 /***/ }),
 
-/***/ 181:
+/***/ 179:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PipesModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__date_date__ = __webpack_require__(415);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__date_date__ = __webpack_require__(412);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -178,6 +140,44 @@ PipesModule = __decorate([
 ], PipesModule);
 
 //# sourceMappingURL=pipes.module.js.map
+
+/***/ }),
+
+/***/ 180:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginPageModule", function() { return LoginPageModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login__ = __webpack_require__(93);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+var LoginPageModule = (function () {
+    function LoginPageModule() {
+    }
+    return LoginPageModule;
+}());
+LoginPageModule = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
+        declarations: [
+            __WEBPACK_IMPORTED_MODULE_2__login__["a" /* LoginPage */],
+        ],
+        imports: [
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["IonicPageModule"].forChild(__WEBPACK_IMPORTED_MODULE_2__login__["a" /* LoginPage */]),
+        ],
+    })
+], LoginPageModule);
+
+//# sourceMappingURL=login.module.js.map
 
 /***/ }),
 
@@ -444,10 +444,11 @@ TaxiListPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'page-taxi-list',template:/*ion-inline-start:"C:\Users\goodd\Desktop\CRA\itaxi\i-Taxi\src\pages\taxi-list\taxi-list.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title class = "top-title">택시조회</ion-title>\n\n  </ion-navbar>\n\n\n\n  <ion-grid class="small-table">\n\n    <ion-row>\n\n        <ion-col col-5>\n\n          <ion-grid>\n\n            <ion-row class = "rowUnderline">\n\n              <ion-col col-11>\n\n                <ion-item class="selectWrapper">\n\n                  <ion-select #newSelect [(ngModel)]="departFilter" interface="popover" placeholder="전체보기" (ionChange)="filterDeparture(departFilter)">\n\n                    <ion-option value="All" checked="true">전체보기</ion-option>\n\n                    <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>\n\n                  </ion-select>\n\n                </ion-item>\n\n              </ion-col>\n\n              <ion-col col-1> \n\n                <p class = "selectIcon">▼</p>\n\n              </ion-col>\n\n            </ion-row>\n\n          </ion-grid>\n\n        </ion-col>\n\n\n\n        <ion-col col-2 class = "rightArrow">  \n\n          <ion-icon name="arrow-round-forward"></ion-icon>\n\n        </ion-col>\n\n\n\n        <ion-col col-5>\n\n          <ion-grid>\n\n            <ion-row class = "rowUnderline">\n\n              <ion-col col-11>\n\n                <ion-item class="selectWrapper">\n\n                  <ion-select [(ngModel)]="destinationFilter" interface="popover" placeholder="전체보기" (ionChange)="filterDestination(destinationFilter)">\n\n                    <ion-option value="All" checked="true">전체보기</ion-option>\n\n                    <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>\n\n                  </ion-select>\n\n                </ion-item>\n\n              </ion-col>\n\n              <ion-col col-1> \n\n                <p class = "selectIcon">▼</p>\n\n              </ion-col>\n\n            </ion-row>\n\n          </ion-grid>\n\n        </ion-col>  \n\n    </ion-row>\n\n\n\n    <ion-row>\n\n      <ion-col col-2 *ngFor="let day of days" class="pointer">\n\n        <ion-item class="days" (click)="showChatroom(day)">\n\n          <p>{{day|date: "dd"}}</p>\n\n        </ion-item>\n\n      </ion-col>\n\n      <ion-col col-2 class="pointer">\n\n        <ion-item class="days_icon" (click)="showCalendar()" >\n\n          <p> + </p>\n\n        </ion-item>\n\n      </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n\n</ion-header>\n\n\n\n<ion-content>\n\n  <div>\n\n    <ion-grid class="mainGrid">\n\n      <ion-item-group>\n\n        <ion-item-divider *ngFor="let date of dates | async" (click)="goChatroom(date)" class="line"\n\n        [ngClass]="{full: date.participants.length >= date.capacity, exist: isExist(date.participants)}">\n\n          <ion-row>\n\n            <ion-col col-3>\n\n              <p>{{date.depart_date}}</p>\n\n              <p>{{date.depart_time}}</p>\n\n            </ion-col>\n\n            <ion-col col-7>\n\n              <p>{{date.departure}}</p>\n\n              <p>>{{date.destination}}</p>\n\n            </ion-col>\n\n            <ion-col col-2>\n\n              <p>{{date.participants.length}} / {{date.capacity}}</p>\n\n              <p>참여 {{ date.participants.length >= date.capacity ? "불가" : "가능" }}</p>\n\n            </ion-col>\n\n          </ion-row>\n\n        </ion-item-divider>\n\n      </ion-item-group>\n\n    </ion-grid>\n\n  </div>\n\n\n\n  <ion-fab right bottom>\n\n    <button color="dark" ion-fab (click)="makeRoom()"><ion-icon name="add"></ion-icon></button>\n\n  </ion-fab>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\goodd\Desktop\CRA\itaxi\i-Taxi\src\pages\taxi-list\taxi-list.html"*/,
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__["a" /* AngularFireDatabase */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_5_ionic2_date_picker__["DatePickerProvider"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5_ionic2_date_picker__["DatePickerProvider"]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["ModalController"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["ModalController"]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_6__providers_users_users__["a" /* UsersProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__providers_users_users__["a" /* UsersProvider */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_7__providers_date_date__["a" /* DateProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__providers_date_date__["a" /* DateProvider */]) === "function" && _g || Object])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"], __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__["a" /* AngularFireDatabase */],
+        __WEBPACK_IMPORTED_MODULE_5_ionic2_date_picker__["DatePickerProvider"], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["ModalController"],
+        __WEBPACK_IMPORTED_MODULE_6__providers_users_users__["a" /* UsersProvider */], __WEBPACK_IMPORTED_MODULE_7__providers_date_date__["a" /* DateProvider */]])
 ], TaxiListPage);
 
-var _a, _b, _c, _d, _e, _f, _g;
 //# sourceMappingURL=taxi-list.js.map
 
 /***/ }),
@@ -491,7 +492,7 @@ var MakeRoomPage = (function () {
         this.departure = "";
         this.selectDestination = { key: "포항역", value: "" };
         this.destination = "";
-        this.maxPeople = 4;
+        this.maxPeople = "4";
         this.msg = "";
         this.nowDate = this.dateServices.nowDate;
         this.nowTime = this.dateServices.nowTime;
@@ -517,10 +518,16 @@ var MakeRoomPage = (function () {
             "최대탑승인원 : " + this.maxPeople + "명" + "<br>";
         //지금 시간 보다 전 시간으로 예약하는 경우 처리
         if ((this.nowDate + this.nowTime) > (this.bookingDate + this.bookingTime)) {
+            console.log("nowDate : " + this.nowDate + this.nowTime);
+            console.log("bookingDate : " + this.bookingDate + this.bookingTime);
+            console.log("Error");
             var alert = this.alertCtrl.create({
-                message: "현재 시간 이후로 예약해 주시기 바랍니다.",
+                message: "출발시간을 현재시간 이후로 입력하여 주세요.",
                 buttons: [{
-                        text: '확인'
+                        text: '확인',
+                        handler: function () {
+                            console.log('Okay');
+                        }
                     }]
             });
             alert.present();
@@ -531,7 +538,22 @@ var MakeRoomPage = (function () {
                 var alert = this.alertCtrl.create({
                     message: "출발지와 도착지를 다르게 입력하여 주세요.",
                     buttons: [{
-                            text: '확인'
+                            text: '확인',
+                            handler: function () {
+                                console.log('Okay');
+                            }
+                        }]
+                });
+                alert.present();
+            }
+            else if (this.departure == "" || this.destination == "") {
+                var alert = this.alertCtrl.create({
+                    message: "출발지 혹은 도착지를 입력하여 주세요.",
+                    buttons: [{
+                            text: '확인',
+                            handler: function () {
+                                console.log('Okay');
+                            }
                         }]
                 });
                 alert.present();
@@ -559,6 +581,7 @@ var MakeRoomPage = (function () {
                                     departure_time: _this.bookingTime,
                                     capacity: _this.maxPeople,
                                     currentPeople: 1,
+                                    //4-parseInt(this.maxPeople),
                                     host: _this.user_id,
                                     participants: [_this.user_id]
                                 };
@@ -589,7 +612,7 @@ var MakeRoomPage = (function () {
 }());
 MakeRoomPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'page-make-room',template:/*ion-inline-start:"C:\Users\goodd\Desktop\CRA\itaxi\i-Taxi\src\pages\makeRoom\makeRoom.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title class="top-title">방만들기</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n  <ion-row justify-content-center style="padding-top:7%; height:8%; margin-top:12px;">\n\n    <ion-col col-3 >\n\n        <p align="center" class="max-people">출발지</p>\n\n    </ion-col>\n\n    <ion-col col-3 >\n\n      <div class="swap_button">\n\n        <button ion-button full large clear no-padding (click)="swapPlace()"></button>\n\n      </div>\n\n    </ion-col>\n\n    <ion-col col-3 >\n\n      <p align="center" class="max-people">도착지</p>\n\n    </ion-col>\n\n  </ion-row>\n\n\n\n  <div class="bottomRow">\n\n  <ion-row just-content-center>\n\n    <ion-col col-4.5 justify-content-center>\n\n      <ion-item text-wrap no-lines>\n\n        <ion-select text-wrap class="my-select" [(ngModel)]="selectDeparture.key" interface="popover" *ngIf="selectDeparture.key!=\'직접입력\'">\n\n          <ion-option text-wrap *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>\n\n        </ion-select>\n\n        <ion-input class="my-input" style="position:absolute" *ngIf="selectDeparture.key==\'직접입력\'" [(ngModel)]="selectDeparture.value" type="text" placeholder="기타장소"></ion-input>\n\n      </ion-item>\n\n    </ion-col>\n\n    <ion-col col-1 >\n\n      <button ion-button no-padding clear round class="my-btn" (click)="setDepartureDefault()" *ngIf="selectDeparture.key==\'직접입력\'"></button>\n\n    </ion-col>\n\n    \n\n    <ion-col col-1 >\n\n      <ion-icon class="arrowIcon" ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon>\n\n    </ion-col>\n\n    \n\n    <ion-col col-4.5 justify-content-center>\n\n      <ion-item text-wrap no-lines>\n\n        <ion-select text-wrap class="my-select" [(ngModel)]="selectDestination.key" interface="popover" *ngIf="selectDestination.key!=\'직접입력\'">\n\n          <ion-option text-wrap *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>\n\n        </ion-select>\n\n        <ion-input class="my-input" style="position:absolute" *ngIf="selectDestination.key==\'직접입력\'" [(ngModel)]="selectDestination.value" type="text" placeholder="기타장소"></ion-input> \n\n      </ion-item>    \n\n    </ion-col>\n\n    <ion-col col-1>\n\n        <button ion-button no-padding clear round class="my-btn" (click)="setDestinationDefault()" *ngIf="selectDestination.key==\'직접입력\'"></button>\n\n      </ion-col>\n\n  </ion-row>\n\n  </div>\n\n  \n\n  <ion-row justify-content-center style="padding-top:7%; height:8%; margin-top:0px;">\n\n    <p class="max-people">출발날짜</p>\n\n  </ion-row>\n\n\n\n  <div class="bottomRow">\n\n  <ion-row justify-content-center>\n\n    <ion-datetime padding class="my-date" displayFormat="YYYY년 M월 D일 ({{today}})" pickerFormat="YYYY-MM-DD" min={{min}} max={{max}} \n\n                  placeholder={{nowDate}} [(ngModel)]="bookingDate"></ion-datetime>   \n\n  </ion-row>\n\n  </div>\n\n  \n\n  <ion-row justify-content-center style="padding-top:7%; height:8%; margin-top:0px;">\n\n    <p class="max-people">출발시간</p>\n\n  </ion-row>\n\n\n\n  <div class="bottomRow">\n\n    <ion-row justify-content-center>\n\n      <!-- 지금 여기 밑에 placeholder가 제대로 작동하지 않는다. 이상하게 9시간의 시차 차이가 난다 -->\n\n      <!-- displayFormat 과 default 값을 바꾸어 주어 시간 이상한거 해결 -->\n\n      <ion-datetime padding class="my-time"  displayFormat="HH:mm" pickerFomat="HH mm" placeholder={{nowTime}} [(ngModel)]="bookingTime"></ion-datetime>\n\n    </ion-row>\n\n  </div>\n\n\n\n  <ion-row justify-content-center style="padding-top:7%; height:8%; margin-top:0px;">\n\n    <p class="max-people">최대탑승인원</p>\n\n  </ion-row>\n\n\n\n  <div class="bottomRow">\n\n    <ion-row justify-content-center>\n\n      <!-- <div class="cc-selector">\n\n        <ion-list radio-group [(ngModel)]="maxPeople">\n\n          <ion-radio value=2>\n\n            <ion-label class="drinkcard-cc twoButton" for="twoButton"></label>\n\n          </ion-radio>\n\n          <ion-radio value=3>\n\n            <ion-label class="drinkcard-cc threeButton"for="threeButton"></label>\n\n          </ion-radio>\n\n          <ion-radio value=2>\n\n            <ion-label class="drinkcard-cc fourButton" for="fourButton"></label>\n\n          </ion-radio>\n\n        </ion-list>\n\n      </div> -->\n\n      \n\n      <form>\n\n        <div class="cc-selector">\n\n          <input id="twoButton" type="radio" name="credit-card" value=2 [(ngModel)]="maxPeople"/>\n\n          <label class="drinkcard-cc twoButton" for="twoButton"></label>\n\n          \n\n          <input id="threeButton" type="radio" name="credit-card" value=3 [(ngModel)]="maxPeople"/>\n\n          <label class="drinkcard-cc threeButton"for="threeButton"></label>\n\n\n\n          <input id="fourButton" type="radio" name="credit-card" value=4 checked [(ngModel)]="maxPeople"/>\n\n          <label class="drinkcard-cc fourButton" for="fourButton"></label>\n\n        </div>\n\n      </form>\n\n    </ion-row>\n\n  </div>\n\n  \n\n  <div class="room_button">          \n\n    <button style="margin-top:15%" class="button customBtn" ion-button round (click)="makeRoom()" >방 만들기</button>\n\n  </div>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\goodd\Desktop\CRA\itaxi\i-Taxi\src\pages\makeRoom\makeRoom.html"*/,
+        selector: 'page-make-room',template:/*ion-inline-start:"C:\Users\goodd\Desktop\CRA\itaxi\i-Taxi\src\pages\makeRoom\makeRoom.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title class="top-title">방만들기</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n\n\n  <ion-row class="top-row" justify-content-center>\n\n    \n\n    <ion-col col-4.5 justify-content-center>\n\n        <p class="departure-label">출발지</p>\n\n    </ion-col>\n\n    \n\n    <ion-col col-1></ion-col>\n\n    \n\n    <ion-col col-auto>  \n\n      <div class="swap-btn">\n\n        <button ion-button full large clear no-padding (click)="swapPlace()"></button>\n\n      </div>\n\n    </ion-col>\n\n    \n\n    <ion-col col-1></ion-col>\n\n    \n\n    <ion-col col-4.5>\n\n      <p align="center" class="destination-label">도착지</p>\n\n    </ion-col>\n\n\n\n  </ion-row>\n\n\n\n  <div class="row-bottom">\n\n    <ion-row just-content-center>\n\n      \n\n      <ion-col col-4.5 justify-content-center>\n\n        <ion-item no-lines> \n\n          <ion-select class="my-select" [(ngModel)]="selectDeparture.key" interface="popover" *ngIf="selectDeparture.key!=\'직접입력\'">\n\n            <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>\n\n          </ion-select>\n\n          <ion-input text-center class="my-input" *ngIf="selectDeparture.key==\'직접입력\'" [(ngModel)]="selectDeparture.value" type="text" placeholder="기타장소"></ion-input>\n\n        </ion-item>\n\n      </ion-col>\n\n\n\n      <ion-col col-1>\n\n        <button ion-button no-padding clear round class="default-btn" (click)="setDepartureDefault()" *ngIf="selectDeparture.key==\'직접입력\'"></button>\n\n      </ion-col>\n\n      \n\n      <ion-col col-auto >\n\n        <ion-icon class="arrow-icon" ios="ios-arrow-forward" md="ios-arrow-forward"></ion-icon>\n\n      </ion-col>\n\n      \n\n      <ion-col col-4.5 justify-content-center>\n\n        <ion-item no-lines>\n\n          <ion-select class="my-select" [(ngModel)]="selectDestination.key" interface="popover" *ngIf="selectDestination.key!=\'직접입력\'">\n\n            <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>\n\n          </ion-select>\n\n          <ion-input text-center class="my-input" *ngIf="selectDestination.key==\'직접입력\'" [(ngModel)]="selectDestination.value" type="text" placeholder="기타장소"></ion-input> \n\n        </ion-item>    \n\n      </ion-col>\n\n      \n\n      <ion-col col-1>\n\n          <button ion-button no-padding clear round class="default-btn" (click)="setDestinationDefault()" *ngIf="selectDestination.key==\'직접입력\'"></button>\n\n      </ion-col>\n\n\n\n    </ion-row>\n\n  </div>\n\n  \n\n  <ion-row class="label-row" justify-content-center>\n\n    <p class="title-label">출발날짜</p>\n\n  </ion-row>\n\n\n\n  <div class="row-bottom">\n\n    <ion-row justify-content-center>\n\n      <ion-datetime padding class="my-date" displayFormat="YYYY년 M월 D일 ({{dateServices.getKToday(bookingDate)}})" pickerFormat="YYYY-MM-DD" min={{min}} max={{max}} \n\n                    placeholder={{nowDate}} [(ngModel)]="bookingDate" (ngModelChange)="dateServices.getKToday()"></ion-datetime>   \n\n    </ion-row>\n\n  </div>\n\n  \n\n  <ion-row class="label-row" justify-content-center>\n\n    <p class="title-label">출발시간</p>\n\n  </ion-row>\n\n\n\n  <div class="row-bottom">\n\n    <ion-row justify-content-center>\n\n      <!-- 지금 여기 밑에 placeholder가 제대로 작동하지 않는다. 이상하게 9시간의 시차 차이가 난다 -->\n\n      <!-- displayFormat 과 default 값을 바꾸어 주어 시간 이상한거 해결 -->\n\n      <ion-datetime padding class="my-time"  displayFormat="HH:mm" pickerFomat="HH mm" placeholder={{nowTime}} [(ngModel)]="bookingTime"></ion-datetime>\n\n    </ion-row>\n\n  </div>\n\n\n\n  <ion-row class="label-row" justify-content-center>\n\n    <p class="title-label">최대탑승인원</p>\n\n  </ion-row>\n\n\n\n  <div class="row-bottom">\n\n    <ion-row justify-content-center>\n\n      \n\n      <form>\n\n        <div class="cc-selector">\n\n          <input id="twoButton" type="radio" name="max-People" value="2" [(ngModel)]="maxPeople">\n\n          <label class="maxPeople-cc twoButton" for="twoButton"></label>\n\n\n\n          <input id="threeButton" type="radio" name="max-People" value="3" [(ngModel)]="maxPeople">\n\n          <label class="maxPeople-cc threeButton"for="threeButton"></label>\n\n\n\n          <input id="fourButton" type="radio" name="max-People" value="4" [(ngModel)]="maxPeople">\n\n          <label class="maxPeople-cc fourButton" for="fourButton"></label>\n\n        </div>\n\n      </form>\n\n      \n\n    </ion-row>\n\n  </div>\n\n  \n\n  <div class="room-btn-align">          \n\n    <button class="room-btn" ion-button round (click)="makeRoom()" >방만들기</button>\n\n  </div>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\goodd\Desktop\CRA\itaxi\i-Taxi\src\pages\makeRoom\makeRoom.html"*/,
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["AlertController"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["AlertController"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_5__providers_date_date__["a" /* DateProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__providers_date_date__["a" /* DateProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__["a" /* AngularFireDatabase */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_4__providers_users_users__["a" /* UsersProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__providers_users_users__["a" /* UsersProvider */]) === "function" && _f || Object])
 ], MakeRoomPage);
@@ -607,7 +630,7 @@ var _a, _b, _c, _d, _e, _f;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(59);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -680,7 +703,7 @@ UsersProvider = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RoomsProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(59);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -891,13 +914,13 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angularfire2_database__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_status_bar__ = __webpack_require__(351);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_splash_screen__ = __webpack_require__(353);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__providers_auth_auth__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__providers_auth_auth__ = __webpack_require__(40);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_ionic2_date_picker__ = __webpack_require__(187);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_ionic2_date_picker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11_ionic2_date_picker__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_taxi_list_taxi_list_module__ = __webpack_require__(311);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_chatroom_chatroom_module__ = __webpack_require__(457);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_login_login_module__ = __webpack_require__(168);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_main_main_module__ = __webpack_require__(180);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_login_login_module__ = __webpack_require__(180);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_main_main_module__ = __webpack_require__(168);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_personal_info_personal_info_module__ = __webpack_require__(182);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_setting_setting_module__ = __webpack_require__(309);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_signup_signup_module__ = __webpack_require__(310);
@@ -907,7 +930,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__providers_date_date__ = __webpack_require__(50);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__providers_users_users__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__providers_rooms_rooms__ = __webpack_require__(308);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__pipes_pipes_module__ = __webpack_require__(181);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__pipes_pipes_module__ = __webpack_require__(179);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -965,8 +988,8 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["IonicModule"].forRoot(__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* MyApp */], {}, {
                 links: [
                     { loadChildren: '../pages/carpool-list/carpool-list.module#CarpoolListPageModule', name: 'CarpoolListPage', segment: 'carpool-list', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/main/main.module#MainPageModule', name: 'MainPage', segment: 'main', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/make-carpool-room/make-carpool-room.module#MakeCarpoolRoomPageModule', name: 'MakeCarpoolRoomPage', segment: 'make-carpool-room', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/personal-info/personal-info.module#PersonalInfoPageModule', name: 'PersonalInfoPage', segment: 'personal-info', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/reset-password/reset-password.module#ResetPasswordPageModule', name: 'ResetPasswordPage', segment: 'reset-password', priority: 'low', defaultHistory: [] },
@@ -1013,15 +1036,15 @@ AppModule = __decorate([
 
 /***/ }),
 
-/***/ 39:
+/***/ 40:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(59);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase__ = __webpack_require__(169);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase__ = __webpack_require__(181);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_firebase__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1080,7 +1103,7 @@ AuthProvider = __decorate([
 
 /***/ }),
 
-/***/ 415:
+/***/ 412:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1145,7 +1168,7 @@ DatePipe = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__main_main__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__main_main__ = __webpack_require__(58);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1231,8 +1254,8 @@ PersonalInfoPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_auth_auth__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__validators_email__ = __webpack_require__(93);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_auth_auth__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__validators_email__ = __webpack_require__(94);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1638,8 +1661,8 @@ webpackContext.id = 420;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SettingPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__login_login__ = __webpack_require__(92);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_auth_auth__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__login_login__ = __webpack_require__(93);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__ = __webpack_require__(18);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1722,8 +1745,8 @@ SettingPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_auth_auth__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__validators_email__ = __webpack_require__(93);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_auth_auth__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__validators_email__ = __webpack_require__(94);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__validators_phone__ = __webpack_require__(427);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__validators_studentID__ = __webpack_require__(428);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1895,14 +1918,14 @@ var StudentIDValidator = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(351);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(353);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_login_login__ = __webpack_require__(92);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_auth_auth__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_login_login__ = __webpack_require__(93);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_auth_auth__ = __webpack_require__(40);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_users_users__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angularfire2_database__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_fcm__ = __webpack_require__(354);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_firebase__ = __webpack_require__(169);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_firebase__ = __webpack_require__(181);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_firebase__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_main_main__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_main_main__ = __webpack_require__(58);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2165,7 +2188,7 @@ ChatRoomPageModule = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DateProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__ = __webpack_require__(59);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_add_operator_map__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2204,7 +2227,8 @@ var DateProvider = (function () {
     };
     //input: 2018-1-23, output: 화
     DateProvider.prototype.getKToday = function (bookingDate) {
-        return this.week[new Date(bookingDate.toString()).getDay()];
+        this.today = this.week[new Date(bookingDate).getDay()];
+        return this.week[new Date(bookingDate).getDay()];
     };
     //input: 2018-1-23, output: 1월 23일
     DateProvider.prototype.getKMonthDay = function (dateWithDelimiter) {
@@ -2233,7 +2257,7 @@ DateProvider = __decorate([
 
 /***/ }),
 
-/***/ 59:
+/***/ 58:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2515,6 +2539,7 @@ var ChatRoomPage = (function () {
             } // 방장이 아닌 다른 사람이 나갈 경우
             else {
                 //방장이고, 방에 사람이 없을 때
+                console.log("delete room: ", this.roomServices.room);
                 if (this.roomServices.room['currentPeople'] === 1) {
                     this.room_object.remove();
                     //this.rideHistory.remove();
@@ -2569,7 +2594,7 @@ var _a, _b, _c, _d, _e, _f, _g, _h;
 
 /***/ }),
 
-/***/ 92:
+/***/ 93:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2577,11 +2602,11 @@ var _a, _b, _c, _d, _e, _f, _g, _h;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__validators_email__ = __webpack_require__(93);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__validators_email__ = __webpack_require__(94);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_auth_auth__ = __webpack_require__(40);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_users_users__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_angularfire2_database__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__main_main__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__main_main__ = __webpack_require__(58);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2699,7 +2724,7 @@ LoginPage = __decorate([
 
 /***/ }),
 
-/***/ 93:
+/***/ 94:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

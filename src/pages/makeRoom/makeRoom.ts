@@ -22,7 +22,7 @@ export class MakeRoomPage {
   selectDestination: Object = {key:"포항역", value:""};
   destination: string = "";
 
-  maxPeople: number = 4; 
+  maxPeople: string = "4"; 
   msg: string="";
 
   nowDate: string = this.dateServices.nowDate;
@@ -37,7 +37,7 @@ export class MakeRoomPage {
   user_id: string; 
 
   spotList: Array<string> = ["한동대학교", "포항역", "양덕", "고속버스터미널", "시외버스터미널", "북부해수욕장", "육거리", "직접입력"];;
-  
+
   constructor(public alertCtrl: AlertController, public navParams: NavParams, public dateServices: DateProvider,
                public navCtrl:NavController, public af: AngularFireDatabase, public userServices: UsersProvider){
     this.user_id = this.userServices.getEmail();
@@ -57,24 +57,48 @@ export class MakeRoomPage {
     
     //지금 시간 보다 전 시간으로 예약하는 경우 처리
     if((this.nowDate+this.nowTime)>(this.bookingDate+this.bookingTime)){
+      console.log("nowDate : " + this.nowDate+this.nowTime);
+      console.log("bookingDate : " + this.bookingDate+this.bookingTime);
+      console.log("Error");
+
       let alert = this.alertCtrl.create({
-        message: "현재 시간 이후로 예약해 주시기 바랍니다.",
+        message: "출발시간을 현재시간 이후로 입력하여 주세요.",
         buttons: [{
-          text: '확인'
+          text: '확인',
+          handler: () => {
+            console.log('Okay');
+          }
         }]
       });
-      alert.present(); 
+      alert.present();
+
     } else{
       //출발지와 목적지가 같을 경우 처리
-      if(this.departure == this.destination){
-        let alert = this.alertCtrl.create({
-          message: "출발지와 도착지를 다르게 입력하여 주세요.",
-          buttons: [{
-            text: '확인'
-          }]
-        });
-        alert.present();     
-      } else{
+        if(this.departure == this.destination){
+          let alert = this.alertCtrl.create({
+            message: "출발지와 도착지를 다르게 입력하여 주세요.",
+            buttons: [{
+              text: '확인',
+              handler: () => {
+                console.log('Okay');
+              }
+            }]
+          });
+          alert.present();}
+        // input type 으로 입력을 받을 때 값을 입력하지 않는 경우 처리  
+        else if(this.departure=="" || this.destination==""){
+          let alert = this.alertCtrl.create({
+            message: "출발지 혹은 도착지를 입력하여 주세요.",
+            buttons: [{
+              text: '확인',
+              handler: () => {
+                console.log('Okay');
+              }
+            }]
+          });
+          alert.present();}
+
+        else{
         let alert = this.alertCtrl.create({
           title: '방만들기',
           subTitle: '방을 만드시겠습니까?',  
@@ -97,6 +121,7 @@ export class MakeRoomPage {
                                         departure_time: this.bookingTime,
                                         capacity: this.maxPeople,
                                         currentPeople: 1,
+                                        //4-parseInt(this.maxPeople),
                                         host: this.user_id,
                                         participants: [this.user_id]
                                       };
@@ -121,4 +146,5 @@ export class MakeRoomPage {
   swapPlace(){
     [this.selectDeparture, this.selectDestination] = [this.selectDestination, this.selectDeparture];
   }
+
 }

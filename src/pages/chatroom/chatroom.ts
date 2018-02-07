@@ -208,7 +208,6 @@ export class ChatRoomPage {
         date_time: new Date().toLocaleString(),
         dateKey: this.chat_room_id
       });
-
     }
     else{
 
@@ -242,6 +241,7 @@ export class ChatRoomPage {
       }// 방장이 아닌 다른 사람이 나갈 경우
       else{
         //방장이고, 방에 사람이 없을 때
+        console.log("delete room: ", this.roomServices.room);
         if(this.roomServices.room['currentPeople'] === 1){
           this.room_object.remove();
           //this.rideHistory.remove();
