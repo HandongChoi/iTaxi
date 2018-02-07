@@ -49,42 +49,36 @@ export class MyApp {
     console.log("splash screen on");
     this.initializeApp();
 
-    this.userServices.initialize().then(() => {
-      // used for an example of ngFor and navigation
-      this.pages = [
-        { title: 'Home', component: HomePage },
-        { title: 'MakeRoom', component: MakeRoomPage},
-        { title: 'TaxiList', component: TaxiListPage},
-        { title: 'Setting', component: SettingPage},
-        { title: 'SignupPage', component: SignupPage},
-      ];
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.userServices.initialize(user).then(() => {
+          this.user_id = this.userServices.getName();
+          this.uid = this.userServices.getUID();
 
-      if (!this.userServices.isActivate()) {
-        this.rootPage = LoginPage;
-      }
-      else {
-        this.rootPage = MainPage;
-        this.user_id = this.userServices.getName();
-        this.uid = this.userServices.getUID();
+          let dates: FirebaseListObservable<any[]>;
+          let parsedUserId = this.stringParser(this.userServices.getEmail());
+          
+          dates = af.list('/rideHistory/'+parsedUserId);
+          dates.subscribe(data =>{
+            if(this.dates_array){
+              this.dates_array.pop();
+              this.dates_array.push(data);
+            }
+            else
+              this.dates_array.push(data);
+          });
 
-        let dates: FirebaseListObservable<any[]>;
-        let parsedUserId = this.stringParser(this.userServices.getEmail());
-        
-        dates = af.list('/rideHistory/'+parsedUserId);
-        dates.subscribe(data =>{
-          if(this.dates_array){
-            this.dates_array.pop();
-            this.dates_array.push(data);
-          }
-          else
-            this.dates_array.push(data);
+          this.rootPage = MainPage;
+        }).catch(error => {
+          alert("An error occured!" + error);
         });
       }
-      
+      else {
+        this.rootPage = LoginPage;
+      }
       this.splashScreen.hide();
       console.log("splash screen out");
     });
-
     
     //
     // const unsubscribe = firebase.auth().onAuthStateChanged( user => {
@@ -162,6 +156,10 @@ export class MyApp {
     console.log("openPage");
   }
 
+  setUID(uid){
+    this.user_id = uid;
+  }
+
   stringParser(sentence){
     let parsedID = sentence.replace('@', '');
     parsedID = parsedID.replace('.', '');
@@ -189,20 +187,9 @@ export class MyApp {
     console.log(page+" push at app.component.ts");
   }
 
-  goCarpoolListPage(){
-    alert('Carpool Page');
-    console.log("goCarpoolListPage() at app.componenent.ts");
-  }
-
-  goMakeCarpoolRoomPage(){
-    alert('Make Carpool Room Page');
-    console.log("goMakeCarpoolRoomPage() at app.componenent.ts");
-  }
-
   logout(){
     this.authProvider.logoutUser();
     this.navCtrl.setRoot(LoginPage, {user_id: this.user_id});
     console.log("Logout");
   }
-
 }

@@ -45,7 +45,13 @@ export class ChatRoomPage {
 
   constructor(public navCtrl: NavController, public af:AngularFireDatabase, public navParams: NavParams, public platform:Platform,
               public roomServices: RoomsProvider, public dateServices: DateProvider, public userServices: UsersProvider) {
-
+    console.log('constructor chatroom'); 
+    //chatRoom을 올 수 있는 방법은 탑승내역, 챗방 만들때, 리스트에서 올 수 있다. 항상 roomObj를 넘길 수 있도록 하자.  
+    this.roomObj = navParams.data.roomObj;
+    this.chat_user_id = this.userServices.getEmail();
+    
+    //////////////////////////// chatroom key가 안 되서 지금 send()작업 못 하는 중 ///////////////////////////////
+    /////////////////////////// 이것부터 고치고 다른 작업하시오. ////////////////////////////////////////////
     console.log('constructor chatroom');  
       
     this.bookingDate = navParams.data.bookingDate;
@@ -97,7 +103,6 @@ export class ChatRoomPage {
     // // console.log('hi', this.rideHistory.$ref.ref.key);
     // let count = 0;
 
-
     // this.room.forEach(data =>{
     //   console.log("시작하자");
     //   console.log(data);
@@ -110,12 +115,10 @@ export class ChatRoomPage {
     //     this.room_dest = data[5].$value;
     //     this.room_host = data[6].$value;
     //     this.room_participants = data[7];
-
     //     this.room_month = (this.room_depart_date[5] + this.room_depart_date[6]);
     //     this.room_day= (this.room_depart_date[8] + this.room_depart_date[9]);
     //     this.room_hour= (this.room_depart_time[0] + this.room_depart_time[1]);
     //     this.room_minute=(this.room_depart_time[3]+this.room_depart_time[4]);
-
     //     this.roomKey = this.room.$ref.ref.parent.key;
     //     console.log(this.roomKey);
         // //내가 방장 주인인지 아닌지 확인
@@ -123,9 +126,7 @@ export class ChatRoomPage {
         //   this.isHost = true;
         // else
         //   this.isHost = false;
-
     //     var isExist = false;
-
     //     //목록에 있는지 없는지 여부 확인.
     //     for(let i = 0; i < this.room_participants.length; i++){
     //       if(this.room_participants[i] === this.chat_user_id){
@@ -133,7 +134,6 @@ export class ChatRoomPage {
     //         break;
     //       }
     //     }
-
     //     //이거는 탑승내역을 기록하는건데 탑승 내역은 방 만들때 넣자.
     //     //그리고 방을 들어갈때 탑승 내역을 넣자.(이때에는 탑승 했던건지 아닌지 확인하고 넣으면 된다.)
     //     if(whichPage === 'makeRoom'){
@@ -147,12 +147,10 @@ export class ChatRoomPage {
     //         roomParticipants: this.room_participants
     //       });
     //     }
-
     //     //목록에 없다면 넣는 것 같다. 방에 인원 추가하고 탑승 내역도 수정하는것 같다.
     //     if(isExist === false){
     //       if(parseInt(this.room_capacity) > this.room_participants.length){
     //         this.room_participants.push(this.chat_user_id);
-
     //         this.room_object.update({
     //           capacity: this.room_capacity,
     //           depart_date: this.room_depart_date,
@@ -175,10 +173,21 @@ export class ChatRoomPage {
     //     };
     //   }
       // count++;
-
     // });
-  }
 
+    //this.roomServices.setRoomInfo(data);
+    //roobObj에 departureDate를 넣은 것은 코드를 좀 더 readable하게 만들기 위해서다. this.bookingDate써도 무방.
+ /*   this.displayDate = this.dateServices.getKMonthDay(this.roomObj['departure_date']);
+    this.displayTime = this.roomObj['departure_time'];
+
+    //내가 방장 주인인지 아닌지 확인
+    if(this.roomObj['host'] === this.chat_user_id)
+      this.isHost = true;
+    else
+      this.isHost = false;
+      */
+  }    
+  
   stringParser(sentence){
     let parsedID = sentence.replace('@', '');
     parsedID = parsedID.replace('.', '');
@@ -187,23 +196,25 @@ export class ChatRoomPage {
   }
 
   goBack(){
-      this.navCtrl.setRoot(TaxiListPage, {user_id: this.chat_user_id});
+      this.navCtrl.setRoot(TaxiListPage);
   }
 
-  send(){
-    if(this.chat_content !== ''){
-      this.chats.push({
+  send(chatContent: string): string{
+    if(chatContent != ''){
+      console.log("test in chatroom.ts : ", this.roomObj);
+      firebase.database().ref('/chats/'+this.roomObj['key']).push({
         user_id: this.chat_user_id,
-        content: this.chat_content,
+        content: chatContent,
         date_time: new Date().toLocaleString(),
         dateKey: this.chat_room_id
       });
 
-      this.chat_content = '';
     }
     else{
 
     }
+    //이게 되는지 한 번 보자.
+    return '';
   }
 
   quit(){
@@ -244,7 +255,7 @@ export class ChatRoomPage {
 
           //this.rideHistory.remove();
         }
-        this.navCtrl.setRoot(TaxiListPage, {user_id: this.chat_user_id});
+        this.navCtrl.setRoot(TaxiListPage);
       }
       //방장 다음 사람으로 옮기기
     }
@@ -255,8 +266,7 @@ export class ChatRoomPage {
       FCMPlugin.onNotification(function(data){
         if(data.wasTrapped){
           alert("background: ");
-        }
-        else{
+        } else{
           alert(data.sendername + ': ' + data.message);
         }
       });

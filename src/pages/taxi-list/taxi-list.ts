@@ -67,23 +67,25 @@ export class TaxiListPage {
   }
 
   showChatroom(date) {
-    this.selectedDate = date;
-    console.log(this.makeStringFromDate(date));
-    this.dates = this.af.list('/chatrooms/' + this.makeStringFromDate(date));
+    if(date != undefined){
+      this.selectedDate = date;
+      console.log(this.makeStringFromDate(date));
+      this.dates = this.af.list('/chatrooms/' + this.makeStringFromDate(date));
+    }
   }
 
   goChatroom(date) {
     console.log("asd", date, date.$key, date['departure_date']);
     let chat_room_id_val = date.$key;
     let bookingDate_val= date['departure_date'];
+    console.log("date log: ", date);
 
     // 00:40 to 2018-01-30
-
     //participant array에 push
     // 참여자가 아니고, 인원 full 아니면 push
     // 참여자이면 그냥 enter
     // full 인원이면 deny
-    this.navCtrl.setRoot(ChatRoomPage, {chat_room_id: chat_room_id_val, bookingDate: bookingDate_val, user_id: this.user_id});
+    this.navCtrl.setRoot(ChatRoomPage, {chat_room_id: chat_room_id_val, bookingDate: bookingDate_val, user_id: this.user_id, roomObj: date});
   }
 
   makeRoom(){

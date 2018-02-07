@@ -74,6 +74,7 @@
         <ion-input formControlName="email" type="email" placeholder="Your email address" [class.invalid]="!signupForm.controls.email.valid && signupForm.controls.email.dirty">
         </ion-input>
       </ion-item>
+      <!-- dirty의 뜻은 '상태가 바꼈니?' 이다-->
       <ion-item class="error-message" *ngIf="!signupForm.controls.email.valid && signupForm.controls.email.dirty">
         <p>이메일 양식을 제대로 입력해주세요!</p>
       </ion-item>
@@ -94,7 +95,7 @@
       <ion-item class="error-message" *ngIf="!signupForm.controls.password2.valid && signupForm.controls.password2.dirty">
         <p>비밀번호가 일치 하지 않습니다. 확인해주세요.</p>
       </ion-item>
-      <!-- 이거를 제출 버튼 옆에다가 놔두면 좋겠다.
+      <!-- 이거를 제출 버튼 옆에다가 놔두면 좋겠다. 
       <button ion-button medium round style="margin-top: 15px" (click)="TermFlagUp()">약관 확인</button>
       -->
       <button ion-button medium round type="submit" style="margin-top: 15px" [disabled]="!signupForm.valid" (click)="CompleteFlagUp()"> 가입하기 </button>
@@ -104,7 +105,7 @@
         <ion-card class="terms_content">
           회원가입이 완료되었습니다
         </ion-card>
-        <button ion-button medium round color="primary" style = "margin-top: 15px" (click)="goLoginPage()">
+        <button ion-button medium round color="primary" style = "margin-top: 15px" (click)="setPage('LoginPage')">
           로그인하기
         </button>
       </div>

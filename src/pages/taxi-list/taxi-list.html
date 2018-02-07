@@ -35,7 +35,7 @@
             <ion-row class = "rowUnderline">
               <ion-col col-11>
                 <ion-item class="selectWrapper">
-                  <ion-select [selectOptions]="destinationOptions" [(ngModel)]="destinationFilter" placeholder="전체보기" interface="popover" (ionChange)="filterDestination(destinationFilter)">
+                  <ion-select [(ngModel)]="destinationFilter" interface="popover" placeholder="전체보기" (ionChange)="filterDestination(destinationFilter)">
                     <ion-option value="All" checked="true">전체보기</ion-option>
                     <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>
                   </ion-select>

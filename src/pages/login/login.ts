@@ -18,11 +18,9 @@ declare var FCMPlugin;
   templateUrl: 'login.html',
 })
 export class LoginPage {
-
   public loginForm:FormGroup;
   public loading:Loading;
 
-  setLoading:Loading;
   firestore: any;
 
   constructor(public navCtrl:NavController, public navParams: NavParams, public loadingCtrl:LoadingController,
@@ -64,7 +62,9 @@ export class LoginPage {
             console.log("FCMPlugin type is undefined!");
           }
         }).then(()=>{
-          this.navCtrl.setRoot(MainPage);
+          this.userServices.initialize(authData).then(()=>{
+            this.navCtrl.setRoot(MainPage)
+          });
         });
       }, error => {
         this.loading.dismiss().then( () => {

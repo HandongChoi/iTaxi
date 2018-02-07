@@ -27,7 +27,7 @@ export class MakeRoomPage {
 
   nowDate: string = this.dateServices.nowDate;
   nowTime: string = this.dateServices.nowTime;
-  today: string = this.dateServices.today;
+  today: string = this.dateServices.today; //요일 표시
   bookingDate: string = this.nowDate;
   bookingTime: string = this.nowTime;
 
@@ -57,19 +57,20 @@ export class MakeRoomPage {
     
     //지금 시간 보다 전 시간으로 예약하는 경우 처리
     if((this.nowDate+this.nowTime)>(this.bookingDate+this.bookingTime)){
-      console.log("nowDate : " + this.nowDate+this.nowTime);
-      console.log("bookingDate : " + this.bookingDate+this.bookingTime);
-      console.log("Error");
+      let alert = this.alertCtrl.create({
+        message: "현재 시간 이후로 예약해 주시기 바랍니다.",
+        buttons: [{
+          text: '확인'
+        }]
+      });
+      alert.present(); 
     } else{
       //출발지와 목적지가 같을 경우 처리
       if(this.departure == this.destination){
         let alert = this.alertCtrl.create({
           message: "출발지와 도착지를 다르게 입력하여 주세요.",
           buttons: [{
-            text: '확인',
-            handler: () => {
-              console.log('Okay');
-            }
+            text: '확인'
           }]
         });
         alert.present();     
@@ -103,7 +104,7 @@ export class MakeRoomPage {
                 this.af.list('/rideHistory/'+this.userServices.getUID()+'/'+chatRoomUrl.key).push(roomObj);
                 console.log(chatRoomUrl.key);
                 console.log('Okay');
-                this.navCtrl.setRoot(ChatRoomPage, {chat_room_id:chatRoomUrl.key, bookingDate:this.bookingDate, user_id: this.user_id, whichPage: "makeRoom"});
+                this.navCtrl.setRoot(ChatRoomPage, {chat_room_id:chatRoomUrl.key, bookingDate:this.bookingDate, user_id: this.user_id, whichPage: "makeRoom", roomObj: roomObj});
               }
             }]
         });
