@@ -21,28 +21,23 @@
     <div class="card-title">i-Taxi</div>
     <div class="card-subtitle">타러가기</div>
   </ion-card> -->
-  <div class="menu">
-    <ion-row>
-      <ion-col col-6>
-        <button class="taxi" ion-button large full (click)="setPage('TaxiListPage')" >
-            <!-- <img class="buttonImg" src="assets/imgs/whiteTaxi.png" alt="taxi"> -->
-          <!-- <ion-row> -->
-            아이택시<br />
-            탑승
-          <!-- </ion-row> -->
-        </button>
-      </ion-col>
-      <ion-col col-6 text-right>
-        <button ion-button large full color="secondary" text-right (click)="goCarpoolListPage()" >
-          카풀<br />
-          탑승
-        </button>
-      </ion-col>
-    </ion-row>
-  </div>
 </ion-header>
-
 <ion-content>
+
+  <ion-buttons>
+    <button ion-button large full icon-left (click)="setPage('TaxiListPage')">
+      <ion-icon name="car"></ion-icon>
+      i-Taxi 탑승
+    </button>
+    <button ion-button large full color="secondary" icon-left (click)="setPage('TaxiListPage')">
+      <ion-icon name="car"></ion-icon>
+      카풀 탑승
+    </button>
+    <button ion-button large full color="tertiary" icon-left (click)="setPage('PersonalInfoPage')">
+      <ion-icon name="person"></ion-icon>
+      마이페이지
+    </button>
+
     <!--
   round button
     <ion-grid>
@@ -63,13 +58,10 @@
       </ion-row>
     </ion-grid>
   -->
-  <div class="ticketLabel">
-    <ion-icon color ="secondary" name="person"></ion-icon>
-    탑승예정
-  </div>
+  </ion-buttons>
 
   <!-- my Ticket -->
-  <!-- <div *ngFor="let dates of dates_array">
+  <div *ngFor="let dates of dates_array">
     <ion-card style="border-radius:5px; margin-top:30px" *ngFor="let date of dates | DatePipe">
       <ion-row style="background-color:#0054a6; color:white; padding:5px 0 5px 15px">
         {{date.roomDate}}
@@ -83,47 +75,6 @@
           <h3>{{date.roomDepart}} <ion-icon name="arrow-forward"></ion-icon>{{date.roomDest}}</h3>
           <p padding-left style="font-size: 10px">{{date.roomTime}}</p>
         </ion-col>
-      </ion-row>
-    </ion-card>
-  </div> -->
-
-  <div *ngFor="let dates of dates_array">
-    <ion-card class = "ticket" *ngFor="let date of dates | DatePipe">
-      <ion-row>
-        <ion-col col-2 style="padding:0px; border:0">
-          <img src="assets/imgs/blueTaxi.png" alt="taxi">
-        </ion-col>
-
-        <ion-col col-3 text-left>
-          <div class="text">
-            {{date.roomDate}}
-            <!-- 12.30 토요일 -->
-          </div>
-          <div style="font-size: 2rem">
-            {{date.roomTime}}
-            <!-- 16:00 -->
-          </div>
-        </ion-col>
-
-
-        <ion-col col-5 style="padding-left:25px">
-          <div class="text">
-            {{date.roomDepart}}
-          </div>
-          <div class="text2">
-            <ion-icon name="arrow-forward"></ion-icon>&nbsp;&nbsp;{{date.roomDest}}
-          </div>
-        </ion-col>
-
-        <ion-col col-2 text-center style="border:0">
-          <div class="text">
-            택시
-          </div>
-          <div class="text2">
-            {{date.roomParticipants.length}}/{{date.roomCapacity}}
-          </div>
-        </ion-col>
-
       </ion-row>
     </ion-card>
   </div>

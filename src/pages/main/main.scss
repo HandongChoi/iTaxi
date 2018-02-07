@@ -1,71 +1,12 @@
 page-main {
-  $ticket_bgColor : #efefef;
-  $fontColor : #29B5EF;
-
-  // .large_button {
-  //   line-height: 100vh !important;
-  //   width:100%;
-  // }
-  // .customBtn{
-  //   width:70%;
-  // }
-  .menu {
-    margin: 0 10px;
-    button {
-      border-radius: 10px;
-      height: 30rem;
-      font-size: 8vw;
-    }
-    .taxi {
-      background-image: url("assets/imgs/whiteTaxi.png");
-    }
-    .buttonImg{
-      display: inline-block;
-
-    }
-    div{
-      display: inline-block;
-    }
+  .large_button {
+    line-height: 100vh !important;
+    width:100%;
+  }
+  .customBtn{
+    width:70%;
   }
 
-  .ticketLabel {
-    float: right;
-    //padding: 5px;
-    margin: 12px;
-    color: $fontColor
-  }
-
-  .ticket{
-    border-radius: 5px;
-    margin-top: 30px;
-    background-color: $ticket_bgColor;
-    color: $fontColor;
-
-    ion-row:first-of-type{
-      padding: 3px 0px;
-    }
-
-    ion-row:first-of-type ~ ion-row {
-      padding: 0px;
-    }
-
-    ion-col{
-      border-right: 1px solid $fontColor;
-      padding: 0 8px;
-    }
-
-    .text{
-      display: inline-table;
-      font-size: 1.2rem;
-    }
-    .text2{
-      display: inline-table;
-      font-size: 1.7rem;
-      //  font-weight: bold;
-    }
-  }
-
-  /**
   .card-background-page {
     ion-card {
       position: relative;
@@ -86,5 +27,5 @@ page-main {
       width: 100%;
       color: #fff;
     }
-  }**/
+  }
 }
