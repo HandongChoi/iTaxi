@@ -187,20 +187,9 @@ export class MyApp {
     console.log(page+" push at app.component.ts");
   }
 
-  goCarpoolListPage(){
-    alert('Carpool Page');
-    console.log("goCarpoolListPage() at app.componenent.ts");
-  }
-
-  goMakeCarpoolRoomPage(){
-    alert('Make Carpool Room Page');
-    console.log("goMakeCarpoolRoomPage() at app.componenent.ts");
-  }
-
   logout(){
     this.authProvider.logoutUser();
     this.navCtrl.setRoot(LoginPage, {user_id: this.user_id});
     console.log("Logout");
   }
-
 }
