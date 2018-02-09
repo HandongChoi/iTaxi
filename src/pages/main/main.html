@@ -21,6 +21,9 @@
     <div class="card-title">i-Taxi</div>
     <div class="card-subtitle">타러가기</div>
   </ion-card> -->
+</ion-header>
+
+<ion-content>
   <div class="menu">
     <ion-row>
       <ion-col col-6>
@@ -29,13 +32,6 @@
           <span>아이택시</span>
           <span>탑승</span>
         </div>
-        <!-- <button class="taxi" ion-button large full (click)="setPage('TaxiListPage')" >
-          <img class="buttonImg" src="assets/img/main_taxi.png" alt="taxi">
-          <ion-row>
-            아이택시<br />
-            탑승
-          </ion-row>
-        </button> -->
       </ion-col>
       <ion-col col-6>
         <div id="cpool" (click)="setPage('CarpoolListPage')">
@@ -46,52 +42,11 @@
       </ion-col>
     </ion-row>
   </div>
-</ion-header>
 
-<ion-content>
-    <!--
-  round button
-    <ion-grid>
-      <ion-row justify-content-center style="padding: 10px 0; margin-top: 25px">
-        <button ion-button round class="customBtn" icon-left (click)="goTaxiListPage()" >
-          i-Taxi 탑승
-        </button>
-      </ion-row>
-      <ion-row justify-content-center style="padding: 10px 0">
-        <button ion-button round class="customBtn" color="secondary" icon-left (click)="goCarpoolListPage()">
-          카풀 탑승
-        </button>
-      </ion-row>
-      <ion-row justify-content-center style="padding: 10px 0">
-        <button ion-button round class="customBtn" color="tertiary" icon-left (click)="goMyPage()" >
-          마이페이지
-        </button>
-      </ion-row>
-    </ion-grid>
-  -->
   <div class="ticketLabel">
     <ion-icon color ="secondary" name="person"></ion-icon>
     탑승예정
   </div>
-
-  <!-- my Ticket -->
-  <!-- <div *ngFor="let dates of dates_array">
-    <ion-card style="border-radius:5px; margin-top:30px" *ngFor="let date of dates | DatePipe">
-      <ion-row style="background-color:#0054a6; color:white; padding:5px 0 5px 15px">
-        {{date.roomDate}}
-      </ion-row>
-      <ion-row>
-        <ion-col col-4 text-center style="border-right: 1px solid #ddd9d9">
-          <h3>Taxi</h3>
-          <p style="font-size: 9px">현 {{date.roomParticipants.length}}/{{date.roomCapacity}} 명</p>
-        </ion-col>
-        <ion-col text-center>
-          <h3>{{date.roomDepart}} <ion-icon name="arrow-forward"></ion-icon>{{date.roomDest}}</h3>
-          <p padding-left style="font-size: 10px">{{date.roomTime}}</p>
-        </ion-col>
-      </ion-row>
-    </ion-card>
-  </div> -->
 
   <div *ngFor="let dates of dates_array">
     <ion-card class = "ticket" *ngFor="let date of dates | DatePipe">
@@ -134,6 +89,7 @@
     </ion-card>
   </div>
 
+  <!-- 카드 예제 -->
   <div>
     <ion-card class="ticket">
       <ion-row>
@@ -144,11 +100,9 @@
         <ion-col col-4 text-left>
           <div class="text">
             12.30 토요일
-            <!-- 12.30 토요일 -->
           </div>
           <div class="text">
             16:00
-            <!-- 16:00 -->
           </div>
         </ion-col>
 
@@ -175,44 +129,42 @@
   </div>
 
   <div>
-      <ion-card class="ticket">
-        <ion-row>
-          <ion-col col-1>
-            <img src="assets/img/main_carpool_mini.png" alt="taxi">
-          </ion-col>
-  
-          <ion-col col-4 text-left>
-            <div class="text">
-              12.26 화요일
-              <!-- 12.30 토요일 -->
-            </div>
-            <div class="text">
-              16:00
-              <!-- 16:00 -->
-            </div>
-          </ion-col>
-  
-          <ion-col col-5>
-            <div class="text">
-              한동대학교
-            </div>
-            <div class="text">
-              <span>&gt;</span>&nbsp;&nbsp;포항역
-            </div>
-          </ion-col>
-  
-          <ion-col col-2 text-center>
-            <div class="text">
-              카풀
-            </div>
-            <div class="text">
-              3/4
-            </div>
-          </ion-col>
-  
-        </ion-row>
-      </ion-card>
-    </div>
+    <ion-card class="ticket">
+      <ion-row>
+        <ion-col col-1>
+          <img src="assets/img/main_carpool_mini.png" alt="taxi">
+        </ion-col>
+
+        <ion-col col-4 text-left>
+          <div class="text">
+            12.26 화요일
+          </div>
+          <div class="text">
+            16:00
+          </div>
+        </ion-col>
+
+        <ion-col col-5>
+          <div class="text">
+            한동대학교
+          </div>
+          <div class="text">
+            <span>&gt;</span>&nbsp;&nbsp;포항역
+          </div>
+        </ion-col>
+
+        <ion-col col-2 text-center>
+          <div class="text">
+            카풀
+          </div>
+          <div class="text">
+            3/4
+          </div>
+        </ion-col>
+
+      </ion-row>
+    </ion-card>
+  </div>
 
 
 
