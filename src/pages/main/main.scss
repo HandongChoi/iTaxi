@@ -1,10 +1,3 @@
-@font-face {
-  font-family: 'NanumSquare';
-  src: 
-    url('../../assets/font/NanumSquareRoundB.ttf') format('truetype'),
-    url('../../assets/font/NanumSquareRoundOTFB.otf') format('opentype');
-}
-
 @mixin menuCard ($color) {
   background-color: $color;
   border-radius: 2vw;
@@ -16,17 +9,17 @@
 }
 
 page-main {
-  $ticket_bgColor : #efefef;
-  $fontColor : #29B5EF;
-  font-family: 'NanumSquare';
+  $backColor: color($colors, back-gray, base);
+  $fontColor : color($colors, secondary, base);
+  font-family: "NanumSquare";
 
-  // .large_button {
-  //   line-height: 100vh !important;
-  //   width:100%;
-  // }
-  // .customBtn{
-  //   width:70%;
-  // }
+  #notice {
+    font-size: 2.6vw;
+    background-color: $backColor;
+    height: 9vw;
+    cursor: pointer;
+  }
+
   .menu {
     margin: 1vw 2vw;
     color: white;
@@ -34,7 +27,7 @@ page-main {
     cursor: pointer;
     
     #taxi {
-      @include menuCard(#3C89C9);
+      @include menuCard(color($colors, primary, base));
 
       img {
         width: 15vw;
@@ -48,7 +41,7 @@ page-main {
     }
 
     #cpool {
-      @include menuCard(#29B5EF);
+      @include menuCard(color($colors, secondary, base));
       align-items: flex-end;
 
       img {
@@ -64,21 +57,6 @@ page-main {
         }
       }
     }
-
-    // button {
-    //   border-radius: 10px;
-    //   height: 30rem;
-    //   font-size: 8vw;
-    // }
-    // .taxi {
-    //   background-image: url("assets/img/main_taxi.png");
-    // }
-    // .buttonImg{
-    //   display: inline-block;
-    // }
-    // div{
-    //   display: inline-block;
-    // }
   }
 
   .ticketLabel {
@@ -93,8 +71,9 @@ page-main {
   .ticket{
     border-radius: 1vw;
     margin-top: 6vw;
-    background-color: $ticket_bgColor;
+    background-color: $backColor;
     color: $fontColor;
+    cursor: pointer;
 
     ion-row {
       padding: 2vw 0;
@@ -129,27 +108,4 @@ page-main {
     }
 
   }
-
-  /**
-  .card-background-page {
-    ion-card {
-      position: relative;
-      text-align: center;
-    }
-    .card-title {
-      position: absolute;
-      top: 36%;
-      font-size: 2.0em;
-      width: 100%;
-      font-weight: bold;
-      color: #fff;
-    }
-    .card-subtitle {
-      font-size: 1.0em;
-      position: absolute;
-      top: 55%;
-      width: 100%;
-      color: #fff;
-    }
-  }**/
 }

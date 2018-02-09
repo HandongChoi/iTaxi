@@ -6,10 +6,10 @@
     <ion-title>i-Taxi</ion-title>
   </ion-navbar>
 
-  <button ion-item color="light2" style="font-size: 2.6vw" (click)="openTaxiList()">
+  <div id="notice" ion-item (click)="openTaxiList()">
     <ion-icon name="ios-information-circle-outline" item-start></ion-icon>
     공지사항입니다. 공지사항입니다.
-  </button>
+  </div>
   <!--
   <ion-card (click)="openTaxiList()">
     <img src="../../assets/imgs/taxi.png"/>
@@ -44,7 +44,7 @@
   </div>
 
   <div class="ticketLabel">
-    <ion-icon color ="secondary" name="person"></ion-icon>
+    <ion-icon color="secondary" name="person"></ion-icon>
     탑승예정
   </div>
 
