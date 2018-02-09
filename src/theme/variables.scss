@@ -95,7 +95,15 @@ $list-md-margin-bottom : 0px;
 
 @font-face {
   font-family: 'NanumSquare';
+  font-style: normal;
   src: 
     url($font-path + 'NanumSquareRoundB.ttf') format('truetype'),
     url($font-path + 'NanumSquareRoundOTFB.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url($font-path + 'SourceHanSansK-Normal.otf') format('opentype');
 }

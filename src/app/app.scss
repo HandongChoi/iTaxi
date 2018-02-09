@@ -16,103 +16,108 @@
 // automatically applied to the <body> element in the app.
 
 .sidemenu-content{
-  font-family: "Open Sans";
-  position: relative;
-  top: -50px;
-}
-.sidemenu-div{
-  background-color:#2C88AD;
-  color: white;
-  border-radius: 5px;
-  padding-top:6px;
-}
+  $fontColor: color($colors, secondary, base);
 
-.sidemenu-row{
-  align-items: center;
-  background-color:#29B5EF;
-  color:white;
-  border-radius: 5px;
-  position: relative;
-  top: 5px;  
-  padding-top:6px;
-  padding-bottom: 6px;
-}
-.sidemenu-userid{
-  font-size: 16px;
-  color: #29B5EF;
-  position: relative;
-  top: 35px;
-  left: 35px;
-  margin-top: 40px;
-}
-.sidemenu-hr{
-  position: relative;
-  top: -5px;
-  height: 1.5px;
-  width: 90%;
-}
-.sidemenu-grid{
-  width: 90%;
-}
-.sidemenu-header-top{
-  font-size: 18px;
-  margin-bottom: 20px;
-  border-width: 2px;
+  font-family: "NanumSquare";
 
-}
-.sidemenu-header{
-  font-size: 18px;
-  margin-bottom: 20px;
-  border-color: white;
+  .sidemenu-userid{
+    font-size: 16px;
+    color: $fontColor;
+    margin: 20px 0 10px 30px;
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
 
-}
-.sidemenu-items{
-    font-size: 14px;
-    position: relative;
-    top: -25px;
-    left: 40px;
-    background-color: #F4EFEF;
-    width: 70%;
-    margin-bottom: 5px;
-    
+    ion-icon {
+      flex-grow: 1;
+      margin-right: 6px;
+    }
+
+    span {
+      flex-grow: 8;
+    }
+
+    button {
+      flex-grow: 1;
+      background-color: white;
+
+      img {
+        width: 20px;
+        margin-right: 6px;
+      }
+    }
   }
-.sidemenu-button{
-  background-color: rgba(255,255,255,0);
-  color: #29B5EF;
-  margin-bottom: 10px;
-}
-.sidemenu-button2{
-  background-color: rgba(255,255,255,0);
-  color: white;
-  position: relative;
-  left: 80%;
-}
 
-.sidemenu-list{
-  position: relative;
-  left: 20px;
-  border-bottom: 0px;
+  .sidemenu-hr{
+    height: 2px;
+    width: 90%;
+    background-color: $fontColor;
+  }
 
+  .sidemenu-grid{
+    width: 90%;
+
+    .sidemenu-div{
+      background-color: #2C88AD;
+      color: white;
+      border-radius: 6px;
+      padding-top: 7.5px;
+  
+      .sidemenu-rtitle {
+        margin-bottom: 3px;
+        padding-left: 7.5px;
+        font-size: 1em;
+      }
+
+      .sidemenu-row{
+        display: flex;
+        justify-content: center;
+        background-color: $fontColor;
+        border-radius: 5px;
+        padding: 6px 0px 6px 14px;
+
+        div {
+          flex-grow: 8;
+        }
+
+        .sidemenu-outbtn{
+          background-color: $fontColor;
+          color: white;
+          flex-grow: 1;
+        }
+      }
+    }
+  }
+  
+  .sidemenu-list{
+    padding-left:20px;
+
+    .sidemenu-header{
+      font-size: 18px;
+      margin-bottom: 20px;
+      border-color: white;
+      padding-left: 5px;
+      margin: 0;
+  
+      img {
+        width: 18px;
+      }
+    }
+    
+    .sidemenu-items{
+      font-size: 14px;
+      background-color: color($colors, back-gray, base);
+      width: 70%;
+      margin-bottom: 5px;
+      margin-left: 10%;
+  
+      .item-inner {
+        border: 0;
+      }
+  
+      &:nth-of-type(2n) {
+        margin-bottom: 20px;
+      }
+    }
+  }
 }
-@font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 400;
-  src: url('../assets/fonts/SourceHanSansK-Normal.otf');
-}
-
-
-//
-// .list .item.item-accordion {
-//   line-height: 38px;
-//   padding-top: 0;
-//   padding-bottom: 0;
-//   transition: 0.09s all linear;
-// }
-// .list .item.item-accordion.ng-hide {
-//   line-height: 0px;
-// }
-// .list .item.item-accordion.ng-hide-add,
-// .list .item.item-accordion.ng-hide-remove {
-//   display: block !important;
-// }
