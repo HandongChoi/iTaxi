@@ -77,40 +77,6 @@ export class MyApp {
       this.splashScreen.hide();
       console.log("splash screen out");
     });
-    
-    //
-    // const unsubscribe = firebase.auth().onAuthStateChanged( user => {
-    //
-    //
-    //
-    //   if(!user){
-    //     this.rootPage = LoginPage;
-    //     unsubscribe();
-    //   } else{
-    //
-    //     //this.uid = this.userServices.firebases.currentUser.uid;
-    //
-    //     this.userServices.setInfo(this.uid);
-    //
-    //     this.user_id = this.userServices.getName();
-    //     this.rootPage = MakeRoomPage;
-    //
-    //     //for showing the most recent reservation list in side bar
-    //     let dates: FirebaseListObservable<any[]>;
-    //     let parsedUserId = this.stringParser(user.email);
-    //     dates = af.list('/rideHistory/'+parsedUserId);
-    //     dates.subscribe(data =>{
-    //       if(this.dates_array){
-    //         this.dates_array.pop();
-    //         this.dates_array.push(data);
-    //       }
-    //       else
-    //         this.dates_array.push(data);
-    //     });
-    //
-    //     unsubscribe();
-    //   }
-    // });
   }
 
   initializeApp() {
