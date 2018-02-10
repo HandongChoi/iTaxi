@@ -44,7 +44,6 @@
     "ionic-plugin-keyboard": "^2.2.1",
     "ionic2-date-picker": "^1.1.0",
     "ionicons": "3.0.0",
-    "jquery": "^3.2.1",
     "npm": "^5.0.3",
     "phonegap-plugin-push": "^2.1.1",
     "rxjs": "5.4.3",

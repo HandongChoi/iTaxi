@@ -4,7 +4,6 @@ import { NavController, Content, NavParams, Platform } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 
 import { TaxiListPage } from '../../pages/taxi-list/taxi-list';
-import * as $ from 'jquery';
 
 import { UsersProvider } from '../../providers/users/users';
 import { DateProvider } from '../../providers/date/date';
@@ -42,6 +41,7 @@ export class ChatRoomPage {
   page_info: string;
 
   subscribe: any;
+  index: number = -1;
 
   constructor(public navCtrl: NavController, public af:AngularFireDatabase, public navParams: NavParams, public platform:Platform,
               public roomServices: RoomsProvider, public dateServices: DateProvider, public userServices: UsersProvider) {
@@ -278,7 +278,11 @@ export class ChatRoomPage {
   }
 
   show(index) {
-    $(".user-name").eq(index).parent().siblings().children('.user-name').siblings().animate({width: 'hide'}, 70);
-    $(".user-name").eq(index).siblings().animate({width: 'toggle'}, 70);
+    if (this.index == index) {
+      this.index = -1;
+    }
+    else {
+      this.index = index;
+    }
   }
 }
