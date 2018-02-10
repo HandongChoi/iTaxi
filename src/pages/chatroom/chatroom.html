@@ -12,7 +12,7 @@
         </button>
     </ion-buttons>
 
-    <ion-title> {{roomObj.host}} ({{roomObj.currentPeople}}/{{roomObj.capacity}}) </ion-title>
+    <ion-title> {{room.host}} ({{room.currentPeople}}/{{room.capacity}}) </ion-title>
     <!-- 방이름/인원 -->
   </ion-navbar>
 
@@ -21,7 +21,7 @@
     <ion-row>
       <ion-col justify-content-center padding-left>
         {{displayDate}} {{displayTime}}
-        <p><b>{{roomObj.departure}} &nbsp; <ion-icon name="arrow-forward"></ion-icon> &nbsp; {{roomObj.destination}}</b></p>
+        <p><b>{{room.departure}} &nbsp; <ion-icon name="arrow-forward"></ion-icon> &nbsp; {{room.destination}}</b></p>
       </ion-col>
       <ion-col col-auto>
         <ion-buttons right icon-only>
@@ -37,7 +37,7 @@
   <ion-grid id="part-info">
     <ion-row>
       <ion-col class="users">
-        <div class="user" *ngFor="let member of roomObj.participants; let i = index">
+        <div class="user" *ngFor="let member of room.participants; let i = index">
           <button class="user-name" [ngClass]="{'active': index==i}" (click)="show(i)" >{{ member }}</button>
           <button class="user-call" (click)="native(i, 1)"><ion-icon name="ios-call-outline"></ion-icon></button>
           <button class="user-mail" (click)="native(i, 2)"><ion-icon name="ios-mail-outline"></ion-icon></button>
@@ -51,10 +51,10 @@
   <ion-list>
     <div class="message-wrap" *ngFor="let chat of chats | async; let last = last">
       <!-- 밑에 주석처리 되어있는 부분이 내가 말한 내용이면 오른쪽, 상대가 말한 내용이면 왼쪽 선택하게한다. -->
-      <div class="message right" *ngIf="chat.user_id == chat_user_id">
+      <div class="message right" *ngIf="chat.user_id == user_id">
         <!-- <img class="user-img" [src]="msg.userAvatar" alt="" src=""> 이거는 프로필사진-->
         <div class="user-info">
-          <ion-icon *ngIf="chat.user_id == room_host" name="star"></ion-icon>{{chat.user_id}}
+          <ion-icon *ngIf="chat.user_id == room_host" name="star"></ion-icon>{{chat.user_name}}
         </div>
         <div class="msg-content">
           <span>{{chat.date_time | slice:12:21}}</span>
@@ -64,10 +64,10 @@
         </div>
       </div>
 
-      <div class="message left" *ngIf="chat.user_id != chat_user_id">
+      <div class="message left" *ngIf="chat.user_id != user_id">
         <!-- <img class="user-img" alt="" src=""> -->
         <div class="user-info">
-          <ion-icon *ngIf="chat.user_id == room_host" name="star"></ion-icon>{{chat.user_id}}
+          <ion-icon *ngIf="chat.user_id == room_host" name="star"></ion-icon>{{chat.user_name}}
         </div>
         <div class="msg-content">
           <div class="msg-info">

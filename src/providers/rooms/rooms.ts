@@ -44,4 +44,8 @@ export class RoomsProvider {
       return false;
     }
   }
+
+  getOut() {
+    this.room['currentPeople']--;
+  }
 }

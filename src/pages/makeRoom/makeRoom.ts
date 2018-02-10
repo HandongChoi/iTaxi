@@ -128,10 +128,8 @@ export class MakeRoomPage {
                                         participants: [this.user_id]
                                       };
                 let chatRoomUrl = this.af.list('/chatrooms/'+this.bookingDate).push(roomObj);
-                this.af.list('/rideHistory/' + this.userServices.getUID() + '/').$ref.ref.child(chatRoomUrl.key).set(roomObj);
-                console.log(chatRoomUrl.key);
-                console.log('Okay');
-                this.navCtrl.setRoot(ChatRoomPage, {chat_room_id:chatRoomUrl.key, bookingDate:this.bookingDate, user_id: this.user_id, whichPage: "makeRoom", roomObj: roomObj});
+                this.af.list(`/rideHistory/${this.userServices.getUID()}/${chatRoomUrl.key}`).push(roomObj);
+                this.navCtrl.setRoot(ChatRoomPage, {room: roomObj, whichPage: "Taxi"});
               }
             }]
         });
