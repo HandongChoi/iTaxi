@@ -16,15 +16,17 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { AuthProvider } from '../providers/auth/auth';
 import { DatePickerModule } from 'ionic2-date-picker';
 
-import { TaxiListPageModule } from '../pages/taxi-list/taxi-list.module'
-import { ChatRoomPageModule } from '../pages/chatroom/chatroom.module'
-import { LoginPageModule } from '../pages/login/login.module'
-import { MainPageModule } from '../pages/main/main.module'
-import { PersonalInfoPageModule } from '../pages/personal-info/personal-info.module'
-import { SettingPageModule } from '../pages/setting/setting.module'
+import { TaxiListPageModule } from '../pages/taxi-list/taxi-list.module';
+import { ChatRoomPageModule } from '../pages/chatroom/chatroom.module';
+import { LoginPageModule } from '../pages/login/login.module';
+import { MainPageModule } from '../pages/main/main.module';
+import { PersonalInfoPageModule } from '../pages/personal-info/personal-info.module';
+import { SettingPageModule } from '../pages/setting/setting.module';
 import { SignupPageModule } from '../pages/signup/signup.module';
 import { ResetPasswordPageModule } from '../pages/reset-password/reset-password.module';
-import { RideHistoryPageModule } from '../pages/ride-history/ride-history.module'
+import { RideHistoryPageModule } from '../pages/ride-history/ride-history.module';
+import { CarpoolListPageModule } from '../pages/carpool-list/carpool-list.module';
+import { MakeCarpoolRoomPageModule } from '../pages/make-carpool-room/make-carpool-room.module';
 
 import { FCM } from '@ionic-native/fcm';
 
@@ -33,7 +35,7 @@ import { UsersProvider } from '../providers/users/users';
 import { RoomsProvider } from '../providers/rooms/rooms';
 import { PipesModule } from '../pipes/pipes.module';
 import { StringProvider } from '../providers/strings/strings';
-import {RidehistoryProvider} from '../providers/ridehistory/ridehistory';
+import { RidehistoryProvider } from '../providers/ridehistory/ridehistory';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyANvht7J2MNX6x47mglqfJk74yZQ9u0qUk",
@@ -65,7 +67,9 @@ export const firebaseConfig = {
     ResetPasswordPageModule,
     RideHistoryPageModule,
     MainPageModule,
-    PipesModule
+    PipesModule,
+    MakeCarpoolRoomPageModule,
+    CarpoolListPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -83,7 +87,9 @@ export const firebaseConfig = {
     UsersProvider,
     RoomsProvider,
     StringProvider,
-    RidehistoryProvider
+    RidehistoryProvider,
+    MakeCarpoolRoomPageModule,
+    CarpoolListPageModule
   ]
 })
 export class AppModule {}

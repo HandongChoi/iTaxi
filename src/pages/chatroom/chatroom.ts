@@ -73,6 +73,8 @@ export class ChatRoomPage {
 
       let isExist: boolean = false;
 
+      console.log(this.roomServices.room);
+
       //목록에 있는지 없는지 여부 확인.
       for(var user of this.roomServices.room['participants']){
         console.log('유저다');

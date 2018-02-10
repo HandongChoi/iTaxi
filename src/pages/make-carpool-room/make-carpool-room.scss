@@ -1,3 +1,100 @@
 page-make-carpool-room {
+  .item-cover {
+    height: 0;
+    width: 0;
+  }
 
+  $back-font: color($colors, semi-gray, base);
+  $front-font: color($colors, primary, base);
+  font-family: "OpenSans-1";
+
+  .wrapper {
+      border-bottom-left-radius: 6px 8px;
+      border-bottom-right-radius: 6px 8px;
+      border-bottom: 2px solid #C9C9CA;
+
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 25px;
+      font-weight: bold;
+      font-size: 18px;
+
+      ion-row {
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+        justify-content: center;
+      }
+
+    .label {
+      color: $back-font;
+    }
+
+    .cont {
+      font-family: "OpenSans-2";
+      color: $front-font;
+    }
+  }
+
+  #dest {
+    ion-row {
+      span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #dest_sel {
+        padding-right: 20px;
+      }
+
+      .arrow-icon {
+        color: $front-font;
+        font-size: 30px;
+      }
+
+      ion-select {
+        max-width: none;
+      }
+    }
+  }
+
+  #date {
+    ion-datetime {
+      font-size: 22px;
+    }
+  }
+
+  #time {
+    ion-datetime {
+      font-size: 30px;
+    }
+  }
+
+  #cap {
+    ion-row {
+      span {
+        text-align: center;
+      }
+
+      input {
+        width: 80%;
+        border: 0;
+        text-align: center;
+        font-size: 30px;
+      }
+
+      &:last-child {
+        span {
+          font-size: 30px;
+        }
+      }
+    }
+  }
+
+  #room-btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 45px;
+  }
 }

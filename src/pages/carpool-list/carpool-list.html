@@ -1,18 +1,78 @@
-<!--
-  Generated template for the CarpoolListPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>carpoolList</ion-title>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title class = "top-title">카풀조회</ion-title>
   </ion-navbar>
 
+  <ion-grid class="small-table">
+    <ion-row class="small-top">
+      <ion-col col-5>
+        <ion-item>
+          <ion-select #newSelect [(ngModel)]="departFilter" interface="popover" placeholder="전체보기" (ionChange)="filterDeparture(departFilter)">
+            <ion-option value="All" checked="true">전체보기</ion-option>
+            <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col col-2 class="rightArrow">  
+        <ion-icon name="md-arrow-round-forward"></ion-icon>
+      </ion-col>
+
+      <ion-col col-5>
+        <ion-item>
+          <ion-select [(ngModel)]="destinationFilter" interface="popover" placeholder="전체보기" (ionChange)="filterDestination(destinationFilter)">
+            <ion-option value="All" checked="true">전체보기</ion-option>
+            <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>  
+    </ion-row>
+
+    <ion-row class="small-bottom">
+      <ion-col col-2 *ngFor="let day of days">
+        <ion-item class="days" (click)="showChatroom(day)">
+          <p>{{day|date: "dd"}}</p>
+        </ion-item>
+      </ion-col>
+      <ion-col col-2>
+        <ion-item class="days_icon" ion-only (click)="showCalendar()" >
+          <ion-icon name="add"></ion-icon>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-header>
 
+<ion-content>
+  <div>
+    <ion-grid class="mainGrid">
+      <ion-item-group>
+        <ion-item-divider *ngFor="let date of dates | async" (click)="goChatroom(date)" class="line"
+        [ngClass]="{full: date.currentPeople >= date.capacity, exist: isExist(date.participants)}">
+          <ion-row>
+            <ion-col col-3>
+              <p>{{date.departure_date}}</p>
+              <p>{{date.departure_time}}</p>
+            </ion-col>
+            <ion-col col-7>
+              <p>{{date.departure}}</p>
+              <p>>{{date.destination}}</p>
+            </ion-col>
+            <ion-col col-2>
+              <p>{{date.currentPeople}} / {{date.capacity}}</p>
+              <p>&#8361;{{date.price}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-item-divider>
+      </ion-item-group>
+    </ion-grid>
+  </div>
 
-<ion-content padding>
+  <ion-fab right bottom>
+    <button color="dark" ion-fab (click)="makeRoom()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
 
 </ion-content>

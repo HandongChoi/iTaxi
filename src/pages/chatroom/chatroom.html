@@ -70,10 +70,10 @@
           <ion-icon *ngIf="chat.user_id == room_host" name="star"></ion-icon>{{chat.user_id}}
         </div>
         <div class="msg-content">
-          <span>{{chat.date_time | slice:12:21}}</span>
           <div class="msg-info">
             <span>{{chat.content}}</span>
           </div>
+          <span>{{chat.date_time | slice:12:21}}</span>
         </div>
       </div>
 
