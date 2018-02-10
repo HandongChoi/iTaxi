@@ -25,7 +25,7 @@ page-taxi-list {
     .small-bottom {
       .days {
         text-align: center;
-        color: color($colors, semi-gray, base);
+        color: color($colors, dark-gray, base);
         cursor: pointer;
   
         .item-inner {
@@ -36,7 +36,7 @@ page-taxi-list {
       .days_icon {
         text-align: center;
         font-style: bold;
-        color: color($colors, semi-gray, base);
+        color: color($colors, dark-gray, base);
       }
     }
   }
@@ -47,7 +47,7 @@ page-taxi-list {
     .line {
       background-color: white;
       cursor: pointer;
-      border-bottom: 1px solid lighten(color($colors, semi-gray, base), 30%);
+      border-bottom: 1px solid lighten(color($colors, dark-gray, base), 30%);
   
       p {
         color: black;
@@ -56,7 +56,7 @@ page-taxi-list {
       &.full {
         background-color: darken(color($colors, back-gray, base), 10%);
         p {
-          color: color($colors, semi-gray, base);
+          color: color($colors, dark-gray, base);
         }
       }
     

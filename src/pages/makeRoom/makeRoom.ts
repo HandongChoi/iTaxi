@@ -146,5 +146,8 @@ export class MakeRoomPage {
   swapPlace(){
     [this.selectDeparture, this.selectDestination] = [this.selectDestination, this.selectDeparture];
   }
+  setPeople(num) {
+    this.maxPeople = String(num);
+  }
 
 }
