@@ -9,7 +9,7 @@
 
 
 <ion-content>
-  <div>
+  <div *ngIf = "rideHistory.length != 0">
     <ion-grid>
       <ion-item-group *ngFor = "let room of rideHistory | async">
         <ion-item-divider color="light" (click)="goChatroom(room)">

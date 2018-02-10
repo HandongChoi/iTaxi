@@ -11,25 +11,12 @@
     
     <hr class="sidemenu-hr">
     <ion-grid class="sidemenu-grid">
-      <div class="sidemenu-div">
-        &nbsp;&nbsp;꼬부기 ({{roomData.currentPeople}} / {{roomData.capacity}})
-        <ion-row class="sidemenu-row" justify-content-left padding-left style="border-top-color: white">
-          {{roomData.departure_date}} &nbsp;&nbsp;|&nbsp;&nbsp; {{roomData.departure_time}}<br>
-          {{roomData.departure}} &nbsp;&nbsp; > &nbsp;&nbsp; {{roomData.destination}}
-          <ion-buttons right > 
-            <button  class="sidemenu-button2" menuClose icon-only (click)="Idontknow()">
-              <ion-icon name="log-out"></ion-icon>
-            </button>
-          </ion-buttons>
-        </ion-row>
-      </div>
-      <!-- 예시입니다 -->
-      <div class="sidemenu-div">
-        <div class="sidemenu-rtitle">&nbsp;&nbsp;꼬부기 1 (4 / 4)</div>
+      <div class="sidemenu-div" *ngFor="let room of roomData | async;">
+        <div class="sidemenu-rtitle">&nbsp;&nbsp; 꼬부기 {{room.currentPeople}} / {{room.capacity}}</div>
         <ion-row class="sidemenu-row">
           <div>
-            12.30 &nbsp;&nbsp;|&nbsp;&nbsp; 16:00<br>
-            포항역 &nbsp;&nbsp; > &nbsp;&nbsp; 한동대학교
+            {{room.departure_date | date: 'M월 dd일, '}} {{dateServices.getKToday(room.departure_date)}}요일 &nbsp;&nbsp;|&nbsp;&nbsp; {{room.departure_time}}<br>
+            {{room.departure}} &nbsp;&nbsp; > &nbsp;&nbsp; {{room.destination}}
           </div>
           <button  class="sidemenu-outbtn" menuClose icon-only (click)="Idontknow()">
             <ion-icon name="log-out"></ion-icon>

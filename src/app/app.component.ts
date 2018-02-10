@@ -12,6 +12,7 @@ import { TaxiListPage } from '../pages/taxi-list/taxi-list';
 
 import { AuthProvider } from '../providers/auth/auth';
 import { UsersProvider } from '../providers/users/users';
+import {DateProvider} from '../providers/date/date';
 
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { FCM, NotificationData } from '@ionic-native/fcm';
@@ -41,28 +42,33 @@ export class MyApp {
   user_id: any;
   uid: any;
 
-  roomData: Object = {};
+  roomData: FirebaseListObservable<any[]>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
               public authProvider:AuthProvider, public alertCtrl: AlertController, public af: AngularFireDatabase,
-              public fcm:FCM, public userServices:UsersProvider, public loadingCtrl: LoadingController) {
+              public fcm:FCM, public userServices:UsersProvider, private dateServices:DateProvider) {
     this.splashScreen.show();
     console.log("splash screen on");
     this.initializeApp();
 
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        this.userServices.initialize(user).then(() => {
-          this.user_id = this.userServices.getName();
-          this.uid = this.userServices.getUID();
 
-          if(this.user_id != undefined && this.uid != undefined){
-            
-            firebase.database().ref('/rideHistory/'+this.uid).orderByChild('departure_date').limitToFirst(1)
-             .on("value", data => {
-                
-              this.roomData = data.val();
-            });
+        this.userServices.initialize(user).then(() => {
+        this.user_id = this.userServices.getName();
+        this.uid = this.userServices.getUID();
+
+        if(this.user_id != undefined && this.uid != undefined){
+             
+          this.roomData = af.list('/rideHistory/' + this.uid, {
+            query:{
+              startAt: this.dateServices.getYearMonthDayWithDash(),
+              orderByChild : 'departure_date',
+              limitToFirst: 1
+            }
+          });
+
+          console.log("app.component", this.roomData.$ref.ref);
 
             this.rootPage = MainPage;
           }
@@ -117,7 +123,6 @@ export class MyApp {
 
   openPage(page) {
     this.navCtrl.setRoot(page.componenent, {user_id: this.user_id});
-    console.log("openPage");
   }
 
   setUID(uid){
@@ -143,17 +148,14 @@ export class MyApp {
 
   setPage(page){
     this.navCtrl.setRoot(page);
-    console.log(page+" set at app.component.ts");
   }
 
-  pushPage(page){
-    this.navCtrl.push(page);
-    console.log(page+" push at app.component.ts");
+  goChatRoomPage(page){
+    this.navCtrl.setRoot(page);
   }
 
   logout(){
     this.authProvider.logoutUser();
     this.navCtrl.setRoot(LoginPage, {user_id: this.user_id});
-    console.log("Logout");
   }
 }
