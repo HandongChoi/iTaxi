@@ -108,7 +108,7 @@ export class ChatRoomPage {
   send(chatContent: string): string{
     if(chatContent != ''){
       console.log("test in chatroom.ts : ", this.roomObj);
-      firebase.database().ref('/chats/'+this.roomObj['key']).push({
+      firebase.database().ref('/chats/'+this.room_object.$ref.key).push({
         user_id: this.chat_user_id,
         content: chatContent,
         date_time: new Date().toLocaleString(),
