@@ -27,6 +27,7 @@ export class ChatRoomPage {
   room: any;
 
   backPage: any;
+  chatContent: string;
 
   room_host: string;
   user_id: string;
@@ -57,56 +58,52 @@ export class ChatRoomPage {
 
     this.chats = af.list('/chats/' + this.room_object.$ref.key);
     this.rideHistory = af.object(`/rideHistory/${this.userServices.getUID()}/${this.room_object.$ref.key}`)
-    this.user_id = this.userServices.getUID();
+    this.user_id = this.userServices.getEmail();
+    
+    this.roomServices.setRoomInfo(this.room);
+    this.displayDate = this.dateServices.getKMonthDay(this.roomServices.room['departure_date']);
+    this.displayTime = this.roomServices.room['depart_time'];
+    this.room_host = this.roomServices.room['host'];
 
-    this.subscribe = this.room_object.subscribe(data => {
-      this.roomServices.setRoomInfo(data);
-      this.displayDate = this.dateServices.getKMonthDay(this.roomServices.room['departure_date']);
-      this.displayTime = this.roomServices.room['depart_time'];
-      this.room_host = this.roomServices.room['host'];
+    let isExist: boolean = false;
 
-      let isExist: boolean = false;
-      console.log(this.roomServices.room['participants']);
-
-      //목록에 있는지 없는지 여부 확인.
-      for(var user of this.roomServices.room['participants']){
-        if(user === this.userServices.getEmail()){
-          isExist = true;
-          break;
-        }
+    //목록에 있는지 없는지 여부 확인.
+    for(var user of this.roomServices.room['participants']){
+      if(user === this.userServices.getEmail()){
+        isExist = true;
+        break;
       }
-      
-      if (isExist == false) {
-        if (this.roomServices.addParticipants(this.userServices.getEmail())) {
-          this.room_object.update(this.roomServices.room);
-        }
-        else {
-          alert("인원이 마감되었습니다.");
-          this.navCtrl.setRoot(this.backPage);
-        }
+    }
+    
+    if (isExist == false) {
+      if (this.roomServices.addParticipants(this.userServices.getEmail())) {
+        this.room_object.update(this.roomServices.room);
       }
-    });
+      else {
+        alert("인원이 마감되었습니다.");
+        this.navCtrl.setRoot(this.backPage);
+      }
+    }
   } 
 
   goBack(){
     this.navCtrl.setRoot(this.backPage);
   }
 
-  send(chatContent: string) {
-    if(chatContent.trim() != '') {
+  send() {
+    if(this.chatContent.trim() != '') {
       firebase.database().ref('/chats/'+this.room_object.$ref.key).push({
-        user_id: this.userServices.getUID(),
+        user_id: this.userServices.getEmail(),
         user_name: this.userServices.getName(),
-        content: chatContent,
+        content: this.chatContent,
         date_time: new Date().toLocaleString()
       }).then(() => {
-        chatContent = "";
+        this.chatContent = "";
       });
     }
   }
 
   quit(){
-    this.subscribe.unsubscribe();
     let old_participants: Array<String> = this.roomServices.room['participants'];
     let new_participants: Array<String> = [];
 
@@ -137,6 +134,7 @@ export class ChatRoomPage {
       }
     }
     this.roomServices.getOut();
+    this.room = this.roomServices.room;
     this.rideHistory.remove();
     this.navCtrl.setRoot(this.backPage);
   }

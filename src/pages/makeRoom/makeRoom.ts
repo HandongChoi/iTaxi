@@ -43,6 +43,7 @@ export class MakeRoomPage {
   constructor(public alertCtrl: AlertController, public navParams: NavParams, public dateServices: DateProvider,
                public navCtrl:NavController, public af: AngularFireDatabase, public userServices: UsersProvider){
     this.user_id = this.userServices.getEmail();
+    dateServices.setNow();
     console.log('constructor makeRoom');
   }
 

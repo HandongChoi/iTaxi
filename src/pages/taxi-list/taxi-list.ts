@@ -32,6 +32,7 @@ export class TaxiListPage {
               public usersService: UsersProvider, public dateServices: DateProvider) {
 
     this.user_id = this.usersService.getEmail();
+    dateServices.setNow();
 
     for(let i = 0; i < 5; i++){
       let temp = new Date(this.nowDate.getTime());
@@ -74,8 +75,14 @@ export class TaxiListPage {
     }
   }
 
-  goChatroom(date) {
-    this.navCtrl.setRoot(ChatRoomPage, {room: date, whichPage: "Taxi"});
+  goChatroom(room) {
+    if (room['currentPeople'] >= room['capacity']) {
+      alert("인원이 가득 차 입장할 수 없습니다.");
+    }
+    else {
+      this.af.object(`/rideHistory/${this.usersService.getUID()}/${room.$key}`).set(room);
+      this.navCtrl.setRoot(ChatRoomPage, {room: room, whichPage: "Taxi"});
+    }
   }
 
   makeRoom(){

@@ -32,6 +32,7 @@ export class CarpoolListPage {
               public usersService: UsersProvider, public dateServices: DateProvider) {
 
     this.user_id = this.usersService.getEmail();
+    dateServices.setNow();
 
     for(let i = 0; i < 5; i++){
       let temp = new Date(this.nowDate.getTime());
@@ -74,7 +75,13 @@ export class CarpoolListPage {
   }
 
   goChatroom(room) {
-    this.navCtrl.setRoot(ChatRoomPage, {room: room, whichPage: "Carpool"});
+    if (room['currentPeople'] >= room['capacity']) {
+      alert("인원이 가득 차 입장할 수 없습니다.");
+    }
+    else {
+      this.af.object(`/rideHistory/${this.usersService.getUID()}/${room.$key}`).set(room);
+      this.navCtrl.setRoot(ChatRoomPage, {room: room, whichPage: "Carpool"});
+    }
   }
 
   makeRoom(){
@@ -111,7 +118,7 @@ export class CarpoolListPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TaxiListPage');
+    console.log('ionViewDidLoad CarpoolListPage');
   }
 
   isExist(users: Array<any>): boolean {

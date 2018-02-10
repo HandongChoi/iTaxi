@@ -53,4 +53,19 @@ export class DateProvider {
     let day = this.addZ(date.getDate());
     return [year, month, day].join(this.delimiter);
   }
+  setNow() {
+    this.nowYear = new Date().getFullYear().toString();
+    this.nowMonth = this.addZ(new Date().getMonth()+1);
+    this.nowDay = this.addZ(new Date().getDate());
+    this.nowDate = [this.nowYear, this.nowMonth, this.nowDay].join(this.delimiter);
+    //12시간 방식이 아닌 24시간 방식으로 변환하고 19:01:39에서 초 단위 제거.
+    this.nowTime = new Date().toLocaleTimeString('en-US',{hour12:false}).substr(0,5);      
+    
+    //방 만들시 min, max값 만들어주기
+    this.min = this.nowDate;
+    this.max = [parseInt(this.nowYear)+1, this.nowMonth, this.nowDay].join(this.delimiter);
+
+    //한글 요일 만들어주기
+    this.today = this.week[new Date().getDay()];
+  }
 }
