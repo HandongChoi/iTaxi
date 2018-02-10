@@ -1,90 +1,111 @@
+@mixin menuCard ($color) {
+  background-color: $color;
+  border-radius: 2vw;
+  height: 80vw;
+  font-size: 9vw;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0.4vw 0.4vw 0 darken($color, 10%);
+}
+
 page-main {
-  $ticket_bgColor : #efefef;
-  $fontColor : #29B5EF;
+  $backColor: color($colors, back-gray, base);
+  $fontColor : color($colors, secondary, base);
+  font-family: "NanumSquare";
 
-  // .large_button {
-  //   line-height: 100vh !important;
-  //   width:100%;
-  // }
-  // .customBtn{
-  //   width:70%;
-  // }
+  #notice {
+    font-size: 13px;
+    background-color: $backColor;
+    height: 30px;
+    cursor: pointer;
+  }
+
   .menu {
-    margin: 0 10px;
-    button {
-      border-radius: 10px;
-      height: 30rem;
-      font-size: 8vw;
-    }
-    .taxi {
-      background-image: url("assets/imgs/whiteTaxi.png");
-    }
-    .buttonImg{
-      display: inline-block;
+    margin: 1vw 2vw;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    
+    #taxi {
+      @include menuCard(color($colors, primary, base));
 
+      img {
+        width: 15vw;
+        margin-top: 10vw;
+        margin-bottom: 16vw;
+      }
+
+      span {
+        margin-left: 4vw;
+      }
     }
-    div{
-      display: inline-block;
+
+    #cpool {
+      @include menuCard(color($colors, secondary, base));
+      align-items: flex-end;
+
+      img {
+        width: 15vw;
+        margin-top: 20vw;
+      }
+
+      span {
+        margin-right: 4vw;
+
+        &:first-child {
+          margin-top: 10vw;
+        }
+      }
     }
   }
 
   .ticketLabel {
+    margin-top: 2vw;
     float: right;
     //padding: 5px;
-    margin: 12px;
-    color: $fontColor
+    margin: 4vw 6vw 2vw 6vw;
+    color: $fontColor;
+    font-size: 4vw;
   }
 
   .ticket{
-    border-radius: 5px;
-    margin-top: 30px;
-    background-color: $ticket_bgColor;
+    border-radius: 1vw;
+    margin-top: 6vw;
+    background-color: $backColor;
     color: $fontColor;
+    cursor: pointer;
 
-    ion-row:first-of-type{
-      padding: 3px 0px;
-    }
-
-    ion-row:first-of-type ~ ion-row {
-      padding: 0px;
+    ion-row {
+      padding: 2vw 0;
     }
 
-    ion-col{
-      border-right: 1px solid $fontColor;
-      padding: 0 8px;
+    ion-col {
+      border-right: 0.2vw solid $fontColor;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      img {
+        width: 6vw;
+      }
+
+      &:first-of-type, &:last-of-type {
+        border-right: 0;
+      }
+
+      &:nth-of-type(1) ~ ion-col {
+        padding: 0 4vw;
+      }
+
+      .text {
+        font-size: 3.8vw;
+
+        span {
+          font-size: 5vw;
+        }
+      }
     }
 
-    .text{
-      display: inline-table;
-      font-size: 1.2rem;
-    }
-    .text2{
-      display: inline-table;
-      font-size: 1.7rem;
-      //  font-weight: bold;
-    }
   }
-
-  /**
-  .card-background-page {
-    ion-card {
-      position: relative;
-      text-align: center;
-    }
-    .card-title {
-      position: absolute;
-      top: 36%;
-      font-size: 2.0em;
-      width: 100%;
-      font-weight: bold;
-      color: #fff;
-    }
-    .card-subtitle {
-      font-size: 1.0em;
-      position: absolute;
-      top: 55%;
-      width: 100%;
-      color: #fff;
-    }
-  }**/
 }

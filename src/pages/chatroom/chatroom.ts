@@ -58,6 +58,8 @@ export class ChatRoomPage {
     this.chat_room_id = navParams.data.chat_room_id;
     this.chat_user_id = navParams.data.user_id;
 
+    console.log(this.roomObj)
+
     //content로 set해두자.
     this.chats = af.list('/chats/'+ this.chat_room_id);
     this.room_object = af.object('/chatrooms/' + this.bookingDate + '/' + this.chat_room_id);

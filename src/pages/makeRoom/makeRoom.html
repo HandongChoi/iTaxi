@@ -7,8 +7,79 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
 
+  <div class="wrapper" id="dest">
+    <ion-row>
+      <span col-1></span>
+      <span col-3 class="label">출발지</span>
+      <span col-4 (click)="swapPlace()"><img src="assets/img/swap.png" alt="swap"></span>
+      <span col-3 class="label">도착지</span>
+      <span col-1></span>
+    </ion-row>
+    <ion-row>
+      <span col-5 class="cont">
+        <ion-select class="my-select" [(ngModel)]="selectDeparture.key" interface="popover" *ngIf="selectDeparture.key!='직접입력'">
+          <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>
+        </ion-select>
+        <span *ngIf="selectDeparture.key=='직접입력'">
+          <ion-input col-10 text-center class="my-input" [(ngModel)]="selectDeparture.value" type="text" placeholder="기타장소"></ion-input>
+          <img col-2 src="assets/img/reset.png" alt="X" (click)="setDepartureDefault()">
+        </span>
+      </span>
+      <span col-2>
+        <ion-icon class="arrow-icon" name="ios-arrow-forward"></ion-icon>
+      </span>
+      <span col-5 class="cont" id="dest_sel">
+        <ion-select class="my-select" [(ngModel)]="selectDestination.key" interface="popover" *ngIf="selectDestination.key!='직접입력'">
+          <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>
+        </ion-select>
+        <span *ngIf="selectDestination.key=='직접입력'">
+          <ion-input col-10 text-center class="my-input" [(ngModel)]="selectDestination.value" type="text" placeholder="기타장소"></ion-input>
+          <img col-2 src="assets/img/reset.png" alt="X" (click)="setDestinationDefault()">
+        </span>
+      </span>
+    </ion-row>
+  </div>
+
+  <div class="wrapper" id="date">
+    <ion-row>
+      <span class="label">출발날짜</span>
+    </ion-row>
+    <ion-row class="cont">
+        <ion-datetime padding class="my-date" displayFormat="YYYY년 M월 D일 ({{dateServices.getKToday(bookingDate)}})" pickerFormat="YYYY-MM-DD" min={{min}} max={{max}} 
+        placeholder={{nowDate}} [(ngModel)]="bookingDate" (ngModelChange)="dateServices.getKToday()"></ion-datetime>
+    </ion-row>
+  </div>
+
+  <div class="wrapper" id="time">
+    <ion-row>
+      <span class="label">출발시간</span>
+    </ion-row>
+    <ion-row>
+      <span class="cont">
+        <ion-datetime padding class="my-time"  displayFormat="HH:mm" pickerFomat="HH mm" placeholder={{nowTime}} [(ngModel)]="bookingTime"></ion-datetime>
+      </span>
+    </ion-row>
+  </div>
+
+  <div class="wrapper" id="cap">
+    <ion-row>
+      <span class="label">최대탑승인원</span>
+    </ion-row>
+    <ion-row>
+      <span col-3></span>
+      <span col-2 [ngClass]="{'nMaxPeople': maxPeople!='2'}"><img src="assets/img/max_2.png" alt="2" (click)="setPeople(2)"></span>
+      <span col-2 [ngClass]="{'nMaxPeople': maxPeople!='3'}"><img src="assets/img/max_3.png" alt="3" (click)="setPeople(3)"></span>
+      <span col-2 [ngClass]="{'nMaxPeople': maxPeople!='4'}"><img src="assets/img/max_4.png" alt="4" (click)="setPeople(4)"></span>
+      <span col-3></span>
+    </ion-row>
+  </div>
+
+  <div id="room-btn">
+    <button ion-button round (click)="makeRoom()">방만들기</button>
+  </div>
+<!-- 
   <ion-row class="top-row" justify-content-center>
     
     <ion-col col-4.5 justify-content-center>
@@ -84,8 +155,6 @@
 
   <div class="row-bottom">
     <ion-row justify-content-center>
-      <!-- 지금 여기 밑에 placeholder가 제대로 작동하지 않는다. 이상하게 9시간의 시차 차이가 난다 -->
-      <!-- displayFormat 과 default 값을 바꾸어 주어 시간 이상한거 해결 -->
       <ion-datetime padding class="my-time"  displayFormat="HH:mm" pickerFomat="HH mm" placeholder={{nowTime}} [(ngModel)]="bookingTime"></ion-datetime>
     </ion-row>
   </div>
@@ -115,6 +184,6 @@
   
   <div class="room-btn-align">          
     <button class="room-btn" ion-button round (click)="makeRoom()" >방만들기</button>
-  </div>
+  </div> -->
 
 </ion-content>

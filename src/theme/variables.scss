@@ -3,7 +3,7 @@
 
 // Font path is used to include ionicons,
 // roboto, and noto sans fonts
-$font-path: "../assets/fonts";
+$font-path: "../assets/fonts/";
 
 
 // The app direction is used to include
@@ -44,10 +44,10 @@ $list-wp-header-font-weight: 800;
 $colors: (
   primary:    #3C89C9,
   secondary:  #29B5EF,
-  tertiary:   #595757,
-  light:      #f4f4f4,
-  light2:     #ddd9d9,
-  dark:       #222
+  back-gray:  #efefef,
+  semi-gray:  #9F9FA0,
+  dark-gray:  #595757,
+  light-white:  #ddd9d9
 );
 
 
@@ -95,3 +95,29 @@ $list-md-margin-bottom : 0px;
 
 @import "roboto";
 @import "noto-sans";
+
+@font-face {
+  font-family: 'NanumSquare';
+  font-style: normal;
+  src: 
+    url($font-path + 'NanumSquareRoundB.ttf') format('truetype'),
+    url($font-path + 'NanumSquareRoundOTFB.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'OpenSans-1';
+  font-style: normal;
+  src: url($font-path + 'SourceHanSansK-Regular.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'OpenSans-2';
+  font-style: normal;
+  src: url($font-path + 'SourceHanSansK-Medium.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'OpenSans-3';
+  font-style: normal;
+  src: url($font-path + 'SourceHanSansK-Bold.otf') format('opentype');
+}

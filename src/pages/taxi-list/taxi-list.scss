@@ -1,99 +1,86 @@
 page-taxi-list {
-  ion-fab {
-    margin-bottom: 2px;
-    margin-right: 15px;
-  }
-
-  ion-select {
-    max-width: none;
-    font-size:14px;
-  }
-
-  .days {
-    text-align: center;
-    color: #595757;
-  }
-
-  .days_icon {
-    text-align: center;
-    font-style: bold;
-    color: #595757;
-  }
-
-
-  .small-table {
-    border-bottom: 1pt solid #9F9FA0;
-  }
-
-  .pointer {
-    cursor: pointer;
-    font-size: 150%;
-    font-style: bold;
-  }
-
-  .labels{
-    color: gray;
-    font-size: 12px;
-    height: 14px;
-  }
-
   .item-inner {
     border-bottom: none !important;
   }
 
-  .rightArrow {
-    text-align: center;
-    font-size: 2.0em;
-    color: #3C89C9;
+  .small-table {
+    border-bottom: 1px solid #9F9FA0;
+
+    .small-top {
+      ion-select {
+        max-width: none;
+        width: 100%;
+        font-size: 14px;
+      }
+  
+      .rightArrow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 30px;
+        color: color($colors, primary, base);
+      }
+    }
+  
+    .small-bottom {
+      .days {
+        text-align: center;
+        color: color($colors, dark-gray, base);
+        cursor: pointer;
+  
+        .item-inner {
+          padding-right: 0;
+        }
+      }
+  
+      .days_icon {
+        text-align: center;
+        font-style: bold;
+        color: color($colors, dark-gray, base);
+      }
+    }
   }
 
   .mainGrid {
     padding: 0;
-  }
 
-  .line {
-    background-color: white;
-
-    p {
-      color: black;
-    }
-  }
-
-  .full {
-    background-color: gray;
-    color: white;
-  }
-
-  .exist {
-    background-color: #29B5EF;
-  }
-
-  .top-title{
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 0 90px 1px;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  }
-
-  .selectWrapper {
-    .select-icon {
-      visibility: hidden;
-    }
-    text-align: left;
-  }
+    .line {
+      background-color: white;
+      cursor: pointer;
+      border-bottom: 1px solid lighten(color($colors, dark-gray, base), 30%);
   
-  .selectIcon
-  {
-    color: #C9C9CA;
-    font-size: 0.7em;
+      p {
+        color: black;
+      }
+
+      &.full {
+        background-color: darken(color($colors, back-gray, base), 10%);
+        p {
+          color: color($colors, dark-gray, base);
+        }
+      }
+    
+      &.exist {
+        background-color: color($colors, secondary, base);
+        p {
+          color: white;
+        }
+      }
+    }
   }
 
-  .rowUnderline{
-  border-bottom:1pt solid #C9C9CA;
+  // .top-title{
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   padding: 0 90px 1px;
+  //   width: 100%;
+  //   height: 100%;
+  //   text-align: center;
+  // }
+
+  ion-fab {
+    margin-bottom: 2px;
+    margin-right: 15px;
   }
-
-
 }

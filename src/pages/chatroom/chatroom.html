@@ -12,12 +12,12 @@
         </button>
     </ion-buttons>
 
-    <!-- <ion-title> 꼬부기 ({{room_participants.length}}/{{room_capacity}}) </ion-title> -->
+    <ion-title> 방장이름 (참여인원/최대인원) </ion-title>
     <!-- 방이름/인원 -->
   </ion-navbar>
 
   <!-- 방 정보 -->
-  <ion-grid class="room-info">
+  <ion-grid id="room-info">
     <ion-row>
       <ion-col justify-content-center padding-left>
         {{displayDate}} {{displayTime}}
@@ -34,13 +34,13 @@
   </ion-grid>
 
   <!-- 참여자 정보  -->
-  <ion-grid>
+  <ion-grid id="part-info">
     <ion-row>
       <ion-col class="users">
         <div class="user" *ngFor="let member of roomObj.participants; let i = index">
-          <button ion-button class="user-name" (click)="show(i)" >{{ member }}</button>
-          <button ion-button class="user-call" (click)="native(i, 1)"><ion-icon name="ios-call-outline"></ion-icon></button>
-          <button ion-button class="user-mail" (click)="native(i, 2)"><ion-icon name="ios-mail-outline"></ion-icon></button>
+          <button class="user-name" [ngClass]="{'active': index==i}" (click)="show(i)" >{{ member }}</button>
+          <button class="user-call" (click)="native(i, 1)"><ion-icon name="ios-call-outline"></ion-icon></button>
+          <button class="user-mail" (click)="native(i, 2)"><ion-icon name="ios-mail-outline"></ion-icon></button>
         </div>
       </ion-col>
     </ion-row>
@@ -49,47 +49,30 @@
 
 <ion-content>
   <ion-list>
-
-    <!--
-    <ion-item *ngFor="let chat of chats | async; let last = last">
-      {{chat.user_id}} : {{chat.content}}
-      {{last ? scrollBottom() : ''}}
-    </ion-item>
-    -->
-
     <div class="message-wrap" *ngFor="let chat of chats | async; let last = last">
       <!-- 밑에 주석처리 되어있는 부분이 내가 말한 내용이면 오른쪽, 상대가 말한 내용이면 왼쪽 선택하게한다. -->
-      <!-- <div *ngFor="let msg of msgList"
-           class="message"
-           [class.left]=" msg.userId === toUser.id "
-           [class.right]=" msg.userId === user.id "> -->
       <div class="message right" *ngIf="chat.user_id == chat_user_id">
         <!-- <img class="user-img" [src]="msg.userAvatar" alt="" src=""> 이거는 프로필사진-->
-        <div class="msg-detail">
-          <div class="msg-content">
-            <div class="msg-info">
-              <p>
-                <!-- 사용자 아이디, 메세지 작성시간 {{msg.userName}}&nbsp;&nbsp;&nbsp;{{msg.time | relativeTime}}</p> -->
-                <ion-icon *ngIf="chat.user_id == room_host" name="star"></ion-icon>{{chat.user_id}}&nbsp;&nbsp;&nbsp;{{chat.date_time | slice:12:21}}</p>
-            </div>
-            <span class="triangle"></span>
-            <p class="line-breaker">{{chat.content}}</p>
-            <!-- {{msg.message}} -->
+        <div class="user-info">
+          <ion-icon *ngIf="chat.user_id == room_host" name="star"></ion-icon>{{chat.user_id}}
+        </div>
+        <div class="msg-content">
+          <span>{{chat.date_time | slice:12:21}}</span>
+          <div class="msg-info">
+            <span>{{chat.content}}</span>
           </div>
         </div>
       </div>
 
       <div class="message left" *ngIf="chat.user_id != chat_user_id">
         <!-- <img class="user-img" alt="" src=""> -->
-        <div class="msg-detail">
-          <div class="msg-content">
-            <div class="msg-info">
-              <p>
-                <!-- {{msg.userName}}&nbsp;&nbsp;&nbsp;{{msg.time | relativeTime}}</p> -->
-                <ion-icon *ngIf="chat.user_id == room_host" name="star"></ion-icon>{{chat.user_name}}&nbsp;&nbsp;&nbsp;{{chat.date_time | slice:12:21}}</p>
-            </div>
-            <span class="triangle"></span>
-            <p class="line-breaker">{{chat.content}}</p>
+        <div class="user-info">
+          <ion-icon *ngIf="chat.user_id == room_host" name="star"></ion-icon>{{chat.user_id}}
+        </div>
+        <div class="msg-content">
+          <span>{{chat.date_time | slice:12:21}}</span>
+          <div class="msg-info">
+            <span>{{chat.content}}</span>
           </div>
         </div>
       </div>
