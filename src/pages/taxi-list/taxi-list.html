@@ -63,7 +63,8 @@
             </ion-col>
             <ion-col col-2>
               <p>{{date.currentPeople}} / {{date.capacity}}</p>
-              <p>참여 {{ date.currentPeople >= date.capacity ? "불가" : "가능" }}</p>
+              <p *ngIf="isExist(date.participants)">참여중</p>
+              <p *ngIf="!isExist(date.participants)">참여 {{ date.currentPeople >= date.capacity ? "불가" : "가능" }}</p>
             </ion-col>
           </ion-row>
         </ion-item-divider>

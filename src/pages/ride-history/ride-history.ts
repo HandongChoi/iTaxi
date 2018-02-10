@@ -32,6 +32,6 @@ export class RideHistoryPage {
     console.log("room object in rideHistory", room_object);
     console.log("room key in rideHistory", room_object.$key);
 
-    this.navCtrl.setRoot(ChatRoomPage, {roomObj: room_object, bookingDate: room_object.departure_date, user_id: this.user_id, chat_room_id: room_object.$key});
+    this.navCtrl.setRoot(ChatRoomPage, {roomObj: room_object});
   }
 }

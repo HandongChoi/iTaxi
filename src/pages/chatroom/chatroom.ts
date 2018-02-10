@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, Content, NavParams, Platform } from 'ionic-angular';
+import { NavController, Content, NavParams, Platform, AlertController } from 'ionic-angular';
 
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 
@@ -38,10 +38,10 @@ export class ChatRoomPage {
   index: number = -1;
 
   constructor(public navCtrl: NavController, public af:AngularFireDatabase, public navParams: NavParams, public platform:Platform,
-              public roomServices: RoomsProvider, public dateServices: DateProvider, public userServices: UsersProvider) {
+              public roomServices: RoomsProvider, public dateServices: DateProvider, public userServices: UsersProvider,
+              public alertCtrl: AlertController) {
     console.log('constructor chatroom');
 
-    this.room = navParams.data.room;
     if (navParams.data.whichPage == "Taxi") {
       this.backPage = TaxiListPage;
       this.room_object = af.object(`/chatrooms/${this.room['departure_date']}/${this.room.$key}`);
@@ -52,36 +52,48 @@ export class ChatRoomPage {
     }
     else {
       this.backPage = MainPage;
-      alert("잘못된 경로로 접근하셨습니다.");
-      navCtrl.setRoot(this.backPage);
+      let alert = this.alertCtrl.create({
+        message: "잘못된 경로로 접근하셨습니다.",
+        buttons: [{
+          text: '확인',
+          handler: () => {
+            navCtrl.setRoot(this.backPage);
+          }
+        }]
+      });
+      alert.present();
     }
 
-    this.chats = af.list('/chats/' + this.room_object.$ref.key);
-    this.rideHistory = af.object(`/rideHistory/${this.userServices.getUID()}/${this.room_object.$ref.key}`)
-    this.user_id = this.userServices.getEmail();
-    
-    this.roomServices.setRoomInfo(this.room);
-    this.displayDate = this.dateServices.getKMonthDay(this.roomServices.room['departure_date']);
-    this.displayTime = this.roomServices.room['depart_time'];
-    this.room_host = this.roomServices.room['host'];
-
-    let isExist: boolean = false;
-
-    //목록에 있는지 없는지 여부 확인.
-    for(var user of this.roomServices.room['participants']){
-      if(user === this.userServices.getEmail()){
-        isExist = true;
-        break;
+    console.log(this.room_object);
+    if (this.room_object !== undefined) {
+      this.room = navParams.data.room;
+      this.chats = af.list('/chats/' + this.room_object.$ref.key);
+      this.rideHistory = af.object(`/rideHistory/${this.userServices.getUID()}/${this.room_object.$ref.key}`)
+      this.user_id = this.userServices.getEmail();
+      
+      this.roomServices.setRoomInfo(this.room);
+      this.displayDate = this.dateServices.getKMonthDay(this.roomServices.room['departure_date']);
+      this.displayTime = this.roomServices.room['depart_time'];
+      this.room_host = this.roomServices.room['host'];
+  
+      let isExist: boolean = false;
+  
+      //목록에 있는지 없는지 여부 확인.
+      for(var user of this.roomServices.room['participants']){
+        if(user === this.userServices.getEmail()){
+          isExist = true;
+          break;
+        }
       }
-    }
-    
-    if (isExist == false) {
-      if (this.roomServices.addParticipants(this.userServices.getEmail())) {
-        this.room_object.update(this.roomServices.room);
-      }
-      else {
-        alert("인원이 마감되었습니다.");
-        this.navCtrl.setRoot(this.backPage);
+      
+      if (isExist == false) {
+        if (this.roomServices.addParticipants(this.userServices.getEmail())) {
+          this.room_object.update(this.roomServices.room);
+        }
+        else {
+          alert("인원이 마감되었습니다.");
+          this.navCtrl.setRoot(this.backPage);
+        }
       }
     }
   } 
