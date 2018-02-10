@@ -20,6 +20,7 @@ import { TaxiListPageModule } from '../pages/taxi-list/taxi-list.module'
 import { ChatRoomPageModule } from '../pages/chatroom/chatroom.module'
 import { LoginPageModule } from '../pages/login/login.module'
 import { MainPageModule } from '../pages/main/main.module'
+import { MakeRoomPageModule } from '../pages/makeRoom/makeRoom.module'
 import { PersonalInfoPageModule } from '../pages/personal-info/personal-info.module'
 import { SettingPageModule } from '../pages/setting/setting.module'
 import { SignupPageModule } from '../pages/signup/signup.module';
@@ -48,7 +49,6 @@ export const firebaseConfig = {
   declarations: [
     MyApp,
     HomePage,
-    MakeRoomPage,
   ],
   imports: [
     BrowserModule,
@@ -65,7 +65,8 @@ export const firebaseConfig = {
     ResetPasswordPageModule,
     RideHistoryPageModule,
     MainPageModule,
-    PipesModule
+    MakeRoomPageModule,
+    PipesModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
