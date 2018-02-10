@@ -13,11 +13,12 @@ import { TaxiListPage } from '../pages/taxi-list/taxi-list';
 import { AuthProvider } from '../providers/auth/auth';
 import { UsersProvider } from '../providers/users/users';
 
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { FCM, NotificationData } from '@ionic-native/fcm';
 
 import firebase from 'firebase';
 import { MainPage } from '../pages/main/main';
+import { Observable } from 'rxjs/Observable';
 
 firebase.initializeApp({
   apiKey: "AIzaSyANvht7J2MNX6x47mglqfJk74yZQ9u0qUk",
@@ -40,7 +41,7 @@ export class MyApp {
   user_id: any;
   uid: any;
 
-  public room: FirebaseListObservable<any[]>;
+  roomData: Object = {};
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
               public authProvider:AuthProvider, public alertCtrl: AlertController, public af: AngularFireDatabase,
@@ -55,24 +56,21 @@ export class MyApp {
           this.user_id = this.userServices.getName();
           this.uid = this.userServices.getUID();
 
-          let dates: FirebaseListObservable<any[]>;
-          let parsedUserId = this.stringParser(this.userServices.getEmail());
-          
-          dates = af.list('/rideHistory/'+parsedUserId);
-          dates.subscribe(data =>{
-            if(this.dates_array){
-              this.dates_array.pop();
-              this.dates_array.push(data);
-            }
-            else
-              this.dates_array.push(data);
-          });
+          if(this.user_id != undefined && this.uid != undefined){
+            
+            firebase.database().ref('/rideHistory/'+this.uid).orderByChild('departure_date').limitToFirst(1)
+             .on("value", data => {
+                
+              this.roomData = data.val();
+            });
 
-          this.rootPage = MainPage;
+            this.rootPage = MainPage;
+          }
         }).catch(error => {
           alert("An error occured!" + error);
         });
       }
+
       else {
         this.rootPage = LoginPage;
       }

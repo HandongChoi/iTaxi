@@ -33,7 +33,7 @@
         </button>
       </ion-col>
       <ion-col col-6 text-right>
-        <button ion-button large full color="secondary" text-right (click)="goCarpoolListPage()" >
+        <button ion-button large full color="secondary" text-right (click)="setPage('CarpoolListPage')" >
           카풀<br />
           탑승
         </button>
@@ -87,8 +87,10 @@
     </ion-card>
   </div> -->
 
-  <div *ngFor="let dates of dates_array">
-    <ion-card class = "ticket" *ngFor="let date of dates | DatePipe">
+<!--  <div *ngFor="let dates of dates_array"> -->
+  <ion-card class = "ticket">
+  <!-- *ngFor="let room of roomObj| DatePipe"-->
+
       <ion-row>
         <ion-col col-2 style="padding:0px; border:0">
           <img src="assets/imgs/blueTaxi.png" alt="taxi">
@@ -96,11 +98,11 @@
 
         <ion-col col-3 text-left>
           <div class="text">
-            {{date.roomDate}}
+            {{roomObj.departure_date}}
             <!-- 12.30 토요일 -->
           </div>
           <div style="font-size: 2rem">
-            {{date.roomTime}}
+            {{roomObj.departure_time}} 
             <!-- 16:00 -->
           </div>
         </ion-col>
@@ -108,10 +110,10 @@
 
         <ion-col col-5 style="padding-left:25px">
           <div class="text">
-            {{date.roomDepart}}
+            {{roomObj.departure}}
           </div>
           <div class="text2">
-            <ion-icon name="arrow-forward"></ion-icon>&nbsp;&nbsp;{{date.roomDest}}
+            <ion-icon name="arrow-forward"></ion-icon>&nbsp;&nbsp;{{roomObj.destination}}
           </div>
         </ion-col>
 
@@ -120,13 +122,13 @@
             택시
           </div>
           <div class="text2">
-            {{date.roomParticipants.length}}/{{date.roomCapacity}}
+            {{roomObj.currentPeople}}/{{roomObj.capacity}}
           </div>
         </ion-col>
 
       </ion-row>
     </ion-card>
-  </div>
+ <!-- </div> -->
 
 
 

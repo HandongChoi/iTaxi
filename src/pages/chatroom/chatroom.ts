@@ -57,7 +57,6 @@ export class ChatRoomPage {
     this.bookingDate = navParams.data.bookingDate;
     this.chat_room_id = navParams.data.chat_room_id;
     this.chat_user_id = navParams.data.user_id;
-    let whichPage = navParams.data.whichPage;
 
     //content로 set해두자.
     this.chats = af.list('/chats/'+ this.chat_room_id);
@@ -81,6 +80,7 @@ export class ChatRoomPage {
           console.log("True? : "+isExist);        
         }
       }
+
       console.log(this.chat_user_id);
       
       if (isExist == false) {
@@ -95,105 +95,7 @@ export class ChatRoomPage {
 
       console.log("here?");
     });
-
-
-    // let parsedID = this.stringParser(this.chat_user_id)
-    // console.log(parsedID);
-    // // this.rideHistory = af.list('/rideHistory/'+ parsedID);
-    // // console.log('hi', this.rideHistory.$ref.ref.key);
-    // let count = 0;
-
-    // this.room.forEach(data =>{
-    //   console.log("시작하자");
-    //   console.log(data);
-    //   console.log(data[0].$value);
-    //   if(count == 0){
-    //     this.room_capacity = data[0].$value;
-    //     this.room_depart_date = data[2].$value;
-    //     this.room_depart_time = data[3].$value;
-    //     this.room_depart = data[4].$value;
-    //     this.room_dest = data[5].$value;
-    //     this.room_host = data[6].$value;
-    //     this.room_participants = data[7];
-    //     this.room_month = (this.room_depart_date[5] + this.room_depart_date[6]);
-    //     this.room_day= (this.room_depart_date[8] + this.room_depart_date[9]);
-    //     this.room_hour= (this.room_depart_time[0] + this.room_depart_time[1]);
-    //     this.room_minute=(this.room_depart_time[3]+this.room_depart_time[4]);
-    //     this.roomKey = this.room.$ref.ref.parent.key;
-    //     console.log(this.roomKey);
-        // //내가 방장 주인인지 아닌지 확인
-        // if(this.room_host === this.chat_user_id)
-        //   this.isHost = true;
-        // else
-        //   this.isHost = false;
-    //     var isExist = false;
-    //     //목록에 있는지 없는지 여부 확인.
-    //     for(let i = 0; i < this.room_participants.length; i++){
-    //       if(this.room_participants[i] === this.chat_user_id){
-    //         isExist = true;
-    //         break;
-    //       }
-    //     }
-    //     //이거는 탑승내역을 기록하는건데 탑승 내역은 방 만들때 넣자.
-    //     //그리고 방을 들어갈때 탑승 내역을 넣자.(이때에는 탑승 했던건지 아닌지 확인하고 넣으면 된다.)
-    //     if(whichPage === 'makeRoom'){
-    //       this.rideHistory.push({
-    //         roomId: this.chat_room_id,
-    //         roomDate: this.room_depart_date,
-    //         roomTime: this.room_depart_time,
-    //         roomDepart: this.room_depart,
-    //         roomDest: this.room_dest,
-    //         roomCapacity: this.room_capacity,
-    //         roomParticipants: this.room_participants
-    //       });
-    //     }
-    //     //목록에 없다면 넣는 것 같다. 방에 인원 추가하고 탑승 내역도 수정하는것 같다.
-    //     if(isExist === false){
-    //       if(parseInt(this.room_capacity) > this.room_participants.length){
-    //         this.room_participants.push(this.chat_user_id);
-    //         this.room_object.update({
-    //           capacity: this.room_capacity,
-    //           depart_date: this.room_depart_date,
-    //           depart_time: this.room_depart_time,
-    //           departure: this.room_depart,
-    //           destination: this.room_dest,
-    //           host: this.room_host,
-    //           participants: this.room_participants
-    //         })
-    //         this.rideHistory.push({
-    //           roomId: this.chat_room_id,
-    //           roomDate: this.room_depart_date,
-    //           roomTime: this.room_depart_time,
-    //           roomDepart: this.room_depart,
-    //           roomDest: this.room_dest,
-    //           roomCapacity: this.room_capacity,
-    //           roomParticipants: this.room_participants
-    //         });
-    //       }
-    //     };
-    //   }
-      // count++;
-    // });
-
-    //this.roomServices.setRoomInfo(data);
-    //roobObj에 departureDate를 넣은 것은 코드를 좀 더 readable하게 만들기 위해서다. this.bookingDate써도 무방.
- /*   this.displayDate = this.dateServices.getKMonthDay(this.roomObj['departure_date']);
-    this.displayTime = this.roomObj['departure_time'];
-
-    //내가 방장 주인인지 아닌지 확인
-    if(this.roomObj['host'] === this.chat_user_id)
-      this.isHost = true;
-    else
-      this.isHost = false;
-      */
-  }    
-  
-  stringParser(sentence){
-    let parsedID = sentence.replace('@', '');
-    parsedID = parsedID.replace('.', '');
-
-    return parsedID;
-  }
+  } 
 
   goBack(){
       this.navCtrl.setRoot(TaxiListPage);
@@ -213,6 +115,7 @@ export class ChatRoomPage {
 
     }
     //이게 되는지 한 번 보자.
+    
     return '';
   }
 

@@ -11,19 +11,19 @@
 <ion-content>
   <div>
     <ion-grid>
-      <ion-item-group *ngFor = "let chatroomDatum of chatroomData;">
-        <ion-item-divider color="light" (click)="goChatroom(chatroomDatum)">
+      <ion-item-group *ngFor = "let room of rideHistory | async">
+        <ion-item-divider color="light" (click)="goChatroom(room)">
           <ion-row>
             <ion-col col-3>
-              <p>{{chatroomDatum.roomDate}}</p>
-              <p>{{chatroomDatum.roomTime}}</p>
+              <p>{{room.departure_date}}</p>
+              <p>{{room.departure_time}}</p>
             </ion-col>
             <ion-col col-7>
-              <p>{{chatroomDatum.roomDepart}}</p>
-              <p>>{{chatroomDatum.roomDest}}</p>
+              <p>{{room.departure}}</p>
+              <p>>{{room.destination}}</p>
             </ion-col>
             <ion-col col-2>
-              <p>{{chatroomDatum.roomParticipants.length}} / {{chatroomDatum.roomCapacity}}</p>
+              <p>{{room.currentPeople}} / {{room.capacity}}</p>
               <p>참여중</p>
             </ion-col>
           </ion-row>

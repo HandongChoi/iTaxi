@@ -8,12 +8,12 @@
         </button>
       </ion-buttons>
       <hr class="sidemenu-hr" style="background-color:#29B5EF">
-      <ion-grid class="sidemenu-grid"  *ngFor = "let dates of dates_array">
-        <div class="sidemenu-div" *ngFor = "let date of dates | DatePipe">
-        &nbsp;&nbsp;꼬부기 {{date.length}} ({{date.roomParticipants.length}} / {{date.roomCapacity}})
+      <ion-grid class="sidemenu-grid">
+        <div class="sidemenu-div">
+        &nbsp;&nbsp;꼬부기( {{roomData.currentPeople}} / {{roomData.capacity}} )
         <ion-row class="sidemenu-row" justify-content-left padding-left style="border-top-color: white">
-        {{date.roomDate}} &nbsp;&nbsp;|&nbsp;&nbsp; {{date.roomTime}}<br>
-        {{date.roomDepart}} &nbsp;&nbsp; > &nbsp;&nbsp; {{date.roomDest}}
+        {{roomData.departure_date}} &nbsp;&nbsp;|&nbsp;&nbsp; {{roomData.departure_time}}<br>
+        {{roomData.departure}} &nbsp;&nbsp; > &nbsp;&nbsp; {{roomData.destination}}
       <ion-buttons right > 
         <button  class="sidemenu-button2" menuClose icon-only (click)="Idontknow()">
           <ion-icon name="log-out"></ion-icon>

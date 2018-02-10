@@ -5,6 +5,7 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 import { ChatRoomPage } from '../chatroom/chatroom';
 
 import { UsersProvider } from '../../providers/users/users';
+import { StringProvider } from '../../providers/strings/strings';
 
 @IonicPage()
 @Component({
@@ -17,45 +18,20 @@ export class RideHistoryPage {
 
   user_id: string;
   nowDate: string = new Date().toISOString().substr(0, 10);
-  chatroomData: Array<any[]> = [];
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase, 
-              public userServices: UsersProvider) {
+              public userServices: UsersProvider, private stringProvider: StringProvider) {
     this.user_id = this.userServices.getEmail();
     console.log(this.user_id);
-    this.rideHistory = af.list('/rideHistory/'+ this.stringParser(this.user_id));
-
-    this.rideHistory.$ref.orderByChild('roomDate').on('child_added', data =>{
-        console.log(data);
-        this.chatroomData.push(data.val());
-      /*let chatroom = this.af.list('/chatrooms/' + data.val().roomDate + '/' + data.val().roomId);
-
-      chatroom.subscribe(chatroomData => {
-        this.chatroomData = chatroomData;
-        console.log(this.chatroomData);
-      });
-      */
-
-      console.log(this.chatroomData);
-    });
+    this.rideHistory = af.list('/rideHistory/'+ this.userServices.getUID() + '/');
   }
 
-  stringParser(sentence){
-    let parsedID = sentence.replace('@', '');
-    parsedID = parsedID.replace('.', '');
+  goChatroom(room_object) {
 
-    return parsedID;
-  }
+    console.log("room object in rideHistory", room_object);
+    console.log("room key in rideHistory", room_object.$key);
 
-  goChatroom(chatroomDatum_temp) {
-    let chat_room_id_val = chatroomDatum_temp.roomId;
-    let bookingDate_val= chatroomDatum_temp.roomDate;
-
-    //participant array에 push
-    // 참여자가 아니고, 인원 full 아니면 push
-    // 참여자이면 그냥 enter
-    // full 인원이면 deny
-
-    this.navCtrl.setRoot(ChatRoomPage, {chat_room_id: chat_room_id_val, bookingDate: bookingDate_val, user_id: this.user_id});
+    this.navCtrl.setRoot(ChatRoomPage, {roomObj: room_object, bookingDate: room_object.departure_date, user_id: this.user_id, chat_room_id: room_object.$key});
   }
 }
