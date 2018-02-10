@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 
 import { ChatRoomPage } from '../chatroom/chatroom';
@@ -10,12 +10,14 @@ import { DateProvider } from '../../providers/date/date';
 
 import { DatabaseQuery } from 'angularfire2/interfaces';
 
+@IonicPage()
 @Component({
   selector: 'page-make-room',
   templateUrl: 'makeRoom.html',
 })
 
 export class MakeRoomPage {
+  
   selectDeparture: Object = {key:"한동대학교", value:""};
   departure: string = "";
 

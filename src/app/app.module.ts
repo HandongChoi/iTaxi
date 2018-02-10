@@ -22,6 +22,7 @@ import { LoginPageModule } from '../pages/login/login.module';
 import { MainPageModule } from '../pages/main/main.module';
 import { PersonalInfoPageModule } from '../pages/personal-info/personal-info.module';
 import { SettingPageModule } from '../pages/setting/setting.module';
+import { MakeRoomPageModule } from '../pages/makeRoom/makeRoom.module'
 import { SignupPageModule } from '../pages/signup/signup.module';
 import { ResetPasswordPageModule } from '../pages/reset-password/reset-password.module';
 import { RideHistoryPageModule } from '../pages/ride-history/ride-history.module';
@@ -50,7 +51,6 @@ export const firebaseConfig = {
   declarations: [
     MyApp,
     HomePage,
-    MakeRoomPage,
   ],
   imports: [
     BrowserModule,
@@ -69,7 +69,8 @@ export const firebaseConfig = {
     MainPageModule,
     PipesModule,
     MakeCarpoolRoomPageModule,
-    CarpoolListPageModule
+    CarpoolListPageModule,
+    MakeRoomPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
