@@ -10,8 +10,8 @@
     </div>
     
     <hr class="sidemenu-hr">
-    <ion-grid class="sidemenu-grid">
-      <div class="sidemenu-div" *ngFor="let room of roomData | async;">
+    <ion-grid class="sidemenu-grid" *ngFor="let room of roomData | async;">
+      <div class="sidemenu-div" (click)="goChatroomPage(room)">
         <div class="sidemenu-rtitle">&nbsp;&nbsp; 꼬부기 {{room.currentPeople}} / {{room.capacity}}</div>
         <ion-row class="sidemenu-row">
           <div>

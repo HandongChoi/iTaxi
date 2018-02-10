@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, NavController, Platform, AlertController, LoadingController } from 'ionic-angular';
+import { Nav, NavController, Platform, AlertController, LoadingController, MenuController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -9,6 +9,7 @@ import { MakeRoomPage } from '../pages/makeRoom/makeRoom';
 import { SettingPage } from '../pages/setting/setting';
 import { SignupPage } from '../pages/signup/signup';
 import { TaxiListPage } from '../pages/taxi-list/taxi-list';
+import {ChatRoomPage} from '../pages/chatroom/chatroom';
 
 import { AuthProvider } from '../providers/auth/auth';
 import { UsersProvider } from '../providers/users/users';
@@ -46,7 +47,7 @@ export class MyApp {
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
               public authProvider:AuthProvider, public alertCtrl: AlertController, public af: AngularFireDatabase,
-              public fcm:FCM, public userServices:UsersProvider, private dateServices:DateProvider) {
+              public fcm:FCM, public userServices:UsersProvider, private dateServices:DateProvider, public menuCtrl: MenuController) {
     this.splashScreen.show();
     console.log("splash screen on");
     this.initializeApp();
@@ -55,7 +56,8 @@ export class MyApp {
       if (user) {
 
         this.userServices.initialize(user).then(() => {
-        this.user_id = this.userServices.getName();
+        this.user_id = this.userServices.getEmail();
+        console.log(this.user_id);
         this.uid = this.userServices.getUID();
 
         if(this.user_id != undefined && this.uid != undefined){
@@ -150,8 +152,9 @@ export class MyApp {
     this.navCtrl.setRoot(page);
   }
 
-  goChatRoomPage(page){
-    this.navCtrl.setRoot(page);
+  goChatroomPage(room){
+    this.menuCtrl.close();
+    this.navCtrl.setRoot(ChatRoomPage, {chat_room_id:room.$key, bookingDate:room.departure_date, user_id: this.user_id, roomObj: room});
   }
 
   logout(){
