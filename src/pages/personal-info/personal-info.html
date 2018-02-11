@@ -14,32 +14,25 @@
 </ion-header>
 
 <ion-content padding>
-  <form [formGroup]="updateForm" (submit)="updateUserInfo()" novalidate>
+  <form [formGroup]="updateForm" (submit)="updateUserInfo()" novalidate *ngIf="user">
     <ion-item>
       <ion-label stacked>이름</ion-label>
-      <ion-input formControlName="name" type="name" value="{{user_dic.name}}"></ion-input>
+      <ion-input formControlName="name" type="name" value="{{ user.name }}"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label stacked>학번</ion-label>
-      <ion-input formControlName="studentID" type="studentID" value="{{user_dic.studentID}}"></ion-input>
+      <ion-input disabled="true" formControlName="studentID" type="studentID" value="{{ user.studentID }}"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label stacked>전화번호</ion-label>
-      <ion-input formControlName="phoneNumber" type="phoneNumber" value="{{user_dic.phoneNumber}}"></ion-input>
-    </ion-item>
-  <!--
-    <ion-item>
-      <ion-label stacked>새로운 비밀번호</ion-label>
-      <ion-input formControlName="newPassword" type="newPassword"></ion-input>
+      <ion-input disabled="true" formControlName="phoneNumber" type="phoneNumber" value="{{ user.phoneNumber }}"></ion-input>
     </ion-item>
 
-    <ion-item>
-      <ion-label stacked>비밀번호 확인</ion-label>
-      <ion-input formControlName="newPasswordCheck" type="newPasswordCheck"></ion-input>
+    <ion-item no-lines text-center>
+      <p>*추가적인 변경을 원하시면 메일로 문의해 주시기 바랍니다.</p>
     </ion-item>
-  -->
     <div padding>
       <button ion-button block type="submit" (click)="showAlert()">변경하기</button>
     </div>

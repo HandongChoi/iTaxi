@@ -46,7 +46,6 @@ export class UsersProvider {
     this.studentID='';
   }
   
-  
   getEmail(){
     return this.email;
   }
@@ -57,6 +56,14 @@ export class UsersProvider {
   
   getUID(){
     return this.uid;
+  }
+
+  getStudentID() {
+    return this.studentID;
+  }
+
+  getPhoneNumber() {
+    return this.phoneNumber;
   }
 
 }

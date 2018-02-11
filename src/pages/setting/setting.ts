@@ -1,8 +1,13 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform, AlertController } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
-import { LoginPage } from '../login/login'; 
 import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
+
+import { LoginPage } from '../login/login';
+import { PersonalInfoPage } from '../personal-info/personal-info'
+
+import { UsersProvider } from '../../providers/users/users';
+import { DateProvider } from '../../providers/date/date';
 
 @IonicPage()
 @Component({
@@ -11,33 +16,21 @@ import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/data
 })
 export class SettingPage {
 
-  user: any;
+  user: Object;
   userData: FirebaseObjectObservable<any>;
   isNotiToggled: boolean;
   isPushToggled: boolean;
-  firestore;
-    /*
-    this.platform.ready().then(() =>{
-      NativeStorage.getItem('notification').then(data =>{
-        console.log(this.isNotiToggled);
-        this.isNotiToggled = data;
-      });
 
-      NativeStorage.getItem('push').then(data =>{
-        console.log(this.isPushToggled);
-        this.isPushToggled = data;
-      });
+  constructor(public navCtrl: NavController, public navParams: NavParams, public userService: UsersProvider,
+    public platform:Platform, public authProvider:AuthProvider, public af:AngularFireDatabase,
+    public alertCtrl: AlertController) {
+    
+    this.userData = af.object(`/userProfile/${this.userService.getUID()}`);
+    this.userData.subscribe(user => {
+      this.user = user;
+      this.isNotiToggled = user.isNoti;
+      this.isPushToggled = user.isPush;
     });
-    */
-  constructor(public navCtrl: NavController, public navParams: NavParams, 
-    public platform:Platform, public authProvider:AuthProvider, public af:AngularFireDatabase) {
-    let user_id = firebase.auth().currentUser.uid;
-    this.userData = af.object(`/userProfile/${user_id}`);
-    this.userData.subscribe(data => {
-      this.user = data;
-      this.isNotiToggled = data.isNoti;
-      this.isPushToggled = data.isPush;
-    })
   }
 
   ionViewDidLoad() {
@@ -52,11 +45,45 @@ export class SettingPage {
     this.userData.update({ isPush: this.isPushToggled });
   }
 
+  OpenInfoPage() {
+    this.navCtrl.setRoot(PersonalInfoPage);
+  }
+
   delete_user():void {
-    this.firestore = firebase.database().ref('/userProfile/'+ firebase.auth().currentUser.uid);
-    this.authProvider.delete();
-    this.firestore.remove();
-    alert('탈퇴처리되었습니다');
-    this.navCtrl.setRoot(LoginPage);
+    let alert = this.alertCtrl.create({
+      title: "회원탈퇴",
+      message: "정말로 탈퇴하시겠습니까?",
+      buttons: [
+        {
+          text: '취소',
+          role: 'cancle',
+          handler: () => {
+            console.log('Cancle');
+          }
+        },
+        {
+          text: '확인',
+          handler: () => {
+            this.userData.remove();
+            this.authProvider.delete();
+            
+            let a = this.alertCtrl.create({
+              title: "탈퇴 완료",
+              message: "탈퇴가 완료되었습니다.",
+              buttons: [
+                {
+                  text: 'Ok',
+                  handler: () => {
+                    this.navCtrl.setRoot(LoginPage);
+                  }
+                }
+              ]
+            });
+            a.present();
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 }

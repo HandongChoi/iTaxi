@@ -1,3 +1,18 @@
 page-setting {
+  ion-row {
+    ion-col {
+      display: flex;
+      align-content: center;
+      justify-content: center;
+  
+      &:first-of-type {
+        color: color($colors, semi-gray, base); 
+      }
+    }
 
+    &:last-of-type {
+      margin-top: 10px;
+    }
+  }
+  
 }

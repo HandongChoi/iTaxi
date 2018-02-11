@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 
 import { MainPage } from '../main/main';
+import { UsersProvider } from '../../providers/users/users';
+import { DateProvider } from '../../providers/date/date';
 
 @IonicPage()
 @Component({
@@ -14,26 +16,22 @@ export class PersonalInfoPage {
 
   public updateForm:FormGroup;
 
-  user: any;
-  user_dic: { [key: string]: string } = {};
-  uid: any;
-
   user_object:FirebaseObjectObservable<any[]>;
+  user: Object;
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,
-              public alertCtrl: AlertController, public af:AngularFireDatabase, formBuilder:FormBuilder) {
+              public alertCtrl: AlertController, public af:AngularFireDatabase, formBuilder:FormBuilder,
+              public userService: UsersProvider) {
 
+    this.user_object = this.af.object('/userProfile/' + this.userService.getUID());
+    this.user_object.subscribe(data => {
+      this.user = data;
+    })
     this.updateForm = formBuilder.group({
       name: ['', Validators.compose([Validators.required])],
       phoneNumber: ['', Validators.compose([Validators.required])],
       studentID: ['', Validators.compose([Validators.required])],
-
-    });
-    this.user = firebase.auth().currentUser;
-    af.list('/userProfile/' + this.user.uid).subscribe(data => {
-      data.forEach(data => {
-        this.user_dic[data.$key] = data.$value;
-      });
     });
   }
 
@@ -42,12 +40,26 @@ export class PersonalInfoPage {
     const revise_phoneNumber:string = this.updateForm.value.phoneNumber;
     const revise_studentID:string = this.updateForm.value.studentID;
 
-    this.user_object = this.af.object('/userProfile/' + this.user.uid);
-    this.user_object.update({
-      name: revise_name,
-      phoneNumber: revise_phoneNumber,
-      studentID: revise_studentID,
-    });
+    let alert = this.alertCtrl.create({
+      title: "정보 수정",
+      message: "정보를 수정하시겠습니까?",
+      buttons: [
+        {
+          text: "Cancle",
+          role: "cancle"
+        },
+        {
+          text: "Change",
+          handler: () => {
+            this.user_object.update({
+              name: revise_name,
+              phoneNumber: revise_phoneNumber,
+              studentID: revise_studentID,
+            });
+          }
+        }
+      ]
+    })
 
     console.log("Success Update");
   }
