@@ -77,12 +77,15 @@ export class TaxiListPage {
 
   goChatroom(room) {
     if (room['currentPeople'] >= room['capacity']) {
-      alert("인원이 가득 차 입장할 수 없습니다.");
+      console.log(room);
+      if (!this.isExist(room['participants'])) {
+        alert("인원이 가득 차 입장할 수 없습니다.");
+        return;
+      }
     }
-    else {
-      this.af.object(`/rideHistory/${this.usersService.getUID()}/${room.$key}`).set(room);
-      this.navCtrl.setRoot(ChatRoomPage, {room: room, whichPage: "Taxi"});
-    }
+
+    this.af.object(`/rideHistory/${this.usersService.getUID()}/${room.$key}`).set(room);
+    this.navCtrl.setRoot(ChatRoomPage, {room: room, whichPage: "Taxi"});
   }
 
   makeRoom(){
