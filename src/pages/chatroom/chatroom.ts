@@ -151,7 +151,12 @@ export class ChatRoomPage {
     }
     this.roomServices.getOut();
     this.room = this.roomServices.room;
-    this.rideHistory.remove();
+    this.dateServices.setNow();
+    if (this.room['departure_date'] + this.room['departure_time'] > this.dateServices.nowDate + this.dateServices.nowTime) {
+      // 예약시간이 지금보다 이후이면 삭제
+      // => 택시를 타고 나서는 기록이 지워지지 않음. (먹튀 예방..?)
+      this.rideHistory.remove();
+    }
     this.navCtrl.setRoot(this.backPage);
   }
 

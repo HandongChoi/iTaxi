@@ -16,7 +16,7 @@ import { DateProvider } from '../../providers/date/date';
 export class MainPage {
 
   user_id: any;
-  roomObj: FirebaseListObservable<any[]>;
+  roomObj: Array<Object> = [];
   
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase,
      public menu: MenuController, public userServices: UsersProvider, private dateServices: DateProvider) {
@@ -27,12 +27,20 @@ export class MainPage {
 
     //일단 지금 user의 정보를 email로 받아오고 있다.
     this.user_id = this.userServices.getEmail();
+    this.dateServices.setNow();
     console.log("Main user : "+this.user_id);
-    this.roomObj = af.list('/rideHistory/' + this.userServices.getUID(), {
+    af.list('/rideHistory/' + this.userServices.getUID(), {
       query:{
         startAt: this.dateServices.getYearMonthDayWithDash(),
         orderByChild : 'departure_date'
       }
+    }).subscribe(data => {
+      data.forEach(item => {
+        if (item.departure_time > this.dateServices.nowTime) {
+          console.log("asd", item)
+          this.roomObj.unshift(item);
+        }
+      })
     });
   }
 

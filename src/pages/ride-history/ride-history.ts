@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { ChatRoomPage } from '../chatroom/chatroom';
@@ -19,13 +19,26 @@ export class RideHistoryPage {
   user_id: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase, 
-              public userServices: UsersProvider, private stringProvider: StringProvider) {
+              public userServices: UsersProvider, private stringProvider: StringProvider, public alertCtrl: AlertController) {
 
     this.user_id = this.userServices.getEmail();
     this.rideHistory = af.list('/rideHistory/'+ this.userServices.getUID() + '/');
   }
 
   goChatroom(room_object) {
-    this.navCtrl.setRoot(ChatRoomPage, {room: room_object});
+    this.af.object(`/rideHistory/${room_object['departure_date']}/${room_object.$key}`).subscribe(data => {
+      if (data.$value) {
+        this.navCtrl.setRoot(ChatRoomPage, {room: room_object});
+      }
+      else {
+        let alert = this.alertCtrl.create({
+          message: "이미 삭제된 방입니다.",
+          buttons: [{
+            text: '확인',
+          }]
+        });
+        alert.present();
+      }
+    })
   }
 }

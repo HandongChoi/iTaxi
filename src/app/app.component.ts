@@ -38,13 +38,11 @@ export class MyApp {
   @ViewChild(Nav) navCtrl: NavController;
 
   rootPage: any;
-  pages: Array<{title: string, component: any}>;
-  dates_array: Array<any> = [];
   user_id: any;
   user_name: string;
   uid: any;
 
-  roomData: FirebaseListObservable<any[]>;
+  room: Object;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
               public authProvider:AuthProvider, public alertCtrl: AlertController, public af: AngularFireDatabase,
@@ -56,23 +54,25 @@ export class MyApp {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.userServices.initialize(user).then(() => {
-        this.user_id = this.userServices.getEmail();
-        this.user_name = this.userServices.getName();
-        console.log(this.user_id);
-        this.uid = this.userServices.getUID();
+          this.user_id = this.userServices.getEmail();
+          this.user_name = this.userServices.getName();
+          console.log(this.user_id);
+          this.uid = this.userServices.getUID();
 
-        if(this.user_id != undefined && this.uid != undefined){
-             
-          this.roomData = af.list('/rideHistory/' + this.uid, {
-            query:{
-              startAt: this.dateServices.getYearMonthDayWithDash(),
-              orderByChild : 'departure_date',
-              limitToFirst: 1
-            }
-          });
-
-          console.log("app.component", this.roomData.$ref.ref);
-
+          if(this.user_id != undefined && this.uid != undefined) {
+            af.list('/rideHistory/' + this.uid, {
+              query:{
+                startAt: this.dateServices.getYearMonthDayWithDash(),
+                orderByChild : 'departure_date'
+              }
+            }).subscribe(data => {
+              data.forEach(item => {
+                if (item.departure_time > this.dateServices.nowTime) {
+                  this.room = item;
+                  return;
+                }
+              })
+            });
             this.rootPage = MainPage;
           }
         }).catch(error => {
