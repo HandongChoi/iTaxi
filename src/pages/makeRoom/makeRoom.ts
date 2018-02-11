@@ -130,7 +130,7 @@ export class MakeRoomPage {
                                       };
                 let chatRoomUrl = this.af.list('/chatrooms/'+this.bookingDate).push(roomObj);
                 this.af.list(`/rideHistory/${this.userServices.getUID()}/${chatRoomUrl.key}`).push(roomObj);
-                this.navCtrl.setRoot(ChatRoomPage, {room: roomObj, whichPage: "Taxi"});
+                this.navCtrl.setRoot(ChatRoomPage, {room: roomObj});
               }
             }]
         });

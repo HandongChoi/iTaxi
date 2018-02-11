@@ -85,7 +85,7 @@ export class TaxiListPage {
     }
 
     this.af.object(`/rideHistory/${this.usersService.getUID()}/${room.$key}`).set(room);
-    this.navCtrl.setRoot(ChatRoomPage, {room: room, whichPage: "Taxi"});
+    this.navCtrl.setRoot(ChatRoomPage, {room: room});
   }
 
   makeRoom(){

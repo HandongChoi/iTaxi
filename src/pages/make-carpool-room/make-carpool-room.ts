@@ -144,7 +144,7 @@ export class MakeCarpoolRoomPage {
                                       };
                 let chatRoomUrl = this.af.list('/carpoolChatrooms/'+this.bookingDate).push(roomObj);
                 this.af.object(`/rideHistory/${this.userServices.getUID()}/${chatRoomUrl.key}`).set(roomObj).then(() => {
-                  this.navCtrl.setRoot(ChatRoomPage, {room: roomObj, whichPage: "Carpool"});
+                  this.navCtrl.setRoot(ChatRoomPage, {room: roomObj});
                 });
               }
             }]

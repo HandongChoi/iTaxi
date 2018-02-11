@@ -42,19 +42,18 @@ export class ChatRoomPage {
               public roomServices: RoomsProvider, public dateServices: DateProvider, public userServices: UsersProvider,
               public alertCtrl: AlertController) {
     console.log('constructor chatroom');
-    console.log(navParams.data.room);
 
-    if (navParams.data.whichPage == "Taxi") {
-      console.log("Taxi");
-      this.backPage = TaxiListPage;
-      this.room = navParams.data.room;
-      this.room_object = af.object(`/chatrooms/${this.room['departure_date']}/${this.room.$key}`);
-    }
-    else if (navParams.data.whichPage == "Carpool") {
+    if ("price" in navParams.data.room) {
       console.log("Carpool");
       this.backPage = CarpoolListPage;
       this.room = navParams.data.room;
       this.room_object = af.object(`/carpoolChatrooms/${this.room['departure_date']}/${this.room.$key}`);
+    }
+    else if ("host" in navParams.data.room) {
+      console.log("Taxi");
+      this.backPage = TaxiListPage;
+      this.room = navParams.data.room;
+      this.room_object = af.object(`/chatrooms/${this.room['departure_date']}/${this.room.$key}`);
     }
     else {
       this.backPage = MainPage;

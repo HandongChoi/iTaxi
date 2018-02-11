@@ -45,11 +45,6 @@ export class MainPage {
   }
 
   goChatroomPage(room){
-    if ("price" in room) {
-      this.navCtrl.setRoot(ChatRoomPage, {room: room, whichPage: "Carpool"});
-    }
-    else {
-      this.navCtrl.setRoot(ChatRoomPage, {room: room, whichPage: "Taxi"});
-    }
+    this.navCtrl.setRoot(ChatRoomPage, {room: room});
   }
 }

@@ -26,13 +26,6 @@ export class RideHistoryPage {
   }
 
   goChatroom(room_object) {
-    console.log("room object in rideHistory", room_object);
-    console.log("room key in rideHistory", room_object.$key);
-    if ("price" in room_object) {
-      this.navCtrl.setRoot(ChatRoomPage, {room: room_object, whichPage: "Carpool"});
-    }
-    else {
-      this.navCtrl.setRoot(ChatRoomPage, {room: room_object, whichPage: "Taxi"});
-    }
+    this.navCtrl.setRoot(ChatRoomPage, {room: room_object});
   }
 }

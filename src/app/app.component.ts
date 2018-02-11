@@ -155,11 +155,12 @@ export class MyApp {
 
   goChatroomPage(room){
     this.menuCtrl.close();
-    this.navCtrl.setRoot(ChatRoomPage, {chat_room_id:room.$key, bookingDate:room.departure_date, user_id: this.user_id, roomObj: room});
+    this.navCtrl.setRoot(ChatRoomPage, {room: room});
   }
 
   logout(){
     this.authProvider.logoutUser();
-    this.navCtrl.setRoot(LoginPage, {user_id: this.user_id});
+    this.userServices.clear();
+    this.navCtrl.setRoot(LoginPage);
   }
 }
