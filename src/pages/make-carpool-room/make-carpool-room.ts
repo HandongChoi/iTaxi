@@ -139,6 +139,7 @@ export class MakeCarpoolRoomPage {
                                         capacity: this.maxPeople,
                                         currentPeople: 1,
                                         price: this.price,
+                                        hostName: this.userServices.getName(),
                                         host: this.user_id,
                                         participants: [this.user_id]
                                       };

@@ -1,4 +1,4 @@
-<ion-menu [content]="content"  persistent="true">
+<ion-menu id="myMenu" [content]="content"  persistent="true">
   
   <ion-content class="sidemenu-content">
     <div class="sidemenu-userid">
@@ -12,7 +12,7 @@
     <hr class="sidemenu-hr">
     <ion-grid class="sidemenu-grid" *ngIf="room">
       <div class="sidemenu-div" (click)="goChatroomPage(room)">
-        <div class="sidemenu-rtitle">&nbsp;&nbsp; 꼬부기 {{room.currentPeople}} / {{room.capacity}}</div>
+        <div class="sidemenu-rtitle">&nbsp;&nbsp; {{room.hostName}} {{room.currentPeople}} / {{room.capacity}}</div>
         <ion-row class="sidemenu-row">
           <div>
             {{room.departure_date | date: 'M.dd'}}&nbsp;{{dateServices.getKToday(room.departure_date)}}&nbsp;&nbsp;|&nbsp;&nbsp;{{room.departure_time}}<br>

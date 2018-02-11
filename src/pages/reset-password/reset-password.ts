@@ -3,6 +3,7 @@ import { IonicPage, NavController, Alert, AlertController } from 'ionic-angular'
 import { FormBuilder, Validators, FormGroup } from '@angular/forms'; 
 import { AuthProvider } from '../../providers/auth/auth';
 import { EmailValidator } from '../../validators/email';
+import { LoginPage } from '../../pages/login/login';
 
 @IonicPage()
 @Component({
@@ -22,16 +23,15 @@ export class ResetPasswordPage {
 
   resetPassword():void {
     if (!this.resetPasswordForm.valid){
-    console.log(`Form isn't valid, value: ${this.resetPasswordForm.value}`);
+      console.log(`Form isn't valid, value: ${this.resetPasswordForm.value}`);
     } else {
       const email:string = this.resetPasswordForm.value.email; 
       this.authProvider.resetPassword(email).then( user => {
         const alert:Alert = this.alertCtrl.create({
           message: "Check your email for a password reset link", 
           buttons: [{
-            text: "Ok", 
-            role: 'cancel',
-            handler: () => { this.navCtrl.pop() } 
+            text: "Ok",
+            handler: () => { this.navCtrl.setRoot(LoginPage); } 
           }]
         });
         alert.present()

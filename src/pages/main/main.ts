@@ -19,17 +19,16 @@ export class MainPage {
   roomObj: Array<Object> = [];
   
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase,
-     public menu: MenuController, public userServices: UsersProvider, private dateServices: DateProvider) {
-
+              public menu: MenuController, public userServices: UsersProvider, private dateServices: DateProvider) {
+    console.log("constructure Main");
     //여기서부터는 로그인 및 회원가입 페이지를 넘어서 사이드 메뉴를 볼 수 있도록 만들기.
-    this.menu=menu;
     this.menu.enable(true,'myMenu');
 
     //일단 지금 user의 정보를 email로 받아오고 있다.
     this.user_id = this.userServices.getEmail();
     this.dateServices.setNow();
     console.log("Main user : "+this.user_id);
-    af.list('/rideHistory/' + this.userServices.getUID(), {
+    this.af.list('/rideHistory/' + this.userServices.getUID(), {
       query:{
         startAt: this.dateServices.getYearMonthDayWithDash(),
         orderByChild : 'departure_date'
@@ -44,7 +43,7 @@ export class MainPage {
     });
   }
 
-  ioniViewDidLoad(){
+  ionViewDidLoad(){
     console.log("ionViewDidLoad at main.ts");
   }
 

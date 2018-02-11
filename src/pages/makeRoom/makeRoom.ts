@@ -124,7 +124,7 @@ export class MakeRoomPage {
                                         departure_time: this.bookingTime,
                                         capacity: this.maxPeople,
                                         currentPeople: 1,
-                                        //4-parseInt(this.maxPeople),
+                                        hostName: this.userServices.getName(),
                                         host: this.user_id,
                                         participants: [this.user_id]
                                       };

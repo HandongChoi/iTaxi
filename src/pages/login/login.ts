@@ -28,7 +28,6 @@ export class LoginPage {
               public menu: MenuController, public userServices:UsersProvider, public af: AngularFireDatabase) {
 
     //왼쪽 사이드바 메뉴 안 보이게 하는 역할
-    this.menu=menu;
     this.menu.enable(false,'myMenu');
 
     //로그인시 제한 조건 걸어놓기

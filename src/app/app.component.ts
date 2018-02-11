@@ -125,7 +125,7 @@ export class MyApp {
   }
 
   openPage(page) {
-    this.navCtrl.setRoot(page.componenent, {user_id: this.user_id});
+    this.navCtrl.setRoot(page);
   }
 
   setUID(uid){
