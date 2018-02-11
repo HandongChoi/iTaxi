@@ -53,7 +53,8 @@
     <ion-card class="ticket" (click)="goChatroomPage(room)">
       <ion-row>
         <ion-col col-1>
-          <img src="assets/img/main_taxi_mini.png" alt="taxi">
+          <img *ngIf="!room.price" src="assets/img/main_taxi_mini.png" alt="taxi">
+          <img *ngIf="room.price" src="assets/img/main_carpool_mini.png" alt="carpool">
         </ion-col>
 
         <ion-col col-4 text-left>
@@ -75,8 +76,11 @@
         </ion-col>
 
         <ion-col col-2 text-center>
-          <div class="text">
+          <div class="text" *ngIf="!room.price">
             택시
+          </div>
+          <div class="text" *ngIf="room.price">
+            카풀
           </div>
           <div class="text">
             {{room.currentPeople}}/{{room.capacity}}
@@ -86,46 +90,6 @@
       </ion-row>
     </ion-card>
   </div>
-
-  <div>
-    <ion-card class="ticket">
-      <ion-row>
-        <ion-col col-1>
-          <img src="assets/img/main_carpool_mini.png" alt="taxi">
-        </ion-col>
-
-        <ion-col col-4 text-left>
-          <div class="text">
-            12.26 화요일
-          </div>
-          <div class="text">
-            16:00
-          </div>
-        </ion-col>
-
-        <ion-col col-5>
-          <div class="text">
-            한동대학교
-          </div>
-          <div class="text">
-            <span>&gt;</span>&nbsp;&nbsp;포항역
-          </div>
-        </ion-col>
-
-        <ion-col col-2 text-center>
-          <div class="text">
-            카풀
-          </div>
-          <div class="text">
-            3/4
-          </div>
-        </ion-col>
-
-      </ion-row>
-    </ion-card>
-  </div>
-
-
 
   <!-- <button ion-button secondary menuToggle>Toggle Menu</button> -->
 </ion-content>
