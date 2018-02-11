@@ -15,7 +15,7 @@
         <div class="sidemenu-rtitle">&nbsp;&nbsp; 꼬부기 {{room.currentPeople}} / {{room.capacity}}</div>
         <ion-row class="sidemenu-row">
           <div>
-            {{room.departure_date | date: 'M월 dd일, '}} {{dateServices.getKToday(room.departure_date)}}요일 &nbsp;&nbsp;|&nbsp;&nbsp; {{room.departure_time}}<br>
+            {{room.departure_date | date: 'M.dd'}}&nbsp;{{dateServices.getKToday(room.departure_date)}}&nbsp;&nbsp;|&nbsp;&nbsp;{{room.departure_time}}<br>
             {{room.departure}} &nbsp;&nbsp; > &nbsp;&nbsp; {{room.destination}}
           </div>
           <button  class="sidemenu-outbtn" menuClose icon-only (click)="Idontknow()">
