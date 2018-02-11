@@ -36,7 +36,6 @@ import { UsersProvider } from '../providers/users/users';
 import { RoomsProvider } from '../providers/rooms/rooms';
 import { PipesModule } from '../pipes/pipes.module';
 import { StringProvider } from '../providers/strings/strings';
-import { RidehistoryProvider } from '../providers/ridehistory/ridehistory';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyANvht7J2MNX6x47mglqfJk74yZQ9u0qUk",
@@ -88,7 +87,6 @@ export const firebaseConfig = {
     UsersProvider,
     RoomsProvider,
     StringProvider,
-    RidehistoryProvider,
     MakeCarpoolRoomPageModule,
     CarpoolListPageModule
   ]

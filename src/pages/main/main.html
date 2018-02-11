@@ -48,50 +48,9 @@
     탑승예정
   </div>
 
-  <div *ngFor="let dates of dates_array">
-    <ion-card class = "ticket" *ngFor="let date of dates | DatePipe">
-      <ion-row>
-        <ion-col col-2 style="padding:0px; border:0">
-          <img src="assets/imgs/bSlueTaxi.png" alt="taxi">
-        </ion-col>
-
-        <ion-col col-3 text-left>
-          <div class="text">
-            {{roomObj.departure_date}}
-            <!-- 12.30 토요일 -->
-          </div>
-          <div style="font-size: 2rem">
-            {{roomObj.departure_time}} 
-            <!-- 16:00 -->
-          </div>
-        </ion-col>
-
-
-        <ion-col col-5 style="padding-left:25px">
-          <div class="text">
-            {{roomObj.departure}}
-          </div>
-          <div class="text2">
-            <ion-icon name="arrow-forward"></ion-icon>&nbsp;&nbsp;{{roomObj.destination}}
-          </div>
-        </ion-col>
-
-        <ion-col col-2 text-center style="border:0">
-          <div class="text">
-            택시
-          </div>
-          <div class="text2">
-            {{roomObj.currentPeople}}/{{roomObj.capacity}}
-          </div>
-        </ion-col>
-
-      </ion-row>
-    </ion-card>
-  </div>
-
   <!-- 카드 예제 -->
-  <div>
-    <ion-card class="ticket">
+  <div *ngFor="let room of roomObj | async;">
+    <ion-card class="ticket" (click)="goChatroomPage(room)">
       <ion-row>
         <ion-col col-1>
           <img src="assets/img/main_taxi_mini.png" alt="taxi">
@@ -99,19 +58,19 @@
 
         <ion-col col-4 text-left>
           <div class="text">
-            12.30 토요일
+            {{room.departure_date | date: 'M.dd '}} {{dateServices.getKToday(room.departure_date)}}요일
           </div>
           <div class="text">
-            16:00
+            {{room.departure_time}}
           </div>
         </ion-col>
 
         <ion-col col-5>
           <div class="text">
-            포항역
+            {{room.departure}}
           </div>
           <div class="text">
-            <span>&gt;</span>&nbsp;&nbsp;한동대학교
+            <span>&gt;</span>&nbsp;&nbsp;{{room.destination}}
           </div>
         </ion-col>
 
@@ -120,7 +79,7 @@
             택시
           </div>
           <div class="text">
-            4/4
+            {{room.currentPeople}}/{{room.capacity}}
           </div>
         </ion-col>
 

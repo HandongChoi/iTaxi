@@ -32,6 +32,14 @@ export class DateProvider {
     return n < 10 ? '0' + n : '' + n;
   }
 
+  getMonthDayWithDash(){
+    return this.nowMonth + '-' + this.nowDay;
+  }
+
+  getYearMonthDayWithDash(){
+    return this.nowDate;
+  }
+
   //input: 2018-1-23, output: 화
   getKToday(bookingDate: string): string{
     this.today = this.week[new Date(bookingDate).getDay()];

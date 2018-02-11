@@ -17,21 +17,22 @@ export class RideHistoryPage {
   rideHistory: FirebaseListObservable<any[]>;
 
   user_id: string;
-  nowDate: string = new Date().toISOString().substr(0, 10);
-
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase, 
               public userServices: UsersProvider, private stringProvider: StringProvider) {
+
     this.user_id = this.userServices.getEmail();
-    console.log(this.user_id);
     this.rideHistory = af.list('/rideHistory/'+ this.userServices.getUID() + '/');
   }
 
   goChatroom(room_object) {
-
     console.log("room object in rideHistory", room_object);
     console.log("room key in rideHistory", room_object.$key);
-
-    this.navCtrl.setRoot(ChatRoomPage, {roomObj: room_object});
+    if ("price" in room_object) {
+      this.navCtrl.setRoot(ChatRoomPage, {room: room_object, whichPage: "Carpool"});
+    }
+    else {
+      this.navCtrl.setRoot(ChatRoomPage, {room: room_object, whichPage: "Taxi"});
+    }
   }
 }

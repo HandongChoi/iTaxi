@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, Content, NavParams, Platform, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, Content, NavParams, Platform, AlertController } from 'ionic-angular';
 
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 
@@ -13,6 +13,7 @@ import { RoomsProvider } from '../../providers/rooms/rooms';
 
 declare var FCMPlugin;
 
+@IonicPage()
 @Component({
   selector: 'page-chatroom',
   templateUrl: 'chatroom.html'
@@ -41,13 +42,18 @@ export class ChatRoomPage {
               public roomServices: RoomsProvider, public dateServices: DateProvider, public userServices: UsersProvider,
               public alertCtrl: AlertController) {
     console.log('constructor chatroom');
+    console.log(navParams.data.room);
 
     if (navParams.data.whichPage == "Taxi") {
+      console.log("Taxi");
       this.backPage = TaxiListPage;
+      this.room = navParams.data.room;
       this.room_object = af.object(`/chatrooms/${this.room['departure_date']}/${this.room.$key}`);
     }
     else if (navParams.data.whichPage == "Carpool") {
+      console.log("Carpool");
       this.backPage = CarpoolListPage;
+      this.room = navParams.data.room;
       this.room_object = af.object(`/carpoolChatrooms/${this.room['departure_date']}/${this.room.$key}`);
     }
     else {
@@ -66,7 +72,6 @@ export class ChatRoomPage {
 
     console.log(this.room_object);
     if (this.room_object !== undefined) {
-      this.room = navParams.data.room;
       this.chats = af.list('/chats/' + this.room_object.$ref.key);
       this.rideHistory = af.object(`/rideHistory/${this.userServices.getUID()}/${this.room_object.$ref.key}`)
       this.user_id = this.userServices.getEmail();
