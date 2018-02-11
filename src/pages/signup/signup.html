@@ -26,14 +26,14 @@
     <div *ngSwitchCase="'terms'">
       <div class="wrap">
         <ion-card class="terms_content">
-          longtext
+          <pre>{{text1}}</pre>
         </ion-card>
         <div ion-item no-lines class="agree_check">
           <ion-label>약관을 모두 읽었으며 동의합니다.</ion-label>
           <ion-checkbox [(ngModel)]='firstChecking' color="primary" checked="false"></ion-checkbox>
         </div>
         <ion-card class="terms_content">
-          longtext
+          <pre>{{text2}}</pre>
         </ion-card>
         <div ion-item no-lines class="agree_check">
           <ion-label>약관을 모두 읽었으며 동의합니다.</ion-label>
