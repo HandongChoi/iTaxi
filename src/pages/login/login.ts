@@ -9,6 +9,8 @@ import { UsersProvider } from '../../providers/users/users';
 import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 
 import { MainPage } from '../main/main';
+import { SignupPage } from '../signup/signup';
+import { ResetPasswordPage } from '../reset-password/reset-password';
 
 declare var FCMPlugin;
 
@@ -80,7 +82,7 @@ export class LoginPage {
   }
 
   pushPage(name){
-    this.navCtrl.push(name);
+    this.navCtrl.setRoot(name);
   }
 
   tokenSetup(){
