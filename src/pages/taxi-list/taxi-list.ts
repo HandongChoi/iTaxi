@@ -34,7 +34,7 @@ export class TaxiListPage {
     this.user_id = this.usersService.getEmail();
     dateServices.setNow();
 
-    for(let i = 0; i < 5; i++){
+    for(let i = 1; i < 5; i++){
       let temp = new Date(this.nowDate.getTime());
       temp.setDate(temp.getDate() + i);
       this.days.push(temp);

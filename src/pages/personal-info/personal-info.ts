@@ -55,6 +55,13 @@ export class PersonalInfoPage {
               phoneNumber: revise_phoneNumber,
               studentID: revise_studentID,
             });
+            let a = this.alertCtrl.create({
+              title: '개인정보 수정',
+              subTitle: '개인정보가 성공적으로 변경되었습니다.',
+              buttons: ['확인']
+            });
+            a.present();
+            this.navCtrl.setRoot(MainPage);
           }
         }
       ]
@@ -72,15 +79,4 @@ export class PersonalInfoPage {
     this.viewCtrl.dismiss()
     console.log('dismiss page');
   }
-
-  showAlert() {
-    let alert = this.alertCtrl.create({
-      title: '개인정보 수정',
-      subTitle: '개인정보가 성공적으로 변경되었습니다.',
-      buttons: ['확인']
-    });
-    alert.present();
-    this.navCtrl.setRoot(MainPage);
-  }
-
 }

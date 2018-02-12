@@ -32,6 +32,11 @@
     </ion-row>
 
     <ion-row class="small-bottom">
+      <ion-col col-2>
+        <ion-item class="days_icon" ion-only (click)="showChatroom(nowDate)" >
+          <p>오늘</p>
+        </ion-item>
+      </ion-col>
       <ion-col col-2 *ngFor="let day of days">
         <ion-item class="days" (click)="showChatroom(day)">
           <p>{{day|date: "dd"}}</p>
