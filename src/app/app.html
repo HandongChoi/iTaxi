@@ -4,7 +4,7 @@
     <div class="sidemenu-userid">
       <ion-icon name="person"></ion-icon>
       <span>{{user_name}}</span>
-      <button class="sidemenu-button" menuClose icon-only (click)="setPage('SettingPage')">
+      <button class="sidemenu-button" menuClose icon-only (click)="SettingPage()">
         <img src="assets/img/setting.png" alt="setting">
       </button>
     </div>
@@ -18,25 +18,21 @@
             {{room.departure_date | date: 'M.dd'}}&nbsp;{{dateServices.getKToday(room.departure_date)}}&nbsp;&nbsp;|&nbsp;&nbsp;{{room.departure_time}}<br>
             {{room.departure}} &nbsp;&nbsp; > &nbsp;&nbsp; {{room.destination}}
           </div>
-          <button  class="sidemenu-outbtn" menuClose icon-only (click)="Idontknow()">
-            <ion-icon name="log-out"></ion-icon>
-          </button>
         </ion-row>
       </div>
     </ion-grid>
-    
     <ion-list class="sidemenu-list">
       <ion-list-header class="sidemenu-header"><img src="assets/img/taxi.png" alt="taxi">&nbsp;&nbsp;택시</ion-list-header>
-      <button menuClose ion-item class="sidemenu-items" (click)="setPage('TaxiListPage')">조회</button>
-      <button menuClose ion-item class="sidemenu-items" (click)="setPage('MakeRoomPage')">모집</button>
+      <button menuClose ion-item class="sidemenu-items" (click)="TaxiListPage()">조회</button>
+      <button menuClose ion-item class="sidemenu-items" (click)="MakeRoomPage()">모집</button>
       <ion-list-header class="sidemenu-header"><img src="assets/img/carpool.png" alt="carpool">&nbsp;&nbsp;카풀 </ion-list-header>
-      <button menuClose ion-item class="sidemenu-items" (click)="setPage('CarpoolListPage')">조회</button>
-      <button menuClose ion-item class="sidemenu-items" (click)="setPage('MakeCarpoolRoomPage')">모집</button>
+      <button menuClose ion-item class="sidemenu-items" (click)="CarpoolListPage()">조회</button>
+      <button menuClose ion-item class="sidemenu-items" (click)="MakeCarpoolRoomPage()">모집</button>
       <ion-list-header class="sidemenu-header"> <ion-icon name="person"></ion-icon>&nbsp;&nbsp;마이페이지 </ion-list-header>
-      <button menuClose ion-item class="sidemenu-items" (click)="setPage('RideHistoryPage')">탑승내역</button>
-      <button menuClose ion-item class="sidemenu-items" (click)="setPage('PersonalInfoPage')">내정보수정</button>
+      <button menuClose ion-item class="sidemenu-items" (click)="RideHistoryPage()">탑승내역</button>
+      <button menuClose ion-item class="sidemenu-items" (click)="PersonalInfoPage()">내정보수정</button>
       <ion-list-header class="sidemenu-header"> <ion-icon name="home"></ion-icon>  &nbsp;&nbsp;메인페이지 </ion-list-header>
-      <button menuClose ion-item class="sidemenu-items" (click)="setPage('MainPage')">메인페이지</button>  
+      <button menuClose ion-item class="sidemenu-items" (click)="MainPage()">메인페이지</button>  
       <button menuClose ion-item class="sidemenu-items" (click)="logout()">로그아웃</button>
     </ion-list>
   </ion-content>

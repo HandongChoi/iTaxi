@@ -97,10 +97,7 @@ export class SignupPage {
     this.completeFlag=false;
   }
 
-  setPage(page){
-    this.navCtrl.setRoot(page);
-    console.log(page+" at singup.ts");
-  }
+  LoginPage() { this.navCtrl.setRoot(LoginPage); }
 
   goBack() {
     this.navCtrl.setRoot(LoginPage);

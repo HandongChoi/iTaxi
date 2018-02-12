@@ -15,6 +15,13 @@ import { FCM, NotificationData } from '@ionic-native/fcm';
 
 import firebase from 'firebase';
 import { MainPage } from '../pages/main/main';
+import { TaxiListPage } from '../pages/taxi-list/taxi-list';
+import { MakeRoomPage } from '../pages/makeRoom/makeRoom';
+import { CarpoolListPage } from '../pages/carpool-list/carpool-list';
+import { MakeCarpoolRoomPage } from '../pages/make-carpool-room/make-carpool-room';
+import { RideHistoryPage } from '../pages/ride-history/ride-history';
+import { PersonalInfoPage } from '../pages/personal-info/personal-info';
+import { SettingPage } from '../pages/setting/setting';
 
 firebase.initializeApp({
   apiKey: "AIzaSyANvht7J2MNX6x47mglqfJk74yZQ9u0qUk",
@@ -118,34 +125,14 @@ export class MyApp {
     console.log("initailizeApp at app.component.ts");
   }
 
-  openPage(page) {
-    this.navCtrl.setRoot(page);
-  }
-
-  setUID(uid){
-    this.user_id = uid;
-  }
-
-  stringParser(sentence){
-    let parsedID = sentence.replace('@', '');
-    parsedID = parsedID.replace('.', '');
-
-    return parsedID;
-  }
-
-  inviteFriend(){
-    alert('invite friend');
-    console.log("inviteFriend() at app.componenent.ts");
-  }
-
-  leaveRoom(){
-    alert('leave');
-    console.log("leaveRoom() at app.componenent.ts");
-  }
-
-  setPage(page){
-    this.navCtrl.setRoot(page);
-  }
+  TaxiListPage() { this.navCtrl.setRoot(TaxiListPage); }
+  MakeRoomPage() { this.navCtrl.setRoot(MakeRoomPage); }
+  CarpoolListPage() { this.navCtrl.setRoot(CarpoolListPage); }
+  MakeCarpoolRoomPage() { this.navCtrl.setRoot(MakeCarpoolRoomPage); }
+  RideHistoryPage() { this.navCtrl.setRoot(RideHistoryPage); }
+  PersonalInfoPage() { this.navCtrl.setRoot(PersonalInfoPage); }
+  MainPage() { this.navCtrl.setRoot(MainPage); }
+  SettingPage() { this.navCtrl.setRoot(SettingPage); }
 
   goChatroomPage(room){
     this.menuCtrl.close();

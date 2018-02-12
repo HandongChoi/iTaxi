@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { AngularFireDatabase } from 'angularfire2/database';
 
-import {ChatRoomPage} from '../../pages/chatroom/chatroom';
+import { ChatRoomPage } from '../../pages/chatroom/chatroom';
+import { TaxiListPage } from '../../pages/taxi-list/taxi-list';
+import { CarpoolListPage } from '../../pages/carpool-list/carpool-list';
 
 import { UsersProvider } from '../../providers/users/users';
 import { DateProvider } from '../../providers/date/date';
@@ -47,9 +49,8 @@ export class MainPage {
     console.log("ionViewDidLoad at main.ts");
   }
 
-  setPage(page){
-    this.navCtrl.setRoot(page);
-  }
+  TaxiListPage() { this.navCtrl.setRoot(TaxiListPage); }
+  CarpoolListPage() { this.navCtrl.setRoot(CarpoolListPage); }
 
   goChatroomPage(room){
     this.navCtrl.setRoot(ChatRoomPage, {room: room});
