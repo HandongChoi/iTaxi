@@ -7,7 +7,6 @@ import { LoginPage } from '../login/login';
 import { PersonalInfoPage } from '../personal-info/personal-info'
 
 import { UsersProvider } from '../../providers/users/users';
-import { DateProvider } from '../../providers/date/date';
 
 @IonicPage()
 @Component({

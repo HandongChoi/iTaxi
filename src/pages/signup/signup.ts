@@ -5,7 +5,6 @@ import { AuthProvider } from '../../providers/auth/auth';
 import { EmailValidator } from '../../validators/email';
 import { PhoneValidator } from '../../validators/phone';
 import { StudentIDValidator } from '../../validators/studentID';
-import { MainPage } from '../main/main';
 import { LoginPage } from '../login/login';
 
 import { AbstractControl } from '@angular/forms/src/model';
@@ -101,6 +100,10 @@ export class SignupPage {
   setPage(page){
     this.navCtrl.setRoot(page);
     console.log(page+" at singup.ts");
+  }
+
+  goBack() {
+    this.navCtrl.setRoot(LoginPage);
   }
 
   text1 = `iTaxi 이용약관

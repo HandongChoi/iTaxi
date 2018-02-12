@@ -6,7 +6,7 @@ import { EmailValidator } from '../../validators/email';
 import { AuthProvider } from '../../providers/auth/auth';
 import { UsersProvider } from '../../providers/users/users';
 
-import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 import { MainPage } from '../main/main';
 import { SignupPage } from '../signup/signup';
@@ -81,9 +81,8 @@ export class LoginPage {
     }
   }
 
-  pushPage(name){
-    this.navCtrl.setRoot(name);
-  }
+  signUp() { this.navCtrl.setRoot(SignupPage); }
+  password() { this.navCtrl.setRoot(ResetPasswordPage); }
 
   tokenSetup(){
     var promise = new Promise((resolve, reject)=>{

@@ -3,12 +3,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 
 import { ChatRoomPage } from '../chatroom/chatroom';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 import { UsersProvider } from '../../providers/users/users';
 import { DateProvider } from '../../providers/date/date';
-
-import { DatabaseQuery } from 'angularfire2/interfaces';
 
 @IonicPage()
 @Component({

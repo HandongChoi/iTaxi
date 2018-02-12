@@ -1,26 +1,20 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, NavController, Platform, AlertController, LoadingController, MenuController } from 'ionic-angular';
+import { Nav, NavController, Platform, AlertController, MenuController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
-import { MakeRoomPage } from '../pages/makeRoom/makeRoom';
-import { SettingPage } from '../pages/setting/setting';
-import { SignupPage } from '../pages/signup/signup';
-import { TaxiListPage } from '../pages/taxi-list/taxi-list';
-import {ChatRoomPage} from '../pages/chatroom/chatroom';
+import { ChatRoomPage } from '../pages/chatroom/chatroom';
 
 import { AuthProvider } from '../providers/auth/auth';
 import { UsersProvider } from '../providers/users/users';
-import {DateProvider} from '../providers/date/date';
+import { DateProvider } from '../providers/date/date';
 
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { FCM, NotificationData } from '@ionic-native/fcm';
 
 import firebase from 'firebase';
 import { MainPage } from '../pages/main/main';
-import { Observable } from 'rxjs/Observable';
 
 firebase.initializeApp({
   apiKey: "AIzaSyANvht7J2MNX6x47mglqfJk74yZQ9u0qUk",

@@ -5,7 +5,6 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 import { ChatRoomPage } from '../chatroom/chatroom';
 
 import { UsersProvider } from '../../providers/users/users';
-import { StringProvider } from '../../providers/strings/strings';
 
 @IonicPage()
 @Component({
@@ -19,7 +18,7 @@ export class RideHistoryPage {
   user_id: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase, 
-              public userServices: UsersProvider, private stringProvider: StringProvider, public alertCtrl: AlertController) {
+              public userServices: UsersProvider, public alertCtrl: AlertController) {
 
     this.user_id = this.userServices.getEmail();
     this.rideHistory = af.list('/rideHistory/'+ this.userServices.getUID() + '/');

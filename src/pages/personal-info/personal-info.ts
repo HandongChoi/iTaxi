@@ -5,7 +5,6 @@ import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/data
 
 import { MainPage } from '../main/main';
 import { UsersProvider } from '../../providers/users/users';
-import { DateProvider } from '../../providers/date/date';
 
 @IonicPage()
 @Component({
@@ -60,6 +59,7 @@ export class PersonalInfoPage {
         }
       ]
     })
+    alert.present();
 
     console.log("Success Update");
   }

@@ -4,9 +4,6 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 
 import { HomePage } from '../pages/home/home';
-import { MakeRoomPage } from '../pages/makeRoom/makeRoom';
-import { MainPage } from '../pages/main/main';
-import { RideHistoryPage } from '../pages/ride-history/ride-history'
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -74,8 +71,7 @@ export const firebaseConfig = {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
-    MakeRoomPage,
+    HomePage
   ],
   providers: [
     StatusBar,
@@ -86,9 +82,7 @@ export const firebaseConfig = {
     DateProvider,
     UsersProvider,
     RoomsProvider,
-    StringProvider,
-    MakeCarpoolRoomPageModule,
-    CarpoolListPageModule
+    StringProvider
   ]
 })
 export class AppModule {}
