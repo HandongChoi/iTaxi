@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.itaxi.push" version="0.0.4" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>i-TAXI</name>
-    <description>An i-TAXI application for all HGU Members.</description>
-    <author email="cra.handong.service@gmail.com" href="http://itaxi.handong.edu/">i-Taxi Development Team, CRA</author>
+    <name>iTAXI</name>
+    <description>An iTAXI application for all HGU Members.</description>
+    <author email="cra.handong.service@gmail.com" href="http://itaxi.handong.edu/">iTaxi Development Team, CRA</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />

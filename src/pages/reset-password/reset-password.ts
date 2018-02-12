@@ -44,5 +44,9 @@ export class ResetPasswordPage {
       }); 
     }
   }
+
+  goBack() {
+    this.navCtrl.setRoot(LoginPage);
+  }
  
 }
