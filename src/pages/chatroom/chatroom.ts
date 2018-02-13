@@ -89,6 +89,7 @@ export class ChatRoomPage {
         }).subscribe(data => {
           console.log("data", data);
           this.users.push(data[0]);
+          this.scrollBottom();
         });
         if(user === this.userServices.getEmail()){
           isExist = true;

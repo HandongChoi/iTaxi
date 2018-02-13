@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AlertController } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 
 import firebase from 'firebase';
@@ -22,7 +23,15 @@ export class AuthProvider {
       firebase.database().ref(`/userProfile/${newUser.uid}/name`).set(name);
       firebase.database().ref(`/userProfile/${newUser.uid}/isPush`).set(true);
       firebase.database().ref(`/userProfile/${newUser.uid}/isNoti`).set(true);
-    }).catch( error => console.error(error) );
+    }).catch( error => {
+      let alertCtrl: AlertController;
+      let alert = alertCtrl.create({
+        title: "회원가입 에러",
+        message: "회원가입 도중 에러가 발생했습니다. 관리자에게 문의해주시기 바랍니다. 에러: " + error,
+        buttons: ['Ok']
+      });
+      alert.present();
+    });
   }
 
   delete(){
