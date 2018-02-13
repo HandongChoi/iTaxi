@@ -10,7 +10,6 @@ import { CarpoolListPage } from '../../pages/carpool-list/carpool-list';
 import { UsersProvider } from '../../providers/users/users';
 import { DateProvider } from '../../providers/date/date';
 import { RoomsProvider } from '../../providers/rooms/rooms';
-import { DatePipe } from '../../pipes/date/date';
 
 declare var FCMPlugin;
 
@@ -27,6 +26,7 @@ export class ChatRoomPage {
   rideHistory: FirebaseObjectObservable<any>;
   room_object:FirebaseObjectObservable<any>;
   room: any;
+  users: Array<Object> = [];
 
   backPage: any;
   chatContent: string;
@@ -45,13 +45,11 @@ export class ChatRoomPage {
     console.log('constructor chatroom');
 
     if ("price" in navParams.data.room) {
-      console.log("Carpool");
       this.backPage = CarpoolListPage;
       this.room = navParams.data.room;
       this.room_object = af.object(`/carpoolChatrooms/${this.room['departure_date']}/${this.room.$key}`);
     }
     else if ("host" in navParams.data.room) {
-      console.log("Taxi");
       this.backPage = TaxiListPage;
       this.room = navParams.data.room;
       this.room_object = af.object(`/chatrooms/${this.room['departure_date']}/${this.room.$key}`);
@@ -70,7 +68,6 @@ export class ChatRoomPage {
       alert.present();
     }
 
-    console.log(this.room_object);
     if (this.room_object !== undefined) {
       this.chats = af.list('/chats/' + this.room_object.$ref.key);
       this.rideHistory = af.object(`/rideHistory/${this.userServices.getUID()}/${this.room_object.$ref.key}`)
@@ -84,19 +81,31 @@ export class ChatRoomPage {
       let isExist: boolean = false;
   
       //목록에 있는지 없는지 여부 확인.
-      for(var user of this.roomServices.room['participants']){
+      for(let user of this.roomServices.room['participants']){
+        af.list(`/userProfile`, {
+          query: {
+            orderByChild: 'email',
+            equalTo: user
+          }
+        }).subscribe(data => {
+          console.log("data", data);
+          this.users.push(data[0]);
+        });
         if(user === this.userServices.getEmail()){
           isExist = true;
-          break;
         }
       }
-      
+      console.log(this.users);
       if (isExist == false) {
         if (this.roomServices.addParticipants(this.userServices.getEmail())) {
           this.room_object.update(this.roomServices.room);
         }
         else {
-          alert("인원이 마감되었습니다.");
+          let alert = alertCtrl.create({
+            message: "인원이 마감되었습니다.",
+            buttons: [{text:"OK"}]
+          });
+          alert.present();
           this.navCtrl.setRoot(this.backPage);
         }
       }

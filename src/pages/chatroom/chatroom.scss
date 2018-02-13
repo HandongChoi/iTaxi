@@ -35,8 +35,8 @@ page-chatroom {
       border-radius: 45px;
       margin-left: 10px;
 
-      &:last-child {
-        margin-right: 10px;
+      &:first-child button {
+        display: flex;
       }
 
       button {
@@ -67,6 +67,7 @@ page-chatroom {
         display: none;
         margin: 4px 2px;
         width: 45px;
+
       }
 
       .user-mail {

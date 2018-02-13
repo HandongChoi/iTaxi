@@ -37,10 +37,13 @@
   <ion-grid id="part-info">
     <ion-row>
       <ion-col class="users">
-        <div class="user" *ngFor="let member of room.participants; let i = index">
-          <button class="user-name" [ngClass]="{'active': index==i}" (click)="show(i)" >{{ member }}</button>
-          <button class="user-call" (click)="native(i, 1)"><ion-icon name="ios-call-outline"></ion-icon></button>
-          <button class="user-mail" (click)="native(i, 2)"><ion-icon name="ios-mail-outline"></ion-icon></button>
+        <div class="user" *ngFor="let member of users; let i = index">
+          <button class="user-name" [ngClass]="{'active': index==i}" (click)="show(i)" >{{ member.name }}</button>
+          <button class="user-call"><a href="sms://{{member.phoneNumber}}"><ion-icon name="ios-call-outline"></ion-icon></a></button>
+          <button class="user-mail"><a href="sms://{{member.phoneNumber}}"><ion-icon name="ios-mail-outline"></ion-icon></a></button>
+        </div>
+        <div class="user dumy" *ngIf="!users.length">
+          <button class="user-name"></button>
         </div>
       </ion-col>
     </ion-row>
