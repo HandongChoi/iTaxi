@@ -25,17 +25,26 @@ page-taxi-list {
     .small-bottom {
       .days {
         text-align: center;
-        color: color($colors, dark-gray, base);
         cursor: pointer;
+
+        p { color: color($colors, semi-gray, base); }
+
+        &.activate {
+          p { color: black}
+        }
   
         .item-inner {
           padding-right: 0;
+
+          ion-label {
+            overflow: visible;
+          }
         }
       }
   
       .days_icon {
         text-align: center;
-        font-style: bold;
+        font-weight: bold;
         color: color($colors, dark-gray, base);
       }
     }
