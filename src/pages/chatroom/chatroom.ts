@@ -116,6 +116,7 @@ export class ChatRoomPage {
         date_time: new Date().toLocaleString()
       }).then(() => {
         this.chatContent = "";
+        this.scrollBottom();
       });
     }
   }
@@ -174,7 +175,7 @@ export class ChatRoomPage {
   }
 
   scrollBottom(){
-    this.content.scrollToBottom();
+    this.content.scrollToBottom(300);
   }
 
   show(index) {

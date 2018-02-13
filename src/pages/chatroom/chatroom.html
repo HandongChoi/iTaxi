@@ -54,7 +54,7 @@
       <div class="message right" *ngIf="chat.user_id == user_id">
         <!-- <img class="user-img" [src]="msg.userAvatar" alt="" src=""> 이거는 프로필사진-->
         <div class="user-info">
-          <img *ngIf="chat.user_id == room_host" src="assets/img/crown.png" alt="Host">{{chat.user_name}}
+          <img *ngIf="chat.user_id == room_host" src="assets/img/crown_gold.png" alt="Host">{{chat.user_name}}
         </div>
         <div class="msg-content">
           <span>{{chat.date_time | DatePipe}}</span>
@@ -67,13 +67,13 @@
       <div class="message left" *ngIf="chat.user_id != user_id">
         <!-- <img class="user-img" alt="" src=""> -->
         <div class="user-info">
-            <img *ngIf="chat.user_id == room_host" src="assets/img/crown.png" alt="Host">{{chat.user_name}}
+          <img *ngIf="chat.user_id == room_host" src="assets/img/crown_gold.png" alt="Host">{{chat.user_name}}
         </div>
         <div class="msg-content">
           <div class="msg-info">
             <span>{{chat.content}}</span>
           </div>
-          <span>{{chat.date_time | DatePipe}}</span>
+          <span>{{chat.date_time}}</span>
         </div>
       </div>
 
@@ -86,7 +86,7 @@
 
 <ion-footer>
   <ion-item>
-    <ion-input [(ngModel)]="chatContent" fixed type="text" (keyup.enter)="send()" (click)="scrollBottom()"></ion-input>
-    <button ion-button clear item-right (click)="send()" (click)="scrollBottom()"> send </button>
+    <ion-input [(ngModel)]="chatContent" fixed type="text" (keyup.enter)="send()"></ion-input>
+    <button ion-button clear item-right (click)="send()"> send </button>
   </ion-item>
 </ion-footer>
