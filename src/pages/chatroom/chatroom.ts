@@ -36,7 +36,6 @@ export class ChatRoomPage {
   displayDate: string;
   displayTime: string;
 
-  subscribe: any;
   index: number = -1;
 
   constructor(public navCtrl: NavController, public af:AngularFireDatabase, public navParams: NavParams, public platform:Platform,
@@ -95,7 +94,7 @@ export class ChatRoomPage {
           isExist = true;
         }
       }
-      console.log(this.users);
+      
       if (isExist == false) {
         if (this.roomServices.addParticipants(this.userServices.getEmail())) {
           this.room_object.update(this.roomServices.room);
@@ -131,44 +130,57 @@ export class ChatRoomPage {
   }
 
   quit(){
-    let old_participants: Array<String> = this.roomServices.room['participants'];
-    let new_participants: Array<String> = [];
-
-    old_participants.forEach(user =>{
-      if(user !== this.userServices.getEmail())
-        new_participants.push(user);
+    let alert = this.alertCtrl.create({
+      title: "방 나가기",
+      message: "정말로 방을 나가시겠습니까?",
+      buttons: [{
+        text: "Cancle",
+        role: "cancle"
+      }, {
+        text: "OK",
+        handler: () => {
+          let old_participants: Array<String> = this.roomServices.room['participants'];
+          let new_participants: Array<String> = [];
+      
+          old_participants.forEach(user =>{
+            if(user !== this.userServices.getEmail())
+              new_participants.push(user);
+          });
+      
+          if(this.userServices.getEmail() !== this.roomServices.room['host']) {
+            // 방장이 아닌 다른 사람이 나갈 경우
+            this.room_object.update({
+              participants: new_participants,
+              currentPeople: this.roomServices.room['currentPeople'] - 1
+            });
+          }
+          else{
+            if(this.roomServices.room['currentPeople'] <= 1) {
+              //방장이고, 방에 사람이 없을 때
+              this.room_object.remove();
+            }
+            else {
+              //방장 다음 사람으로 옮기기
+              this.room_object.update({
+                host: new_participants[0],
+                participants: new_participants,
+                currentPeople: this.roomServices.room['currentPeople'] - 1
+              });
+            }
+          }
+          this.roomServices.getOut();
+          this.room = this.roomServices.room;
+          this.dateServices.setNow();
+          if (this.room['departure_date'] + this.room['departure_time'] > this.dateServices.nowDate + this.dateServices.nowTime) {
+            // 예약시간이 지금보다 이후이면 삭제
+            // => 택시를 타고 나서는 기록이 지워지지 않음. (먹튀 예방..?)
+            this.rideHistory.remove();
+          }
+          this.navCtrl.setRoot(this.backPage);
+        }
+      }]
     });
-
-    if(this.userServices.getEmail() !== this.roomServices.room['host']) {
-      // 방장이 아닌 다른 사람이 나갈 경우
-      this.room_object.update({
-        participants: new_participants,
-        currentPeople: this.roomServices.room['currentPeople'] - 1
-      });
-    }
-    else{
-      if(this.roomServices.room['currentPeople'] <= 1) {
-        //방장이고, 방에 사람이 없을 때
-        this.room_object.remove();
-      }
-      else {
-        //방장 다음 사람으로 옮기기
-        this.room_object.update({
-          host: new_participants[0],
-          participants: new_participants,
-          currentPeople: this.roomServices.room['currentPeople'] - 1
-        });
-      }
-    }
-    this.roomServices.getOut();
-    this.room = this.roomServices.room;
-    this.dateServices.setNow();
-    if (this.room['departure_date'] + this.room['departure_time'] > this.dateServices.nowDate + this.dateServices.nowTime) {
-      // 예약시간이 지금보다 이후이면 삭제
-      // => 택시를 타고 나서는 기록이 지워지지 않음. (먹튀 예방..?)
-      this.rideHistory.remove();
-    }
-    this.navCtrl.setRoot(this.backPage);
+    alert.present();
   }
 
   ionViewDidLoad(){
