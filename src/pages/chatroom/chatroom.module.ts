@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { ChatRoomPage } from './chatroom';
+import { PipesModule } from '../../pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -8,6 +9,7 @@ import { ChatRoomPage } from './chatroom';
   ],
   imports: [
     IonicPageModule.forChild(ChatRoomPage),
+    PipesModule
   ],
 })
 export class ChatRoomPageModule {}

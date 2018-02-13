@@ -31,7 +31,6 @@ import { FCM } from '@ionic-native/fcm';
 import { DateProvider } from '../providers/date/date';
 import { UsersProvider } from '../providers/users/users';
 import { RoomsProvider } from '../providers/rooms/rooms';
-import { PipesModule } from '../pipes/pipes.module';
 import { StringProvider } from '../providers/strings/strings';
 
 export const firebaseConfig = {
@@ -63,10 +62,9 @@ export const firebaseConfig = {
     ResetPasswordPageModule,
     RideHistoryPageModule,
     MainPageModule,
-    PipesModule,
     MakeCarpoolRoomPageModule,
     CarpoolListPageModule,
-    MakeRoomPageModule
+    MakeRoomPageModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [

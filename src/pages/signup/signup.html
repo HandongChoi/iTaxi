@@ -53,12 +53,12 @@
     <form [formGroup]="signupForm" (submit)="signupUser()" novalidate *ngSwitchCase="'info'">
       <ion-item>
         <ion-label stacked>이름</ion-label>
-        <ion-input formControlName="name" type="name" placeholder="최효은"></ion-input>
+        <ion-input formControlName="name" type="name" placeholder="홍길동"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label stacked>학번</ion-label>
-        <ion-input formControlName="studentID" type="studentID" placeholder="21000763" [class.invalid]="!signupForm.controls.studentID.valid && signupForm.controls.studentID.dirty">
+        <ion-input formControlName="studentID" type="studentID" placeholder="218000001" [class.invalid]="!signupForm.controls.studentID.valid && signupForm.controls.studentID.dirty">
         </ion-input>
       </ion-item>
       <ion-item class="error-message" *ngIf="!signupForm.controls.studentID.valid && signupForm.controls.studentID.dirty">
@@ -67,7 +67,7 @@
 
       <ion-item>
         <ion-label stacked>전화번호</ion-label>
-        <ion-input formControlName="phoneNumber" type="phoneNumber" placeholder="010-7766-2016" [class.invalid]="!signupForm.controls.phoneNumber.valid && signupForm.controls.phoneNumber.dirty">
+        <ion-input formControlName="phoneNumber" type="phoneNumber" placeholder="010-1234-5678" [class.invalid]="!signupForm.controls.phoneNumber.valid && signupForm.controls.phoneNumber.dirty">
         </ion-input>
       </ion-item>
       <ion-item class="error-message" *ngIf="!signupForm.controls.phoneNumber.valid && signupForm.controls.phoneNumber.dirty">

@@ -10,13 +10,14 @@ import { CarpoolListPage } from '../../pages/carpool-list/carpool-list';
 import { UsersProvider } from '../../providers/users/users';
 import { DateProvider } from '../../providers/date/date';
 import { RoomsProvider } from '../../providers/rooms/rooms';
+import { DatePipe } from '../../pipes/date/date';
 
 declare var FCMPlugin;
 
 @IonicPage()
 @Component({
   selector: 'page-chatroom',
-  templateUrl: 'chatroom.html'
+  templateUrl: 'chatroom.html',
 })
 export class ChatRoomPage {
 
