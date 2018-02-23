@@ -12,22 +12,24 @@ import { MainPage } from '../main/main';
 import { SignupPage } from '../signup/signup';
 import { ResetPasswordPage } from '../reset-password/reset-password';
 
-declare var FCMPlugin;
-
 @IonicPage()
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
 })
+
+
 export class LoginPage {
   public loginForm:FormGroup;
   public loading:Loading;
 
-  firestore: any;
+ //+ firestore: any;
 
   constructor(public navCtrl:NavController, public navParams: NavParams, public loadingCtrl:LoadingController,
               public alertCtrl:AlertController, public authProvider:AuthProvider, formBuilder:FormBuilder,
               public menu: MenuController, public userServices:UsersProvider, public af: AngularFireDatabase) {
+
+    console.log('push test');
 
     //왼쪽 사이드바 메뉴 안 보이게 하는 역할
     this.menu.enable(false,'myMenu');
@@ -49,20 +51,9 @@ export class LoginPage {
     }else{
       const email = this.loginForm.value.email;
       const password = this.loginForm.value.password;
-
+      
       this.authProvider.loginUser(email, password).then( authData =>  {
         this.loading.dismiss().then( () => {
-          if(typeof(FCMPlugin) != 'undefined'){
-            FCMPlugin.onTokenRefresh(function(token){
-              if(token){
-                this.firestore = firebase.database().ref('/userProfile/'+ authData.uid);
-                this.storetoken(token);
-              }
-            });
-          } else {
-            console.log("FCMPlugin type is undefined!");
-          }
-        }).then(()=>{
           this.userServices.initialize(authData).then(()=>{
             this.navCtrl.setRoot(MainPage)
           });
@@ -83,27 +74,4 @@ export class LoginPage {
 
   signUp() { this.navCtrl.setRoot(SignupPage); }
   password() { this.navCtrl.setRoot(ResetPasswordPage); }
-
-  tokenSetup(){
-    var promise = new Promise((resolve, reject)=>{
-      if(typeof(FCMPlugin) != 'undefined'){
-        FCMPlugin.getToken(function(token){
-          resolve(token);
-        }, (err)=>{
-          reject(err);
-        });
-      }
-    });
-    return promise;
-  }
-
-  storetoken(token){
-    this.firestore.update({
-      devtoken:token
-    }).then(()=>{
-      alert('Token Stored');
-    }).catch(()=>{
-      alert('Token not sotred');
-    });
-  }
 }

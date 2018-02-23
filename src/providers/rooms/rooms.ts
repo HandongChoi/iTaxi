@@ -14,6 +14,7 @@ export class RoomsProvider {
                    currentPeople: Number,
                    host: String,
                    participants: Array,
+                   devTokens: Array,
                  }
 
   constructor() {
@@ -31,12 +32,15 @@ export class RoomsProvider {
     console.log(this.room == obj);
   }
 
-  addParticipants(user): boolean {
+  addParticipants(user, userToken): boolean {
     console.log("여긴가");
     let parts = this.room['participants'];
+    let tokenList = this.room['devTokens'];
     if (this.room['currentPeople'] < this.room['capacity']) {
       parts.push(user);
+      tokenList.push(userToken);
       this.room['participants'] = parts;
+      this.room['devTokens'] = tokenList;
       this.room['currentPeople']++;
       return true;
     }

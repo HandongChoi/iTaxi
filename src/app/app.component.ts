@@ -96,14 +96,6 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
 
-      this.fcm.getToken()
-        .then((token:String) =>{
-          console.log("The token is ", token);
-        })
-        .catch(error => {
-          console.error(error);
-        });
-
       this.fcm.onTokenRefresh().subscribe(
         (token:string) => console.log("New Token", token),
         error => console.error(error)

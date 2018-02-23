@@ -97,7 +97,7 @@ export class ChatRoomPage {
       }
       
       if (isExist == false) {
-        if (this.roomServices.addParticipants(this.userServices.getEmail())) {
+        if (this.roomServices.addParticipants(this.userServices.getEmail(), this.userServices.getDevToken())) {
           this.room_object.update(this.roomServices.room);
         }
         else {
@@ -142,17 +142,20 @@ export class ChatRoomPage {
         handler: () => {
           let old_participants: Array<String> = this.roomServices.room['participants'];
           let new_participants: Array<String> = [];
+          let new_devTokens: Array<String> = [];
       
           old_participants.forEach(user =>{
             if(user !== this.userServices.getEmail())
               new_participants.push(user);
+              new_devTokens.push(this.userServices.getDevToken());
           });
       
           if(this.userServices.getEmail() !== this.roomServices.room['host']) {
             // 방장이 아닌 다른 사람이 나갈 경우
             this.room_object.update({
               participants: new_participants,
-              currentPeople: this.roomServices.room['currentPeople'] - 1
+              currentPeople: this.roomServices.room['currentPeople'] - 1,
+              devTokens : new_devTokens
             });
           }
           else{
@@ -165,7 +168,8 @@ export class ChatRoomPage {
               this.room_object.update({
                 host: new_participants[0],
                 participants: new_participants,
-                currentPeople: this.roomServices.room['currentPeople'] - 1
+                currentPeople: this.roomServices.room['currentPeople'] - 1,
+                devTokens: new_devTokens
               });
             }
           }

@@ -9,6 +9,7 @@ import { CarpoolListPage } from '../../pages/carpool-list/carpool-list';
 import { UsersProvider } from '../../providers/users/users';
 import { DateProvider } from '../../providers/date/date';
 
+declare var FCMPlugin;
 
 @IonicPage()
 @Component({
@@ -25,6 +26,9 @@ export class MainPage {
     console.log("constructure Main");
     //여기서부터는 로그인 및 회원가입 페이지를 넘어서 사이드 메뉴를 볼 수 있도록 만들기.
     this.menu.enable(true,'myMenu');
+
+    this.storetoken();
+    //token setup
 
     //일단 지금 user의 정보를 email로 받아오고 있다.
     this.user_id = this.userServices.getEmail();
@@ -54,5 +58,31 @@ export class MainPage {
 
   goChatroomPage(room){
     this.navCtrl.setRoot(ChatRoomPage, {room: room});
+  }
+
+  storetoken(){
+    this.tokenSetup().then((token) => {
+      this.af.database.ref('/userProfile/' + this.userServices.getUID()).update({
+        devtoken : token
+      }).then(()=>{
+        this.userServices.setDevToken(token);
+      }).catch(()=>{
+        alert('Warning: Push Notification Token not sotred');
+      });
+    });
+  }
+  
+  tokenSetup(){
+    var promise = new Promise((resolve, reject)=>{
+      console.log(FCMPlugin);
+      if(typeof(FCMPlugin) != 'undefined'){
+        FCMPlugin.getToken(function(token){
+          resolve(token);
+        }, (err)=>{
+          reject(err);
+        });
+      }
+    });
+    return promise;
   }
 }

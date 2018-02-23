@@ -12,6 +12,9 @@ export class UsersProvider {
   private phoneNumber: string;
   private name: string;
   private studentID: string;
+  private devToken: string;
+
+  private firestore: any;
 
   constructor(public af: AngularFireDatabase, public loadingCtrl: LoadingController) {
     console.log('Hello UsersProvider Provider');
@@ -23,12 +26,16 @@ export class UsersProvider {
 
   initialize(user) {
     return new Promise((resolve, reject) => {
+
       this.uid = user.uid;
-      this.af.object('/userProfile/' + this.uid).subscribe(data=>{
+      this.firestore = this.af.object('/userProfile/' + this.uid).subscribe(data=>{
+      
         this.email = data['email'];
         this.phoneNumber = data['phoneNumber'];
         this.name = data['name'];
         this.studentID = data['studentID'];
+        this.devToken = data['devtoken'];
+        
         resolve();
       }, error=> {
         console.log("userService initialize error!");
@@ -36,13 +43,14 @@ export class UsersProvider {
       });
     });
   }
-
+  
   clear(){
     this.email='';
     this.uid='';
     this.phoneNumber='';
     this.name='';
     this.studentID='';
+    this.devToken = '';
   }
   
   getEmail(){
@@ -63,6 +71,15 @@ export class UsersProvider {
 
   getPhoneNumber() {
     return this.phoneNumber;
+  }
+
+  getDevToken(){
+    return this.devToken;
+  }
+
+  setDevToken(token){
+    console.log(token);
+    this.devToken = token;
   }
 
 }

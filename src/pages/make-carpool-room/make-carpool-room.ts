@@ -139,7 +139,8 @@ export class MakeCarpoolRoomPage {
                                         price: this.price,
                                         hostName: this.userServices.getName(),
                                         host: this.user_id,
-                                        participants: [this.user_id]
+                                        participants: [this.user_id],
+                                        devToken: [this.userServices.getDevToken()]
                                       };
                 let chatRoomUrl = this.af.list('/carpoolChatrooms/'+this.bookingDate).push(roomObj);
                 this.af.object(`/rideHistory/${this.userServices.getUID()}/${chatRoomUrl.key}`).set(roomObj).then(() => {

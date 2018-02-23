@@ -124,7 +124,8 @@ export class MakeRoomPage {
                                         currentPeople: 1,
                                         hostName: this.userServices.getName(),
                                         host: this.user_id,
-                                        participants: [this.user_id]
+                                        participants: [this.user_id],
+                                        devTokens:[this.userServices.getDevToken()]
                                       };
                 let chatRoomUrl = this.af.list('/chatrooms/'+this.bookingDate).push(roomObj);
                 this.af.object(`/rideHistory/${this.userServices.getUID()}/${chatRoomUrl.key}`).set(roomObj);

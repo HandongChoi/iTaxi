@@ -63,6 +63,7 @@ export class SignupPage {
         this.loading.dismiss('Loading');
       }, error => {
         this.loading.dismiss().then( () => {
+          console.log("alertController error?", this.alertCtrl);
           const alert:Alert = this.alertCtrl.create({
             message: error.message,
             buttons: [{ text: "Ok", role: "cancel" }]
