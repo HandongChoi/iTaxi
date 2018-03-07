@@ -11,8 +11,6 @@ import { UsersProvider } from '../../providers/users/users';
 import { DateProvider } from '../../providers/date/date';
 import { RoomsProvider } from '../../providers/rooms/rooms';
 
-declare var FCMPlugin;
-
 @IonicPage()
 @Component({
   selector: 'page-chatroom',
@@ -38,20 +36,26 @@ export class ChatRoomPage {
 
   index: number = -1;
 
+  isCarpool : boolean;
+
+  roomKey: String;
+
   constructor(public navCtrl: NavController, public af:AngularFireDatabase, public navParams: NavParams, public platform:Platform,
               public roomServices: RoomsProvider, public dateServices: DateProvider, public userServices: UsersProvider,
               public alertCtrl: AlertController) {
     console.log('constructor chatroom');
-
-    if ("price" in navParams.data.room) {
+    
+    if ("price" in navParams.data.room) { 
       this.backPage = CarpoolListPage;
       this.room = navParams.data.room;
       this.room_object = af.object(`/carpoolChatrooms/${this.room['departure_date']}/${this.room.$key}`);
+      this.isCarpool = true;
     }
     else if ("host" in navParams.data.room) {
       this.backPage = TaxiListPage;
       this.room = navParams.data.room;
       this.room_object = af.object(`/chatrooms/${this.room['departure_date']}/${this.room.$key}`);
+      this.isCarpool = false;
     }
     else {
       this.backPage = MainPage;
@@ -62,14 +66,23 @@ export class ChatRoomPage {
           handler: () => {
             navCtrl.setRoot(this.backPage);
           }
-        }]
+        }] 
       });
       alert.present();
     }
 
     if (this.room_object !== undefined) {
-      this.chats = af.list('/chats/' + this.room_object.$ref.key);
-      this.rideHistory = af.object(`/rideHistory/${this.userServices.getUID()}/${this.room_object.$ref.key}`)
+
+      if(navParams.data.roomKey){
+        this.roomKey = navParams.data.roomKey;
+      }else{
+        this.roomKey = this.room_object.$ref.key;
+      }
+      // 임시로 해결책..
+
+      this.chats = af.list('/chats/' + this.roomKey);
+
+      this.rideHistory = af.object(`/rideHistory/${this.userServices.getUID()}/${this.roomKey}`)
       this.user_id = this.userServices.getEmail();
       
       this.roomServices.setRoomInfo(this.room);
@@ -117,12 +130,31 @@ export class ChatRoomPage {
   }
 
   send() {
-    if(this.chatContent.trim() != '') {
-      firebase.database().ref('/chats/'+this.room_object.$ref.key).push({
+
+    if(this.chatContent !== '') {
+
+      let tokenListWithoutCurrentUser = this.roomServices.room['devTokens'];
+      console.log("userdevtoken", this.userServices.getDevToken())
+
+      for (let i = 0; i < tokenListWithoutCurrentUser.length; i++)
+        if(tokenListWithoutCurrentUser[i] === ""){
+          tokenListWithoutCurrentUser.splice(i, 1);
+        }
+        // ""를 모두 제거하자..
+
+
+      //나중에 수정 필요.. array를 object로?
+
+      console.log("currentToken List", tokenListWithoutCurrentUser);
+
+      firebase.database().ref('/chats/' + this.roomKey).push({
         user_id: this.userServices.getEmail(),
         user_name: this.userServices.getName(),
         content: this.chatContent,
-        date_time: new Date().toLocaleString()
+        date_time: new Date().toLocaleString(),
+        devTokens: tokenListWithoutCurrentUser,
+        whenToDepart: this.roomServices.room['departure_date'],
+        isCarpool: this.isCarpool
       }).then(() => {
         this.chatContent = "";
         this.scrollBottom();
@@ -145,9 +177,10 @@ export class ChatRoomPage {
           let new_devTokens: Array<String> = [];
       
           old_participants.forEach(user =>{
-            if(user !== this.userServices.getEmail())
+            if(user !== this.userServices.getEmail()){
               new_participants.push(user);
               new_devTokens.push(this.userServices.getDevToken());
+            }
           });
       
           if(this.userServices.getEmail() !== this.roomServices.room['host']) {
@@ -176,6 +209,7 @@ export class ChatRoomPage {
           this.roomServices.getOut();
           this.room = this.roomServices.room;
           this.dateServices.setNow();
+          console.log('아니면 여기인가?'); 
           if (this.room['departure_date'] + this.room['departure_time'] > this.dateServices.nowDate + this.dateServices.nowTime) {
             // 예약시간이 지금보다 이후이면 삭제
             // => 택시를 타고 나서는 기록이 지워지지 않음. (먹튀 예방..?)
@@ -189,15 +223,7 @@ export class ChatRoomPage {
   }
 
   ionViewDidLoad(){
-    if(typeof(FCMPlugin) != 'undefined'){
-      FCMPlugin.onNotification(function(data){
-        if(data.wasTrapped){
-          alert("background: ");
-        } else{
-          alert(data.sendername + ': ' + data.message);
-        }
-      });
-    }
+    
   }
 
   scrollBottom(){
@@ -213,3 +239,4 @@ export class ChatRoomPage {
     }
   }
 }
+

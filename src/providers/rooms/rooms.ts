@@ -22,18 +22,10 @@ export class RoomsProvider {
   }
 
   setRoomInfo(obj: Object){
-    console.log(this.room === obj);
-    console.log(this.room == obj);
     this.room = obj;
-    console.log(this.room);
-    console.log(obj);
-    console.log('정보 좀 볼께');
-    console.log(this.room === obj);
-    console.log(this.room == obj);
   }
 
   addParticipants(user, userToken): boolean {
-    console.log("여긴가");
     let parts = this.room['participants'];
     let tokenList = this.room['devTokens'];
     if (this.room['currentPeople'] < this.room['capacity']) {

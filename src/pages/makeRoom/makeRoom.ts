@@ -127,9 +127,12 @@ export class MakeRoomPage {
                                         participants: [this.user_id],
                                         devTokens:[this.userServices.getDevToken()]
                                       };
+                                      // object이기 때문에 address가 전달되지 않는다는 문제가 생김
+                                      //
+
                 let chatRoomUrl = this.af.list('/chatrooms/'+this.bookingDate).push(roomObj);
                 this.af.object(`/rideHistory/${this.userServices.getUID()}/${chatRoomUrl.key}`).set(roomObj);
-                this.navCtrl.setRoot(ChatRoomPage, {room: roomObj});
+                this.navCtrl.setRoot(ChatRoomPage, {room: roomObj, roomKey: chatRoomUrl.key});
               }
             }]
         });

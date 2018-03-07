@@ -82,10 +82,11 @@ export class TaxiListPage {
         alert("인원이 가득 차 입장할 수 없습니다.");
         return;
       }
-    }
+    }else{
 
-    this.af.object(`/rideHistory/${this.usersService.getUID()}/${room.$key}`).set(room);
-    this.navCtrl.setRoot(ChatRoomPage, {room: room});
+      this.af.object(`/rideHistory/${this.usersService.getUID()}/${room.$key}`).set(room);
+      this.navCtrl.setRoot(ChatRoomPage, {room: room});  
+    }
   }
 
   makeRoom(){

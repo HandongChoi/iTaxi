@@ -8,7 +8,9 @@ import { HomePage } from '../pages/home/home';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 
-import { StatusBar } from '@ionic-native/status-bar';
+import {LocalNotifications} from '@ionic-native/local-notifications';
+import { PhonegapLocalNotification } from '@ionic-native/phonegap-local-notification';
+
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AuthProvider } from '../providers/auth/auth';
 import { DatePickerModule } from 'ionic2-date-picker';
@@ -27,6 +29,7 @@ import { CarpoolListPageModule } from '../pages/carpool-list/carpool-list.module
 import { MakeCarpoolRoomPageModule } from '../pages/make-carpool-room/make-carpool-room.module';
 
 import { FCM } from '@ionic-native/fcm';
+import {StatusBar} from '@ionic-native/status-bar';
 
 import { DateProvider } from '../providers/date/date';
 import { UsersProvider } from '../providers/users/users';
@@ -72,15 +75,17 @@ export const firebaseConfig = {
     HomePage
   ],
   providers: [
-    StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
     FCM,
+    StatusBar,
     DateProvider,
     UsersProvider,
     RoomsProvider,
-    StringProvider
+    StringProvider,
+    LocalNotifications,
+    PhonegapLocalNotification
   ]
 })
 export class AppModule {}

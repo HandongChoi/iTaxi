@@ -123,7 +123,7 @@ export class MakeCarpoolRoomPage {
             { text: '취소',
               role: 'cancel',
               handler: () => {
-                console.log('Cancel clicked');
+                console.log('Cancel clicked');  
               }
             },
             { text: '확인',
@@ -140,11 +140,11 @@ export class MakeCarpoolRoomPage {
                                         hostName: this.userServices.getName(),
                                         host: this.user_id,
                                         participants: [this.user_id],
-                                        devToken: [this.userServices.getDevToken()]
+                                        devTokens: [this.userServices.getDevToken()]
                                       };
                 let chatRoomUrl = this.af.list('/carpoolChatrooms/'+this.bookingDate).push(roomObj);
                 this.af.object(`/rideHistory/${this.userServices.getUID()}/${chatRoomUrl.key}`).set(roomObj).then(() => {
-                  this.navCtrl.setRoot(ChatRoomPage, {room: roomObj});
+                  this.navCtrl.setRoot(ChatRoomPage, {room: roomObj, roomKey: chatRoomUrl.key});
                 });
               }
             }]

@@ -1,6 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 import { Nav, NavController, Platform, AlertController, MenuController } from 'ionic-angular';
-import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { LoginPage } from '../pages/login/login';
@@ -10,10 +9,15 @@ import { AuthProvider } from '../providers/auth/auth';
 import { UsersProvider } from '../providers/users/users';
 import { DateProvider } from '../providers/date/date';
 
+import {StatusBar} from '@ionic-native/status-bar';
+import {LocalNotifications} from '@ionic-native/local-notifications';
+
 import { AngularFireDatabase } from 'angularfire2/database';
 import { FCM, NotificationData } from '@ionic-native/fcm';
+import { PhonegapLocalNotification } from '@ionic-native/phonegap-local-notification';
 
 import firebase from 'firebase';
+
 import { MainPage } from '../pages/main/main';
 import { TaxiListPage } from '../pages/taxi-list/taxi-list';
 import { MakeRoomPage } from '../pages/makeRoom/makeRoom';
@@ -45,9 +49,10 @@ export class MyApp {
 
   room: Object;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
-              public authProvider:AuthProvider, public alertCtrl: AlertController, public af: AngularFireDatabase,
+  constructor(public platform: Platform, public splashScreen: SplashScreen, private statusBar: StatusBar, private localNotifications: LocalNotifications,
+              public authProvider:AuthProvider, public alertCtrl: AlertController, public af: AngularFireDatabase, private localNotification: PhonegapLocalNotification,
               public fcm:FCM, public userServices:UsersProvider, private dateServices:DateProvider, public menuCtrl: MenuController) {
+
     this.splashScreen.show();
     console.log("splash screen on");
     this.initializeApp();
@@ -60,7 +65,7 @@ export class MyApp {
           console.log(this.user_id);
           this.uid = this.userServices.getUID();
 
-          if(this.user_id != undefined && this.uid != undefined) {
+          if(this.user_id != undefined && this.uid  != undefined) {
             af.list('/rideHistory/' + this.uid, {
               query:{
                 startAt: this.dateServices.getYearMonthDayWithDash(),
@@ -68,7 +73,7 @@ export class MyApp {
               }
             }).subscribe(data => {
               data.forEach(item => {
-                if (item.departure_time > this.dateServices.nowTime) {
+                if (item.departure_time >= this.dateServices.nowTime) {
                   this.room = item;
                   return;
                 }
@@ -78,7 +83,7 @@ export class MyApp {
           }
         }).catch(error => {
           alert("An error occured!" + error);
-        });
+        }); 
       }
 
       else {
@@ -96,23 +101,51 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
 
+
       this.fcm.onTokenRefresh().subscribe(
-        (token:string) => console.log("New Token", token),
+        (token:string) => this.userServices.setDevToken(token),
         error => console.error(error)
       );
+      //token refresh시 token을 update한다..
 
       this.fcm.onNotification().subscribe(
+
         (data:NotificationData)=>{
+          
+          this.localNotifications.on('click', () =>{
+            
+            this.af.object(data.roomURL).subscribe(room => {
+              console.log("local notification", room, data.roomURL);
+              this.goChatroomPage(room);
+            })
+          });
+          
           if(data.wasTapped){
-            console.log("Received in background", JSON.stringify(data));
+            this.localNotifications.schedule({
+              id: 1,
+              icon: 'res:/icon.png',
+              title: 'iTAXI',
+              text: data.message
+            });
+          // received in background
           }
           else{
-            console.log("Received in foreground", JSON.stringify(data))
+            this.localNotifications.schedule({
+              id: 1,
+              icon: 'res:/icon.png',
+              title: 'iTAXI',
+              text: data.message
+            });
+            // received in foreground
           }
         }, error=>{
           console.error("Error in notification", error);
         }
-      )
+      );
+      // push message 수신 시 background, foreground에서 어떻게 할 건지 정의
+
+      // Note: 현재 카톡에서 올때 위에 떴다가 사라지는 것을 구현하려고 하는데 이름이 뭔지.. docs에는 없는 것 같은데.. 나중에 찾아보자..
+
     });
     console.log("initailizeApp at app.component.ts");
   }

@@ -61,21 +61,14 @@ export class MainPage {
   }
 
   storetoken(){
-    this.tokenSetup().then((token) => {
-      this.af.database.ref('/userProfile/' + this.userServices.getUID()).update({
-        devtoken : token
-      }).then(()=>{
-        this.userServices.setDevToken(token);
-      }).catch(()=>{
-        alert('Warning: Push Notification Token not sotred');
-      });
+    this.tokenSetup().then((token) => { 
+      this.userServices.setDevToken(token);
     });
   }
   
   tokenSetup(){
     var promise = new Promise((resolve, reject)=>{
-      console.log(FCMPlugin);
-      if(typeof(FCMPlugin) != 'undefined'){
+      if(typeof(FCMPlugin) !== 'undefined'){
         FCMPlugin.getToken(function(token){
           resolve(token);
         }, (err)=>{
