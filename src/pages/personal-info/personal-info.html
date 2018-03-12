@@ -7,6 +7,11 @@
   </ion-navbar>
 </ion-header>
 
+<!-- 
+
+      현재 이름 바꾸고 설정 변경 누르면 'Cannot read property 'scrollToBottom' of null'가 뜬다.
+
+-->
 <ion-content padding>
   <form [formGroup]="updateForm" (submit)="updateUserInfo()" novalidate *ngIf="user">
     <ion-item>

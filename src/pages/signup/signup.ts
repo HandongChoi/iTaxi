@@ -49,6 +49,12 @@ export class SignupPage {
     };
   }
 
+
+  //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Error!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  //!!!!!!!!!!!!!! 현재 회원가입 마지막쪽에서 create error가 뜬다. !!!!!!!!!!!!!!!!!!!
+  //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
   signupUser() {
     if(!this.signupForm.valid){
       console.log(`Need to complete the form: ${this.signupForm.value}`);
