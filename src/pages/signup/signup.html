@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar color="primary">
     <ion-buttons left>
-      <button ion-button (click)='goBack()'>
+      <button ion-button (click)='LoginPage()'>
         <ion-icon name = "ios-arrow-back"></ion-icon>
       </button>
     </ion-buttons>
@@ -100,10 +100,7 @@
       <ion-item class="error-message" *ngIf="!signupForm.controls.password2.valid && signupForm.controls.password2.dirty">
         <p>비밀번호가 일치 하지 않습니다. 확인해주세요.</p>
       </ion-item>
-      <!-- 이거를 제출 버튼 옆에다가 놔두면 좋겠다. 
-      <button ion-button medium round style="margin-top: 15px" (click)="TermFlagUp()">약관 확인</button>
-      -->
-      <button ion-button medium round type="submit" style="margin-top: 15px" [disabled]="!signupForm.valid" (click)="CompleteFlagUp()"> 가입하기 </button>
+      <button ion-button medium round type="submit" style="margin-top: 15px" [disabled]="!signupForm.valid" (click)="signupUser()"> 가입하기 </button>
       </form>
     <div *ngSwitchCase="'complete'">
       <div class="wrap">

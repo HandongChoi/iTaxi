@@ -6,8 +6,6 @@ import { EmailValidator } from '../../validators/email';
 import { AuthProvider } from '../../providers/auth/auth';
 import { UsersProvider } from '../../providers/users/users';
 
-import { AngularFireDatabase } from 'angularfire2/database';
-
 import { MainPage } from '../main/main';
 import { SignupPage } from '../signup/signup';
 import { ResetPasswordPage } from '../reset-password/reset-password';
@@ -18,18 +16,13 @@ import { ResetPasswordPage } from '../reset-password/reset-password';
   templateUrl: 'login.html',
 })
 
-
 export class LoginPage {
-  public loginForm:FormGroup;
-  public loading:Loading;
+  public loginForm: FormGroup;
 
- //+ firestore: any;
-
-  constructor(public navCtrl:NavController, public navParams: NavParams, public loadingCtrl:LoadingController,
-              public alertCtrl:AlertController, public authProvider:AuthProvider, formBuilder:FormBuilder,
-              public menu: MenuController, public userServices:UsersProvider, public af: AngularFireDatabase) {
-
-    console.log('push test');
+  constructor(private navCtrl: NavController, public formBuilder: FormBuilder,
+              private loadingCtrl: LoadingController, private alertCtrl: AlertController, 
+              private authProvider: AuthProvider, private menu: MenuController, 
+              private userServices: UsersProvider) {
 
     //왼쪽 사이드바 메뉴 안 보이게 하는 역할
     this.menu.enable(false,'myMenu');
@@ -41,34 +34,38 @@ export class LoginPage {
     });
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
-  }
-
-  loginUser():void {
-    if(!this.loginForm.valid){
-      console.log(`Form isn't valid yet, value: ${this.loginForm.value}`);
-    }else{
+  loginUser(): void {
+    if (!this.loginForm.valid) {
+      let alert = this.alertCtrl.create({
+        title: "Failed",
+        message: `Form isn't valid yet, value: ${this.loginForm.value}`,
+        buttons: [{text: "OK", role: "cancle"}]
+      });
+    }
+    else {
       const email = this.loginForm.value.email;
       const password = this.loginForm.value.password;
+
+      let loading: Loading;
       
-      this.authProvider.loginUser(email, password).then( authData =>  {
-        this.loading.dismiss().then( () => {
-          this.userServices.initialize(authData).then(()=>{
-            this.navCtrl.setRoot(MainPage)
+      this.authProvider.loginUser(email, password).then(authData =>  {
+        this.userServices.initialize(authData).then(() => {
+          loading.dismiss().then(() => {
+            this.navCtrl.setRoot(MainPage);
           });
         });
       }, error => {
-        this.loading.dismiss().then( () => {
-            const alert:Alert = this.alertCtrl.create({
+        loading.dismiss().then( () => {
+          const alert: Alert = this.alertCtrl.create({
             message: error.message,
             buttons: [{ text: "Ok", role: 'cancel'}]
           });
           alert.present();
         });
       });
-      this.loading = this.loadingCtrl.create();
-      this.loading.present();
+
+      loading = this.loadingCtrl.create();
+      loading.present();
     }
   }
 

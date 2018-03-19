@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { ChatRoomPage } from '../chatroom/chatroom';
 import { MakeRoomPage } from '../makeRoom/makeRoom';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { DatePickerProvider, DatePickerOption } from 'ionic2-date-picker';
 
 import { UsersProvider } from '../../providers/users/users';
@@ -15,23 +15,28 @@ import { DateProvider } from '../../providers/date/date';
 })
 export class TaxiListPage {
 
-  dates: FirebaseListObservable<any[]>;
-  user_id: any;
+  dates: AngularFireList<any[]>;
 
   days: Array<Date> = [];
   nowDate: Date = new Date();
   selectedDate: Date = new Date();
 
-  departOptions: any;
-  destinationOptions: any;
+  departOptions: any = {
+    title: '출발지',
+    subTitle: '원하시는 출발지를 체크해주세요.',
+    mode: 'md'
+  };
+  destinationOptions: any = {
+    title: '도착지',
+    subTitle: '원하시는 도착지를 체크해주세요.',
+    mode: 'md'
+  };
 
   spotList: Array<string> = ["한동대학교", "포항역", "고속버스터미널", "시외버스터미널", "북부해수욕장", "육거리"];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase,
-              public datePickerProvider: DatePickerProvider, public modalCtrl: ModalController, 
-              public usersService: UsersProvider, public dateServices: DateProvider) {
-
-    this.user_id = this.usersService.getEmail();
+  constructor(private navCtrl: NavController, private af: AngularFireDatabase,
+              private datePickerProvider: DatePickerProvider, private modalCtrl: ModalController, 
+              private usersService: UsersProvider, private dateServices: DateProvider) {
     dateServices.setNow();
 
     for(let i = 1; i < 5; i++){
@@ -42,18 +47,6 @@ export class TaxiListPage {
 
     //기본적으로 오늘 날짜 기준으로 data 불러오기.
     this.showChatroom(this.nowDate);
-
-    this.departOptions = {
-      title: '출발지',
-      subTitle: '원하시는 출발지를 체크해주세요.',
-      mode: 'md'
-    };
-
-    this.destinationOptions = {
-      title: '도착지',
-      subTitle: '원하시는 도착지를 체크해주세요.',
-      mode: 'md'
-    };
   }
 
   showCalendar() {
@@ -67,17 +60,19 @@ export class TaxiListPage {
     dateSelected.subscribe(date => {this.showChatroom(date);});
   }
 
+  // 쿼리를 따로따로 날리지 말고 쿼리를 날리는 함수 하나를 만들어서 하자.
+  // 내생각엔 .orderByChild().equalTo().orderByChild(). ... 하면 가능할거같구
+  // 고려해야하는게 날짜, 출발지, 목적지 세개니까 이거를 rwx처럼 777같은 느낌으로 할 수 있겠다
+  // 이렇게 네개 고려하는거 만들면 딱 되면 좋을텐데..? 그치?
   showChatroom(date) {
     if(date != undefined){
       this.selectedDate = date;
-      console.log(this.makeStringFromDate(date));
-      this.dates = this.af.list('/chatrooms/' + this.makeStringFromDate(date));
+      this.dates = this.af.list(`/chatrooms/${this.makeStringFromDate(date)}`);
     }
   }
 
   goChatroom(room) {
     if (room['currentPeople'] >= room['capacity']) {
-      console.log(room);
       if (!this.isExist(room['participants'])) {
         alert("인원이 가득 차 입장할 수 없습니다.");
         return;

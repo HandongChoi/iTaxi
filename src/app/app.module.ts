@@ -3,8 +3,6 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 
-import { HomePage } from '../pages/home/home';
-
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 
@@ -45,7 +43,6 @@ export const firebaseConfig = {
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
   ],
   imports: [
     BrowserModule,
@@ -69,7 +66,6 @@ export const firebaseConfig = {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
   ],
   providers: [
     StatusBar,

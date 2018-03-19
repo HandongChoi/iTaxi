@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, MenuController } from 'ionic-angular';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 import { ChatRoomPage } from '../../pages/chatroom/chatroom';
@@ -16,24 +16,26 @@ declare var FCMPlugin;
   selector: 'page-main',
   templateUrl: 'main.html',
 })
+
 export class MainPage {
 
   user_id: any;
   roomObj: Array<Object> = [];
   
-  constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase,
-              public menu: MenuController, public userServices: UsersProvider, private dateServices: DateProvider) {
-    console.log("constructure Main");
+  constructor(private navCtrl: NavController, private af: AngularFireDatabase,
+              private menu: MenuController, private userServices: UsersProvider,
+              private dateServices: DateProvider) {
     //여기서부터는 로그인 및 회원가입 페이지를 넘어서 사이드 메뉴를 볼 수 있도록 만들기.
-    this.menu.enable(true,'myMenu');
+    menu.enable(true,'myMenu');
+    dateServices.setNow();
 
-    this.storetoken();
-    //token setup
+    af.list(`/rideHistory/${this.userServices.getUID()}`, ref => 
+      ref.orderByChild('departure_date').startAt(dateServices.getYearMonthDayWithDash())
+    ).valueChanges().forEach(item => {
+      console.log("Main.ts item: " + item);
+    });
 
-    //일단 지금 user의 정보를 email로 받아오고 있다.
-    this.user_id = this.userServices.getEmail();
-    this.dateServices.setNow();
-    console.log("Main user : "+this.user_id);
+    /*
     this.af.list('/rideHistory/' + this.userServices.getUID(), {
       query:{
         startAt: this.dateServices.getYearMonthDayWithDash(),
@@ -47,10 +49,7 @@ export class MainPage {
         }
       })
     });
-  }
-
-  ionViewDidLoad(){
-    console.log("ionViewDidLoad at main.ts");
+    */
   }
 
   TaxiListPage() { this.navCtrl.setRoot(TaxiListPage); }
@@ -58,31 +57,5 @@ export class MainPage {
 
   goChatroomPage(room){
     this.navCtrl.setRoot(ChatRoomPage, {room: room});
-  }
-
-  storetoken(){
-    this.tokenSetup().then((token) => {
-      this.af.database.ref('/userProfile/' + this.userServices.getUID()).update({
-        devtoken : token
-      }).then(()=>{
-        this.userServices.setDevToken(token);
-      }).catch(()=>{
-        alert('Warning: Push Notification Token not sotred');
-      });
-    });
-  }
-  
-  tokenSetup(){
-    var promise = new Promise((resolve, reject)=>{
-      console.log(FCMPlugin);
-      if(typeof(FCMPlugin) != 'undefined'){
-        FCMPlugin.getToken(function(token){
-          resolve(token);
-        }, (err)=>{
-          reject(err);
-        });
-      }
-    });
-    return promise;
   }
 }

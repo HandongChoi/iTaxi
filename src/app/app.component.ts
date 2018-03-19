@@ -45,22 +45,28 @@ export class MyApp {
 
   room: Object;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
-              public authProvider:AuthProvider, public alertCtrl: AlertController, public af: AngularFireDatabase,
-              public fcm:FCM, public userServices:UsersProvider, private dateServices:DateProvider, public menuCtrl: MenuController) {
+  constructor(private platform: Platform, private statusBar: StatusBar,
+              private splashScreen: SplashScreen, private authProvider: AuthProvider, 
+              private af: AngularFireDatabase, private fcm: FCM, 
+              private userServices: UsersProvider, private dateServices: DateProvider, 
+              private menuCtrl: MenuController) {
+
     this.splashScreen.show();
-    console.log("splash screen on");
     this.initializeApp();
 
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.userServices.initialize(user).then(() => {
-          this.user_id = this.userServices.getEmail();
           this.user_name = this.userServices.getName();
-          console.log(this.user_id);
           this.uid = this.userServices.getUID();
 
-          if(this.user_id != undefined && this.uid != undefined) {
+          if(this.uid != undefined) {
+            af.list(`/rideHistory/${this.uid}`, ref => 
+              ref.startAt(this.dateServices.getYearMonthDayWithDash()).orderByChild('departure_date')
+            ).valueChanges().forEach(item => {
+              console.log("App.components.ts item : " + item);
+            });
+            /*
             af.list('/rideHistory/' + this.uid, {
               query:{
                 startAt: this.dateServices.getYearMonthDayWithDash(),
@@ -74,18 +80,16 @@ export class MyApp {
                 }
               })
             });
+            */
             this.rootPage = MainPage;
           }
         }).catch(error => {
           alert("An error occured!" + error);
         });
       }
-
       else {
         this.rootPage = LoginPage;
       }
-      this.splashScreen.hide();
-      console.log("splash screen out");
     });
   }
 
@@ -114,7 +118,6 @@ export class MyApp {
         }
       )
     });
-    console.log("initailizeApp at app.component.ts");
   }
 
   TaxiListPage() { this.navCtrl.setRoot(TaxiListPage); }
