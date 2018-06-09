@@ -25,7 +25,7 @@
       </ion-col>
       <ion-col col-auto>
         <ion-buttons right icon-only>
-          <button class="quit" ion-button (click)='quit()'>
+          <button class="quit" *ngIf="room.departure_date + room.departure_time > dateServices.nowDate + dateServices.nowTime" ion-button (click)='quit()'>
             <span>방나가기</span>
           </button>
         </ion-buttons>

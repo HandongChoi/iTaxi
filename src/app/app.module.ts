@@ -8,7 +8,7 @@ import { HomePage } from '../pages/home/home';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 
-import {LocalNotifications} from '@ionic-native/local-notifications';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 import { PhonegapLocalNotification } from '@ionic-native/phonegap-local-notification';
 
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -29,7 +29,7 @@ import { CarpoolListPageModule } from '../pages/carpool-list/carpool-list.module
 import { MakeCarpoolRoomPageModule } from '../pages/make-carpool-room/make-carpool-room.module';
 
 import { FCM } from '@ionic-native/fcm';
-import {StatusBar} from '@ionic-native/status-bar';
+import { StatusBar } from '@ionic-native/status-bar';
 
 import { DateProvider } from '../providers/date/date';
 import { UsersProvider } from '../providers/users/users';

@@ -42,18 +42,6 @@ export class TaxiListPage {
 
     //기본적으로 오늘 날짜 기준으로 data 불러오기.
     this.showChatroom(this.nowDate);
-
-    this.departOptions = {
-      title: '출발지',
-      subTitle: '원하시는 출발지를 체크해주세요.',
-      mode: 'md'
-    };
-
-    this.destinationOptions = {
-      title: '도착지',
-      subTitle: '원하시는 도착지를 체크해주세요.',
-      mode: 'md'
-    };
   }
 
   showCalendar() {
@@ -77,13 +65,11 @@ export class TaxiListPage {
 
   goChatroom(room) {
     if (room['currentPeople'] >= room['capacity']) {
-      console.log(room);
       if (!this.isExist(room['participants'])) {
         alert("인원이 가득 차 입장할 수 없습니다.");
         return;
       }
-    }else{
-
+    } else {
       this.af.object(`/rideHistory/${this.usersService.getUID()}/${room.$key}`).set(room);
       this.navCtrl.setRoot(ChatRoomPage, {room: room});  
     }
@@ -91,14 +77,12 @@ export class TaxiListPage {
 
   makeRoom(){
     this.navCtrl.setRoot(MakeRoomPage);
-    console.log("makeRoom function into taxi-list.tx");
   }
 
   filterDeparture(departFilter){
     if (departFilter == "All") {
       this.dates = this.af.list('/chatrooms/'+ this.makeStringFromDate(this.selectedDate));
-    }
-    else {
+    } else {
       this.dates = this.af.list('/chatrooms/'+ this.makeStringFromDate(this.selectedDate), {
         query: {
           orderByChild: 'departure',
@@ -111,8 +95,7 @@ export class TaxiListPage {
   filterDestination(destinationFilter){
     if (destinationFilter == "All") {
       this.dates = this.af.list('/chatrooms/'+ this.makeStringFromDate(this.selectedDate));
-    }
-    else {
+    } else {
       this.dates = this.af.list('/chatrooms/'+ this.makeStringFromDate(this.selectedDate), {
         query: {
           orderByChild: 'destination',

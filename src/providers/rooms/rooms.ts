@@ -13,9 +13,11 @@ export class RoomsProvider {
                    capacity: Number,
                    currentPeople: Number,
                    host: String,
+                   hostName: String,
                    participants: Array,
                    devTokens: Array,
                  }
+                 //hostName을 넣은 이유는 makeRoom에 있어서 일단 넣었다.
 
   constructor() {
     console.log('Hello RoomsProvider Provider');

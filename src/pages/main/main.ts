@@ -33,16 +33,16 @@ export class MainPage {
     //일단 지금 user의 정보를 email로 받아오고 있다.
     this.user_id = this.userServices.getEmail();
     this.dateServices.setNow();
-    console.log("Main user : "+this.user_id);
+    //app.component.ts에서의 로직과 동일하다.
     this.af.list('/rideHistory/' + this.userServices.getUID(), {
       query:{
         startAt: this.dateServices.getYearMonthDayWithDash(),
         orderByChild : 'departure_date'
       }
     }).subscribe(data => {
+      //여기에 어떤 data가 오는지 파악을 못하고 있다.
       data.forEach(item => {
         if (item.departure_time > this.dateServices.nowTime) {
-          console.log("asd", item)
           this.roomObj.unshift(item);
         }
       })
@@ -53,8 +53,7 @@ export class MainPage {
     console.log("ionViewDidLoad at main.ts");
   }
 
-  TaxiListPage() { this.navCtrl.setRoot(TaxiListPage); }
-  CarpoolListPage() { this.navCtrl.setRoot(CarpoolListPage); }
+  setRoot(Page) { this.navCtrl.setRoot(Page); }
 
   goChatroomPage(room){
     this.navCtrl.setRoot(ChatRoomPage, {room: room});

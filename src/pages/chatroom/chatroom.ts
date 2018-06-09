@@ -21,7 +21,7 @@ export class ChatRoomPage {
   @ViewChild(Content) content: Content;
 
   chats: FirebaseListObservable<any[]>;
-  rideHistory: FirebaseObjectObservable<any>;
+  rideHistoryObject: FirebaseObjectObservable<any>;
   room_object:FirebaseObjectObservable<any>;
   room: any;
   users: Array<Object> = [];
@@ -43,21 +43,18 @@ export class ChatRoomPage {
   constructor(public navCtrl: NavController, public af:AngularFireDatabase, public navParams: NavParams, public platform:Platform,
               public roomServices: RoomsProvider, public dateServices: DateProvider, public userServices: UsersProvider,
               public alertCtrl: AlertController) {
-    console.log('constructor chatroom');
-    
+    //이거는 차라리 방을 만들때 안에 isTaxi 나 Transport로 둬서 Taxi, Carpool, default로 구분지어도 될 것 같다.
     if ("price" in navParams.data.room) { 
       this.backPage = CarpoolListPage;
       this.room = navParams.data.room;
       this.room_object = af.object(`/carpoolChatrooms/${this.room['departure_date']}/${this.room.$key}`);
       this.isCarpool = true;
-    }
-    else if ("host" in navParams.data.room) {
+    } else if ("host" in navParams.data.room) {
       this.backPage = TaxiListPage;
       this.room = navParams.data.room;
       this.room_object = af.object(`/chatrooms/${this.room['departure_date']}/${this.room.$key}`);
       this.isCarpool = false;
-    }
-    else {
+    } else {
       this.backPage = MainPage;
       let alert = this.alertCtrl.create({
         message: "잘못된 경로로 접근하셨습니다.",
@@ -71,28 +68,32 @@ export class ChatRoomPage {
       alert.present();
     }
 
+    //room key를 설정함으로써 채팅방 데이터를 가져오는 행위.
     if (this.room_object !== undefined) {
-
       if(navParams.data.roomKey){
         this.roomKey = navParams.data.roomKey;
-      }else{
+      } else {
         this.roomKey = this.room_object.$ref.key;
       }
       // 임시로 해결책..
 
+      //모든 chat을 가져온것.
       this.chats = af.list('/chats/' + this.roomKey);
 
-      this.rideHistory = af.object(`/rideHistory/${this.userServices.getUID()}/${this.roomKey}`)
+      this.rideHistoryObject = af.object(`/rideHistory/${this.userServices.getUID()}/${this.roomKey}`)
       this.user_id = this.userServices.getEmail();
       
+      //그냥 바로 room을 쓰지 왜 setRoomInfo를 통해서 roomService를 쓸까?
       this.roomServices.setRoomInfo(this.room);
+      //이거는 그 채팅방에 들어가면 위에 보이는 Date와 Time에 관해서 보여주는거다.
       this.displayDate = this.dateServices.getKMonthDay(this.roomServices.room['departure_date']);
       this.displayTime = this.roomServices.room['depart_time'];
+      //room_host는 왜 필요하지?
       this.room_host = this.roomServices.room['host'];
   
       let isExist: boolean = false;
   
-      //목록에 있는지 없는지 여부 확인.
+      //접속한 user가 그 채팅방의 목록에 있는지 없는지 여부 확인.
       for(let user of this.roomServices.room['participants']){
         af.list(`/userProfile`, {
           query: {
@@ -100,8 +101,10 @@ export class ChatRoomPage {
             equalTo: user
           }
         }).subscribe(data => {
+          //이거는 뭐하는건지 모르겠다?
           console.log("data", data);
           this.users.push(data[0]);
+          //이거는 스크롤을 가장 밑으로 옮기는걸까? 채팅방에 이게 필요할 것 같다. 맞으면 다른 곳에도 적용해보자.
           this.scrollBottom();
         });
         if(user === this.userServices.getEmail()){
@@ -109,11 +112,12 @@ export class ChatRoomPage {
         }
       }
       
+      //새로운 사람이 들어오는 상황.
       if (isExist == false) {
+        //새로운 사람이 들어 갈 수 있는 상황.
         if (this.roomServices.addParticipants(this.userServices.getEmail(), this.userServices.getDevToken())) {
           this.room_object.update(this.roomServices.room);
-        }
-        else {
+        } else {
           let alert = alertCtrl.create({
             message: "인원이 마감되었습니다.",
             buttons: [{text:"OK"}]
@@ -123,6 +127,9 @@ export class ChatRoomPage {
         }
       }
     }
+
+    //시간 관련 장소에서는 늘 현재 시간으로 다시 셋팅하기.
+    this.dateServices.setNow();
   } 
 
   goBack(){
@@ -130,9 +137,7 @@ export class ChatRoomPage {
   }
 
   send() {
-
     if(this.chatContent !== '') {
-
       let tokenListWithoutCurrentUser = this.roomServices.room['devTokens'];
       console.log("userdevtoken", this.userServices.getDevToken())
 
@@ -142,9 +147,7 @@ export class ChatRoomPage {
         }
         // ""를 모두 제거하자..
 
-
       //나중에 수정 필요.. array를 object로?
-
       console.log("currentToken List", tokenListWithoutCurrentUser);
 
       firebase.database().ref('/chats/' + this.roomKey).push({
@@ -176,6 +179,7 @@ export class ChatRoomPage {
           let new_participants: Array<String> = [];
           let new_devTokens: Array<String> = [];
       
+          //이전 사용자들을 정보들을 새로운 곳에 다 넣는다.
           old_participants.forEach(user =>{
             if(user !== this.userServices.getEmail()){
               new_participants.push(user);
@@ -190,13 +194,11 @@ export class ChatRoomPage {
               currentPeople: this.roomServices.room['currentPeople'] - 1,
               devTokens : new_devTokens
             });
-          }
-          else{
+          } else {
             if(this.roomServices.room['currentPeople'] <= 1) {
               //방장이고, 방에 사람이 없을 때
               this.room_object.remove();
-            }
-            else {
+            } else {
               //방장 다음 사람으로 옮기기
               this.room_object.update({
                 host: new_participants[0],
@@ -209,11 +211,9 @@ export class ChatRoomPage {
           this.roomServices.getOut();
           this.room = this.roomServices.room;
           this.dateServices.setNow();
-          console.log('아니면 여기인가?'); 
+          // 예약시간이 지금보다 이후이면 삭제
           if (this.room['departure_date'] + this.room['departure_time'] > this.dateServices.nowDate + this.dateServices.nowTime) {
-            // 예약시간이 지금보다 이후이면 삭제
-            // => 택시를 타고 나서는 기록이 지워지지 않음. (먹튀 예방..?)
-            this.rideHistory.remove();
+            this.rideHistoryObject.remove();
           }
           this.navCtrl.setRoot(this.backPage);
         }
@@ -223,7 +223,7 @@ export class ChatRoomPage {
   }
 
   ionViewDidLoad(){
-    
+    console.log("chatroom loaded");
   }
 
   scrollBottom(){
@@ -233,8 +233,7 @@ export class ChatRoomPage {
   show(index) {
     if (this.index == index) {
       this.index = -1;
-    }
-    else {
+    } else {
       this.index = index;
     }
   }

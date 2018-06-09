@@ -45,7 +45,7 @@ export class MyApp {
   rootPage: any;
   user_id: any;
   user_name: string;
-  uid: any;
+  user_uid: any;
 
   room: Object;
 
@@ -62,11 +62,11 @@ export class MyApp {
         this.userServices.initialize(user).then(() => {
           this.user_id = this.userServices.getEmail();
           this.user_name = this.userServices.getName();
-          console.log(this.user_id);
-          this.uid = this.userServices.getUID();
+          this.user_uid = this.userServices.getUID();
 
-          if(this.user_id != undefined && this.uid  != undefined) {
-            af.list('/rideHistory/' + this.uid, {
+          //현재 로직에서는 id or uid에 뭔가라도 있으면 거기서 뭐를 가져온다는건데.
+          if(this.user_id != undefined && this.user_uid  != undefined) {
+            af.list('/rideHistory/' + this.user_uid, {
               query:{
                 startAt: this.dateServices.getYearMonthDayWithDash(),
                 orderByChild : 'departure_date'
@@ -84,9 +84,7 @@ export class MyApp {
         }).catch(error => {
           alert("An error occured!" + error);
         }); 
-      }
-
-      else {
+      } else {
         this.rootPage = LoginPage;
       }
       this.splashScreen.hide();
@@ -109,17 +107,13 @@ export class MyApp {
       //token refresh시 token을 update한다..
 
       this.fcm.onNotification().subscribe(
-
         (data:NotificationData)=>{
-          
           this.localNotifications.on('click', () =>{
-            
             this.af.object(data.roomURL).subscribe(room => {
               console.log("local notification", room, data.roomURL);
               this.goChatroomPage(room);
             })
           });
-          
           if(data.wasTapped){
             this.localNotifications.schedule({
               id: 1,
@@ -128,8 +122,7 @@ export class MyApp {
               text: data.message
             });
           // received in background
-          }
-          else{
+          }else{
             this.localNotifications.schedule({
               id: 1,
               icon: 'res:/icon.png',

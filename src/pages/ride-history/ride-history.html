@@ -7,29 +7,55 @@
   </ion-navbar>
 </ion-header>
 
-
 <ion-content>
-  <div *ngIf = "rideHistory.length != 0">
+  <div *ngIf = "rideHistoryObject.length != 0">
     <ion-grid>
-      <ion-item-group *ngFor = "let room of rideHistory | async">
-        <ion-item-divider color="light" (click)="goChatroom(room)">
-          <ion-row>
-            <ion-col col-3>
-              <p>{{room.departure_date}}</p>
-              <p>{{room.departure_time}}</p>
-            </ion-col>
-            <ion-col col-7>
-              <p>{{room.departure}}</p>
-              <p>>{{room.destination}}</p>
-            </ion-col>
-            <ion-col col-2>
-              <p>{{room.currentPeople}} / {{room.capacity}}</p>
-              <p>참여중</p>
-            </ion-col>
-          </ion-row>
-        <div class="button-effect"></div>
-        </ion-item-divider>
+      <ion-item-group *ngFor = "let room of rideHistoryObject | async">
+        <div *ngIf = "room.roomDate+room.roomTime > dateServices.nowDate + dateServices.nowTime ;else pasted">
+          탑승 예정 내역
+          <ion-item-divider color="light" (click)="goChatroom(room)">
+            <ion-row>
+              <ion-col col-3>
+                <p>{{room.departure_date}}</p>
+                <p>{{room.departure_time}}</p>
+              </ion-col>
+              <ion-col col-7>
+                <p>{{room.departure}}</p>
+                <p>>{{room.destination}}</p>
+              </ion-col>
+              <ion-col col-2>
+                <p>{{room.currentPeople}} / {{room.capacity}}</p>
+                <p>참여중</p>
+              </ion-col>
+            </ion-row>
+          <div class="button-effect"></div>
+          </ion-item-divider>
+        </div>
+        <ng-template #pasted>
+          <ion-item-divider color="light" (click)="goChatroom(room)">
+            <ion-row>
+              <ion-col col-3>
+                <p>{{room.departure_date}}</p>
+                <p>{{room.departure_time}}</p>
+              </ion-col>
+              <ion-col col-7>
+                <p>{{room.departure}}</p>
+                <p>>{{room.destination}}</p>
+              </ion-col>
+              <ion-col col-2>
+                <p>{{room.currentPeople}} / {{room.capacity}}</p>
+                <p>참여중</p>
+              </ion-col>
+            </ion-row>
+          <div class="button-effect"></div>
+          </ion-item-divider>
+        </ng-template>
+
+
       </ion-item-group>
     </ion-grid>
+  </div>
+  <div *ngIf = "rideHistoryObject.length == 0">
+    <p>탑승 내역이 없습니다.</p>
   </div>
 </ion-content>
