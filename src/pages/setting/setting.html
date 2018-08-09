@@ -9,57 +9,64 @@
     <button ion-button menuToggle >
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>설정</ion-title>
+    <ion-title>Settings</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <ion-list *ngIf="user">
-    <ion-list-header>내정보</ion-list-header>
+    <ion-list-header>Profile</ion-list-header>
     <ion-item no-lines>
       <ion-row>
-        <ion-col col-2>이름</ion-col>
-        <ion-col col-8>
+        <ion-col col-3>Student ID</ion-col>
+        <ion-col col-7>
+          <span>{{ user.studentID }}</span>
+        </ion-col>
+        <ion-col col-2></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>Name</ion-col>
+        <ion-col col-7>
           <span>{{ user.name }}</span>
         </ion-col>
         <ion-col col-2></ion-col>
       </ion-row>
       <ion-row>
-        <ion-col col-2>번호</ion-col>
-        <ion-col col-8>
+        <ion-col col-3>Phone</ion-col>
+        <ion-col col-7>
           <span>{{ user.phoneNumber }}</span>
         </ion-col>
         <ion-col col-2></ion-col>
       </ion-row>
       <ion-row>
-        <ion-col col-2>학번</ion-col>
-        <ion-col col-8>
-          <span>{{ user.studentID }}</span>
+        <ion-col col-3>Email</ion-col>
+        <ion-col col-7>
+          <span>{{ user.email }}</span>
         </ion-col>
         <ion-col col-2></ion-col>
       </ion-row>
 
       <ion-row justify-content-center>
-        <button ion-button color="primary" small round outline (click)="OpenInfoPage()" >개인정보 수정</button>
+        <button ion-button color="primary" small round outline (click)="OpenInfoPage()">개인정보 수정</button>
         <button ion-button color="primary" small round outline (click)="delete_user()">회원탈퇴</button>
       </ion-row>
     </ion-item>
 
-    <ion-list-header> PUSH알림 </ion-list-header>
+    <ion-list-header> Notifications (알람) </ion-list-header>
     <ion-item no-lines>
-      <ion-label>메세지 알림</ion-label>
+      <ion-label>Group Chat Notification (채팅 알람)</ion-label>
       <ion-toggle [(ngModel)]="isPushToggled" (ionChange)="PushToggle()" checked="true"></ion-toggle>
     </ion-item>
     <ion-item no-lines>
-      <ion-label>공지 알림</ion-label>
+      <ion-label>Reminder Notification (예약 알람)</ion-label>
       <ion-toggle [(ngModel)]="isNotiToggled" (ionChange)="NotiToggle()" checked="true"></ion-toggle>
     </ion-item>
     
-    <ion-list-header> 문의 </ion-list-header>
+    <ion-list-header> Contact Us</ion-list-header>
     <ion-item no-lines>
       <span>hguitaxi@gmail.com</span>
     </ion-item>
-    <ion-list-header> 버전 </ion-list-header>
+    <ion-list-header> Version </ion-list-header>
     <ion-item no-lines>
       <span>1.0</span>
     </ion-item>

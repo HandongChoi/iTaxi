@@ -22,22 +22,20 @@ export class ChatRoomPage {
 
   chats: FirebaseListObservable<any[]>;
   rideHistoryObject: FirebaseObjectObservable<any>;
-  room_object:FirebaseObjectObservable<any>;
+  roomObject:FirebaseObjectObservable<any>;
   room: any;
   users: Array<Object> = [];
 
   backPage: any;
   chatContent: string;
 
-  room_host: string;
-  user_id: string;
+  roomHost: string;
+  userID: string;
   displayDate: string;
   displayTime: string;
 
   index: number = -1;
-
   isCarpool : boolean;
-
   roomKey: String;
 
   constructor(public navCtrl: NavController, public af:AngularFireDatabase, public navParams: NavParams, public platform:Platform,
@@ -47,12 +45,12 @@ export class ChatRoomPage {
     if ("price" in navParams.data.room) { 
       this.backPage = CarpoolListPage;
       this.room = navParams.data.room;
-      this.room_object = af.object(`/carpoolChatrooms/${this.room['departure_date']}/${this.room.$key}`);
+      this.roomObject = af.object(`/carpoolChatrooms/${this.room['departureDate']}/${this.room.$key}`);
       this.isCarpool = true;
     } else if ("host" in navParams.data.room) {
       this.backPage = TaxiListPage;
       this.room = navParams.data.room;
-      this.room_object = af.object(`/chatrooms/${this.room['departure_date']}/${this.room.$key}`);
+      this.roomObject = af.object(`/chatrooms/${this.room['departureDate']}/${this.room.$key}`);
       this.isCarpool = false;
     } else {
       this.backPage = MainPage;
@@ -69,11 +67,11 @@ export class ChatRoomPage {
     }
 
     //room key를 설정함으로써 채팅방 데이터를 가져오는 행위.
-    if (this.room_object !== undefined) {
+    if (this.roomObject !== undefined) {
       if(navParams.data.roomKey){
         this.roomKey = navParams.data.roomKey;
       } else {
-        this.roomKey = this.room_object.$ref.key;
+        this.roomKey = this.roomObject.$ref.key;
       }
       // 임시로 해결책..
 
@@ -81,15 +79,15 @@ export class ChatRoomPage {
       this.chats = af.list('/chats/' + this.roomKey);
 
       this.rideHistoryObject = af.object(`/rideHistory/${this.userServices.getUID()}/${this.roomKey}`)
-      this.user_id = this.userServices.getEmail();
+      this.userID = this.userServices.getEmail();
       
       //그냥 바로 room을 쓰지 왜 setRoomInfo를 통해서 roomService를 쓸까?
       this.roomServices.setRoomInfo(this.room);
       //이거는 그 채팅방에 들어가면 위에 보이는 Date와 Time에 관해서 보여주는거다.
-      this.displayDate = this.dateServices.getKMonthDay(this.roomServices.room['departure_date']);
+      this.displayDate = this.dateServices.getKMonthDay(this.roomServices.room['departureDate']);
       this.displayTime = this.roomServices.room['depart_time'];
-      //room_host는 왜 필요하지?
-      this.room_host = this.roomServices.room['host'];
+      //roomHost는 왜 필요하지?
+      this.roomHost = this.roomServices.room['host'];
   
       let isExist: boolean = false;
   
@@ -116,7 +114,7 @@ export class ChatRoomPage {
       if (isExist == false) {
         //새로운 사람이 들어 갈 수 있는 상황.
         if (this.roomServices.addParticipants(this.userServices.getEmail(), this.userServices.getDevToken())) {
-          this.room_object.update(this.roomServices.room);
+          this.roomObject.update(this.roomServices.room);
         } else {
           let alert = alertCtrl.create({
             message: "인원이 마감되었습니다.",
@@ -131,10 +129,6 @@ export class ChatRoomPage {
     //시간 관련 장소에서는 늘 현재 시간으로 다시 셋팅하기.
     this.dateServices.setNow();
   } 
-
-  goBack(){
-    this.navCtrl.setRoot(this.backPage);
-  }
 
   send() {
     if(this.chatContent !== '') {
@@ -151,12 +145,12 @@ export class ChatRoomPage {
       console.log("currentToken List", tokenListWithoutCurrentUser);
 
       firebase.database().ref('/chats/' + this.roomKey).push({
-        user_id: this.userServices.getEmail(),
+        userID: this.userServices.getEmail(),
         user_name: this.userServices.getName(),
         content: this.chatContent,
         date_time: new Date().toLocaleString(),
         devTokens: tokenListWithoutCurrentUser,
-        whenToDepart: this.roomServices.room['departure_date'],
+        whenToDepart: this.roomServices.room['departureDate'],
         isCarpool: this.isCarpool
       }).then(() => {
         this.chatContent = "";
@@ -189,7 +183,7 @@ export class ChatRoomPage {
       
           if(this.userServices.getEmail() !== this.roomServices.room['host']) {
             // 방장이 아닌 다른 사람이 나갈 경우
-            this.room_object.update({
+            this.roomObject.update({
               participants: new_participants,
               currentPeople: this.roomServices.room['currentPeople'] - 1,
               devTokens : new_devTokens
@@ -197,10 +191,10 @@ export class ChatRoomPage {
           } else {
             if(this.roomServices.room['currentPeople'] <= 1) {
               //방장이고, 방에 사람이 없을 때
-              this.room_object.remove();
+              this.roomObject.remove();
             } else {
               //방장 다음 사람으로 옮기기
-              this.room_object.update({
+              this.roomObject.update({
                 host: new_participants[0],
                 participants: new_participants,
                 currentPeople: this.roomServices.room['currentPeople'] - 1,
@@ -212,7 +206,7 @@ export class ChatRoomPage {
           this.room = this.roomServices.room;
           this.dateServices.setNow();
           // 예약시간이 지금보다 이후이면 삭제
-          if (this.room['departure_date'] + this.room['departure_time'] > this.dateServices.nowDate + this.dateServices.nowTime) {
+          if (this.room['departureDate'] + this.room['departureTime'] > this.dateServices.nowDate + this.dateServices.nowTime) {
             this.rideHistoryObject.remove();
           }
           this.navCtrl.setRoot(this.backPage);
@@ -220,6 +214,13 @@ export class ChatRoomPage {
       }]
     });
     alert.present();
+  }
+
+  payment(){
+    //room에서 사람수 빼낸다.
+    //클릭한 유저 계좌번호 빼낸다.
+    //input으로 돈 받아낸다.
+    //나눠서 채팅방에 출력한다.
   }
 
   ionViewDidLoad(){

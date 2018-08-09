@@ -29,13 +29,13 @@
       <ion-col col-6>
         <div id="taxi" (click)="setRoot('TaxiListPage')">
           <img src="assets/img/main_taxi.png" alt="taxi">
-          <span>아이택시</span>
+          <span>Taxi</span>
           <span>탑승</span>
         </div>
       </ion-col>
       <ion-col col-6>
         <div id="cpool" (click)="setRoot('CarpoolListPage')">
-            <span>카풀</span>
+            <span>Carpoor</span>
             <span>탑승</span>
             <img src="assets/img/main_carpool.png" alt="taxi">
         </div>
@@ -59,10 +59,10 @@
 
         <ion-col col-4 text-left>
           <div class="text">
-            {{room.departure_date | date: 'M.dd '}} {{dateServices.getKToday(room.departure_date)}}요일
+            {{room.departureDate | date: 'M.dd '}} {{dateServices.getKToday(room.departureDate)}}요일
           </div>
           <div class="text">
-            {{room.departure_time}}
+            {{room.departureTime}}
           </div>
         </ion-col>
 

@@ -8,8 +8,8 @@ export class RoomsProvider {
 
   room: Object = { departure: String,
                    destination: String,
-                   departure_date: String,
-                   departure_time: String,
+                   departureDate: String,
+                   departureTime: String,
                    capacity: Number,
                    currentPeople: Number,
                    host: String,

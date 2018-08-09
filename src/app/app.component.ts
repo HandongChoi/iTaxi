@@ -69,11 +69,11 @@ export class MyApp {
             af.list('/rideHistory/' + this.user_uid, {
               query:{
                 startAt: this.dateServices.getYearMonthDayWithDash(),
-                orderByChild : 'departure_date'
+                orderByChild : 'departureDate'
               }
             }).subscribe(data => {
               data.forEach(item => {
-                if (item.departure_time >= this.dateServices.nowTime) {
+                if (item.departureTime >= this.dateServices.nowTime) {
                   this.room = item;
                   return;
                 }
@@ -143,18 +143,11 @@ export class MyApp {
     console.log("initailizeApp at app.component.ts");
   }
 
-  TaxiListPage() { this.navCtrl.setRoot(TaxiListPage); }
-  MakeRoomPage() { this.navCtrl.setRoot(MakeRoomPage); }
-  CarpoolListPage() { this.navCtrl.setRoot(CarpoolListPage); }
-  MakeCarpoolRoomPage() { this.navCtrl.setRoot(MakeCarpoolRoomPage); }
-  RideHistoryPage() { this.navCtrl.setRoot(RideHistoryPage); }
-  PersonalInfoPage() { this.navCtrl.setRoot(PersonalInfoPage); }
-  MainPage() { this.navCtrl.setRoot(MainPage); }
-  SettingPage() { this.navCtrl.setRoot(SettingPage); }
+  setRoot(Page) { this.navCtrl.setRoot(Page); }
 
   goChatroomPage(room){
     this.menuCtrl.close();
-    this.navCtrl.setRoot(ChatRoomPage, {room: room});
+    this.navCtrl.push(ChatRoomPage, {room: room});
   }
 
   logout(){

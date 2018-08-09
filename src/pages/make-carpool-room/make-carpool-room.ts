@@ -132,8 +132,8 @@ export class MakeCarpoolRoomPage {
                 console.log(data);
                 let roomObj: Object = { departure: this.departure,
                                         destination: this.destination,
-                                        departure_date: this.bookingDate,
-                                        departure_time: this.bookingTime,
+                                        departureDate: this.bookingDate,
+                                        departureTime: this.bookingTime,
                                         capacity: this.maxPeople,
                                         currentPeople: 1,
                                         price: this.price,
@@ -144,7 +144,7 @@ export class MakeCarpoolRoomPage {
                                       };
                 let chatRoomUrl = this.af.list('/carpoolChatrooms/'+this.bookingDate).push(roomObj);
                 this.af.object(`/rideHistory/${this.userServices.getUID()}/${chatRoomUrl.key}`).set(roomObj).then(() => {
-                  this.navCtrl.setRoot(ChatRoomPage, {room: roomObj, roomKey: chatRoomUrl.key});
+                  this.navCtrl.push(ChatRoomPage, {room: roomObj, roomKey: chatRoomUrl.key});
                 });
               }
             }]

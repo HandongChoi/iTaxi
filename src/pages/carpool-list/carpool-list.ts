@@ -83,7 +83,7 @@ export class CarpoolListPage {
       }
     }else{
       this.af.object(`/rideHistory/${this.usersService.getUID()}/${room.$key}`).set(room);
-      this.navCtrl.setRoot(ChatRoomPage, {room: room});
+      this.navCtrl.push(ChatRoomPage, {room: room});
     }
   }
 

@@ -78,10 +78,15 @@ page-make-carpool-room {
       }
 
       input {
-        width: 80%;
         border: 0;
         text-align: center;
         font-size: 30px;
+      }
+      #people{
+        width: 30%;
+      }
+      #money{
+        width: 70%;
       }
 
       &:last-child {

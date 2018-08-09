@@ -58,7 +58,6 @@ export class TaxiListPage {
   showChatroom(date) {
     if(date != undefined){
       this.selectedDate = date;
-      console.log(this.makeStringFromDate(date));
       this.dates = this.af.list('/chatrooms/' + this.makeStringFromDate(date));
     }
   }
@@ -71,7 +70,7 @@ export class TaxiListPage {
       }
     } else {
       this.af.object(`/rideHistory/${this.usersService.getUID()}/${room.$key}`).set(room);
-      this.navCtrl.setRoot(ChatRoomPage, {room: room});  
+      this.navCtrl.push(ChatRoomPage, {room: room});  
     }
   }
 

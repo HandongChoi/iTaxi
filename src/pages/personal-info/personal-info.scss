@@ -1,3 +1,8 @@
 page-personal-info {
-
+    //여기에서 백 버튼 왼쪽에 패딩 없애고 싶은데 실패했다.
+    ion-title.title.title-md{
+        &:toolbar-title.toolbar-title-md{ 
+            padding: 0 12px;
+        }
+    }
 }

@@ -45,7 +45,7 @@ export class SettingPage {
   }
 
   OpenInfoPage() {
-    this.navCtrl.setRoot(PersonalInfoPage);
+    this.navCtrl.push(PersonalInfoPage);
   }
 
   delete_user():void {

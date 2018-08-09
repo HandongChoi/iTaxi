@@ -31,15 +31,15 @@ export class RideHistoryPage {
   goChatroom(room_object) {
     let subb;
     if ("price" in room_object) {
-      subb = this.af.object(`/carpoolChatrooms/${room_object['departure_date']}/${room_object.$key}`);
-    } else if ("departure_date" in room_object) {
-      subb = this.af.object(`/chatrooms/${room_object['departure_date']}/${room_object.$key}`);
+      subb = this.af.object(`/carpoolChatrooms/${room_object['departureDate']}/${room_object.$key}`);
+    } else if ("departureDate" in room_object) {
+      subb = this.af.object(`/chatrooms/${room_object['departureDate']}/${room_object.$key}`);
     }
 
     if (subb) {
       this.sub = subb.subscribe(data => {
-        if ("departure_date" in data) {
-          this.navCtrl.setRoot(ChatRoomPage, {room: room_object});
+        if ("departureDate" in data) {
+          this.navCtrl.push(ChatRoomPage, {room: room_object});
         } else {
           let alert = this.alertCtrl.create({
             message: "이미 삭제된 방입니다.",

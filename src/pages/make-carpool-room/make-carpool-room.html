@@ -69,9 +69,10 @@
       <span col-6 class="label">가격</span>
     </ion-row>
     <ion-row>
-      <span col-5 class="cont"><input type="number" [(ngModel)]="maxPeople">명</span>
       <span col-1></span>
-      <span col-6 class="cont"><input type="number" [(ngModel)]="price">&#8361;</span>
+      <span col-4 class="cont"><input type="number" id="people" [(ngModel)]="maxPeople">명</span>
+      <span col-1></span>
+      <span col-6 class="cont">&#8361;<input type="number" id="money" [(ngModel)]="price"></span>
     </ion-row>
   </div>
 

@@ -37,12 +37,12 @@ export class MainPage {
     this.af.list('/rideHistory/' + this.userServices.getUID(), {
       query:{
         startAt: this.dateServices.getYearMonthDayWithDash(),
-        orderByChild : 'departure_date'
+        orderByChild : 'departureDate'
       }
     }).subscribe(data => {
       //여기에 어떤 data가 오는지 파악을 못하고 있다.
       data.forEach(item => {
-        if (item.departure_time > this.dateServices.nowTime) {
+        if (item.departureTime > this.dateServices.nowTime) {
           this.roomObj.unshift(item);
         }
       })
@@ -56,7 +56,7 @@ export class MainPage {
   setRoot(Page) { this.navCtrl.setRoot(Page); }
 
   goChatroomPage(room){
-    this.navCtrl.setRoot(ChatRoomPage, {room: room});
+    this.navCtrl.push(ChatRoomPage, {room: room});
   }
 
   storetoken(){
