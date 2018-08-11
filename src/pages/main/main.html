@@ -27,15 +27,15 @@
   <div class="menu">
     <ion-row>
       <ion-col col-6>
-        <div id="taxi" (click)="setRoot('TaxiListPage')">
+        <div id="taxi" (click)="takeTaxi()">
           <img src="assets/img/main_taxi.png" alt="taxi">
           <span>Taxi</span>
           <span>탑승</span>
         </div>
       </ion-col>
       <ion-col col-6>
-        <div id="cpool" (click)="setRoot('CarpoolListPage')">
-            <span>Carpoor</span>
+        <div id="cpool" (click)="takeCarpool()">
+            <span>Carpool</span>
             <span>탑승</span>
             <img src="assets/img/main_carpool.png" alt="taxi">
         </div>
@@ -53,33 +53,33 @@
     <ion-card class="ticket" (click)="goChatroomPage(room)">
       <ion-row>
         <ion-col col-1>
-          <img *ngIf="!room.price" src="assets/img/main_taxi_mini.png" alt="taxi">
-          <img *ngIf="room.price" src="assets/img/main_carpool_mini.png" alt="carpool">
+          <img *ngIf="room.transportType == 'taxi'" src="assets/img/main_taxi_mini.png" alt="taxi">
+          <img *ngIf="room.transportType == 'carpool'" src="assets/img/main_carpool_mini.png" alt="carpool">
         </ion-col>
 
         <ion-col col-4 text-left>
           <div class="text">
-            {{room.departureDate | date: 'M.dd '}} {{dateServices.getKToday(room.departureDate)}}요일
+            {{room.departDate | date: 'M.dd '}} {{dateServices.getKToday(room.departDate)}}요일
           </div>
           <div class="text">
-            {{room.departureTime}}
+            {{room.departTime}}
           </div>
         </ion-col>
 
         <ion-col col-5>
           <div class="text">
-            {{room.departure}}
+            {{room.depart}}
           </div>
           <div class="text">
-            <span>&gt;</span>&nbsp;&nbsp;{{room.destination}}
+            <span>&gt;</span>&nbsp;&nbsp;{{room.arrive}}
           </div>
         </ion-col>
 
         <ion-col col-2 text-center>
-          <div class="text" *ngIf="!room.price">
+          <div class="text" *ngIf="room.transportType == 'taxi'">
             택시
           </div>
-          <div class="text" *ngIf="room.price">
+          <div class="text" *ngIf="room.transportType == 'carpool'">
             카풀
           </div>
           <div class="text">

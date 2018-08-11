@@ -23,7 +23,7 @@
 
       <ion-col col-5>
         <ion-item>
-          <ion-select [(ngModel)]="destinationFilter" interface="popover" placeholder="전체보기" (ionChange)="filterDestination(destinationFilter)">
+          <ion-select [(ngModel)]="arriveFilter" interface="popover" placeholder="전체보기" (ionChange)="filterDestination(arriveFilter)">
             <ion-option value="All" checked="true">전체보기</ion-option>
             <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>
           </ion-select>
@@ -56,15 +56,15 @@
     <ion-grid class="mainGrid">
       <ion-item-group>
         <ion-item-divider *ngFor="let date of dates | async" (click)="goChatroom(date)" class="line"
-        [ngClass]="{full: date.currentPeople >= date.capacity, exist: isExist(date.participants)}">
+        [ngClass]="{full: date.currentPeople >= date.capacity, exist: isEntered(date.participants)}">
           <ion-row>
             <ion-col col-3>
-              <p>{{date.departureDate}}</p>
-              <p>{{date.departureTime}}</p>
+              <p>{{date.departDate}}</p>
+              <p>{{date.departTime}}</p>
             </ion-col>
             <ion-col col-7>
-              <p>{{date.departure}}</p>
-              <p>>{{date.destination}}</p>
+              <p>{{date.depart}}</p>
+              <p>>{{date.arrive}}</p>
             </ion-col>
             <ion-col col-2>
               <p>{{date.currentPeople}} / {{date.capacity}}</p>

@@ -14,16 +14,16 @@
     <ion-row>
       <ion-col justify-content-center padding-left>
         {{displayDate}} {{displayTime}}
-        <p><b>{{room.departure}} &nbsp; <ion-icon name="arrow-forward"></ion-icon> &nbsp; {{room.destination}}</b></p>
+        <p><b>{{room.depart}} &nbsp; <ion-icon name="arrow-forward"></ion-icon> &nbsp; {{room.arrive}}</b></p>
       </ion-col>
       <ion-col col-auto>
         <ion-buttons right icon-only>
           <!-- 먹튀 방지용으로 방나가기는 택시 이용 시간 직전까지만 사용 가능-->
-          <button class="quit" *ngIf="room.departureDate + room.departureTime > dateServices.nowDate + dateServices.nowTime" ion-button (click)='quit()'>
+          <button class="quit" *ngIf="room.departDate + room.departTime > dateServices.nowDate + dateServices.nowTime" ion-button (click)='quit()'>
             <span>방나가기</span>
           </button>
           <!-- 택시 타고 난 이후 정산 기능-->
-          <button class="payment" *ngIf="room.departureDate + room.departureTime <= dateServices.nowDate + dateServices.nowTime" ion-button (click)='payment()'>
+          <button class="payment" *ngIf="room.departDate + room.departTime <= dateServices.nowDate + dateServices.nowTime" ion-button (click)='payment()'>
               <span>정산하기</span>
             </button>
         </ion-buttons>
@@ -35,12 +35,12 @@
   <ion-grid id="part-info">
     <ion-row>
       <ion-col class="users">
-        <div class="user" *ngFor="let member of users; let i = index">
-          <button class="user-name" [ngClass]="{'active': index==i}" (click)="show(i)" >{{ member.name }}</button>
+        <div class="user" *ngFor="let member of participants; let i = index">
+          <button class="user-name" [ngClass]="{'active': index==i}" (click)="show(i)" >{{ member.korName }}</button>
           <button class="user-call"><a href="sms://{{member.phoneNumber}}"><ion-icon name="ios-call-outline"></ion-icon></a></button>
           <button class="user-mail"><a href="sms://{{member.phoneNumber}}"><ion-icon name="ios-mail-outline"></ion-icon></a></button>
         </div>
-        <div class="user dumy" *ngIf="!users.length">
+        <div class="user dumy" *ngIf="!participants.length">
           <button class="user-name"></button>
         </div>
       </ion-col>
@@ -87,7 +87,7 @@
 
 <ion-footer>
   <ion-item>
-    <ion-input [(ngModel)]="chatContent" fixed type="text" (keyup.enter)="send()"></ion-input>
+    <ion-input [(ngModel)]="chatContent" fixed transportType="text" (keyup.enter)="send()"></ion-input>
     <button ion-button clear item-right (click)="send()"> send </button>
   </ion-item>
 </ion-footer>

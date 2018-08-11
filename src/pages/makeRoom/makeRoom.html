@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title class="top-title">택시모집</ion-title>
+    <ion-title class="top-title">{{ transportType == 'taxi' ? "택시" : "카풀" }}모집</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -63,7 +63,7 @@
     </ion-row>
   </div>
 
-  <div class="wrapper" id="cap">
+  <div class="wrapper" id="taxi" *ngIf="transportType == 'taxi'">
     <ion-row>
       <span class="label">최대탑승인원</span>
     </ion-row>
@@ -75,6 +75,18 @@
       <span col-3></span>
     </ion-row>
   </div>
+
+  <div class="wrapper" id="carpool" *ngIf="transportType == 'carpool'">
+      <ion-row>
+        <span col-6 class="label">최대탑승인원</span>
+        <span col-6 class="label">가격</span>
+      </ion-row>
+      <ion-row>
+        <span col-5 class="cont"><input type="number" id="people" [(ngModel)]="maxPeople">명</span>
+        <span col-1></span>
+        <span col-6 class="cont">&#8361;<input type="number" id="money" [(ngModel)]="price"></span>
+      </ion-row>
+    </div>
 
   <div id="room-btn">
     <button ion-button round (click)="makeRoom()">방만들기</button>

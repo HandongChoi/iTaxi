@@ -6,10 +6,10 @@ import 'rxjs/add/operator/map';
 export class RoomsProvider {
 
 
-  room: Object = { departure: String,
-                   destination: String,
-                   departureDate: String,
-                   departureTime: String,
+  room: Object = { depart: String,
+                   arrive: String,
+                   departDate: String,
+                   departTime: String,
                    capacity: Number,
                    currentPeople: Number,
                    host: String,

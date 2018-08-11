@@ -23,13 +23,13 @@ import { PersonalInfoPageModule } from '../pages/personal-info/personal-info.mod
 import { SettingPageModule } from '../pages/setting/setting.module';
 import { MakeRoomPageModule } from '../pages/makeRoom/makeRoom.module'
 import { SignupPageModule } from '../pages/signup/signup.module';
-import { ResetPasswordPageModule } from '../pages/reset-password/reset-password.module';
 import { RideHistoryPageModule } from '../pages/ride-history/ride-history.module';
 import { CarpoolListPageModule } from '../pages/carpool-list/carpool-list.module';
 import { MakeCarpoolRoomPageModule } from '../pages/make-carpool-room/make-carpool-room.module';
 
 import { FCM } from '@ionic-native/fcm';
 import { StatusBar } from '@ionic-native/status-bar';
+import { HttpModule } from '@angular/http';
 
 import { DateProvider } from '../providers/date/date';
 import { UsersProvider } from '../providers/users/users';
@@ -62,12 +62,12 @@ export const firebaseConfig = {
     PersonalInfoPageModule,
     SettingPageModule,
     SignupPageModule,
-    ResetPasswordPageModule,
     RideHistoryPageModule,
     MainPageModule,
     MakeCarpoolRoomPageModule,
     CarpoolListPageModule,
     MakeRoomPageModule,
+    HttpModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [

@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title class = "top-title">택시조회</ion-title>
+    <ion-title class = "top-title">{{ transportType == 'taxi' ? "택시" : "카풀" }}조회</ion-title>
   </ion-navbar>
 
   <ion-grid class="small-table">
@@ -23,7 +23,7 @@
 
       <ion-col col-5>
         <ion-item>
-          <ion-select [(ngModel)]="destinationFilter" interface="popover" placeholder="전체보기" (ionChange)="filterDestination(destinationFilter)">
+          <ion-select [(ngModel)]="arriveFilter" interface="popover" placeholder="전체보기" (ionChange)="filterDestination(arriveFilter)">
             <ion-option value="All" checked="true">전체보기</ion-option>
             <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>
           </ion-select>
@@ -54,22 +54,25 @@
 <ion-content>
   <div>
     <ion-grid class="mainGrid">
-      <ion-item-group>
-        <ion-item-divider *ngFor="let date of dates | async" (click)="goChatroom(date)" class="line"
-        [ngClass]="{full: date.currentPeople >= date.capacity, exist: isExist(date.participants)}">
-          <ion-row>
+      <ion-item-group *ngFor="let room of rooms | async">
+        <!-- 현재는 지금 시간 이후이면서 방이 꽉 차지 않는 것만 보이게 해 놨다. -->
+        <ion-item-divider *ngIf="room.departTime > nowTime && isAvailable(room)" (click)="goChatroom(room)" class="line"
+        [ngClass]="{full: room.currentPeople >= room.capacity, exist: isEntered(room.participants)}">
+          <ion-row >
             <ion-col col-3>
-              <p>{{date.departureDate}}</p>
-              <p>{{date.departureTime}}</p>
+              <p>{{room.departDate}}</p>
+              <p>{{room.departTime}}</p>
             </ion-col>
             <ion-col col-7>
-              <p>{{date.departure}}</p>
-              <p>>{{date.destination}}</p>
+              <p>{{room.depart}}</p>
+              <p>>{{room.arrive}}</p>
             </ion-col>
             <ion-col col-2>
-              <p>{{date.currentPeople}} / {{date.capacity}}</p>
-              <p *ngIf="isExist(date.participants)">참여중</p>
-              <p *ngIf="!isExist(date.participants)">참여 {{ date.currentPeople >= date.capacity ? "불가" : "가능" }}</p>
+              <p>{{room.currentPeople}} / {{room.capacity}}</p>
+              <p *ngIf="isEntered(room.participants)">참여중</p>
+              <!-- 생각해보니깐 참여 불가능한거는 걍 안 보이게 하면 되겠다.
+                <p *ngIf="!isEntered(room.participants)">참여 {{ room.currentPeople >= room.capacity ? "불가" : "가능" }}</p>
+              -->
             </ion-col>
           </ion-row>
         </ion-item-divider>

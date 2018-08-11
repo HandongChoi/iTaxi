@@ -16,10 +16,10 @@ import { DateProvider } from '../../providers/date/date';
 export class MakeCarpoolRoomPage {
 
   selectDeparture: Object = {key:"한동대학교", value:""};
-  departure: string = "";
+  depart: string = "";
 
   selectDestination: Object = {key:"포항역", value:""};
-  destination: string = "";
+  arrive: string = "";
 
   maxPeople: string = "4"; 
   msg: string="";
@@ -40,18 +40,18 @@ export class MakeCarpoolRoomPage {
 
   constructor(public alertCtrl: AlertController, public navParams: NavParams, public dateServices: DateProvider,
                public navCtrl:NavController, public af: AngularFireDatabase, public userServices: UsersProvider){
-    this.user_id = this.userServices.getEmail();
+    this.user_id = this.userServices.getStudentID();
     dateServices.setNow();
     console.log('constructor makeRoom');
   }
 
   makeRoom(){
-    this.departure = this.selectDeparture['key'] != '직접입력' ? this.selectDeparture['key'] : this.selectDeparture['value'];
-    this.destination = this.selectDestination['key'] != '직접입력' ? this.selectDestination['key'] : this.selectDestination['value'];
+    this.depart = this.selectDeparture['key'] != '직접입력' ? this.selectDeparture['key'] : this.selectDeparture['value'];
+    this.arrive = this.selectDestination['key'] != '직접입력' ? this.selectDestination['key'] : this.selectDestination['value'];
     
     //전달할 메시지
-    this.msg = "<br>" + "출발지 : " + this.departure + "<br>" + 
-              "도착지 : " + this.destination + "<br>" + 
+    this.msg = "<br>" + "출발지 : " + this.depart + "<br>" + 
+              "도착지 : " + this.arrive + "<br>" + 
               "출발날짜 : " + this.bookingDate + "(" + this.dateServices.getKToday(this.bookingDate) + ")" + "<br>" + 
               "출발시간 : " + this.bookingTime + "<br>" +
               "최대탑승인원 : " + this.maxPeople + "명" + "<br>" +
@@ -76,7 +76,7 @@ export class MakeCarpoolRoomPage {
     }
     else{
       //출발지와 목적지가 같을 경우 처리
-      if(this.departure == this.destination){
+      if(this.depart == this.arrive){
         let alert = this.alertCtrl.create({
           message: "출발지와 도착지를 다르게 입력하여 주세요.",
           buttons: [{
@@ -89,7 +89,7 @@ export class MakeCarpoolRoomPage {
         alert.present();
       }
       // input type 으로 입력을 받을 때 값을 입력하지 않는 경우 처리  
-      else if(this.departure=="" || this.destination==""){
+      else if(this.depart=="" || this.arrive==""){
         let alert = this.alertCtrl.create({
           message: "출발지 혹은 도착지를 입력하여 주세요.",
           buttons: [{
@@ -130,20 +130,17 @@ export class MakeCarpoolRoomPage {
               handler: data => {
                 console.log('데이타 시작');
                 console.log(data);
-                let roomObj: Object = { departure: this.departure,
-                                        destination: this.destination,
-                                        departureDate: this.bookingDate,
-                                        departureTime: this.bookingTime,
+                let roomObj: Object = { depart: this.depart,
+                                        arrive: this.arrive,
+                                        departDate: this.bookingDate,
+                                        departTime: this.bookingTime,
                                         capacity: this.maxPeople,
                                         currentPeople: 1,
                                         price: this.price,
-                                        hostName: this.userServices.getName(),
-                                        host: this.user_id,
-                                        participants: [this.user_id],
-                                        devTokens: [this.userServices.getDevToken()]
+                                   
                                       };
                 let chatRoomUrl = this.af.list('/carpoolChatrooms/'+this.bookingDate).push(roomObj);
-                this.af.object(`/rideHistory/${this.userServices.getUID()}/${chatRoomUrl.key}`).set(roomObj).then(() => {
+                this.af.object(`/rideHistory/${this.userServices.getStudentID()}/${chatRoomUrl.key}`).set(roomObj).then(() => {
                   this.navCtrl.push(ChatRoomPage, {room: roomObj, roomKey: chatRoomUrl.key});
                 });
               }

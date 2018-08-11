@@ -23,7 +23,7 @@ export class CarpoolListPage {
   selectedDate: Date = new Date();
 
   departOptions: any;
-  destinationOptions: any;
+  arriveOptions: any;
 
   spotList: Array<string> = ["한동대학교", "포항역", "고속버스터미널", "시외버스터미널", "북부해수욕장", "육거리"];
 
@@ -31,7 +31,7 @@ export class CarpoolListPage {
               public datePickerProvider: DatePickerProvider, public modalCtrl: ModalController, 
               public usersService: UsersProvider, public dateServices: DateProvider) {
 
-    this.user_id = this.usersService.getEmail();
+    this.user_id;
     dateServices.setNow();
 
     for(let i = 1; i < 5; i++){
@@ -49,7 +49,7 @@ export class CarpoolListPage {
       mode: 'md'
     };
 
-    this.destinationOptions = {
+    this.arriveOptions = {
       title: '도착지',
       subTitle: '원하시는 도착지를 체크해주세요.',
       mode: 'md'
@@ -77,12 +77,12 @@ export class CarpoolListPage {
   goChatroom(room) {
     if (room['currentPeople'] >= room['capacity']) {
       console.log(room);
-      if (!this.isExist(room['participants'])) {
+      if (!this.isEntered(room['participants'])) {
         alert("인원이 가득 차 입장할 수 없습니다.");
         return;
       }
     }else{
-      this.af.object(`/rideHistory/${this.usersService.getUID()}/${room.$key}`).set(room);
+      this.af.object(`/rideHistory/${this.usersService.getStudentID()}/${room.$key}`).set(room);
       this.navCtrl.push(ChatRoomPage, {room: room});
     }
   }
@@ -99,22 +99,22 @@ export class CarpoolListPage {
     else {
       this.dates = this.af.list('/carpoolChatrooms/'+ this.makeStringFromDate(this.selectedDate), {
         query: {
-          orderByChild: 'departure',
+          orderByChild: 'depart',
           equalTo: departFilter
         }
       });
     }
   }
 
-  filterDestination(destinationFilter){
-    if (destinationFilter == "All") {
+  filterDestination(arriveFilter){
+    if (arriveFilter == "All") {
       this.dates = this.af.list('/carpoolChatrooms/'+ this.makeStringFromDate(this.selectedDate));
     }
     else {
       this.dates = this.af.list('/carpoolChatrooms/'+ this.makeStringFromDate(this.selectedDate), {
         query: {
-          orderByChild: 'destination',
-          equalTo: destinationFilter
+          orderByChild: 'arrive',
+          equalTo: arriveFilter
         }
       });
     }
@@ -124,9 +124,9 @@ export class CarpoolListPage {
     console.log('ionViewDidLoad CarpoolListPage');
   }
 
-  isExist(users: Array<any>): boolean {
+  isEntered(users: Array<any>): boolean {
     for (let user of users) {
-      if (user === this.usersService.getEmail()) {
+      if (user === this.usersService.getStudentID()) {
         return true;
       }
     }

@@ -7,10 +7,11 @@ import { AuthProvider } from '../../providers/auth/auth';
 import { UsersProvider } from '../../providers/users/users';
 
 import { AngularFireDatabase } from 'angularfire2/database';
+import { Http } from '@angular/http';
 
 import { MainPage } from '../main/main';
 import { SignupPage } from '../signup/signup';
-import { ResetPasswordPage } from '../reset-password/reset-password';
+import { resolve } from 'dns';
 
 @IonicPage()
 @Component({
@@ -26,7 +27,8 @@ export class LoginPage {
  //+ firestore: any;
   constructor(public navCtrl:NavController, public navParams: NavParams, public loadingCtrl:LoadingController,
               public alertCtrl:AlertController, public authProvider:AuthProvider, formBuilder:FormBuilder,
-              public menu: MenuController, public userServices:UsersProvider, public af: AngularFireDatabase) {
+              public menu: MenuController, public userServices:UsersProvider, public af: AngularFireDatabase,
+              public http: Http) {
     //왼쪽 사이드바 메뉴 안 보이게 하는 역할
     this.menu.enable(false,'myMenu');
 
@@ -44,7 +46,56 @@ export class LoginPage {
   loginUser():void { 
     const id = this.loginForm.value.id;
     const password = this.loginForm.value.password;
+
+    var userInfo: Object = {
+                              studentID: "",
+                              phone: "",
+                              email: "",
+                              korName: "",
+                              engName: "",
+                              accountBank: "",
+                              accountNumber: "",
+                              devToken: "",
+                              isPush: "",
+                              isNoti: "",
+                            } 
+    var login = {"id": id, "password": password}
+    this.http.post('https://8slpzkf3j9.execute-api.us-east-2.amazonaws.com/iTaxi/login',JSON.stringify(login))
+    .subscribe( data => {
+      this.loading.dismiss().then( () => {
+        var body = JSON.parse(data['_body']);
+        if (body['studentID'] == undefined){
+          this.loading.dismiss().then( () => {
+            const alert:Alert = this.alertCtrl.create({
+            message: "ID 혹은 비밀번호가 틀렸습니다.",
+            buttons: [{ text: "Ok", role: 'cancel'}]
+          });
+          alert.present();
+          });
+        } else {
+          var exist = false;
+          this.af.object(`/userProfile/${body['studentID']}`, { preserveSnapshot: true }).subscribe( (data) => {
+            exist = data.exists();
+          });
+          if(exist){
+            this.authProvider.loginUser(body['studentID']);        
+          } else {
+            userInfo['studentID'] = body['studentID'];
+            userInfo['phone'] = body['phone'];
+            userInfo['email'] = body['email'];
+            userInfo['korName'] = body['korName'];
+            userInfo['engName'] = body['engName'];
+            this.navCtrl.push(SignupPage, {userInfo: userInfo});
+            console.log('여기는 몇번');
+          } 
+        }
+      })
+    });
+    this.loading = this.loadingCtrl.create();
+    this.loading.present(); 
     
+    
+    /*
     //지금 문제는 세션값 저장이라던지 앱에서 할 때 한 번 로그인 하면 계속 그 정보가 남아있게 하는 방식을 구상해야된다.
     this.authProvider.loginUser(id, password).then( authData =>  {
       this.loading.dismiss().then( () => {
@@ -63,6 +114,7 @@ export class LoginPage {
     });
     this.loading = this.loadingCtrl.create();
     this.loading.present();
+    */
   
   }
   /********* 자체 로그인 시스템을 쓸 때 아래와 같은 코드를 사용 하면 된다. ***************
@@ -93,6 +145,4 @@ export class LoginPage {
     }
   }
   ***************************************************************************/
-  signUp() { this.navCtrl.setRoot(SignupPage); }
-  password() { this.navCtrl.setRoot(ResetPasswordPage); }
 }

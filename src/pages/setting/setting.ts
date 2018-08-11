@@ -24,7 +24,7 @@ export class SettingPage {
     public platform:Platform, public authProvider:AuthProvider, public af:AngularFireDatabase,
     public alertCtrl: AlertController) {
     
-    this.userData = af.object(`/userProfile/${this.userService.getUID()}`);
+    this.userData = af.object(`/userProfile/${this.userService.getStudentID()}`);
     this.userData.subscribe(user => {
       this.user = user;
       this.isNotiToggled = user.isNoti;
@@ -32,21 +32,13 @@ export class SettingPage {
     });
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SettingPage');
-  }
+  ionViewDidLoad() { console.log('ionViewDidLoad SettingPage'); }
 
-  NotiToggle(){
-    this.userData.update({ isNoti: this.isNotiToggled });
-  }
+  NotiToggle(){ this.userData.update({ isNoti: this.isNotiToggled }); }
 
-  PushToggle(){
-    this.userData.update({ isPush: this.isPushToggled });
-  }
+  PushToggle(){ this.userData.update({ isPush: this.isPushToggled }); }
 
-  OpenInfoPage() {
-    this.navCtrl.push(PersonalInfoPage);
-  }
+  OpenInfoPage() { this.navCtrl.push(PersonalInfoPage); }
 
   delete_user():void {
     let alert = this.alertCtrl.create({

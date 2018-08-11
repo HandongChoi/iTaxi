@@ -26,6 +26,7 @@ import { MakeCarpoolRoomPage } from '../pages/make-carpool-room/make-carpool-roo
 import { RideHistoryPage } from '../pages/ride-history/ride-history';
 import { PersonalInfoPage } from '../pages/personal-info/personal-info';
 import { SettingPage } from '../pages/setting/setting';
+import { SignupPage } from '../pages/signup/signup';
 
 firebase.initializeApp({
   apiKey: "AIzaSyANvht7J2MNX6x47mglqfJk74yZQ9u0qUk",
@@ -43,9 +44,10 @@ export class MyApp {
   @ViewChild(Nav) navCtrl: NavController;
 
   rootPage: any;
-  user_id: any;
-  user_name: string;
-  user_uid: any;
+  userID: any;
+  userName: string;
+  userUID: any;
+  transportType: string;
 
   room: Object;
 
@@ -54,41 +56,31 @@ export class MyApp {
               public fcm:FCM, public userServices:UsersProvider, private dateServices:DateProvider, public menuCtrl: MenuController) {
 
     this.splashScreen.show();
-    console.log("splash screen on");
     this.initializeApp();
-
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        this.userServices.initialize(user).then(() => {
-          this.user_id = this.userServices.getEmail();
-          this.user_name = this.userServices.getName();
-          this.user_uid = this.userServices.getUID();
-
-          //현재 로직에서는 id or uid에 뭔가라도 있으면 거기서 뭐를 가져온다는건데.
-          if(this.user_id != undefined && this.user_uid  != undefined) {
-            af.list('/rideHistory/' + this.user_uid, {
-              query:{
-                startAt: this.dateServices.getYearMonthDayWithDash(),
-                orderByChild : 'departureDate'
-              }
-            }).subscribe(data => {
-              data.forEach(item => {
-                if (item.departureTime >= this.dateServices.nowTime) {
-                  this.room = item;
-                  return;
-                }
-              })
-            });
-            this.rootPage = MainPage;
-          }
-        }).catch(error => {
-          alert("An error occured!" + error);
-        }); 
-      } else {
+    firebase.auth().onAuthStateChanged( authData => {  
+      if(authData == null){
         this.rootPage = LoginPage;
+      } else {
+        var currentUserID = authData.email.substr(0,8);
+        this.userServices.initialize(currentUserID).then( () => {
+          this.userName = this.userServices.userInfo['korName'];
+        });
+        af.list('/rideHistory/' + currentUserID, {
+          query:{
+            startAt: this.dateServices.getYearMonthDayWithDash(),
+            orderByChild : 'departDate'
+          }
+        }).subscribe(data => {
+          data.forEach(item => {
+            if (item.departTime >= this.dateServices.nowTime) {
+              this.room = item;
+              return;
+            }
+          });
+        });
+        this.rootPage = MainPage;
       }
       this.splashScreen.hide();
-      console.log("splash screen out");
     });
   }
 
@@ -99,7 +91,7 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
 
-
+/*
       this.fcm.onTokenRefresh().subscribe(
         (token:string) => this.userServices.setDevToken(token),
         error => console.error(error)
@@ -136,9 +128,8 @@ export class MyApp {
         }
       );
       // push message 수신 시 background, foreground에서 어떻게 할 건지 정의
-
       // Note: 현재 카톡에서 올때 위에 떴다가 사라지는 것을 구현하려고 하는데 이름이 뭔지.. docs에는 없는 것 같은데.. 나중에 찾아보자..
-
+      */
     });
     console.log("initailizeApp at app.component.ts");
   }
@@ -149,6 +140,12 @@ export class MyApp {
     this.menuCtrl.close();
     this.navCtrl.push(ChatRoomPage, {room: room});
   }
+
+  takeTaxi() { this.navCtrl.setRoot(TaxiListPage, {transportType: 'taxi'}); }
+  makeTaxi() { this.navCtrl.setRoot(MakeRoomPage, {transportType: 'taxi'}); }
+
+  takeCarpool() { this.navCtrl.setRoot(TaxiListPage, {transportType: 'carpool'}); }
+  makeCarpool() { this.navCtrl.setRoot(MakeRoomPage, {transportType: 'carpool'}); }
 
   logout(){
     this.authProvider.logoutUser();

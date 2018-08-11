@@ -9,20 +9,14 @@ export class AuthProvider {
   constructor() {
     
   }
-  loginUser(email:string, password:string):firebase.Promise<any> { 
-    return firebase.auth().signInWithEmailAndPassword(email, password);
+  loginUser(studentID:string):firebase.Promise<any> { 
+    return firebase.auth().signInWithEmailAndPassword(studentID + '@handong.edu', 'HandongCRA1004');
   }
    
-  signupUser(email:string, password:string, name:string, phoneNumber:string, studentID:string):firebase.Promise<any> { 
-    return firebase.auth().createUserWithEmailAndPassword(email, password)
+  signupUser(studentID:string):firebase.Promise<any> { 
+    return firebase.auth().createUserWithEmailAndPassword(studentID + '@handong.edu', 'HandongCRA1004')
     .then( newUser => { 
-      firebase.database().ref(`/userProfile/${newUser.uid}/email`).set(email);
-      firebase.database().ref(`/userProfile/${newUser.uid}/studentID`).set(studentID);
-      firebase.database().ref(`/userProfile/${newUser.uid}/phoneNumber`).set(phoneNumber);
-      firebase.database().ref(`/userProfile/${newUser.uid}/devtoken`).set("");
-      firebase.database().ref(`/userProfile/${newUser.uid}/name`).set(name);
-      firebase.database().ref(`/userProfile/${newUser.uid}/isPush`).set(true);
-      firebase.database().ref(`/userProfile/${newUser.uid}/isNoti`).set(true);
+      firebase.database().ref(`/UID/${newUser.uid}/studentID`).set(studentID);                
     }).catch( error => {
       let alertCtrl: AlertController;
       let alert = alertCtrl.create({
@@ -36,7 +30,6 @@ export class AuthProvider {
 
   delete(){
     var user = firebase.auth().currentUser;
- 
     user.delete().then(function() {
       // User deleted.
     }).catch(function(error) {

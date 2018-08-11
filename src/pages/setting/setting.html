@@ -25,16 +25,23 @@
         <ion-col col-2></ion-col>
       </ion-row>
       <ion-row>
-        <ion-col col-3>Name</ion-col>
+          <ion-col col-3>Korean Name</ion-col>
+          <ion-col col-7>
+            <span>{{ user.korName }}</span>
+          </ion-col>
+          <ion-col col-2></ion-col>
+        </ion-row>
+      <ion-row>
+        <ion-col col-3>English Name</ion-col>
         <ion-col col-7>
-          <span>{{ user.name }}</span>
+          <span>{{ user.engName }}</span>
         </ion-col>
         <ion-col col-2></ion-col>
       </ion-row>
       <ion-row>
-        <ion-col col-3>Phone</ion-col>
+        <ion-col col-3>Phone Number</ion-col>
         <ion-col col-7>
-          <span>{{ user.phoneNumber }}</span>
+          <span>{{ user.phone }}</span>
         </ion-col>
         <ion-col col-2></ion-col>
       </ion-row>
@@ -45,10 +52,23 @@
         </ion-col>
         <ion-col col-2></ion-col>
       </ion-row>
+      <ion-row>
+        <ion-col col-3>Account Bank Name</ion-col>
+        <ion-col col-7>
+          <span>{{ user.accountBank }}</span>
+        </ion-col>
+        <ion-col col-2></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>Account Number</ion-col>
+        <ion-col col-7>
+          <span>{{ user.accountNumber }}</span>
+        </ion-col>
+        <ion-col col-2></ion-col>
+      </ion-row>
 
       <ion-row justify-content-center>
         <button ion-button color="primary" small round outline (click)="OpenInfoPage()">개인정보 수정</button>
-        <button ion-button color="primary" small round outline (click)="delete_user()">회원탈퇴</button>
       </ion-row>
     </ion-item>
 

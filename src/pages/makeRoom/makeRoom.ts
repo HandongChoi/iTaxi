@@ -17,10 +17,11 @@ import { DateProvider } from '../../providers/date/date';
 export class MakeRoomPage {
   
   selectDeparture: Object = {key:"한동대학교", value:""};
-  departure: string = "";
+  depart: string = "";
   selectDestination: Object = {key:"포항역", value:""};
-  destination: string = "";
-  maxPeople: string = "4"; 
+  arrive: string = "";
+  maxPeople: string = "4";
+  price: string = "0"; 
   msg: string="";
 
   nowDate: string = this.dateServices.nowDate;
@@ -32,23 +33,25 @@ export class MakeRoomPage {
   min: string = this.dateServices.min;
   max: string = this.dateServices.max;
 
-  userID: string; 
+  userID: string;
+  transportType: string;
 
   spotList: Array<string> = ["한동대학교", "포항역", "양덕", "고속버스터미널", "시외버스터미널", "북부해수욕장", "육거리", "직접입력"];;
 
   constructor(public alertCtrl: AlertController, public navParams: NavParams, public dateServices: DateProvider,
                public navCtrl:NavController, public af: AngularFireDatabase, public userServices: UsersProvider){
-    this.userID = this.userServices.getEmail();
+    this.userID = this.userServices.getStudentID();
+    this.transportType = this.navParams.data.transportType;
     dateServices.setNow();
   }
 
   makeRoom(){
-    this.departure = this.selectDeparture['key'] != '직접입력' ? this.selectDeparture['key'] : this.selectDeparture['value'];
-    this.destination = this.selectDestination['key'] != '직접입력' ? this.selectDestination['key'] : this.selectDestination['value'];
+    this.depart = this.selectDeparture['key'] != '직접입력' ? this.selectDeparture['key'] : this.selectDeparture['value'];
+    this.arrive = this.selectDestination['key'] != '직접입력' ? this.selectDestination['key'] : this.selectDestination['value'];
     
     //전달할 메시지
-    this.msg = "<br>출발지 : " + this.departure + "<br>" + 
-              "도착지 : " + this.destination + "<br>" + 
+    this.msg = "<br>출발지 : " + this.depart + "<br>" + 
+              "도착지 : " + this.arrive + "<br>" + 
               "출발날짜 : " + this.bookingDate + "(" + this.dateServices.getKToday(this.bookingDate) + ")" + "<br>" + 
               "출발시간 : " + this.bookingTime + "<br>" +
               "탑승허용인원 : " + this.maxPeople + "명" + "<br>" ;
@@ -65,7 +68,7 @@ export class MakeRoomPage {
       alert.present();
     }else{
       //출발지와 목적지가 같을 경우 처리
-      if(this.departure == this.destination){
+      if(this.depart == this.arrive){
         let alert = this.alertCtrl.create({
           message: "출발지와 도착지를 다르게 입력하여 주세요.",
           buttons: [{
@@ -75,7 +78,7 @@ export class MakeRoomPage {
         });
         alert.present();
       //input type 으로 입력을 받을 때 값을 입력하지 않는 경우 처리  
-      }else if(this.departure=="" || this.destination==""){
+      }else if(this.depart=="" || this.arrive==""){
         let alert = this.alertCtrl.create({
           message: "출발지 혹은 도착지를 입력하여 주세요.",
           buttons: [{
@@ -97,25 +100,25 @@ export class MakeRoomPage {
             },
             { text: '확인',
               handler: data => {
-                let room: Object = { departure: this.departure,
-                                        destination: this.destination,
-                                        departureDate: this.bookingDate,
-                                        departureTime: this.bookingTime,
-                                        capacity: this.maxPeople,
-                                        currentPeople: 1,
-                                        hostName: this.userServices.getName(),
-                                        host: this.userID,
-                                        participants: [this.userID],
-                                        devTokens:[this.userServices.getDevToken()]
-                                      };
-                                      // object이기 때문에 address가 전달되지 않는다는 문제가 생김
-                
-                                      //af list와 object의 차이가 뭐길래 따로 설정했지?
-                                      //내가 봤을 때에는 밑에 Url에 대한 것도 object set으로 다 정해야 되지 않나?
-                                      //list는 말 그대로 list기준으로 작동하는 것 같은데.
-                let chatRoomUrl = this.af.list('/chatrooms/'+this.bookingDate).push(room);
-                console.log(chatRoomUrl);
-                let test = this.af.object(`/rideHistory/${this.userServices.getUID()}/${chatRoomUrl.key}`).set(room);
+                let room: Object = { depart: this.depart,
+                                     arrive: this.arrive,
+                                     departDate: this.bookingDate,
+                                     departTime: this.bookingTime,
+                                     capacity: this.maxPeople,
+                                     currentPeople: 1,
+                                     hostName: this.userServices.userInfo['korName'],
+                                     host: this.userID,
+                                     transportType: this.transportType,
+                                     participants: [this.userID],
+                                     devTokens:[this.userServices.userInfo['devToken']]
+                                   };
+                console.log(room);
+                                    //object set말고 다른 방식으로 유니크한 값을 받으면서 디비에 저장하는 방법이 있을까?
+                                    //그러면 그걸로 저장 후 바로 room을 받아서 보내는게 좋을 것 같다. 보낼때에는
+                                    //promise방식으로 then 알아보자.
+                let chatRoomUrl = room['transportType'] == 'taxi' ? this.af.list('/taxiChatrooms/'+this.bookingDate).push(room)
+                                                                  : this.af.list('/carpoolChatrooms/'+this.bookingDate).push(room);
+                this.af.object(`/rideHistory/${this.userServices.getStudentID()}/${chatRoomUrl.key}`).set(room);
                 this.navCtrl.setRoot(ChatRoomPage, {room: room, roomKey: chatRoomUrl.key});
               }
            }]  
@@ -124,16 +127,8 @@ export class MakeRoomPage {
     }
     }
   }
-  setDepartureDefault(){
-    this.selectDeparture = {key:"한동대학교", value:""};
-  }
-  setDestinationDefault(){
-    this.selectDestination = {key:"포항역", value:""};
-  }
-  swapPlace(){
-    [this.selectDeparture, this.selectDestination] = [this.selectDestination, this.selectDeparture];
-  }
-  setPeople(num) {
-    this.maxPeople = String(num);
-  }
+  setDepartureDefault(){ this.selectDeparture = {key:"한동대학교", value:""}; }
+  setDestinationDefault(){ this.selectDestination = {key:"포항역", value:""}; }
+  swapPlace(){ [this.selectDeparture, this.selectDestination] = [this.selectDestination, this.selectDeparture]; }
+  setPeople(num) { this.maxPeople = String(num); }
 }

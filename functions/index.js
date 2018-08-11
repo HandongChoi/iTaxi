@@ -9,9 +9,7 @@ admin.initializeApp({
 
 exports.kakaoLogin = functions.https.onRequest((req, res) => {
    const uid = req.query.id;
-
    console.log(uid);
-
    admin.auth().createCustomToken(uid, {provider: 'KAKAO'})
      .then(function(customToken) {
        // Send token back to client
@@ -26,26 +24,19 @@ exports.kakaoLogin = functions.https.onRequest((req, res) => {
 });
 
 exports.ChatMessageTrigger= functions.database.ref('/chats/{roomId}/{chatId}').onWrite((event)=>{
-
 	let chatObject = event.data.val();
-
 	if(typeof(chatObject) !== 'undefined'){
-
 		let tokens = chatObject.devTokens;
 		let message = chatObject.user_name + ' : ' + chatObject.content;
-
 		if(tokens != null){
 	// this.navCtrl.setRoot(ChatRoomPage, {room: room});  
-			
 			let isCarpool = chatObject.isCarpool;
 			let roomURL = '';
-
 			if(isCarpool){
 				roomURL = '/carpoolChatrooms/' + chatObject.whenToDepart + '/' + event.data.ref.parent.key;
 			}else{
-				roomURL = '/chatrooms/' + chatObject.whenToDepart + '/' + event.data.ref.parent.key;
+				roomURL = '/taxiChatrooms/' + chatObject.whenToDepart + '/' + event.data.ref.parent.key;
 			}
-
 			var payload ={
 				'notification' : {
 					'title' : '[iTAXI]',
@@ -56,9 +47,7 @@ exports.ChatMessageTrigger= functions.database.ref('/chats/{roomId}/{chatId}').o
 					'roomURL' : roomURL
 				}
 			}
-			
 			console.log(tokens);
-
 			return admin.messaging().sendToDevice(tokens, payload).then((response) => {
 				console.log('success', response);
 			}).catch((err) => {

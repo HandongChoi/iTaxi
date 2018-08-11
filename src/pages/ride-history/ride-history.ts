@@ -14,15 +14,15 @@ import { DateProvider } from '../../providers/date/date';
 })
 export class RideHistoryPage {
 
-  rideHistoryObject: FirebaseListObservable<any[]>;
+  rideHistory: FirebaseListObservable<any[]>;
 
-  user_id: string;
+  userID: string;
   sub: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase, 
               public userServices: UsersProvider, public alertCtrl: AlertController, public dateServices: DateProvider) {
-    this.user_id = this.userServices.getEmail();
-    this.rideHistoryObject = af.list('/rideHistory/'+ this.userServices.getUID() + '/');
+    this.userID = this.userServices.getStudentID();
+    this.rideHistory = af.list('/rideHistory/'+ this.userServices.getStudentID());
 
     //시간 관련 장소에서는 늘 현재 시간으로 다시 셋팅하기.
     this.dateServices.setNow();
@@ -30,15 +30,15 @@ export class RideHistoryPage {
 
   goChatroom(room_object) {
     let subb;
-    if ("price" in room_object) {
-      subb = this.af.object(`/carpoolChatrooms/${room_object['departureDate']}/${room_object.$key}`);
-    } else if ("departureDate" in room_object) {
-      subb = this.af.object(`/chatrooms/${room_object['departureDate']}/${room_object.$key}`);
+    if (room_object.transportType == "carpool") {
+      subb = this.af.object(`/carpoolChatrooms/${room_object['departDate']}/${room_object.$key}`);
+    } else if (room_object.transportType == "taxi") {
+      subb = this.af.object(`/taxiChatrooms/${room_object['departDate']}/${room_object.$key}`);
     }
 
     if (subb) {
       this.sub = subb.subscribe(data => {
-        if ("departureDate" in data) {
+        if ("departDate" in data) {
           this.navCtrl.push(ChatRoomPage, {room: room_object});
         } else {
           let alert = this.alertCtrl.create({

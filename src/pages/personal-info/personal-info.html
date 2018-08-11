@@ -13,28 +13,62 @@
       백퍼튼 옆의 패딩 scss로 없애는거 해야된다.
 -->
 <ion-content padding>
-  <form [formGroup]="updateForm" (submit)="updateUserInfo()" novalidate *ngIf="user">
-    <ion-item>
-      <ion-label stacked>이름</ion-label>
-      <ion-input formControlName="name" type="name" value="{{ user.name }}"></ion-input>
-    </ion-item>
 
     <ion-item>
-      <ion-label stacked>학번</ion-label>
-      <ion-input disabled="true" formControlName="studentID" type="studentID" value="{{ user.studentID }}"></ion-input>
-    </ion-item>
+        <ion-label stacked>StudentID (학번)</ion-label>
+        <ion-label >{{userInfo.studentID}}</ion-label>
+      </ion-item>
 
-    <ion-item>
-      <ion-label stacked>전화번호</ion-label>
-      <ion-input disabled="true" formControlName="phoneNumber" type="phoneNumber" value="{{ user.phoneNumber }}"></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label stacked>Korean Name (한글 이름)</ion-label>
+        <ion-label>{{userInfo.korName}}</ion-label>
+      </ion-item>
 
-    <ion-item no-lines text-center>
-      <p>추가적인 변경을 원하시면 메일로 문의해 주시기 바랍니다.</p>
-    </ion-item>
-    <div padding>
-      <button ion-button block type="submit">변경하기</button>
-    </div>
-  </form>
+      <form [formGroup]="updateForm" (submit)="updateUserInfo()" novalidate >
+      <ion-item>
+        <ion-label stacked>English Name (영어 이름)</ion-label>
+        <ion-input formControlName="engName" type="engName" [class.invalid]="!updateForm.controls.engName.valid && updateForm.controls.engName.dirty">
+        </ion-input>
+      </ion-item>
+      <ion-item class="error-message" *ngIf="!updateForm.controls.engName.valid && updateForm.controls.engName.dirty">
+        <p>영어 이름을 입력하셔야 합니다.</p>
+      </ion-item>
 
+      <ion-item>
+        <ion-label stacked>Phone Number (휴대폰 번호)</ion-label>
+        <ion-input formControlName="phone" type="phone" [class.invalid]="!updateForm.controls.phone.valid && updateForm.controls.phone.dirty">
+        </ion-input>
+      </ion-item>
+      <ion-item class="error-message" *ngIf="!updateForm.controls.phone.valid && updateForm.controls.phone.dirty">
+        <p>휴대폰 번호를 입력하셔야 합니다.</p>
+      </ion-item>
+    
+      <ion-item>
+        <ion-label stacked>Email</ion-label>
+        <ion-input formControlName="email" type="email" placeholder="{{userInfo.email}}" [class.invalid]="!updateForm.controls.email.valid && updateForm.controls.email.dirty">
+        </ion-input>
+      </ion-item>
+      <!-- dirty의 뜻은 '상태가 바꼈니?' 이다-->
+      <ion-item class="error-message" *ngIf="!updateForm.controls.email.valid && updateForm.controls.email.dirty">
+        <p>이메일 양식을 제대로 입력해주세요!</p>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Account Bank Name (계좌 은행)</ion-label>
+        <ion-input formControlName="accountBank" type="accountBank">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Account Number (계좌 번호)</ion-label>
+        <ion-input formControlName="accountNumber" type="accountNumber"></ion-input>
+      </ion-item>
+      
+      <ion-item no-lines text-center>
+        <p>추가적인 변경을 원하시면 메일로 문의해 주시기 바랍니다.</p>
+      </ion-item>
+      <button ion-button medium round color="primary" type="submit" style="margin-top: 15px" [disabled]="!updateForm.valid">
+          변경하기 
+      </button>
+      </form>
 </ion-content>

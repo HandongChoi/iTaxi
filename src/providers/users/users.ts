@@ -6,13 +6,18 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class UsersProvider {
 
-  //user 정보는 민감하기 때문에 혹시라도 밖에서 접근하는 일이 없도록 geter, seter방식으로 해둔다.
-  private email: string;
-  private uid: string;
-  private phoneNumber: string;
-  private name: string;
-  private studentID: string;
-  private devToken: string;
+  public userInfo: Object = {
+    studentID: "",
+    phone: "",
+    email: "",
+    korName: "",
+    engName: "",
+    accountBank: "",
+    accountNumber: "",
+    devToken: "",
+    isPush: "",
+    isNoti: "",
+  }
 
   private firestore: any;
 
@@ -20,22 +25,14 @@ export class UsersProvider {
     console.log('Hello UsersProvider Provider');
   }
 
-  ionViewDidLoad(){
-    console.log('ionViewDidLoad UsersProvider');
-  }
-
-  initialize(user) {
+  ionViewDidLoad(){ console.log('ionViewDidLoad UsersProvider'); }
+  
+  initialize(userID) {
     return new Promise((resolve, reject) => {
-
-      this.uid = user.uid;
-      this.firestore = this.af.object('/userProfile/' + this.uid).subscribe(data=>{
-      
-        this.email = data['email'];
-        this.phoneNumber = data['phoneNumber'];
-        this.name = data['name'];
-        this.studentID = data['studentID'];
-        this.devToken = data['devtoken'];
-        
+      this.af.object('/userProfile/' + userID).subscribe( data => {
+        this.userInfo = data;
+        this.userInfo['devToken'] = 'TempTodken';
+        this.af.object('/userProfile/' + userID).update(this.userInfo);
         resolve();
       }, error=> {
         console.log("userService initialize error!");
@@ -45,41 +42,21 @@ export class UsersProvider {
   }
   
   clear(){
-    this.email='';
-    this.uid='';
-    this.phoneNumber='';
-    this.name='';
-    this.studentID='';
-    this.devToken = '';
+    this.userInfo = {
+      studentID: "",
+      phone: "",
+      email: "",
+      korName: "",
+      engName: "",
+      accountBank: "",
+      accountNumber: "",
+      devToken: "ddf"
+    }
   }
-  
-  getEmail(){
-    return this.email;
-  }
-
-  getName(){
-    return this.name;
-  }
-  
-  getUID(){
-    return this.uid;
-  }
-
-  getStudentID() {
-    return this.studentID;
-  }
-
-  getPhoneNumber() {
-    return this.phoneNumber;
-  }
-
-  getDevToken(){
-    return this.devToken;
-  }
-
+  getStudentID(){ return this.userInfo['studentID']; }
   setDevToken(token){
     console.log(token);
-    this.devToken = token;
+    this.userInfo['devToken'] = token;
   }
 
 }

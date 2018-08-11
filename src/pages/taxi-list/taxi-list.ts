@@ -14,16 +14,17 @@ import { DateProvider } from '../../providers/date/date';
   templateUrl: 'taxi-list.html',
 })
 export class TaxiListPage {
-
-  dates: FirebaseListObservable<any[]>;
-  user_id: any;
+  rooms: FirebaseListObservable<any[]>;
+  userID: any;
+  transportType: string;
 
   days: Array<Date> = [];
-  nowDate: Date = new Date();
   selectedDate: Date = new Date();
+  nowDate: Date = new Date();
+  nowTime: string = new Date().toLocaleTimeString('en-US',{hour12:false}).substr(0,5);
 
   departOptions: any;
-  destinationOptions: any;
+  arriveOptions: any;
 
   spotList: Array<string> = ["한동대학교", "포항역", "고속버스터미널", "시외버스터미널", "북부해수욕장", "육거리"];
 
@@ -31,7 +32,8 @@ export class TaxiListPage {
               public datePickerProvider: DatePickerProvider, public modalCtrl: ModalController, 
               public usersService: UsersProvider, public dateServices: DateProvider) {
 
-    this.user_id = this.usersService.getEmail();
+    this.userID = this.usersService.getStudentID();
+    this.transportType = this.navParams.data.transportType;
     dateServices.setNow();
 
     for(let i = 1; i < 5; i++){
@@ -56,65 +58,69 @@ export class TaxiListPage {
   }
 
   showChatroom(date) {
-    if(date != undefined){
-      this.selectedDate = date;
-      this.dates = this.af.list('/chatrooms/' + this.makeStringFromDate(date));
-    }
+    this.selectedDate = date;
+    this.rooms = this.getRooms(date, this.transportType);
   }
 
   goChatroom(room) {
-    if (room['currentPeople'] >= room['capacity']) {
-      if (!this.isExist(room['participants'])) {
-        alert("인원이 가득 차 입장할 수 없습니다.");
-        return;
-      }
-    } else {
-      this.af.object(`/rideHistory/${this.usersService.getUID()}/${room.$key}`).set(room);
+    if (!this.isEntered(room['participants'])) {
+      let parts = room['participants'];
+      let tokenList = room['devTokens'];
+      parts.push(this.userID);
+      tokenList.push(this.usersService.userInfo['devToken']);
+      room['participants'] = parts;
+      room['devTokens'] = tokenList;
+      room['currentPeople']++;
+      this.af.object(`/rideHistory/${this.usersService.getStudentID()}/${room.$key}`).set(room);
       this.navCtrl.push(ChatRoomPage, {room: room});  
     }
   }
 
-  makeRoom(){
-    this.navCtrl.setRoot(MakeRoomPage);
-  }
+  makeRoom(){ this.navCtrl.setRoot(MakeRoomPage, {transportType: this.transportType}); }
 
   filterDeparture(departFilter){
     if (departFilter == "All") {
-      this.dates = this.af.list('/chatrooms/'+ this.makeStringFromDate(this.selectedDate));
+      this.rooms = this.getRooms(this.selectedDate, this.transportType);
     } else {
-      this.dates = this.af.list('/chatrooms/'+ this.makeStringFromDate(this.selectedDate), {
+      this.rooms = this.af.list('/taxiChatrooms/'+ this.makeStringFromDate(this.selectedDate), {
         query: {
-          orderByChild: 'departure',
+          orderByChild: 'depart',
           equalTo: departFilter
         }
       });
     }
   }
 
-  filterDestination(destinationFilter){
-    if (destinationFilter == "All") {
-      this.dates = this.af.list('/chatrooms/'+ this.makeStringFromDate(this.selectedDate));
+  filterDestination(arriveFilter){
+    if (arriveFilter == "All") {
+      this.rooms = this.getRooms(this.selectedDate, this.transportType);
     } else {
-      this.dates = this.af.list('/chatrooms/'+ this.makeStringFromDate(this.selectedDate), {
+      this.rooms = this.af.list('/taxiChatrooms/'+ this.makeStringFromDate(this.selectedDate), {
         query: {
-          orderByChild: 'destination',
-          equalTo: destinationFilter
+          orderByChild: 'arrive',
+          equalTo: arriveFilter
         }
       });
     }
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad TaxiListPage');
+  ionViewDidLoad() { console.log('ionViewDidLoad TaxiListPage'); }
+
+  //함수에 옵션으로 쿼리 넣는 방법을 알아보자. 오보로드 해야되나?
+  getRooms(date, transportType){
+    return transportType == 'taxi' ? this.af.list('/taxiChatrooms/' + this.makeStringFromDate(date)) 
+                                   : this.af.list('/carpoolChatrooms/' + this.makeStringFromDate(date));
   }
 
-  isExist(users: Array<any>): boolean {
-    for (let user of users) {
-      if (user == this.user_id)
+  isEntered(participants: Array<any>): boolean {
+    for (let user of participants) {
+      if (user == this.userID)
         return true;
     }
     return false;
   }
+
+  isAvailable(room): boolean { return room.currentPeople < room.capacity ? true : false; }
 
   private makeStringFromDate(date: Date): string {
     var d = new Date(date);
@@ -127,5 +133,4 @@ export class TaxiListPage {
 
     return [year, month, day].join('-');
   }
-
 }

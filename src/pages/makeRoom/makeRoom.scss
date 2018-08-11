@@ -71,12 +71,38 @@ page-make-room {
     }
   }
   
-  #cap {
+  #taxi {
     .nMaxPeople {
       filter: brightness(1.8) grayscale(1) opacity(.7);
 
       &:hover {
         filter: brightness(1.2) grayscale(.5) opacity(.9);
+      }
+    }
+  }
+
+  #carpool {
+    ion-row {
+      span {
+        text-align: center;
+      }
+
+      input {
+        border: 0;
+        text-align: center;
+        font-size: 30px;
+      }
+      #people{
+        width: 30%;
+      }
+      #money{
+        width: 70%;
+      }
+
+      &:last-child {
+        span {
+          font-size: 30px;
+        }
       }
     }
   }

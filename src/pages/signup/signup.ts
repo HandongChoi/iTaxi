@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Loading, LoadingController, Alert, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Loading, LoadingController, AlertController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators, ValidatorFn } from '@angular/forms';
 import { AuthProvider } from '../../providers/auth/auth';
 import { EmailValidator } from '../../validators/email';
-import { PhoneValidator } from '../../validators/phone';
-import { StudentIDValidator } from '../../validators/studentID';
-import { LoginPage } from '../login/login';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 import { AbstractControl } from '@angular/forms/src/model';
+import { UsersProvider } from '../../providers/users/users';
+import { MainPage } from '../main/main';
 
 @IonicPage()
 @Component({
@@ -17,26 +17,89 @@ import { AbstractControl } from '@angular/forms/src/model';
 
 export class SignupPage {
   procedure: string = "terms";
-  public signupForm:FormGroup;
-  public loading:Loading;
+  signUpForm:FormGroup;
+  loading:Loading;
 
-  termsFlag: boolean = false;
-  infoFlag: boolean = true;
-  completeFlag: boolean = true;
+  termsDisable: boolean = false;
+  infoDisable: boolean = true;
+  
+  userInfo: Object = {
+                      studentID: "",
+                      phone: "",
+                      email: "",
+                      korName: "",
+                      engName: "",
+                      accountBank: "",
+                      accountNumber: "",
+                      devToken: "",
+                      isPush: "",
+                      isNoti: "",
+                    } 
 
   constructor(public navCtrl:NavController, public navParams: NavParams, public authProvider:AuthProvider, 
-    public loadingCtrl:LoadingController, public alertCtrl:AlertController, formBuilder:FormBuilder) {
-      this.procedure = 'terms';
-      this.signupForm = formBuilder.group({
-        email: ['', Validators.compose([Validators.required, EmailValidator.isValid])],
-        password: ['', Validators.compose([Validators.minLength(6), Validators.required])],
-        password2: ['', Validators.compose([Validators.required, this.equalTo('password')])],
-        name: ['', Validators.compose([Validators.minLength(2), Validators.required])],
-        phoneNumber: ['', Validators.compose([Validators.required, PhoneValidator.isValid])],
-        studentID: ['', Validators.compose([Validators.required, StudentIDValidator.isValid])]
+    public loadingCtrl:LoadingController, public alertCtrl:AlertController, formBuilder:FormBuilder,
+    public af: AngularFireDatabase, public userService: UsersProvider) {
+      this.userInfo = this.navParams.data.userInfo; 
+      this.signUpForm = formBuilder.group({
+        engName: [this.userInfo['engName'], Validators.required],
+        email: [this.userInfo['email'], Validators.compose([Validators.required, EmailValidator.isValid])],
+        phone: [this.userInfo['phone'], Validators.compose([Validators.required, ])],
+        accountBank: ['', ],
+        accountNumber: ['', ]
       });
   }
 
+  signUpUser() {
+    this.userInfo['engName']=this.signUpForm.value.engName;
+    this.userInfo['email']=this.signUpForm.value.email;
+    this.userInfo['phone']=this.signUpForm.value.phone;
+    this.userInfo['accountBank']=this.signUpForm.value.accountBank;
+    this.userInfo['accountNumber']=this.signUpForm.value.accountNumber;
+              
+    var msg = "<br>Student ID : " + this.userInfo['studentID'] + "<br>" + 
+            "Korean Name : " + this.userInfo['korName'] + "<br>" + 
+            "English Name : " + this.userInfo['engName']  + "<br>" + 
+            "Email : " + this.userInfo['email'] + "<br>" +
+            "Phone Number : " + this.userInfo['phone'] + "<br>" +
+            "Bank name of your account : " + this.userInfo['accountBank'] + "<br>" +
+            "Account number : " + this.userInfo['accountNumber'] + "<br>" ;
+
+    let alert = this.alertCtrl.create({
+      title: '계정 만들기',
+      subTitle: '아래 내용이 맞습니까?',  
+      message: msg,
+      cssClass: 'custom-alrt',
+      buttons: [
+        { text: '취소',
+          role: 'cancel',
+          handler: () => {}
+        },
+        { text: '확인',
+          handler: () => {
+            this.authProvider.signupUser(this.userInfo['studentID']).then( () => {
+              this.af.object(`/userProfile/${this.userInfo['studentID']}`).set(this.userInfo);
+              this.authProvider.loginUser(this.userInfo['studentID']);
+            });
+          }
+        }
+      ]  
+    });
+    alert.present();
+  }
+
+  termsAvail(){
+    this.procedure='terms';
+    this.termsDisable=false;
+    this.infoDisable=true;
+  }
+
+  allAvail(){
+    this.procedure='info';
+    this.termsDisable=false;
+    this.infoDisable=false;
+  }
+
+  /*과거에 비밀번호 확인을 위해 Validator와 같이 썼던 코드
   private equalTo(field_name): ValidatorFn {
     return (control: AbstractControl): {[key: string]: any} => {
       let input = control.value;
@@ -47,68 +110,7 @@ export class SignupPage {
       else
         return null;
     };
-  }
-
-
-  //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Error!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  //!!!!!!!!!!!!!! 현재 회원가입 마지막쪽에서 create error가 뜬다. !!!!!!!!!!!!!!!!!!!
-  //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-
-  signupUser() {
-    if(!this.signupForm.valid){
-      console.log(`Need to complete the form: ${this.signupForm.value}`);
-    } else {
-      const email:string = this.signupForm.value.email;
-      const password:string = this.signupForm.value.password;
-      const name:string = this.signupForm.value.name;
-      const phoneNumber:string = this.signupForm.value.phoneNumber;
-      const studentID:string = this.signupForm.value.studentID;
-
-      this.authProvider.signupUser(email, password, name, phoneNumber, studentID).then( user => {
-        this.loading.dismiss('Loading');
-      }, error => {
-        this.loading.dismiss().then( () => {
-          console.log("alertController error?", this.alertCtrl);
-          const alert:Alert = this.alertCtrl.create({
-            message: error.message,
-            buttons: [{ text: "Ok", role: "cancel" }]
-          });
-          alert.present();
-        });
-      });
-      this.loading = this.loadingCtrl.create();
-      this.loading.present();
-    }
-  }
-
-  TermFlagUp(){
-    this.procedure='term';
-    this.termsFlag=false;
-    this.infoFlag=true;
-    this.completeFlag=true;
-  }
-
-  InfoFlagUp(){
-    this.procedure='info';
-    this.termsFlag=true;
-    this.infoFlag=false;
-    this.completeFlag=true;
-  }
-
-  CompleteFlagUp(){
-    this.signupUser();
-    this.procedure='complete';
-    this.termsFlag=true;
-    this.infoFlag=true;
-    this.completeFlag=false;
-  }
-
-  LoginPage() { this.navCtrl.setRoot(LoginPage); }
-
-  goBack() {
-    this.navCtrl.setRoot(LoginPage);
-  }
+  }*/
 
   text1 = `iTaxi 이용약관
     이용약관은 다음과 같은 내용을 담고 있습니다.

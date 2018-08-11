@@ -3,7 +3,7 @@
   <ion-content class="sidemenu-content">
     <div class="sidemenu-userid">
       <ion-icon name="person"></ion-icon>
-      <span>{{user_name}}</span>
+      <span>{{userName}}</span>
       <button class="sidemenu-button" menuClose icon-only (click)="setRoot('MainPage')">
         <img src="assets/img/home.png" alt="home">
       </button>
@@ -18,23 +18,22 @@
         <div class="sidemenu-rtitle">&nbsp;&nbsp; {{room.hostName}} {{room.currentPeople}} / {{room.capacity}}</div>
         <ion-row class="sidemenu-row">
           <div>
-            {{room.departureDate | date: 'M.dd'}}&nbsp;{{dateServices.getKToday(room.departureDate)}}&nbsp;&nbsp;|&nbsp;&nbsp;{{room.departureTime}}<br>
-            {{room.departure}} &nbsp;&nbsp; > &nbsp;&nbsp; {{room.destination}}
+            {{room.departDate | date: 'M.dd'}}&nbsp;{{dateServices.getKToday(room.departDate)}}&nbsp;&nbsp;|&nbsp;&nbsp;{{room.departTime}}<br>
+            {{room.depart}} &nbsp;&nbsp; > &nbsp;&nbsp; {{room.arrive}}
           </div>
         </ion-row>
       </div>
     </ion-grid>
     <ion-list class="sidemenu-list">
       <ion-list-header class="sidemenu-header"><img src="assets/img/taxi.png" alt="taxi">&nbsp;&nbsp;택시</ion-list-header>
-      <button menuClose ion-item class="sidemenu-items" (click)="setRoot('TaxiListPage')">조회</button>
-      <button menuClose ion-item class="sidemenu-items" (click)="setRoot('MakeRoomPage')">모집</button>
+      <button menuClose ion-item class="sidemenu-items" (click)="takeTaxi()">조회</button>
+      <button menuClose ion-item class="sidemenu-items" (click)="makeTaxi()">모집</button>
       <ion-list-header class="sidemenu-header"><img src="assets/img/carpool.png" alt="carpool">&nbsp;&nbsp;카풀 </ion-list-header>
-      <button menuClose ion-item class="sidemenu-items" (click)="setRoot('CarpoolListPage')">조회</button>
-      <button menuClose ion-item class="sidemenu-items" (click)="setRoot('MakeCarpoolRoomPage')">모집</button>
+      <button menuClose ion-item class="sidemenu-items" (click)="takeCarpool()">조회</button>
+      <button menuClose ion-item class="sidemenu-items" (click)="makeCarpool()">모집</button>
       <ion-list-header class="sidemenu-header"> <ion-icon name="person"></ion-icon>&nbsp;&nbsp;마이페이지 </ion-list-header>
       <button menuClose ion-item class="sidemenu-items" (click)="setRoot('RideHistoryPage')">탑승내역</button>
       <button menuClose ion-item class="sidemenu-items" (click)="setRoot('SettingPage')">설정</button>
-      <ion-list-header class="sidemenu-header"> <ion-icon name="home"></ion-icon>  &nbsp;&nbsp;메인페이지 </ion-list-header>
     </ion-list>
   </ion-content>
 
