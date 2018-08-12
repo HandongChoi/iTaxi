@@ -1,28 +1,7 @@
-This is a starter template for [Ionic](http://ionicframework.com/docs/) projects.
+처음 다운 받았을 시 실행을 위해서
 
-## How to use this template
-
-*This template does not work on its own*. The shared files for each starter are found in the [ionic2-app-base repo](https://github.com/ionic-team/ionic2-app-base).
-
-To use this template, either create a new ionic project using the ionic node.js utility, or copy the files from this repository into the [Starter App Base](https://github.com/ionic-team/ionic2-app-base).
-
-### With the Ionic CLI:
-
-Take the name after `ionic2-starter-`, and that is the name of the template to be used when using the `ionic start` command below:
-
-```bash
-$ sudo npm install -g ionic cordova
-$ ionic start mySideMenu sidemenu
-```
-
-Then, to run it, cd into `mySideMenu` and run:
-
-```bash
-$ ionic cordova platform add ios
-$ ionic cordova run ios
-```
-
-Substitute ios for android if not on a Mac.
+npm install 잊지마세요.
+조만간에 md 좀 익혀서 하겠습니다.
 
 현재 구조 사황
 - ID로는 studentID로 쓰고 있고 미래에 가입 절차가 hisnet이 아닐 경우 프로젝트 안에 있는 userID를 다른 것으로 다 대체해야 될 것이다.
@@ -40,7 +19,17 @@ Substitute ios for android if not on a Mac.
   한 번만 모든 활동이 끝날때까지 저장해두면 바뀔 일이 없다고 생각했다. 그리고 그것을 지속적으로 사용한다.
 - transportType이 taxi와 carpool 두개만 있다고 가정하고 if == taxi else 구문으로 짠 것이 많다.
 - 차마 자체적인 auth 시스템 개발이 힘들 것 같아서 파베 이메일 시스템을 쓰지만 실질적으로 그거는 auth를 사용하기 위해 내가 한동메일로 아이디 가입시켜놨고 비밀번호는 일정하게 주었다. 따라서 로그인 시스템은 login코드에 의거하여 hisnet 정보로 로그인 판단을 하며 대신 앱과 웹에서 세션관리를 위해 파베 로그인 시스템을 도구로써 사용하였다.
-
+- list page 에서 채팅방 들어 가는 여부를 모두 결정하고 채팅방에 들어왔을 때에는 모두가 들어와있는 정보가 다 있다고 가정을 하고 있다.
+- Ridehistory와 Chatroom system자체가 동일한 키로 동일한 정보를 가지고 있다. 따라서 Chatroom에서 방 나가기 혹은 방 들어오기 등
+  정보가 지속적으로 바뀌면 Ridehistory를 chatroom.ts에서 동시에 바꿔줘야 한다. (sync를 맞춰주기 위해서.)
+  그러므로 구조는 Chatroom이 Main이 되고 Ridehistory는 읽기 전용의 구조를 지닌다.
+  추가적으로 makeRoom에서 채팅방을 만들때 근본적으로 ridehistory와 동일한 것읆 만든다.
+- 위와 같이 하는 이유는 파베 특성상 깊이가 낮아야지 빠르기 때문에 최대한 낮은 깊이로 만들기 위해서이다.
+- 동일한 원리로 chat의 경우 방키로만 관리를 하고 있고 transportType을 구분짓지 않고 관리한다.
+  Ridehistory 역시 학번까지만 나눠지지 이후로는 chat과 동일한 원리로 모델링 되어 있다.
+- 후배들이 이 코드를 보고 공부를 할 수 있도록 동일한 기능을 하는 것을 다르게 표현한 코드를 일부러 남겨 두었다.
+  코드의 일관성을 위해서는 동일한 효과를 가져오면 하나의 형태로만 쓰면 깔끔해지겠지만 다양한 코드를 둠으로써 여러가지 활용법을
+  공부 할 수 있도록 코드를 남겨두었다.
 
 - Main 접근 경로 1) Login 2) Signup 3) Appcomponent by auth
 - List 접근 경로 1) Main 2) Appcomponent
@@ -52,11 +41,8 @@ Substitute ios for android if not on a Mac.
 
 해야 될 일
 - 룸 프로바이더 완전 다 지우기
-- 카풀 리스트와 카풀 메이크 룸 모두 지우기
 - fcm 공부해서 푸쉬 제대로 하기
-- 로그인 유지 하는 방법 적용
 - 웹에서 토큰 없이 작동하는 방법 알고 pwa가능한지 알아보기.
-- 불필요한 dismiss loading 다 지우기
 - singup시에 지금 init가 2번정도 불리고 다른 것도 중복해서 불리는게 있는데 그런것들 정확한 이유 확인해서 버그 고치기. - 대충 promise방식의 부족한 이해로 인해 발생하는 것 같다.
 
 
@@ -66,10 +52,13 @@ Substitute ios for android if not on a Mac.
 - 회원가입에서 가입하기 가운데 놓기
 - 회원가입 확인란 + 채팅방 만들기 확인란 영어와 한글 디자인 고려
 - 로그인 시 5번 이상 시도 시 잠금 기능
-- 리스트 페이지에서 공통 집합 필터 기능
+- 리스트 페이지에서 필터 기능 사용시 출발지, 도착지 모두 동시에 만족하는 로직으로 짜기.
   이거는 로직 자체를 파베에서 바로 불러오는 걸로 하지말고 파베에서 불러 왔을 때 다른 곳에 저장 했다가 처리하는 시스템을 생각해보자.
   근데 잘못하면 async를 올바로 사용 할 수 없는 경우가 생기므로 async에 대한 이해를 하고 이 로직으로 접근하자.
 - 푸쉬 적용 할 방식들에 추가
 - 택시리스트 페이지를 리스트 페이지로 만들기
 - 홈 디렉토리 kakaoLogin으로 바꾸고 다른 import된 것들 모두 지우기
 - 탈퇴기능. 현재는 못하고 문의로 하게 만들건데 나중에는 30일 이후 자동 계정 삭제가 가능하도록 만들자.
+- 정산이 끝난 방은 없앨 수 있거나 자동으로 7일 뒤에 없애도록 만들기
+- 데이터들을 어떻게 관리할지 사라지는 데이터들 관리할 방법 생각하기
+- 채팅방에 카카오처럼 시간별로 출력하고 1일이 지난거는 또 따로 출력하는 방식 추가

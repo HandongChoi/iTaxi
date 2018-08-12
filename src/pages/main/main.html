@@ -49,7 +49,7 @@
   </div>
 
   <!-- 카드 예제 -->
-  <div *ngFor="let room of roomObj">
+  <div *ngFor="let room of rooms">
     <ion-card class="ticket" (click)="goChatroomPage(room)">
       <ion-row>
         <ion-col col-1>
@@ -59,19 +59,19 @@
 
         <ion-col col-4 text-left>
           <div class="text">
-            {{room.departDate | date: 'M.dd '}} {{dateServices.getKToday(room.departDate)}}요일
+            {{ room.departDate | date: 'M.dd ' }} {{ dateServices.getKToday(room.departDate) }}요일
           </div>
           <div class="text">
-            {{room.departTime}}
+            {{ room.departTime }}
           </div>
         </ion-col>
 
         <ion-col col-5>
           <div class="text">
-            {{room.depart}}
+            {{ room.depart }}
           </div>
           <div class="text">
-            <span>&gt;</span>&nbsp;&nbsp;{{room.arrive}}
+            <span>&gt;</span>&nbsp;&nbsp;{{ room.arrive }}
           </div>
         </ion-col>
 
@@ -83,7 +83,7 @@
             카풀
           </div>
           <div class="text">
-            {{room.currentPeople}}/{{room.capacity}}
+            {{ room.currentPeople }}/{{ room.capacity }}
           </div>
         </ion-col>
 

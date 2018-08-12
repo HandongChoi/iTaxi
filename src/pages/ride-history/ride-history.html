@@ -5,57 +5,115 @@
     </button>
     <ion-title>탑승내역조회</ion-title>
   </ion-navbar>
+  <ion-toolbar no-border-top>
+    <ion-segment [(ngModel)]="history">
+      <ion-segment-button value="future">
+        탑승 예정
+      </ion-segment-button>
+      <ion-segment-button value="past">
+        지난 내역
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div *ngIf = "rideHistory.length != 0">
-    <ion-grid>
-      <ion-item-group *ngFor = "let room of rideHistory | async">
-        <div *ngIf = "room.roomDate+room.roomTime > dateServices.nowDate + dateServices.nowTime ;else pasted">
-          탑승 예정 내역
-          <ion-item-divider color="light" (click)="goChatroom(room)">
-            <ion-row>
-              <ion-col col-3>
-                <p>{{room.departDate}}</p>
-                <p>{{room.departTime}}</p>
-              </ion-col>
-              <ion-col col-7>
-                <p>{{room.depart}}</p>
-                <p>>{{room.arrive}}</p>
-              </ion-col>
-              <ion-col col-2>
-                <p>{{room.currentPeople}} / {{room.capacity}}</p>
-                <p>참여중</p>
-              </ion-col>
-            </ion-row>
-          <div class="button-effect"></div>
-          </ion-item-divider>
-        </div>
-        <ng-template #pasted>
-          <ion-item-divider color="light" (click)="goChatroom(room)">
-            <ion-row>
-              <ion-col col-3>
-                <p>{{room.departDate}}</p>
-                <p>{{room.departTime}}</p>
-              </ion-col>
-              <ion-col col-7>
-                <p>{{room.depart}}</p>
-                <p>>{{room.arrive}}</p>
-              </ion-col>
-              <ion-col col-2>
-                <p>{{room.currentPeople}} / {{room.capacity}}</p>
-                <p>참여중</p>
-              </ion-col>
-            </ion-row>
-          <div class="button-effect"></div>
-          </ion-item-divider>
-        </ng-template>
-
-
-      </ion-item-group>
-    </ion-grid>
-  </div>
-  <div *ngIf = "rideHistory.length == 0">
-    <p>탑승 내역이 없습니다.</p>
+<ion-content padding>
+  <div [ngSwitch]="history">
+    <div *ngSwitchCase="'future'">
+      <ion-item>Taxi</ion-item>
+      <ion-grid>
+        <ion-item-group *ngFor = "let room of taxiRooms | async">
+          <div *ngIf = "room.departDate + room.departTime > dateServices.nowDate + dateServices.nowTime">
+            <ion-item-divider color="light" (click)="goChatroom(room)">
+              <ion-row>
+                <ion-col col-3>
+                  <p>{{room.departDate}}</p>
+                  <p>{{room.departTime}}</p>
+                </ion-col>
+                <ion-col col-7>
+                  <p>{{room.depart}}</p>
+                  <p>>{{room.arrive}}</p>
+                </ion-col>
+                <ion-col col-2>
+                  <p>{{room.currentPeople}} / {{room.capacity}}</p>
+                  <p>참여중</p>
+                </ion-col>
+              </ion-row>
+            </ion-item-divider>
+          </div>
+        </ion-item-group>
+      </ion-grid>
+      <ion-item>Carpool</ion-item>
+      <ion-grid>
+        <ion-item-group *ngFor = "let room of carpoolRooms | async">
+          <div *ngIf = "room.departDate + room.departTime > dateServices.nowDate + dateServices.nowTime">
+            <ion-item-divider color="light" (click)="goChatroom(room)">
+              <ion-row>
+                <ion-col col-3>
+                  <p>{{room.departDate}}</p>
+                  <p>{{room.departTime}}</p>
+                </ion-col>
+                <ion-col col-7>
+                  <p>{{room.depart}}</p>
+                  <p>>{{room.arrive}}</p>
+                </ion-col>
+                <ion-col col-2>
+                  <p>{{room.currentPeople}} / {{room.capacity}}</p>
+                  <p>참여중</p>
+                </ion-col>
+              </ion-row>
+            </ion-item-divider>
+          </div>
+        </ion-item-group>
+      </ion-grid>
+    </div>
+    <div *ngSwitchCase="'past'">
+        <ion-item>Taxi</ion-item>
+        <ion-grid>
+          <ion-item-group *ngFor = "let room of taxiRooms | async">
+            <div *ngIf = "room.departDate + room.departTime <= dateServices.nowDate + dateServices.nowTime">
+              <ion-item-divider color="light" (click)="goChatroom(room)">
+                <ion-row>
+                  <ion-col col-3>
+                    <p>{{room.departDate}}</p>
+                    <p>{{room.departTime}}</p>
+                  </ion-col>
+                  <ion-col col-7>
+                    <p>{{room.depart}}</p>
+                    <p>>{{room.arrive}}</p>
+                  </ion-col>
+                  <ion-col col-2>
+                    <p>{{room.currentPeople}} / {{room.capacity}}</p>
+                    <p>운행종료</p>
+                  </ion-col>
+                </ion-row>
+              </ion-item-divider>
+            </div>
+          </ion-item-group>
+        </ion-grid>
+        <ion-item>Carpool</ion-item>
+        <ion-grid>
+          <ion-item-group *ngFor = "let room of carpoolRooms | async">
+            <div *ngIf = "room.departDate + room.departTime <= dateServices.nowDate + dateServices.nowTime">
+              <ion-item-divider color="light" (click)="goChatroom(room)">
+                <ion-row>
+                  <ion-col col-3>
+                    <p>{{room.departDate}}</p>
+                    <p>{{room.departTime}}</p>
+                  </ion-col>
+                  <ion-col col-7>
+                    <p>{{room.depart}}</p>
+                    <p>>{{room.arrive}}</p>
+                  </ion-col>
+                  <ion-col col-2>
+                    <p>{{room.currentPeople}} / {{room.capacity}}</p>
+                    <p>운행종료</p>
+                  </ion-col>
+                </ion-row>
+              </ion-item-divider>
+            </div>
+          </ion-item-group>
+        </ion-grid>
+    </div>
   </div>
 </ion-content>

@@ -5,7 +5,6 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable }
 
 import { MainPage } from '../../pages/main/main';
 import { TaxiListPage } from '../../pages/taxi-list/taxi-list';
-import { CarpoolListPage } from '../../pages/carpool-list/carpool-list';
 
 import { UsersProvider } from '../../providers/users/users';
 import { DateProvider } from '../../providers/date/date';
@@ -21,86 +20,33 @@ export class ChatRoomPage {
   @ViewChild(Content) content: Content;
 
   chats: FirebaseListObservable<any[]>;
-  rideHistoryObject: FirebaseObjectObservable<any>;
-  roomObject:FirebaseObjectObservable<any>;
-  room: any;
+  room: Object; //오브젝트와 파베오브젝트로 형태로 올 수 있는데 둘다 Object type이다.
+  
   participants: Array<Object> = [];
-
   chatContent: string;
-
   roomHost: string;
   userID: string;
   displayDate: string;
   displayTime: string;
 
   index: number = -1;
-  isCarpool : boolean;
   roomKey: string;
-  transportType: string; //taxi냐 carpool이냐 정하기. 이거는 파라미터로 받아도 된다.
-
+  
   constructor(public navCtrl: NavController, public af:AngularFireDatabase, public navParams: NavParams, public platform:Platform,
               public roomServices: RoomsProvider, public dateServices: DateProvider, public userServices: UsersProvider,
               public alertCtrl: AlertController) {
-    //이거는 차라리 방을 만들때 안에 isTaxi 나 Transport로 둬서 Taxi, Carpool, default로 구분지어도 될 것 같다.
-    /*
-    if ("price" in navParams.data.room) { 
-      this.backPage = CarpoolListPage;
-      this.room = navParams.data.room;
-      this.roomObject = af.object(`/carpoolChatrooms/${this.room['departDate']}/${this.room.$key}`);
-      this.isCarpool = true;
-    } else if ("host" in navParams.data.room) {
-      this.backPage = TaxiListPage;
-      this.room = navParams.data.room;
-      this.roomObject = af.object(`/taxiChatrooms/${this.room['departDate']}/${this.room.$key}`);
-      this.isCarpool = false;
-    } else {
-      this.backPage = MainPage;
-      let alert = this.alertCtrl.create({
-        message: "잘못된 경로로 접근하셨습니다.",
-        buttons: [{
-          text: '확인',
-          handler: () => {
-            navCtrl.setRoot(this.backPage);
-          }
-        }] 
-      });
-      alert.present();
-    }
-    */
 
+    //Data loading    
+    //이거는 makeRoom에서 room을 보낼때 roomKey를 보내는데 이 방법이 서버 접근을 덜해서 서버 비용 감면효과 + 속도 향상이라 그렇게 짰다.
     this.room = navParams.data.room;
-    this.transportType = navParams.data.transportType;
-    if(this.transportType == 'taxi'){
-      this.roomObject = af.object(`/taxiChatrooms/${this.room['departDate']}/${this.room.$key}`);
-    }else{
-      this.roomObject = af.object(`/carpoolChatrooms/${this.room['departDate']}/${this.room.$key}`);
-    }
-
-    //이거는 makeRoom에서 room을 보낼때 원형 object를 보내는 것이 아니라 af.list.push했는 것을 불러와서 다시 보내면
-    //굳이 roomKey를 안 써도 된다. 이로직을 고치면 여기 있는 모든 roomKey를 this.room.$key로 바꾸고 쓸데 없는건 지워라.
-    if(navParams.data.roomKey){
-      this.roomKey = navParams.data.roomKey;
-    }else{
-      this.roomKey = this.roomObject.$ref.key;
-    }
-
-    
-    //모든 chat을 가져온것.
+    this.roomKey = navParams.data.roomKey == undefined ? navParams.data.room.$key : navParams.data.roomKey;
     this.chats = af.list('/chats/' + this.roomKey);
-    
-    this.rideHistoryObject = af.object(`/rideHistory/${this.userServices.getStudentID()}/${this.roomKey}`)
-    this.userID = this.userServices.getStudentID();
-    
-    //그냥 바로 room을 쓰지 왜 setRoomInfo를 통해서 roomService를 쓸까?
-    //this.roomServices.setRoomInfo(this.room);
-    
-    //이거는 그 채팅방에 들어가면 위에 보이는 Date와 Time에 관해서 보여주는거다.
+    this.userID = this.userServices.userInfo['studentID'];    
+
+    //Display 관련
     this.displayDate = this.dateServices.getKMonthDay(this.room['departDate']);
     this.displayTime = this.room['depart_time'];
-    //roomHost는 왜 필요하지?
-    //this.roomHost = this.room['host'];
-
-    let isEntered: boolean = false;
+    this.roomHost = this.room['host'];
 
     //접속한 user가 그 채팅방의 목록에 있는지 없는지 여부 확인 하고 user들 정보를 관리.
     //방 참가자들에 바로 유저 object를 넣어도 될 것 같지만 파베의 특성이 얕은 db출력이 빠르므로 속도측면에서
@@ -125,25 +71,11 @@ export class ChatRoomPage {
 
   send() {
     if(this.chatContent !== '') {
-      let tokenListWithoutCurrentUser = this.roomServices.room['devTokens'];
-      
-      for (let i = 0; i < tokenListWithoutCurrentUser.length; i++)
-        if(tokenListWithoutCurrentUser[i] === ""){
-          tokenListWithoutCurrentUser.splice(i, 1);
-        }
-        // ""를 모두 제거하자..
-
-      //나중에 수정 필요.. array를 object로?
-      console.log("currentToken List", tokenListWithoutCurrentUser);
-
       firebase.database().ref('/chats/' + this.roomKey).push({
         userID: this.userServices.userInfo['studentID'],
-        user_name: this.userServices.userInfo['korName'],
+        userName: this.userServices.userInfo['korName'],
         content: this.chatContent,
-        date_time: new Date().toLocaleString(),
-        devTokens: tokenListWithoutCurrentUser,
-        whenToDepart: this.roomServices.room['departDate'],
-        isCarpool: this.isCarpool
+        dateTime: new Date().toLocaleString(),
       }).then(() => {
         this.chatContent = "";
         this.scrollBottom();
@@ -161,46 +93,20 @@ export class ChatRoomPage {
       }, {
         text: "OK",
         handler: () => {
-          let old_participants: Array<String> = this.roomServices.room['participants'];
-          let new_participants: Array<String> = [];
-          let new_devTokens: Array<String> = [];
-      
-          //이전 사용자들을 정보들을 새로운 곳에 다 넣는다.
-          old_participants.forEach(user =>{
-            if(user !== this.userServices.userInfo['studentID']){
-              new_participants.push(user);
-              new_devTokens.push(this.userServices.userInfo['devToken']);
-            }
-          });
-      
-          if(this.userServices.userInfo['studentID'] !== this.roomServices.room['host']) {
-            // 방장이 아닌 다른 사람이 나갈 경우
-            this.roomObject.update({
-              participants: new_participants,
-              currentPeople: this.roomServices.room['currentPeople'] - 1,
-              devTokens : new_devTokens
-            });
-          } else {
-            if(this.roomServices.room['currentPeople'] <= 1) {
-              //방장이고, 방에 사람이 없을 때
-              this.roomObject.remove();
-            } else {
-              //방장 다음 사람으로 옮기기
-              this.roomObject.update({
-                host: new_participants[0],
-                participants: new_participants,
-                currentPeople: this.roomServices.room['currentPeople'] - 1,
-                devTokens: new_devTokens
-              });
-            }
+          let index = this.room['participants'].indexOf(this.userServices.userInfo['studentID']);
+          this.room['participants'].splice(index,1);
+          this.room['currentPeople']--;
+          if(this.room['currentPeople'] <= 0){ 
+            this.af.object(`/${this.room['transportType']}Chatrooms/${this.room['departDate']}/${this.roomKey}`).remove();
+            this.af.object(`/rideHistory/${this.userID}/${this.roomKey}`).remove();
+          }else{
+            if(this.room['host'] == this.userID){ this.room['host'] = this.room['participants'][0]; }
+            let index = this.room['devTokens'].indexOf(this.userServices.userInfo['devToken']);
+            this.room['devTokens'].splice(index,1);
+            this.af.object(`/${this.room['transportType']}Chatrooms/${this.room['departDate']}/${this.roomKey}`).update(this.room);
+            this.af.object(`/rideHistory/${this.userID}/${this.roomKey}`).update(this.room);
           }
-          this.roomServices.getOut();
-          this.room = this.roomServices.room;
           this.dateServices.setNow();
-          // 예약시간이 지금보다 이후이면 삭제
-          if (this.room['departDate'] + this.room['departTime'] > this.dateServices.nowDate + this.dateServices.nowTime) {
-            this.rideHistoryObject.remove();
-          }
           this.navCtrl.setRoot(MainPage);
         }
       }]
@@ -209,10 +115,41 @@ export class ChatRoomPage {
   }
 
   payment(){
-    //room에서 사람수 빼낸다.
-    //클릭한 유저 계좌번호 빼낸다.
-    //input으로 돈 받아낸다.
-    //나눠서 채팅방에 출력한다.
+    let alert = this.alertCtrl.create({
+      title: "정산하기",
+      message: "10원 단위에서 반올림하여 정산하시는 분에게 차익을 남기도록 하였습니다.",
+      inputs: [
+        {
+          name: 'people',
+          placeholder: '합승한 인원수를 입력하세요.'
+        },
+        {
+          name: 'price',
+          placeholder: '결제된 총 금액을 입력하세요.'
+        }
+      ],
+      buttons: [{
+        text: "Cancle",
+        role: "cancle"
+      }, {
+        text: "OK",
+        handler: ( data ) => {
+          var money: number = Math.round(data.price / data.people / 100) * 100; //여기서 십원 자리수에서 반올림
+          var msg = `${money}원
+          ${this.userServices.userInfo['accountBank']} ${this.userServices.userInfo['accountNumber']}으로 입금해주시면 됩니다.`
+          firebase.database().ref('/chats/' + this.roomKey).push({
+            userID: 'Noti',
+            userName: 'Master',
+            content: msg,
+            dateTime: new Date().toLocaleString(),
+          }).then(() => {
+            this.chatContent = "";
+            this.scrollBottom();
+          });
+        }
+      }]
+    });
+    alert.present();
   }
 
   ionViewDidLoad(){

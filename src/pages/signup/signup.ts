@@ -32,8 +32,8 @@ export class SignupPage {
                       accountBank: "",
                       accountNumber: "",
                       devToken: "",
-                      isPush: "",
-                      isNoti: "",
+                      isPush: true,
+                      isNoti: true,
                     } 
 
   constructor(public navCtrl:NavController, public navParams: NavParams, public authProvider:AuthProvider, 

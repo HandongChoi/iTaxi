@@ -14,7 +14,10 @@
     <ion-row>
       <ion-col justify-content-center padding-left>
         {{displayDate}} {{displayTime}}
-        <p><b>{{room.depart}} &nbsp; <ion-icon name="arrow-forward"></ion-icon> &nbsp; {{room.arrive}}</b></p>
+        <p><b>{{room.depart}} &nbsp; <ion-icon name="arrow-forward"></ion-icon>
+           &nbsp; {{room.arrive}}
+        </b></p>
+        <p>{{room.departTime}}</p>
       </ion-col>
       <ion-col col-auto>
         <ion-buttons right icon-only>
@@ -52,32 +55,31 @@
   <ion-list>
     <div class="message-wrap" *ngFor="let chat of chats | async; let last = last">
       <!-- 밑에 주석처리 되어있는 부분이 내가 말한 내용이면 오른쪽, 상대가 말한 내용이면 왼쪽 선택하게한다. -->
-      <div class="message right" *ngIf="chat.user_id == user_id">
+      <div class="message right" *ngIf="chat.userID == userID">
         <!-- <img class="user-img" [src]="msg.userAvatar" alt="" src=""> 이거는 프로필사진-->
         <div class="user-info">
-          <img *ngIf="chat.user_id == room_host" src="assets/img/crown_gold.png" alt="Host">{{chat.user_name}}
+          <img *ngIf="chat.userID == roomHost" src="assets/img/crown_gold.png" alt="Host">{{chat.userName}}
         </div>
         <div class="msg-content">
-          <span>{{chat.date_time | DatePipe}}</span>
+          <span>{{chat.dateTime | DatePipe}}</span>
           <div class="msg-info">
             <span>{{chat.content}}</span>
           </div>
         </div>
       </div>
 
-      <div class="message left" *ngIf="chat.user_id != user_id">
+      <div class="message left" *ngIf="chat.userID != userID">
         <!-- <img class="user-img" alt="" src=""> -->
         <div class="user-info">
-          <img *ngIf="chat.user_id == room_host" src="assets/img/crown_gold.png" alt="Host">{{chat.user_name}}
+          <img *ngIf="chat.userID == roomHsot" src="assets/img/crown_gold.png" alt="Host">{{chat.userName}}
         </div>
         <div class="msg-content">
           <div class="msg-info">
             <span>{{chat.content}}</span>
           </div>
-          <span>{{chat.date_time}}</span>
+          <span>{{chat.dateTime}}</span>
         </div>
       </div>
-
       <!-- 입장/퇴장/택시비 정산 등등 공지 >
        <div class="message-notice">한동이 님이 퇴장하셨습니다.</div>
       -->

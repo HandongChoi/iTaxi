@@ -40,7 +40,7 @@ export class MakeRoomPage {
 
   constructor(public alertCtrl: AlertController, public navParams: NavParams, public dateServices: DateProvider,
                public navCtrl:NavController, public af: AngularFireDatabase, public userServices: UsersProvider){
-    this.userID = this.userServices.getStudentID();
+    this.userID = this.userServices.userInfo['studentID'];
     this.transportType = this.navParams.data.transportType;
     dateServices.setNow();
   }
@@ -112,13 +112,13 @@ export class MakeRoomPage {
                                      participants: [this.userID],
                                      devTokens:[this.userServices.userInfo['devToken']]
                                    };
-                console.log(room);
+                
                                     //object set말고 다른 방식으로 유니크한 값을 받으면서 디비에 저장하는 방법이 있을까?
                                     //그러면 그걸로 저장 후 바로 room을 받아서 보내는게 좋을 것 같다. 보낼때에는
                                     //promise방식으로 then 알아보자.
                 let chatRoomUrl = room['transportType'] == 'taxi' ? this.af.list('/taxiChatrooms/'+this.bookingDate).push(room)
                                                                   : this.af.list('/carpoolChatrooms/'+this.bookingDate).push(room);
-                this.af.object(`/rideHistory/${this.userServices.getStudentID()}/${chatRoomUrl.key}`).set(room);
+                this.af.object(`/rideHistory/${this.userServices.userInfo['studentID']}/${chatRoomUrl.key}`).set(room);
                 this.navCtrl.setRoot(ChatRoomPage, {room: room, roomKey: chatRoomUrl.key});
               }
            }]  

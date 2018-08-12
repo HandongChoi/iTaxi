@@ -30,9 +30,9 @@ export class TaxiListPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase,
               public datePickerProvider: DatePickerProvider, public modalCtrl: ModalController, 
-              public usersService: UsersProvider, public dateServices: DateProvider) {
+              public userServices: UsersProvider, public dateServices: DateProvider) {
 
-    this.userID = this.usersService.getStudentID();
+    this.userID = this.userServices.userInfo['studentID'];
     this.transportType = this.navParams.data.transportType;
     dateServices.setNow();
 
@@ -43,8 +43,8 @@ export class TaxiListPage {
     }
 
     //기본적으로 오늘 날짜 기준으로 data 불러오기.
-    this.showChatroom(this.nowDate);
-  }
+      this.showChatroom(this.nowDate);
+    }
 
   showCalendar() {
     var now = new Date();
@@ -63,16 +63,18 @@ export class TaxiListPage {
   }
 
   goChatroom(room) {
-    if (!this.isEntered(room['participants'])) {
-      let parts = room['participants'];
+    if (!this.isEntered(room['participants'])) { //처음 참여
+      let members = room['participants'];
       let tokenList = room['devTokens'];
-      parts.push(this.userID);
-      tokenList.push(this.usersService.userInfo['devToken']);
-      room['participants'] = parts;
+      members.push(this.userID);
+      tokenList.push(this.userServices.userInfo['devToken']);
+      room['participants'] = members;
       room['devTokens'] = tokenList;
       room['currentPeople']++;
-      this.af.object(`/rideHistory/${this.usersService.getStudentID()}/${room.$key}`).set(room);
+      this.af.object(`/rideHistory/${this.userServices.userInfo['studentID']}/${room.$key}`).set(room);
       this.navCtrl.push(ChatRoomPage, {room: room});  
+    } else{ // 참여중
+      this.navCtrl.push(ChatRoomPage, {room: room});
     }
   }
 

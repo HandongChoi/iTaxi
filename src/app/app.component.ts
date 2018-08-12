@@ -21,8 +21,6 @@ import firebase from 'firebase';
 import { MainPage } from '../pages/main/main';
 import { TaxiListPage } from '../pages/taxi-list/taxi-list';
 import { MakeRoomPage } from '../pages/makeRoom/makeRoom';
-import { CarpoolListPage } from '../pages/carpool-list/carpool-list';
-import { MakeCarpoolRoomPage } from '../pages/make-carpool-room/make-carpool-room';
 import { RideHistoryPage } from '../pages/ride-history/ride-history';
 import { PersonalInfoPage } from '../pages/personal-info/personal-info';
 import { SettingPage } from '../pages/setting/setting';

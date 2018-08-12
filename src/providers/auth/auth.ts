@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { AlertController } from 'ionic-angular';
+import { AngularFireDatabase } from 'angularfire2/database';
 import 'rxjs/add/operator/map';
 
 import firebase from 'firebase';
 
 @Injectable()
 export class AuthProvider {
-  constructor() {
+  constructor(public af: AngularFireDatabase) {
     
   }
   loginUser(studentID:string):firebase.Promise<any> { 
@@ -28,6 +29,18 @@ export class AuthProvider {
     });
   }
 
+  logoutUser():firebase.Promise<void> {
+    const UID:string = firebase.auth().currentUser.uid;
+    this.af.object(`/UID/${UID}`).subscribe( data => {
+      let userID = data.studentID;
+      console.log('logoutTest');
+      console.log(userID);
+      firebase.database().ref(`/userProfile/${userID}`).off();
+    })
+    return firebase.auth().signOut();
+  }
+  
+  //아래 두개의 함수는 지금 버전에서는 쓰지 않는다. 히즈넷으로 작동하기 때문에 밑의 함수가 필요가 없다.
   delete(){
     var user = firebase.auth().currentUser;
     user.delete().then(function() {
@@ -41,10 +54,6 @@ export class AuthProvider {
     return firebase.auth().sendPasswordResetEmail(email);
   }
    
-  logoutUser():firebase.Promise<void> {
-    const userId:string = firebase.auth().currentUser.uid;
-    firebase.database().ref(`/userProfile/${userId}`).off(); 
-    return firebase.auth().signOut();
-  }
+  
 
 }

@@ -23,23 +23,17 @@ export class SettingPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public userService: UsersProvider,
     public platform:Platform, public authProvider:AuthProvider, public af:AngularFireDatabase,
     public alertCtrl: AlertController) {
-    
-    this.userData = af.object(`/userProfile/${this.userService.getStudentID()}`);
-    this.userData.subscribe(user => {
-      this.user = user;
-      this.isNotiToggled = user.isNoti;
-      this.isPushToggled = user.isPush;
-    });
+    this.user = this.userService.userInfo;
+    this.isNotiToggled = this.user['isNoti'];
+    this.isPushToggled = this.user['isPush'];
   }
 
   ionViewDidLoad() { console.log('ionViewDidLoad SettingPage'); }
-
-  NotiToggle(){ this.userData.update({ isNoti: this.isNotiToggled }); }
-
-  PushToggle(){ this.userData.update({ isPush: this.isPushToggled }); }
-
+  NotiToggle(){ this.af.object(`/userProfile/${this.user['studentID']}`).update({ isNoti: this.isNotiToggled }); }
+  PushToggle(){ this.af.object(`/userProfile/${this.user['studentID']}`).update({ isPush: this.isPushToggled }); }
   OpenInfoPage() { this.navCtrl.push(PersonalInfoPage); }
 
+  //안쓰는 기능
   delete_user():void {
     let alert = this.alertCtrl.create({
       title: "회원탈퇴",

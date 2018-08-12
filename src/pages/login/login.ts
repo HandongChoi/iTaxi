@@ -31,7 +31,7 @@ export class LoginPage {
               public http: Http) {
     //왼쪽 사이드바 메뉴 안 보이게 하는 역할
     this.menu.enable(false,'myMenu');
-
+    firebase.auth().signOut();
     //로그인시 제한 조건 걸어놓기
     this.loginForm = formBuilder.group({
       id: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
@@ -46,7 +46,6 @@ export class LoginPage {
   loginUser():void { 
     const id = this.loginForm.value.id;
     const password = this.loginForm.value.password;
-
     var userInfo: Object = {
                               studentID: "",
                               phone: "",
@@ -75,19 +74,17 @@ export class LoginPage {
         } else {
           var exist = false;
           this.af.object(`/userProfile/${body['studentID']}`, { preserveSnapshot: true }).subscribe( (data) => {
-            exist = data.exists();
+            if(data.exists()){
+              this.authProvider.loginUser(body['studentID']);        
+            } else {
+              userInfo['studentID'] = body['studentID'];
+              userInfo['phone'] = body['phone'];
+              userInfo['email'] = body['email'];
+              userInfo['korName'] = body['korName'];
+              userInfo['engName'] = body['engName'];
+              this.navCtrl.push(SignupPage, {userInfo: userInfo});
+            }
           });
-          if(exist){
-            this.authProvider.loginUser(body['studentID']);        
-          } else {
-            userInfo['studentID'] = body['studentID'];
-            userInfo['phone'] = body['phone'];
-            userInfo['email'] = body['email'];
-            userInfo['korName'] = body['korName'];
-            userInfo['engName'] = body['engName'];
-            this.navCtrl.push(SignupPage, {userInfo: userInfo});
-            console.log('여기는 몇번');
-          } 
         }
       })
     });
