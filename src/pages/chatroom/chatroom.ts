@@ -93,10 +93,24 @@ export class ChatRoomPage {
       }, {
         text: "OK",
         handler: () => {
+          // 방을 나갔을 때, "홍길동님이 나갔습니다." 메세지 남김
+          if(this.chatContent !== '') {
+            firebase.database().ref('/chats/' + this.roomKey).push({
+              userID: this.userServices.userInfo['studentID'],
+              userName: this.userServices.userInfo['korName'],
+              content: this.userServices.userInfo['korName'] + "님이 나갔습니다.",
+              dateTime: new Date().toLocaleString(),
+              isQuitOrEnter: true,
+            }).then(() => {
+              this.chatContent = "";
+              this.scrollBottom();
+            });
+          }
+
           let index = this.room['participants'].indexOf(this.userServices.userInfo['studentID']);
           this.room['participants'].splice(index,1);
           this.room['currentPeople']--;
-          if(this.room['currentPeople'] <= 0){ 
+          if(this.room['currentPeople'] <= 0){
             this.af.object(`/${this.room['transportType']}Chatrooms/${this.room['departDate']}/${this.roomKey}`).remove();
             this.af.object(`/rideHistory/${this.userID}/${this.roomKey}`).remove();
           }else{

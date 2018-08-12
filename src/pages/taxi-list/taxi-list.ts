@@ -72,7 +72,16 @@ export class TaxiListPage {
       room['devTokens'] = tokenList;
       room['currentPeople']++;
       this.af.object(`/rideHistory/${this.userServices.userInfo['studentID']}/${room.$key}`).set(room);
-      this.navCtrl.push(ChatRoomPage, {room: room});  
+      this.navCtrl.push(ChatRoomPage, {room: room}).then(() => {
+        // 방에 들어왔을 때, "홍길동님이 들어왔습니다." 메세지 남김
+        firebase.database().ref('/chats/' + room.$key).push({
+          userID: this.userServices.userInfo['studentID'],
+          userName: this.userServices.userInfo['korName'],
+          content: this.userServices.userInfo['korName'] + "님이 들어왔습니다.",
+          dateTime: new Date().toLocaleString(),
+          isQuitOrEnter: true,
+        })
+      })
     } else{ // 참여중
       this.navCtrl.push(ChatRoomPage, {room: room});
     }
