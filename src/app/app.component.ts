@@ -48,6 +48,7 @@ export class MyApp {
   transportType: string;
 
   room: Object;
+  roomCheck: any;
 
   constructor(public platform: Platform, public splashScreen: SplashScreen, private statusBar: StatusBar, private localNotifications: LocalNotifications,
               public authProvider:AuthProvider, public alertCtrl: AlertController, public af: AngularFireDatabase, private localNotification: PhonegapLocalNotification,
@@ -55,8 +56,8 @@ export class MyApp {
 
     this.splashScreen.show();
     this.initializeApp();
-    firebase.auth().onAuthStateChanged( authData => {  
-      if(authData == null){
+    firebase.auth().onAuthStateChanged(authData => {
+      if (authData == null){
         this.rootPage = LoginPage;
       } else {
         var currentUserID = authData.email.substr(0,8);
@@ -66,13 +67,20 @@ export class MyApp {
         af.list('/rideHistory/' + currentUserID, {
           query:{
             startAt: this.dateServices.getYearMonthDayWithDash(),
-            orderByChild : 'departDate'
+            orderByChild : 'departDate',
           }
         }).subscribe(data => {
+          /**
+           * roomCheck라는 변수를 만들어서, 종료되지 않는 방을 체크함
+           * 아직 종료되지 않은 방이 하나라도 존재하면 roomCheck = -1
+           */
+          this.roomCheck = 1 ;
           data.forEach(item => {
             if (item.departTime >= this.dateServices.nowTime) {
               this.room = item;
-              return;
+              if (this.roomCheck == 1) this.roomCheck *= -1;
+            } else {
+              this.roomCheck *= 1;
             }
           });
         });
