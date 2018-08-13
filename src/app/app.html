@@ -13,7 +13,7 @@
     </div>
     
     <hr class="sidemenu-hr">
-    <ion-grid class="sidemenu-grid" *ngIf="room">
+    <ion-grid class="sidemenu-grid" *ngIf="roomCheck == -1">
       <div class="sidemenu-div" (click)="goChatroomPage(room)">
         <div class="sidemenu-rtitle">&nbsp;&nbsp; {{room.hostName}} {{room.currentPeople}} / {{room.capacity}}</div>
         <ion-row class="sidemenu-row">
