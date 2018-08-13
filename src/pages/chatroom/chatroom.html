@@ -88,8 +88,8 @@
 </ion-content>
 
 <ion-footer>
-  <ion-item>
-    <ion-input [(ngModel)]="chatContent" fixed transportType="text" (keyup.enter)="send()"></ion-input>
+  <ion-item (keyup.enter)="send()">
+    <ion-input [(ngModel)]="chatContent" fixed transportType="text"></ion-input>
     <button ion-button clear item-right (click)="send()"> send </button>
   </ion-item>
 </ion-footer>
