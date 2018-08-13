@@ -49,46 +49,48 @@
   </div>
 
   <!-- 카드 예제 -->
-  <div *ngFor="let room of rooms">
-    <ion-card class="ticket" (click)="goChatroomPage(room)">
-      <ion-row>
-        <ion-col col-1>
-          <img *ngIf="room.transportType == 'taxi'" src="assets/img/main_taxi_mini.png" alt="taxi">
-          <img *ngIf="room.transportType == 'carpool'" src="assets/img/main_carpool_mini.png" alt="carpool">
-        </ion-col>
+  <div *ngFor="let room of rooms | async | roomSort">
+    <div *ngIf='room.departDate + room.departTime >= nowDate + nowTime'>
+      <ion-card class="ticket" (click)="goChatroomPage(room)">
+        <ion-row>
+          <ion-col col-1>
+            <img *ngIf="room.transportType == 'taxi'" src="assets/img/main_taxi_mini.png" alt="taxi">
+            <img *ngIf="room.transportType == 'carpool'" src="assets/img/main_carpool_mini.png" alt="carpool">
+          </ion-col>
 
-        <ion-col col-4 text-left>
-          <div class="text">
-            {{ room.departDate | date: 'M.dd ' }} {{ dateServices.getKToday(room.departDate) }}요일
-          </div>
-          <div class="text">
-            {{ room.departTime }}
-          </div>
-        </ion-col>
+          <ion-col col-4 text-left>
+            <div class="text">
+              {{ room.departDate | date: 'M.dd ' }} {{ dateServices.getKToday(room.departDate) }}요일
+            </div>
+            <div class="text">
+              {{ room.departTime }}
+            </div>
+          </ion-col>
 
-        <ion-col col-5>
-          <div class="text">
-            {{ room.depart }}
-          </div>
-          <div class="text">
-            <span>&gt;</span>&nbsp;&nbsp;{{ room.arrive }}
-          </div>
-        </ion-col>
+          <ion-col col-5>
+            <div class="text">
+              {{ room.depart }}
+            </div>
+            <div class="text">
+              <span>&gt;</span>&nbsp;&nbsp;{{ room.arrive }}
+            </div>
+          </ion-col>
 
-        <ion-col col-2 text-center>
-          <div class="text" *ngIf="room.transportType == 'taxi'">
-            택시
-          </div>
-          <div class="text" *ngIf="room.transportType == 'carpool'">
-            카풀
-          </div>
-          <div class="text">
-            {{ room.currentPeople }}/{{ room.capacity }}
-          </div>
-        </ion-col>
+          <ion-col col-2 text-center>
+            <div class="text" *ngIf="room.transportType == 'taxi'">
+              택시
+            </div>
+            <div class="text" *ngIf="room.transportType == 'carpool'">
+              카풀
+            </div>
+            <div class="text">
+              {{ room.currentPeople }}/{{ room.capacity }}
+            </div>
+          </ion-col>
 
-      </ion-row>
-    </ion-card>
+        </ion-row>
+      </ion-card>
+    </div>
   </div>
 
   <!-- <button ion-button secondary menuToggle>Toggle Menu</button> -->

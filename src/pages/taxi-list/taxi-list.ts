@@ -7,6 +7,7 @@ import { DatePickerProvider, DatePickerOption } from 'ionic2-date-picker';
 
 import { UsersProvider } from '../../providers/users/users';
 import { DateProvider } from '../../providers/date/date';
+import { RoomsProvider } from '../../providers/rooms/rooms';
 
 @IonicPage()
 @Component({
@@ -14,13 +15,13 @@ import { DateProvider } from '../../providers/date/date';
   templateUrl: 'taxi-list.html',
 })
 export class TaxiListPage {
-  rooms: FirebaseListObservable<any[]>;
-  userID: any;
+  rooms: FirebaseListObservable<Object[]>;
+  userID: string;
   transportType: string;
 
-  days: Array<Date> = [];
-  selectedDate: Date = new Date();
-  nowDate: Date = new Date();
+  days: Array<string> = []; //2018-03-02 형식으로 받아 놓을것이다.
+  selectedDate: string;
+  nowDate: string;
   nowTime: string = new Date().toLocaleTimeString('en-US',{hour12:false}).substr(0,5);
 
   departOptions: any;
@@ -29,20 +30,20 @@ export class TaxiListPage {
   spotList: Array<string> = ["한동대학교", "포항역", "고속버스터미널", "시외버스터미널", "북부해수욕장", "육거리"];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase,
-              public datePickerProvider: DatePickerProvider, public modalCtrl: ModalController, 
-              public userServices: UsersProvider, public dateServices: DateProvider) {
+              public datePickerProvider: DatePickerProvider, public modalCtrl: ModalController,  
+              public userServices: UsersProvider, public dateServices: DateProvider, public roomServices: RoomsProvider) {
 
     this.userID = this.userServices.userInfo['studentID'];
     this.transportType = this.navParams.data.transportType;
     //시간 관련 장소에서는 늘 현재 시간으로 다시 셋팅하기.
     this.dateServices.setNow();
-    
+    this.nowDate = this.dateServices.nowDate;
     for(let i = 1; i < 5; i++){
-      let temp = new Date(this.nowDate.getTime());
-      temp.setDate(temp.getDate() + i);
-      this.days.push(temp);
+      let temp = new Date(this.nowDate);
+      temp.setDate(temp.getDate() + i + 1);//지금 미국에서는 +1을 해야되는데 이거 한국가서 테스팅해보자.
+      this.days.push(this.dateServices.makeStringFromDate(temp));
     }
-
+    
     //기본적으로 오늘 날짜 기준으로 data 불러오기.
     this.showChatroom(this.nowDate);
   }
@@ -53,14 +54,14 @@ export class TaxiListPage {
       minimumDate: now,
       maximumDate: new Date(now.getFullYear(), now.getMonth() + 1, now.getDate())
     }
-
     const dateSelected = this.datePickerProvider.showCalendar(this.modalCtrl, datePickerOption);
     dateSelected.subscribe(date => {this.showChatroom(date);});
   }
 
+  //input으로 2018-02-01 형식이 와야한다.
   showChatroom(date) {
     this.selectedDate = date;
-    this.rooms = this.getRooms(date, this.transportType);
+    this.rooms = this.roomServices.getChatRooms(date, this.transportType);
   }
 
   goChatroom(room) {
@@ -83,48 +84,31 @@ export class TaxiListPage {
 
   filterDeparture(departFilter){
     if (departFilter == "All") {
-      this.rooms = this.getRooms(this.selectedDate, this.transportType);
+      this.rooms = this.roomServices.getChatRooms(this.selectedDate, this.transportType);
     } else {
       let query = {
         orderByChild: 'depart',
         equalTo: departFilter
       }
-      this.rooms = this.getRooms(this.selectedDate, this.transportType, query);
+      this.rooms = this.roomServices.getChatRooms(this.selectedDate, this.transportType, query);
     }
   }
 
   filterDestination(arriveFilter){
     if (arriveFilter == "All") {
-      this.rooms = this.getRooms(this.selectedDate, this.transportType);
+      this.rooms = this.roomServices.getChatRooms(this.selectedDate, this.transportType);
     } else {
       let query = {
         orderByChild: 'arrive',
         equalTo: arriveFilter
       }
-      this.rooms = this.getRooms(this.selectedDate, this.transportType, query);
+      this.rooms = this.roomServices.getChatRooms(this.selectedDate, this.transportType, query);
     }
   }
 
   ionViewDidLoad() { console.log('ionViewDidLoad TaxiListPage'); }
-
-  getRooms(date, transportType, queryMsg?){
-    return queryMsg ? this.af.list(`/${transportType}Chatrooms/${this.makeStringFromDate(date)}`, {
-                      query: queryMsg }) 
-                    : this.af.list(`/${transportType}Chatrooms/${this.makeStringFromDate(date)}`); 
-  }
-
   isEntered(participants: Array<any>): boolean { return participants.indexOf(this.userID) != -1 ? true : false }
   isAvailable(room): boolean { return room.currentPeople < room.capacity ? true : false; }
 
-  private makeStringFromDate(date: Date): string {
-    var d = new Date(date);
-    let month = "" + (d.getMonth() + 1);
-    let day = "" + d.getDate();
-    let year = d.getFullYear();
-
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
-
-    return [year, month, day].join('-');
-  }
+  
 }

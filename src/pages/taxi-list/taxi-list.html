@@ -39,7 +39,7 @@
       </ion-col>
       <ion-col col-2 *ngFor="let day of days">
         <ion-item class="days" [ngClass]="{'activate': day == selectedDate }" (click)="showChatroom(day)">
-          <p>{{day|date: "dd"}}</p>
+          <p>{{day | date:'dd'}} </p>
         </ion-item>
       </ion-col>
       <ion-col col-2>
@@ -54,9 +54,9 @@
 <ion-content>
   <div>
     <ion-grid class="mainGrid">
-      <ion-item-group *ngFor="let room of rooms | async">
+      <ion-item-group *ngFor="let room of rooms | async | roomSort">
         <!-- 현재는 지금 시간 이후이면서 방이 꽉 차지 않는 것만 보이게 해 놨다. -->
-        <ion-item-divider *ngIf="room.departTime > nowTime && isAvailable(room)" (click)="goChatroom(room)" class="line"
+        <ion-item-divider *ngIf="room.departDate + room.departTime > nowDate + nowTime && isAvailable(room)" (click)="goChatroom(room)" class="line"
         [ngClass]="{full: room.currentPeople >= room.capacity, exist: isEntered(room.participants)}">
           <ion-row >
             <ion-col col-3>

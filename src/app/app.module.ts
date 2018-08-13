@@ -30,6 +30,8 @@ import { DateProvider } from '../providers/date/date';
 import { UsersProvider } from '../providers/users/users';
 import { RoomsProvider } from '../providers/rooms/rooms';
 
+import { PipesModule } from '../pipes/pipes.module'
+
 export const firebaseConfig = {
   apiKey: "AIzaSyANvht7J2MNX6x47mglqfJk74yZQ9u0qUk",
   authDomain: "itaxi-54bdc.firebaseapp.com",
@@ -59,6 +61,7 @@ export const firebaseConfig = {
     MainPageModule,
     MakeRoomPageModule,
     HttpModule,
+    PipesModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

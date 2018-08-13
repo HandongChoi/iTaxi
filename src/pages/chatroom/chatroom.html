@@ -60,6 +60,7 @@
         <div class="user-info">
           <img *ngIf="chat.userID == roomHost" src="assets/img/crown_gold.png" alt="Host">{{chat.userName}}
         </div>
+        
         <div class="msg-content">
           <span>{{chat.dateTime | DatePipe}}</span>
           <div class="msg-info">
@@ -68,10 +69,18 @@
         </div>
       </div>
 
-      <div class="message left" *ngIf="chat.userID != userID">
+      <div class="message" *ngIf="chat.userID == 'CRA'">
+        <div class="msg-content">
+          <div class="notification">
+            {{chat.content}}
+          </div>
+        </div>
+      </div>
+      
+      <div class="message left" *ngIf="(chat.userID != userID) && (chat.userID != 'CRA')">
         <!-- <img class="user-img" alt="" src=""> -->
         <div class="user-info">
-          <img *ngIf="chat.userID == roomHsot" src="assets/img/crown_gold.png" alt="Host">{{chat.userName}}
+          <img *ngIf="chat.userID == roomHost" src="assets/img/crown_gold.png" alt="Host">{{chat.userName}}
         </div>
         <div class="msg-content">
           <div class="msg-info">
@@ -80,16 +89,13 @@
           <span>{{chat.dateTime}}</span>
         </div>
       </div>
-      <!-- 입장/퇴장/택시비 정산 등등 공지 >
-       <div class="message-notice">한동이 님이 퇴장하셨습니다.</div>
-      -->
     </div>
   </ion-list>
 </ion-content>
 
 <ion-footer>
-  <ion-item>
-    <ion-input [(ngModel)]="chatContent" fixed type="text" (keyup.enter)="send()"></ion-input>
+  <ion-item (keyup.enter)="send()">
+    <ion-input [(ngModel)]="chatContent" fixed transportType="text"></ion-input>
     <button ion-button clear item-right (click)="send()"> send </button>
   </ion-item>
 </ion-footer>

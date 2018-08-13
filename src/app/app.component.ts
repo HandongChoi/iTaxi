@@ -8,6 +8,7 @@ import { ChatRoomPage } from '../pages/chatroom/chatroom';
 import { AuthProvider } from '../providers/auth/auth';
 import { UsersProvider } from '../providers/users/users';
 import { DateProvider } from '../providers/date/date';
+import { RoomsProvider } from '../providers/rooms/rooms';
 
 import {StatusBar} from '@ionic-native/status-bar';
 import {LocalNotifications} from '@ionic-native/local-notifications';
@@ -43,11 +44,12 @@ export class MyApp {
   userUID: any;
   transportType: string;
 
-  room: Object;
+  room: any;
 
   constructor(public platform: Platform, public splashScreen: SplashScreen, private statusBar: StatusBar, private localNotifications: LocalNotifications,
               public authProvider:AuthProvider, public alertCtrl: AlertController, public af: AngularFireDatabase, private localNotification: PhonegapLocalNotification,
-              public fcm:FCM, public userServices:UsersProvider, private dateServices:DateProvider, public menuCtrl: MenuController) {
+              public fcm:FCM, public userServices:UsersProvider, private dateServices:DateProvider, public menuCtrl: MenuController,
+              public roomServices: RoomsProvider) {
 
     this.splashScreen.show();
     this.initializeApp();
@@ -59,21 +61,18 @@ export class MyApp {
         var currentUserID = authData.email.substr(0,8);
         this.userServices.initialize(currentUserID).then( () => {
           this.userName = this.userServices.userInfo['korName'];
-        });
-        af.list('/rideHistory/' + currentUserID, {
-          query:{
-            startAt: this.dateServices.getYearMonthDayWithDash(),
-            orderByChild : 'departDate'
-          }
-        }).subscribe(data => {
-          data.forEach(item => {
-            if (item.departTime >= this.dateServices.nowTime) {
-              this.room = item;
-              return;
+          this.af.list('/rideHistory/' + this.userServices.userInfo['studentID'], {
+            query: {
+              startAt: this.dateServices.getYearMonthDayWithDash(),
+              orderByChild: 'departDate',
             }
-          });
+          }).subscribe( rooms => {
+            this.room = rooms.sort(this.roomServices.sortByDateTime)
+            .filter((room: Object) => room['departDate'] + room['departTime'] >= this.dateServices.nowDate + this.dateServices.nowTime)[0];
+          })
+        }).then( () => {
+          this.rootPage = MainPage;
         });
-        this.rootPage = MainPage;
       }
       this.splashScreen.hide();
     });

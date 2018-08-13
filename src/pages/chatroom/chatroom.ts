@@ -37,7 +37,12 @@ export class ChatRoomPage {
     //Data loading    
     //이거는 makeRoom에서 room을 보낼때 roomKey를 보내는데 이 방법이 서버 접근을 덜해서 서버 비용 감면효과 + 속도 향상이라 그렇게 짰다.
     this.room = navParams.data.room;
-    this.roomKey = navParams.data.roomKey == undefined ? navParams.data.room.$key : navParams.data.roomKey;
+    if(navParams.data.roomKey == undefined){
+      this.roomKey = navParams.data.room.$key
+      this.sendNotification(`${this.userServices.userInfo['korName']}님이 입장하셨습니다.`);
+    } else {
+      this.roomKey = navParams.data.roomKey;
+    }
     this.chats = af.list('/chats/' + this.roomKey);
     this.userID = this.userServices.userInfo['studentID'];    
 
@@ -102,6 +107,7 @@ export class ChatRoomPage {
             this.room['devTokens'].splice(index,1);
             this.af.object(`/${this.room['transportType']}Chatrooms/${this.room['departDate']}/${this.roomKey}`).update(this.room);
             this.af.object(`/rideHistory/${this.userID}/${this.roomKey}`).update(this.room);
+            this.sendNotification(`${this.userServices.userInfo['korName']}님이 나가셨습니다.`);
           }
           this.dateServices.setNow();
           this.navCtrl.setRoot(MainPage);
@@ -133,28 +139,32 @@ export class ChatRoomPage {
         handler: ( data ) => {
           if(data.price <= 0 || data.people <= 0){
             let error = this.alertCtrl.create({
-              title:"잘못 입력",
-              message:"했어요",
+              title:"",
+              message:"",
             });
             error.present();
           }else{
-            var money: number = Math.round(data.price / data.people / 100) * 100; //여기서 십원 자리수에서 반올림
-            var msg = `${money}원
+            let money: number = Math.round(data.price / data.people / 100) * 100; //여기서 십원 자리수에서 반올림
+            let msg = `${money}원
             ${this.userServices.userInfo['accountBank']} ${this.userServices.userInfo['accountNumber']}으로 입금해주시면 됩니다.`
-            firebase.database().ref('/chats/' + this.roomKey).push({
-              userID: 'Noti',
-              userName: 'Master',
-              content: msg,
-              dateTime: new Date().toLocaleString(),
-            }).then(() => {
-              this.chatContent = "";
-              this.scrollBottom();
-            });
+            this.sendNotification(msg);
           }
         }
       }]
     });
     alert.present();
+  }
+
+  sendNotification(msg){
+    firebase.database().ref('/chats/' + this.roomKey).push({
+      userID: 'CRA',
+      userName: 'CRAang',
+      content: msg,
+      dateTime: new Date().toLocaleString(),
+    }).then(() => {
+      this.chatContent = "";
+      this.scrollBottom();
+    });
   }
 
   ionViewDidLoad(){ console.log("chatroom loaded"); }

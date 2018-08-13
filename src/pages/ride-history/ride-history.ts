@@ -6,6 +6,7 @@ import { ChatRoomPage } from '../chatroom/chatroom';
 
 import { UsersProvider } from '../../providers/users/users';
 import { DateProvider } from '../../providers/date/date';
+import { RoomsProvider } from '../../providers/rooms/rooms'
 
 @IonicPage()
 @Component({
@@ -13,27 +14,18 @@ import { DateProvider } from '../../providers/date/date';
   templateUrl: 'ride-history.html',
 })
 export class RideHistoryPage {
-  rideHistory: FirebaseListObservable<any[]>;
+  rideHistory: FirebaseListObservable<Object[]>;
   history: string = "future";
   userID: string;
   taxiRooms: FirebaseListObservable<any[]>;
   carpoolRooms: FirebaseListObservable<any[]>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase, 
-              public userServices: UsersProvider, public alertCtrl: AlertController, public dateServices: DateProvider) {
+              public userServices: UsersProvider, public alertCtrl: AlertController, public dateServices: DateProvider,
+              public roomServices: RoomsProvider,) {
     this.userID = this.userServices.userInfo['studentID'];
-    this.taxiRooms = af.list('/rideHistory/' + this.userServices.userInfo['studentID'], {
-      query: {
-        orderByChild: 'transportType',
-        equalTo: 'taxi'
-      }
-    });
-    this.carpoolRooms = this.af.list('/rideHistory/' + this.userServices.userInfo['studentID'], {
-      query: {
-        orderByChild: 'transportType',
-        equalTo: 'carpool'
-      }
-    });
+    this.taxiRooms = this.roomServices.getRideHistoryRooms('taxi');
+    this.carpoolRooms = this.roomServices.getRideHistoryRooms('carpool');
     //시간 관련 장소에서는 늘 현재 시간으로 다시 셋팅하기.
     this.dateServices.setNow();
   }
