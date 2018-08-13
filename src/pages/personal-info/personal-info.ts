@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,  ViewController, AlertController} from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
-
-import { MainPage } from '../main/main';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { UsersProvider } from '../../providers/users/users';
 import { SettingPage } from '../setting/setting'
 import { EmailValidator } from '../../validators/email';
@@ -14,14 +12,12 @@ import { EmailValidator } from '../../validators/email';
   templateUrl: 'personal-info.html',
 })
 export class PersonalInfoPage {
-
   updateForm:FormGroup;
   userInfo: Object;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,
               public alertCtrl: AlertController, public af:AngularFireDatabase, formBuilder:FormBuilder,
               public userService: UsersProvider) {
-
     this.userInfo = this.userService.userInfo;
     this.updateForm = formBuilder.group({
       engName: [this.userInfo['engName'], Validators.required],
@@ -34,7 +30,6 @@ export class PersonalInfoPage {
 
   //기존것을 object.set 말고 object.update가 있을 것 같은데 찾아보자.
   updateUserInfo(){
-    
     this.userInfo['engName'] = this.updateForm.value.engName;
     this.userInfo['email'] = this.updateForm.value.email;
     this.userInfo['phone'] = this.updateForm.value.phone;
@@ -67,9 +62,7 @@ export class PersonalInfoPage {
     alert.present();
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad PersonalInfoPage');
-  }
+  ionViewDidLoad() { console.log('ionViewDidLoad PersonalInfoPage'); }
 
   dismiss(){
     this.viewCtrl.dismiss()

@@ -21,10 +21,6 @@ import firebase from 'firebase';
 import { MainPage } from '../pages/main/main';
 import { TaxiListPage } from '../pages/taxi-list/taxi-list';
 import { MakeRoomPage } from '../pages/makeRoom/makeRoom';
-import { RideHistoryPage } from '../pages/ride-history/ride-history';
-import { PersonalInfoPage } from '../pages/personal-info/personal-info';
-import { SettingPage } from '../pages/setting/setting';
-import { SignupPage } from '../pages/signup/signup';
 
 firebase.initializeApp({
   apiKey: "AIzaSyANvht7J2MNX6x47mglqfJk74yZQ9u0qUk",
@@ -59,6 +55,7 @@ export class MyApp {
       if(authData == null){
         this.rootPage = LoginPage;
       } else {
+        //token setup을 여기서 하자.
         var currentUserID = authData.email.substr(0,8);
         this.userServices.initialize(currentUserID).then( () => {
           this.userName = this.userServices.userInfo['korName'];
@@ -146,8 +143,22 @@ export class MyApp {
   makeCarpool() { this.navCtrl.setRoot(MakeRoomPage, {transportType: 'carpool'}); }
 
   logout(){
-    this.authProvider.logoutUser();
-    this.userServices.clear();
-    this.navCtrl.setRoot(LoginPage);
+    let alert = this.alertCtrl.create({
+      title: "로그아웃",
+      message: "로그아웃 하시겠습니까?",
+      buttons: [{
+        text: "Cancle",
+        role: "cancle"
+      }, {
+        text: "OK",
+        handler: () => {
+          this.authProvider.logoutUser();
+          this.userServices.clear();
+          this.navCtrl.setRoot(LoginPage);
+        }
+      }]
+    });
+    alert.present();
+    
   }
 }

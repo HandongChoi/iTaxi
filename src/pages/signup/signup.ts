@@ -1,13 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Loading, LoadingController, AlertController } from 'ionic-angular';
-import { FormBuilder, FormGroup, Validators, ValidatorFn } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthProvider } from '../../providers/auth/auth';
 import { EmailValidator } from '../../validators/email';
 import { AngularFireDatabase } from 'angularfire2/database';
-
-import { AbstractControl } from '@angular/forms/src/model';
 import { UsersProvider } from '../../providers/users/users';
-import { MainPage } from '../main/main';
 
 @IonicPage()
 @Component({
@@ -76,6 +73,7 @@ export class SignupPage {
         },
         { text: '확인',
           handler: () => {
+            //token setup을 여기서 하자.
             this.authProvider.signupUser(this.userInfo['studentID']).then( () => {
               this.af.object(`/userProfile/${this.userInfo['studentID']}`).set(this.userInfo);
               this.authProvider.loginUser(this.userInfo['studentID']);

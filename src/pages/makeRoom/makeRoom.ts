@@ -42,7 +42,8 @@ export class MakeRoomPage {
                public navCtrl:NavController, public af: AngularFireDatabase, public userServices: UsersProvider){
     this.userID = this.userServices.userInfo['studentID'];
     this.transportType = this.navParams.data.transportType;
-    dateServices.setNow();
+    //시간 관련 장소에서는 늘 현재 시간으로 다시 셋팅하기.
+    this.dateServices.setNow();
   }
 
   makeRoom(){
@@ -99,7 +100,7 @@ export class MakeRoomPage {
               handler: () => {}
             },
             { text: '확인',
-              handler: data => {
+              handler: () => {
                 let room: Object = { depart: this.depart,
                                      arrive: this.arrive,
                                      departDate: this.bookingDate,
@@ -112,12 +113,8 @@ export class MakeRoomPage {
                                      participants: [this.userID],
                                      devTokens:[this.userServices.userInfo['devToken']]
                                    };
-                
-                                    //object set말고 다른 방식으로 유니크한 값을 받으면서 디비에 저장하는 방법이 있을까?
-                                    //그러면 그걸로 저장 후 바로 room을 받아서 보내는게 좋을 것 같다. 보낼때에는
-                                    //promise방식으로 then 알아보자.
-                let chatRoomUrl = room['transportType'] == 'taxi' ? this.af.list('/taxiChatrooms/'+this.bookingDate).push(room)
-                                                                  : this.af.list('/carpoolChatrooms/'+this.bookingDate).push(room);
+
+                let chatRoomUrl = this.af.list(`/${room['transportType']}Chatrooms/${this.bookingDate}`).push(room);
                 this.af.object(`/rideHistory/${this.userServices.userInfo['studentID']}/${chatRoomUrl.key}`).set(room);
                 this.navCtrl.setRoot(ChatRoomPage, {room: room, roomKey: chatRoomUrl.key});
               }

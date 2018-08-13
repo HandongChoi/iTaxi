@@ -1,10 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, Content, NavParams, Platform, AlertController } from 'ionic-angular';
-
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 import { MainPage } from '../../pages/main/main';
-import { TaxiListPage } from '../../pages/taxi-list/taxi-list';
 
 import { UsersProvider } from '../../providers/users/users';
 import { DateProvider } from '../../providers/date/date';
@@ -64,7 +62,6 @@ export class ChatRoomPage {
         this.scrollBottom();
       });
     }
-    
     //시간 관련 장소에서는 늘 현재 시간으로 다시 셋팅하기.
     this.dateServices.setNow();
   } 
@@ -134,32 +131,34 @@ export class ChatRoomPage {
       }, {
         text: "OK",
         handler: ( data ) => {
-          var money: number = Math.round(data.price / data.people / 100) * 100; //여기서 십원 자리수에서 반올림
-          var msg = `${money}원
-          ${this.userServices.userInfo['accountBank']} ${this.userServices.userInfo['accountNumber']}으로 입금해주시면 됩니다.`
-          firebase.database().ref('/chats/' + this.roomKey).push({
-            userID: 'Noti',
-            userName: 'Master',
-            content: msg,
-            dateTime: new Date().toLocaleString(),
-          }).then(() => {
-            this.chatContent = "";
-            this.scrollBottom();
-          });
+          if(data.price <= 0 || data.people <= 0){
+            let error = this.alertCtrl.create({
+              title:"잘못 입력",
+              message:"했어요",
+            });
+            error.present();
+          }else{
+            var money: number = Math.round(data.price / data.people / 100) * 100; //여기서 십원 자리수에서 반올림
+            var msg = `${money}원
+            ${this.userServices.userInfo['accountBank']} ${this.userServices.userInfo['accountNumber']}으로 입금해주시면 됩니다.`
+            firebase.database().ref('/chats/' + this.roomKey).push({
+              userID: 'Noti',
+              userName: 'Master',
+              content: msg,
+              dateTime: new Date().toLocaleString(),
+            }).then(() => {
+              this.chatContent = "";
+              this.scrollBottom();
+            });
+          }
         }
       }]
     });
     alert.present();
   }
 
-  ionViewDidLoad(){
-    console.log("chatroom loaded");
-  }
-
-  scrollBottom(){
-    this.content.scrollToBottom(300);
-  }
-
+  ionViewDidLoad(){ console.log("chatroom loaded"); }
+  scrollBottom(){ this.content.scrollToBottom(300); }
   show(index) {
     if (this.index == index) {
       this.index = -1;

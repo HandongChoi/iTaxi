@@ -54,9 +54,6 @@ export class UsersProvider {
     }
   }
   getStudentID(){ return this.userInfo['studentID']; }
-  setDevToken(token){
-    console.log(token);
-    this.userInfo['devToken'] = token;
-  }
+  setDevToken(token){ this.userInfo['devToken'] = token; }
 
 }

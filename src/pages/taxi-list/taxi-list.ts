@@ -34,8 +34,9 @@ export class TaxiListPage {
 
     this.userID = this.userServices.userInfo['studentID'];
     this.transportType = this.navParams.data.transportType;
-    dateServices.setNow();
-
+    //시간 관련 장소에서는 늘 현재 시간으로 다시 셋팅하기.
+    this.dateServices.setNow();
+    
     for(let i = 1; i < 5; i++){
       let temp = new Date(this.nowDate.getTime());
       temp.setDate(temp.getDate() + i);
@@ -43,8 +44,8 @@ export class TaxiListPage {
     }
 
     //기본적으로 오늘 날짜 기준으로 data 불러오기.
-      this.showChatroom(this.nowDate);
-    }
+    this.showChatroom(this.nowDate);
+  }
 
   showCalendar() {
     var now = new Date();
@@ -84,12 +85,11 @@ export class TaxiListPage {
     if (departFilter == "All") {
       this.rooms = this.getRooms(this.selectedDate, this.transportType);
     } else {
-      this.rooms = this.af.list('/taxiChatrooms/'+ this.makeStringFromDate(this.selectedDate), {
-        query: {
-          orderByChild: 'depart',
-          equalTo: departFilter
-        }
-      });
+      let query = {
+        orderByChild: 'depart',
+        equalTo: departFilter
+      }
+      this.rooms = this.getRooms(this.selectedDate, this.transportType, query);
     }
   }
 
@@ -97,31 +97,23 @@ export class TaxiListPage {
     if (arriveFilter == "All") {
       this.rooms = this.getRooms(this.selectedDate, this.transportType);
     } else {
-      this.rooms = this.af.list('/taxiChatrooms/'+ this.makeStringFromDate(this.selectedDate), {
-        query: {
-          orderByChild: 'arrive',
-          equalTo: arriveFilter
-        }
-      });
+      let query = {
+        orderByChild: 'arrive',
+        equalTo: arriveFilter
+      }
+      this.rooms = this.getRooms(this.selectedDate, this.transportType, query);
     }
   }
 
   ionViewDidLoad() { console.log('ionViewDidLoad TaxiListPage'); }
 
-  //함수에 옵션으로 쿼리 넣는 방법을 알아보자. 오보로드 해야되나?
-  getRooms(date, transportType){
-    return transportType == 'taxi' ? this.af.list('/taxiChatrooms/' + this.makeStringFromDate(date)) 
-                                   : this.af.list('/carpoolChatrooms/' + this.makeStringFromDate(date));
+  getRooms(date, transportType, queryMsg?){
+    return queryMsg ? this.af.list(`/${transportType}Chatrooms/${this.makeStringFromDate(date)}`, {
+                      query: queryMsg }) 
+                    : this.af.list(`/${transportType}Chatrooms/${this.makeStringFromDate(date)}`); 
   }
 
-  isEntered(participants: Array<any>): boolean {
-    for (let user of participants) {
-      if (user == this.userID)
-        return true;
-    }
-    return false;
-  }
-
+  isEntered(participants: Array<any>): boolean { return participants.indexOf(this.userID) != -1 ? true : false }
   isAvailable(room): boolean { return room.currentPeople < room.capacity ? true : false; }
 
   private makeStringFromDate(date: Date): string {

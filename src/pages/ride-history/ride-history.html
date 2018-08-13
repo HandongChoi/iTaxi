@@ -26,11 +26,11 @@
           <div *ngIf = "room.departDate + room.departTime > dateServices.nowDate + dateServices.nowTime">
             <ion-item-divider color="light" (click)="goChatroom(room)">
               <ion-row>
-                <ion-col col-3>
+                <ion-col col-4>
                   <p>{{room.departDate}}</p>
                   <p>{{room.departTime}}</p>
                 </ion-col>
-                <ion-col col-7>
+                <ion-col col-6>
                   <p>{{room.depart}}</p>
                   <p>>{{room.arrive}}</p>
                 </ion-col>
@@ -49,11 +49,11 @@
           <div *ngIf = "room.departDate + room.departTime > dateServices.nowDate + dateServices.nowTime">
             <ion-item-divider color="light" (click)="goChatroom(room)">
               <ion-row>
-                <ion-col col-3>
+                <ion-col col-4>
                   <p>{{room.departDate}}</p>
                   <p>{{room.departTime}}</p>
                 </ion-col>
-                <ion-col col-7>
+                <ion-col col-6>
                   <p>{{room.depart}}</p>
                   <p>>{{room.arrive}}</p>
                 </ion-col>
@@ -74,11 +74,11 @@
             <div *ngIf = "room.departDate + room.departTime <= dateServices.nowDate + dateServices.nowTime">
               <ion-item-divider color="light" (click)="goChatroom(room)">
                 <ion-row>
-                  <ion-col col-3>
+                  <ion-col col-4>
                     <p>{{room.departDate}}</p>
                     <p>{{room.departTime}}</p>
                   </ion-col>
-                  <ion-col col-7>
+                  <ion-col col-6>
                     <p>{{room.depart}}</p>
                     <p>>{{room.arrive}}</p>
                   </ion-col>
@@ -97,11 +97,11 @@
             <div *ngIf = "room.departDate + room.departTime <= dateServices.nowDate + dateServices.nowTime">
               <ion-item-divider color="light" (click)="goChatroom(room)">
                 <ion-row>
-                  <ion-col col-3>
+                  <ion-col col-4>
                     <p>{{room.departDate}}</p>
                     <p>{{room.departTime}}</p>
                   </ion-col>
-                  <ion-col col-7>
+                  <ion-col col-6>
                     <p>{{room.depart}}</p>
                     <p>>{{room.arrive}}</p>
                   </ion-col>

@@ -42,25 +42,20 @@ export class SettingPage {
         {
           text: '취소',
           role: 'cancle',
-          handler: () => {
-            console.log('Cancle');
-          }
+          handler: () => { console.log('Cancle'); }
         },
         {
           text: '확인',
           handler: () => {
             this.userData.remove();
             this.authProvider.delete();
-            
             let a = this.alertCtrl.create({
               title: "탈퇴 완료",
               message: "탈퇴가 완료되었습니다.",
               buttons: [
                 {
                   text: 'Ok',
-                  handler: () => {
-                    this.navCtrl.setRoot(LoginPage);
-                  }
+                  handler: () => { this.navCtrl.setRoot(LoginPage);}
                 }
               ]
             });

@@ -7,9 +7,8 @@ import firebase from 'firebase';
 
 @Injectable()
 export class AuthProvider {
-  constructor(public af: AngularFireDatabase) {
-    
-  }
+  constructor(public af: AngularFireDatabase) {}
+  
   loginUser(studentID:string):firebase.Promise<any> { 
     return firebase.auth().signInWithEmailAndPassword(studentID + '@handong.edu', 'HandongCRA1004');
   }
