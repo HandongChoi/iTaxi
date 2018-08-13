@@ -8,6 +8,7 @@ import { ChatRoomPage } from '../pages/chatroom/chatroom';
 import { AuthProvider } from '../providers/auth/auth';
 import { UsersProvider } from '../providers/users/users';
 import { DateProvider } from '../providers/date/date';
+import { RoomsProvider } from '../providers/rooms/rooms';
 
 import {StatusBar} from '@ionic-native/status-bar';
 import {LocalNotifications} from '@ionic-native/local-notifications';
@@ -21,10 +22,6 @@ import firebase from 'firebase';
 import { MainPage } from '../pages/main/main';
 import { TaxiListPage } from '../pages/taxi-list/taxi-list';
 import { MakeRoomPage } from '../pages/makeRoom/makeRoom';
-import { RideHistoryPage } from '../pages/ride-history/ride-history';
-import { PersonalInfoPage } from '../pages/personal-info/personal-info';
-import { SettingPage } from '../pages/setting/setting';
-import { SignupPage } from '../pages/signup/signup';
 
 firebase.initializeApp({
   apiKey: "AIzaSyANvht7J2MNX6x47mglqfJk74yZQ9u0qUk",
@@ -47,36 +44,35 @@ export class MyApp {
   userUID: any;
   transportType: string;
 
-  room: Object;
+  room: any;
 
   constructor(public platform: Platform, public splashScreen: SplashScreen, private statusBar: StatusBar, private localNotifications: LocalNotifications,
               public authProvider:AuthProvider, public alertCtrl: AlertController, public af: AngularFireDatabase, private localNotification: PhonegapLocalNotification,
-              public fcm:FCM, public userServices:UsersProvider, private dateServices:DateProvider, public menuCtrl: MenuController) {
-
+              public fcm:FCM, public userServices:UsersProvider, private dateServices:DateProvider, public menuCtrl: MenuController,
+              public roomServices: RoomsProvider) {
+    this.dateServices.setNow();
     this.splashScreen.show();
     this.initializeApp();
     firebase.auth().onAuthStateChanged( authData => {  
       if(authData == null){
         this.rootPage = LoginPage;
       } else {
+        //token setup을 여기서 하자.
         var currentUserID = authData.email.substr(0,8);
         this.userServices.initialize(currentUserID).then( () => {
           this.userName = this.userServices.userInfo['korName'];
-        });
-        af.list('/rideHistory/' + currentUserID, {
-          query:{
-            startAt: this.dateServices.getYearMonthDayWithDash(),
-            orderByChild : 'departDate'
-          }
-        }).subscribe(data => {
-          data.forEach(item => {
-            if (item.departTime >= this.dateServices.nowTime) {
-              this.room = item;
-              return;
+          this.af.list('/rideHistory/' + this.userServices.userInfo['studentID'], {
+            query: {
+              startAt: this.dateServices.getYearMonthDayWithDash(),
+              orderByChild: 'departDate',
             }
-          });
+          }).subscribe( rooms => {
+            this.room = rooms.sort(this.roomServices.sortByDateTime)
+            .filter((room: Object) => room['departDate'] + room['departTime'] >= this.dateServices.nowDate + this.dateServices.nowTime)[0];
+          })
+        }).then( () => {
+          this.rootPage = MainPage;
         });
-        this.rootPage = MainPage;
       }
       this.splashScreen.hide();
     });
@@ -146,8 +142,21 @@ export class MyApp {
   makeCarpool() { this.navCtrl.setRoot(MakeRoomPage, {transportType: 'carpool'}); }
 
   logout(){
-    this.authProvider.logoutUser();
-    this.userServices.clear();
-    this.navCtrl.setRoot(LoginPage);
+    let alert = this.alertCtrl.create({
+      title: "로그아웃",
+      message: "로그아웃 하시겠습니까?",
+      buttons: [{
+        text: "Cancle",
+        role: "cancle"
+      }, {
+        text: "OK",
+        handler: () => {
+          this.authProvider.logoutUser();
+          this.userServices.clear();
+          this.navCtrl.setRoot(LoginPage);
+        }
+      }]
+    });
+    alert.present();
   }
 }

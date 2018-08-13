@@ -1,10 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, Content, NavParams, Platform, AlertController } from 'ionic-angular';
-
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 import { MainPage } from '../../pages/main/main';
-import { TaxiListPage } from '../../pages/taxi-list/taxi-list';
 
 import { UsersProvider } from '../../providers/users/users';
 import { DateProvider } from '../../providers/date/date';
@@ -35,11 +33,18 @@ export class ChatRoomPage {
   constructor(public navCtrl: NavController, public af:AngularFireDatabase, public navParams: NavParams, public platform:Platform,
               public roomServices: RoomsProvider, public dateServices: DateProvider, public userServices: UsersProvider,
               public alertCtrl: AlertController) {
-
+    //시간 관련 장소에서는 늘 현재 시간으로 다시 셋팅하기.
+    this.dateServices.setNow();
+    
     //Data loading    
     //이거는 makeRoom에서 room을 보낼때 roomKey를 보내는데 이 방법이 서버 접근을 덜해서 서버 비용 감면효과 + 속도 향상이라 그렇게 짰다.
     this.room = navParams.data.room;
-    this.roomKey = navParams.data.roomKey == undefined ? navParams.data.room.$key : navParams.data.roomKey;
+    if(navParams.data.roomKey == undefined){ //기존 멤버 입장
+      this.roomKey = navParams.data.room.$key
+    } else { //처음으로 방에 진입
+      this.roomKey = navParams.data.roomKey;
+      this.sendNotification(`${this.userServices.userInfo['korName']}님이 입장하셨습니다.`);
+    }
     this.chats = af.list('/chats/' + this.roomKey);
     this.userID = this.userServices.userInfo['studentID'];    
 
@@ -65,8 +70,6 @@ export class ChatRoomPage {
       });
     }
     
-    //시간 관련 장소에서는 늘 현재 시간으로 다시 셋팅하기.
-    this.dateServices.setNow();
   } 
 
   send() {
@@ -93,20 +96,6 @@ export class ChatRoomPage {
       }, {
         text: "OK",
         handler: () => {
-          // 방을 나갔을 때, "홍길동님이 나갔습니다." 메세지 남김
-          if(this.chatContent !== '') {
-            firebase.database().ref('/chats/' + this.roomKey).push({
-              userID: this.userServices.userInfo['studentID'],
-              userName: this.userServices.userInfo['korName'],
-              content: this.userServices.userInfo['korName'] + "님이 나갔습니다.",
-              dateTime: new Date().toLocaleString(),
-              isQuitOrEnter: true,
-            }).then(() => {
-              this.chatContent = "";
-              this.scrollBottom();
-            });
-          }
-
           let index = this.room['participants'].indexOf(this.userServices.userInfo['studentID']);
           this.room['participants'].splice(index,1);
           this.room['currentPeople']--;
@@ -119,6 +108,7 @@ export class ChatRoomPage {
             this.room['devTokens'].splice(index,1);
             this.af.object(`/${this.room['transportType']}Chatrooms/${this.room['departDate']}/${this.roomKey}`).update(this.room);
             this.af.object(`/rideHistory/${this.userID}/${this.roomKey}`).update(this.room);
+            this.sendNotification(`${this.userServices.userInfo['korName']}님이 나가셨습니다.`);
           }
           this.dateServices.setNow();
           this.navCtrl.setRoot(MainPage);
@@ -148,32 +138,38 @@ export class ChatRoomPage {
       }, {
         text: "OK",
         handler: ( data ) => {
-          var money: number = Math.round(data.price / data.people / 100) * 100; //여기서 십원 자리수에서 반올림
-          var msg = `${money}원
-          ${this.userServices.userInfo['accountBank']} ${this.userServices.userInfo['accountNumber']}으로 입금해주시면 됩니다.`
-          firebase.database().ref('/chats/' + this.roomKey).push({
-            userID: 'Noti',
-            userName: 'Master',
-            content: msg,
-            dateTime: new Date().toLocaleString(),
-          }).then(() => {
-            this.chatContent = "";
-            this.scrollBottom();
-          });
+          if(data.price <= 0 || data.people <= 0){
+            let error = this.alertCtrl.create({
+              title:"",
+              message:"",
+            });
+            error.present();
+          }else{
+            let money: number = Math.round(data.price / data.people / 100) * 100; //여기서 십원 자리수에서 반올림
+            let msg = `${money}원
+            ${this.userServices.userInfo['accountBank']} ${this.userServices.userInfo['accountNumber']}으로 입금해주시면 됩니다.`
+            this.sendNotification(msg);
+          }
         }
       }]
     });
     alert.present();
   }
 
-  ionViewDidLoad(){
-    console.log("chatroom loaded");
+  sendNotification(msg){
+    firebase.database().ref('/chats/' + this.roomKey).push({
+      userID: 'CRA',
+      userName: 'CRAang',
+      content: msg,
+      dateTime: new Date().toLocaleString(),
+    }).then(() => {
+      this.chatContent = "";
+      this.scrollBottom();
+    });
   }
 
-  scrollBottom(){
-    this.content.scrollToBottom(300);
-  }
-
+  ionViewDidLoad(){ console.log("chatroom loaded"); }
+  scrollBottom(){ this.content.scrollToBottom(300); }
   show(index) {
     if (this.index == index) {
       this.index = -1;

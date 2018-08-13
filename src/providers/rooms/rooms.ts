@@ -1,49 +1,35 @@
 import { Injectable } from '@angular/core';
+import { DateProvider } from '../../providers/date/date';
+import { UsersProvider } from '../../providers/users/users';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import 'rxjs/add/operator/map';
-
 
 @Injectable()
 export class RoomsProvider {
+  rooms : Array<Object> = [];
 
-
-  room: Object = { depart: String,
-                   arrive: String,
-                   departDate: String,
-                   departTime: String,
-                   capacity: Number,
-                   currentPeople: Number,
-                   host: String,
-                   hostName: String,
-                   participants: Array,
-                   devTokens: Array,
-                 }
-                 //hostName을 넣은 이유는 makeRoom에 있어서 일단 넣었다.
-
-  constructor() {
-    console.log('Hello RoomsProvider Provider');
+  constructor(public dateServices: DateProvider, public af: AngularFireDatabase,
+              public userServices: UsersProvider) {
+    console.log('Hello RoomsProvider Provider'); 
   }
 
-  setRoomInfo(obj: Object){
-    this.room = obj;
+  getChatRooms(date, transportType, queryMsg?){
+    return queryMsg ? this.af.list(`/${transportType}Chatrooms/${date}`, {query: queryMsg }) 
+                                 : this.af.list(`/${transportType}Chatrooms/${date}`); 
   }
 
-  addParticipants(user, userToken): boolean {
-    let parts = this.room['participants'];
-    let tokenList = this.room['devTokens'];
-    if (this.room['currentPeople'] < this.room['capacity']) {
-      parts.push(user);
-      tokenList.push(userToken);
-      this.room['participants'] = parts;
-      this.room['devTokens'] = tokenList;
-      this.room['currentPeople']++;
-      return true;
-    }
-    else {
-      return false;
-    }
+  getRideHistoryRooms(transportType){
+    return this.af.list('/rideHistory/' + this.userServices.userInfo['studentID'], {
+              query: {
+                orderByChild: 'transportType',
+                equalTo: `${transportType}`
+              }
+            })
   }
 
-  getOut() {
-    this.room['currentPeople']--;
+  sortByDateTime(room1, room2){
+    const compare1 = room1.departDate + room1.departTime;
+    const compare2 = room2.departDate + room2.departTime;
+    return compare1 > compare2 ? 1 : -1;
   }
 }

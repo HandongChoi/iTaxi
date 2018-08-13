@@ -86,7 +86,8 @@ page-chatroom {
       flex-direction: column;
       padding: 7px 0;
       color: $userBackgroundColor;
-      .quit-enter {
+
+      .notification {
         text-align: center;
         max-width: 100% !important;
         color: white;

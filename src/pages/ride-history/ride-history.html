@@ -22,12 +22,12 @@
     <div *ngSwitchCase="'future'">
       <ion-item>Taxi</ion-item>
       <ion-grid>
-        <ion-item-group *ngFor = "let room of taxiRooms | async">
+        <ion-item-group *ngFor = "let room of taxiRooms | async | roomSort">
           <div *ngIf = "room.departDate + room.departTime > dateServices.nowDate + dateServices.nowTime">
             <ion-item-divider color="light" (click)="goChatroom(room)">
               <ion-row>
                 <ion-col col-3>
-                  <p>{{room.departDate}}</p>
+                  <p>{{room.departDate | date: 'M.dd '}} {{ dateServices.getKToday(room.departDate) }}</p>
                   <p>{{room.departTime}}</p>
                 </ion-col>
                 <ion-col col-7>
@@ -45,12 +45,12 @@
       </ion-grid>
       <ion-item>Carpool</ion-item>
       <ion-grid>
-        <ion-item-group *ngFor = "let room of carpoolRooms | async">
+        <ion-item-group *ngFor = "let room of carpoolRooms | async | roomSort">
           <div *ngIf = "room.departDate + room.departTime > dateServices.nowDate + dateServices.nowTime">
             <ion-item-divider color="light" (click)="goChatroom(room)">
               <ion-row>
                 <ion-col col-3>
-                  <p>{{room.departDate}}</p>
+                  <p>{{room.departDate | date: 'M.dd '}} {{ dateServices.getKToday(room.departDate) }}</p>
                   <p>{{room.departTime}}</p>
                 </ion-col>
                 <ion-col col-7>
@@ -70,12 +70,12 @@
     <div *ngSwitchCase="'past'">
         <ion-item>Taxi</ion-item>
         <ion-grid>
-          <ion-item-group *ngFor = "let room of taxiRooms | async">
+          <ion-item-group *ngFor = "let room of taxiRooms | async | roomSort">
             <div *ngIf = "room.departDate + room.departTime <= dateServices.nowDate + dateServices.nowTime">
               <ion-item-divider color="light" (click)="goChatroom(room)">
                 <ion-row>
                   <ion-col col-3>
-                    <p>{{room.departDate}}</p>
+                    <p>{{room.departDate | date: 'M.dd '}} {{ dateServices.getKToday(room.departDate) }}</p>
                     <p>{{room.departTime}}</p>
                   </ion-col>
                   <ion-col col-7>
@@ -93,12 +93,12 @@
         </ion-grid>
         <ion-item>Carpool</ion-item>
         <ion-grid>
-          <ion-item-group *ngFor = "let room of carpoolRooms | async">
+          <ion-item-group *ngFor = "let room of carpoolRooms | async | roomSort">
             <div *ngIf = "room.departDate + room.departTime <= dateServices.nowDate + dateServices.nowTime">
               <ion-item-divider color="light" (click)="goChatroom(room)">
                 <ion-row>
                   <ion-col col-3>
-                    <p>{{room.departDate}}</p>
+                    <p>{{room.departDate | date: 'M.dd '}} {{ dateServices.getKToday(room.departDate) }}</p>
                     <p>{{room.departTime}}</p>
                   </ion-col>
                   <ion-col col-7>

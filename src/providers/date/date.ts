@@ -28,17 +28,10 @@ export class DateProvider {
   constructor() {
     console.log('Hello DateProvider Provider');
   }
-  addZ(n) {
-    return n < 10 ? '0' + n : '' + n;
-  }
+  addZ(n) { return n < 10 ? '0' + n : '' + n; }
 
-  getMonthDayWithDash(){
-    return this.nowMonth + '-' + this.nowDay;
-  }
-
-  getYearMonthDayWithDash(){
-    return this.nowDate;
-  }
+  getMonthDayWithDash(){ return this.nowMonth + '-' + this.nowDay; }
+  getYearMonthDayWithDash(){ return this.nowDate; }
 
   //input: 2018-1-23, output: 화
   getKToday(bookingDate: string): string{
@@ -55,6 +48,14 @@ export class DateProvider {
     let splitDate = dateWithDelimiter.split(this.delimiter);
     return splitDate[0]+'년 '+splitDate[1]+'월 '+splitDate[2]+'일 ('+this.getKToday(dateWithDelimiter)+')';
   }
+  //2018-08-27과 같은 형식으로 만들어준다.
+  makeStringFromDate(date: Date): string {
+    let month = this.addZ(date.getMonth() + 1);
+    let day = this.addZ(date.getDate());
+    let year = date.getFullYear();
+    return [year, month, day].join('-');
+  }
+  //아직 안 쓰지만 - 외의 형식으로 만들 때 사용할 예정.
   dateToDelimiterFormat(date: Date): string {    
     let year = date.getFullYear();
     let month = this.addZ(date.getMonth()+1);

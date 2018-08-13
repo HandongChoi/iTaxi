@@ -7,6 +7,7 @@ import { DatePickerProvider, DatePickerOption } from 'ionic2-date-picker';
 
 import { UsersProvider } from '../../providers/users/users';
 import { DateProvider } from '../../providers/date/date';
+import { RoomsProvider } from '../../providers/rooms/rooms';
 
 @IonicPage()
 @Component({
@@ -14,13 +15,13 @@ import { DateProvider } from '../../providers/date/date';
   templateUrl: 'taxi-list.html',
 })
 export class TaxiListPage {
-  rooms: FirebaseListObservable<any[]>;
-  userID: any;
+  rooms: FirebaseListObservable<Object[]>;
+  userID: string;
   transportType: string;
 
-  days: Array<Date> = [];
-  selectedDate: Date = new Date();
-  nowDate: Date = new Date();
+  days: Array<string> = []; //2018-03-02 형식으로 받아 놓을것이다.
+  selectedDate: string;
+  nowDate: string;
   nowTime: string = new Date().toLocaleTimeString('en-US',{hour12:false}).substr(0,5);
 
   departOptions: any;
@@ -29,22 +30,20 @@ export class TaxiListPage {
   spotList: Array<string> = ["한동대학교", "포항역", "고속버스터미널", "시외버스터미널", "북부해수욕장", "육거리"];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase,
-              public datePickerProvider: DatePickerProvider, public modalCtrl: ModalController, 
-              public userServices: UsersProvider, public dateServices: DateProvider) {
-
+              public datePickerProvider: DatePickerProvider, public modalCtrl: ModalController,  
+              public userServices: UsersProvider, public dateServices: DateProvider, public roomServices: RoomsProvider) {
+    this.dateServices.setNow();
     this.userID = this.userServices.userInfo['studentID'];
     this.transportType = this.navParams.data.transportType;
-    dateServices.setNow();
-
+    this.nowDate = this.dateServices.nowDate;
     for(let i = 1; i < 5; i++){
-      let temp = new Date(this.nowDate.getTime());
+      let temp = new Date(this.nowDate);
       temp.setDate(temp.getDate() + i);
-      this.days.push(temp);
+      this.days.push(this.dateServices.makeStringFromDate(temp));
     }
-
-    //기본적으로 오늘 날짜 기준으로 data 불러오기.
-      this.showChatroom(this.nowDate);
-    }
+    //오늘 날짜 기준으로 data 불러오기.
+    this.showChatroom(this.nowDate);
+  }
 
   showCalendar() {
     var now = new Date();
@@ -52,14 +51,14 @@ export class TaxiListPage {
       minimumDate: now,
       maximumDate: new Date(now.getFullYear(), now.getMonth() + 1, now.getDate())
     }
-
     const dateSelected = this.datePickerProvider.showCalendar(this.modalCtrl, datePickerOption);
     dateSelected.subscribe(date => {this.showChatroom(date);});
   }
 
+  //input으로 2018-02-01 형식을 기대한다.
   showChatroom(date) {
     this.selectedDate = date;
-    this.rooms = this.getRooms(date, this.transportType);
+    this.rooms = this.roomServices.getChatRooms(date, this.transportType);
   }
 
   goChatroom(room) {
@@ -72,16 +71,6 @@ export class TaxiListPage {
       room['devTokens'] = tokenList;
       room['currentPeople']++;
       this.af.object(`/rideHistory/${this.userServices.userInfo['studentID']}/${room.$key}`).set(room);
-      this.navCtrl.push(ChatRoomPage, {room: room}).then(() => {
-        // 방에 들어왔을 때, "홍길동님이 들어왔습니다." 메세지 남김
-        firebase.database().ref('/chats/' + room.$key).push({
-          userID: this.userServices.userInfo['studentID'],
-          userName: this.userServices.userInfo['korName'],
-          content: this.userServices.userInfo['korName'] + "님이 들어왔습니다.",
-          dateTime: new Date().toLocaleString(),
-          isQuitOrEnter: true,
-        })
-      })
     } else{ // 참여중
       this.navCtrl.push(ChatRoomPage, {room: room});
     }
@@ -91,57 +80,29 @@ export class TaxiListPage {
 
   filterDeparture(departFilter){
     if (departFilter == "All") {
-      this.rooms = this.getRooms(this.selectedDate, this.transportType);
+      this.rooms = this.roomServices.getChatRooms(this.selectedDate, this.transportType);
     } else {
-      this.rooms = this.af.list('/taxiChatrooms/'+ this.makeStringFromDate(this.selectedDate), {
-        query: {
-          orderByChild: 'depart',
-          equalTo: departFilter
-        }
-      });
+      let query = {
+        orderByChild: 'depart',
+        equalTo: departFilter
+      }
+      this.rooms = this.roomServices.getChatRooms(this.selectedDate, this.transportType, query);
     }
   }
 
   filterDestination(arriveFilter){
     if (arriveFilter == "All") {
-      this.rooms = this.getRooms(this.selectedDate, this.transportType);
+      this.rooms = this.roomServices.getChatRooms(this.selectedDate, this.transportType);
     } else {
-      this.rooms = this.af.list('/taxiChatrooms/'+ this.makeStringFromDate(this.selectedDate), {
-        query: {
-          orderByChild: 'arrive',
-          equalTo: arriveFilter
-        }
-      });
+      let query = {
+        orderByChild: 'arrive',
+        equalTo: arriveFilter
+      }
+      this.rooms = this.roomServices.getChatRooms(this.selectedDate, this.transportType, query);
     }
   }
 
   ionViewDidLoad() { console.log('ionViewDidLoad TaxiListPage'); }
-
-  //함수에 옵션으로 쿼리 넣는 방법을 알아보자. 오보로드 해야되나?
-  getRooms(date, transportType){
-    return transportType == 'taxi' ? this.af.list('/taxiChatrooms/' + this.makeStringFromDate(date)) 
-                                   : this.af.list('/carpoolChatrooms/' + this.makeStringFromDate(date));
-  }
-
-  isEntered(participants: Array<any>): boolean {
-    for (let user of participants) {
-      if (user == this.userID)
-        return true;
-    }
-    return false;
-  }
-
+  isEntered(participants: Array<any>): boolean { return participants.indexOf(this.userID) != -1 ? true : false }
   isAvailable(room): boolean { return room.currentPeople < room.capacity ? true : false; }
-
-  private makeStringFromDate(date: Date): string {
-    var d = new Date(date);
-    let month = "" + (d.getMonth() + 1);
-    let day = "" + d.getDate();
-    let year = d.getFullYear();
-
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
-
-    return [year, month, day].join('-');
-  }
 }

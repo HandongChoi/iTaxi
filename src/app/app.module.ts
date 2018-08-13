@@ -3,8 +3,6 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 
-import { HomePage } from '../pages/home/home';
-
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 
@@ -31,7 +29,8 @@ import { HttpModule } from '@angular/http';
 import { DateProvider } from '../providers/date/date';
 import { UsersProvider } from '../providers/users/users';
 import { RoomsProvider } from '../providers/rooms/rooms';
-import { StringProvider } from '../providers/strings/strings';
+
+import { PipesModule } from '../pipes/pipes.module'
 
 export const firebaseConfig = {
   apiKey: "AIzaSyANvht7J2MNX6x47mglqfJk74yZQ9u0qUk",
@@ -45,7 +44,6 @@ export const firebaseConfig = {
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
   ],
   imports: [
     BrowserModule,
@@ -63,11 +61,11 @@ export const firebaseConfig = {
     MainPageModule,
     MakeRoomPageModule,
     HttpModule,
+    PipesModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
   ],
   providers: [
     SplashScreen,
@@ -78,7 +76,6 @@ export const firebaseConfig = {
     DateProvider,
     UsersProvider,
     RoomsProvider,
-    StringProvider,
     LocalNotifications,
     PhonegapLocalNotification
   ]

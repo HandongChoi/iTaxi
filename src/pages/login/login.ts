@@ -1,15 +1,12 @@
 import { Component } from '@angular/core';
 import { IonicPage, Loading, LoadingController, NavController, NavParams, Alert, AlertController, MenuController } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { EmailValidator } from '../../validators/email';
 
 import { AuthProvider } from '../../providers/auth/auth';
 import { UsersProvider } from '../../providers/users/users';
-
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Http } from '@angular/http';
 
-import { MainPage } from '../main/main';
 import { SignupPage } from '../signup/signup';
 import { resolve } from 'dns';
 
@@ -19,12 +16,10 @@ import { resolve } from 'dns';
   templateUrl: 'login.html',
 })
 
-
 export class LoginPage {
   public loginForm:FormGroup;
   public loading:Loading;
 
- //+ firestore: any;
   constructor(public navCtrl:NavController, public navParams: NavParams, public loadingCtrl:LoadingController,
               public alertCtrl:AlertController, public authProvider:AuthProvider, formBuilder:FormBuilder,
               public menu: MenuController, public userServices:UsersProvider, public af: AngularFireDatabase,
@@ -39,9 +34,7 @@ export class LoginPage {
     });
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
-  }
+  ionViewDidLoad() { console.log('ionViewDidLoad LoginPage'); }
 
   loginUser():void { 
     const id = this.loginForm.value.id;
@@ -72,7 +65,6 @@ export class LoginPage {
           alert.present();
           });
         } else {
-          var exist = false;
           this.af.object(`/userProfile/${body['studentID']}`, { preserveSnapshot: true }).subscribe( (data) => {
             if(data.exists()){
               this.authProvider.loginUser(body['studentID']);        
@@ -89,32 +81,11 @@ export class LoginPage {
       })
     });
     this.loading = this.loadingCtrl.create();
-    this.loading.present(); 
-    
-    
-    /*
-    //지금 문제는 세션값 저장이라던지 앱에서 할 때 한 번 로그인 하면 계속 그 정보가 남아있게 하는 방식을 구상해야된다.
-    this.authProvider.loginUser(id, password).then( authData =>  {
-      this.loading.dismiss().then( () => {
-        this.userServices.initialize(authData).then(()=>{
-          this.navCtrl.setRoot(MainPage)
-        });
-      });
-    }, error => {
-      this.loading.dismiss().then( () => {
-          const alert:Alert = this.alertCtrl.create({
-          message: error.message,
-          buttons: [{ text: "Ok", role: 'cancel'}]
-        });
-        alert.present();
-      });
-    });
-    this.loading = this.loadingCtrl.create();
-    this.loading.present();
-    */
-  
+    this.loading.present();   
   }
-  /********* 자체 로그인 시스템을 쓸 때 아래와 같은 코드를 사용 하면 된다. ***************
+  /*************************************************************************/
+  /********* 자체 로그인 시스템을 쓸 때 아래와 같은 코드를 사용 하면 된다. ***************/
+  /*************************************************************************
   loginUser():void {
     if(!this.loginForm.valid){
       console.log(`Form isn't valid yet, value: ${this.loginForm.value}`);
@@ -141,5 +112,5 @@ export class LoginPage {
       this.loading.present();
     }
   }
-  ***************************************************************************/
+   ***************************************************************************/
 }
