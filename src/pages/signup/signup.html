@@ -25,6 +25,9 @@
 
 <ion-content padding>
   <div [ngSwitch]="procedure">
+    <!--****************************************************************
+        ***************************  약관  ******************************
+        ****************************************************************-->
     <div *ngSwitchCase="'terms'">
       <div class="wrap">
         <ion-card class="terms_content">
@@ -99,9 +102,14 @@
         <ion-label stacked>Account Number (계좌 번호)</ion-label>
         <ion-input formControlName="accountNumber" type="accountNumber" placeholder="추후에 입력하셔도 됩니다."></ion-input>
       </ion-item>
-      <button ion-button medium round color="primary" type="submit" style="margin-top: 15px" [disabled]="!signUpForm.valid">
-          가입하기 
-      </button>
+      <ion-row>
+        <ion-col width-100 style="text-align: center">
+            <button ion-button medium round color="primary" type="submit" style="margin-top: 15px" [disabled]="!signUpForm.valid">
+                가입하기 
+            </button>
+        </ion-col>
+      </ion-row>
+      
       </form>
       
     </div>

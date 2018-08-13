@@ -22,6 +22,7 @@ import firebase from 'firebase';
 import { MainPage } from '../pages/main/main';
 import { TaxiListPage } from '../pages/taxi-list/taxi-list';
 import { MakeRoomPage } from '../pages/makeRoom/makeRoom';
+import { SignupPage } from '../pages/signup/signup'
 
 firebase.initializeApp({
   apiKey: "AIzaSyANvht7J2MNX6x47mglqfJk74yZQ9u0qUk",
