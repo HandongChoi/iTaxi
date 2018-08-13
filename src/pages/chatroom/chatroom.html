@@ -96,8 +96,10 @@
 </ion-content>
 
 <ion-footer>
-  <ion-item (keyup.enter)="send()">
-    <ion-input [(ngModel)]="chatContent" fixed transportType="text"></ion-input>
-    <button ion-button clear item-right (click)="send()"> send </button>
-  </ion-item>
+  <form (ngSubmit)="send()">
+    <ion-item>
+      <ion-input type="text" name="contents" [(ngModel)]="chatContent" fixed transportType="text" ></ion-input>
+      <button type="submit" ion-button clear item-right > send </button>
+    </ion-item>
+  </form>
 </ion-footer>
