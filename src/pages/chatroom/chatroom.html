@@ -55,7 +55,7 @@
   <ion-list>
     <div class="message-wrap" *ngFor="let chat of chats | async; let last = last">
       <!-- 밑에 주석처리 되어있는 부분이 내가 말한 내용이면 오른쪽, 상대가 말한 내용이면 왼쪽 선택하게한다. -->
-      <div class="message right" *ngIf="chat.userID == userID">
+      <div class="message right" *ngIf="chat.userID == userID && chat.isQuitOrEnter != true">
         <!-- <img class="user-img" [src]="msg.userAvatar" alt="" src=""> 이거는 프로필사진-->
         <div class="user-info">
           <img *ngIf="chat.userID == roomHost" src="assets/img/crown_gold.png" alt="Host">{{chat.userName}}
@@ -68,16 +68,24 @@
         </div>
       </div>
 
-      <div class="message left" *ngIf="chat.userID != userID">
+      <div class="message left" *ngIf="chat.userID != userID && chat.isQuitOrEnter != true">
         <!-- <img class="user-img" alt="" src=""> -->
         <div class="user-info">
-          <img *ngIf="chat.userID == roomHsot" src="assets/img/crown_gold.png" alt="Host">{{chat.userName}}
+          <img *ngIf="chat.userID == roomHost" src="assets/img/crown_gold.png" alt="Host">{{chat.userName}}
         </div>
         <div class="msg-content">
           <div class="msg-info">
             <span>{{chat.content}}</span>
           </div>
           <span>{{chat.dateTime}}</span>
+        </div>
+      </div>
+
+      <div class="message" *ngIf="chat.isQuitOrEnter == true">
+        <div class="msg-content">
+          <div class="msg-info quit-enter">
+            {{chat.content}}
+          </div>
         </div>
       </div>
       <!-- 입장/퇴장/택시비 정산 등등 공지 >
