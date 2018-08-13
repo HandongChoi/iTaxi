@@ -110,7 +110,6 @@ export class ChatRoomPage {
             this.af.object(`/rideHistory/${this.userID}/${this.roomKey}`).update(this.room);
             this.sendNotification(`${this.userServices.userInfo['korName']}님이 나가셨습니다.`);
           }
-          this.dateServices.setNow();
           this.navCtrl.setRoot(MainPage);
         }
       }]

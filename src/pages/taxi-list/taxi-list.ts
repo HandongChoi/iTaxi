@@ -38,7 +38,7 @@ export class TaxiListPage {
     this.nowDate = this.dateServices.nowDate;
     for(let i = 1; i < 5; i++){
       let temp = new Date(this.nowDate);
-      temp.setDate(temp.getDate() + i);
+      temp.setDate(temp.getDate() + i + 1);
       this.days.push(this.dateServices.makeStringFromDate(temp));
     }
     //오늘 날짜 기준으로 data 불러오기.

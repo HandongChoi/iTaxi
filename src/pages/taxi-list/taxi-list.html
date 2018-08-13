@@ -70,9 +70,6 @@
             <ion-col col-2>
               <p>{{room.currentPeople}} / {{room.capacity}}</p>
               <p *ngIf="isEntered(room.participants)">참여중</p>
-              <!-- 생각해보니깐 참여 불가능한거는 걍 안 보이게 하면 되겠다.
-                <p *ngIf="!isEntered(room.participants)">참여 {{ room.currentPeople >= room.capacity ? "불가" : "가능" }}</p>
-              -->
             </ion-col>
           </ion-row>
         </ion-item-divider>

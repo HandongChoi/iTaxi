@@ -55,7 +55,7 @@
   <ion-list>
     <div class="message-wrap" *ngFor="let chat of chats | async; let last = last">
       <!-- 밑에 주석처리 되어있는 부분이 내가 말한 내용이면 오른쪽, 상대가 말한 내용이면 왼쪽 선택하게한다. -->
-      <div class="message right" *ngIf="chat.userID == userID && chat.isQuitOrEnter != true">
+      <div class="message right" *ngIf="chat.userID == userID">
         <!-- <img class="user-img" [src]="msg.userAvatar" alt="" src=""> 이거는 프로필사진-->
         <div class="user-info">
           <img *ngIf="chat.userID == roomHost" src="assets/img/crown_gold.png" alt="Host">{{chat.userName}}

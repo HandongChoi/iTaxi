@@ -54,7 +54,7 @@ export class MakeRoomPage {
               "도착지 : " + this.arrive + "<br>" + 
               "출발날짜 : " + this.bookingDate + "(" + this.dateServices.getKToday(this.bookingDate) + ")" + "<br>" + 
               "출발시간 : " + this.bookingTime + "<br>" +
-              "탑승허용인원 : " + this.maxPeople + "명" + "<br>" ;
+              "탑승모집인원 : " + this.maxPeople + "명" + "<br>" ;
     
     //지금 시간 보다 전 시간으로 예약하는 경우 처리
     if((this.nowDate+this.nowTime)>(this.bookingDate+this.bookingTime)){
