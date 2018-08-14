@@ -78,7 +78,7 @@ export class ChatRoomPage {
         userID: this.userServices.userInfo['studentID'],
         userName: this.userServices.userInfo['korName'],
         content: this.chatContent,
-        dateTime: new Date().toLocaleString(),
+        dateTime: new Date().toLocaleString('ko-KR', { timeZone: 'UTC' }),
       }).then(() => {
         this.chatContent = "";
         this.scrollBottom();
@@ -108,7 +108,7 @@ export class ChatRoomPage {
             this.room['devTokens'].splice(index,1);
             this.af.object(`/${this.room['transportType']}Chatrooms/${this.room['departDate']}/${this.roomKey}`).update(this.room);
             this.af.object(`/rideHistory/${this.userID}/${this.roomKey}`).update(this.room);
-            this.sendNotification(`${this.userServices.userInfo['korName']}님이 나가셨습니다.`);
+            this.sendNotification(`${this.userServices.userInfo['korName']}님이 나갔습니다.`);
           }
           this.navCtrl.setRoot(MainPage);
         }
