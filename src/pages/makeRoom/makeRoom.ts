@@ -126,5 +126,5 @@ export class MakeRoomPage {
   setDepartureDefault(){ this.selectDeparture = {key:"한동대학교", value:""}; }
   setDestinationDefault(){ this.selectDestination = {key:"포항역", value:""}; }
   swapPlace(){ [this.selectDeparture, this.selectDestination] = [this.selectDestination, this.selectDeparture]; }
-  setPeople(num) { this.maxPeople = String(num); }
+  setPeople(num) { this.maxPeople = String(num+1); }
 }
