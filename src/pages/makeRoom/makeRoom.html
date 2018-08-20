@@ -65,13 +65,13 @@
 
   <div class="wrapper" id="taxi" *ngIf="transportType == 'taxi'">
     <ion-row>
-      <span class="label">탑승허용인원</span>
+      <span class="label">탑승모집인원</span>
     </ion-row>
     <ion-row>
       <span col-3></span>
-      <span col-2 [ngClass]="{'nMaxPeople': maxPeople!='2'}"><img src="assets/img/max_4.png" alt="2" (click)="setPeople(2)"></span>
-      <span col-2 [ngClass]="{'nMaxPeople': maxPeople!='3'}"><img src="assets/img/max_2.png" alt="3" (click)="setPeople(3)"></span>
-      <span col-2 [ngClass]="{'nMaxPeople': maxPeople!='4'}"><img src="assets/img/max_3.png" alt="4" (click)="setPeople(4)"></span>
+      <span col-2 [ngClass]="{'nMaxPeople': maxPeople!='4'}"><img src="assets/img/max_3.png" alt="3" (click)="setPeople(3)"></span>
+      <span col-2 [ngClass]="{'nMaxPeople': maxPeople!='3'}"><img src="assets/img/max_2.png" alt="2" (click)="setPeople(2)"></span>
+      <span col-2 [ngClass]="{'nMaxPeople': maxPeople!='2'}"><img src="assets/img/max_1.png" alt="1" (click)="setPeople(1)"></span>
       <span col-3></span>
     </ion-row>
   </div>
