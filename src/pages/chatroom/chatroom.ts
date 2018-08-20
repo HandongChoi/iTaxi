@@ -91,8 +91,8 @@ export class ChatRoomPage {
       title: "방 나가기",
       message: "정말로 방을 나가시겠습니까?",
       buttons: [{
-        text: "Cancle",
-        role: "cancle"
+        text: "Cancel",
+        role: "cancel"
       }, {
         text: "OK",
         handler: () => {
@@ -132,15 +132,15 @@ export class ChatRoomPage {
         }
       ],
       buttons: [{
-        text: "Cancle",
-        role: "cancle"
+        text: "Cancel",
+        role: "cancel"
       }, {
         text: "OK",
         handler: ( data ) => {
           if(data.price <= 0 || data.people <= 0){
             let error = this.alertCtrl.create({
-              title:"",
-              message:"",
+              title:"입력정보 오류",
+              message:"올바른 가격과 인원을 입력해주세요.",
             });
             error.present();
           }else{
