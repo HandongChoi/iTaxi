@@ -71,9 +71,19 @@ export class TaxiListPage {
       room['devTokens'] = tokenList;
       room['currentPeople']++;
       this.af.object(`/rideHistory/${this.userServices.userInfo['studentID']}/${room.$key}`).set(room);
+      this.sendNotification(`${this.userServices.userInfo['korName']}님이 입장하셨습니다.`, room.$key);
     } else{ // 참여중
       this.navCtrl.push(ChatRoomPage, {room: room});
     }
+  }
+
+  sendNotification(msg, roomKey){
+    firebase.database().ref('/chats/' + roomKey).push({
+      userID: 'CRA',
+      userName: 'CRAang',
+      content: msg,
+      dateTime: new Date().toLocaleString(),
+    });
   }
 
   makeRoom(){ this.navCtrl.setRoot(MakeRoomPage, {transportType: this.transportType}); }

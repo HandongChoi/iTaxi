@@ -43,7 +43,6 @@ export class ChatRoomPage {
       this.roomKey = navParams.data.room.$key
     } else { //처음으로 방에 진입
       this.roomKey = navParams.data.roomKey;
-      this.sendNotification(`${this.userServices.userInfo['korName']}님이 입장하셨습니다.`);
     }
     this.chats = af.list('/chats/' + this.roomKey);
     this.userID = this.userServices.userInfo['studentID'];    
