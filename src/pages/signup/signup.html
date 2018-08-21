@@ -103,7 +103,7 @@
         <ion-input formControlName="accountNumber" type="accountNumber" placeholder="추후에 입력하셔도 됩니다."></ion-input>
       </ion-item>
       <ion-item class="error-message" *ngIf="!signUpForm.controls.accountNumber.valid && signUpForm.controls.accountNumber.dirty">
-        <p>숫자와 -의 조합으로만 입력해주세요.</p>
+        <p>숫자 또는 - 의 조합으로만 입력해주세요.</p>
       </ion-item>
 
       <button ion-button medium round color="primary" type="submit" style="margin-top: 15px" [disabled]="!signUpForm.valid">
