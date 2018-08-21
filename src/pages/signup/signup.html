@@ -94,11 +94,18 @@
         <ion-input formControlName="accountBank" type="accountBank" placeholder="추후에 입력하셔도 됩니다.">
         </ion-input>
       </ion-item>
+      <ion-item class="error-message" *ngIf="!signUpForm.controls.accountBank.valid && signUpForm.controls.accountBank.dirty">
+        <p>은행이름은 한글로만 입력해주세요!</p>
+      </ion-item>
 
       <ion-item>
         <ion-label stacked>Account Number (계좌 번호)</ion-label>
         <ion-input formControlName="accountNumber" type="accountNumber" placeholder="추후에 입력하셔도 됩니다."></ion-input>
       </ion-item>
+      <ion-item class="error-message" *ngIf="!signUpForm.controls.accountNumber.valid && signUpForm.controls.accountNumber.dirty">
+        <p>숫자와 -의 조합으로만 입력해주세요.</p>
+      </ion-item>
+
       <button ion-button medium round color="primary" type="submit" style="margin-top: 15px" [disabled]="!signUpForm.valid">
           가입하기 
       </button>
