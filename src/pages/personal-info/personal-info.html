@@ -58,10 +58,16 @@
         <ion-input formControlName="accountBank" type="accountBank">
         </ion-input>
       </ion-item>
+      <ion-item class="error-message" *ngIf="!updateForm.controls.accountBank.valid && updateForm.controls.accountBank.dirty">
+        <p>은행이름은 한글로만 입력해주세요!</p>
+      </ion-item>
 
       <ion-item>
         <ion-label stacked>Account Number (계좌 번호)</ion-label>
         <ion-input formControlName="accountNumber" type="accountNumber"></ion-input>
+      </ion-item>
+      <ion-item class="error-message" *ngIf="!updateForm.controls.accountNumber.valid && updateForm.controls.accountNumber.dirty">
+        <p>숫자 또는 - 의 조합으로만 입력해주세요.</p>
       </ion-item>
       
       <ion-item no-lines text-center>

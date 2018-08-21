@@ -5,6 +5,8 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { UsersProvider } from '../../providers/users/users';
 import { SettingPage } from '../setting/setting'
 import { EmailValidator } from '../../validators/email';
+import { AccountBankValidator } from '../../validators/accountBank';
+import { AccountNumberValidator } from '../../validators/accountNumber';
 
 @IonicPage()
 @Component({
@@ -23,8 +25,8 @@ export class PersonalInfoPage {
       engName: [this.userInfo['engName'], Validators.required],
       email: [this.userInfo['email'], Validators.compose([Validators.required, EmailValidator.isValid])],
       phone: [this.userInfo['phone'], Validators.required],
-      accountBank: [this.userInfo['accountBank'], ],
-      accountNumber: [this.userInfo['accountNumber'], ]
+      accountBank: [this.userInfo['accountBank'], AccountBankValidator.isValid],
+      accountNumber: [this.userInfo['accountNumber'], AccountNumberValidator.isValid]
     });
   }
 

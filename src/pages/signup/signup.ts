@@ -5,6 +5,9 @@ import { AuthProvider } from '../../providers/auth/auth';
 import { EmailValidator } from '../../validators/email';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { UsersProvider } from '../../providers/users/users';
+import { EngNameValidator } from '../../validators/engName';
+import { AccountNumberValidator } from '../../validators/accountNumber';
+import { AccountBankValidator } from '../../validators/accountBank';
 
 @IonicPage()
 @Component({
@@ -38,11 +41,11 @@ export class SignupPage {
     public af: AngularFireDatabase, public userService: UsersProvider) {
       this.userInfo = this.navParams.data.userInfo; 
       this.signUpForm = formBuilder.group({
-        engName: [this.userInfo['engName'], Validators.required],
+        engName: [this.userInfo['engName'], EngNameValidator.isValid],
         email: [this.userInfo['email'], Validators.compose([Validators.required, EmailValidator.isValid])],
         phone: [this.userInfo['phone'], Validators.compose([Validators.required, ])],
-        accountBank: ['', ],
-        accountNumber: ['', ]
+        accountBank: [this.userInfo['accountBank'],AccountBankValidator.isValid],
+        accountNumber: [this.userInfo['accountNumber'],AccountNumberValidator.isValid]
       });
   }
 
