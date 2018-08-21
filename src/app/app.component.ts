@@ -25,12 +25,12 @@ import { MakeRoomPage } from '../pages/makeRoom/makeRoom';
 import { SignupPage } from '../pages/signup/signup'
 
 firebase.initializeApp({
-  apiKey: "AIzaSyANvht7J2MNX6x47mglqfJk74yZQ9u0qUk",
-  authDomain: "itaxi-54bdc.firebaseapp.com",
-  databaseURL: "https://itaxi-54bdc.firebaseio.com",
-  projectId: "itaxi-54bdc",
-  storageBucket: "itaxi-54bdc.appspot.com",
-  messagingSenderId: "208976127032"
+  apiKey: "AIzaSyAUzjyDEOkbfvh3hU_t4wR4p3jXNq5lz3A",
+  authDomain: "itaxipublic.firebaseapp.com",
+  databaseURL: "https://itaxipublic.firebaseio.com",
+  projectId: "itaxipublic",
+  storageBucket: "",
+  messagingSenderId: "762163958818"
 });
 
 @Component({

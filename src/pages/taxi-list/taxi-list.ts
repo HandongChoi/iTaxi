@@ -38,7 +38,7 @@ export class TaxiListPage {
     this.nowDate = this.dateServices.nowDate;
     for(let i = 1; i < 5; i++){
       let temp = new Date(this.nowDate);
-      temp.setDate(temp.getDate() + i + 1);
+      temp.setDate(temp.getDate() + i);
       this.days.push(this.dateServices.makeStringFromDate(temp));
     }
     //오늘 날짜 기준으로 data 불러오기.
@@ -63,22 +63,30 @@ export class TaxiListPage {
 
   goChatroom(room) {
     if (!this.isEntered(room['participants'])) { //처음 참여
-      let members = room['participants'];
+      this.sendNotification(`${this.userServices.userInfo['korName']}님이 입장하셨습니다.`, room.$key);
+      
+      let members:Array<any> = room['participants'];
       let tokenList = room['devTokens'];
       members.push(this.userID);
       tokenList.push(this.userServices.userInfo['devToken']);
       room['participants'] = members;
       room['devTokens'] = tokenList;
       room['currentPeople']++;
-      this.af.object(`/rideHistory/${this.userServices.userInfo['studentID']}/${room.$key}`).set(room);
-      this.sendNotification(`${this.userServices.userInfo['korName']}님이 입장하셨습니다.`, room.$key);
+
+      this.af.object(`/${room.transportType}Chatrooms/${room.departDate}/${room.$key}`).set(room);
+  
+      members.forEach(studentID => {
+        this.af.object(`/rideHistory/${studentID}/${room.$key}`).set(room);
+      })
+      
+      this.navCtrl.push(ChatRoomPage, {room: room});
     } else{ // 참여중
       this.navCtrl.push(ChatRoomPage, {room: room});
     }
   }
 
   sendNotification(msg, roomKey){
-    firebase.database().ref('/chats/' + roomKey).push({
+    this.af.list('/chats/' + roomKey).push({
       userID: 'CRA',
       userName: 'CRAang',
       content: msg,
