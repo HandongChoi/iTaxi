@@ -20,7 +20,7 @@ import { PhonegapLocalNotification } from '@ionic-native/phonegap-local-notifica
 import firebase from 'firebase';
 
 import { MainPage } from '../pages/main/main';
-import { TaxiListPage } from '../pages/taxi-list/taxi-list';
+import { ListPage } from '../pages/list/list';
 import { MakeRoomPage } from '../pages/makeRoom/makeRoom';
 import { SignupPage } from '../pages/signup/signup'
 
@@ -136,10 +136,10 @@ export class MyApp {
     this.navCtrl.push(ChatRoomPage, {room: room});
   }
 
-  takeTaxi() { this.navCtrl.setRoot(TaxiListPage, {transportType: 'taxi'}); }
+  takeTaxi() { this.navCtrl.setRoot(ListPage, {transportType: 'taxi'}); }
   makeTaxi() { this.navCtrl.setRoot(MakeRoomPage, {transportType: 'taxi'}); }
 
-  takeCarpool() { this.navCtrl.setRoot(TaxiListPage, {transportType: 'carpool'}); }
+  takeCarpool() { this.navCtrl.setRoot(ListPage, {transportType: 'carpool'}); }
   makeCarpool() { this.navCtrl.setRoot(MakeRoomPage, {transportType: 'carpool'}); }
 
   logout(){

@@ -11,10 +11,10 @@ import { RoomsProvider } from '../../providers/rooms/rooms';
 
 @IonicPage()
 @Component({
-  selector: 'page-taxi-list',
-  templateUrl: 'taxi-list.html',
+  selector: 'page-list',
+  templateUrl: 'list.html',
 })
-export class TaxiListPage {
+export class ListPage {
   rooms: FirebaseListObservable<Object[]>;
   userID: string;
   transportType: string;
@@ -120,7 +120,7 @@ export class TaxiListPage {
     }
   }
 
-  ionViewDidLoad() { console.log('ionViewDidLoad TaxiListPage'); }
+  ionViewDidLoad() { console.log('ionViewDidLoad ListPage'); }
   isEntered(participants: Array<any>): boolean { return participants.indexOf(this.userID) != -1 ? true : false }
   isAvailable(room): boolean { return room.currentPeople < room.capacity ? true : false; }
 }

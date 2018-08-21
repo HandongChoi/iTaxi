@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { ChatRoomPage } from '../../pages/chatroom/chatroom';
-import { TaxiListPage } from '../../pages/taxi-list/taxi-list';
+import { ListPage } from '../../pages/list/list';
 
 import { UsersProvider } from '../../providers/users/users';
 import { DateProvider } from '../../providers/date/date';
@@ -42,8 +42,8 @@ export class MainPage {
   }
 
   ionViewDidLoad(){ console.log("ionViewDidLoad at main.ts"); }
-  takeTaxi() { this.navCtrl.setRoot(TaxiListPage, {transportType: 'taxi'}); }
-  takeCarpool() { this.navCtrl.setRoot(TaxiListPage, {transportType: 'carpool'}); }
+  takeTaxi() { this.navCtrl.setRoot(ListPage, {transportType: 'taxi'}); }
+  takeCarpool() { this.navCtrl.setRoot(ListPage, {transportType: 'carpool'}); }
   goChatroomPage(room){ this.navCtrl.push(ChatRoomPage, {room: room}); }
 
   storetoken(){

@@ -6,7 +6,6 @@ npm install 잊지마세요.
 현재 구조 사황
 - ID로는 studentID로 쓰고 있고 미래에 가입 절차가 hisnet이 아닐 경우 프로젝트 안에 있는 userID를 다른 것으로 다 대체해야 될 것이다.
 - list page와 makeRoom page는 택시와 카풀의 거의 유사한 점들 때문에 room['type']에서 그것을 구분짓고 있다.
-- chatRoom으로 가는 경로는 appComponent, list, rideHistory, makeRoom, main에서 오는 것으로 보고 있다.
 - chatRoom에서는 파베에서 데이터를 불러올때 경로가 type에 따라 나눠진다.
 - 채팅방의 접근에 관해서 list페이지에서 관리를한다. 채팅방에 들어갈 수 있고 없고가 list에서 해결이 되니 chatRoomPage에서는 모든 사람들이
   들어가있는 것으로 간주된다.
@@ -34,7 +33,6 @@ npm install 잊지마세요.
   공부 할 수 있도록 코드를 남겨두었다.
 - 시간은 로컬로 해놓았기 때문에 같은 시차를 가진 장소에서만 불편함 없이 사용 할 수 있다.
 
-
 - Main 접근 경로 1) Login 2) Signup 3) Appcomponent by auth
 - List 접근 경로 1) Main 2) Appcomponent
 - MakeRoom 접근 경로 1) List 2) Appcomponent direct
@@ -44,7 +42,6 @@ npm install 잊지마세요.
 
 
 해야 될 일
-- 룸 프로바이더 완전 다 지우기
 - fcm 공부해서 푸쉬 제대로 하기
 - 웹에서 토큰 없이 작동하는 방법 알고 pwa가능한지 알아보기.
 - singup시에 지금 init가 2번정도 불리고 다른 것도 중복해서 불리는게 있는데 그런것들 정확한 이유 확인해서 버그 고치기. - 대충 promise방식의 부족한 이해로 인해 발생하는 것 같다.
@@ -53,7 +50,6 @@ npm install 잊지마세요.
 요구 추가 기능
 - 회원가입에서 영어 이름에 대한 정규식을 정리(+personInfo 정보 바꾸는 것도 같이.)
 - 회원가입에서 휴대폰 번호 입력시 자동 - 입력("")
-- 회원가입에서 가입하기 가운데 놓기
 - 회원가입 확인란 + 채팅방 만들기 확인란 영어와 한글 디자인 고려
 - 로그인 시 5번 이상 시도 시 잠금 기능
 - 리스트 페이지에서 필터 기능 사용시 출발지, 도착지 모두 동시에 만족하는 로직으로 짜기.
