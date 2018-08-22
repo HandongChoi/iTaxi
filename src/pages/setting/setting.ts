@@ -41,8 +41,8 @@ export class SettingPage {
       buttons: [
         {
           text: '취소',
-          role: 'cancle',
-          handler: () => { console.log('Cancle'); }
+          role: 'cancel',
+          handler: () => { console.log('Cancel'); }
         },
         {
           text: '확인',
