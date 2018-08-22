@@ -70,7 +70,7 @@ npm install 잊지마세요.
 - 안드 스튜디오와 brew install gradle을 이용해서 2가지를 깔았다.
 - 안드 스튜디오로 sdk platform을 설치해야한다.
 - sudo chmod +x /Applications/Android\ Studio.app/Contents/gradle/gradle-4.4/bin/gradle
-  npm install @ionic/app-scripts@latest --save-
+  npm install @ionic/app-scripts@latest --save
   npm install
   sudo ionic cordova build android
   명령어로 빌드를 했고 gradle같은 경우 4.4인지 아니면 다른 버전인지 gradle이후 tab을 이용해서 확인 하고 바꾸면 된다.

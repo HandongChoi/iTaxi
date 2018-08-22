@@ -54,40 +54,20 @@
 
 <ion-content>
   <ion-list>
-    <div class="message-wrap" *ngFor="let chat of chats | async; let last = last">
+    <div class="message-wrap" *ngFor="let chat of chats | async as Chats; let i = index;">
       <!-- 밑에 주석처리 되어있는 부분이 내가 말한 내용이면 오른쪽, 상대가 말한 내용이면 왼쪽 선택하게한다. -->
-      <div class="message right" *ngIf="chat.userID == userID">
-        <!-- <img class="user-img" [src]="msg.userAvatar" alt="" src=""> 이거는 프로필사진-->
-        <div class="user-info">
+      <div class="message" [ngClass]="chat.userID == userID ? 'right' : (chat.userID != 'CRA' ? 'left' : 'testing')">
+        <!-- 한 유저의 연속된 메시지는 첫 메시지만 이름 띄움 -->
+        <div class="user-info" *ngIf="chat.userID != 'CRA' && (i == 0 ? true : Chats[i-1].userName != chat.userName)">
           <img *ngIf="chat.userID == roomHost" src="assets/img/crown_gold.png" alt="Host">{{chat.userName}}
         </div>
-        
         <div class="msg-content">
-          <span>{{chat.dateTime | DatePipe}}</span>
-          <div class="msg-info">
-            <span>{{chat.content}}</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="message" *ngIf="chat.userID == 'CRA'">
-        <div class="msg-content">
-          <div class="notification">
+          <!-- 디자인상으로 왼쪽 오른쪽 span태그의 위치가 달라져서 똑같은 태그 반복 -->
+          <span *ngIf="chat.userID == userID">{{chat.dateTime | DatePipe}}</span>
+          <div class="msg-info" [ngClass]="{'notification': chat.userID == 'CRA'}">
             {{chat.content}}
           </div>
-        </div>
-      </div>
-      
-      <div class="message left" *ngIf="(chat.userID != userID) && (chat.userID != 'CRA')">
-        <!-- <img class="user-img" alt="" src=""> -->
-        <div class="user-info">
-          <img *ngIf="chat.userID == roomHost" src="assets/img/crown_gold.png" alt="Host">{{chat.userName}}
-        </div>
-        <div class="msg-content">
-          <div class="msg-info">
-            <span>{{chat.content}}</span>
-          </div>
-          <span>{{chat.dateTime}}</span>
+          <span *ngIf="chat.userID != 'CRA' && chat.userID != userID ">{{chat.dateTime | DatePipe}}</span>
         </div>
       </div>
     </div>

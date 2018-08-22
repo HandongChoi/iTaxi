@@ -73,8 +73,12 @@
       <ion-item no-lines text-center>
         <p>추가적인 변경을 원하시면 메일로 문의해 주시기 바랍니다.</p>
       </ion-item>
-      <button ion-button medium round color="primary" type="submit" style="margin-top: 15px" [disabled]="!updateForm.valid">
-          변경하기 
-      </button>
+      <ion-row>
+        <ion-col width-100 style="text-align: center">
+          <button ion-button medium round color="primary" type="submit" style="margin-top: 15px" [disabled]="!updateForm.valid">
+              변경하기 
+          </button>
+        </ion-col>
+      </ion-row>
       </form>
 </ion-content>
