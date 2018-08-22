@@ -13,7 +13,6 @@ export class DatePipe implements PipeTransform {
    * Takes a value and makes it lowercase.
    */
   transform(date: string): string {
-    console.log(date);
     // 챗팅 메시지가 1분이내에 연속되면 날짜를 보이지 않도록 함
     // if (date=="isContinuousMessage") return " ";
     if (date.includes("[continuousMessage]")) return " ";
