@@ -50,11 +50,18 @@ export class MakeRoomPage {
     this.arrive = this.selectDestination['key'] != '직접입력' ? this.selectDestination['key'] : this.selectDestination['value'];
     
     //전달할 메시지
-    this.msg = "<br>출발지 : " + this.depart + "<br>" + 
+    this.msg = this.transportType == 'taxi' 
+              ? "<br>출발지 : " + this.depart + "<br>" + 
               "도착지 : " + this.arrive + "<br>" + 
               "출발날짜 : " + this.bookingDate + "(" + this.dateServices.getKToday(this.bookingDate) + ")" + "<br>" + 
               "출발시간 : " + this.bookingTime + "<br>" +
-              "탑승모집인원 : " + this.maxPeople + "명" + "<br>" ;
+              "탑승모집인원 : " + this.maxPeople + "명" + "<br>" 
+              : "<br>출발지 : " + this.depart + "<br>" + 
+              "도착지 : " + this.arrive + "<br>" + 
+              "출발날짜 : " + this.bookingDate + "(" + this.dateServices.getKToday(this.bookingDate) + ")" + "<br>" + 
+              "출발시간 : " + this.bookingTime + "<br>" +
+              "탑승모집인원 : " + this.maxPeople + "명" + "<br>" +
+              "가격 : " + this.price + "원" + "<br>";
     
     //지금 시간 보다 전 시간으로 예약하는 경우 처리
     if((this.nowDate+this.nowTime)>(this.bookingDate+this.bookingTime)){
@@ -123,7 +130,7 @@ export class MakeRoomPage {
                                     transportType: this.transportType,
                                     participants: [this.userID],
                                     devTokens:[this.userServices.userInfo['devToken']],
-                                    price: this.price
+                                    price: this.price == null ? 0 : this.price
                                   };
 
                 let chatRoomUrl = this.af.list(`/${room['transportType']}Chatrooms/${this.bookingDate}`).push(room);
