@@ -43,8 +43,8 @@ export class PersonalInfoPage {
       message: "정보를 수정하시겠습니까?",
       buttons: [
         {
-          text: "Cancle",
-          role: "cancle"
+          text: "Cancel",
+          role: "cancel"
         },
         {
           text: "Change",
