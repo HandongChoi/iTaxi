@@ -5,6 +5,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { UsersProvider } from '../../providers/users/users';
 import { SettingPage } from '../setting/setting'
 import { EmailValidator } from '../../validators/email';
+import { EngNameValidator } from '../../validators/engName';
 import { AccountBankValidator } from '../../validators/accountBank';
 import { AccountNumberValidator } from '../../validators/accountNumber';
 
@@ -22,7 +23,7 @@ export class PersonalInfoPage {
               public userService: UsersProvider) {
     this.userInfo = this.userService.userInfo;
     this.updateForm = formBuilder.group({
-      engName: [this.userInfo['engName'], Validators.required],
+      engName: [this.userInfo['engName'], EngNameValidator.isValid],
       email: [this.userInfo['email'], Validators.compose([Validators.required, EmailValidator.isValid])],
       phone: [this.userInfo['phone'], Validators.required],
       accountBank: [this.userInfo['accountBank'], AccountBankValidator.isValid],
