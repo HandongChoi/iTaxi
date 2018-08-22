@@ -26,6 +26,9 @@ export class ChatRoomPage {
   userID: string;
   displayDate: string;
   displayTime: string;
+  accountBank: string;
+  accountNumber: string;
+  price: number;
 
   index: number = -1;
   roomKey: string;
@@ -46,7 +49,7 @@ export class ChatRoomPage {
       this.sendNotification(`${this.userServices.userInfo['korName']}님이 입장하셨습니다.`);
     }
     this.chats = af.list('/chats/' + this.roomKey);
-    this.userID = this.userServices.userInfo['studentID'];    
+    this.userID = this.userServices.userInfo['studentID']; 
 
     //Display 관련
     this.displayDate = this.dateServices.getKMonthDay(this.room['departDate']);
@@ -86,13 +89,51 @@ export class ChatRoomPage {
     }
   }
 
+  quitCarpool(){
+    let alert = this.alertCtrl.create({
+      title: "방 나가기",
+      message: "정말로 방을 나가시겠습니까?",
+      buttons: [{
+        text: "Cancel",
+        role: "cancel"
+      }, {
+        text: "OK",
+        // 나가기 버튼을 눌렀을 때에도 방장이 방을 파토내면 방 자체를 지워야 되겠다. 
+        // 지금의 로직상은 택시카풀을 기준으로 방장이 나가면 다음 사람이 방장이 되는건데 
+        // 카풀은 그게 아니라 방 자체가 터져야지 맞는 것 같다.
+        // 방이 터진다는 말은 방 참가 했는 모든 인원들의 ridehistory역시 지워야 됨을 의미한다.
+        handler: () => {
+          let index = this.room['participants'].indexOf(this.userServices.userInfo['studentID']);
+          this.room['participants'].splice(index,1);
+          this.room['currentPeople']--;
+          if(this.room['host'] == this.userID){
+            this.af.object(`/${this.room['transportType']}Chatrooms/${this.room['departDate']}/${this.roomKey}`).remove();
+            this.participants = this.room['participants'];
+            for(let i = 0; i < this.participants.length; i++){
+              this.af.object(`/rideHistory/${this.room['participants'][i]}/${this.roomKey}`).remove();
+              this.af.object(`/rideHistory/${this.userID}/${this.roomKey}`).remove();
+            }
+          }else{
+            let index = this.room['devTokens'].indexOf(this.userServices.userInfo['devToken']);
+            this.room['devTokens'].splice(index,1);
+            this.af.object(`/${this.room['transportType']}Chatrooms/${this.room['departDate']}/${this.roomKey}`).update(this.room);
+            this.af.object(`/rideHistory/${this.userID}/${this.roomKey}`).update(this.room);
+            this.sendNotification(`${this.userServices.userInfo['korName']}님이 나가셨습니다.`);
+          }
+          this.navCtrl.setRoot(MainPage);
+        }
+      }]
+    });
+    alert.present();
+  }
+
   quit(){
     let alert = this.alertCtrl.create({
       title: "방 나가기",
       message: "정말로 방을 나가시겠습니까?",
       buttons: [{
-        text: "Cancle",
-        role: "cancle"
+        text: "Cancel",
+        role: "cancel"
       }, {
         text: "OK",
         handler: () => {
@@ -132,8 +173,8 @@ export class ChatRoomPage {
         }
       ],
       buttons: [{
-        text: "Cancle",
-        role: "cancle"
+        text: "Cancel",
+        role: "cancel"
       }, {
         text: "OK",
         handler: ( data ) => {
@@ -152,6 +193,27 @@ export class ChatRoomPage {
         }
       }]
     });
+    alert.present();
+  }
+
+  paymentCarpool(){
+    this.af.object('/userProfile/' + this.roomHost).subscribe( data => {
+      let userProfile = data;
+      this.accountBank = userProfile['accountBank'];
+      this.accountNumber = userProfile['accountNumber'];
+    })
+    let alert = this.alertCtrl.create({
+      // 이미 돈을 줘야 하는 사람이 정해져있다. 따라서 정산하기 버튼을 누르면 입력창이 뜨는게 아니라
+      // 방장의 계좌 정보와 가격을 띄어야 한다
+      title: "정산하기",
+      message: `${this.accountBank} ${this.accountNumber}로
+                ${this.room['price']}원씩 보내주세요.`,
+      buttons:[{
+        text: "Ok",
+        role: "cancel"
+      }]
+    });
+    this.sendNotification(`${this.accountBank} ${this.accountNumber}로 ${this.room['price']}원씩 보내주세요.`);
     alert.present();
   }
 

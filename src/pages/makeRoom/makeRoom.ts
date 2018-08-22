@@ -100,7 +100,8 @@ export class MakeRoomPage {
             },
             { text: '확인',
               handler: () => {
-                let room: Object = { depart: this.depart,
+                //카풀이면 가격정보저장, 택시면 가격정보 없이
+                let room: Object = this.transportType == 'taxi' ? { depart: this.depart,
                                      arrive: this.arrive,
                                      departDate: this.bookingDate,
                                      departTime: this.bookingTime,
@@ -111,7 +112,19 @@ export class MakeRoomPage {
                                      transportType: this.transportType,
                                      participants: [this.userID],
                                      devTokens:[this.userServices.userInfo['devToken']]
-                                   };
+                                   } : { depart: this.depart,
+                                    arrive: this.arrive,
+                                    departDate: this.bookingDate,
+                                    departTime: this.bookingTime,
+                                    capacity: this.maxPeople,
+                                    currentPeople: 1,
+                                    hostName: this.userServices.userInfo['korName'],
+                                    host: this.userID,
+                                    transportType: this.transportType,
+                                    participants: [this.userID],
+                                    devTokens:[this.userServices.userInfo['devToken']],
+                                    price: this.price
+                                  };
 
                 let chatRoomUrl = this.af.list(`/${room['transportType']}Chatrooms/${this.bookingDate}`).push(room);
                 this.af.object(`/rideHistory/${this.userServices.userInfo['studentID']}/${chatRoomUrl.key}`).set(room);
