@@ -86,7 +86,6 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
 
-/*
       this.fcm.onTokenRefresh().subscribe(
         (token:string) => this.userServices.setDevToken(token),
         error => console.error(error)
@@ -124,7 +123,7 @@ export class MyApp {
       );
       // push message 수신 시 background, foreground에서 어떻게 할 건지 정의
       // Note: 현재 카톡에서 올때 위에 떴다가 사라지는 것을 구현하려고 하는데 이름이 뭔지.. docs에는 없는 것 같은데.. 나중에 찾아보자..
-      */
+      
     });
     console.log("initailizeApp at app.component.ts");
   }
@@ -147,8 +146,8 @@ export class MyApp {
       title: "로그아웃",
       message: "로그아웃 하시겠습니까?",
       buttons: [{
-        text: "Cancle",
-        role: "cancle"
+        text: "Cancel",
+        role: "cancel"
       }, {
         text: "OK",
         handler: () => {
