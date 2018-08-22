@@ -1,0 +1,95 @@
+page-list {
+  .item-inner {
+    border-bottom: none !important;
+  }
+
+  .small-table {
+    border-bottom: 1px solid #9F9FA0;
+
+    .small-top {
+      ion-select {
+        max-width: none;
+        width: 100%;
+        font-size: 14px;
+      }
+  
+      .rightArrow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 30px;
+        color: color($colors, primary, base);
+      }
+    }
+  
+    .small-bottom {
+      .days {
+        text-align: center;
+        cursor: pointer;
+
+        p { color: color($colors, semi-gray, base); }
+
+        &.activate {
+          p { color: black}
+        }
+  
+        .item-inner {
+          padding-right: 0;
+
+          ion-label {
+            overflow: visible;
+          }
+        }
+      }
+  
+      .days_icon {
+        text-align: center;
+        font-weight: bold;
+        color: color($colors, dark-gray, base);
+      }
+    }
+  }
+
+  .mainGrid {
+    padding: 0;
+
+    .line {
+      background-color: white;
+      cursor: pointer;
+      border-bottom: 1px solid lighten(color($colors, dark-gray, base), 30%);
+  
+      p {
+        color: black;
+      }
+
+      &.full {
+        background-color: darken(color($colors, back-gray, base), 10%);
+        p {
+          color: color($colors, dark-gray, base);
+        }
+      }
+    
+      &.exist {
+        background-color: color($colors, secondary, base);
+        p {
+          color: white;
+        }
+      }
+    }
+  }
+
+  // .top-title{
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   padding: 0 90px 1px;
+  //   width: 100%;
+  //   height: 100%;
+  //   text-align: center;
+  // }
+
+  ion-fab {
+    margin-bottom: 2px;
+    margin-right: 15px;
+  }
+}
