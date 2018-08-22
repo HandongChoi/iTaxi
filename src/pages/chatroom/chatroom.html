@@ -38,6 +38,7 @@
   <ion-grid id="part-info">
     <ion-row>
       <ion-col class="users">
+        <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!문제의 지점!!!!!!!!!!!!!!!!!!!!!!!!!!-->
         <div class="user" *ngFor="let member of participants; let i = index">
           <button class="user-name" [ngClass]="{'active': index==i}" (click)="show(i)" >{{ member.korName }}</button>
           <button class="user-call"><a href="sms://{{member.phoneNumber}}"><ion-icon name="ios-call-outline"></ion-icon></a></button>
