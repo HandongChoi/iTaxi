@@ -44,9 +44,8 @@ export class ChatRoomPage {
     this.room = navParams.data.room;
     if(navParams.data.roomKey == undefined){ //기존 멤버 입장
       this.roomKey = navParams.data.room.$key
-    } else { //처음으로 방에 진입
+    } else { //처음 방 만들고 방 진입 할 때
       this.roomKey = navParams.data.roomKey;
-      this.sendNotification(`${this.userServices.userInfo['korName']}님이 입장하셨습니다.`);
     }
     this.chats = af.list('/chats/' + this.roomKey);
     this.userID = this.userServices.userInfo['studentID'];
@@ -56,9 +55,8 @@ export class ChatRoomPage {
     this.displayTime = this.room['depart_time'];
     this.roomHost = this.room['host'];
 
-    //접속한 user가 그 채팅방의 목록에 있는지 없는지 여부 확인 하고 user들 정보를 관리.
-    //방 참가자들에 바로 유저 object를 넣어도 될 것 같지만 파베의 특성이 얕은 db출력이 빠르므로 속도측면에서
-    //번거롭더라도 아래와 같은 구조를 지니고 있다.
+    /////////////////////////////////// 문제의 지점 ///////////////////////////////////////
+    //지금 participants에 관한 정보가 object라서 실시간 업데이트가 안 되고 있다.
     for(let user of this.room['participants']){
       af.list(`/userProfile`, {
         query: {
@@ -85,6 +83,8 @@ export class ChatRoomPage {
         userName: this.userServices.userInfo['korName'],
         content: this.chatContent,
         dateTime: this.chatNowTime,
+      }).catch(err => {
+        console.log(err);
       }).then((data) => {
         // 한 유저가 1분 이내 보낸 메세지들은 가장 마지막 메세지만 날짜를 표시함
         if (this.continuousMessage(this.chatNowTime, this.chatPrevTime) && this.chatPrevKey) {
@@ -106,24 +106,31 @@ export class ChatRoomPage {
       title: "방 나가기",
       message: "정말로 방을 나가시겠습니까?",
       buttons: [{
-        text: "Cancle",
-        role: "cancle"
+        text: "Cancel",
+        role: "cancel"
       }, {
         text: "OK",
         handler: () => {
+          ////////////////////////////////문제 고쳤을 때 봐야 할 곳///////////////////////////////
+          // 문제의 지점 로직이 바뀌면 반드시 여기도 바뀌어야 될 것이다///////////////////////////////////
           let index = this.room['participants'].indexOf(this.userServices.userInfo['studentID']);
           this.room['participants'].splice(index,1);
           this.room['currentPeople']--;
-          if (this.room['currentPeople'] <= 0){
+          if(this.room['currentPeople'] <= 0){ //방 삭제의 경우
             this.af.object(`/${this.room['transportType']}Chatrooms/${this.room['departDate']}/${this.roomKey}`).remove();
             this.af.object(`/rideHistory/${this.userID}/${this.roomKey}`).remove();
-          } else{
-            if(this.room['host'] == this.userID){ this.room['host'] = this.room['participants'][0]; }
+          }else{
+            if(this.room['host'] == this.userID){ //기존 방장이 나간 경우
+              let newHost = this.af.object(`/userProfile/${this.room['participants'][0]}`);
+              this.room['host'] = newHost['studentID']; 
+              this.room['hostName'] = newHost['korName'];
+            }
             let index = this.room['devTokens'].indexOf(this.userServices.userInfo['devToken']);
             this.room['devTokens'].splice(index,1);
             this.af.object(`/${this.room['transportType']}Chatrooms/${this.room['departDate']}/${this.roomKey}`).update(this.room);
-            this.af.object(`/rideHistory/${this.userID}/${this.roomKey}`).update(this.room);
-            this.sendNotification(`${this.userServices.userInfo['korName']}님이 나갔습니다.`);
+            ////////////// 일단 여기도 update가 안 되는 상황인데 위에 로직 고치면 한꺼번에 고치자///////////
+            this.af.object(`/rideHistory/${this.userID}/${this.roomKey}`).remove();
+            this.sendNotification(`${this.userServices.userInfo['korName']}님이 나가셨습니다.`);
           }
           this.navCtrl.setRoot(MainPage);
         }
@@ -147,15 +154,15 @@ export class ChatRoomPage {
         }
       ],
       buttons: [{
-        text: "Cancle",
-        role: "cancle"
+        text: "Cancel",
+        role: "cancel"
       }, {
         text: "OK",
         handler: ( data ) => {
           if(data.price <= 0 || data.people <= 0){
             let error = this.alertCtrl.create({
-              title:"",
-              message:"",
+              title:"입력정보 오류",
+              message:"올바른 가격과 인원을 입력해주세요.",
             });
             error.present();
           }else{
@@ -172,7 +179,7 @@ export class ChatRoomPage {
   }
 
   sendNotification(msg){
-    firebase.database().ref('/chats/' + this.roomKey).push({
+    this.af.list('/chats/' + this.roomKey).push({
       userID: 'CRA',
       userName: 'CRAang',
       content: msg,

@@ -20,7 +20,7 @@ export class MakeRoomPage {
   depart: string = "";
   selectDestination: Object = {key:"포항역", value:""};
   arrive: string = "";
-  maxPeople: string = "4";
+  maxPeople: string = "3";
   price: string = "0"; 
   msg: string="";
 
@@ -104,7 +104,7 @@ export class MakeRoomPage {
                                      arrive: this.arrive,
                                      departDate: this.bookingDate,
                                      departTime: this.bookingTime,
-                                     capacity: this.maxPeople,
+                                     capacity: Number(this.maxPeople) + 1,
                                      currentPeople: 1,
                                      hostName: this.userServices.userInfo['korName'],
                                      host: this.userID,
