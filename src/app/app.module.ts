@@ -47,7 +47,13 @@ export const firebaseConfig = {
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+      menuType: 'overlay',
+      mode: 'md',
+      pageTransition: 'md-transition', // 안드로이드 화면전환이 렉이 덜 걸리는 듯
+      // backButtonIcon: 'md-arrow-back',
+      // backButtonText: '',
+    }),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     DatePickerModule,
