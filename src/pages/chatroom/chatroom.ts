@@ -107,12 +107,10 @@ export class ChatRoomPage {
           this.room['participants'].splice(index,1);
           this.room['currentPeople']--;
           if(this.room['host'] == this.userID){
-            this.af.object(`/${this.room['transportType']}Chatrooms/${this.room['departDate']}/${this.roomKey}`).remove();
             this.participants = this.room['participants'];
-            for(let i = 0; i < this.participants.length; i++){
-              this.af.object(`/rideHistory/${this.room['participants'][i]}/${this.roomKey}`).remove();
-              this.af.object(`/rideHistory/${this.userID}/${this.roomKey}`).remove();
-            }
+            this.af.object(`/rideHistory/${this.userID}/${this.roomKey}`).remove();
+            for(let i = 0; i < this.participants.length; i++){this.af.object(`/rideHistory/${this.room['participants'][i]}/${this.roomKey}`).remove();}
+            this.af.object(`/${this.room['transportType']}Chatrooms/${this.room['departDate']}/${this.roomKey}`).remove();
           }else{
             let index = this.room['devTokens'].indexOf(this.userServices.userInfo['devToken']);
             this.room['devTokens'].splice(index,1);
