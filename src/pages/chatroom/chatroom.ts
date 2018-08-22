@@ -44,7 +44,7 @@ export class ChatRoomPage {
     this.room = navParams.data.room;
     if(navParams.data.roomKey == undefined){ //기존 멤버 입장
       this.roomKey = navParams.data.room.$key
-    } else { //처음으로 방에 진입
+    } else{ //처음으로 방에 진입
       this.roomKey = navParams.data.roomKey;
       this.sendNotification(`${this.userServices.userInfo['korName']}님이 입장하셨습니다.`);
     }
@@ -53,7 +53,7 @@ export class ChatRoomPage {
 
     //Display 관련
     this.displayDate = this.dateServices.getKMonthDay(this.room['departDate']);
-    this.displayTime = this.room['depart_time'];
+    this.displayTime = this.room['departTime'];
     this.roomHost = this.room['host'];
 
     //접속한 user가 그 채팅방의 목록에 있는지 없는지 여부 확인 하고 user들 정보를 관리.
@@ -76,7 +76,7 @@ export class ChatRoomPage {
   } 
 
   send() {
-    if(this.chatContent !== '') {
+    if(this.chatContent !== ''){
       firebase.database().ref('/chats/' + this.roomKey).push({
         userID: this.userServices.userInfo['studentID'],
         userName: this.userServices.userInfo['korName'],
@@ -230,9 +230,9 @@ export class ChatRoomPage {
   ionViewDidLoad(){ console.log("chatroom loaded"); }
   scrollBottom(){ this.content.scrollToBottom(300); }
   show(index) {
-    if (this.index == index) {
+    if(this.index == index){
       this.index = -1;
-    } else {
+    } else{
       this.index = index;
     }
   }

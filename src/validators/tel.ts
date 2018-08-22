@@ -9,7 +9,7 @@ import { FormControl } from '@angular/forms';
 export class TelValidator {
     static isValid(control: FormControl){
         const re = /^(0(2|3[1-3]|4[1-4]|5[1-5]|6[1-4]))-(\d{3,4})-(\d{4})$/ .test(control.value);
-        if (re){ 
+        if(re){ 
             return null;
         }
         return { "invalid Telephone Number": true};

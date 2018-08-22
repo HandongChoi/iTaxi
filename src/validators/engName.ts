@@ -7,7 +7,7 @@ import { FormControl } from '@angular/forms';
 export class EngNameValidator {
     static isValid(control: FormControl){
         const re =/^[a-zA-Z|,]+$/ .test(control.value);
-        if (re){ 
+        if(re){ 
             return null;
         }
         return { "invalidEngName": true};

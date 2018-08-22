@@ -34,7 +34,7 @@ export class SettingPage {
   OpenInfoPage() { this.navCtrl.push(PersonalInfoPage); }
 
   //안쓰는 기능
-  delete_user():void {
+  deleteUser():void {
     let alert = this.alertCtrl.create({
       title: "회원탈퇴",
       message: "정말로 탈퇴하시겠습니까?",

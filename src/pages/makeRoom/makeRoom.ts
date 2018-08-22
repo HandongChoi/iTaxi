@@ -73,7 +73,7 @@ export class MakeRoomPage {
         }]
       });
       alert.present();
-    }else{
+    } else{
       //출발지와 목적지가 같을 경우 처리
       if(this.depart == this.arrive){
         let alert = this.alertCtrl.create({
@@ -85,7 +85,7 @@ export class MakeRoomPage {
         });
         alert.present();
       //input type 으로 입력을 받을 때 값을 입력하지 않는 경우 처리  
-      }else if(this.depart=="" || this.arrive==""){
+      } else if(this.depart=="" || this.arrive==""){
         let alert = this.alertCtrl.create({
           message: "출발지 혹은 도착지를 입력하여 주세요.",
           buttons: [{
@@ -94,7 +94,7 @@ export class MakeRoomPage {
           }]
         });
         alert.present();
-      }else{
+      } else{
         let alert = this.alertCtrl.create({
           title: '방만들기',
           subTitle: '아래 내용이 맞습니까?',  

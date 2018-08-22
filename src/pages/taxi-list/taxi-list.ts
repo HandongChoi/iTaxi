@@ -62,7 +62,7 @@ export class TaxiListPage {
   }
 
   goChatroom(room) {
-    if (!this.isEntered(room['participants'])) { //처음 참여
+    if(!this.isEntered(room['participants'])){ //처음 참여
       let members = room['participants'];
       let tokenList = room['devTokens'];
       members.push(this.userID);
@@ -79,9 +79,9 @@ export class TaxiListPage {
   makeRoom(){ this.navCtrl.setRoot(MakeRoomPage, {transportType: this.transportType}); }
 
   filterDeparture(departFilter){
-    if (departFilter == "All") {
+    if(departFilter == "All"){
       this.rooms = this.roomServices.getChatRooms(this.selectedDate, this.transportType);
-    } else {
+    } else{
       let query = {
         orderByChild: 'depart',
         equalTo: departFilter
@@ -91,9 +91,9 @@ export class TaxiListPage {
   }
 
   filterDestination(arriveFilter){
-    if (arriveFilter == "All") {
+    if(arriveFilter == "All"){
       this.rooms = this.roomServices.getChatRooms(this.selectedDate, this.transportType);
-    } else {
+    } else{
       let query = {
         orderByChild: 'arrive',
         equalTo: arriveFilter
