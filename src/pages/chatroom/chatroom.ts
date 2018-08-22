@@ -19,7 +19,6 @@ export class ChatRoomPage {
 
   chats: FirebaseListObservable<any[]>;
   room: Object; //오브젝트와 파베오브젝트로 형태로 올 수 있는데 둘다 Object type이다.
-  
   participants: Array<Object> = [];
   chatContent: string;
   roomHost: string;
@@ -27,9 +26,13 @@ export class ChatRoomPage {
   displayDate: string;
   displayTime: string;
 
+  chatPrevTime: string;
+  chatNowTime: string;
+  chatPrevKey: string;
+
   index: number = -1;
   roomKey: string;
-  
+
   constructor(public navCtrl: NavController, public af:AngularFireDatabase, public navParams: NavParams, public platform:Platform,
               public roomServices: RoomsProvider, public dateServices: DateProvider, public userServices: UsersProvider,
               public alertCtrl: AlertController) {
@@ -45,7 +48,7 @@ export class ChatRoomPage {
       this.roomKey = navParams.data.roomKey;
     }
     this.chats = af.list('/chats/' + this.roomKey);
-    this.userID = this.userServices.userInfo['studentID'];    
+    this.userID = this.userServices.userInfo['studentID'];
 
     //Display 관련
     this.displayDate = this.dateServices.getKMonthDay(this.room['departDate']);
@@ -67,19 +70,31 @@ export class ChatRoomPage {
         this.scrollBottom();
       });
     }
-    
-  } 
-
+  }
   send() {
     if(this.chatContent !== '') {
-      this.af.list('/chats/' + this.roomKey).push({
+      if(!this.chatPrevTime) {
+        this.chatPrevTime = new Date().toLocaleString('ko-KR');
+      }
+      this.chatNowTime = new Date().toLocaleString('ko-KR');
+
+      firebase.database().ref('/chats/' + this.roomKey).push({
         userID: this.userServices.userInfo['studentID'],
         userName: this.userServices.userInfo['korName'],
         content: this.chatContent,
-        dateTime: new Date().toLocaleString(),
+        dateTime: this.chatNowTime,
       }).catch(err => {
         console.log(err);
-      }).then(() => {
+      }).then((data) => {
+        // 한 유저가 1분 이내 보낸 메세지들은 가장 마지막 메세지만 날짜를 표시함
+        if (this.continuousMessage(this.chatNowTime, this.chatPrevTime) && this.chatPrevKey) {
+          firebase.database().ref(`/chats/${this.roomKey}/${this.chatPrevKey}`).update({
+            dateTime: this.chatPrevTime+" [continuousMessage]",
+          })
+        }
+        this.chatPrevTime = this.chatNowTime;
+        this.chatPrevKey = data['key'];
+
         this.chatContent = "";
         this.scrollBottom();
       });
@@ -152,6 +167,7 @@ export class ChatRoomPage {
             error.present();
           }else{
             let money: number = Math.round(data.price / data.people / 100) * 100; //여기서 십원 자리수에서 반올림
+            // TODO: 아직 계좌정보를 입력하지 않았을 경우를 처리해줘야 함.
             let msg = `${money}원
             ${this.userServices.userInfo['accountBank']} ${this.userServices.userInfo['accountNumber']}으로 입금해주시면 됩니다.`
             this.sendNotification(msg);
@@ -167,7 +183,7 @@ export class ChatRoomPage {
       userID: 'CRA',
       userName: 'CRAang',
       content: msg,
-      dateTime: new Date().toLocaleString(),
+      dateTime: new Date().toLocaleString('ko-KR'),
     }).then(() => {
       this.chatContent = "";
       this.scrollBottom();
@@ -182,6 +198,21 @@ export class ChatRoomPage {
     } else {
       this.index = index;
     }
+  }
+  continuousMessage(nowChat, prevChat) {
+    /**
+     * 1분 내에 연속된 메시지 발생함을 알리는 함수
+     * 날짜 형식 'ko-KR' 2018. 8. 22. 오후 5:14:56
+     */
+    var nowTime = nowChat.split(" ");
+    nowTime = nowTime[4].split(":");
+    var prevTime = prevChat.split(" ");
+    prevTime = prevTime[4].split(":");
+
+    if (nowTime[0] == prevTime[0] && nowTime[1] == prevTime[1]) {
+      return true;
+    }
+    return false;
   }
 }
 
