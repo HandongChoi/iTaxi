@@ -64,3 +64,13 @@ npm install 잊지마세요.
 - 프로필 사진 추가 및 대화방에 카톡처럼 캐릭터로 나오게 만들기
 - 중복되는 몇가지 함수들 한대로 모아서 provider로 제공하기.
 - 탑승 예정 티켓들에 대해서 D-Day, Hour 표시해주기.
+
+안드 배포시
+- java sdk는 8 version으로 깔고 그 외에것은 다 지우는게 편했다.
+- 안드 스튜디오와 brew install gradle을 이용해서 2가지를 깔았다.
+- 안드 스튜디오로 sdk platform을 설치해야한다.
+- sudo chmod +x /Applications/Android\ Studio.app/Contents/gradle/gradle-4.4/bin/gradle
+  npm install @ionic/app-scripts@latest --save-
+  npm install
+  sudo ionic cordova build android
+  명령어로 빌드를 했고 gradle같은 경우 4.4인지 아니면 다른 버전인지 gradle이후 tab을 이용해서 확인 하고 바꾸면 된다.
