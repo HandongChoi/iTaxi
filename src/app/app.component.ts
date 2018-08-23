@@ -20,16 +20,17 @@ import { PhonegapLocalNotification } from '@ionic-native/phonegap-local-notifica
 import firebase from 'firebase';
 
 import { MainPage } from '../pages/main/main';
-import { TaxiListPage } from '../pages/taxi-list/taxi-list';
+import { ListPage } from '../pages/list/list';
 import { MakeRoomPage } from '../pages/makeRoom/makeRoom';
+import { SignupPage } from '../pages/signup/signup'
 
 firebase.initializeApp({
-  apiKey: "AIzaSyANvht7J2MNX6x47mglqfJk74yZQ9u0qUk",
-  authDomain: "itaxi-54bdc.firebaseapp.com",
-  databaseURL: "https://itaxi-54bdc.firebaseio.com",
-  projectId: "itaxi-54bdc",
-  storageBucket: "itaxi-54bdc.appspot.com",
-  messagingSenderId: "208976127032"
+  apiKey: "AIzaSyAUzjyDEOkbfvh3hU_t4wR4p3jXNq5lz3A",
+  authDomain: "itaxipublic.firebaseapp.com",
+  databaseURL: "https://itaxipublic.firebaseio.com",
+  projectId: "itaxipublic",
+  storageBucket: "",
+  messagingSenderId: "762163958818"
 });
 
 @Component({
@@ -135,10 +136,10 @@ export class MyApp {
     this.navCtrl.push(ChatRoomPage, {room: room});
   }
 
-  takeTaxi() { this.navCtrl.setRoot(TaxiListPage, {transportType: 'taxi'}); }
+  takeTaxi() { this.navCtrl.setRoot(ListPage, {transportType: 'taxi'}); }
   makeTaxi() { this.navCtrl.setRoot(MakeRoomPage, {transportType: 'taxi'}); }
 
-  takeCarpool() { this.navCtrl.setRoot(TaxiListPage, {transportType: 'carpool'}); }
+  takeCarpool() { this.navCtrl.setRoot(ListPage, {transportType: 'carpool'}); }
   makeCarpool() { this.navCtrl.setRoot(MakeRoomPage, {transportType: 'carpool'}); }
 
   logout(){

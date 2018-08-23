@@ -25,6 +25,9 @@
 
 <ion-content padding>
   <div [ngSwitch]="procedure">
+    <!--****************************************************************
+        ***************************  약관  ******************************
+        ****************************************************************-->
     <div *ngSwitchCase="'terms'">
       <div class="wrap">
         <ion-card class="terms_content">
@@ -106,11 +109,15 @@
         <p>숫자 또는 - 의 조합으로만 입력해주세요.</p>
       </ion-item>
 
-      <button ion-button medium round color="primary" type="submit" style="margin-top: 15px" [disabled]="!signUpForm.valid">
-          가입하기 
-      </button>
+      <ion-row>
+        <ion-col width-100 style="text-align: center">
+            <button ion-button medium round color="primary" type="submit" style="margin-top: 15px" [disabled]="!signUpForm.valid">
+                가입하기 
+            </button>
+        </ion-col>
+      </ion-row>
+            
       </form>
-      
     </div>
   </div>
 </ion-content>
