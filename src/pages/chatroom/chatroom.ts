@@ -26,8 +26,8 @@ export class ChatRoomPage {
   displayDate: string;
   displayTime: string;
 
-  chatPrevTime: string;
-  chatNowTime: string;
+  chatPrevTime: any;
+  chatNowTime: any;
   chatPrevKey: string;
 
   index: number = -1;
@@ -74,22 +74,22 @@ export class ChatRoomPage {
   send() {
     if(this.chatContent !== '') {
       if(!this.chatPrevTime) {
-        this.chatPrevTime = new Date().toLocaleString('ko-KR');
+        this.chatPrevTime = new Date();
       }
-      this.chatNowTime = new Date().toLocaleString('ko-KR');
+      this.chatNowTime = new Date();
 
       firebase.database().ref('/chats/' + this.roomKey).push({
         userID: this.userServices.userInfo['studentID'],
         userName: this.userServices.userInfo['korName'],
         content: this.chatContent,
-        dateTime: this.chatNowTime,
+        dateTime: this.chatNowTime.toLocaleString('ko-KR'),
       }).catch(err => {
         console.log(err);
       }).then((data) => {
         // 한 유저가 1분 이내 보낸 메세지들은 가장 마지막 메세지만 날짜를 표시함
         if (this.continuousMessage(this.chatNowTime, this.chatPrevTime) && this.chatPrevKey) {
           firebase.database().ref(`/chats/${this.roomKey}/${this.chatPrevKey}`).update({
-            dateTime: this.chatPrevTime+" [continuousMessage]",
+            dateTime: this.chatPrevTime.toLocaleString('ko-KR')+" [continuousMessage]",
           })
         }
         this.chatPrevTime = this.chatNowTime;
@@ -199,20 +199,23 @@ export class ChatRoomPage {
       this.index = index;
     }
   }
+  
   continuousMessage(nowChat, prevChat) {
     /**
      * 1분 내에 연속된 메시지 발생함을 알리는 함수
      * 날짜 형식 'ko-KR' 2018. 8. 22. 오후 5:14:56
      */
-    var nowTime = nowChat.split(" ");
-    nowTime = nowTime[4].split(":");
-    var prevTime = prevChat.split(" ");
-    prevTime = prevTime[4].split(":");
+    var nowDay = nowChat.getDate();
+    var nowHour = nowChat.getHours();
+    var nowMin = nowChat.getMinutes();
 
-    if (nowTime[0] == prevTime[0] && nowTime[1] == prevTime[1]) {
+    var prevDay = prevChat.getDate();
+    var prevHour = prevChat.getHours();
+    var prevMin = prevChat.getMinutes();
+
+    if (nowDay == prevDay && nowHour == prevHour && nowMin == prevMin) {
       return true;
     }
     return false;
   }
 }
-
