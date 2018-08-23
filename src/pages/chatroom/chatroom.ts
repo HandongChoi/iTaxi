@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, Content, NavParams, Platform, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, Content, NavParams, Platform, AlertController, Alert } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 import { MainPage } from '../../pages/main/main';
@@ -60,8 +60,8 @@ export class ChatRoomPage {
     //호스트의 계좌정보
     this.af.object('/userProfile/' + this.roomHost).subscribe( data => {
       let userProfile = data;
-      this.accountBank = userProfile['accountBank'] == null ? '미입력' : userProfile['accountBank'];
-      this.accountNumber = userProfile['accountNumber'] == null ? '미입력' : userProfile['accountNumber'];
+      this.accountBank = userProfile['accountBank'];
+      this.accountNumber = userProfile['accountNumber'];
     })
 
     /////////////////////////////////// 문제의 지점 ///////////////////////////////////////
@@ -124,36 +124,27 @@ export class ChatRoomPage {
           this.room['participants'].splice(index,1);
           this.room['currentPeople']--;
           this.participants = this.room['participants'];
-          if(transportType=='taxi'){
-            if(this.room['currentPeople'] <= 0){ //방 삭제의 경우
-              this.af.object(`/${this.room['transportType']}Chatrooms/${this.room['departDate']}/${this.roomKey}`).remove();
-              this.af.object(`/rideHistory/${this.userID}/${this.roomKey}`).remove();
-            } else{
-              if(this.room['host'] == this.userID){ //기존 방장이 나간 경우
+          if(this.room['currentPeople'] <= 0){ //방 삭제의 경우
+            this.af.object(`/${this.room['transportType']}Chatrooms/${this.room['departDate']}/${this.roomKey}`).remove();
+            this.af.object(`/rideHistory/${this.userID}/${this.roomKey}`).remove();
+          } else{
+            if(this.room['host'] == this.userID){ //기존 방장이 나간 경우
+              if(transportType=='taxi'){ //택시일 경우 방장을 넘김
                 let newHost = this.af.object(`/userProfile/${this.room['participants'][0]}`);
                 this.room['host'] = newHost['studentID']; 
                 this.room['hostName'] = newHost['korName'];
+              } else if(transportType == 'carpool'){ // 카풀일 경우 방 삭제
+                this.af.object(`/rideHistory/${this.userID}/${this.roomKey}`).remove();
+                for(let i = 0; i < this.participants.length; i++){this.af.object(`/rideHistory/${this.room['participants'][i]}/${this.roomKey}`).remove();}
+                this.af.object(`/${this.room['transportType']}Chatrooms/${this.room['departDate']}/${this.roomKey}`).remove();
               }
-              let index = this.room['devTokens'].indexOf(this.userServices.userInfo['devToken']);
-              this.room['devTokens'].splice(index,1);
-              this.af.object(`/${this.room['transportType']}Chatrooms/${this.room['departDate']}/${this.roomKey}`).update(this.room);
-              for(let i = 0; i < this.participants.length; i++){this.af.object(`/rideHistory/${this.room['participants'][i]}/${this.roomKey}`).update(this.room);}
-              this.af.object(`/rideHistory/${this.userID}/${this.roomKey}`).remove();
-              this.sendNotification(`${this.userServices.userInfo['korName']}님이 나가셨습니다.`);
             }
-          } else{ // 카풀일 경우
-            if(this.room['host'] == this.userID){ // 나간사람이 방장일 때
-              this.af.object(`/rideHistory/${this.userID}/${this.roomKey}`).remove();
-              for(let i = 0; i < this.participants.length; i++){this.af.object(`/rideHistory/${this.room['participants'][i]}/${this.roomKey}`).remove();}
-              this.af.object(`/${this.room['transportType']}Chatrooms/${this.room['departDate']}/${this.roomKey}`).remove();
-            }else{ // 나간사람이 방장이 아닐 때
-              let index = this.room['devTokens'].indexOf(this.userServices.userInfo['devToken']);
-              this.room['devTokens'].splice(index,1);
-              this.af.object(`/${this.room['transportType']}Chatrooms/${this.room['departDate']}/${this.roomKey}`).update(this.room);
-              for(let i = 0; i < this.participants.length; i++){this.af.object(`/rideHistory/${this.room['participants'][i]}/${this.roomKey}`).update(this.room);}
-              this.af.object(`/rideHistory/${this.userID}/${this.roomKey}`).remove();
-              this.sendNotification(`${this.userServices.userInfo['korName']}님이 나가셨습니다.`);
-            }
+            let index = this.room['devTokens'].indexOf(this.userServices.userInfo['devToken']);
+            this.room['devTokens'].splice(index,1);
+            this.af.object(`/${this.room['transportType']}Chatrooms/${this.room['departDate']}/${this.roomKey}`).update(this.room);
+            for(let i = 0; i < this.participants.length; i++){this.af.object(`/rideHistory/${this.room['participants'][i]}/${this.roomKey}`).update(this.room);}
+            this.af.object(`/rideHistory/${this.userID}/${this.roomKey}`).remove();
+            this.sendNotification(`${this.userServices.userInfo['korName']}님이 나가셨습니다.`);
           }
           this.navCtrl.setRoot(MainPage);
         }
@@ -163,55 +154,75 @@ export class ChatRoomPage {
   }
 
   payment(transportType){
+    let paymentAlert = this.alertCtrl.create({
+      title: "정산하기",
+      message: "10원 단위에서 반올림하여 정산하시는 분에게 차익을 남기도록 하였습니다.",
+      inputs: [{
+          name: 'people',
+          placeholder: '합승한 인원수를 입력하세요.'
+        },{
+          name: 'price',
+          placeholder: '결제된 총 금액을 입력하세요.'
+        }],
+      buttons: [{
+        text: "Cancel",
+        role: "cancel"
+      }, {
+        text: "OK",
+        handler: ( data ) => {
+          if(data.price <= 0 || data.people <= 0){
+            let error = this.alertCtrl.create({
+              title:"입력정보 오류",
+              message:"올바른 가격과 인원을 입력해주세요.",
+            });
+            error.present();
+          }else{
+            let money: number = Math.round(data.price / data.people / 100) * 100; //여기서 십원 자리수에서 반올림
+            // TODO: 아직 계좌정보를 입력하지 않았을 경우를 처리해줘야 함.
+            let msg = `${money}원
+            ${this.userServices.userInfo['accountBank']} ${this.userServices.userInfo['accountNumber']}으로 입금해주시면 됩니다.`
+            this.sendNotification(msg);
+          }}
+      }]
+    });
+    let alert = this.alertCtrl.create({
+      title: "계좌정보 입력",
+      inputs: [{
+          name: 'bank',
+          placeholder: '은행정보를 입력하세요.'
+        },{
+          name: "accountNumber",
+          placeholder: "계좌번호를 입력하세요."
+        }],
+      buttons: [{
+        text : "OK",
+        handler : ( data ) => {
+          if(transportType == "carpool"){
+            this.af.object(`/userProfile/${this.roomHost}`).update({
+              accountBank : data.bank,
+              accountNumber : data.accountNumber
+            }).then(() => {
+              this.sendNotification(`${this.accountBank} ${this.accountNumber}로 ${this.room['price']}원씩 보내주세요.`);
+            });
+          } else if(transportType == "taxi"){
+            this.af.object(`/userProfile/${this.userServices.getStudentID()}`).update({
+              accountBank : data.bank,
+              accountNumber : data.accountNumber
+            }).then(() => {
+              paymentAlert.present();
+            })}
+        }
+      }]
+    });
     if(transportType == 'carpool'){
-      let alert = this.alertCtrl.create({
-        title: "정산하기",
-        message: `${this.accountBank} ${this.accountNumber}로
-                  ${this.room['price']}원씩 보내주세요.`,
-        buttons:[{
-          text: "Ok",
-          role: "cancel"
-        }]
-      });
-      this.sendNotification(`${this.accountBank} ${this.accountNumber}로 ${this.room['price']}원씩 보내주세요.`);
-      alert.present();
-    } else{
-      let alert = this.alertCtrl.create({
-        title: "정산하기",
-        message: "10원 단위에서 반올림하여 정산하시는 분에게 차익을 남기도록 하였습니다.",
-        inputs: [
-          {
-            name: 'people',
-            placeholder: '합승한 인원수를 입력하세요.'
-          },
-          {
-            name: 'price',
-            placeholder: '결제된 총 금액을 입력하세요.'
-          }
-        ],
-        buttons: [{
-          text: "Cancel",
-          role: "cancel"
-        }, {
-          text: "OK",
-          handler: ( data ) => {
-            if(data.price <= 0 || data.people <= 0){
-              let error = this.alertCtrl.create({
-                title:"입력정보 오류",
-                message:"올바른 가격과 인원을 입력해주세요.",
-              });
-              error.present();
-            }else{
-              let money: number = Math.round(data.price / data.people / 100) * 100; //여기서 십원 자리수에서 반올림
-              // TODO: 아직 계좌정보를 입력하지 않았을 경우를 처리해줘야 함.
-              let msg = `${money}원
-              ${this.userServices.userInfo['accountBank']} ${this.userServices.userInfo['accountNumber']}으로 입금해주시면 됩니다.`
-              this.sendNotification(msg);
-            }
-          }
-        }]
-      });
-      alert.present();
+      if(this.accountBank == "" || this.accountNumber == ""){ // 계좌정보가 없을 때
+        alert.present();
+      } else
+        this.sendNotification(`${this.accountBank} ${this.accountNumber}로 ${this.room['price']}원씩 보내주세요.`);
+    } else if(transportType == 'taxi'){
+      if(this.userServices.userInfo['accountBank'] == "" || this.userServices.userInfo['accountNumber'] == ""){
+        alert.present();
+      } else paymentAlert.present();
     }
   }
 

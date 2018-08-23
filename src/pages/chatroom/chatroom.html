@@ -26,7 +26,8 @@
             <span>방나가기</span>
           </button>
           <!-- 택시 타고 난 이후 정산 기능-->
-          <button class="payment" *ngIf="room.departDate + room.departTime <= dateServices.nowDate + dateServices.nowTime" ion-button (click)='payment(room.transportType)'>
+          <button class="payment" *ngIf="room.departDate + room.departTime <= dateServices.nowDate + dateServices.nowTime" ion-button (click)='payment(room.transportType)'
+          [hidden]="room.transportType=='carpool' && userID != roomHost">
               <span>정산하기</span>
             </button>
         </ion-buttons>
