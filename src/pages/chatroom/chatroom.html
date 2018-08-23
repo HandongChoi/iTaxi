@@ -22,11 +22,11 @@
       <ion-col col-auto>
         <ion-buttons right icon-only>
           <!-- 먹튀 방지용으로 방나가기는 택시 이용 시간 직전까지만 사용 가능-->
-          <button class="quit" *ngIf="room.departDate + room.departTime > dateServices.nowDate + dateServices.nowTime" ion-button (click)='room.transportType=="carpool" ? quitCarpool():quit()'>
+          <button class="quit" *ngIf="room.departDate + room.departTime > dateServices.nowDate + dateServices.nowTime" ion-button (click)='quit(room.transportType)'>
             <span>방나가기</span>
           </button>
           <!-- 택시 타고 난 이후 정산 기능-->
-          <button class="payment" *ngIf="room.departDate + room.departTime <= dateServices.nowDate + dateServices.nowTime" ion-button (click)='room.transportType=="carpool" ? paymentCarpool():payment()'>
+          <button class="payment" *ngIf="room.departDate + room.departTime <= dateServices.nowDate + dateServices.nowTime" ion-button (click)='payment(room.transportType)'>
               <span>정산하기</span>
             </button>
         </ion-buttons>
