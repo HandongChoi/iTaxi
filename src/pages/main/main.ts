@@ -42,8 +42,8 @@ export class MainPage {
   }
 
   ionViewDidLoad(){ console.log("ionViewDidLoad at main.ts"); }
-  takeTaxi() { this.navCtrl.setRoot(ListPage, {transportType: 'taxi'}); }
-  takeCarpool() { this.navCtrl.setRoot(ListPage, {transportType: 'carpool'}); }
+  takeTaxi() { this.navCtrl.push(ListPage, {transportType: 'taxi'}); }
+  takeCarpool() { this.navCtrl.push(ListPage, {transportType: 'carpool'}); }
   goChatroomPage(room){ this.navCtrl.push(ChatRoomPage, {room: room}); }
 
   storetoken(){

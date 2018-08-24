@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, Content, NavParams, Platform, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, Content, NavParams, Platform, AlertController, Alert } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 import { MainPage } from '../../pages/main/main';
@@ -7,6 +7,7 @@ import { MainPage } from '../../pages/main/main';
 import { UsersProvider } from '../../providers/users/users';
 import { DateProvider } from '../../providers/date/date';
 import { RoomsProvider } from '../../providers/rooms/rooms';
+import { PersonalInfoPage } from '../personal-info/personal-info';
 
 @IonicPage()
 @Component({
@@ -40,9 +41,9 @@ export class ChatRoomPage {
     this.dateServices.setNow();
     
     //Data loading    
-    //이거는 makeRoom에서 room을 보낼때 roomKey를 보내는데 이 방법이 서버 접근을 덜해서 서버 비용 감면효과 + 속도 향상이라 그렇게 짰다.
+    //방에서 바뀌지 않는 정보들을 빠르게 받아오고 굳이 db의 정보에 의존하지 않는 것은 db 접근 없이 사용하기 위해서 parameter로 받는다.
     this.room = navParams.data.room;
-    if(navParams.data.roomKey == undefined){ //기존 멤버 입장
+    if(navParams.data.roomKey === undefined){ //기존 멤버 입장
       this.roomKey = navParams.data.room.$key
     } else { //처음 방 만들고 방 진입 할 때
       this.roomKey = navParams.data.roomKey;
@@ -52,24 +53,30 @@ export class ChatRoomPage {
 
     //Display 관련
     this.displayDate = this.dateServices.getKMonthDay(this.room['departDate']);
-    this.displayTime = this.room['depart_time'];
+    this.displayTime = this.room['departTime'];
     this.roomHost = this.room['host'];
 
-    /////////////////////////////////// 문제의 지점 ///////////////////////////////////////
-    //지금 participants에 관한 정보가 object라서 실시간 업데이트가 안 되고 있다.
-    for(let user of this.room['participants']){
-      af.list(`/userProfile`, {
-        query: {
-          orderByChild: 'studentID',
-          equalTo: user
+    af.object(`/${this.room['transportType']}Chatrooms/${navParams.data.room['departDate']}/${this.roomKey}`)
+      .subscribe((room) => {
+        this.participants = [];
+        //여기서 공부거리 하나 던저 주면 undfined와 null이 ==일때는 같다고 인정이 되고 ===일때만 다르다고 인정이 된다.
+        //지금 여기서 방 나갔을 때 방 정보가 하나라도 없으면 null값이 오고 방 정보가 있으면 undefined로 온다.
+        //아래 구조가 변형되면 68line에서 for구문의 room[]을 못 읽어와서 error가 발생한다.
+        if(room.$value === null){
+          console.log('방이 remove해서 사라졌을 때 여기 온다.')
+        }else{ // 방 정보가 여전히 있을 때.
+          //아래에서 방 정보를 새로 호출하는것은 비동기 안에서 (1/4)를 실시간으로 바꿔주기 위해서다.
+          this.room = room;
+          for(let studentID of room['participants']){
+            af.object(`/userProfile/${studentID}`).subscribe(user => {
+              this.participants.push(user);
+            })
+          }
         }
-      }).subscribe(user => {
-        //user[0]만 하면 모든 유저의 정보가 들어갈까? 나중에 복수 테스트를 꼭 해야된다.
-        this.participants.push(user[0]);
-        //이거는 스크롤을 가장 밑으로 옮기는걸까? 채팅방에 이게 필요할 것 같다. 맞으면 다른 곳에도 적용해보자.
-        this.scrollBottom();
-      });
-    }
+    })
+    
+    this.chatPrevKey = null;
+    //this.scrollBottom(); 
   }
   send() {
     if(this.chatContent !== '') {
@@ -96,12 +103,12 @@ export class ChatRoomPage {
         this.chatPrevKey = data['key'];
 
         this.chatContent = "";
-        this.scrollBottom();
+        //this.scrollBottom();
       });
     }
   }
 
-  quit(){
+  quit(transportType: string){
     let alert = this.alertCtrl.create({
       title: "방 나가기",
       message: "정말로 방을 나가시겠습니까?",
@@ -111,26 +118,33 @@ export class ChatRoomPage {
       }, {
         text: "OK",
         handler: () => {
-          ////////////////////////////////문제 고쳤을 때 봐야 할 곳///////////////////////////////
-          // 문제의 지점 로직이 바뀌면 반드시 여기도 바뀌어야 될 것이다///////////////////////////////////
-          let index = this.room['participants'].indexOf(this.userServices.userInfo['studentID']);
-          this.room['participants'].splice(index,1);
-          this.room['currentPeople']--;
-          if(this.room['currentPeople'] <= 0){ //방 삭제의 경우
-            this.af.object(`/${this.room['transportType']}Chatrooms/${this.room['departDate']}/${this.roomKey}`).remove();
-            this.af.object(`/rideHistory/${this.userID}/${this.roomKey}`).remove();
-          }else{
-            if(this.room['host'] == this.userID){ //기존 방장이 나간 경우
-              let newHost = this.af.object(`/userProfile/${this.room['participants'][0]}`);
-              this.room['host'] = newHost['studentID']; 
-              this.room['hostName'] = newHost['korName'];
+          //지금 채팅 기록은 안 지우고 있는데 일단 이거는 나중에 생각하자.
+          //무슨 경우라도 자신 rideHistory는 지워야한다.
+          this.af.object(`/rideHistory/${this.userID}/${this.roomKey}`).remove();
+          if(this.userID == this.room['host']){
+            if(transportType == 'carpool'){ //유저들 rideHistory 삭제 후 방 삭제
+              this.sendNotification(`카풀 모집자 ${this.room['hostName']}님이 나갔습니다.`);
+              this.sendNotification(`방이 사라졌으므로 방을 나가시면 다시 들어오실 수 없습니다.`);
+              this.room['participants'].forEach(studentID => {
+                this.af.object(`/rideHistory/${studentID}/${this.roomKey}`).remove();
+              })
+              this.af.object(`/${this.room['transportType']}Chatrooms/${this.room['departDate']}/${this.roomKey}`).remove();
+            }else if(transportType == 'taxi'){
+              if(this.room['currentPeople'] == 1){ //방장 혼자서 방 있으니깐 자기 관련 db 삭제
+                this.af.object(`/${this.room['transportType']}Chatrooms/${this.room['departDate']}/${this.roomKey}`).remove();
+              } else{ //다른 사람에게 방장 넘기고 방 업데이트
+                this.removeUserFromRoom(this.room);
+                this.af.object(`/userProfile/${this.room['participants'][0]}`).subscribe( newHost => {
+                  this.room['host'] = newHost['studentID']; 
+                  this.room['hostName'] = newHost['korName'];
+                  this.roomUpdate(this.room, this.roomKey, `${this.userServices.userInfo['korName']}님이 나가셨습니다.`);
+                  this.sendNotification(`${this.room['hostName']}님이 새로운 방장이 되셨습니다.`);
+                });
+              }
             }
-            let index = this.room['devTokens'].indexOf(this.userServices.userInfo['devToken']);
-            this.room['devTokens'].splice(index,1);
-            this.af.object(`/${this.room['transportType']}Chatrooms/${this.room['departDate']}/${this.roomKey}`).update(this.room);
-            ////////////// 일단 여기도 update가 안 되는 상황인데 위에 로직 고치면 한꺼번에 고치자///////////
-            this.af.object(`/rideHistory/${this.userID}/${this.roomKey}`).remove();
-            this.sendNotification(`${this.userServices.userInfo['korName']}님이 나가셨습니다.`);
+          }else{ //방장은 항상 존재하니깐 자신의 정보 지우고 방 업데이트
+            this.removeUserFromRoom(this.room);
+            this.roomUpdate(this.room, this.roomKey, `${this.userServices.userInfo['korName']}님이 나가셨습니다.`);
           }
           this.navCtrl.setRoot(MainPage);
         }
@@ -139,24 +153,38 @@ export class ChatRoomPage {
     alert.present();
   }
 
-  payment(){
-    let alert = this.alertCtrl.create({
+  removeUserFromRoom(room){
+    let index = room['participants'].indexOf(this.userServices.userInfo['studentID']);
+    room['participants'].splice(index,1);
+    room['currentPeople']--;
+    
+    index = room['devTokens'].indexOf(this.userServices.userInfo['devToken']);
+    room['devTokens'].splice(index,1);        
+  }
+
+  roomUpdate(updatedRoom, roomKey, msg){
+    this.af.object(`/${updatedRoom['transportType']}Chatrooms/${updatedRoom['departDate']}/${roomKey}`).update(updatedRoom);
+    updatedRoom['participants'].forEach(studentID => {
+      this.af.object(`/rideHistory/${studentID}/${roomKey}`).update(updatedRoom);
+    });
+    this.sendNotification(msg);
+  }
+
+  payment(transportType: string){
+    let paymentAlert = this.alertCtrl.create({
       title: "정산하기",
       message: "10원 단위에서 반올림하여 정산하시는 분에게 차익을 남기도록 하였습니다.",
-      inputs: [
-        {
+      inputs: [{
           name: 'people',
           placeholder: '합승한 인원수를 입력하세요.'
-        },
-        {
+        },{
           name: 'price',
           placeholder: '결제된 총 금액을 입력하세요.'
-        }
-      ],
+      }],
       buttons: [{
         text: "Cancel",
         role: "cancel"
-      }, {
+      },{
         text: "OK",
         handler: ( data ) => {
           if(data.price <= 0 || data.people <= 0){
@@ -168,14 +196,32 @@ export class ChatRoomPage {
           }else{
             let money: number = Math.round(data.price / data.people / 100) * 100; //여기서 십원 자리수에서 반올림
             // TODO: 아직 계좌정보를 입력하지 않았을 경우를 처리해줘야 함.
-            let msg = `${money}원
-            ${this.userServices.userInfo['accountBank']} ${this.userServices.userInfo['accountNumber']}으로 입금해주시면 됩니다.`
+            let msg = `
+            ${this.userServices.userInfo['accountBank']} ${this.userServices.userInfo['accountNumber']} 으로 ₩${money}원 입금해주시면 됩니다.`
             this.sendNotification(msg);
           }
         }
       }]
     });
-    alert.present();
+
+    let accountAlert = this.alertCtrl.create({
+      title: "계좌정보 입력",
+      message: "등록된 계좌 정보가 없습니다.<br>설정 페이지에서 계좌 정보를 입력해주세요.",
+      buttons: [{
+        text : "OK",
+        handler : ( data ) => {
+          this.navCtrl.push(PersonalInfoPage);
+        }
+      }]
+    });
+
+    if(this.userServices.userInfo['accountBank'] == '' || this.userServices.userInfo['accountNumber'] == ''){
+      accountAlert.present();
+    }else if(transportType == 'carpool'){
+      this.sendNotification(`${this.userServices.userInfo['accountBank']} ${this.userServices.userInfo['accountNumber']}로 ${this.room['price']}원씩 보내주세요.`);
+    }else if(transportType == 'taxi'){
+      paymentAlert.present();
+    }
   }
 
   sendNotification(msg){
@@ -186,19 +232,13 @@ export class ChatRoomPage {
       dateTime: new Date().toLocaleString('ko-KR'),
     }).then(() => {
       this.chatContent = "";
-      this.scrollBottom();
+      //this.scrollBottom();
     });
   }
 
   ionViewDidLoad(){ console.log("chatroom loaded"); }
   scrollBottom(){ this.content.scrollToBottom(300); }
-  show(index) {
-    if (this.index == index) {
-      this.index = -1;
-    } else {
-      this.index = index;
-    }
-  }
+  show(index) { this.index = (this.index == index) ? -1 : index; }
   
   continuousMessage(nowChat, prevChat) {
     /**
@@ -213,9 +253,6 @@ export class ChatRoomPage {
     var prevHour = prevChat.getHours();
     var prevMin = prevChat.getMinutes();
 
-    if (nowDay == prevDay && nowHour == prevHour && nowMin == prevMin) {
-      return true;
-    }
-    return false;
+    return (nowDay == prevDay && nowHour == prevHour && nowMin == prevMin) ? true : false;
   }
 }

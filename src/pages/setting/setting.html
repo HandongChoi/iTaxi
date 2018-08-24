@@ -1,8 +1,10 @@
 <ion-header>
   <ion-navbar color = "primary">
-    <button ion-button menuToggle >
-      <ion-icon name="menu"></ion-icon>
-    </button>
+    <ion-buttons right>
+      <button ion-button menuToggle >
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title>Settings</ion-title>
   </ion-navbar>
 </ion-header>
@@ -12,28 +14,28 @@
     <ion-list-header>Profile</ion-list-header>
     <ion-item no-lines>
       <ion-row>
-        <ion-col col-3>Student ID</ion-col>
+        <ion-col col-3>학번</ion-col>
         <ion-col col-7>
           <span>{{ user.studentID }}</span>
         </ion-col>
         <ion-col col-2></ion-col>
       </ion-row>
       <ion-row>
-          <ion-col col-3>Korean Name</ion-col>
+          <ion-col col-3>한글 이름</ion-col>
           <ion-col col-7>
             <span>{{ user.korName }}</span>
           </ion-col>
           <ion-col col-2></ion-col>
         </ion-row>
       <ion-row>
-        <ion-col col-3>English Name</ion-col>
+        <ion-col col-3>영어 이름</ion-col>
         <ion-col col-7>
           <span>{{ user.engName }}</span>
         </ion-col>
         <ion-col col-2></ion-col>
       </ion-row>
       <ion-row>
-        <ion-col col-3>Phone Number</ion-col>
+        <ion-col col-3>휴대폰 번호</ion-col>
         <ion-col col-7>
           <span>{{ user.phone }}</span>
         </ion-col>
@@ -47,14 +49,14 @@
         <ion-col col-2></ion-col>
       </ion-row>
       <ion-row>
-        <ion-col col-3>Account Bank Name</ion-col>
+        <ion-col col-3>계좌 은행</ion-col>
         <ion-col col-7>
           <span>{{ user.accountBank }}</span>
         </ion-col>
         <ion-col col-2></ion-col>
       </ion-row>
       <ion-row>
-        <ion-col col-3>Account Number</ion-col>
+        <ion-col col-3>계좌 번호</ion-col>
         <ion-col col-7>
           <span>{{ user.accountNumber }}</span>
         </ion-col>

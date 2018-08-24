@@ -51,10 +51,12 @@ export class MakeRoomPage {
     
     //전달할 메시지
     this.msg = "<br>출발지 : " + this.depart + "<br>" + 
-              "도착지 : " + this.arrive + "<br>" + 
-              "출발날짜 : " + this.bookingDate + "(" + this.dateServices.getKToday(this.bookingDate) + ")" + "<br>" + 
-              "출발시간 : " + this.bookingTime + "<br>" +
-              "탑승모집인원 : " + this.maxPeople + "명" + "<br>" ;
+               "도착지 : " + this.arrive + "<br>" + 
+               "출발날짜 : " + this.bookingDate + "(" + this.dateServices.getKToday(this.bookingDate) + ")" + "<br>" + 
+               "출발시간 : " + this.bookingTime + "<br>" +
+               "탑승모집인원 : " + this.maxPeople + "명" + "<br>" 
+              
+    if(this.transportType == 'carpool'){ this.msg += `가격 : ${this.price}원<br>`}
     
     //지금 시간 보다 전 시간으로 예약하는 경우 처리
     if((this.nowDate+this.nowTime)>(this.bookingDate+this.bookingTime)){
@@ -100,19 +102,20 @@ export class MakeRoomPage {
             },
             { text: '확인',
               handler: () => {
-                let room: Object = { depart: this.depart,
-                                     arrive: this.arrive,
-                                     departDate: this.bookingDate,
-                                     departTime: this.bookingTime,
-                                     capacity: Number(this.maxPeople) + 1,
-                                     currentPeople: 1,
-                                     hostName: this.userServices.userInfo['korName'],
-                                     host: this.userID,
-                                     transportType: this.transportType,
-                                     participants: [this.userID],
-                                     devTokens:[this.userServices.userInfo['devToken']]
-                                   };
-
+                let room: Object = { 
+                                    depart: this.depart,
+                                    arrive: this.arrive,
+                                    departDate: this.bookingDate,
+                                    departTime: this.bookingTime,
+                                    capacity: Number(this.maxPeople) + 1,
+                                    currentPeople: 1,
+                                    hostName: this.userServices.userInfo['korName'],
+                                    host: this.userID,
+                                    transportType: this.transportType,
+                                    participants: [this.userID],
+                                    devTokens:[this.userServices.userInfo['devToken']]
+                                  };
+                if(this.transportType == 'carpool'){ room['price'] = (this.price == null) ? 0 : this.price; }                
                 let chatRoomUrl = this.af.list(`/${room['transportType']}Chatrooms/${this.bookingDate}`).push(room);
                 this.af.object(`/rideHistory/${this.userServices.userInfo['studentID']}/${chatRoomUrl.key}`).set(room);
                 this.navCtrl.setRoot(ChatRoomPage, {room: room, roomKey: chatRoomUrl.key});

@@ -1,8 +1,10 @@
 <ion-header>
   <ion-navbar color="primary">
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
+    <ion-buttons right>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title class = "top-title">{{ transportType == 'taxi' ? "택시" : "카풀" }}조회</ion-title>
   </ion-navbar>
 
@@ -65,7 +67,7 @@
             </ion-col>
             <ion-col col-7>
               <p>{{room.depart}}</p>
-              <p>>{{room.arrive}}</p>
+              <p>> {{room.arrive}}</p>
             </ion-col>
             <ion-col col-2>
               <p>{{room.currentPeople}} / {{room.capacity}}</p>

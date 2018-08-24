@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, AlertController} from 'ionic-angular';
 import { ChatRoomPage } from '../chatroom/chatroom';
 import { MakeRoomPage } from '../makeRoom/makeRoom';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
@@ -31,7 +31,8 @@ export class ListPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase,
               public datePickerProvider: DatePickerProvider, public modalCtrl: ModalController,  
-              public userServices: UsersProvider, public dateServices: DateProvider, public roomServices: RoomsProvider) {
+              public userServices: UsersProvider, public dateServices: DateProvider, public roomServices: RoomsProvider,
+              public alertCtrl: AlertController,) {
     this.dateServices.setNow();
     this.userID = this.userServices.userInfo['studentID'];
     this.transportType = this.navParams.data.transportType;
@@ -62,25 +63,43 @@ export class ListPage {
   }
 
   goChatroom(room) {
+    console.log('goChatroom')
     if (!this.isEntered(room['participants'])) { //처음 참여
-      this.sendNotification(`${this.userServices.userInfo['korName']}님이 입장하셨습니다.`, room.$key);
+      console.log('처음 참여')
+      let alert = this.alertCtrl.create({
+        title: '참여 확인',
+        message: `<br>일시 : ${room['departDate']} 
+                  <br>시간 : ${room['departTime']}
+                  <br>장소 : ${room['depart']} -> ${room['arrive']}`,
+        buttons: [{
+          text: "Cancel",
+          role: "cancel"
+        }, {
+          text: "OK",
+          handler: () => {
+            this.sendNotification(`${this.userServices.userInfo['korName']}님이 입장하셨습니다.`, room.$key);
       
-      let members:Array<any> = room['participants'];
-      let tokenList = room['devTokens'];
-      members.push(this.userID);
-      tokenList.push(this.userServices.userInfo['devToken']);
-      room['participants'] = members;
-      room['devTokens'] = tokenList;
-      room['currentPeople']++;
-
-      this.af.object(`/${room.transportType}Chatrooms/${room.departDate}/${room.$key}`).set(room);
-  
-      members.forEach(studentID => {
-        this.af.object(`/rideHistory/${studentID}/${room.$key}`).set(room);
-      })
-      
-      this.navCtrl.push(ChatRoomPage, {room: room});
+            let members:Array<any> = room['participants'];
+            let tokenList = room['devTokens'];
+            members.push(this.userID);
+            tokenList.push(this.userServices.userInfo['devToken']);
+            room['participants'] = members;
+            room['devTokens'] = tokenList;
+            room['currentPeople']++;
+            
+            //들어가는 방 정보 업데이트
+            this.af.object(`/${room.transportType}Chatrooms/${room.departDate}/${room.$key}`).set(room);
+            //타고 있던 사람들 rideHistory 업데이트
+            members.forEach(studentID => {
+              this.af.object(`/rideHistory/${studentID}/${room.$key}`).set(room);
+            });
+            this.navCtrl.push(ChatRoomPage, {room: room});
+          }
+        }],
+      });
+      alert.present();
     } else{ // 참여중
+      console.log('참여중')
       this.navCtrl.push(ChatRoomPage, {room: room});
     }
   }

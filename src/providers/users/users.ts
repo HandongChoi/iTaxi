@@ -53,7 +53,6 @@ export class UsersProvider {
       devToken: "ddf"
     }
   }
-  getStudentID(){ return this.userInfo['studentID']; }
   setDevToken(token){ this.userInfo['devToken'] = token; }
 
 }
