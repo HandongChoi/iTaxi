@@ -50,11 +50,18 @@ export class MakeRoomPage {
     this.arrive = this.selectDestination['key'] != '직접입력' ? this.selectDestination['key'] : this.selectDestination['value'];
     
     //전달할 메시지
-    this.msg = "<br>출발지 : " + this.depart + "<br>" + 
+    this.msg = this.transportType == 'taxi' 
+              ? "<br>출발지 : " + this.depart + "<br>" + 
               "도착지 : " + this.arrive + "<br>" + 
               "출발날짜 : " + this.bookingDate + "(" + this.dateServices.getKToday(this.bookingDate) + ")" + "<br>" + 
               "출발시간 : " + this.bookingTime + "<br>" +
-              "탑승모집인원 : " + this.maxPeople + "명" + "<br>" ;
+              "탑승모집인원 : " + this.maxPeople + "명" + "<br>" 
+              : "<br>출발지 : " + this.depart + "<br>" + 
+              "도착지 : " + this.arrive + "<br>" + 
+              "출발날짜 : " + this.bookingDate + "(" + this.dateServices.getKToday(this.bookingDate) + ")" + "<br>" + 
+              "출발시간 : " + this.bookingTime + "<br>" +
+              "탑승모집인원 : " + this.maxPeople + "명" + "<br>" +
+              "가격 : " + this.price + "원" + "<br>";
     
     //지금 시간 보다 전 시간으로 예약하는 경우 처리
     if((this.nowDate+this.nowTime)>(this.bookingDate+this.bookingTime)){
@@ -66,7 +73,7 @@ export class MakeRoomPage {
         }]
       });
       alert.present();
-    }else{
+    } else{
       //출발지와 목적지가 같을 경우 처리
       if(this.depart == this.arrive){
         let alert = this.alertCtrl.create({
@@ -78,7 +85,7 @@ export class MakeRoomPage {
         });
         alert.present();
       //input type 으로 입력을 받을 때 값을 입력하지 않는 경우 처리  
-      }else if(this.depart=="" || this.arrive==""){
+      } else if(this.depart=="" || this.arrive==""){
         let alert = this.alertCtrl.create({
           message: "출발지 혹은 도착지를 입력하여 주세요.",
           buttons: [{
@@ -87,7 +94,7 @@ export class MakeRoomPage {
           }]
         });
         alert.present();
-      }else{
+      } else{
         let alert = this.alertCtrl.create({
           title: '방만들기',
           subTitle: '아래 내용이 맞습니까?',  
@@ -100,7 +107,8 @@ export class MakeRoomPage {
             },
             { text: '확인',
               handler: () => {
-                let room: Object = { depart: this.depart,
+                //카풀이면 가격정보저장, 택시면 가격정보 없이
+                let room: Object = this.transportType == 'taxi' ? { depart: this.depart,
                                      arrive: this.arrive,
                                      departDate: this.bookingDate,
                                      departTime: this.bookingTime,
@@ -111,7 +119,19 @@ export class MakeRoomPage {
                                      transportType: this.transportType,
                                      participants: [this.userID],
                                      devTokens:[this.userServices.userInfo['devToken']]
-                                   };
+                                   } : { depart: this.depart,
+                                    arrive: this.arrive,
+                                    departDate: this.bookingDate,
+                                    departTime: this.bookingTime,
+                                    capacity: this.maxPeople,
+                                    currentPeople: 1,
+                                    hostName: this.userServices.userInfo['korName'],
+                                    host: this.userID,
+                                    transportType: this.transportType,
+                                    participants: [this.userID],
+                                    devTokens:[this.userServices.userInfo['devToken']],
+                                    price: this.price == null ? 0 : this.price
+                                  };
 
                 let chatRoomUrl = this.af.list(`/${room['transportType']}Chatrooms/${this.bookingDate}`).push(room);
                 this.af.object(`/rideHistory/${this.userServices.userInfo['studentID']}/${chatRoomUrl.key}`).set(room);

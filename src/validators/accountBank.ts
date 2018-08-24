@@ -6,7 +6,7 @@ import { FormControl } from '@angular/forms';
 export class AccountBankValidator {
     static isValid(control: FormControl){
         const re = /^[가-힣\s]+$/ .test(control.value);
-        if (re || control.value==''){  // 여기서 nullable 하게
+        if(re || control.value==''){  // 여기서 nullable 하게
             return null;
         }
         return { "invalidAccountBank": true};

@@ -97,9 +97,9 @@ export class ListPage {
   makeRoom(){ this.navCtrl.setRoot(MakeRoomPage, {transportType: this.transportType}); }
 
   filterDeparture(departFilter){
-    if (departFilter == "All") {
+    if(departFilter == "All"){
       this.rooms = this.roomServices.getChatRooms(this.selectedDate, this.transportType);
-    } else {
+    } else{
       let query = {
         orderByChild: 'depart',
         equalTo: departFilter
@@ -109,9 +109,9 @@ export class ListPage {
   }
 
   filterDestination(arriveFilter){
-    if (arriveFilter == "All") {
+    if(arriveFilter == "All"){
       this.rooms = this.roomServices.getChatRooms(this.selectedDate, this.transportType);
-    } else {
+    } else{
       let query = {
         orderByChild: 'arrive',
         equalTo: arriveFilter

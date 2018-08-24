@@ -56,7 +56,7 @@ export class LoginPage {
     .subscribe( data => {
       this.loading.dismiss().then( () => {
         var body = JSON.parse(data['_body']);
-        if (body['studentID'] == undefined){
+        if(body['studentID'] == undefined){
           this.loading.dismiss().then( () => {
             const alert:Alert = this.alertCtrl.create({
             message: "ID 혹은 비밀번호가 틀렸습니다.",
@@ -69,11 +69,11 @@ export class LoginPage {
             this.authProvider.loginUser('21000123');
             console.log('tester');
           }
-        } else {
+        } else{
           this.af.object(`/userProfile/${body['studentID']}`, { preserveSnapshot: true }).subscribe( (data) => {
             if(data.exists()){
               this.authProvider.loginUser(body['studentID']);        
-            } else {
+            } else{
               userInfo['studentID'] = body['studentID'];
               userInfo['phone'] = body['phone'];
               userInfo['email'] = body['email'];
