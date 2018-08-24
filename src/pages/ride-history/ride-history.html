@@ -71,7 +71,8 @@
         <ion-item>Taxi</ion-item>
         <ion-grid>
           <ion-item-group *ngFor = "let room of taxiRooms | async | roomSort">
-            <div *ngIf = "room.departDate + room.departTime <= dateServices.nowDate + dateServices.nowTime">
+            <div *ngIf = "(room.departDate + room.departTime <= dateServices.nowDate + dateServices.nowTime) && 
+            (limitation(dateServices.nowDate) < room.departDate)">
               <ion-item-divider color="light" (click)="goChatroom(room)">
                 <ion-row>
                   <ion-col col-3>
@@ -94,7 +95,8 @@
         <ion-item>Carpool</ion-item>
         <ion-grid>
           <ion-item-group *ngFor = "let room of carpoolRooms | async | roomSort">
-            <div *ngIf = "room.departDate + room.departTime <= dateServices.nowDate + dateServices.nowTime">
+            <div *ngIf = "room.departDate + room.departTime <= dateServices.nowDate + dateServices.nowTime && 
+            (limitation(dateServices.nowDate) < room.departDate)">
               <ion-item-divider color="light" (click)="goChatroom(room)">
                 <ion-row>
                   <ion-col col-3>

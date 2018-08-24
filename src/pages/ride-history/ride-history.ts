@@ -31,6 +31,13 @@ export class RideHistoryPage {
 
   goChatroom(room) { this.navCtrl.push(ChatRoomPage, {room: room}); }
   
+  //input: '2018-08-08' output: '2018-08-01'
+  //현재 7일을 자동 삭제 기간으로 잡았다.
+  limitation(date){
+    var disapperTime = new Date(date);
+    disapperTime.setDate(disapperTime.getDate() - 7);
+    return this.dateServices.makeStringFromDate(disapperTime);
+  }
   /* 과거에 무슨 이유에서인지 썼는데 기억이 안남.
   ngOnDestroy(){ if (this.sub) this.sub.unsubscribe(); }
   */
