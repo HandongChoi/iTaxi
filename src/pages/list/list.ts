@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, AlertController } from 'ionic-angular';
 import { ChatRoomPage } from '../chatroom/chatroom';
 import { MakeRoomPage } from '../makeRoom/makeRoom';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
@@ -31,7 +31,8 @@ export class ListPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase,
               public datePickerProvider: DatePickerProvider, public modalCtrl: ModalController,  
-              public userServices: UsersProvider, public dateServices: DateProvider, public roomServices: RoomsProvider) {
+              public userServices: UsersProvider, public dateServices: DateProvider, public roomServices: RoomsProvider,
+              public alertCtrl: AlertController,) {
     this.dateServices.setNow();
     this.userID = this.userServices.userInfo['studentID'];
     this.transportType = this.navParams.data.transportType;
@@ -63,23 +64,35 @@ export class ListPage {
 
   goChatroom(room) {
     if (!this.isEntered(room['participants'])) { //처음 참여
-      this.sendNotification(`${this.userServices.userInfo['korName']}님이 입장하셨습니다.`, room.$key);
-      
-      let members:Array<any> = room['participants'];
-      let tokenList = room['devTokens'];
-      members.push(this.userID);
-      tokenList.push(this.userServices.userInfo['devToken']);
-      room['participants'] = members;
-      room['devTokens'] = tokenList;
-      room['currentPeople']++;
+      let alert = this.alertCtrl.create({
+        title: `${room['departDate']}, ${room['departTime']}`,
+        message: `${room['depart']}에서 ${room['arrive']}(으)로 \n가는 게 맞으신가요?`,
+        buttons: [{
+          text: "Cancle",
+          role: "cancle"
+        }, {
+          text: "OK",
+          handler: () => {
+            this.sendNotification(`${this.userServices.userInfo['korName']}님이 입장하셨습니다.`, room.$key);
+            let members:Array<any> = room['participants'];
+            let tokenList = room['devTokens'];
+            members.push(this.userID);
+            tokenList.push(this.userServices.userInfo['devToken']);
+            room['participants'] = members;
+            room['devTokens'] = tokenList;
+            room['currentPeople']++;
 
-      this.af.object(`/${room.transportType}Chatrooms/${room.departDate}/${room.$key}`).set(room);
-  
-      members.forEach(studentID => {
-        this.af.object(`/rideHistory/${studentID}/${room.$key}`).set(room);
-      })
-      
-      this.navCtrl.push(ChatRoomPage, {room: room});
+            // 들어가는 방 정보 업데이트
+            this.af.object(`/${room.transportType}Chatrooms/${room.departDate}/${room.$key}`).set(room);
+            // 타고있는 사람들의 rideHistory 업데이트
+            members.forEach(studentID => {
+              this.af.object(`/rideHistory/${studentID}/${room.$key}`).set(room);
+            });
+            this.navCtrl.push(ChatRoomPage, {room: room});
+          }
+        }]
+      });
+      alert.present();
     } else{ // 참여중
       this.navCtrl.push(ChatRoomPage, {room: room});
     }

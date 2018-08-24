@@ -2,11 +2,11 @@
   <ion-navbar color="primary">
     <ion-buttons right>
       <button ion-button menuToggle>
-          <ion-icon name="menu"></ion-icon>
-        </button>
+        <ion-icon name="menu"></ion-icon>
+      </button>
     </ion-buttons>
     <!-- 방이름/인원 -->
-    <ion-title> {{room.hostName}}방장 ({{room.currentPeople}}/{{room.capacity}}) </ion-title>
+    <ion-title> {{roomData.hostName}}방장 ({{roomData.currentPeople}}/{{roomData.capacity}}) </ion-title>
   </ion-navbar>
 
   <!-- 방 정보 -->
@@ -14,19 +14,19 @@
     <ion-row>
       <ion-col justify-content-center padding-left>
         {{displayDate}} {{displayTime}}
-        <p><b>{{room.depart}} &nbsp; <ion-icon name="arrow-forward"></ion-icon>
-           &nbsp; {{room.arrive}}
+        <p><b>{{roomData.depart}} &nbsp; <ion-icon name="arrow-forward"></ion-icon>
+           &nbsp; {{roomData.arrive}}
         </b></p>
-        <p>{{room.departTime}}</p>
+        <p>{{roomData.departTime}}</p>
       </ion-col>
       <ion-col col-auto>
         <ion-buttons right icon-only>
           <!-- 먹튀 방지용으로 방나가기는 택시 이용 시간 직전까지만 사용 가능-->
-          <button class="quit" *ngIf="room.departDate + room.departTime > dateServices.nowDate + dateServices.nowTime" ion-button (click)='quit()'>
+          <button class="quit" *ngIf="roomData.departDate + roomData.departTime > dateServices.nowDate + dateServices.nowTime" ion-button (click)='quit()'>
             <span>방나가기</span>
           </button>
           <!-- 택시 타고 난 이후 정산 기능-->
-          <button class="payment" *ngIf="room.departDate + room.departTime <= dateServices.nowDate + dateServices.nowTime" ion-button (click)='payment()'>
+          <button class="payment" *ngIf="roomData.departDate + roomData.departTime <= dateServices.nowDate + dateServices.nowTime" ion-button (click)='payment()'>
               <span>정산하기</span>
             </button>
         </ion-buttons>
@@ -59,7 +59,7 @@
       <div class="message" [ngClass]="chat.userID == userID ? 'right' : (chat.userID != 'CRA' ? 'left' : 'testing')">
         <!-- 한 유저의 연속된 메시지는 첫 메시지만 이름 띄움 -->
         <div class="user-info" *ngIf="chat.userID != 'CRA' && (i == 0 ? true : Chats[i-1].userName != chat.userName)">
-          <img *ngIf="chat.userID == roomHost" src="assets/img/crown_gold.png" alt="Host">{{chat.userName}}
+          <img *ngIf="chat.userID == roomData['host']" src="assets/img/crown_gold.png" alt="Host">{{chat.userName}}
         </div>
         <div class="msg-content">
           <!-- 디자인상으로 왼쪽 오른쪽 span태그의 위치가 달라져서 똑같은 태그 반복 -->

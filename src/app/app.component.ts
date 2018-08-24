@@ -22,7 +22,8 @@ import firebase from 'firebase';
 import { MainPage } from '../pages/main/main';
 import { ListPage } from '../pages/list/list';
 import { MakeRoomPage } from '../pages/makeRoom/makeRoom';
-import { SignupPage } from '../pages/signup/signup'
+import { SettingPage } from '../pages/setting/setting';
+import { RideHistoryPage } from '../pages/ride-history/ride-history';
 
 firebase.initializeApp({
   apiKey: "AIzaSyAUzjyDEOkbfvh3hU_t4wR4p3jXNq5lz3A",
@@ -70,9 +71,12 @@ export class MyApp {
           }).subscribe( rooms => {
             this.room = rooms.sort(this.roomServices.sortByDateTime)
             .filter((room: Object) => room['departDate'] + room['departTime'] >= this.dateServices.nowDate + this.dateServices.nowTime)[0];
+
+            this.navCtrl.setRoot(MainPage, {'room': this.room});
           })
         }).then( () => {
-          this.rootPage = MainPage;
+          
+          // this.rootPage = MainPage;
         });
       }
       this.splashScreen.hide();
@@ -137,11 +141,14 @@ export class MyApp {
     this.navCtrl.push(ChatRoomPage, {room: room});
   }
 
-  takeTaxi() { this.navCtrl.setRoot(ListPage, {transportType: 'taxi'}); }
-  makeTaxi() { this.navCtrl.setRoot(MakeRoomPage, {transportType: 'taxi'}); }
+  takeTaxi() { this.navCtrl.push(ListPage, {transportType: 'taxi'}); }
+  makeTaxi() { this.navCtrl.push(MakeRoomPage, {transportType: 'taxi'}); }
 
-  takeCarpool() { this.navCtrl.setRoot(ListPage, {transportType: 'carpool'}); }
-  makeCarpool() { this.navCtrl.setRoot(MakeRoomPage, {transportType: 'carpool'}); }
+  takeCarpool() { this.navCtrl.push(ListPage, {transportType: 'carpool'}); }
+  makeCarpool() { this.navCtrl.push(MakeRoomPage, {transportType: 'carpool'}); }
+
+  goRideHistoryPage() { this.navCtrl.push(RideHistoryPage) }
+  goSettingPage() { this.navCtrl.push(SettingPage) };
 
   logout(){
     let alert = this.alertCtrl.create({
