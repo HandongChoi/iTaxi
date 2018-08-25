@@ -8,7 +8,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { Http } from '@angular/http';
 
 import { SignupPage } from '../signup/signup';
-import { resolve } from 'dns';
+//import { resolve } from 'dns';
 
 @IonicPage()
 @Component({
@@ -52,6 +52,7 @@ export class LoginPage {
                               isNoti: "",
                             } 
     var login = {"id": id, "password": password}
+    //헤더 부분에다가 utf-8 적용해서 한글도 보낼 수 있도록 해야된다.
     this.http.post('https://8slpzkf3j9.execute-api.us-east-2.amazonaws.com/iTaxi/login',JSON.stringify(login))
     .subscribe( data => {
       this.loading.dismiss().then( () => {
@@ -67,7 +68,6 @@ export class LoginPage {
           //test용
           if(id == 'tester'){
             this.authProvider.loginUser('21000123');
-            console.log('tester');
           }
         } else {
           this.af.object(`/userProfile/${body['studentID']}`, { preserveSnapshot: true }).subscribe( (data) => {
