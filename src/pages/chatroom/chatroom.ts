@@ -8,6 +8,7 @@ import { UsersProvider } from '../../providers/users/users';
 import { DateProvider } from '../../providers/date/date';
 import { RoomsProvider } from '../../providers/rooms/rooms';
 import { PersonalInfoPage } from '../personal-info/personal-info';
+import { SMS } from '@ionic-native/sms';
 
 @IonicPage()
 @Component({
@@ -36,10 +37,12 @@ export class ChatRoomPage {
 
   constructor(public navCtrl: NavController, public af:AngularFireDatabase, public navParams: NavParams, public platform:Platform,
               public roomServices: RoomsProvider, public dateServices: DateProvider, public userServices: UsersProvider,
-              public alertCtrl: AlertController) {
+              public alertCtrl: AlertController, public sms: SMS) {
     //시간 관련 장소에서는 늘 현재 시간으로 다시 셋팅하기.
     this.dateServices.setNow();
     
+    console.log(this.platform)
+
     //Data loading    
     //방에서 바뀌지 않는 정보들을 빠르게 받아오고 굳이 db의 정보에 의존하지 않는 것은 db 접근 없이 사용하기 위해서 parameter로 받는다.
     this.room = navParams.data.room;
@@ -105,6 +108,22 @@ export class ChatRoomPage {
         this.scrollBottom();
       });
     }
+  }
+
+  sendSMS(phonenumber){
+    this.platform.ready();
+    try{
+      this.sms.send(phonenumber, '아이택시에서 연락드립니다.');
+      let alert = this.alertCtrl.create({
+        title: "문자 전송",
+        message: "메시지가 전송되었습니다."
+      })
+      alert.present();
+    }
+    catch (e) {
+      console.log("error");
+    }
+    
   }
 
   quit(transportType: string){

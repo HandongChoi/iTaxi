@@ -42,8 +42,8 @@
       <ion-col class="users">
         <div class="user" *ngFor="let member of participants; let i = index">
           <button class="user-name" [ngClass]="{'active': index==i}" (click)="show(i)" >{{ member.korName }}</button>
-          <button class="user-call"><a href="sms://{{member.phoneNumber}}"><ion-icon name="ios-call-outline"></ion-icon></a></button>
-          <button class="user-mail"><a href="sms://{{member.phoneNumber}}"><ion-icon name="ios-mail-outline"></ion-icon></a></button>
+          <button class="user-call"><a href="tel:{{member.phone}}"><ion-icon name="ios-call-outline"></ion-icon></a></button>
+          <button class="user-mail" (click)=sendSMS(member.phone)><ion-icon name="ios-mail-outline"></ion-icon></button>
         </div>
         <div class="user dumy" *ngIf="!participants.length">
           <button class="user-name"></button>
