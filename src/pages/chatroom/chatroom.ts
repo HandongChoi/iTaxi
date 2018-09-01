@@ -1,9 +1,7 @@
-import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, Content, NavParams, Platform, AlertController, Alert } from 'ionic-angular';
+import { Component, ViewChild, ElementRef } from '@angular/core';
+import { IonicPage, NavController, Content, NavParams, Platform, AlertController, List } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-
 import { MainPage } from '../../pages/main/main';
-
 import { UsersProvider } from '../../providers/users/users';
 import { DateProvider } from '../../providers/date/date';
 import { RoomsProvider } from '../../providers/rooms/rooms';
@@ -18,6 +16,8 @@ import { SMS } from '@ionic-native/sms';
 export class ChatRoomPage {
 
   @ViewChild(Content) content: Content;
+  @ViewChild(List, {read: ElementRef}) chatList: ElementRef;
+
 
   chats: FirebaseListObservable<any[]>;
   room: Object; //오브젝트와 파베오브젝트로 형태로 올 수 있는데 둘다 Object type이다.
@@ -34,6 +34,8 @@ export class ChatRoomPage {
 
   index: number = 0;
   roomKey: string;
+  private mutationObserver: MutationObserver;
+
 
   constructor(public navCtrl: NavController, public af:AngularFireDatabase, public navParams: NavParams, public platform:Platform,
               public roomServices: RoomsProvider, public dateServices: DateProvider, public userServices: UsersProvider,
@@ -76,8 +78,9 @@ export class ChatRoomPage {
             })
           }
         }
+        // this.scrollBottom();
     })
-    this.scrollBottom();
+    
     this.chatPrevKey = null;
   }
   send() {
@@ -249,11 +252,20 @@ export class ChatRoomPage {
       dateTime: new Date().toLocaleString('ko-KR'),
     }).then(() => {
       this.chatContent = "";
-      this.scrollBottom();
     });
   }
+  ionViewDidEnter(){
+    this.content.scrollToBottom(300);
+  }
+  ionViewDidLoad(){ 
+    this.mutationObserver = new MutationObserver((mutations) => {
+    this.content.scrollToBottom();
+    });
 
-  ionViewDidLoad(){ console.log("chatroom loaded"); }
+    this.mutationObserver.observe(this.chatList.nativeElement, {
+      childList: true
+    });
+  } 
   scrollBottom(){ this.content.scrollToBottom(300); }
   show(index) { this.index = (this.index == index) ? -1 : index; }
   
