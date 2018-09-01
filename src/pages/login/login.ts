@@ -58,13 +58,11 @@ export class LoginPage {
       this.loading.dismiss().then( () => {
         var body = JSON.parse(data['_body']);
         if (body['studentID'] == undefined){
-          this.loading.dismiss().then( () => {
-            const alert:Alert = this.alertCtrl.create({
-            message: "ID 혹은 비밀번호가 틀렸습니다.",
-            buttons: [{ text: "Ok", role: 'cancel'}]
+          const alert:Alert = this.alertCtrl.create({
+          message: "ID 혹은 비밀번호가 틀렸습니다.",
+          buttons: [{ text: "Ok", role: 'cancel'}]
           });
           alert.present();
-          });
           //test용
           if(id == 'tester'){
             this.authProvider.loginUser('21000123');
@@ -86,7 +84,7 @@ export class LoginPage {
       })
     });
     this.loading = this.loadingCtrl.create();
-    this.loading.present();   
+    this.loading.present();
   }
   /*************************************************************************/
   /********* 자체 로그인 시스템을 쓸 때 아래와 같은 코드를 사용 하면 된다. ***************/

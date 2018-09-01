@@ -63,12 +63,10 @@ export class ListPage {
   }
 
   goChatroom(room) {
-    console.log('goChatroom')
     if (!this.isEntered(room['participants'])) { //처음 참여
-      console.log('처음 참여')
       let alert = this.alertCtrl.create({
         title: '참여 확인',
-        message: `<br>일시 : ${room['departDate']} 
+        message: `<br>일시 : ${room['departDate']}(${this.dateServices.getKToday(room['departDate'])})
                   <br>시간 : ${room['departTime']}
                   <br>장소 : ${room['depart']} -> ${room['arrive']}`,
         buttons: [{
@@ -99,7 +97,6 @@ export class ListPage {
       });
       alert.present();
     } else{ // 참여중
-      console.log('참여중')
       this.navCtrl.push(ChatRoomPage, {room: room});
     }
   }

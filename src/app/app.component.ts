@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, NavController, Platform, AlertController, MenuController } from 'ionic-angular';
+import { Nav, NavController, Platform, AlertController, MenuController, LoadingController } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { LoginPage } from '../pages/login/login';
@@ -51,7 +51,7 @@ export class MyApp {
   constructor(public platform: Platform, public splashScreen: SplashScreen, private statusBar: StatusBar, private localNotifications: LocalNotifications,
               public authProvider:AuthProvider, public alertCtrl: AlertController, public af: AngularFireDatabase, private localNotification: PhonegapLocalNotification,
               public fcm:FCM, public userServices:UsersProvider, private dateServices:DateProvider, public menuCtrl: MenuController,
-              public roomServices: RoomsProvider) {
+              public roomServices: RoomsProvider, public loadingCtrl:LoadingController) {
     this.dateServices.setNow();
     this.splashScreen.show();
     this.initializeApp();
@@ -127,8 +127,6 @@ export class MyApp {
       // Note: 현재 카톡에서 올때 위에 떴다가 사라지는 것을 구현하려고 하는데 이름이 뭔지.. docs에는 없는 것 같은데.. 나중에 찾아보자..
       */
     });
-    
-    console.log("initailizeApp at app.component.ts");
   }
 
   setRoot(Page) { this.navCtrl.setRoot(Page); }
@@ -157,9 +155,10 @@ export class MyApp {
       }, {
         text: "OK",
         handler: () => {
-          this.authProvider.logoutUser();
-          this.userServices.clear();
-          this.navCtrl.setRoot(LoginPage);
+          this.authProvider.logoutUser().then( () => {
+            this.userServices.clear();
+            this.navCtrl.setRoot(LoginPage);
+          });
         }
       }]
     });
