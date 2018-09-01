@@ -31,7 +31,7 @@ export class ChatRoomPage {
   chatNowTime: any;
   chatPrevKey: string;
 
-  index: number = -1;
+  index: number = 0;
   roomKey: string;
 
   constructor(public navCtrl: NavController, public af:AngularFireDatabase, public navParams: NavParams, public platform:Platform,
@@ -74,8 +74,7 @@ export class ChatRoomPage {
           }
         }
     })
-    
-    if(this.platform.is('ios') || this.platform.is('android')){ this.scrollBottom(); }
+    this.scrollBottom();
     this.chatPrevKey = null;
   }
   send() {
@@ -103,7 +102,7 @@ export class ChatRoomPage {
         this.chatPrevKey = data['key'];
 
         this.chatContent = "";
-        if(this.platform.is('ios') || this.platform.is('android')){ this.scrollBottom(); }
+        this.scrollBottom();
       });
     }
   }
@@ -231,7 +230,7 @@ export class ChatRoomPage {
       dateTime: new Date().toLocaleString('ko-KR'),
     }).then(() => {
       this.chatContent = "";
-      if(this.platform.is('ios') || this.platform.is('android')){ this.scrollBottom(); }
+      this.scrollBottom();
     });
   }
 
