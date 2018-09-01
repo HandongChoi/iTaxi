@@ -95,29 +95,3 @@ $list-md-margin-bottom : 0px;
 
 @import "roboto";
 @import "noto-sans";
-
-@font-face {
-  font-family: 'NanumSquare';
-  font-style: normal;
-  src: 
-    url($font-path + 'NanumSquareRoundB.ttf') format('truetype'),
-    url($font-path + 'NanumSquareRoundOTFB.otf') format('opentype');
-}
-
-@font-face {
-  font-family: 'OpenSans-1';
-  font-style: normal;
-  src: url($font-path + 'SourceHanSansK-Regular.otf') format('opentype');
-}
-
-@font-face {
-  font-family: 'OpenSans-2';
-  font-style: normal;
-  src: url($font-path + 'SourceHanSansK-Medium.otf') format('opentype');
-}
-
-@font-face {
-  font-family: 'OpenSans-3';
-  font-style: normal;
-  src: url($font-path + 'SourceHanSansK-Bold.otf') format('opentype');
-}

@@ -6,7 +6,7 @@ page-make-room {
 
   $back-font: color($colors, semi-gray, base);
   $front-font: color($colors, primary, base);
-  font-family: "OpenSans-1";
+  font-family: "Noto Sans", "Noto Sans CJK KR";
 
   .wrapper {
     border-bottom-left-radius: 6px 8px;
@@ -31,7 +31,8 @@ page-make-room {
     }
 
     .cont {
-      font-family: "OpenSans-2";
+      // font-family: "OpenSans-2";
+      font-family: "Noto Sans", "Noto Sans CJK KR";
       color: $front-font;
     }
   }

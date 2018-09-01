@@ -11,7 +11,7 @@
 page-main {
   $backColor: color($colors, back-gray, base);
   $fontColor : color($colors, secondary, base);
-  font-family: "NanumSquare";
+  font-family: "Noto Sans", "Noto Sans CJK KR";
 
   #notice {
     font-size: 13px;
@@ -23,7 +23,6 @@ page-main {
   .menu {
     margin: 1vw 2vw;
     color: white;
-    font-weight: 500;
     cursor: pointer;
     
     #taxi {
@@ -32,7 +31,7 @@ page-main {
       img {
         width: 15vw;
         margin-top: 10vw;
-        margin-bottom: 16vw;
+        margin-bottom: 12vw;
       }
 
       span {
@@ -46,7 +45,7 @@ page-main {
 
       img {
         width: 15vw;
-        margin-top: 20vw;
+        margin-top: 16vw;
       }
 
       span {
