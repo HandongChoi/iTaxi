@@ -30,7 +30,8 @@ import { DateProvider } from '../providers/date/date';
 import { UsersProvider } from '../providers/users/users';
 import { RoomsProvider } from '../providers/rooms/rooms';
 
-import { PipesModule } from '../pipes/pipes.module'
+import { PipesModule } from '../pipes/pipes.module';
+import { SMS } from '@ionic-native/sms';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAUzjyDEOkbfvh3hU_t4wR4p3jXNq5lz3A",
@@ -83,7 +84,8 @@ export const firebaseConfig = {
     UsersProvider,
     RoomsProvider,
     LocalNotifications,
-    PhonegapLocalNotification
+    PhonegapLocalNotification,
+    SMS
   ]
 })
 export class AppModule {}
