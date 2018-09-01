@@ -1,27 +1,35 @@
 {
   "project_info": {
-    "project_number": "208976127032",
-    "firebase_url": "https://itaxi-54bdc.firebaseio.com",
-    "project_id": "itaxi-54bdc",
-    "storage_bucket": "itaxi-54bdc.appspot.com"
+    "project_number": "762163958818",
+    "firebase_url": "https://itaxipublic.firebaseio.com",
+    "project_id": "itaxipublic",
+    "storage_bucket": "itaxipublic.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:208976127032:android:af6d23e980ab678c",
+        "mobilesdk_app_id": "1:762163958818:android:f61ba3b9c5c61649",
         "android_client_info": {
-          "package_name": "com.itaxi.push"
+          "package_name": "com.iTaxi.push"
         }
       },
       "oauth_client": [
         {
-          "client_id": "208976127032-9spu449h5i7rhrct23m2brchomhvf83h.apps.googleusercontent.com",
+          "client_id": "762163958818-67gk3f8qnof47tjj2mnk3lfsfbn1mn70.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.iTaxi.push",
+            "certificate_hash": "7b9018c62c41556ecfe1cc3eb3a41dc05a8046e3"
+          }
+        },
+        {
+          "client_id": "762163958818-nu4cph3ma2i2rjhlubqmm2mqk0gocj2g.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD6GK1xlEzh7Z1D3YQSbRKcxaDwZFIVu1M"
+          "current_key": "AIzaSyDRRvKfCA0OXtjXPMTJ-7XjwZczaSfZ6OM"
         }
       ],
       "services": {
@@ -29,8 +37,71 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "762163958818-nu4cph3ma2i2rjhlubqmm2mqk0gocj2g.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "762163958818-0lunve8origltj82h3km5fokcp3qhbaa.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.itaxi.push"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:762163958818:android:af6d23e980ab678c",
+        "android_client_info": {
+          "package_name": "com.itaxi.push"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "762163958818-khgfkun27sr1onu54b2t1le3l5f0v4c9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.itaxi.push",
+            "certificate_hash": "7b9018c62c41556ecfe1cc3eb3a41dc05a8046e3"
+          }
+        },
+        {
+          "client_id": "762163958818-nu4cph3ma2i2rjhlubqmm2mqk0gocj2g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRRvKfCA0OXtjXPMTJ-7XjwZczaSfZ6OM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "762163958818-nu4cph3ma2i2rjhlubqmm2mqk0gocj2g.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "762163958818-0lunve8origltj82h3km5fokcp3qhbaa.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.itaxi.push"
+              }
+            }
+          ]
         },
         "ads_service": {
           "status": 2
