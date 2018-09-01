@@ -32,8 +32,6 @@ export class AuthProvider {
     const UID:string = firebase.auth().currentUser.uid;
     this.af.object(`/UID/${UID}`).subscribe( data => {
       let userID = data.studentID;
-      console.log('logoutTest');
-      console.log(userID);
       firebase.database().ref(`/userProfile/${userID}`).off();
     })
     return firebase.auth().signOut();
@@ -52,7 +50,4 @@ export class AuthProvider {
   resetPassword(email:string):firebase.Promise<void> { 
     return firebase.auth().sendPasswordResetEmail(email);
   }
-   
-  
-
 }

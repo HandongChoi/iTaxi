@@ -54,8 +54,6 @@ function loginWithKakao() {
           }
 
     });
-
-
     
     },
     fail: function(err) {

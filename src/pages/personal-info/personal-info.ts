@@ -65,9 +65,5 @@ export class PersonalInfoPage {
   }
 
   ionViewDidLoad() { console.log('ionViewDidLoad PersonalInfoPage'); }
-
-  dismiss(){
-    this.viewCtrl.dismiss()
-    console.log('dismiss page');
-  }
+  dismiss(){ this.viewCtrl.dismiss() }
 }
