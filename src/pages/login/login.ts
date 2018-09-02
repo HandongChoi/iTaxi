@@ -64,9 +64,9 @@ export class LoginPage {
           });
           alert.present();
           //test용
-          if(id == 'tester'){
-            this.authProvider.loginUser('21000123');
-          }
+          //if(id == 'tester'){
+          //  this.authProvider.loginUser('21000123');
+          //}
         } else {
           this.af.object(`/userProfile/${body['studentID']}`, { preserveSnapshot: true }).subscribe( (data) => {
             if(data.exists()){
