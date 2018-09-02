@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.iTaxi.push" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>iTAXI</name>
+<widget id="com.itaxi.push" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>아이택시</name>
     <description>An iTAXI application for all HGU Members</description>
     <author email="cra.handong.service@gmail.com" href="http://itaxi.handong.edu/">CRA</author>
     <content src="index.html" />
@@ -82,7 +82,7 @@
     <allow-navigation href="http://172.17.204.52:8100" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
     <plugin name="cordova-plugin-whitelist" spec="^1.3.1" />
-    <plugin name="cordova-plugin-statusbar" spec="git+https://github.com/apache/cordova-plugin-statusbar.git" />
+    <plugin name="cordova-plugin-statusbar" spec="~2.4.3-dev" />
     <plugin name="cordova-plugin-device" spec="^1.1.4" />
     <plugin name="cordova-plugin-splashscreen" spec="^4.0.3" />
     <plugin name="cordova-plugin-ionic-webview" spec="^1.1.16" />
@@ -91,14 +91,14 @@
         <variable name="SENDER_ID" value="208976127032" />
         <variable name="FCM_VERSION" value="11.0.1" />
     </plugin>
-    <plugin name="call-number" spec="~0.0.2" />
+    <plugin name="cordova-sms-plugin" spec="^0.1.11" />
+    <plugin name="mx.ferreyra.callnumber" spec="~0.0.2" />
     <plugin name="cordova-plugin-file-transfer" spec="~1.7.1" />
     <plugin name="cordova-plugin-app-preferences" spec="~0.99.3" />
     <plugin name="cordova-plugin-local-notification" spec="^0.9.0-beta.2" />
     <plugin name="cordova-plugin-x-toast" spec="^2.6.0" />
     <plugin name="phonegap-plugin-local-notification" spec="^1.0.1" />
-    <plugin name="cordova-sms-plugin" spec="^0.1.13" />
     <engine name="browser" spec="5.0.1" />
-    <engine name="ios" spec="^4.5.4" />
     <engine name="android" spec="6.3.0" />
+    <engine name="ios" spec="^4.5.5" />
 </widget>
