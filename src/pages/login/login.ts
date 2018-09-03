@@ -55,33 +55,33 @@ export class LoginPage {
     //헤더 부분에다가 utf-8 적용해서 한글도 보낼 수 있도록 해야된다.
     this.http.post('https://8slpzkf3j9.execute-api.us-east-2.amazonaws.com/iTaxi/login',JSON.stringify(login))
     .subscribe( data => {
-      this.loading.dismiss().then( () => {
-        var body = JSON.parse(data['_body']);
-        if (body['studentID'] == undefined){
-          const alert:Alert = this.alertCtrl.create({
-          message: "ID 혹은 비밀번호가 틀렸습니다.",
-          buttons: [{ text: "Ok", role: 'cancel'}]
-          });
-          alert.present();
-          //test용
-          //if(id == 'tester'){
-          //  this.authProvider.loginUser('21000123');
-          //}
-        } else {
-          this.af.object(`/userProfile/${body['studentID']}`, { preserveSnapshot: true }).subscribe( (data) => {
-            if(data.exists()){
-              this.authProvider.loginUser(body['studentID']);        
-            } else {
-              userInfo['studentID'] = body['studentID'];
-              userInfo['phone'] = body['phone'];
-              userInfo['email'] = body['email'];
-              userInfo['korName'] = body['korName'];
-              userInfo['engName'] = body['engName'];
-              this.navCtrl.push(SignupPage, {userInfo: userInfo});
-            }
-          });
-        }
-      })
+      var body = JSON.parse(data['_body']);
+      if (body['studentID'] == undefined){
+        this.loading.dismiss();
+        const alert:Alert = this.alertCtrl.create({
+        message: "ID 혹은 비밀번호가 틀렸습니다.",
+        buttons: [{ text: "Ok", role: 'cancel'}]
+        });
+        alert.present();
+        //test용
+        //if(id == 'tester'){
+        //  this.authProvider.loginUser('21000123');
+        //}
+      } else {
+        this.af.object(`/userProfile/${body['studentID']}`, { preserveSnapshot: true }).subscribe( (data) => {
+          if(data.exists()){
+            this.authProvider.loginUser(body['studentID']).then( ()=> this.loading.dismiss());        
+          } else {
+            userInfo['studentID'] = body['studentID'];
+            userInfo['phone'] = body['phone'];
+            userInfo['email'] = body['email'];
+            userInfo['korName'] = body['korName'];
+            userInfo['engName'] = body['engName'];
+            this.navCtrl.push(SignupPage, {userInfo: userInfo});
+            this.loading.dismiss();
+          }
+        });
+      }
     });
     this.loading = this.loadingCtrl.create();
     this.loading.present();

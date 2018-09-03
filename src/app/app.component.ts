@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, NavController, Platform, AlertController, MenuController, LoadingController } from 'ionic-angular';
+import { Nav, NavController, Platform, AlertController, MenuController, Loading, LoadingController } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { LoginPage } from '../pages/login/login';
@@ -61,6 +61,7 @@ export class MyApp {
       } else {
         //token setup을 여기서 하자.
         var currentUserID = authData.email.substr(0,8);
+        var loading: Loading;
         this.userServices.initialize(currentUserID).then( () => {
           this.userName = this.userServices.userInfo['korName'];
           this.af.list('/rideHistory/' + this.userServices.userInfo['studentID'], {
@@ -73,8 +74,11 @@ export class MyApp {
             .filter((room: Object) => room['departDate'] + room['departTime'] >= this.dateServices.nowDate + this.dateServices.nowTime)[0];
           })
         }).then( () => {
+          loading.dismiss();
           this.rootPage = MainPage;
         })
+        loading = this.loadingCtrl.create();
+        loading.present();
       }
       this.splashScreen.hide();
     });
