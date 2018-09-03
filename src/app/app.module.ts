@@ -6,8 +6,8 @@ import { MyApp } from './app.component';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 
-import { LocalNotifications } from '@ionic-native/local-notifications';
-import { PhonegapLocalNotification } from '@ionic-native/phonegap-local-notification';
+// import { LocalNotifications } from '@ionic-native/local-notifications';
+// import { PhonegapLocalNotification } from '@ionic-native/phonegap-local-notification';
 
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AuthProvider } from '../providers/auth/auth';
@@ -83,8 +83,8 @@ export const firebaseConfig = {
     DateProvider,
     UsersProvider,
     RoomsProvider,
-    LocalNotifications,
-    PhonegapLocalNotification,
+    // LocalNotifications,
+    // PhonegapLocalNotification,
     SMS
   ]
 })

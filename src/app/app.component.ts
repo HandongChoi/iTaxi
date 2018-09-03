@@ -14,8 +14,7 @@ import {StatusBar} from '@ionic-native/status-bar';
 import {LocalNotifications} from '@ionic-native/local-notifications';
 
 import { AngularFireDatabase } from 'angularfire2/database';
-import { FCM, NotificationData } from '@ionic-native/fcm';
-import { PhonegapLocalNotification } from '@ionic-native/phonegap-local-notification';
+import { FCM } from '@ionic-native/fcm';
 
 import firebase from 'firebase';
 
@@ -53,7 +52,7 @@ export class MyApp {
               public fcm:FCM, public userServices:UsersProvider, private dateServices:DateProvider, public menuCtrl: MenuController,
               public roomServices: RoomsProvider, public loadingCtrl:LoadingController) {
     this.dateServices.setNow();
-    this.splashScreen.show();
+    // this.splashScreen.show();
     this.initializeApp();
     firebase.auth().onAuthStateChanged( authData => {  
       if(authData == null){
@@ -80,7 +79,7 @@ export class MyApp {
         loading = this.loadingCtrl.create();
         loading.present();
       }
-      this.splashScreen.hide();
+      // this.splashScreen.hide();
     });
 
   }
@@ -90,7 +89,7 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
-      this.splashScreen.hide();
+      // this.splashScreen.hide();
       /*
       this.fcm.onTokenRefresh().subscribe(
         (token:string) => this.userServices.setDevToken(token),
