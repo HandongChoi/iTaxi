@@ -47,45 +47,45 @@ export class MyApp {
 
   room: any;
 
-  constructor(public platform: Platform, public splashScreen: SplashScreen, private statusBar: StatusBar, private localNotifications: LocalNotifications,
-              public authProvider:AuthProvider, public alertCtrl: AlertController, public af: AngularFireDatabase, private localNotification: PhonegapLocalNotification,
+  constructor(public platform: Platform, public splashScreen: SplashScreen, private statusBar: StatusBar,
+              public authProvider:AuthProvider, public alertCtrl: AlertController, public af: AngularFireDatabase,
               public fcm:FCM, public userServices:UsersProvider, private dateServices:DateProvider, public menuCtrl: MenuController,
               public roomServices: RoomsProvider, public loadingCtrl:LoadingController) {
     this.dateServices.setNow();
     // this.splashScreen.show();
     this.initializeApp();
-    firebase.auth().onAuthStateChanged( authData => {  
-      if(authData == null){
-        this.rootPage = LoginPage;
-      } else {
-        //token setup을 여기서 하자.
-        var currentUserID = authData.email.substr(0,8);
-        var loading: Loading;
-        this.userServices.initialize(currentUserID).then( () => {
-          this.userName = this.userServices.userInfo['korName'];
-          this.af.list('/rideHistory/' + this.userServices.userInfo['studentID'], {
-            query: {
-              startAt: this.dateServices.getYearMonthDayWithDash(),
-              orderByChild: 'departDate',
-            }
-          }).subscribe( rooms => {
-            this.room = rooms.sort(this.roomServices.sortByDateTime)
-            .filter((room: Object) => room['departDate'] + room['departTime'] >= this.dateServices.nowDate + this.dateServices.nowTime)[0];
+    this.platform.ready().then(() => {
+      firebase.auth().onAuthStateChanged( authData => {  
+        if(authData == null){
+          this.rootPage = LoginPage;
+        } else {
+          //token setup을 여기서 하자.
+          var currentUserID = authData.email.substr(0,8);
+          var loading: Loading;
+          this.userServices.initialize(currentUserID).then( () => {
+            this.userName = this.userServices.userInfo['korName'];
+            this.af.list('/rideHistory/' + this.userServices.userInfo['studentID'], {
+              query: {
+                startAt: this.dateServices.getYearMonthDayWithDash(),
+                orderByChild: 'departDate',
+              }
+            }).subscribe( rooms => {
+              this.room = rooms.sort(this.roomServices.sortByDateTime)
+              .filter((room: Object) => room['departDate'] + room['departTime'] >= this.dateServices.nowDate + this.dateServices.nowTime)[0];
+            })
+          }).then( () => {
+            loading.dismiss();
+            this.rootPage = MainPage;
           })
-        }).then( () => {
-          loading.dismiss();
-          this.rootPage = MainPage;
-        })
-        loading = this.loadingCtrl.create();
-        loading.present();
-      }
-      // this.splashScreen.hide();
+          loading = this.loadingCtrl.create();
+          loading.present();
+        }
+        // this.splashScreen.hide();
+      });
     });
-
   }
 
   initializeApp() {
-    this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
@@ -129,7 +129,7 @@ export class MyApp {
       // push message 수신 시 background, foreground에서 어떻게 할 건지 정의
       // Note: 현재 카톡에서 올때 위에 떴다가 사라지는 것을 구현하려고 하는데 이름이 뭔지.. docs에는 없는 것 같은데.. 나중에 찾아보자..
       */
-    });
+    
   }
 
   setRoot(Page) { this.navCtrl.setRoot(Page); }
