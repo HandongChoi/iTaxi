@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 
 import { ChatRoomPage } from '../chatroom/chatroom';
@@ -15,7 +15,7 @@ import { DateProvider } from '../../providers/date/date';
 })
 
 export class MakeRoomPage {
-  
+  @ViewChild(Content) content: Content;
   selectDeparture: Object = {key:"한동대학교", value:""};
   depart: string = "";
   selectDestination: Object = {key:"포항역", value:""};
@@ -43,6 +43,10 @@ export class MakeRoomPage {
     this.dateServices.setNow();
     this.userID = this.userServices.userInfo['studentID'];
     this.transportType = this.navParams.data.transportType;
+  }
+
+  ionViewWillEnter() {
+    this.content.resize();
   }
 
   makeRoom(){

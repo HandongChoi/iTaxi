@@ -80,6 +80,11 @@ export class ChatRoomPage {
     
     this.chatPrevKey = null;
   }
+
+  ionViewWillEnter() {
+
+  }
+  
   send() {
     if(this.chatContent !== '') {
       if(!this.chatPrevTime) {

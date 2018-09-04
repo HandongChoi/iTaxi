@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, AlertController, Content } from 'ionic-angular';
 
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { ChatRoomPage } from '../chatroom/chatroom';
@@ -14,6 +14,7 @@ import { RoomsProvider } from '../../providers/rooms/rooms'
   templateUrl: 'ride-history.html',
 })
 export class RideHistoryPage {
+  @ViewChild(Content) content: Content;
   rideHistory: FirebaseListObservable<Object[]>;
   history: string = "future";
   userID: string;
@@ -23,10 +24,14 @@ export class RideHistoryPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase, 
               public userServices: UsersProvider, public alertCtrl: AlertController, public dateServices: DateProvider,
               public roomServices: RoomsProvider,) {
-    this.dateServices.setNow();
     this.userID = this.userServices.userInfo['studentID'];
+  }
+
+  ionViewWillEnter() {
+    this.dateServices.setNow();
     this.taxiRooms = this.roomServices.getRideHistoryRooms('taxi');
     this.carpoolRooms = this.roomServices.getRideHistoryRooms('carpool');
+    this.content.resize();
   }
 
   goChatroom(room) { this.navCtrl.push(ChatRoomPage, {room: room}); }
