@@ -141,7 +141,6 @@ export class ListPage {
       this.rooms = this.roomServices.getChatRooms(this.selectedDate, this.transportType, query);
     }
   }
-
   
   isEntered(participants: Array<any>): boolean { return participants.indexOf(this.userID) != -1 ? true : false }
   isAvailable(room): boolean { return room.currentPeople < room.capacity ? true : false; }

@@ -138,14 +138,14 @@ export class MyApp {
     this.navCtrl.push(ChatRoomPage, {room: room});
   }
 
-  takeTaxi() { this.navCtrl.push(ListPage, {transportType: 'taxi'}); }
-  makeTaxi() { this.navCtrl.push(MakeRoomPage, {transportType: 'taxi'}); }
+  takeTaxi() { this.navCtrl.setRoot(ListPage, {transportType: 'taxi'}); }
+  makeTaxi() { this.navCtrl.setRoot(MakeRoomPage, {transportType: 'taxi'}); }
 
-  takeCarpool() { this.navCtrl.push(ListPage, {transportType: 'carpool'}); }
-  makeCarpool() { this.navCtrl.push(MakeRoomPage, {transportType: 'carpool'}); }
+  takeCarpool() { this.navCtrl.setRoot(ListPage, {transportType: 'carpool'}); }
+  makeCarpool() { this.navCtrl.setRoot(MakeRoomPage, {transportType: 'carpool'}); }
 
-  goRideHistoryPage() { this.navCtrl.push(RideHistoryPage) }
-  goSettingPage() { this.navCtrl.push(SettingPage) };
+  goRideHistoryPage() { this.navCtrl.setRoot(RideHistoryPage) }
+  goSettingPage() { this.navCtrl.setRoot(SettingPage) };
 
   logout(){
     let alert = this.alertCtrl.create({

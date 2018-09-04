@@ -71,7 +71,5 @@ export class MainPage {
       }
     });
   }
-
-  
 }
 
