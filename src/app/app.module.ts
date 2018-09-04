@@ -13,6 +13,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { AuthProvider } from '../providers/auth/auth';
 import { DatePickerModule } from 'ionic2-date-picker';
 
+import { BugReportPageModule } from '../pages/bug-report/bug-report.module';
 import { ListPageModule } from '../pages/list/list.module';
 import { ChatRoomPageModule } from '../pages/chatroom/chatroom.module';
 import { LoginPageModule } from '../pages/login/login.module';
@@ -58,6 +59,7 @@ export const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     DatePickerModule,
+    BugReportPageModule,
     ChatRoomPageModule,
     LoginPageModule,
     ListPageModule,
