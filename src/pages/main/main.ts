@@ -8,7 +8,6 @@ import { UsersProvider } from '../../providers/users/users';
 import { DateProvider } from '../../providers/date/date';
 
 import { RoomsProvider } from '../../providers/rooms/rooms'
-import { compareDates } from 'ionic-angular/umd/util/datetime-util';
 
 declare var FCMPlugin;
 

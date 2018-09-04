@@ -11,7 +11,6 @@ import { DateProvider } from '../providers/date/date';
 import { RoomsProvider } from '../providers/rooms/rooms';
 
 import {StatusBar} from '@ionic-native/status-bar';
-import {LocalNotifications} from '@ionic-native/local-notifications';
 
 import { AngularFireDatabase } from 'angularfire2/database';
 import { FCM } from '@ionic-native/fcm';

@@ -19,8 +19,6 @@ export class UsersProvider {
     isNoti: "",
   }
 
-  private firestore: any;
-
   constructor(public af: AngularFireDatabase, public loadingCtrl: LoadingController) {
     console.log('Hello UsersProvider Provider');
   }

@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams,  ViewController, AlertController} 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { UsersProvider } from '../../providers/users/users';
-import { SettingPage } from '../setting/setting'
 import { EmailValidator } from '../../validators/email';
 import { EngNameValidator } from '../../validators/engName';
 import { AccountBankValidator } from '../../validators/accountBank';
