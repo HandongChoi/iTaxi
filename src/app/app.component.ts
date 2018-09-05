@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, NavController, Platform, AlertController, MenuController, Loading, LoadingController } from 'ionic-angular';
+import { Nav, NavController, Platform, AlertController, MenuController, Loading, LoadingController, ToastController } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { LoginPage } from '../pages/login/login';
@@ -46,14 +46,26 @@ export class MyApp {
 
   room: any;
 
+  public counter = 0;
+
   constructor(public platform: Platform, public splashScreen: SplashScreen, private statusBar: StatusBar,
               public authProvider:AuthProvider, public alertCtrl: AlertController, public af: AngularFireDatabase,
               public fcm:FCM, public userServices:UsersProvider, private dateServices:DateProvider, public menuCtrl: MenuController,
-              public roomServices: RoomsProvider, public loadingCtrl:LoadingController) {
+              public roomServices: RoomsProvider, public loadingCtrl:LoadingController,
+              public toastCtrl: ToastController) {
     this.dateServices.setNow();
     // this.splashScreen.show();
     this.initializeApp();
     this.platform.ready().then(() => {
+      platform.registerBackButtonAction(() => {
+        if (this.counter == 0) {
+          this.counter++;
+          this.presentToast();
+          setTimeout(() => { this.counter = 0 }, 3000)
+        } else {
+          platform.exitApp();
+        }
+      }, 0)
       firebase.auth().onAuthStateChanged( authData => {  
         if(authData == null){
           this.rootPage = LoginPage;
@@ -130,6 +142,15 @@ export class MyApp {
       */
     
   }
+  presentToast() {
+    let toast = this.toastCtrl.create({
+      message: "끝내시려면 종료버튼을 한번 더 눌러주세요",
+      duration: 3000,
+      position: "bottom"
+    });
+    toast.present();
+  }
+
 
   setRoot(Page) { this.navCtrl.setRoot(Page); }
 

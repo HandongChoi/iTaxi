@@ -37,6 +37,10 @@ export class ChatRoomPage {
   constructor(public navCtrl: NavController, public af:AngularFireDatabase, public navParams: NavParams, public platform:Platform,
               public roomServices: RoomsProvider, public dateServices: DateProvider, public userServices: UsersProvider,
               public alertCtrl: AlertController, public sms: SMS) {
+    let backAction = platform.registerBackButtonAction(() => {
+      this.navCtrl.pop();
+      backAction();
+    }, 2)
     this.userID = this.userServices.userInfo['studentID'];
     //Data loading    
     //방에서 바뀌지 않는 정보들을 빠르게 받아오고 굳이 db의 정보에 의존하지 않는 것은 db 접근 없이 사용하기 위해서 parameter로 받는다.

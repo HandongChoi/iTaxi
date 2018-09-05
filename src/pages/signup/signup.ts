@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Loading, LoadingController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Loading, LoadingController, AlertController, Platform } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthProvider } from '../../providers/auth/auth';
 import { EmailValidator } from '../../validators/email';
@@ -38,7 +38,12 @@ export class SignupPage {
 
   constructor(public navCtrl:NavController, public navParams: NavParams, public authProvider:AuthProvider, 
     public loadingCtrl:LoadingController, public alertCtrl:AlertController, formBuilder:FormBuilder,
-    public af: AngularFireDatabase, public userService: UsersProvider) {
+    public af: AngularFireDatabase, public userService: UsersProvider,
+    public platform:Platform) {
+      let backAction = platform.registerBackButtonAction(() => {
+        this.navCtrl.pop();
+        backAction();
+      }, 2)
       this.userInfo = this.navParams.data.userInfo; 
       this.signUpForm = formBuilder.group({
         engName: [this.userInfo['engName'], EngNameValidator.isValid],
