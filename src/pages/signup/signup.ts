@@ -285,11 +285,11 @@ export class SignupPage {
 
     1. 본 약관에 명시되지 않은 사항에 대해서는 관계 법령 또는 전자상거래 관례 및 학교 교칙에 따릅니다.
 
-    2. 본 약관은 2018년 02월 12일부터 적용됩니다.
+    2. 본 약관은 2018년 09월 14일부터 적용됩니다.
 
     이용약관 문의
 
-    이 　　　름　:　
+    이 　　　름　:　최 효 은
     소속 / 직위　:　한동대학교 CRA / iTaxi 팀장
     E - M A I L　:　hguitaxi@gmail.com
   `
@@ -412,7 +412,7 @@ export class SignupPage {
 
   개인 정보 관리 책임자
 
-  이 　　름　: 
+  이 　　름　: 최 효 은
   소속 / 직위　:　한동대학교 CRA / iTaxi 팀장
   E - M A I L　:　hguitaxi@gmail.com
   `
