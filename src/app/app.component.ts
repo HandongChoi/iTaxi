@@ -22,6 +22,7 @@ import { ListPage } from '../pages/list/list';
 import { MakeRoomPage } from '../pages/makeRoom/makeRoom';
 import { SettingPage } from '../pages/setting/setting';
 import { RideHistoryPage } from '../pages/ride-history/ride-history';
+import { BugReportPage } from '../pages/bug-report/bug-report';
 
 firebase.initializeApp({
   apiKey: "AIzaSyAUzjyDEOkbfvh3hU_t4wR4p3jXNq5lz3A",
@@ -165,8 +166,8 @@ export class MyApp {
   takeCarpool() { this.navCtrl.setRoot(ListPage, {transportType: 'carpool'}); }
   makeCarpool() { this.navCtrl.setRoot(MakeRoomPage, {transportType: 'carpool'}); }
 
-  goRideHistoryPage() { this.navCtrl.setRoot(RideHistoryPage) }
-  goSettingPage() { this.navCtrl.setRoot(SettingPage) };
+  goBugReportPage() { this.navCtrl.push(BugReportPage) }
+  
 
   logout(){
     let alert = this.alertCtrl.create({
