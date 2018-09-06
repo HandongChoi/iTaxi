@@ -58,7 +58,7 @@ export class BugReportPage {
       }).then((data) => {
         // 한 유저가 1분 이내 보낸 메세지들은 가장 마지막 메세지만 날짜를 표시함
         if (this.continuousMessage(this.chatNowTime, this.chatPrevTime) && this.chatPrevKey) {
-          firebase.database().ref(`/bug`).update({
+          firebase.database().ref(`/bug/${this.chatPrevKey}`).update({
             dateTime: this.chatPrevTime.toLocaleString('ko-KR')+" [continuousMessage]",
           })
         }
