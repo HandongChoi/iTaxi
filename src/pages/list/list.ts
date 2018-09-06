@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, AlertController, Content} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, AlertController, Content, Platform} from 'ionic-angular';
 import { ChatRoomPage } from '../chatroom/chatroom';
 import { MakeRoomPage } from '../makeRoom/makeRoom';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
@@ -33,8 +33,12 @@ export class ListPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase,
               public datePickerProvider: DatePickerProvider, public modalCtrl: ModalController,  
               public userServices: UsersProvider, public dateServices: DateProvider, public roomServices: RoomsProvider,
-              public alertCtrl: AlertController,) {
+              public alertCtrl: AlertController, public platform : Platform) {
     this.userID = this.userServices.userInfo['studentID'];
+    let backAction = platform.registerBackButtonAction(() => {
+      this.navCtrl.pop();
+      backAction();
+    }, 2)
   }
 
   ionViewWillEnter() {
