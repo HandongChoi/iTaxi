@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, Content, NavParams, Platform, AlertController, List } from 'ionic-angular';
+import { IonicPage, NavController, Content, NavParams, Platform, AlertController, List, ToastController } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { MainPage } from '../../pages/main/main';
 import { UsersProvider } from '../../providers/users/users';
@@ -36,7 +36,7 @@ export class ChatRoomPage {
 
   constructor(public navCtrl: NavController, public af:AngularFireDatabase, public navParams: NavParams, public platform:Platform,
               public roomServices: RoomsProvider, public dateServices: DateProvider, public userServices: UsersProvider,
-              public alertCtrl: AlertController, public sms: SMS) {
+              public alertCtrl: AlertController, public sms: SMS, public toastCtrl : ToastController) {
     let backAction = platform.registerBackButtonAction(() => {
       this.navCtrl.pop();
       backAction();
@@ -116,11 +116,28 @@ export class ChatRoomPage {
   sendSMS(phonenumber){
     this.platform.ready();
     try{
-      this.sms.send(phonenumber, '아이택시에서 연락드립니다.');
       let alert = this.alertCtrl.create({
-        title: "문자 전송",
-        message: "메시지가 전송되었습니다."
-      })
+        title: "문자 보내기",
+        message: "보낼 메시지를 입력하세요.",
+        inputs: [{
+          name: 'msg'
+        }],
+        buttons: [{
+          text: "취소",
+          role: "cancel"
+        }, {
+          text: "보내기",
+          handler: (data) => {
+            this.sms.send(phonenumber, data.msg);
+            let toast = this.toastCtrl.create({
+              message: "메시지가 전송되었습니다.",
+              duration: 2000,
+              position: "bottom"
+            })
+            toast.present();
+          }
+        }]
+      });
       alert.present();
     }
     catch (e) {
