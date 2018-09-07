@@ -56,10 +56,11 @@ export class PersonalInfoPage {
             this.af.object(`/userProfile/${this.userInfo['studentID']}`).update(this.userInfo);
             let alert = this.alertCtrl.create({
               title: '개인정보 수정',
-              subTitle: '<br>성공적으로 변경되었습니다.<br>뒤로 돌아가주세요.',
+              subTitle: '<br>성공적으로 변경되었습니다.',
               buttons: ['확인']
             });
             alert.present();
+            this.navCtrl.pop();
           }
         }
       ]
