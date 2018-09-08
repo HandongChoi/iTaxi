@@ -10,8 +10,8 @@ import { UsersProvider } from '../providers/users/users';
 import { DateProvider } from '../providers/date/date';
 import { RoomsProvider } from '../providers/rooms/rooms';
 
-import {StatusBar} from '@ionic-native/status-bar';
-import {LocalNotifications} from '@ionic-native/local-notifications';
+import { StatusBar } from '@ionic-native/status-bar';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 
 import { AngularFireDatabase } from 'angularfire2/database';
 import { FCM, NotificationData } from '@ionic-native/fcm';
@@ -24,6 +24,9 @@ import { ListPage } from '../pages/list/list';
 import { MakeRoomPage } from '../pages/makeRoom/makeRoom';
 import { SettingPage } from '../pages/setting/setting';
 import { RideHistoryPage } from '../pages/ride-history/ride-history';
+
+import { OneSignal as OneSignalNative } from '@ionic-native/onesignal';
+declare var OneSignal;
 
 firebase.initializeApp({
   apiKey: "AIzaSyAUzjyDEOkbfvh3hU_t4wR4p3jXNq5lz3A",
@@ -51,32 +54,32 @@ export class MyApp {
   constructor(public platform: Platform, public splashScreen: SplashScreen, private statusBar: StatusBar, private localNotifications: LocalNotifications,
               public authProvider:AuthProvider, public alertCtrl: AlertController, public af: AngularFireDatabase, private localNotification: PhonegapLocalNotification,
               public fcm:FCM, public userServices:UsersProvider, private dateServices:DateProvider, public menuCtrl: MenuController,
-              public roomServices: RoomsProvider, public loadingCtrl:LoadingController) {
+              public roomServices: RoomsProvider, public loadingCtrl:LoadingController, private oneSignalNative: OneSignalNative) {
     this.dateServices.setNow();
-    this.splashScreen.show();
     this.initializeApp();
-    firebase.auth().onAuthStateChanged( authData => {  
+
+    firebase.auth().onAuthStateChanged(authData => {
       if(authData == null){
         this.rootPage = LoginPage;
       } else {
         //token setup을 여기서 하자.
         var currentUserID = authData.email.substr(0,8);
-        this.userServices.initialize(currentUserID).then( () => {
+        this.userServices.initialize(currentUserID).then(() => {
           this.userName = this.userServices.userInfo['korName'];
           this.af.list('/rideHistory/' + this.userServices.userInfo['studentID'], {
             query: {
               startAt: this.dateServices.getYearMonthDayWithDash(),
               orderByChild: 'departDate',
             }
-          }).subscribe( rooms => {
+          }).subscribe(rooms => {
             this.room = rooms.sort(this.roomServices.sortByDateTime)
             .filter((room: Object) => room['departDate'] + room['departTime'] >= this.dateServices.nowDate + this.dateServices.nowTime)[0];
-          })
-        }).then( () => {
+          });
+        }).then(() => {
+          this.setOneSignal(true); // true이면 addToken을 실행함
           this.rootPage = MainPage;
         })
       }
-      this.splashScreen.hide();
     });
 
   }
@@ -85,47 +88,23 @@ export class MyApp {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-      /*
-      this.fcm.onTokenRefresh().subscribe(
-        (token:string) => this.userServices.setDevToken(token),
-        error => console.error(error)
-      );
-      //token refresh시 token을 update한다..
+      if (this.platform.is('cordova')) {
+        this.statusBar.styleDefault();
+        this.statusBar.overlaysWebView(false);
+        this.splashScreen.hide();
 
-      this.fcm.onNotification().subscribe(
-        (data:NotificationData)=>{
-          this.localNotifications.on('click', () =>{
-            this.af.object(data.roomURL).subscribe(room => {
-              console.log("local notification", room, data.roomURL);
-              this.goChatroomPage(room);
-            })
-          });
-          if(data.wasTapped){
-            this.localNotifications.schedule({
-              id: 1,
-              icon: 'res:/icon.png',
-              title: 'iTAXI',
-              text: data.message
-            });
-          // received in background
-          }else{
-            this.localNotifications.schedule({
-              id: 1,
-              icon: 'res:/icon.png',
-              title: 'iTAXI',
-              text: data.message
-            });
-            // received in foreground
-          }
-        }, error=>{
-          console.error("Error in notification", error);
-        }
-      );
-      // push message 수신 시 background, foreground에서 어떻게 할 건지 정의
-      // Note: 현재 카톡에서 올때 위에 떴다가 사라지는 것을 구현하려고 하는데 이름이 뭔지.. docs에는 없는 것 같은데.. 나중에 찾아보자..
-      */
+        this.oneSignalNative.startInit('f4229499-d7fe-48bd-a3d9-6b64cfcb4ce2', '762163958818');
+        this.oneSignalNative.enableVibrate(true);
+        this.oneSignalNative.enableSound(true);
+        this.oneSignalNative.inFocusDisplaying(this.oneSignalNative.OSInFocusDisplayOption.None);
+        this.oneSignalNative.handleNotificationReceived().subscribe(() => {
+          // do something when notification is received
+        });
+        this.oneSignalNative.handleNotificationOpened().subscribe(() => {
+          // do something when a notification is opened
+        });
+        this.oneSignalNative.endInit();
+      }
     });
   }
 
@@ -155,7 +134,11 @@ export class MyApp {
       }, {
         text: "OK",
         handler: () => {
-          this.authProvider.logoutUser().then( () => {
+          // removeToken하는데 토큰 값을 파라미터로 넘기는 이유는 
+          // removeToken할 때, userService에서 토큰을 불러오는 것이
+          // 바로 아래 라인보다 늦게 실행되기 때문
+          this.setOneSignal(0, this.userServices.userInfo['OneSignal']);
+          this.authProvider.logoutUser().then(() => {
             this.userServices.clear();
             this.navCtrl.setRoot(LoginPage);
           });
@@ -163,5 +146,70 @@ export class MyApp {
       }]
     });
     alert.present();
+  }
+
+  // 디바이스 별로 해당 기기의 OneSignal Token 값을 가져와 add/remove Token 함수 호출
+  setOneSignal(isLoginOrLogout, userOneSignalTokens?){
+    var oneSignalToken;
+    // Native OneSignal Token
+    if (this.platform.is('cordova')) {
+      // console.log("This Mobile is Cordova");
+      this.oneSignalNative.getIds().then(data => {
+        // console.log("CORDOVA OneSignal User ID:", data['userId']);
+        oneSignalToken = data['userId'];
+        isLoginOrLogout == true
+          ? this.addToken(this.userServices.userInfo['studentID'], oneSignalToken)
+          : this.removeToken(this.userServices.userInfo['studentID'], oneSignalToken, userOneSignalTokens);
+      }).catch(err => {
+        console.log(err);
+      });
+    } else { // Web OneSignal Token
+      // console.log("This Mobile is Web");
+      OneSignal.getUserId().then(userId => {
+        // console.log("WEB OneSignal User ID:", userId);
+        oneSignalToken = userId;
+        isLoginOrLogout == true
+          ? this.addToken(this.userServices.userInfo['studentID'], oneSignalToken)
+          : this.removeToken(this.userServices.userInfo['studentID'], oneSignalToken, userOneSignalTokens);
+      }).catch(err => {
+        console.log(err);
+      });
+    }
+  }
+  addToken(studentID, oneSignalToken: string) {
+    let tokens: string[] = [];
+    if (this.userServices.userInfo['OneSignal'] == null) {
+      tokens.push(oneSignalToken);
+    }
+    else {
+      for(let i =0; i < this.userServices.userInfo['OneSignal'].length; i++) {
+        tokens.push(this.userServices.userInfo['OneSignal'][i]);
+      }
+      // 현재 유저의 OneSignal 토큰 값에, 해당 기기의 token 값이 있을 때만 push
+      tokens.indexOf(oneSignalToken) == -1 ? tokens.push(oneSignalToken) : {}
+    }
+    this.af.object(`/userProfile/${studentID}`).update({
+      OneSignal : tokens,
+    }).catch(err => {
+      console.log(err);
+    })
+  }
+  removeToken(studentID, oneSignalToken: string, userOneSignalTokens) {
+    let tokens: string[] = [];
+    if (userOneSignalTokens == null) {
+      // 토큰이 없는 사람의 로그아웃, 혹시나 버그가 있을 수도 있어서 예외(?)처리해놨음
+    }
+    else {
+      for(let i =0; i < userOneSignalTokens.length; i++) {
+        tokens.push(userOneSignalTokens[i]);
+      }
+      // 현재 유저의 OneSignal 토큰 값에, 해당 기기의 token 값이 있을 때만 push
+      tokens.indexOf(oneSignalToken) == -1 ? {} : tokens.splice(tokens.indexOf(oneSignalToken), 1)
+    }
+    this.af.object(`/userProfile/${studentID}`).update({
+      OneSignal : tokens,
+    }).catch(err => {
+      console.log(err);
+    })
   }
 }

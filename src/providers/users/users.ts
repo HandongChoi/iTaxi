@@ -17,9 +17,8 @@ export class UsersProvider {
     devToken: "",
     isPush: "",
     isNoti: "",
+    OneSignal: [],
   }
-
-  private firestore: any;
 
   constructor(public af: AngularFireDatabase, public loadingCtrl: LoadingController) {
     console.log('Hello UsersProvider Provider');
@@ -29,7 +28,7 @@ export class UsersProvider {
   
   initialize(userID) {
     return new Promise((resolve, reject) => {
-      this.af.object('/userProfile/' + userID).subscribe( data => {
+      this.af.object('/userProfile/' + userID).subscribe(data => {
         this.userInfo = data;
         this.userInfo['devToken'] = 'TempTodken';
         this.af.object('/userProfile/' + userID).update(this.userInfo);
@@ -50,9 +49,9 @@ export class UsersProvider {
       engName: "",
       accountBank: "",
       accountNumber: "",
-      devToken: "ddf"
+      devToken: "ddf",
+      OneSignal: [],
     }
   }
   setDevToken(token){ this.userInfo['devToken'] = token; }
-
 }
