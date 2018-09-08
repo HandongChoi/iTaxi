@@ -34,7 +34,7 @@ export class LoginPage {
     });
   }
 
-  ionViewDidLoad() { console.log('ionViewDidLoad LoginPage'); }
+  // ionViewDidLoad() { console.log('ionViewDidLoad LoginPage'); }
 
   loginUser():void { 
     const id = this.loginForm.value.id;

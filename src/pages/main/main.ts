@@ -47,7 +47,7 @@ export class MainPage {
     loading.present();
   }
 
-  ionViewDidLoad(){ console.log("ionViewDidLoad at main.ts"); }
+  // ionViewDidLoad(){ console.log("ionViewDidLoad at main.ts"); }
   takeTaxi() { this.navCtrl.push(ListPage, {transportType: 'taxi'}); }
   takeCarpool() { this.navCtrl.push(ListPage, {transportType: 'carpool'}); }
   goChatroomPage(room){ this.navCtrl.push(ChatRoomPage, {room: room}); }

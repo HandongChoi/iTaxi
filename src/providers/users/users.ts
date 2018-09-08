@@ -21,10 +21,10 @@ export class UsersProvider {
   }
 
   constructor(public af: AngularFireDatabase, public loadingCtrl: LoadingController) {
-    console.log('Hello UsersProvider Provider');
+    // console.log('Hello UsersProvider Provider');
   }
 
-  ionViewDidLoad(){ console.log('ionViewDidLoad UsersProvider'); }
+  // ionViewDidLoad(){ console.log('ionViewDidLoad UsersProvider'); }
   
   initialize(userID) {
     return new Promise((resolve, reject) => {

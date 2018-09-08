@@ -26,7 +26,7 @@ export class DateProvider {
   public today: string = this.week[new Date().getDay()];
   
   constructor() {
-    console.log('Hello DateProvider Provider');
+    // console.log('Hello DateProvider Provider');
   }
   addZ(n) { return n < 10 ? '0' + n : '' + n; }
 

@@ -9,11 +9,11 @@ admin.initializeApp({
 
 exports.kakaoLogin = functions.https.onRequest((req, res) => {
    const uid = req.query.id;
-   console.log(uid);
+  //  console.log(uid);
    admin.auth().createCustomToken(uid, {provider: 'KAKAO'})
      .then(function(customToken) {
        // Send token back to client
-        console.log(customToken);
+       // console.log(customToken);
        res.status(200).jsonp({customToken});
 
      })
@@ -47,9 +47,9 @@ exports.ChatMessageTrigger= functions.database.ref('/chats/{roomId}/{chatId}').o
 					'roomURL' : roomURL
 				}
 			}
-			console.log(tokens);
+			// console.log(tokens);
 			return admin.messaging().sendToDevice(tokens, payload).then((response) => {
-				console.log('success', response);
+				// console.log('success', response);
 			}).catch((err) => {
 				console.log('err: ', err);
 			})

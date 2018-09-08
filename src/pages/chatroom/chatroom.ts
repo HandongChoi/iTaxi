@@ -68,7 +68,7 @@ export class ChatRoomPage {
         //지금 여기서 방 나갔을 때 방 정보가 하나라도 없으면 null값이 오고 방 정보가 있으면 undefined로 온다.
         //아래 구조가 변형되면 68line에서 for구문의 room[]을 못 읽어와서 error가 발생한다.
         if(room.$value === null){
-          console.log('방이 remove해서 사라졌을 때 여기 온다.')
+          // console.log('방이 remove해서 사라졌을 때 여기 온다.')
         }else{ // 방 정보가 여전히 있을 때.
           //아래에서 방 정보를 새로 호출하는것은 비동기 안에서 (1/4)를 실시간으로 바꿔주기 위해서다.
           this.room = room;
@@ -281,9 +281,9 @@ export class ChatRoomPage {
       'headings': {'en': headings},
       'contents': {'en': msg},
     }
-    console.log(oneSignalTokens)
+    
     this.http.post('https://onesignal.com/api/v1/notifications', parameter).subscribe(data => {
-      console.log(data);
+      // console.log(data);
       oneSignalTokens = [];
     })
   }

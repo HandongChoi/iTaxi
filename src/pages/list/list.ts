@@ -125,7 +125,7 @@ export class ListPage {
     }
   }
 
-  ionViewDidLoad() { console.log('ionViewDidLoad ListPage'); }
+  // ionViewDidLoad() { console.log('ionViewDidLoad ListPage'); }
   isEntered(participants: Array<any>): boolean { return participants.indexOf(this.userID) != -1 ? true : false }
   isAvailable(room): boolean { return room.currentPeople < room.capacity ? true : false; }
 }

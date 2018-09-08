@@ -28,7 +28,7 @@ export class SettingPage {
     this.isPushToggled = this.user['isPush'];
   }
 
-  ionViewDidLoad() { console.log('ionViewDidLoad SettingPage'); }
+  // ionViewDidLoad() { console.log('ionViewDidLoad SettingPage'); }
   NotiToggle(){ this.af.object(`/userProfile/${this.user['studentID']}`).update({ isNoti: this.isNotiToggled }); }
   PushToggle(){ this.af.object(`/userProfile/${this.user['studentID']}`).update({ isPush: this.isPushToggled }); }
   OpenInfoPage() { this.navCtrl.push(PersonalInfoPage); }
@@ -42,7 +42,9 @@ export class SettingPage {
         {
           text: '취소',
           role: 'cancel',
-          handler: () => { console.log('Cancel'); }
+          handler: () => { 
+            // console.log('Cancel'); 
+          }
         },
         {
           text: '확인',

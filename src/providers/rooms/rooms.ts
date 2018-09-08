@@ -10,7 +10,7 @@ export class RoomsProvider {
 
   constructor(public dateServices: DateProvider, public af: AngularFireDatabase,
               public userServices: UsersProvider) {
-    console.log('Hello RoomsProvider Provider'); 
+    // console.log('Hello RoomsProvider Provider'); 
   }
 
   getChatRooms(date, transportType, queryMsg?){
