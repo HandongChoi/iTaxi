@@ -34,13 +34,17 @@
   <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
   <script>
     var OneSignal = window.OneSignal || [];
-    OneSignal.push(function() {
+    OneSignal.push(() => {
       // console.log("Start OneSignal Initialize")
-      OneSignal.init({
+      OneSignal.init({        
         appId: "f4229499-d7fe-48bd-a3d9-6b64cfcb4ce2",
         autoRegister: true,
         notifyButton: {
           enable: false,
+        },
+        persistNotification: false,
+        welcomeNotification: {
+          disable: true
         },
       });
       // console.log("End OneSignal Initialize")
