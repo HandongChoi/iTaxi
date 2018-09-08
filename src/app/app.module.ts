@@ -5,7 +5,7 @@ import { MyApp } from './app.component';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
-
+import { OneSignal } from '@ionic-native/onesignal';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { PhonegapLocalNotification } from '@ionic-native/phonegap-local-notification';
 
@@ -85,7 +85,8 @@ export const firebaseConfig = {
     RoomsProvider,
     LocalNotifications,
     PhonegapLocalNotification,
-    SMS
+    SMS,
+    OneSignal
   ]
 })
 export class AppModule {}

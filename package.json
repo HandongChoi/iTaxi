@@ -24,6 +24,7 @@
     "@ionic-native/fcm": "^4.4.2",
     "@ionic-native/local-notifications": "^4.5.3",
     "@ionic-native/mobile-accessibility": "^4.5.3",
+    "@ionic-native/onesignal": "^4.12.2",
     "@ionic-native/phonegap-local-notification": "^4.5.3",
     "@ionic-native/push": "^4.4.2",
     "@ionic-native/sms": "^4.12.2",
@@ -57,6 +58,8 @@
     "ionic-plugin-keyboard": "^2.2.1",
     "ionic2-date-picker": "^1.1.0",
     "ionicons": "3.0.0",
+    "mx.ferreyra.callnumber": "~0.0.2",
+    "onesignal-cordova-plugin": "^2.4.3",
     "phonegap-plugin-local-notification": "^1.0.1",
     "phonegap-plugin-mobile-accessibility": "^1.0.5",
     "phonegap-plugin-push": "^2.2.3",
@@ -93,7 +96,9 @@
       "cordova-plugin-app-preferences": {},
       "cordova-plugin-local-notification": {},
       "cordova-plugin-x-toast": {},
-      "phonegap-plugin-local-notification": {}
+      "phonegap-plugin-local-notification": {},
+      "mx.ferreyra.callnumber": {},
+      "onesignal-cordova-plugin": {}
     }
   }
 }

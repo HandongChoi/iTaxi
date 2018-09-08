@@ -39,6 +39,11 @@
         <splash density="port-xhdpi" src="resources/android/splash/drawable-port-xhdpi-screen.png" />
         <splash density="port-xxhdpi" src="resources/android/splash/drawable-port-xxhdpi-screen.png" />
         <splash density="port-xxxhdpi" src="resources/android/splash/drawable-port-xxxhdpi-screen.png" />
+        <resource-file src="locales/android/drawable-mdpi/ic_stat_onesignal_default.png" target="res/drawable-mdpi/ic_stat_onesignal_default.png" />
+        <resource-file src="locales/android/drawable-hdpi/ic_stat_onesignal_default.png" target="res/drawable-hdpi/ic_stat_onesignal_default.png" />
+        <resource-file src="locales/android/drawable-xhdpi/ic_stat_onesignal_default.png" target="res/drawable-xhdpi/ic_stat_onesignal_default.png" />
+        <resource-file src="locales/android/drawable-xxhdpi/ic_stat_onesignal_default.png" target="res/drawable-xxhdpi/ic_stat_onesignal_default.png" />
+        <resource-file src="locales/android/drawable-xxxhdpi/ic_stat_onesignal_default.png" target="res/drawable-xxxhdpi/ic_stat_onesignal_default.png" />
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
@@ -98,6 +103,7 @@
     <plugin name="cordova-plugin-local-notification" spec="^0.9.0-beta.2" />
     <plugin name="cordova-plugin-x-toast" spec="^2.6.0" />
     <plugin name="phonegap-plugin-local-notification" spec="^1.0.1" />
+    <plugin name="onesignal-cordova-plugin" spec="^2.4.3" />
     <engine name="browser" spec="5.0.1" />
     <engine name="ios" spec="^4.5.4" />
     <engine name="android" spec="6.3.0" />
