@@ -42,8 +42,6 @@ export class ChatRoomPage {
               public alertCtrl: AlertController, public sms: SMS) {
     //시간 관련 장소에서는 늘 현재 시간으로 다시 셋팅하기.
     this.dateServices.setNow();
-    
-    console.log(this.platform)
 
     //Data loading    
     //방에서 바뀌지 않는 정보들을 빠르게 받아오고 굳이 db의 정보에 의존하지 않는 것은 db 접근 없이 사용하기 위해서 parameter로 받는다.
@@ -80,8 +78,9 @@ export class ChatRoomPage {
         }
         // this.scrollBottom();
     })
-    
     this.chatPrevKey = null;
+    // 이미 만들어진 방에 처음 입장했을 때, 방에 noti를 날린다.
+    if (navParams.data.isFirst == true) this.sendNotification(`${this.userServices.userInfo['korName']}님이 입장하셨습니다.`);
   }
   send() {
     if(this.chatContent !== '') {
@@ -216,7 +215,6 @@ export class ChatRoomPage {
             error.present();
           }else{
             let money: number = Math.round(data.price / data.people / 100) * 100; //여기서 십원 자리수에서 반올림
-            // TODO: 아직 계좌정보를 입력하지 않았을 경우를 처리해줘야 함.
             let msg = `${this.userServices.userInfo['accountBank']} ${this.userServices.userInfo['accountNumber']} 으로 ₩${money}원 입금해주시면 됩니다.`
             this.sendNotification(msg);
           }
@@ -229,7 +227,7 @@ export class ChatRoomPage {
       message: "등록된 계좌 정보가 없습니다.<br>설정 페이지에서 계좌 정보를 입력해주세요.",
       buttons: [{
         text : "OK",
-        handler : ( data ) => {
+        handler : () => {
           this.navCtrl.push(PersonalInfoPage);
         }
       }]

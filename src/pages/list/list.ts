@@ -75,8 +75,6 @@ export class ListPage {
         }, {
           text: "OK",
           handler: () => {
-            this.sendNotification(`${this.userServices.userInfo['korName']}님이 입장하셨습니다.`, room.$key);
-      
             let members:Array<any> = room['participants'];
             let tokenList = room['devTokens'];
             members.push(this.userID);
@@ -84,14 +82,14 @@ export class ListPage {
             room['participants'] = members;
             room['devTokens'] = tokenList;
             room['currentPeople']++;
-            
+
             //들어가는 방 정보 업데이트
             this.af.object(`/${room.transportType}Chatrooms/${room.departDate}/${room.$key}`).set(room);
             //타고 있던 사람들 rideHistory 업데이트
             members.forEach(studentID => {
               this.af.object(`/rideHistory/${studentID}/${room.$key}`).set(room);
             });
-            this.navCtrl.push(ChatRoomPage, {room: room});
+            this.navCtrl.push(ChatRoomPage, {room: room, isFirst: true});
           }
         }],
       });
@@ -99,15 +97,6 @@ export class ListPage {
     } else{ // 참여중
       this.navCtrl.push(ChatRoomPage, {room: room});
     }
-  }
-
-  sendNotification(msg, roomKey){
-    this.af.list('/chats/' + roomKey).push({
-      userID: 'CRA',
-      userName: 'CRAang',
-      content: msg,
-      dateTime: new Date().toLocaleString(),
-    });
   }
 
   makeRoom(){ this.navCtrl.setRoot(MakeRoomPage, {transportType: this.transportType}); }
