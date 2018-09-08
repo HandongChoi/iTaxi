@@ -8,6 +8,8 @@ import { RoomsProvider } from '../../providers/rooms/rooms';
 import { PersonalInfoPage } from '../personal-info/personal-info';
 import { SMS } from '@ionic-native/sms';
 
+import { Http } from '@angular/http';
+
 @IonicPage()
 @Component({
   selector: 'page-chatroom',
@@ -39,7 +41,7 @@ export class ChatRoomPage {
 
   constructor(public navCtrl: NavController, public af:AngularFireDatabase, public navParams: NavParams, public platform:Platform,
               public roomServices: RoomsProvider, public dateServices: DateProvider, public userServices: UsersProvider,
-              public alertCtrl: AlertController, public sms: SMS) {
+              public alertCtrl: AlertController, public sms: SMS, public http: Http) {
     //시간 관련 장소에서는 늘 현재 시간으로 다시 셋팅하기.
     this.dateServices.setNow();
 
@@ -106,6 +108,7 @@ export class ChatRoomPage {
         this.chatPrevTime = this.chatNowTime;
         this.chatPrevKey = data['key'];
 
+        this.pushNotification(this.userServices.userInfo['korName'], this.chatContent, false);
         this.chatContent = "";
         this.scrollBottom();
       });
@@ -249,9 +252,42 @@ export class ChatRoomPage {
       content: msg,
       dateTime: new Date().toLocaleString('ko-KR'),
     }).then(() => {
+      this.pushNotification('알림', msg, true);
       this.chatContent = "";
     });
   }
+
+  pushNotification(headings, msg, isNotice?: boolean) {
+    var oneSignalTokens = [];
+    for (let i = 0; i < this.participants.length; i++) {
+      // 본인이 아닌 다른 사람에게 모두 push
+      if (this.participants[i]['studentID'] != this.userServices.userInfo['studentID']) {
+        // TODO: 나중에 || this.participants[i]['isNoti'] == '' 지우고 배포해야함
+        if (isNotice == true && this.participants[i]['isNoti'] == true) {
+          for(let idx in this.participants[i]['OneSignal']) {
+            oneSignalTokens.push(this.participants[i]['OneSignal'][idx])
+          }
+        }
+        else if (isNotice == false && this.participants[i]['isPush'] == true) {
+          for(let idx in this.participants[i]['OneSignal']) {
+            oneSignalTokens.push(this.participants[i]['OneSignal'][idx])
+          }
+        }
+     }
+    }
+    var parameter = {
+      'app_id': 'f4229499-d7fe-48bd-a3d9-6b64cfcb4ce2',
+      'include_player_ids': oneSignalTokens,
+      'headings': {'en': headings},
+      'contents': {'en': msg},
+    }
+    console.log(oneSignalTokens)
+    this.http.post('https://onesignal.com/api/v1/notifications', parameter).subscribe(data => {
+      console.log(data);
+      oneSignalTokens = [];
+    })
+  }
+
   ionViewDidEnter(){
     this.content.scrollToBottom(300);
   }
