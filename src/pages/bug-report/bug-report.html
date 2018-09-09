@@ -8,17 +8,17 @@
     <ion-title> 문의 사항 & 버그 신고 </ion-title>
   </ion-navbar>
   <ion-grid id="room-info">
-    소중한 의견 감사합니다.
+    cra.handong.service@gmail.com<br>위의 메일로도 신고 받습니다.
   </ion-grid>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <div class="message-wrap" *ngFor="let chat of chats | async as Chats; let i = index;">
+    <div class="message-wrap" *ngFor="let chat of chats | async">
       <!-- 밑에 주석처리 되어있는 부분이 내가 말한 내용이면 오른쪽, 상대가 말한 내용이면 왼쪽 선택하게한다. -->
       <div class="message" [ngClass]="chat.userID == userID ? 'right' : (chat.userID != 'CRA' ? 'left' : 'testing')">
         <!-- 한 유저의 연속된 메시지는 첫 메시지만 이름 띄움 -->
-        <div class="user-info" *ngIf="chat.userID != 'CRA' && (i == 0 ? true : Chats[i-1].userName != chat.userName)">
+        <div class="user-info" *ngIf="chat.userID != 'CRA'">
           {{chat.userName}}
         </div>
         <div class="msg-content">

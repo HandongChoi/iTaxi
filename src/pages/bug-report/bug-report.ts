@@ -18,28 +18,31 @@ export class BugReportPage {
   chats: FirebaseListObservable<any[]>;
   chatContent: string;
   userID: string;
+  bugRoomDate: string;
 
   chatPrevTime: any;
   chatNowTime: any;
   chatPrevKey: string;
 
-  index: number = 0;
   private mutationObserver: MutationObserver;
 
   constructor(public navCtrl: NavController, public af:AngularFireDatabase, public navParams: NavParams, public platform:Platform,
               public roomServices: RoomsProvider, public dateServices: DateProvider, public userServices: UsersProvider,
               public alertCtrl: AlertController, public sms: SMS) {
-    let backAction = platform.registerBackButtonAction(() => {
-      this.navCtrl.pop();
-      backAction();
-    }, 2)
     this.userID = this.userServices.userInfo['studentID'];
   }
 
   ionViewWillEnter() {
     //시간 관련 장소에서는 늘 현재 시간으로 다시 셋팅하기.
     this.dateServices.setNow();
-    this.chats = this.af.list('/bug');
+    let backAction = this.platform.registerBackButtonAction(() => {
+      this.navCtrl.pop();
+      backAction();
+    }, 2)
+    this.af.object('/bugRoom').subscribe( (data) => {
+      this.bugRoomDate = data['date'];
+    });
+    this.chats = this.af.list('/bugChats');
     //Display 관련
     this.chatPrevKey = null;
     this.content.resize();
@@ -52,7 +55,14 @@ export class BugReportPage {
       }
       this.chatNowTime = new Date();
 
-      firebase.database().ref('/bug').push({
+      if(this.bugRoomDate < this.dateServices.makeStringFromDate(this.chatNowTime)){
+        this.bugRoomDate = this.dateServices.makeStringFromDate(this.chatNowTime);
+        firebase.database().ref(`/bugRoom`).update({
+          date: this.bugRoomDate,
+        })
+        this.sendNotification(`${this.bugRoomDate}`);
+      }
+      firebase.database().ref('/bugChats').push({
         userID: this.userServices.userInfo['studentID'],
         userName: this.userServices.userInfo['korName'],
         content: this.chatContent,
@@ -62,7 +72,7 @@ export class BugReportPage {
       }).then((data) => {
         // 한 유저가 1분 이내 보낸 메세지들은 가장 마지막 메세지만 날짜를 표시함
         if (this.continuousMessage(this.chatNowTime, this.chatPrevTime) && this.chatPrevKey) {
-          firebase.database().ref(`/bug/${this.chatPrevKey}`).update({
+          firebase.database().ref(`/bugChats/${this.chatPrevKey}`).update({
             dateTime: this.chatPrevTime.toLocaleString('ko-KR')+" [continuousMessage]",
           })
         }
@@ -103,5 +113,16 @@ export class BugReportPage {
     var prevMin = prevChat.getMinutes();
 
     return (nowDay == prevDay && nowHour == prevHour && nowMin == prevMin) ? true : false;
+  }
+
+  sendNotification(msg){
+    firebase.database().ref('/bugChats').push({
+      userID: 'CRA',
+      userName: 'CRAang',
+      content: msg,
+      dateTime: new Date().toLocaleString('ko-KR'),
+    }).then(() => {
+      this.chatContent = "";
+    });
   }
 }
