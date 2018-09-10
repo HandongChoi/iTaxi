@@ -116,8 +116,8 @@ export class MakeRoomPage {
                                     hostName: this.userServices.userInfo['korName'],
                                     host: this.userID,
                                     transportType: this.transportType,
+                                    lastChatDate: this.nowDate,
                                     participants: [this.userID],
-                                    devTokens:[this.userServices.userInfo['devToken']]
                                   };
                 if(this.transportType == 'carpool'){ room['price'] = (this.price == null) ? 0 : this.price; }                
                 let chatRoomUrl = this.af.list(`/${room['transportType']}Chatrooms/${this.bookingDate}`).push(room);

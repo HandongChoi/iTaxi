@@ -47,7 +47,6 @@ export class LoginPage {
                               engName: "",
                               accountBank: "",
                               accountNumber: "",
-                              devToken: "",
                               isPush: "",
                               isNoti: "",
                             } 

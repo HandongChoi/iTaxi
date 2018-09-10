@@ -90,6 +90,12 @@ export class ChatRoomPage {
       }
       this.chatNowTime = new Date();
 
+      if(this.room['lastChatDate'] < this.dateServices.makeStringFromDate(this.chatNowTime)){
+        this.af.object(`/${this.room['transportType']}Chatrooms/${this.room['departDate']}/${this.roomKey}`).update({
+          lastChatDate: this.dateServices.makeStringFromDate(this.chatNowTime),
+        })
+        this.sendNotification(`${this.dateServices.getKYearMonthDay(this.dateServices.makeStringFromDate(this.chatNowTime))}`);
+      }
       firebase.database().ref('/chats/' + this.roomKey).push({
         userID: this.userServices.userInfo['studentID'],
         userName: this.userServices.userInfo['korName'],
@@ -194,10 +200,7 @@ export class ChatRoomPage {
   removeUserFromRoom(room){
     let index = room['participants'].indexOf(this.userServices.userInfo['studentID']);
     room['participants'].splice(index,1);
-    room['currentPeople']--;
-    
-    index = room['devTokens'].indexOf(this.userServices.userInfo['devToken']);
-    room['devTokens'].splice(index,1);        
+    room['currentPeople']--;     
   }
 
   roomUpdate(updatedRoom, roomKey, msg){

@@ -18,7 +18,7 @@ export class BugReportPage {
   chats: FirebaseListObservable<any[]>;
   chatContent: string;
   userID: string;
-  bugRoomDate: string;
+  lastChatDate: string;
 
   chatPrevTime: any;
   chatNowTime: any;
@@ -40,7 +40,7 @@ export class BugReportPage {
       backAction();
     }, 2)
     this.af.object('/bugRoom').subscribe( (data) => {
-      this.bugRoomDate = data['date'];
+      this.lastChatDate = data['lastChatDate'];
     });
     this.chats = this.af.list('/bugChats');
     //Display 관련
@@ -55,12 +55,12 @@ export class BugReportPage {
       }
       this.chatNowTime = new Date();
 
-      if(this.bugRoomDate < this.dateServices.makeStringFromDate(this.chatNowTime)){
-        this.bugRoomDate = this.dateServices.makeStringFromDate(this.chatNowTime);
+      if(this.lastChatDate < this.dateServices.makeStringFromDate(this.chatNowTime)){
+        this.lastChatDate = this.dateServices.makeStringFromDate(this.chatNowTime);
         firebase.database().ref(`/bugRoom`).update({
-          date: this.bugRoomDate,
+          date: this.lastChatDate,
         })
-        this.sendNotification(`${this.bugRoomDate}`);
+        this.sendNotification(`${this.lastChatDate}`);
       }
       firebase.database().ref('/bugChats').push({
         userID: this.userServices.userInfo['studentID'],

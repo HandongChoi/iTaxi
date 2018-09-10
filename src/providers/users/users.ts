@@ -48,7 +48,7 @@ export class UsersProvider {
       engName: "",
       accountBank: "",
       accountNumber: "",
-      devToken: "ddf"
+      devToken: ""
     }
   }
   setDevToken(token){ this.userInfo['devToken'] = token; }

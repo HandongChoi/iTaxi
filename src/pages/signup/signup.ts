@@ -32,8 +32,8 @@ export class SignupPage {
                       accountBank: "",
                       accountNumber: "",
                       devToken: "",
-                      isPush: true,
-                      isNoti: true,
+                      isPush: "",
+                      isNoti: "",
                     } 
 
   constructor(public navCtrl:NavController, public navParams: NavParams, public authProvider:AuthProvider, 
@@ -44,7 +44,9 @@ export class SignupPage {
         this.navCtrl.pop();
         backAction();
       }, 2)
-      this.userInfo = this.navParams.data.userInfo; 
+      this.userInfo = this.navParams.data.userInfo;
+      this.userInfo['isPush'] = true;
+      this.userInfo['isNoti'] = true;
       this.signUpForm = formBuilder.group({
         engName: [this.userInfo['engName'], EngNameValidator.isValid],
         email: [this.userInfo['email'], Validators.compose([Validators.required, EmailValidator.isValid])],

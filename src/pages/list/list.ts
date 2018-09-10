@@ -86,13 +86,9 @@ export class ListPage {
           text: "OK",
           handler: () => {
             this.sendNotification(`${this.userServices.userInfo['korName']}님이 입장하셨습니다.`, room.$key);
-      
             let members:Array<any> = room['participants'];
-            let tokenList = room['devTokens'];
             members.push(this.userID);
-            tokenList.push(this.userServices.userInfo['devToken']);
             room['participants'] = members;
-            room['devTokens'] = tokenList;
             room['currentPeople']++;
             
             //들어가는 방 정보 업데이트
