@@ -9,8 +9,6 @@ import { DateProvider } from '../../providers/date/date';
 
 import { RoomsProvider } from '../../providers/rooms/rooms'
 
-declare var FCMPlugin;
-
 @IonicPage()
 @Component({
   selector: 'page-main',
@@ -33,8 +31,6 @@ export class MainPage {
   ionViewWillEnter() {
     var loading: Loading;
     this.dateServices.setNow();
-    //token setup
-    this.storetoken();
     this.nowDate = this.dateServices.nowDate;
     this.nowTime = this.dateServices.nowTime;
     this.rooms = this.af.list('/rideHistory/' + this.userServices.userInfo['studentID'], {
@@ -53,23 +49,6 @@ export class MainPage {
   takeTaxi() { this.navCtrl.push(ListPage, {transportType: 'taxi'}); }
   takeCarpool() { this.navCtrl.push(ListPage, {transportType: 'carpool'}); }
   goChatroomPage(room){ this.navCtrl.push(ChatRoomPage, {room: room}); }
-
-  storetoken(){
-    this.tokenSetup().then((token) => { 
-      this.userServices.setDevToken(token);
-    });
-  }
   
-  tokenSetup(){
-    return new Promise((resolve, reject)=>{
-      if(typeof(FCMPlugin) !== 'undefined'){
-        FCMPlugin.getToken( token => {
-          resolve(token);
-        }, (err)=>{
-          reject(err);
-        });
-      }
-    });
-  }
 }
 

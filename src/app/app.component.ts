@@ -20,8 +20,6 @@ import firebase from 'firebase';
 import { MainPage } from '../pages/main/main';
 import { ListPage } from '../pages/list/list';
 import { MakeRoomPage } from '../pages/makeRoom/makeRoom';
-import { SettingPage } from '../pages/setting/setting';
-import { RideHistoryPage } from '../pages/ride-history/ride-history';
 import { BugReportPage } from '../pages/bug-report/bug-report';
 
 firebase.initializeApp({
@@ -152,9 +150,7 @@ export class MyApp {
     toast.present();
   }
 
-
   setRoot(Page) { this.navCtrl.setRoot(Page); }
-
   goChatroomPage(room){
     this.menuCtrl.close();
     this.navCtrl.push(ChatRoomPage, {room: room});
@@ -167,7 +163,6 @@ export class MyApp {
   makeCarpool() { this.navCtrl.setRoot(MakeRoomPage, {transportType: 'carpool'}); }
 
   goBugReportPage() { this.navCtrl.push(BugReportPage) }
-  
 
   logout(){
     let alert = this.alertCtrl.create({

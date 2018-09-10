@@ -26,7 +26,6 @@ exports.kakaoLogin = functions.https.onRequest((req, res) => {
 exports.ChatMessageTrigger= functions.database.ref('/chats/{roomId}/{chatId}').onWrite((event)=>{
 	let chatObject = event.data.val();
 	if(typeof(chatObject) !== 'undefined'){
-		let tokens = chatObject.devTokens;
 		let message = chatObject.user_name + ' : ' + chatObject.content;
 		if(tokens != null){
 	// this.navCtrl.setRoot(ChatRoomPage, {room: room});  

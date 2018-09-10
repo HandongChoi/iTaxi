@@ -14,7 +14,6 @@ export class UsersProvider {
     engName: "",
     accountBank: "",
     accountNumber: "",
-    devToken: "",
     isPush: "",
     isNoti: "",
   }
@@ -29,7 +28,6 @@ export class UsersProvider {
     return new Promise((resolve, reject) => {
       this.af.object('/userProfile/' + userID).subscribe( data => {
         this.userInfo = data;
-        this.userInfo['devToken'] = 'TempTodken';
         this.af.object('/userProfile/' + userID).update(this.userInfo);
         resolve();
       }, error=> {
@@ -48,9 +46,7 @@ export class UsersProvider {
       engName: "",
       accountBank: "",
       accountNumber: "",
-      devToken: ""
     }
   }
-  setDevToken(token){ this.userInfo['devToken'] = token; }
 
 }

@@ -31,9 +31,8 @@ export class SignupPage {
                       engName: "",
                       accountBank: "",
                       accountNumber: "",
-                      devToken: "",
-                      isPush: "",
-                      isNoti: "",
+                      isPush: true,
+                      isNoti: true,
                     } 
 
   constructor(public navCtrl:NavController, public navParams: NavParams, public authProvider:AuthProvider, 
@@ -45,8 +44,6 @@ export class SignupPage {
         backAction();
       }, 2)
       this.userInfo = this.navParams.data.userInfo;
-      this.userInfo['isPush'] = true;
-      this.userInfo['isNoti'] = true;
       this.signUpForm = formBuilder.group({
         engName: [this.userInfo['engName'], EngNameValidator.isValid],
         email: [this.userInfo['email'], Validators.compose([Validators.required, EmailValidator.isValid])],
@@ -54,6 +51,7 @@ export class SignupPage {
         accountBank: [this.userInfo['accountBank'],AccountBankValidator.isValid],
         accountNumber: [this.userInfo['accountNumber'],AccountNumberValidator.isValid]
       });
+      console.log('test');
   }
 
   signUpUser() {
@@ -62,7 +60,10 @@ export class SignupPage {
     this.userInfo['phone']=this.signUpForm.value.phone;
     this.userInfo['accountBank']=this.signUpForm.value.accountBank;
     this.userInfo['accountNumber']=this.signUpForm.value.accountNumber;
-              
+    this.userInfo['isPush'] = true;
+    this.userInfo['isNoti'] = true;
+    console.log(this.userInfo);
+
     var msg = "<br>Student ID : " + this.userInfo['studentID'] + "<br>" + 
             "Korean Name : " + this.userInfo['korName'] + "<br>" + 
             "English Name : " + this.userInfo['engName']  + "<br>" + 
@@ -83,7 +84,7 @@ export class SignupPage {
         },
         { text: '확인',
           handler: () => {
-            //token setup을 여기서 하자.
+            console.log(this.userInfo);
             this.authProvider.signupUser(this.userInfo['studentID']).then( () => {
               this.af.object(`/userProfile/${this.userInfo['studentID']}`).set(this.userInfo);
               this.authProvider.loginUser(this.userInfo['studentID']);

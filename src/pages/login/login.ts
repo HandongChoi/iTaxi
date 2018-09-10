@@ -47,8 +47,8 @@ export class LoginPage {
                               engName: "",
                               accountBank: "",
                               accountNumber: "",
-                              isPush: "",
-                              isNoti: "",
+                              isPush: true,
+                              isNoti: true,
                             } 
     var login = {"id": id, "password": password}
     //헤더 부분에다가 utf-8 적용해서 한글도 보낼 수 있도록 해야된다.
@@ -62,10 +62,6 @@ export class LoginPage {
         buttons: [{ text: "Ok", role: 'cancel'}]
         });
         alert.present();
-        //test용
-        //if(id == 'tester'){
-        //  this.authProvider.loginUser('21000123');
-        //}
       } else {
         this.af.object(`/userProfile/${body['studentID']}`, { preserveSnapshot: true }).subscribe( (data) => {
           if(data.exists()){
