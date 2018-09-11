@@ -53,7 +53,6 @@ export class MyApp {
               public userServices:UsersProvider, private dateServices:DateProvider, public menuCtrl: MenuController,
               public roomServices: RoomsProvider, public loadingCtrl:LoadingController, private oneSignalNative: OneSignalNative,
               public toastCtrl: ToastController) {
-    this.dateServices.setNow();
     // this.splashScreen.show();
     this.initializeApp();
     this.platform.ready().then(() => {
@@ -66,47 +65,45 @@ export class MyApp {
           platform.exitApp();
         }
       }, 0)
-    });
-    firebase.auth().onAuthStateChanged( authData => {  
-      if(authData == null){
-        this.rootPage = LoginPage;
-      } else {
-        //token setup을 여기서 하자.
-        var currentUserID = authData.email.substr(0,8);
-        var loading: Loading;
-        this.userServices.initialize(currentUserID).then( () => {
-          this.userName = this.userServices.userInfo['korName'];
-          this.af.list('/rideHistory/' + this.userServices.userInfo['studentID'], {
-            query: {
-              startAt: this.dateServices.getYearMonthDayWithDash(),
-              orderByChild: 'departDate',
-            }
-          }).subscribe(rooms => {
-            this.room = rooms.sort(this.roomServices.sortByDateTime)
-            .filter((room: Object) => room['departDate'] + room['departTime'] >= this.dateServices.nowDate + this.dateServices.nowTime)[0];
-          });
-        }).then(() => {
-          this.setOneSignal(true); // true이면 addToken을 실행함
-          loading.dismiss();
-          this.rootPage = MainPage;
-        })
-        loading = this.loadingCtrl.create();
-        loading.present();
-      }
+      this.statusBar.styleDefault();
+      firebase.auth().onAuthStateChanged( authData => {  
+        if(authData == null){
+          this.rootPage = LoginPage;
+        } else {
+          //token setup을 여기서 하자.
+          var currentUserID = authData.email.substr(0,8);
+          var loading: Loading;
+          this.userServices.initialize(currentUserID).then( () => {
+            this.userName = this.userServices.userInfo['korName'];
+            this.af.list('/rideHistory/' + this.userServices.userInfo['studentID'], {
+              query: {
+                startAt: this.dateServices.getYearMonthDayWithDash(),
+                orderByChild: 'departDate',
+              }
+            }).subscribe(rooms => {
+              this.room = rooms.sort(this.roomServices.sortByDateTime)
+              .filter((room: Object) => room['departDate'] + room['departTime'] >= this.dateServices.nowDate + this.dateServices.nowTime)[0];
+            });
+          }).then(() => {
+            this.setOneSignal(true); // true이면 addToken을 실행함
+            loading.dismiss();
+            this.rootPage = MainPage;
+          })
+          loading = this.loadingCtrl.create();
+          loading.present();
+        }
+      });
     });
   }
 
-  ionViewWillEnter() { }
+  ionViewWillEnter() { this.dateServices.setNow(); }
 
   initializeApp() {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
 
       if (this.platform.is('cordova')) {
-        this.statusBar.styleDefault();
         this.statusBar.overlaysWebView(false);
-        this.splashScreen.hide();
-
         this.oneSignalNative.startInit('f4229499-d7fe-48bd-a3d9-6b64cfcb4ce2', '762163958818');
         this.oneSignalNative.enableVibrate(true);
         this.oneSignalNative.enableSound(true);
@@ -119,8 +116,6 @@ export class MyApp {
         });
         this.oneSignalNative.endInit();
       }
-      this.statusBar.styleDefault();
-      // this.splashScreen.hide();
       /*
       this.fcm.onTokenRefresh().subscribe(
         (token:string) => this.userServices.setDevToken(token),

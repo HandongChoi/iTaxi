@@ -85,7 +85,6 @@ export class ListPage {
         }, {
           text: "OK",
           handler: () => {
-            this.sendNotification(`${this.userServices.userInfo['korName']}님이 입장하셨습니다.`, room.$key);
             let members:Array<any> = room['participants'];
             members.push(this.userID);
             room['participants'] = members;
@@ -107,14 +106,7 @@ export class ListPage {
     }
   }
 
-  sendNotification(msg, roomKey){
-    this.af.list('/chats/' + roomKey).push({
-      userID: 'CRA',
-      userName: '운영자',
-      content: msg,
-      dateTime: new Date().toLocaleString(),
-    });
-  }
+ 
 
   makeRoom(){ this.navCtrl.push(MakeRoomPage, {transportType: this.transportType}); }
 
