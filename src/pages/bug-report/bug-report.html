@@ -14,12 +14,12 @@
 
 <ion-content>
   <ion-list>
-    <div class="message-wrap" *ngFor="let chat of chats | async">
+    <div class="message-wrap" *ngFor="let chat of chats | async as Chats; let i = index;">
       <!-- 밑에 주석처리 되어있는 부분이 내가 말한 내용이면 오른쪽, 상대가 말한 내용이면 왼쪽 선택하게한다. -->
       <div class="message" [ngClass]="chat.userID == userID ? 'right' : (chat.userID != 'CRA' ? 'left' : 'testing')">
         <!-- 한 유저의 연속된 메시지는 첫 메시지만 이름 띄움 -->
         <div class="user-info" *ngIf="chat.userID != 'CRA' && (i == 0 ? true : Chats[i-1].userID != chat.userID)">
-          {{ chat.userName }} {{ Chats[i-1].userName }}
+          {{ chat.userName }}
         </div>
         <div class="msg-content">
           <!-- 디자인상으로 왼쪽 오른쪽 span태그의 위치가 달라져서 똑같은 태그 반복 -->

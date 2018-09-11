@@ -44,7 +44,6 @@ export class BugReportPage {
     });
     this.chats = this.af.list('/bugChats');
     //Display 관련
-    this.chatPrevKey = null;
     this.content.resize();
   }
   
