@@ -106,8 +106,6 @@ export class ListPage {
     }
   }
 
- 
-
   makeRoom(){ this.navCtrl.push(MakeRoomPage, {transportType: this.transportType}); }
 
   filterDeparture(departFilter){

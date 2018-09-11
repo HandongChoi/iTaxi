@@ -39,9 +39,6 @@ export class MainPage {
         orderByChild : 'departDate'
       }
     })
-    this.rooms.subscribe( ()=>{ loading.dismiss(); })
-    loading = this.loadingCtrl.create();
-    loading.present();
     this.content.resize();
   }
 

@@ -53,9 +53,7 @@ export class BugReportPage {
         this.chatPrevTime = new Date();
       }
       this.chatNowTime = new Date();
-
       this.newDateMsg();
-
       firebase.database().ref('/bugChats').push({
         userID: this.userServices.userInfo['studentID'],
         userName: this.userServices.userInfo['korName'],
