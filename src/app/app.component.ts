@@ -55,44 +55,32 @@ export class MyApp {
               public toastCtrl: ToastController) {
     // this.splashScreen.show();
     this.initializeApp();
-    this.platform.ready().then(() => {
-      platform.registerBackButtonAction(() => {
-        if (this.counter == 0) {
-          this.counter++;
-          this.presentToast();
-          setTimeout(() => { this.counter = 0 }, 3000)
-        } else {
-          platform.exitApp();
-        }
-      }, 0)
-      this.statusBar.styleDefault();
-      firebase.auth().onAuthStateChanged( authData => {  
-        if(authData == null){
-          this.rootPage = LoginPage;
-        } else {
-          //token setup을 여기서 하자.
-          var currentUserID = authData.email.substr(0,8);
-          var loading: Loading;
-          this.userServices.initialize(currentUserID).then( () => {
-            this.userName = this.userServices.userInfo['korName'];
-            this.af.list('/rideHistory/' + this.userServices.userInfo['studentID'], {
-              query: {
-                startAt: this.dateServices.getYearMonthDayWithDash(),
-                orderByChild: 'departDate',
-              }
-            }).subscribe(rooms => {
-              this.room = rooms.sort(this.roomServices.sortByDateTime)
-              .filter((room: Object) => room['departDate'] + room['departTime'] >= this.dateServices.nowDate + this.dateServices.nowTime)[0];
-            });
-          }).then(() => {
-            this.setOneSignal(true); // true이면 addToken을 실행함
-            loading.dismiss();
-            this.rootPage = MainPage;
-          })
-          loading = this.loadingCtrl.create();
-          loading.present();
-        }
-      });
+    firebase.auth().onAuthStateChanged( authData => {  
+      if(authData == null){
+        this.rootPage = LoginPage;
+      } else {
+        //token setup을 여기서 하자.
+        var currentUserID = authData.email.substr(0,8);
+        var loading: Loading;
+        this.userServices.initialize(currentUserID).then( () => {
+          this.userName = this.userServices.userInfo['korName'];
+          this.af.list('/rideHistory/' + this.userServices.userInfo['studentID'], {
+            query: {
+              startAt: this.dateServices.getYearMonthDayWithDash(),
+              orderByChild: 'departDate',
+            }
+          }).subscribe(rooms => {
+            this.room = rooms.sort(this.roomServices.sortByDateTime)
+            .filter((room: Object) => room['departDate'] + room['departTime'] >= this.dateServices.nowDate + this.dateServices.nowTime)[0];
+          });
+        }).then(() => {
+          this.setOneSignal(true); // true이면 addToken을 실행함
+          loading.dismiss();
+          this.rootPage = MainPage;
+        })
+        loading = this.loadingCtrl.create();
+        loading.present();
+      }
     });
   }
 
@@ -101,7 +89,17 @@ export class MyApp {
   initializeApp() {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-
+    this.platform.ready().then(() => {
+      this.statusBar.styleDefault();
+      this.platform.registerBackButtonAction(() => {
+        if (this.counter == 0) {
+          this.counter++;
+          this.presentToast();
+          setTimeout(() => { this.counter = 0 }, 3000)
+        } else {
+          this.platform.exitApp();
+        }
+      }, 0)
       if (this.platform.is('cordova')) {
         this.statusBar.overlaysWebView(false);
         this.oneSignalNative.startInit('f4229499-d7fe-48bd-a3d9-6b64cfcb4ce2', '762163958818');
@@ -116,7 +114,7 @@ export class MyApp {
         });
         this.oneSignalNative.endInit();
       }
-      /*
+    /*
       this.fcm.onTokenRefresh().subscribe(
         (token:string) => this.userServices.setDevToken(token),
         error => console.error(error)
@@ -155,7 +153,7 @@ export class MyApp {
       // push message 수신 시 background, foreground에서 어떻게 할 건지 정의
       // Note: 현재 카톡에서 올때 위에 떴다가 사라지는 것을 구현하려고 하는데 이름이 뭔지.. docs에는 없는 것 같은데.. 나중에 찾아보자..
       */
-    
+    });
   }
   presentToast() {
     let toast = this.toastCtrl.create({
