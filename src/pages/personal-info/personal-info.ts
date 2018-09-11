@@ -34,7 +34,6 @@ export class PersonalInfoPage {
     }, 2)
   }
 
-  //기존것을 object.set 말고 object.update가 있을 것 같은데 찾아보자.
   updateUserInfo(){
     this.userInfo['engName'] = this.updateForm.value.engName;
     this.userInfo['email'] = this.updateForm.value.email;

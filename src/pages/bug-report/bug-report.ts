@@ -55,13 +55,7 @@ export class BugReportPage {
       }
       this.chatNowTime = new Date();
 
-      if(this.lastChatDate < this.dateServices.makeStringFromDate(this.chatNowTime)){
-        this.lastChatDate = this.dateServices.makeStringFromDate(this.chatNowTime);
-        firebase.database().ref(`/bugRoom`).update({
-          lastChatDate: this.lastChatDate,
-        })
-        this.sendNotification(`${this.dateServices.getKYearMonthDay(this.lastChatDate)}`);
-      }
+      this.newDateMsg();
 
       firebase.database().ref('/bugChats').push({
         userID: this.userServices.userInfo['studentID'],
@@ -96,6 +90,17 @@ export class BugReportPage {
     });
   } 
   scrollBottom(){ this.content.scrollToBottom(300); }
+
+  newDateMsg(){
+    if(this.lastChatDate < this.dateServices.makeStringFromDate(this.chatNowTime)){
+      this.lastChatDate = this.dateServices.makeStringFromDate(this.chatNowTime);
+      firebase.database().ref(`/bugRoom`).update({
+        lastChatDate: this.lastChatDate,
+      })
+      this.sendNotification(`${this.dateServices.getKYearMonthDay(this.lastChatDate)}`);
+    }
+  }
+
   continuousMessage(nowChat, prevChat) {
     /**
      * 1분 내에 연속된 메시지 발생함을 알리는 함수

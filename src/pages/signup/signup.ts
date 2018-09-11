@@ -51,7 +51,6 @@ export class SignupPage {
         accountBank: [this.userInfo['accountBank'],AccountBankValidator.isValid],
         accountNumber: [this.userInfo['accountNumber'],AccountNumberValidator.isValid]
       });
-      console.log('test');
   }
 
   signUpUser() {
@@ -62,7 +61,6 @@ export class SignupPage {
     this.userInfo['accountNumber']=this.signUpForm.value.accountNumber;
     this.userInfo['isPush'] = true;
     this.userInfo['isNoti'] = true;
-    console.log(this.userInfo);
 
     var msg = "<br>Student ID : " + this.userInfo['studentID'] + "<br>" + 
             "Korean Name : " + this.userInfo['korName'] + "<br>" + 
@@ -84,7 +82,6 @@ export class SignupPage {
         },
         { text: '확인',
           handler: () => {
-            console.log(this.userInfo);
             this.authProvider.signupUser(this.userInfo['studentID']).then( () => {
               this.af.object(`/userProfile/${this.userInfo['studentID']}`).set(this.userInfo);
               this.authProvider.loginUser(this.userInfo['studentID']);
