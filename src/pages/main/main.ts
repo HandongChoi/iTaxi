@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, Loading, LoadingController, Content } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, Loading, LoadingController, Content, Platform, ToastController } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { ChatRoomPage } from '../../pages/chatroom/chatroom';
 import { ListPage } from '../../pages/list/list';
@@ -19,7 +19,7 @@ export class MainPage {
   rooms: FirebaseListObservable<Object[]>;
   nowDate: string;
   nowTime: string;
-  
+  public counter = 0;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase,
               public menu: MenuController, public userServices: UsersProvider, private dateServices: DateProvider,

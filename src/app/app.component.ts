@@ -179,6 +179,12 @@ export class MyApp {
   goBugReportPage() { this.navCtrl.push(BugReportPage) }
 
   logout(){
+    this.platform.registerBackButtonAction(() => {
+      alert.dismiss();
+      this.platform.registerBackButtonAction(() => {
+        this.navCtrl.pop();
+      }, 2)
+    }, 2)
     let alert = this.alertCtrl.create({
       title: "로그아웃",
       message: "로그아웃 하시겠습니까?",

@@ -101,6 +101,10 @@ export class ListPage {
         }],
       });
       alert.present();
+      let dismissAlert = this.platform.registerBackButtonAction(() => {
+        alert.dismiss();
+        dismissAlert();
+      }, 3)
     } else{ // 참여중
       this.navCtrl.push(ChatRoomPage, {room: room});
     }

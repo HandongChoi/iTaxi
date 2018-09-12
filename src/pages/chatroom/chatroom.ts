@@ -150,6 +150,10 @@ export class ChatRoomPage {
         }]
       });
       alert.present();
+      let dismissAlert = this.platform.registerBackButtonAction(() => {
+        alert.dismiss();
+        dismissAlert();
+      }, 3)
     }
     catch (e) {
       console.log("error");
@@ -158,6 +162,10 @@ export class ChatRoomPage {
   }
 
   quit(transportType: string){
+    let dismissAlert = this.platform.registerBackButtonAction(() => {
+      alert.dismiss();
+      dismissAlert();
+    }, 3)
     let alert = this.alertCtrl.create({
       title: "방 나가기",
       message: "정말로 방을 나가시겠습니까?",
@@ -217,6 +225,10 @@ export class ChatRoomPage {
   }
 
   payment(transportType: string){
+    let dismissAlert = this.platform.registerBackButtonAction(() => {
+      paymentAlert.dismiss();
+      dismissAlert();
+    }, 3)
     let paymentAlert = this.alertCtrl.create({
       title: "정산하기",
       message: "10원 단위에서 반올림하여 정산하시는 분에게 차익을 남기도록 하였습니다.",

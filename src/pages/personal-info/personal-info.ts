@@ -41,6 +41,12 @@ export class PersonalInfoPage {
     this.userInfo['accountBank'] = this.updateForm.value.accountBank;
     this.userInfo['accountNumber'] = this.updateForm.value.accountNumber;
 
+    this.platform.registerBackButtonAction(() => {
+      alert.dismiss();
+      this.platform.registerBackButtonAction(() => {
+        this.navCtrl.pop();
+      }, 2)
+    }, 2)
     let alert = this.alertCtrl.create({
       title: "정보 수정",
       message: "정보를 수정하시겠습니까?",
