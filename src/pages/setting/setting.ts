@@ -23,12 +23,12 @@ export class SettingPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public userService: UsersProvider,
     public platform:Platform, public authProvider:AuthProvider, public af:AngularFireDatabase,
     public alertCtrl: AlertController) {
-    this.user = this.userService.userInfo;
-    this.isNotiToggled = this.user['isNoti'];
-    this.isPushToggled = this.user['isPush'];
   }
 
   ionViewWillEnter() {
+    this.user = this.userService.userInfo;
+    this.isNotiToggled = this.user['isNoti'];
+    this.isPushToggled = this.user['isPush'];
     this.content.resize();
   }
 

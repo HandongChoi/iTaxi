@@ -24,10 +24,10 @@ export class RideHistoryPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase, 
               public userServices: UsersProvider, public alertCtrl: AlertController, public dateServices: DateProvider,
               public roomServices: RoomsProvider,) {
-    this.userID = this.userServices.userInfo['studentID'];
   }
 
   ionViewWillEnter() {
+    this.userID = this.userServices.userInfo['studentID'];
     this.dateServices.setNow();
     this.taxiRooms = this.roomServices.getRideHistoryRooms('taxi');
     this.carpoolRooms = this.roomServices.getRideHistoryRooms('carpool');

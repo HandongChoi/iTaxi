@@ -25,7 +25,7 @@ export class LoginPage {
               public menu: MenuController, public userServices:UsersProvider, public af: AngularFireDatabase,
               public http: Http) {
     //왼쪽 사이드바 메뉴 안 보이게 하는 역할
-    this.menu.enable(false,'myMenu');
+    
     firebase.auth().signOut();
     //로그인시 제한 조건 걸어놓기
     this.loginForm = formBuilder.group({
@@ -33,7 +33,9 @@ export class LoginPage {
       password: ['', Validators.compose([Validators.required, Validators.minLength(1)])]
     });
   }
-
+  ionViewWillEnter() {
+    this.menu.enable(false,'myMenu');
+  }
   // ionViewDidLoad() { console.log('ionViewDidLoad LoginPage'); }
 
   loginUser():void { 

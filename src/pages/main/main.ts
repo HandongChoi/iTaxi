@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, Loading, LoadingController, Content, Platform, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, LoadingController, Content } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { ChatRoomPage } from '../../pages/chatroom/chatroom';
 import { ListPage } from '../../pages/list/list';
@@ -25,11 +25,10 @@ export class MainPage {
               public menu: MenuController, public userServices: UsersProvider, private dateServices: DateProvider,
               public roomServices: RoomsProvider, public loadingCtrl:LoadingController) {
     //여기서부터는 로그인 및 회원가입 페이지를 넘어서 사이드 메뉴를 볼 수 있도록 만들기.
-    this.menu.enable(true,'myMenu');
+    
   }
 
   ionViewWillEnter() {
-    var loading: Loading;
     this.dateServices.setNow();
     this.nowDate = this.dateServices.nowDate;
     this.nowTime = this.dateServices.nowTime;
@@ -40,6 +39,7 @@ export class MainPage {
       }
     })
     this.content.resize();
+    this.menu.enable(true,'myMenu');
   }
 
   // ionViewDidLoad(){ console.log("ionViewDidLoad at main.ts"); }

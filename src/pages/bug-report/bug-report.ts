@@ -29,10 +29,11 @@ export class BugReportPage {
   constructor(public navCtrl: NavController, public af:AngularFireDatabase, public navParams: NavParams, public platform:Platform,
               public roomServices: RoomsProvider, public dateServices: DateProvider, public userServices: UsersProvider,
               public alertCtrl: AlertController, public sms: SMS) {
-    this.userID = this.userServices.userInfo['studentID'];
+    
   }
 
   ionViewWillEnter() {
+    this.userID = this.userServices.userInfo['studentID'];
     //시간 관련 장소에서는 늘 현재 시간으로 다시 셋팅하기.
     this.dateServices.setNow();
     let backAction = this.platform.registerBackButtonAction(() => {

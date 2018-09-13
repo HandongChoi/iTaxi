@@ -40,11 +40,11 @@ export class MakeRoomPage {
 
   constructor(public alertCtrl: AlertController, public navParams: NavParams, public dateServices: DateProvider,
                public navCtrl:NavController, public af: AngularFireDatabase, public userServices: UsersProvider){
-    this.userID = this.userServices.userInfo['studentID'];
     this.transportType = this.navParams.data.transportType;
   }
 
   ionViewWillEnter() {
+    this.userID = this.userServices.userInfo['studentID'];
     this.dateServices.setNow();
     this.content.resize();
   }
