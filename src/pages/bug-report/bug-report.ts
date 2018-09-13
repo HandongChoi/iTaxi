@@ -58,10 +58,11 @@ export class BugReportPage {
       if(this.lastChatDate < this.dateServices.makeStringFromDate(this.chatNowTime)){
         this.lastChatDate = this.dateServices.makeStringFromDate(this.chatNowTime);
         firebase.database().ref(`/bugRoom`).update({
-          date: this.lastChatDate,
+          lastChatDate: this.lastChatDate,
         })
-        this.sendNotification(`${this.lastChatDate}`);
+        this.sendNotification(`${this.dateServices.getKYearMonthDay(this.lastChatDate)}`);
       }
+
       firebase.database().ref('/bugChats').push({
         userID: this.userServices.userInfo['studentID'],
         userName: this.userServices.userInfo['korName'],
@@ -70,7 +71,6 @@ export class BugReportPage {
       }).catch(err => {
         console.log(err);
       }).then((data) => {
-        // 한 유저가 1분 이내 보낸 메세지들은 가장 마지막 메세지만 날짜를 표시함
         if (this.continuousMessage(this.chatNowTime, this.chatPrevTime) && this.chatPrevKey) {
           firebase.database().ref(`/bugChats/${this.chatPrevKey}`).update({
             dateTime: this.chatPrevTime.toLocaleString('ko-KR')+" [continuousMessage]",
@@ -85,10 +85,7 @@ export class BugReportPage {
     }
   }
 
-  ionViewDidEnter(){
-    this.content.scrollToBottom(300);
-  }
-
+  ionViewDidEnter(){ this.content.scrollToBottom(300); }
   ionViewDidLoad(){ 
     this.mutationObserver = new MutationObserver((mutations) => {
     this.content.scrollToBottom();
@@ -118,7 +115,7 @@ export class BugReportPage {
   sendNotification(msg){
     firebase.database().ref('/bugChats').push({
       userID: 'CRA',
-      userName: 'CRAang',
+      userName: '운영자',
       content: msg,
       dateTime: new Date().toLocaleString('ko-KR'),
     }).then(() => {
