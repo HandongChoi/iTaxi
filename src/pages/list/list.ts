@@ -34,7 +34,7 @@ export class ListPage {
               public datePickerProvider: DatePickerProvider, public modalCtrl: ModalController,  
               public userServices: UsersProvider, public dateServices: DateProvider, public roomServices: RoomsProvider,
               public alertCtrl: AlertController, public platform : Platform) {
-    this.userID = this.userServices.userInfo['studentID'];
+    
     let backAction = platform.registerBackButtonAction(() => {
       this.navCtrl.pop();
       backAction();
@@ -42,6 +42,7 @@ export class ListPage {
   }
 
   ionViewWillEnter() {
+    this.userID = this.userServices.userInfo['studentID'];
     this.transportType = this.navParams.data.transportType;
     this.days = [];
     this.dateServices.setNow();
@@ -101,6 +102,10 @@ export class ListPage {
         }],
       });
       alert.present();
+      let dismissAlert = this.platform.registerBackButtonAction(() => {
+        alert.dismiss();
+        dismissAlert();
+      }, 3)
     } else{ // 참여중
       this.navCtrl.push(ChatRoomPage, {room: room});
     }
