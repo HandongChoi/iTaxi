@@ -53,7 +53,6 @@ export class MyApp {
               public userServices:UsersProvider, private dateServices:DateProvider, public menuCtrl: MenuController,
               public roomServices: RoomsProvider, public loadingCtrl:LoadingController, private oneSignalNative: OneSignalNative,
               public toastCtrl: ToastController) {
-    // this.splashScreen.show();
     this.initializeApp();
     firebase.auth().onAuthStateChanged( authData => {  
       if(authData == null){
@@ -90,6 +89,7 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
     this.platform.ready().then(() => {
+      this.splashScreen.hide();
       this.statusBar.styleDefault();
       this.platform.registerBackButtonAction(() => {
         if (this.counter == 0) {
@@ -106,12 +106,6 @@ export class MyApp {
         this.oneSignalNative.enableVibrate(true);
         this.oneSignalNative.enableSound(true);
         this.oneSignalNative.inFocusDisplaying(this.oneSignalNative.OSInFocusDisplayOption.None);
-        this.oneSignalNative.handleNotificationReceived().subscribe(() => {
-          // do something when notification is received
-        });
-        this.oneSignalNative.handleNotificationOpened().subscribe(() => {
-          // do something when a notification is opened
-        });
         this.oneSignalNative.endInit();
       }
     /*
