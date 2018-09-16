@@ -64,7 +64,9 @@ export class ListPage {
       maximumDate: new Date(now.getFullYear(), now.getMonth() + 1, now.getDate())
     }
     const dateSelected = this.datePickerProvider.showCalendar(this.modalCtrl, datePickerOption);
-    dateSelected.subscribe(date => {this.showChatroom(date);});
+    dateSelected.subscribe(date => {
+      this.showChatroom(this.dateServices.makeStringFromDate(date));
+    });
   }
 
   //input으로 2018-02-01 형식을 기대한다.
