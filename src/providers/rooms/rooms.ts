@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DateProvider } from '../../providers/date/date';
 import { UsersProvider } from '../../providers/users/users';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 import 'rxjs/add/operator/map';
 
 @Injectable()

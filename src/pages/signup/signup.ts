@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Loading, LoadingController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Loading, LoadingController, AlertController, Platform } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthProvider } from '../../providers/auth/auth';
 import { EmailValidator } from '../../validators/email';
@@ -31,15 +31,19 @@ export class SignupPage {
                       engName: "",
                       accountBank: "",
                       accountNumber: "",
-                      devToken: "",
                       isPush: true,
                       isNoti: true,
                     } 
 
   constructor(public navCtrl:NavController, public navParams: NavParams, public authProvider:AuthProvider, 
     public loadingCtrl:LoadingController, public alertCtrl:AlertController, formBuilder:FormBuilder,
-    public af: AngularFireDatabase, public userService: UsersProvider) {
-      this.userInfo = this.navParams.data.userInfo; 
+    public af: AngularFireDatabase, public userService: UsersProvider,
+    public platform:Platform) {
+      let backAction = platform.registerBackButtonAction(() => {
+        this.navCtrl.pop();
+        backAction();
+      }, 2)
+      this.userInfo = this.navParams.data.userInfo;
       this.signUpForm = formBuilder.group({
         engName: [this.userInfo['engName'], EngNameValidator.isValid],
         email: [this.userInfo['email'], Validators.compose([Validators.required, EmailValidator.isValid])],
@@ -47,6 +51,7 @@ export class SignupPage {
         accountBank: [this.userInfo['accountBank'],AccountBankValidator.isValid],
         accountNumber: [this.userInfo['accountNumber'],AccountNumberValidator.isValid]
       });
+      console.log('test');
   }
 
   signUpUser() {
@@ -55,7 +60,10 @@ export class SignupPage {
     this.userInfo['phone']=this.signUpForm.value.phone;
     this.userInfo['accountBank']=this.signUpForm.value.accountBank;
     this.userInfo['accountNumber']=this.signUpForm.value.accountNumber;
-              
+    this.userInfo['isPush'] = true;
+    this.userInfo['isNoti'] = true;
+    console.log(this.userInfo);
+
     var msg = "<br>Student ID : " + this.userInfo['studentID'] + "<br>" + 
             "Korean Name : " + this.userInfo['korName'] + "<br>" + 
             "English Name : " + this.userInfo['engName']  + "<br>" + 
@@ -76,7 +84,7 @@ export class SignupPage {
         },
         { text: '확인',
           handler: () => {
-            //token setup을 여기서 하자.
+            console.log(this.userInfo);
             this.authProvider.signupUser(this.userInfo['studentID']).then( () => {
               this.af.object(`/userProfile/${this.userInfo['studentID']}`).set(this.userInfo);
               this.authProvider.loginUser(this.userInfo['studentID']);
@@ -280,11 +288,11 @@ export class SignupPage {
 
     1. 본 약관에 명시되지 않은 사항에 대해서는 관계 법령 또는 전자상거래 관례 및 학교 교칙에 따릅니다.
 
-    2. 본 약관은 2018년 02월 12일부터 적용됩니다.
+    2. 본 약관은 2018년 09월 14일부터 적용됩니다.
 
     이용약관 문의
 
-    이 　　　름　:　
+    이 　　　름　:　최 효 은
     소속 / 직위　:　한동대학교 CRA / iTaxi 팀장
     E - M A I L　:　hguitaxi@gmail.com
   `
@@ -407,7 +415,7 @@ export class SignupPage {
 
   개인 정보 관리 책임자
 
-  이 　　름　: 
+  이 　　름　: 최 효 은
   소속 / 직위　:　한동대학교 CRA / iTaxi 팀장
   E - M A I L　:　hguitaxi@gmail.com
   `

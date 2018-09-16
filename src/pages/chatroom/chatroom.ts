@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, Content, NavParams, Platform, AlertController, List } from 'ionic-angular';
+import { IonicPage, NavController, Content, NavParams, Platform, AlertController, List, ToastController } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { MainPage } from '../../pages/main/main';
 import { UsersProvider } from '../../providers/users/users';
@@ -16,10 +16,8 @@ import { Http } from '@angular/http';
   templateUrl: 'chatroom.html',
 })
 export class ChatRoomPage {
-
   @ViewChild(Content) content: Content;
   @ViewChild(List, {read: ElementRef}) chatList: ElementRef;
-
 
   chats: FirebaseListObservable<any[]>;
   room: Object; //오브젝트와 파베오브젝트로 형태로 올 수 있는데 둘다 Object type이다.
@@ -38,30 +36,34 @@ export class ChatRoomPage {
   roomKey: string;
   private mutationObserver: MutationObserver;
 
-
   constructor(public navCtrl: NavController, public af:AngularFireDatabase, public navParams: NavParams, public platform:Platform,
               public roomServices: RoomsProvider, public dateServices: DateProvider, public userServices: UsersProvider,
-              public alertCtrl: AlertController, public sms: SMS, public http: Http) {
-    //시간 관련 장소에서는 늘 현재 시간으로 다시 셋팅하기.
-    this.dateServices.setNow();
-
+              public alertCtrl: AlertController, public sms: SMS, public toastCtrl : ToastController, public http: Http) {
+    let backAction = platform.registerBackButtonAction(() => {
+      this.navCtrl.pop();
+      backAction();
+    }, 2)
+    this.userID = this.userServices.userInfo['studentID'];
     //Data loading    
     //방에서 바뀌지 않는 정보들을 빠르게 받아오고 굳이 db의 정보에 의존하지 않는 것은 db 접근 없이 사용하기 위해서 parameter로 받는다.
-    this.room = navParams.data.room;
-    if(navParams.data.roomKey === undefined){ //기존 멤버 입장
-      this.roomKey = navParams.data.room.$key
+    this.room = this.navParams.data.room;
+    if(this.navParams.data.roomKey === undefined){ //기존 멤버 입장
+      this.roomKey = this.navParams.data.room.$key
     } else { //처음 방 만들고 방 진입 할 때
-      this.roomKey = navParams.data.roomKey;
+      this.roomKey = this.navParams.data.roomKey;
     }
-    this.chats = af.list('/chats/' + this.roomKey);
-    this.userID = this.userServices.userInfo['studentID'];
+  }
 
+  ionViewWillEnter() {
+    //시간 관련 장소에서는 늘 현재 시간으로 다시 셋팅하기.
+    this.dateServices.setNow();
+    this.chats = this.af.list('/chats/' + this.roomKey);
     //Display 관련
     this.displayDate = this.dateServices.getKMonthDay(this.room['departDate']);
     this.displayTime = this.room['departTime'];
     this.roomHost = this.room['host'];
 
-    af.object(`/${this.room['transportType']}Chatrooms/${navParams.data.room['departDate']}/${this.roomKey}`)
+    this.af.object(`/${this.room['transportType']}Chatrooms/${this.room['departDate']}/${this.roomKey}`)
       .subscribe((room) => {
         this.participants = [];
         //여기서 공부거리 하나 던저 주면 undfined와 null이 ==일때는 같다고 인정이 되고 ===일때만 다르다고 인정이 된다.
@@ -73,17 +75,18 @@ export class ChatRoomPage {
           //아래에서 방 정보를 새로 호출하는것은 비동기 안에서 (1/4)를 실시간으로 바꿔주기 위해서다.
           this.room = room;
           for(let studentID of room['participants']){
-            af.object(`/userProfile/${studentID}`).subscribe(user => {
+            this.af.object(`/userProfile/${studentID}`).subscribe(user => {
               this.participants.push(user);
             })
           }
         }
-        // this.scrollBottom();
     })
     this.chatPrevKey = null;
     // 이미 만들어진 방에 처음 입장했을 때, 방에 noti를 날린다.
-    if (navParams.data.isFirst == true) this.sendNotification(`${this.userServices.userInfo['korName']}님이 입장하셨습니다.`);
+    if (this.navParams.data.isFirst == true) this.sendNotification(`${this.userServices.userInfo['korName']}님이 입장하셨습니다.`);
+    this.content.resize();
   }
+  
   send() {
     if(this.chatContent !== '') {
       if(!this.chatPrevTime) {
@@ -91,6 +94,12 @@ export class ChatRoomPage {
       }
       this.chatNowTime = new Date();
 
+      if(this.room['lastChatDate'] < this.dateServices.makeStringFromDate(this.chatNowTime)){
+        this.af.object(`/${this.room['transportType']}Chatrooms/${this.room['departDate']}/${this.roomKey}`).update({
+          lastChatDate: this.dateServices.makeStringFromDate(this.chatNowTime),
+        })
+        this.sendNotification(`${this.dateServices.getKYearMonthDay(this.dateServices.makeStringFromDate(this.chatNowTime))}`);
+      }
       firebase.database().ref('/chats/' + this.roomKey).push({
         userID: this.userServices.userInfo['studentID'],
         userName: this.userServices.userInfo['korName'],
@@ -118,11 +127,28 @@ export class ChatRoomPage {
   sendSMS(phonenumber){
     this.platform.ready();
     try{
-      this.sms.send(phonenumber, '아이택시에서 연락드립니다.');
       let alert = this.alertCtrl.create({
-        title: "문자 전송",
-        message: "메시지가 전송되었습니다."
-      })
+        title: "문자 보내기",
+        message: "보낼 메시지를 입력하세요.",
+        inputs: [{
+          name: 'msg'
+        }],
+        buttons: [{
+          text: "취소",
+          role: "cancel"
+        }, {
+          text: "보내기",
+          handler: (data) => {
+            this.sms.send(phonenumber, data.msg);
+            let toast = this.toastCtrl.create({
+              message: "메시지가 전송되었습니다.",
+              duration: 2000,
+              position: "bottom"
+            })
+            toast.present();
+          }
+        }]
+      });
       alert.present();
     }
     catch (e) {
@@ -179,10 +205,7 @@ export class ChatRoomPage {
   removeUserFromRoom(room){
     let index = room['participants'].indexOf(this.userServices.userInfo['studentID']);
     room['participants'].splice(index,1);
-    room['currentPeople']--;
-    
-    index = room['devTokens'].indexOf(this.userServices.userInfo['devToken']);
-    room['devTokens'].splice(index,1);        
+    room['currentPeople']--;     
   }
 
   roomUpdate(updatedRoom, roomKey, msg){
@@ -218,7 +241,7 @@ export class ChatRoomPage {
             error.present();
           }else{
             let money: number = Math.round(data.price / data.people / 100) * 100; //여기서 십원 자리수에서 반올림
-            let msg = `${this.userServices.userInfo['accountBank']} ${this.userServices.userInfo['accountNumber']} 으로 ₩${money}원 입금해주시면 됩니다.`
+            let msg = `${this.userServices.userInfo['accountBank']} ${this.userServices.userInfo['accountNumber']} 으로 ${money}원 입금해주시면 됩니다.`
             this.sendNotification(msg);
           }
         }
@@ -248,7 +271,7 @@ export class ChatRoomPage {
   sendNotification(msg){
     this.af.list('/chats/' + this.roomKey).push({
       userID: 'CRA',
-      userName: 'CRAang',
+      userName: '운영자',
       content: msg,
       dateTime: new Date().toLocaleString('ko-KR'),
     }).then(() => {

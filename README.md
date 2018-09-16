@@ -32,6 +32,7 @@ npm install 잊지마세요.
   코드의 일관성을 위해서는 동일한 효과를 가져오면 하나의 형태로만 쓰면 깔끔해지겠지만 다양한 코드를 둠으로써 여러가지 활용법을
   공부 할 수 있도록 코드를 남겨두었다.
 - 시간은 로컬로 해놓았기 때문에 같은 시차를 가진 장소에서만 불편함 없이 사용 할 수 있다.
+- bugRoom을 이용하기 위해서 파베에 직접 bugRoom url을 만들고 lastChatDate: "2018-01-01"을 입력해줘야한다.
 
 - Main 접근 경로 1) Login 2) Signup 3) Appcomponent by auth
 - List 접근 경로 1) Main 2) Appcomponent
@@ -55,10 +56,7 @@ npm install 잊지마세요.
 - 리스트 페이지에서 필터 기능 사용시 출발지, 도착지 모두 동시에 만족하는 로직으로 짜기.
   이거는 로직 자체를 파베에서 바로 불러오는 걸로 하지말고 파베에서 불러 왔을 때 다른 곳에 저장 했다가 처리하는 시스템을 생각해보자.
   근데 잘못하면 async를 올바로 사용 할 수 없는 경우가 생기므로 async에 대한 이해를 하고 이 로직으로 접근하자.
-- 푸쉬 적용 할 방식들에 추가
-- 택시리스트 페이지를 리스트 페이지로 만들기
 - 탈퇴기능. 현재는 못하고 문의로 하게 만들건데 나중에는 30일 이후 자동 계정 삭제가 가능하도록 만들자.
-- 정산이 끝난 방은 없앨 수 있거나 자동으로 7일 뒤에 없애도록 만들기
 - 데이터들을 어떻게 관리할지 사라지는 데이터들 관리할 방법 생각하기
 - 채팅방에 카카오처럼 시간별로 출력하고 1일이 지난거는 또 따로 출력하는 방식 추가
 - 프로필 사진 추가 및 대화방에 카톡처럼 캐릭터로 나오게 만들기
@@ -70,7 +68,6 @@ npm install 잊지마세요.
 - 안드 스튜디오와 brew install gradle을 이용해서 2가지를 깔았다.
 - 안드 스튜디오로 sdk platform을 설치해야한다.
 - sudo chmod +x /Applications/Android\ Studio.app/Contents/gradle/gradle-4.4/bin/gradle
-  npm install @ionic/app-scripts@latest --save
   npm install
   sudo ionic cordova build android
   명령어로 빌드를 했고 gradle같은 경우 4.4인지 아니면 다른 버전인지 gradle이후 tab을 이용해서 확인 하고 바꾸면 된다.

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 
 import { ChatRoomPage } from '../chatroom/chatroom';
@@ -15,7 +15,7 @@ import { DateProvider } from '../../providers/date/date';
 })
 
 export class MakeRoomPage {
-  
+  @ViewChild(Content) content: Content;
   selectDeparture: Object = {key:"한동대학교", value:""};
   depart: string = "";
   selectDestination: Object = {key:"포항역", value:""};
@@ -40,9 +40,13 @@ export class MakeRoomPage {
 
   constructor(public alertCtrl: AlertController, public navParams: NavParams, public dateServices: DateProvider,
                public navCtrl:NavController, public af: AngularFireDatabase, public userServices: UsersProvider){
-    this.dateServices.setNow();
     this.userID = this.userServices.userInfo['studentID'];
     this.transportType = this.navParams.data.transportType;
+  }
+
+  ionViewWillEnter() {
+    this.dateServices.setNow();
+    this.content.resize();
   }
 
   makeRoom(){
@@ -112,8 +116,8 @@ export class MakeRoomPage {
                                     hostName: this.userServices.userInfo['korName'],
                                     host: this.userID,
                                     transportType: this.transportType,
+                                    lastChatDate: this.nowDate,
                                     participants: [this.userID],
-                                    devTokens:[this.userServices.userInfo['devToken']]
                                   };
                 if(this.transportType == 'carpool'){ room['price'] = (this.price == null) ? 0 : this.price; }                
                 let chatRoomUrl = this.af.list(`/${room['transportType']}Chatrooms/${this.bookingDate}`).push(room);

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform, AlertController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Platform, AlertController, Content } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
 import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 
@@ -14,7 +14,7 @@ import { UsersProvider } from '../../providers/users/users';
   templateUrl: 'setting.html',
 })
 export class SettingPage {
-
+  @ViewChild(Content) content: Content;
   user: Object;
   userData: FirebaseObjectObservable<any>;
   isNotiToggled: boolean;
@@ -28,7 +28,11 @@ export class SettingPage {
     this.isPushToggled = this.user['isPush'];
   }
 
-  // ionViewDidLoad() { console.log('ionViewDidLoad SettingPage'); }
+  ionViewWillEnter() {
+    this.content.resize();
+  }
+
+  ionViewDidLoad() { console.log('ionViewDidLoad SettingPage'); }
   NotiToggle(){ this.af.object(`/userProfile/${this.user['studentID']}`).update({ isNoti: this.isNotiToggled }); }
   PushToggle(){ this.af.object(`/userProfile/${this.user['studentID']}`).update({ isPush: this.isPushToggled }); }
   OpenInfoPage() { this.navCtrl.push(PersonalInfoPage); }

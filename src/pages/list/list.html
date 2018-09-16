@@ -54,30 +54,28 @@
 </ion-header>
 
 <ion-content>
-  <div>
-    <ion-grid class="mainGrid">
-      <ion-item-group *ngFor="let room of rooms | async | roomSort">
-        <!-- 현재는 지금 시간 이후이면서 방이 꽉 차지 않는 것만 보이게 해 놨다. -->
-        <ion-item-divider *ngIf="room.departDate + room.departTime > nowDate + nowTime && isAvailable(room)" (click)="goChatroom(room)" class="line"
-        [ngClass]="{full: room.currentPeople >= room.capacity, exist: isEntered(room.participants)}">
-          <ion-row >
-            <ion-col col-3>
-              <p>{{room.departDate}}</p>
-              <p>{{room.departTime}}</p>
-            </ion-col>
-            <ion-col col-7>
-              <p>{{room.depart}}</p>
-              <p>> {{room.arrive}}</p>
-            </ion-col>
-            <ion-col col-2>
-              <p>{{room.currentPeople}} / {{room.capacity}}</p>
-              <p *ngIf="isEntered(room.participants)">참여중</p>
-            </ion-col>
-          </ion-row>
-        </ion-item-divider>
-      </ion-item-group>
-    </ion-grid>
-  </div>
+  <ion-grid class="mainGrid">
+    <ion-item-group *ngFor="let room of rooms | async | roomSort">
+      <!-- 현재는 지금 시간 이후이면서 방이 꽉 차지 않는 것만 보이게 해 놨다. -->
+      <ion-item-divider *ngIf="room.departDate + room.departTime > nowDate + nowTime && isAvailable(room)" (click)="goChatroom(room)" class="line"
+      [ngClass]="{full: room.currentPeople >= room.capacity, exist: isEntered(room.participants)}">
+        <ion-row >
+          <ion-col col-3>
+            <p>{{room.departDate}}</p>
+            <p>{{room.departTime}}</p>
+          </ion-col>
+          <ion-col col-7>
+            <p>{{room.depart}}</p>
+            <p>> {{room.arrive}}</p>
+          </ion-col>
+          <ion-col col-2>
+            <p>{{room.currentPeople}} / {{room.capacity}}</p>
+            <p *ngIf="isEntered(room.participants)">참여중</p>
+          </ion-col>
+        </ion-row>
+      </ion-item-divider>
+    </ion-item-group>
+  </ion-grid>
 
   <ion-fab right bottom>
     <button color="dark" ion-fab (click)="makeRoom()"><ion-icon name="add"></ion-icon></button>

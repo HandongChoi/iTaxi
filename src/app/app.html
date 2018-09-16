@@ -33,8 +33,9 @@
       <button menuClose ion-item class="sidemenu-items" (click)="takeCarpool()">조회</button>
       <button menuClose ion-item class="sidemenu-items" (click)="makeCarpool()">모집</button>
       <ion-list-header class="sidemenu-header"> <ion-icon name="person"></ion-icon>&nbsp;&nbsp;마이페이지 </ion-list-header>
-      <button menuClose ion-item class="sidemenu-items" (click)="goRideHistoryPage()">탑승내역</button>
-      <button menuClose ion-item class="sidemenu-items" (click)="goSettingPage()">설정</button>
+      <button menuClose ion-item class="sidemenu-items" (click)="setRoot('RideHistoryPage')">탑승내역</button>
+      <button menuClose ion-item class="sidemenu-items" (click)="setRoot('SettingPage')">설정</button>
+      <button menuClose ion-item class="sidemenu-items" (click)="goBugReportPage()">문의 사항 & 버그 신고</button>
     </ion-list>
     <div style="text-align: right"><br>Powered by CRA&nbsp;&nbsp;&nbsp;&nbsp;</div>
   </ion-content>

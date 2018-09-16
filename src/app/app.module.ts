@@ -6,13 +6,12 @@ import { MyApp } from './app.component';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { OneSignal } from '@ionic-native/onesignal';
-import { LocalNotifications } from '@ionic-native/local-notifications';
-import { PhonegapLocalNotification } from '@ionic-native/phonegap-local-notification';
 
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AuthProvider } from '../providers/auth/auth';
 import { DatePickerModule } from 'ionic2-date-picker';
 
+import { BugReportPageModule } from '../pages/bug-report/bug-report.module';
 import { ListPageModule } from '../pages/list/list.module';
 import { ChatRoomPageModule } from '../pages/chatroom/chatroom.module';
 import { LoginPageModule } from '../pages/login/login.module';
@@ -22,7 +21,7 @@ import { SettingPageModule } from '../pages/setting/setting.module';
 import { MakeRoomPageModule } from '../pages/makeRoom/makeRoom.module'
 import { SignupPageModule } from '../pages/signup/signup.module';
 import { RideHistoryPageModule } from '../pages/ride-history/ride-history.module';
-import { FCM } from '@ionic-native/fcm';
+
 import { StatusBar } from '@ionic-native/status-bar';
 import { HttpModule } from '@angular/http';
 
@@ -58,6 +57,7 @@ export const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     DatePickerModule,
+    BugReportPageModule,
     ChatRoomPageModule,
     LoginPageModule,
     ListPageModule,
@@ -78,13 +78,10 @@ export const firebaseConfig = {
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
-    FCM,
     StatusBar,
     DateProvider,
     UsersProvider,
     RoomsProvider,
-    LocalNotifications,
-    PhonegapLocalNotification,
     SMS,
     OneSignal
   ]
