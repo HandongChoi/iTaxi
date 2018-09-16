@@ -15,17 +15,17 @@ export class AuthProvider {
    
   signupUser(studentID:string):firebase.Promise<any> { 
     return firebase.auth().createUserWithEmailAndPassword(studentID + '@handong.edu', 'HandongCRA1004')
-    .then( newUser => { 
-      firebase.database().ref(`/UID/${newUser.uid}/studentID`).set(studentID);                
-    }).catch( error => {
-      let alertCtrl: AlertController;
-      let alert = alertCtrl.create({
-        title: "회원가입 에러",
-        message: "회원가입 도중 에러가 발생했습니다. 관리자에게 문의해주시기 바랍니다. 에러: " + error,
-        buttons: ['Ok']
+      .then( newUser => { 
+        firebase.database().ref(`/UID/${newUser.uid}/studentID`).set(studentID);                
+      }).catch( error => {
+        let alertCtrl: AlertController;
+        let alert = alertCtrl.create({
+          title: "회원가입 에러",
+          message: "회원가입 도중 에러가 발생했습니다. 관리자에게 문의해주시기 바랍니다. 에러: " + error,
+          buttons: ['Ok']
+        });
+        alert.present();
       });
-      alert.present();
-    });
   }
 
   logoutUser():firebase.Promise<void> {

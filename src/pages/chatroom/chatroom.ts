@@ -236,7 +236,6 @@ export class ChatRoomPage {
             error.present();
           }else{
             let money: number = Math.round(data.price / data.people / 100) * 100; //여기서 십원 자리수에서 반올림
-            // TODO: 아직 계좌정보를 입력하지 않았을 경우를 처리해줘야 함.
             let msg = `${this.userServices.userInfo['accountBank']} ${this.userServices.userInfo['accountNumber']} 으로 ${money}원 입금해주시면 됩니다.`
             this.sendNotification(msg);
           }

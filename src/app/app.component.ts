@@ -64,33 +64,36 @@ export class MyApp {
           platform.exitApp();
         }
       }, 0)
-      firebase.auth().onAuthStateChanged( authData => {  
-        if(authData == null){
-          this.rootPage = LoginPage;
-        } else {
-          //token setup을 여기서 하자.
-          var currentUserID = authData.email.substr(0,8);
-          var loading: Loading;
-          this.userServices.initialize(currentUserID).then( () => {
-            this.userName = this.userServices.userInfo['korName'];
-            this.af.list('/rideHistory/' + this.userServices.userInfo['studentID'], {
-              query: {
-                startAt: this.dateServices.getYearMonthDayWithDash(),
-                orderByChild: 'departDate',
-              }
-            }).subscribe( rooms => {
-              this.room = rooms.sort(this.roomServices.sortByDateTime)
-              .filter((room: Object) => room['departDate'] + room['departTime'] >= this.dateServices.nowDate + this.dateServices.nowTime)[0];
-            })
-          }).then( () => {
-            loading.dismiss();
-            this.rootPage = MainPage;
+    });
+  }
+
+  ionViewWillEnter() {
+    firebase.auth().onAuthStateChanged( authData => {  
+      if(authData == null){
+        this.rootPage = LoginPage;
+      } else {
+        //token setup을 여기서 하자.
+        var currentUserID = authData.email.substr(0,8);
+        var loading: Loading;
+        this.userServices.initialize(currentUserID).then( () => {
+          this.userName = this.userServices.userInfo['korName'];
+          this.af.list('/rideHistory/' + this.userServices.userInfo['studentID'], {
+            query: {
+              startAt: this.dateServices.getYearMonthDayWithDash(),
+              orderByChild: 'departDate',
+            }
+          }).subscribe( rooms => {
+            this.room = rooms.sort(this.roomServices.sortByDateTime)
+            .filter((room: Object) => room['departDate'] + room['departTime'] >= this.dateServices.nowDate + this.dateServices.nowTime)[0];
           })
-          loading = this.loadingCtrl.create();
-          loading.present();
-        }
-        // this.splashScreen.hide();
-      });
+        }).then( () => {
+          loading.dismiss();
+          this.rootPage = MainPage;
+        })
+        loading = this.loadingCtrl.create();
+        loading.present();
+      }
+      // this.splashScreen.hide();
     });
   }
 
