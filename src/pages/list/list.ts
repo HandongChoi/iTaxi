@@ -110,7 +110,7 @@ export class ListPage {
   sendNotification(msg, roomKey){
     this.af.list('/chats/' + roomKey).push({
       userID: 'CRA',
-      userName: 'CRAang',
+      userName: '운영자',
       content: msg,
       dateTime: new Date().toLocaleString(),
     });

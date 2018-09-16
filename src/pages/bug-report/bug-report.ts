@@ -118,7 +118,7 @@ export class BugReportPage {
   sendNotification(msg){
     firebase.database().ref('/bugChats').push({
       userID: 'CRA',
-      userName: 'CRAang',
+      userName: '운영자',
       content: msg,
       dateTime: new Date().toLocaleString('ko-KR'),
     }).then(() => {

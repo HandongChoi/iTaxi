@@ -267,7 +267,7 @@ export class ChatRoomPage {
   sendNotification(msg){
     this.af.list('/chats/' + this.roomKey).push({
       userID: 'CRA',
-      userName: 'CRAang',
+      userName: '운영자',
       content: msg,
       dateTime: new Date().toLocaleString('ko-KR'),
     }).then(() => {
