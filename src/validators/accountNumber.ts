@@ -5,7 +5,7 @@ import { FormControl } from '@angular/forms';
 
 export class AccountNumberValidator {
     static isValid(control: FormControl){
-        const re = /^[0-9]{2}[0-9|-]+$/ .test(control.value);
+        const re = /^[0-9]{2}[0-9-\s]+$/ .test(control.value);
         if (re || control.value==''){ // 여기서 nullable 하게
             return null;
         }
