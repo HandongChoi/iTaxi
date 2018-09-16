@@ -13,7 +13,6 @@ import { RoomsProvider } from '../providers/rooms/rooms';
 import {StatusBar} from '@ionic-native/status-bar';
 
 import { AngularFireDatabase } from 'angularfire2/database';
-import { FCM } from '@ionic-native/fcm';
 
 import firebase from 'firebase';
 
@@ -49,7 +48,7 @@ export class MyApp {
 
   constructor(public platform: Platform, public splashScreen: SplashScreen, private statusBar: StatusBar,
               public authProvider:AuthProvider, public alertCtrl: AlertController, public af: AngularFireDatabase,
-              public fcm:FCM, public userServices:UsersProvider, private dateServices:DateProvider, public menuCtrl: MenuController,
+              public userServices:UsersProvider, private dateServices:DateProvider, public menuCtrl: MenuController,
               public roomServices: RoomsProvider, public loadingCtrl:LoadingController,
               public toastCtrl: ToastController) {
     this.dateServices.setNow();
