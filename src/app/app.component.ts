@@ -101,7 +101,7 @@ export class MyApp {
         }
       }, 0)
       if (this.platform.is('cordova')) {
-        this.statusBar.overlaysWebView(false);
+        if(!this.platform.is('ios')) this.statusBar.overlaysWebView(false);
         this.oneSignalNative.startInit('f4229499-d7fe-48bd-a3d9-6b64cfcb4ce2', '762163958818');
         this.oneSignalNative.enableVibrate(true);
         this.oneSignalNative.enableSound(true);
