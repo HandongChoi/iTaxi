@@ -57,7 +57,7 @@
   <ion-grid class="mainGrid">
     <ion-item-group *ngFor="let room of rooms | async | roomSort">
       <!-- 현재는 지금 시간 이후이면서 방이 꽉 차지 않는 것만 보이게 해 놨다. -->
-      <ion-item-divider *ngIf="room.departDate + room.departTime > nowDate + nowTime && isAvailable(room)" (click)="goChatroom(room)" class="line"
+      <ion-item-divider *ngIf="room.departDate + room.departTime > nowDate + nowTime " (click)="(!isEntered(room.participants) && !isAvailable(room)) || goChatroom(room)" class="line"
       [ngClass]="{full: room.currentPeople >= room.capacity, exist: isEntered(room.participants)}">
         <ion-row >
           <ion-col col-3>
@@ -71,6 +71,7 @@
           <ion-col col-2>
             <p>{{room.currentPeople}} / {{room.capacity}}</p>
             <p *ngIf="isEntered(room.participants)">참여중</p>
+            <p *ngIf="!isEntered(room.participants) && room.currentPeople >= room.capacity">참여불가</p>
           </ion-col>
         </ion-row>
       </ion-item-divider>
