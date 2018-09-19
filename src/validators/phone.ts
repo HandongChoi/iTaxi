@@ -14,5 +14,3 @@ export class PhoneValidator {
         return { "invalid Phone Number": true};
     }
 }
-
-

@@ -17,7 +17,7 @@
         <p><b>{{room.depart}} &nbsp; <ion-icon name="arrow-forward"></ion-icon>
            &nbsp; {{room.arrive}}
         </b></p>
-        <p>{{room.departTime}}</p>
+        <p *ngIf="room.transportType == 'carpool'">{{room.price}}원</p>
       </ion-col>
       <ion-col col-auto>
         <ion-buttons right icon-only>

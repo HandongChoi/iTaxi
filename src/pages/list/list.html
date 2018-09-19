@@ -66,7 +66,8 @@
           </ion-col>
           <ion-col col-7>
             <p>{{room.depart}}</p>
-            <p>> {{room.arrive}}</p>
+            <p *ngIf="room.transportType == 'taxi'">> {{room.arrive}}</p>
+            <p *ngIf="room.transportType == 'carpool'">> {{room.arrive}} ( {{room.price}}원 )</p>
           </ion-col>
           <ion-col col-2>
             <p>{{room.currentPeople}} / {{room.capacity}}</p>
