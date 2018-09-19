@@ -45,6 +45,10 @@ export class DateProvider {
     let splitDate = dateWithDelimiter.split(this.delimiter);
     return splitDate[0]+'년 '+splitDate[1]+'월 '+splitDate[2]+'일 ('+this.getKToday(dateWithDelimiter)+')';
   }
+  //input: 2018-01-23, output: 18-01-23
+  getShortDate(dateWithDelimiter: string): string{
+    return dateWithDelimiter.slice(2);
+  }
   //2018-08-27과 같은 형식으로 만들어준다.
   makeStringFromDate(date: Date): string {
     let month = this.addZ(date.getMonth() + 1);

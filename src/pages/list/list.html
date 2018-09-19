@@ -41,7 +41,7 @@
       </ion-col>
       <ion-col col-2 *ngFor="let day of days">
         <ion-item class="days" [ngClass]="{'activate': day == selectedDate }" (click)="showChatroom(day)">
-          <p>{{day | date:'dd'}} </p>
+          <p>{{day | date:'dd'}} ({{this.dateServices.getKToday(day)}}) </p>
         </ion-item>
       </ion-col>
       <ion-col col-2>
@@ -61,7 +61,7 @@
       [ngClass]="{full: room.currentPeople >= room.capacity, exist: isEntered(room.participants)}">
         <ion-row >
           <ion-col col-3>
-            <p>{{room.departDate}}</p>
+            <p>{{this.dateServices.getShortDate(room.departDate)}}</p>
             <p>{{room.departTime}}</p>
           </ion-col>
           <ion-col col-7>

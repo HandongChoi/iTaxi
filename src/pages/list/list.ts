@@ -69,7 +69,7 @@ export class ListPage {
     });
   }
 
-  //input으로 2018-02-01 형식을 기대한다.
+  //input: 2018-02-01 형식
   showChatroom(date) {
     this.selectedDate = date;
     this.rooms = this.roomServices.getChatRooms(date, this.transportType);

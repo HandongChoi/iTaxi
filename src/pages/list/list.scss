@@ -24,6 +24,10 @@ page-list {
   
     .small-bottom {
       .days {
+        ion-label {
+          margin-right: 0 !important;
+        }
+        padding-left: 0;
         text-align: center;
         cursor: pointer;
 
@@ -43,6 +47,7 @@ page-list {
       }
   
       .days_icon {
+        padding-left: 0;
         text-align: center;
         font-weight: bold;
         color: color($colors, dark-gray, base);
