@@ -28,7 +28,7 @@ export class ListPage {
   departOptions: any;
   arriveOptions: any;
 
-  spotList: Array<string> = ["한동대학교", "포항역", "양덕", "고속버스터미널", "시외버스터미널", "E1", "그랜드할인마트", "장흥초등학교", "세차장" ,"커피유야", "하나로", "북부해수욕장", "육거리", "직접입력"];;
+  spotList: Array<string> = ["한동대학교", "포항역", "하나로마트", "고속버스터미널", "시외버스터미널", "E1", "그랜드할인마트", "장흥초등학교", "세차장" ,"커피유야", "하나로", "북부해수욕장", "육거리", "직접입력"];;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase,
               public datePickerProvider: DatePickerProvider, public modalCtrl: ModalController,  
