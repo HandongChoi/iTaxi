@@ -36,7 +36,7 @@ export class MakeRoomPage {
   userID: string;
   transportType: string;
 
-  spotList: Array<string> = ["한동대학교", "포항역", "하나로마트", "고속버스터미널", "시외버스터미널", "E1", "그랜드할인마트", "장흥초등학교", "세차장" ,"커피유야", "북부해수욕장", "육거리", "직접입력"];;
+  spotList: Array<string> = ["한동대학교", "포항역", "고속버스터미널", "시외버스터미널", "하나로마트", "E1", "그랜드할인마트", "장흥초등학교", "세차장" ,"커피유야", "북부해수욕장", "육거리", "직접입력"];;
 
   constructor(public alertCtrl: AlertController, public navParams: NavParams, public dateServices: DateProvider,
                public navCtrl:NavController, public af: AngularFireDatabase, public userServices: UsersProvider){
@@ -109,6 +109,7 @@ export class MakeRoomPage {
                 let room: Object = { 
                                     depart: this.depart,
                                     arrive: this.arrive,
+                                    fromto: this.depart + '>' + this.arrive,
                                     departDate: this.bookingDate,
                                     departTime: this.bookingTime,
                                     capacity: Number(this.maxPeople) + 1,

@@ -129,6 +129,31 @@ export class ListPage {
     }
   }
 
+  test(){
+    if(this.departOptions == "All" && this.arriveOptions == "All"){
+      this.rooms = this.roomServices.getChatRooms(this.selectedDate, this.transportType);
+    }else if(this.departOptions == "All"){
+      let query = {
+        orderByChild: 'arrive',
+        equalTo: this.arriveOptions
+      }
+      this.rooms = this.roomServices.getChatRooms(this.selectedDate, this.transportType, query);
+    }else if(this.arriveOptions == "All"){
+      let query = {
+        orderByChild: 'depart',
+        equalTo: this.departOptions
+      }
+      this.rooms = this.roomServices.getChatRooms(this.selectedDate, this.transportType, query);
+    }else{
+      let query = {
+        orderByChild: 'fromto',
+        equalTo: this.departOptions + '>' + this.arriveOptions
+      }
+      this.rooms = this.roomServices.getChatRooms(this.selectedDate, this.transportType, query);
+    }
+    
+  }
+
   filterDestination(arriveFilter){
     if (arriveFilter == "All") {
       this.rooms = this.roomServices.getChatRooms(this.selectedDate, this.transportType);
