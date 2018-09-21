@@ -75,6 +75,7 @@ export class ListPage {
   showChatroom(date) {
     this.selectedDate = date;
     this.rooms = this.roomServices.getChatRooms(date, this.transportType);
+    //this.filter();
   }
 
   goChatroom(room) {
@@ -129,7 +130,7 @@ export class ListPage {
     }
   }
 
-  test(){
+  filter(){
     if(this.departOptions == "All" && this.arriveOptions == "All"){
       this.rooms = this.roomServices.getChatRooms(this.selectedDate, this.transportType);
     }else if(this.departOptions == "All"){

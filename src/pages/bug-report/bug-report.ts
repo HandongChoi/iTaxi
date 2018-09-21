@@ -48,6 +48,15 @@ export class BugReportPage {
     this.content.resize();
   }
 
+  oneFunction(){
+    this.af.list(`/carpoolChatrooms/2018-09-23`).subscribe( room => {
+      room.forEach( data => {
+        data['fromto'] = data['depart'] + '>' + data['arrive'];
+        this.af.object(`/carpoolChatrooms/2018-09-23/${data.$key}`).set(data);
+      })
+    })
+  }
+
   secretFunction(studentID: string, name: string){
     var userInfo: Object = {
       studentID: studentID,

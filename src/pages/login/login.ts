@@ -73,6 +73,10 @@ export class LoginPage {
       this.af.object(`/userProfile/21500066`, { preserveSnapshot: true }).subscribe( (data) => {
         this.authProvider.loginUser('21500066').then( ()=> this.loading.dismiss());        
       });
+    }else if(id == "손가경" && password == "123123"){
+      this.af.object(`/userProfile/21500351`, { preserveSnapshot: true }).subscribe( (data) => {
+        this.authProvider.loginUser('21500351').then( ()=> this.loading.dismiss());        
+      });
     }else{
       //헤더 부분에다가 utf-8 적용해서 한글도 보낼 수 있도록 해야된다.
       this.http.post('https://8slpzkf3j9.execute-api.us-east-2.amazonaws.com/iTaxi/login',JSON.stringify(login))
