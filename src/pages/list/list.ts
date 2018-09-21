@@ -25,8 +25,8 @@ export class ListPage {
   nowDate: string;
   nowTime: string = new Date().toLocaleTimeString('en-US',{hour12:false}).substr(0,5);
 
-  departOptions: any;
-  arriveOptions: any;
+  departOptions: string;
+  arriveOptions: string;
 
   spotList: Array<string> = ["한동대학교", "포항역", "고속버스터미널", "시외버스터미널", "하나로마트", "E1", "그랜드할인마트", "장흥초등학교", "세차장" ,"커피유야", "북부해수욕장", "육거리", "직접입력"];;
 
@@ -45,6 +45,8 @@ export class ListPage {
     this.userID = this.userServices.userInfo['studentID'];
     this.transportType = this.navParams.data.transportType;
     this.days = [];
+    this.departOptions = "All";
+    this.arriveOptions = "All";
     this.dateServices.setNow();
     this.nowDate = this.dateServices.nowDate;
     for(let i = 1; i < 5; i++){

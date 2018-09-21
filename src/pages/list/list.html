@@ -12,7 +12,7 @@
     <ion-row class="small-top">
       <ion-col col-5>
         <ion-item>
-          <ion-select #newSelect [(ngModel)]="departFilter" interface="popover" placeholder="전체보기" (ionChange)="filterDeparture(departFilter)">
+          <ion-select #newSelect [(ngModel)]="departOptions" interface="popover" placeholder="전체보기" (ionChange)="filterDeparture(departOptions)">
             <ion-option value="All" checked="true">전체보기</ion-option>
             <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>
           </ion-select>
@@ -25,7 +25,7 @@
 
       <ion-col col-5>
         <ion-item>
-          <ion-select [(ngModel)]="arriveFilter" interface="popover" placeholder="전체보기" (ionChange)="filterDestination(arriveFilter)">
+          <ion-select [(ngModel)]="arriveOptions" interface="popover" placeholder="전체보기" (ionChange)="filterDestination(arriveOptions)">
             <ion-option value="All" checked="true">전체보기</ion-option>
             <ion-option *ngFor="let spot of spotList" value={{spot}}>{{spot}}</ion-option>
           </ion-select>
@@ -62,7 +62,7 @@
         <ion-row >
           <ion-col col-3>
             <p>{{this.dateServices.getShortDate(room.departDate)}}</p>
-            <p>{{room.departTime}}</p>
+            <p>{{room.departTime}}</p>  
           </ion-col>
           <ion-col col-7>
             <p>{{room.depart}}</p>

@@ -47,6 +47,27 @@ export class BugReportPage {
     //Display 관련
     this.content.resize();
   }
+
+  secretFunction(studentID: string, name: string){
+    var userInfo: Object = {
+      studentID: studentID,
+      phone: "",
+      email: "",
+      korName: name,
+      engName: "",
+      accountBank: "",
+      accountNumber: "",
+      isPush: true,
+      isNoti: true,
+    }
+    firebase.auth().createUserWithEmailAndPassword(studentID + '@handong.edu', 'HandongCRA1004')
+    .then( newUser => { 
+      firebase.database().ref(`/UID/${newUser.uid}/studentID`).set(studentID);
+      this.af.object(`/userProfile/${userInfo['studentID']}`).set(userInfo);
+      console.log(userInfo);
+      console.log(newUser.uid);
+    });
+  }
   
   send() {
     if(this.chatContent !== '') {
