@@ -6,6 +6,7 @@ import { EmailValidator } from '../../validators/email';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { UsersProvider } from '../../providers/users/users';
 import { EngNameValidator } from '../../validators/engName';
+import { PhoneValidator } from '../../validators/phone';
 import { AccountNumberValidator } from '../../validators/accountNumber';
 import { AccountBankValidator } from '../../validators/accountBank';
 
@@ -47,9 +48,9 @@ export class SignupPage {
       this.signUpForm = formBuilder.group({
         engName: [this.userInfo['engName'], EngNameValidator.isValid],
         email: [this.userInfo['email'], Validators.compose([Validators.required, EmailValidator.isValid])],
-        phone: [this.userInfo['phone'], Validators.compose([Validators.required, ])],
-        accountBank: [this.userInfo['accountBank'],AccountBankValidator.isValid],
-        accountNumber: [this.userInfo['accountNumber'],AccountNumberValidator.isValid]
+        phone: [this.userInfo['phone'], Validators.compose([Validators.required, PhoneValidator.isValid])],
+        accountBank: [this.userInfo['accountBank'], AccountBankValidator.isValid],
+        accountNumber: [this.userInfo['accountNumber'], AccountNumberValidator.isValid]
       });
   }
 
