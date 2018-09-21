@@ -51,7 +51,7 @@ export class BugReportPage {
   oneFunction(){
     this.af.list(`/carpoolChatrooms/2018-09-23`).subscribe( room => {
       room.forEach( data => {
-        data['fromto'] = data['depart'] + '>' + data['arrive'];
+        data['fromTo'] = data['depart'] + '>' + data['arrive'];
         this.af.object(`/carpoolChatrooms/2018-09-23/${data.$key}`).set(data);
       })
     })

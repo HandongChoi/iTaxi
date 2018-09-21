@@ -109,7 +109,7 @@ export class MakeRoomPage {
                 let room: Object = { 
                                     depart: this.depart,
                                     arrive: this.arrive,
-                                    fromto: this.depart + '>' + this.arrive,
+                                    fromTo: this.depart + '>' + this.arrive,
                                     departDate: this.bookingDate,
                                     departTime: this.bookingTime,
                                     capacity: Number(this.maxPeople) + 1,

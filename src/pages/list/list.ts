@@ -147,7 +147,7 @@ export class ListPage {
       this.rooms = this.roomServices.getChatRooms(this.selectedDate, this.transportType, query);
     }else{
       let query = {
-        orderByChild: 'fromto',
+        orderByChild: 'fromTo',
         equalTo: this.departOptions + '>' + this.arriveOptions
       }
       this.rooms = this.roomServices.getChatRooms(this.selectedDate, this.transportType, query);
