@@ -106,7 +106,7 @@ export class ChatRoomPage {
         content: this.chatContent,
         dateTime: this.chatNowTime.toLocaleString('ko-KR'),
       }).catch(err => {
-        console.log(err);
+        console.log(err); 
       }).then((data) => {
         // 한 유저가 1분 이내 보낸 메세지들은 가장 마지막 메세지만 날짜를 표시함
         if (this.continuousMessage(this.chatNowTime, this.chatPrevTime) && this.chatPrevKey) {

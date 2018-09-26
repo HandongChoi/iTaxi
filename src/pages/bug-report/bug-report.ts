@@ -51,13 +51,12 @@ export class BugReportPage {
   oneFunction(){
     console.log('click')
     var count = 0;
-    var date = '2018-09-28';
+    var date = '2018-09-26';
     var roomName = 'taxiChatrooms';
     this.af.list(`/${roomName}/${date}`).subscribe( room => {
       room.forEach( data => {
         data['fromTo'] = data['depart'] + '>' + data['arrive'];
         this.af.object(`/${roomName}/${date}/${data.$key}`).set(data);
-        console.log(data)
       })
       count = count + 1;
       console.log(count);

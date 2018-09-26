@@ -55,3 +55,11 @@ npm install 잊지마세요.
   npm install
   sudo ionic cordova build android
   명령어로 빌드를 했고 gradle같은 경우 4.4인지 아니면 다른 버전인지 gradle이후 tab을 이용해서 확인 하고 바꾸면 된다.
+
+안드 앱 업데이트
+- 빌드 후 unsigned된 apk를 signedup을 시켜준다.
+- signed up 하는 방법
+cd /Users/sam-koh/Library/Android/sdk/build-tools/27.0.3/
+./zipalign -v -p 4 android-release-unsigned.apk iTaxi.apk
+./apksigner sign —ks iTaxi.jks iTaxi.apk 
+./apksigner verify —verbose iTaxi.apk
