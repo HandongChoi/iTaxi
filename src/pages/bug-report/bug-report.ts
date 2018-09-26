@@ -49,11 +49,18 @@ export class BugReportPage {
   }
 
   oneFunction(){
-    this.af.list(`/carpoolChatrooms/2018-09-23`).subscribe( room => {
+    console.log('click')
+    var count = 0;
+    var date = '2018-09-28';
+    var roomName = 'taxiChatrooms';
+    this.af.list(`/${roomName}/${date}`).subscribe( room => {
       room.forEach( data => {
         data['fromTo'] = data['depart'] + '>' + data['arrive'];
-        this.af.object(`/carpoolChatrooms/2018-09-23/${data.$key}`).set(data);
+        this.af.object(`/${roomName}/${date}/${data.$key}`).set(data);
+        console.log(data)
       })
+      count = count + 1;
+      console.log(count);
     })
   }
 

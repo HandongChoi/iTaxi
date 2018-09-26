@@ -75,7 +75,7 @@ export class ListPage {
   showChatroom(date) {
     this.selectedDate = date;
     this.rooms = this.roomServices.getChatRooms(date, this.transportType);
-    //this.filter();
+    this.filter();
   }
 
   goChatroom(room) {
@@ -118,18 +118,6 @@ export class ListPage {
 
   makeRoom(){ this.navCtrl.push(MakeRoomPage, {transportType: this.transportType}); }
 
-  filterDeparture(departFilter){
-    if (departFilter == "All") {
-      this.rooms = this.roomServices.getChatRooms(this.selectedDate, this.transportType);
-    } else {
-      let query = {
-        orderByChild: 'depart',
-        equalTo: departFilter
-      }
-      this.rooms = this.roomServices.getChatRooms(this.selectedDate, this.transportType, query);
-    }
-  }
-
   filter(){
     if(this.departOptions == "All" && this.arriveOptions == "All"){
       this.rooms = this.roomServices.getChatRooms(this.selectedDate, this.transportType);
@@ -149,19 +137,6 @@ export class ListPage {
       let query = {
         orderByChild: 'fromTo',
         equalTo: this.departOptions + '>' + this.arriveOptions
-      }
-      this.rooms = this.roomServices.getChatRooms(this.selectedDate, this.transportType, query);
-    }
-    
-  }
-
-  filterDestination(arriveFilter){
-    if (arriveFilter == "All") {
-      this.rooms = this.roomServices.getChatRooms(this.selectedDate, this.transportType);
-    } else {
-      let query = {
-        orderByChild: 'arrive',
-        equalTo: arriveFilter
       }
       this.rooms = this.roomServices.getChatRooms(this.selectedDate, this.transportType, query);
     }
