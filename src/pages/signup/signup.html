@@ -63,7 +63,7 @@
         </ion-input>
       </ion-item>
       <ion-item class="error-message" *ngIf="!signUpForm.controls.engName.valid && signUpForm.controls.engName.dirty">
-        <p>영어 이름을 입력하셔야 합니다.</p>
+        <p>영어와 ,-_'"`외의 특수문자는 사용하시면 안 됩니다.</p>
       </ion-item>
 
       <ion-item>
@@ -72,7 +72,7 @@
         </ion-input>
       </ion-item>
       <ion-item class="error-message" *ngIf="!signUpForm.controls.phone.valid && signUpForm.controls.phone.dirty">
-        <p>휴대폰 번호를 입력하셔야 합니다.</p>
+        <p>총 11-12자리 번호와 - 문자 외에는 사용하시면 안 됩니다.</p>
       </ion-item>
     
       <ion-item>
@@ -82,7 +82,7 @@
       </ion-item>
       <!-- dirty의 뜻은 '상태가 바꼈니?' 이다-->
       <ion-item class="error-message" *ngIf="!signUpForm.controls.email.valid && signUpForm.controls.email.dirty">
-        <p>이메일 양식을 제대로 입력해주세요!</p>
+        <p>이메일 양식에 숫자와 _.- 외의 특수문자는 사용하실 수 없습니다.</p>
       </ion-item>
 
       <ion-item>
