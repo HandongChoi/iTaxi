@@ -89,6 +89,15 @@ export class ChatRoomPage {
   
   send() {
     if(this.chatContent !== '') {
+      /**
+       * 메세지가 두 번 보내지는 버그 방지
+       * this.chatContent를 뒤에서 ""로 초기화 해주면,
+       * firebase에 push하는 속도 때문에 두 번 보내질 수가 있기 때문에
+       * 먼저 this.chatContent를 ""로 바로 초기화해주고, 임시 변수(chat)를 전달한다.
+       */
+      var chatMsg = this.chatContent;
+      this.chatContent = "";
+
       if(!this.chatPrevTime) {
         this.chatPrevTime = new Date();
       }
@@ -100,10 +109,11 @@ export class ChatRoomPage {
         })
         this.sendNotification(`${this.dateServices.getKYearMonthDay(this.dateServices.makeStringFromDate(this.chatNowTime))}`);
       }
+
       firebase.database().ref('/chats/' + this.roomKey).push({
         userID: this.userServices.userInfo['studentID'],
         userName: this.userServices.userInfo['korName'],
-        content: this.chatContent,
+        content: chatMsg,
         dateTime: this.chatNowTime.toLocaleString('ko-KR'),
       }).catch(err => {
         console.log(err); 
@@ -117,8 +127,7 @@ export class ChatRoomPage {
         this.chatPrevTime = this.chatNowTime;
         this.chatPrevKey = data['key'];
 
-        this.pushNotification(this.userServices.userInfo['korName'], this.chatContent, false);
-        this.chatContent = "";
+        this.pushNotification(this.userServices.userInfo['korName'], chatMsg, false);
         this.scrollBottom();
       });
     }
