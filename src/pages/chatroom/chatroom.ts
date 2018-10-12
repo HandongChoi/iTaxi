@@ -136,38 +136,48 @@ export class ChatRoomPage {
   sendSMS(phonenumber){
     this.platform.ready();
     try{
-      let alert = this.alertCtrl.create({
-        title: "문자 보내기",
-        message: "보낼 메시지를 입력하세요.",
-        inputs: [{
-          name: 'msg'
-        }],
-        buttons: [{
-          text: "취소",
-          role: "cancel"
-        }, {
-          text: "보내기",
-          handler: (data) => {
-            this.sms.send(phonenumber, data.msg);
-            let toast = this.toastCtrl.create({
-              message: "메시지가 전송되었습니다.",
-              duration: 2000,
-              position: "bottom"
-            })
-            toast.present();
-          }
-        }]
-      });
-      alert.present();
-      let dismissAlert = this.platform.registerBackButtonAction(() => {
-        alert.dismiss();
-        dismissAlert();
-      }, 3)
+      if(this.platform.is('ios')||this.platform.is('android')){
+        console.log(this.platform.is('android'))
+        let alert = this.alertCtrl.create({
+          title: "문자 보내기",
+          message: "보낼 메시지를 입력하세요.",
+          inputs: [{
+            name: 'msg'
+          }],
+          buttons: [{
+            text: "취소",
+            role: "cancel"
+          }, {
+            text: "보내기",
+            handler: (data) => {
+              this.sms.send(phonenumber, data.msg);
+              let toast = this.toastCtrl.create({
+                message: "메시지가 전송되었습니다.",
+                duration: 2000,
+                position: "bottom"
+              })
+              toast.present();
+            }
+          }]
+        });
+        alert.present();
+        let dismissAlert = this.platform.registerBackButtonAction(() => {
+          alert.dismiss();
+          dismissAlert();
+        }, 3)
+      }
+      else {
+        let toast = this.toastCtrl.create({
+          message: "문자 전송은 앱에서만 가능합니다.",
+          duration: 2000,
+          position: "bottom"
+        })
+        toast.present();
+      }
     }
     catch (e) {
       console.log("error");
     }
-    
   }
 
   quit(transportType: string){

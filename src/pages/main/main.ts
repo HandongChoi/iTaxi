@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, LoadingController, Content } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, LoadingController, Content, Platform } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { ChatRoomPage } from '../../pages/chatroom/chatroom';
 import { ListPage } from '../../pages/list/list';
@@ -24,7 +24,7 @@ export class MainPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public af: AngularFireDatabase,
               public menu: MenuController, public userServices: UsersProvider, private dateServices: DateProvider,
-              public roomServices: RoomsProvider, public loadingCtrl:LoadingController) {
+              public roomServices: RoomsProvider, public loadingCtrl:LoadingController, public platform: Platform) {
     //여기서부터는 로그인 및 회원가입 페이지를 넘어서 사이드 메뉴를 볼 수 있도록 만들기.
   }
 
