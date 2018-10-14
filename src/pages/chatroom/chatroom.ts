@@ -136,7 +136,7 @@ export class ChatRoomPage {
   sendSMS(phonenumber){
     this.platform.ready();
     try{
-      if(this.platform.is('ios')||this.platform.is('android')){
+      if(this.platform.is('cordova')){
         console.log(this.platform.is('android'))
         let alert = this.alertCtrl.create({
           title: "문자 보내기",
