@@ -18,7 +18,7 @@ export class DatePipe implements PipeTransform {
     /**
      * 들어오는 데이터 형식 'ko-KR' : 2018. 8. 22. 오후 5:29:30
      */
-    let slicedDate = date.slice(12);
+    let slicedDate = date.slice(13);
     let splitedDate = slicedDate.split(":");
     let time = splitedDate[0] + ":" + splitedDate[1];
     return time;
