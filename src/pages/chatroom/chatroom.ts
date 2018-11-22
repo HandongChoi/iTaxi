@@ -7,6 +7,7 @@ import { DateProvider } from '../../providers/date/date';
 import { RoomsProvider } from '../../providers/rooms/rooms';
 import { PersonalInfoPage } from '../personal-info/personal-info';
 import { SMS } from '@ionic-native/sms';
+import { Clipboard } from '@ionic-native/clipboard'
 
 import { Http } from '@angular/http';
 
@@ -38,7 +39,8 @@ export class ChatRoomPage {
 
   constructor(public navCtrl: NavController, public af:AngularFireDatabase, public navParams: NavParams, public platform:Platform,
               public roomServices: RoomsProvider, public dateServices: DateProvider, public userServices: UsersProvider,
-              public alertCtrl: AlertController, public sms: SMS, public toastCtrl : ToastController, public http: Http) {
+              public alertCtrl: AlertController, public sms: SMS, public toastCtrl : ToastController, public http: Http,
+              public clipboard: Clipboard) {
     let backAction = platform.registerBackButtonAction(() => {
       this.navCtrl.pop();
       backAction();
@@ -371,5 +373,18 @@ export class ChatRoomPage {
     var prevMin = prevChat.getMinutes();
 
     return (nowDay == prevDay && nowHour == prevHour && nowMin == prevMin) ? true : false;
+  }
+
+  copyToClipboard(content) {
+    this.platform.ready();
+    if(this.platform.is('cordova')){
+      this.clipboard.copy(content);
+      let toast = this.toastCtrl.create({
+        message: "클립보드에 복사되었습니다.",
+        duration: 2000,
+        position: "bottom"
+      })
+      toast.present();
+    }
   }
 }
