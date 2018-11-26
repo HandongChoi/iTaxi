@@ -31,6 +31,7 @@ import { RoomsProvider } from '../providers/rooms/rooms';
 
 import { PipesModule } from '../pipes/pipes.module';
 import { SMS } from '@ionic-native/sms';
+import { Clipboard } from '@ionic-native/clipboard';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAUzjyDEOkbfvh3hU_t4wR4p3jXNq5lz3A",
@@ -83,7 +84,8 @@ export const firebaseConfig = {
     UsersProvider,
     RoomsProvider,
     SMS,
-    OneSignal
+    OneSignal,
+    Clipboard
   ]
 })
 export class AppModule {}
