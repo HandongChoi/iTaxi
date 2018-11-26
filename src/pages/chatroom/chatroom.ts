@@ -387,6 +387,4 @@ export class ChatRoomPage {
       toast.present();
     }
   }
-
-
 }
