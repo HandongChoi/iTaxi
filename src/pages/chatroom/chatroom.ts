@@ -7,7 +7,7 @@ import { DateProvider } from '../../providers/date/date';
 import { RoomsProvider } from '../../providers/rooms/rooms';
 import { PersonalInfoPage } from '../personal-info/personal-info';
 import { SMS } from '@ionic-native/sms';
-import { Clipboard } from '@ionic-native/clipboard'
+import { Clipboard } from '@ionic-native/clipboard';
 
 import { Http } from '@angular/http';
 
