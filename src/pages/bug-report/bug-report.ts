@@ -1,10 +1,11 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, Content, NavParams, Platform, AlertController, List } from 'ionic-angular';
+import { IonicPage, NavController, Content, NavParams, Platform, AlertController, List, ToastController } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { UsersProvider } from '../../providers/users/users';
 import { DateProvider } from '../../providers/date/date';
 import { RoomsProvider } from '../../providers/rooms/rooms';
 import { SMS } from '@ionic-native/sms';
+import { Clipboard } from '@ionic-native/clipboard';
 
 @IonicPage()
 @Component({
@@ -28,7 +29,7 @@ export class BugReportPage {
 
   constructor(public navCtrl: NavController, public af:AngularFireDatabase, public navParams: NavParams, public platform:Platform,
               public roomServices: RoomsProvider, public dateServices: DateProvider, public userServices: UsersProvider,
-              public alertCtrl: AlertController, public sms: SMS) {
+              public alertCtrl: AlertController, public sms: SMS, public toastCtrl : ToastController, public clipboard: Clipboard) {
     
   }
 
@@ -160,5 +161,18 @@ export class BugReportPage {
     }).then(() => {
       this.chatContent = "";
     });
+  }
+
+  copyToClipboard(content) {
+    this.platform.ready();
+    if(this.platform.is('cordova')){
+      this.clipboard.copy(content);
+      let toast = this.toastCtrl.create({
+        message: "클립보드에 복사되었습니다.",
+        duration: 2000,
+        position: "bottom"
+      })
+      toast.present();
+    }
   }
 }

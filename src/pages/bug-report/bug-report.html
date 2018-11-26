@@ -27,7 +27,7 @@
         <div class="msg-content">
           <!-- 디자인상으로 왼쪽 오른쪽 span태그의 위치가 달라져서 똑같은 태그 반복 -->
           <span *ngIf="chat.userID == userID">{{chat.dateTime | DatePipe}}</span>
-          <div class="msg-info" [ngClass]="{'notification': chat.userID == 'CRA'}">
+          <div class="msg-info" [ngClass]="{'notification': chat.userID == 'CRA'}" (press)="copyToClipboard(chat.content)">
             {{chat.content}}
           </div>
           <span *ngIf="chat.userID != 'CRA' && chat.userID != userID ">{{chat.dateTime | DatePipe}}</span>
