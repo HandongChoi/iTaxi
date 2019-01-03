@@ -29,10 +29,6 @@ export class PersonalInfoPage {
       accountBank: [this.userInfo['accountBank'], AccountBankValidator.isValid],
       accountNumber: [this.userInfo['accountNumber'], AccountNumberValidator.isValid]
     });
-    let backAction = platform.registerBackButtonAction(() => {
-      this.navCtrl.pop();
-      backAction();
-    }, 2)
   }
 
   updateUserInfo(){
