@@ -54,30 +54,35 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid class="mainGrid">
-    <ion-item-group *ngFor="let room of rooms | async | roomSort">
-      <!-- 현재는 지금 시간 이후이면서 방이 꽉 차지 않는 것만 보이게 해 놨다. -->
-      <ion-item-divider *ngIf="room.departDate + room.departTime > nowDate + nowTime " (click)="(!isEntered(room.participants) && !isAvailable(room)) || goChatroom(room)" class="line"
-      [ngClass]="{full: room.currentPeople >= room.capacity, exist: isEntered(room.participants)}">
-        <ion-row >
-          <ion-col col-3>
-            <p>{{this.dateServices.getShortDate(room.departDate)}}</p>
-            <p>{{room.departTime}}</p>  
-          </ion-col>
-          <ion-col col-7>
-            <p>{{room.depart}}</p>
-            <p *ngIf="room.transportType == 'taxi'">> {{room.arrive}}</p>
-            <p *ngIf="room.transportType == 'carpool'">> {{room.arrive}} ( {{room.price}}원 )</p>
-          </ion-col>
-          <ion-col col-2>
-            <p>{{room.currentPeople}} / {{room.capacity}}</p>
-            <p *ngIf="isEntered(room.participants)">참여중</p>
-            <p *ngIf="!isEntered(room.participants) && room.currentPeople >= room.capacity">참여불가</p>
-          </ion-col>
-        </ion-row>
-      </ion-item-divider>
-    </ion-item-group>
-  </ion-grid>
+  <div *ngIf="emptyData == true" >
+    <img src="assets/img/empty_data.png" class="mainGrid_empty"/>
+  </div>
+  <div *ngIf="emptyData == false">
+    <ion-grid class="mainGrid">
+      <ion-item-group *ngFor="let room of rooms | async | roomSort">
+        <!-- 현재는 지금 시간 이후이면서 방이 꽉 차지 않는 것만 보이게 해 놨다. -->
+        <ion-item-divider *ngIf="room.departDate + room.departTime > nowDate + nowTime " (click)="(!isEntered(room.participants) && !isAvailable(room)) || goChatroom(room)" class="line"
+        [ngClass]="{full: room.currentPeople >= room.capacity, exist: isEntered(room.participants)}">
+          <ion-row >
+            <ion-col col-3>
+              <p>{{this.dateServices.getShortDate(room.departDate)}}</p>
+              <p>{{room.departTime}}</p>  
+            </ion-col>
+            <ion-col col-7>
+              <p>{{room.depart}}</p>
+              <p *ngIf="room.transportType == 'taxi'">> {{room.arrive}}</p>
+              <p *ngIf="room.transportType == 'carpool'">> {{room.arrive}} ( {{room.price}}원 )</p>
+            </ion-col>
+            <ion-col col-2>
+              <p>{{room.currentPeople}} / {{room.capacity}}</p>
+              <p *ngIf="isEntered(room.participants)">참여중</p>
+              <p *ngIf="!isEntered(room.participants) && room.currentPeople >= room.capacity">참여불가</p>
+            </ion-col>
+          </ion-row>
+        </ion-item-divider>
+      </ion-item-group>
+    </ion-grid>
+  </div>
 
   <ion-fab right bottom>
     <button color="dark" ion-fab (click)="makeRoom()"><ion-icon name="add"></ion-icon></button>
