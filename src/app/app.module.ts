@@ -21,6 +21,7 @@ import { SettingPageModule } from '../pages/setting/setting.module';
 import { MakeRoomPageModule } from '../pages/makeRoom/makeRoom.module'
 import { SignupPageModule } from '../pages/signup/signup.module';
 import { RideHistoryPageModule } from '../pages/ride-history/ride-history.module';
+import { ModalPageModule } from '../pages/modal/modal.module';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { HttpModule } from '@angular/http';
@@ -69,7 +70,8 @@ export const firebaseConfig = {
     MainPageModule,
     MakeRoomPageModule,
     HttpModule,
-    PipesModule
+    PipesModule,
+    ModalPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

@@ -68,10 +68,14 @@
               <p>{{this.dateServices.getShortDate(room.departDate)}}</p>
               <p>{{room.departTime}}</p>  
             </ion-col>
-            <ion-col col-7>
+            <ion-col col-4>
               <p>{{room.depart}}</p>
               <p *ngIf="room.transportType == 'taxi'">> {{room.arrive}}</p>
               <p *ngIf="room.transportType == 'carpool'">> {{room.arrive}} ( {{room.price}}원 )</p>
+            </ion-col>
+            <ion-col col-3>
+              <p><img src="assets/img/carrier-s.png">{{room['carrierS']}}개</p>
+              <p><img src="assets/img/carrier-l.png">{{room['carrierL']}}개</p>
             </ion-col>
             <ion-col col-2>
               <p>{{room.currentPeople}} / {{room.capacity}}</p>

@@ -8,6 +8,7 @@ import { DatePickerProvider, DatePickerOption } from 'ionic2-date-picker';
 import { UsersProvider } from '../../providers/users/users';
 import { DateProvider } from '../../providers/date/date';
 import { RoomsProvider } from '../../providers/rooms/rooms';
+import { ModalPage } from '../modal/modal';
 
 @IonicPage()
 @Component({
@@ -85,37 +86,33 @@ export class ListPage {
 
   goChatroom(room) {
     if (!this.isEntered(room['participants'])) { //처음 참여
-      let alert = this.alertCtrl.create({
-        title: '참여 확인',
-        message: `<br>일시 : ${room['departDate']}(${this.dateServices.getKToday(room['departDate'])})
-                  <br>시간 : ${room['departTime']}
-                  <br>장소 : ${room['depart']} -> ${room['arrive']}`,
-        buttons: [{
-          text: "Cancel",
-          role: "cancel"
-        }, {
-          text: "OK",
-          handler: () => {
-            let members:Array<any> = room['participants'];
-            members.push(this.userID);
-            room['participants'] = members;
-            room['currentPeople']++;
+      
+      var modalPage = this.modalCtrl.create('ModalPage', {room: room});
+      modalPage.onDidDismiss(data => {
+        if(data){
+          let members:Array<any> = room['participants'];
+          members.push(this.userID);
+          room['participants'] = members;
+          room['currentPeople']++;
+          room['carrierS'] += data['carrierS'];
+          room['carrierL'] += data['carrierL']; 
 
-            //들어가는 방 정보 업데이트
-            this.af.object(`/${room.transportType}Chatrooms/${room.departDate}/${room.$key}`).set(room);
-            //타고 있던 사람들 rideHistory 업데이트
-            members.forEach(studentID => {
+          //들어가는 방 정보 업데이트
+          this.af.object(`/${room.transportType}Chatrooms/${room.departDate}/${room.$key}`).set(room);
+          //타고 있던 사람들 rideHistory 업데이트
+          members.forEach(studentID => {
+            if(this.userID == studentID){
               this.af.object(`/rideHistory/${studentID}/${room.$key}`).set(room);
-            });
-            this.navCtrl.push(ChatRoomPage, {room: room, isFirst: true});
+              this.af.object(`/rideHistory/${studentID}/${room.$key}`).update({carrierS: data['carrierS'], carrierL: data['carrierL']});
+            } else{
+              this.af.object(`/rideHistory/${studentID}/${room.$key}`).update({participants: room['participants'], currentPeople: room['currentPeople']});
+            }          
+          });
+          this.navCtrl.push(ChatRoomPage, {room: room, isFirst: true});
           }
-        }],
       });
-      alert.present();
-      let dismissAlert = this.platform.registerBackButtonAction(() => {
-        alert.dismiss();
-        dismissAlert();
-      }, 3)
+      modalPage.present();
+
     } else{ // 참여중
       this.navCtrl.push(ChatRoomPage, {room: room});
     }

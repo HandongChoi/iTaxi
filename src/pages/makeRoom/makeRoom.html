@@ -79,16 +79,45 @@
   </div>
 
   <div class="wrapper" id="carpool" *ngIf="transportType == 'carpool'">
-      <ion-row>
-        <span col-6 class="label">탑승모집인원</span>
-        <span col-6 class="label">가격</span>
-      </ion-row>
-      <ion-row>
-        <span col-5 class="cont"><input type="number" id="people" [(ngModel)]="maxPeople">명</span>
-        <span col-1></span>
-        <span col-6 class="cont">&#8361;<input type="number" id="money" [(ngModel)]="price"></span>
-      </ion-row>
-    </div>
+    <ion-row>
+      <span col-6 class="label">탑승모집인원</span>
+      <span col-6 class="label">가격</span>
+    </ion-row>
+    <ion-row>
+      <span col-5 class="cont"><input type="number" id="people" [(ngModel)]="maxPeople">명</span>
+      <span col-1></span>
+      <span col-6 class="cont">&#8361;<input type="number" id="money" [(ngModel)]="price"></span>
+    </ion-row>
+  </div>
+
+  <div class="wrapper" id="carrier">
+    <ion-row>
+      <span class="label">캐리어 추가</span>
+    </ion-row>
+    <ion-row>
+      <span class="cont" style="padding-top: 10px; padding-bottom: 15px;">각 방에 최대 3개의 캐리어만 추가 가능</span>
+    </ion-row>
+    <ion-row>
+      <span col-1></span>
+      <span col-1><img src="assets/img/carrier-s.png"></span>
+      <span col-1></span>
+      <span col-2 [ngClass]="{'carrierNum': carrierS!=0}" (click)="setCarrierNum(0, 'S')"><img src="assets/img/0.png"></span>
+      <span col-2 [ngClass]="{'carrierNum': carrierS!=1}" (click)="setCarrierNum(1, 'S')"><img src="assets/img/1.png"></span>
+      <span col-2 [ngClass]="{'carrierNum': carrierS!=2}" (click)="setCarrierNum(2, 'S')"><img src="assets/img/2.png"></span>
+      <span col-2 [ngClass]="{'carrierNum': carrierS!=3}" (click)="setCarrierNum(3, 'S')"><img src="assets/img/3.png"></span>
+      <span col-2></span>
+    </ion-row>
+    <ion-row>
+      <span col-1></span>
+      <span col-1><img src="assets/img/carrier-l.png"></span>
+      <span col-1></span>
+      <span col-2 [ngClass]="{'carrierNum': carrierL!=0}" (click)="setCarrierNum(0, 'L')"><img src="assets/img/0.png"></span>
+      <span col-2 [ngClass]="{'carrierNum': carrierL!=1}" (click)="setCarrierNum(1, 'L')"><img src="assets/img/1.png"></span>
+      <span col-2 [ngClass]="{'carrierNum': carrierL!=2}" (click)="setCarrierNum(2, 'L')"><img src="assets/img/2.png"></span>
+      <span col-2 [ngClass]="{'carrierNum': carrierL!=3}" (click)="setCarrierNum(3, 'L')"><img src="assets/img/3.png"></span>
+      <span col-2></span>
+    </ion-row>
+  </div>
 
   <div id="room-btn">
     <button ion-button round (click)="makeRoom()">방만들기</button>
