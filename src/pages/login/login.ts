@@ -53,33 +53,9 @@ export class LoginPage {
                               isNoti: true,
                             } 
     var login = {"id": id, "password": password}
-    if(id == "박지민" && password == "jimin0725"){
-      this.af.object(`/userProfile/21500296`, { preserveSnapshot: true }).subscribe( (data) => {
-        this.authProvider.loginUser('21500296').then( ()=> this.loading.dismiss());        
-      });
-    }else if(id == "하리보81" && password == "tyty7237060!"){
-      this.af.object(`/userProfile/21800209`, { preserveSnapshot: true }).subscribe( (data) => {
-        this.authProvider.loginUser('21800209').then( ()=> this.loading.dismiss());        
-      });
-    }else if(id == "윤정현" && password == "dbswjdgus29!"){
-      this.af.object(`/userProfile/21600468`, { preserveSnapshot: true }).subscribe( (data) => {
-        this.authProvider.loginUser('21600468').then( ()=> this.loading.dismiss());        
-      });
-    }else if(id == "김진현" && password == "pas1418kal"){
-      this.af.object(`/userProfile/21400210`, { preserveSnapshot: true }).subscribe( (data) => {
-        this.authProvider.loginUser('21400210').then( ()=> this.loading.dismiss());        
-      });
-    }else if(id == "멍두니" && password == "audgwnsg2"){
-      this.af.object(`/userProfile/21500066`, { preserveSnapshot: true }).subscribe( (data) => {
-        this.authProvider.loginUser('21500066').then( ()=> this.loading.dismiss());        
-      });
-    }else if(id == "손가경" && password == "123123"){
-      this.af.object(`/userProfile/21500351`, { preserveSnapshot: true }).subscribe( (data) => {
-        this.authProvider.loginUser('21500351').then( ()=> this.loading.dismiss());        
-      });
-    }else if(id == "유혜영" && password == "0764"){
-      this.af.object(`/userProfile/21500439`, { preserveSnapshot: true }).subscribe( (data) => {
-        this.authProvider.loginUser('21500439').then( ()=> this.loading.dismiss());        
+    if(id == "tester" && password == "tester"){
+      this.af.object(`/userProfile/12345678`, { preserveSnapshot: true }).subscribe( (data) => {
+        this.authProvider.loginUser('12345678').then( ()=> this.loading.dismiss());        
       });
     }else{
       //헤더 부분에다가 utf-8 적용해서 한글도 보낼 수 있도록 해야된다.
