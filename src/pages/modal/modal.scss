@@ -19,13 +19,13 @@ page-modal {
   font-family: "Noto Sans", "Noto Sans CJK KR";
 
   .wrapper {
-    border-bottom-left-radius: 6px 8px;
-    border-bottom-right-radius: 6px 8px;
-    border-bottom: 2px solid #C9C9CA;
+    //border-bottom-left-radius: 6px 8px;
+    //border-bottom-right-radius: 6px 8px;
+    //border-bottom: 2px solid #C9C9CA;
 
     display: flex;
     flex-direction: column;
-    margin-bottom: 25px;
+    margin-bottom: 8px;
     font-weight: bold;
     font-size: 18px;
 
@@ -44,7 +44,7 @@ page-modal {
       // font-family: "OpenSans-2";
       font-family: "Noto Sans", "Noto Sans CJK KR";
       color: $front-font;
-      padding: 10px;
+      padding: 9px;
     }
   }
 
@@ -52,9 +52,9 @@ page-modal {
     .carrierNum {
       filter: brightness(1.8) grayscale(1) opacity(.7);
 
-      // &:hover {
-      //   filter: brightness(1.2) grayscale(.5) opacity(.9);
-      // }
+      &:hover {
+        filter: brightness(1.2) grayscale(.5) opacity(.9);
+      }
     }
     img {
       height: 40px;
