@@ -246,8 +246,13 @@ export class ChatRoomPage {
     let index = room['participants'].indexOf(this.userServices.userInfo['studentID']);
     room['participants'].splice(index,1);
     room['currentPeople']--;
-    room['carrierS'] -= this.userCarrierS;
-    room['carrierL'] -= this.userCarrierL;     
+
+    //ver1.x과 ver2.0에서 에러날 것에 관한 디펜스 코드. 앱 업데이트가 된다면 아래에 주석처리한걸 풀고 이걸 지워야된다.
+    room['carrierS'] = isNaN(this.userCarrierS) ? room['carrierS'] : room['carrierS'] - this.userCarrierS; 
+    room['carrierL'] = isNaN(this.userCarrierL) ? room['carrierL'] : room['carrierL'] - this.userCarrierL;
+
+    // room['carrierS'] -= this.userCarrierS;
+    // room['carrierL'] -= this.userCarrierL;     
   }
 
   roomUpdate(updatedRoom, roomKey, msg){

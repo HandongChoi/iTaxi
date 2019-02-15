@@ -94,8 +94,13 @@ export class ListPage {
           members.push(this.userID);
           room['participants'] = members;
           room['currentPeople']++;
-          room['carrierS'] += data['carrierS'];
-          room['carrierL'] += data['carrierL']; 
+          
+          // room['carrierS'] += data['carrierS'];
+          // room['carrierL'] += data['carrierL']; 
+
+          //ver1.x과 ver2.0에서 에러날 것에 관한 디펜스 코드. 앱 업데이트가 된다면 위에 주석처리한걸 풀고 이걸 지워야된다.
+          room['carrierS'] = isNaN(room['carrierS']) ? data['carrierS'] : room['carrierS'] + data['carrierS'] 
+          room['carrierL'] = isNaN(room['carrierL']) ? data['carrierL'] : room['carrierL'] + data['carrierL'] 
 
           //들어가는 방 정보 업데이트
           this.af.object(`/${room.transportType}Chatrooms/${room.departDate}/${room.$key}`).set(room);
