@@ -49,14 +49,16 @@ export class BugReportPage {
     this.content.resize();
   }
 
-  oneFunction(){
+  //기존 DB에 있는 것들을 필드를 추가 하거나 수정할 때 사용
+  fieldModify(){
     console.log('click')
     var count = 0;
-    var date = '2018-09-26';
+    var date = '2019-02-16';
     var roomName = 'taxiChatrooms';
     this.af.list(`/${roomName}/${date}`).subscribe( room => {
       room.forEach( data => {
-        data['fromTo'] = data['depart'] + '>' + data['arrive'];
+        data['carrierS'] = 0;
+        data['carrierL'] = 0;
         this.af.object(`/${roomName}/${date}/${data.$key}`).set(data);
       })
       count = count + 1;
@@ -64,6 +66,7 @@ export class BugReportPage {
     })
   }
 
+  //수작업으로 아이디 만들때 썼던 함수
   secretFunction(studentID: string, name: string){
     var userInfo: Object = {
       studentID: studentID,
