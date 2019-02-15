@@ -62,7 +62,7 @@ export class MakeRoomPage {
                "출발날짜 : " + this.bookingDate + "(" + this.dateServices.getKToday(this.bookingDate) + ")" + "<br>" + 
                "출발시간 : " + this.bookingTime + "<br>" +
                "탑승모집인원 : " + this.maxPeople + "명" + "<br>" +
-               "캐리어 갯수 : " + "S " + this.carrierS + "개 / L " + this.carrierL + "개" + "<br>"
+               "본인 캐리어 갯수 : " + "S " + this.carrierS + "개 / L " + this.carrierL + "개" + "<br>"
               
     if(this.transportType == 'carpool'){ this.msg += `가격 : ${this.price}원<br>`}
     
