@@ -141,15 +141,20 @@ export class MakeRoomPage {
   setDestinationDefault(){ this.selectDestination = {key:"포항역", value:""}; }
   swapPlace(){ [this.selectDeparture, this.selectDestination] = [this.selectDestination, this.selectDeparture]; }
   setPeople(num) { this.maxPeople = String(num); }
-  setCarrierNum(num, size){
-    if(size == 'S'){
-      if(num + this.carrierL < 4){
-        this.carrierS = num;
-      }
+  carrierCapacityCheck(carrier, carrierSize){
+    var carrierCapacity = 3;
+    var sumOfCarrier = carrierSize == 'S' ?  carrier + this.carrierL : this.carrierS + carrier; 
+    if(sumOfCarrier <= carrierCapacity){
+      carrierSize == 'S' ? this.carrierS = carrier : this.carrierL = carrier;
     }else{
-      if(num + this.carrierS < 4){
-        this.carrierL = num;
-      }
-    }   
+      let alert = this.alertCtrl.create({
+        message: "캐리어는 최대 3개만 차에 실을 수 있습니다.",
+        buttons: [{
+          text: '확인',
+          handler: () => {}
+        }]
+      });
+      alert.present();
+    }
   }
 }

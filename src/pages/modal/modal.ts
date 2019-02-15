@@ -1,12 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
-
-/**
- * Generated class for the ModalPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { IonicPage, NavController, NavParams, ViewController, AlertController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -25,12 +18,8 @@ export class ModalPage {
   carrierS: number = 0;
   carrierL: number = 0;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl : ViewController, public alertCtrl: AlertController) {
   }
-
-  // ionViewDidLoad() {
-  //   console.log('ionViewDidLoad ModalPage');
-  // }
 
   ionViewWillEnter() {
     this.room = this.navParams.get('room');
@@ -50,15 +39,20 @@ export class ModalPage {
     this.viewCtrl.dismiss();
   }
 
-  setCarrierNum(num, size){
-    if(size == 'S'){
-      if(num + this.carrierL + this.currentCarrierS + this.currentCarrierL < 4){
-        this.carrierS = num;
-      }
+  carrierCapacityCheck(carrier, carrierSize){
+    var carrierCapacity = 3;
+    var sumOfCarrier = carrierSize == 'S' ?  carrier + this.carrierL : this.carrierS + carrier; 
+    if(sumOfCarrier <= carrierCapacity){
+      carrierSize == 'S' ? this.carrierS = carrier : this.carrierL = carrier;
     }else{
-      if(num + this.carrierS + this.currentCarrierS + this.currentCarrierL < 4){
-        this.carrierL = num;
-      }
-    }   
+      let alert = this.alertCtrl.create({
+        message: "캐리어는 최대 3개만 차에 실을 수 있습니다.",
+        buttons: [{
+          text: '확인',
+          handler: () => {}
+        }]
+      });
+      alert.present();
+    }
   }
 }

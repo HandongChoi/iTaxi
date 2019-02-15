@@ -63,3 +63,8 @@ cd /Users/sam-koh/Library/Android/sdk/build-tools/27.0.3/
 ./zipalign -v -p 4 android-release-unsigned.apk iTaxi.apk
 ./apksigner sign —ks iTaxi.jks iTaxi.apk 
 ./apksigner verify —verbose iTaxi.apk
+
+* 안드로이드 배포(Windows 환경 기준)
+# android studio와 jdk를 설치해야한다.
+# 안드 스튜디오를 설치 후에는 프로그램 시작후 아래 configuration에서 sdk manager로 가고 v4.4(KiKat)이상 다 설치하도록 한다.
+# 설치 후 JAVA_HOME, ANDROID_HOME의 환경 변수 설정을 해주어야한다. 제어판 -> 시스템 -> 고급 시스템 설정 -> 환경변수 (이 정도는 java 환경변수 설정, android sdk 환경변수 설정에 관해 검색해봐라.)

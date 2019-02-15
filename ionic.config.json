@@ -1,0 +1,8 @@
+{
+    "name": "iTaxi",
+    "integrations": {
+      "cordova": {}
+    },
+    "type": "ionic-angular",
+    "id": "53cfe3dd"
+  }
