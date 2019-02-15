@@ -32,9 +32,6 @@ export class SettingPage {
     this.content.resize();
   }
 
-  ionViewDidLoad() { 
-    // console.log('ionViewDidLoad SettingPage'); 
-  }
   NotiToggle(){ this.af.object(`/userProfile/${this.user['studentID']}`).update({ isNoti: this.isNotiToggled }); }
   PushToggle(){ this.af.object(`/userProfile/${this.user['studentID']}`).update({ isPush: this.isPushToggled }); }
   OpenInfoPage() { this.navCtrl.push(PersonalInfoPage); }

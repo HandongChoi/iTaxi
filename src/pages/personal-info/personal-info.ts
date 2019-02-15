@@ -70,6 +70,5 @@ export class PersonalInfoPage {
     alert.present();
   }
 
-  // ionViewDidLoad() { console.log('ionViewDidLoad PersonalInfoPage'); }
   dismiss(){ this.viewCtrl.dismiss() }
 }
