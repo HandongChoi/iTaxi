@@ -1,0 +1,78 @@
+<!--
+  Generated template for the ModalPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title class="top-title">참여하기</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding class="guide-modal">
+  <div class="overlay" (click)="dismiss()"></div>
+  <div class="wrapper">
+    <ion-row>
+      <span class="label">일시</span>
+    </ion-row>
+    <ion-row>
+      <span class="cont">{{departDate}}</span>
+    </ion-row>
+    <ion-row>
+      <span class="label">시간</span>
+    </ion-row>
+    <ion-row>
+      <span class="cont">{{departTime}}</span>
+    </ion-row>
+    <ion-row>
+      <span class="label">장소</span>
+    </ion-row>
+    <ion-row>
+      <span class="cont">{{depart}} -> {{arrive}}</span>
+    </ion-row>
+    <ion-row>
+      <span class="label">캐리어</span>
+    </ion-row>
+    <ion-row>
+      <span class="cont">S {{currentCarrierS}}개 / L {{currentCarrierL}}개</span>
+    </ion-row>
+  </div>
+  
+  <div class="wrapper" id="carrier">
+    <ion-row>
+      <span class="label">캐리어 추가</span>
+    </ion-row>
+    <ion-row>
+      <span class="cont">각 방에 최대 3개의 캐리어만 추가 가능</span>
+    </ion-row>
+    <ion-row>
+      <span col-1></span>
+      <span col-1><img src="assets/img/carrier-s.png"></span>
+      <span col-1></span>
+      <span col-2 [ngClass]="{'carrierNum': carrierS!=0}" (click)="setCarrierNum(0, 'S')"><img src="assets/img/0.png"></span>
+      <span col-2 [ngClass]="{'carrierNum': carrierS!=1}" (click)="setCarrierNum(1, 'S')"><img src="assets/img/1.png"></span>
+      <span col-2 [ngClass]="{'carrierNum': carrierS!=2}" (click)="setCarrierNum(2, 'S')"><img src="assets/img/2.png"></span>
+      <span col-2 [ngClass]="{'carrierNum': carrierS!=3}" (click)="setCarrierNum(3, 'S')"><img src="assets/img/3.png"></span>
+      <span col-2></span>
+    </ion-row>
+    <ion-row>
+      <span col-1></span>
+      <span col-1><img src="assets/img/carrier-l.png"></span>
+      <span col-1></span>
+      <span col-2 [ngClass]="{'carrierNum': carrierL!=0}" (click)="setCarrierNum(0, 'L')"><img src="assets/img/0.png"></span>
+      <span col-2 [ngClass]="{'carrierNum': carrierL!=1}" (click)="setCarrierNum(1, 'L')"><img src="assets/img/1.png"></span>
+      <span col-2 [ngClass]="{'carrierNum': carrierL!=2}" (click)="setCarrierNum(2, 'L')"><img src="assets/img/2.png"></span>
+      <span col-2 [ngClass]="{'carrierNum': carrierL!=3}" (click)="setCarrierNum(3, 'L')"><img src="assets/img/3.png"></span>
+      <span col-2></span>
+    </ion-row>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-buttons end>
+    <button ion-button round color="light" (click)="dismiss()">Cancel</button>
+    <button ion-button round color="light" (click)="closeModal()">OK</button>
+  </ion-buttons>
+</ion-footer>

@@ -30,6 +30,9 @@ export class MakeRoomPage {
   bookingDate: string = this.nowDate;
   bookingTime: string = this.nowTime;
 
+  carrierS: number = 0;
+  carrierL: number = 0;
+
   min: string = this.dateServices.min;
   max: string = this.dateServices.max;
 
@@ -58,7 +61,8 @@ export class MakeRoomPage {
                "도착지 : " + this.arrive + "<br>" + 
                "출발날짜 : " + this.bookingDate + "(" + this.dateServices.getKToday(this.bookingDate) + ")" + "<br>" + 
                "출발시간 : " + this.bookingTime + "<br>" +
-               "탑승모집인원 : " + this.maxPeople + "명" + "<br>" 
+               "탑승모집인원 : " + this.maxPeople + "명" + "<br>" +
+               "본인 캐리어 갯수 : " + "S " + this.carrierS + "개 / L " + this.carrierL + "개" + "<br>"
               
     if(this.transportType == 'carpool'){ this.msg += `가격 : ${this.price}원<br>`}
     
@@ -119,6 +123,8 @@ export class MakeRoomPage {
                                     transportType: this.transportType,
                                     lastChatDate: this.nowDate,
                                     participants: [this.userID],
+                                    carrierS: this.carrierS,
+                                    carrierL: this.carrierL
                                   };
                 if(this.transportType == 'carpool'){ room['price'] = (this.price == null) ? 0 : this.price; }                
                 let chatRoomUrl = this.af.list(`/${room['transportType']}Chatrooms/${this.bookingDate}`).push(room);
@@ -135,4 +141,15 @@ export class MakeRoomPage {
   setDestinationDefault(){ this.selectDestination = {key:"포항역", value:""}; }
   swapPlace(){ [this.selectDeparture, this.selectDestination] = [this.selectDestination, this.selectDeparture]; }
   setPeople(num) { this.maxPeople = String(num); }
+  setCarrierNum(num, size){
+    if(size == 'S'){
+      if(num + this.carrierL < 4){
+        this.carrierS = num;
+      }
+    }else{
+      if(num + this.carrierS < 4){
+        this.carrierL = num;
+      }
+    }   
+  }
 }

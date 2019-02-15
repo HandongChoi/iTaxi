@@ -107,6 +107,20 @@ page-make-room {
       }
     }
   }
+
+  #carrier {
+    .carrierNum {
+      filter: brightness(1.8) grayscale(1) opacity(.7);
+
+      // &:hover {
+      //   filter: brightness(1.2) grayscale(.5) opacity(.9);
+      // }
+    }
+    img {
+      height: 40px;
+      justify-content: center;
+    }
+  }
   
   #room-btn {
     display: flex;

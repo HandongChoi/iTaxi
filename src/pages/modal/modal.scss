@@ -1,0 +1,64 @@
+page-modal {
+  padding: 30px;
+  background: rgba(0,0,0,0.5);
+
+  .item-cover {
+    height: 0;
+    width: 0;
+  }
+
+  .guide-modal .modal{
+    $modal-inset-min-width:0;
+    $modal-inset-min-height-small:0;
+    display: flex;
+    height: auto;
+}
+
+  $back-font: color($colors, semi-gray, base);
+  $front-font: color($colors, primary, base);
+  font-family: "Noto Sans", "Noto Sans CJK KR";
+
+  .wrapper {
+    border-bottom-left-radius: 6px 8px;
+    border-bottom-right-radius: 6px 8px;
+    border-bottom: 2px solid #C9C9CA;
+
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+    font-weight: bold;
+    font-size: 18px;
+
+    ion-row {
+      display: flex;
+      flex-direction: row;
+      align-content: center;
+      justify-content: center;
+    }
+
+    .label {
+      color: $back-font;
+    }
+
+    .cont {
+      // font-family: "OpenSans-2";
+      font-family: "Noto Sans", "Noto Sans CJK KR";
+      color: $front-font;
+      padding: 10px;
+    }
+  }
+
+  #carrier {
+    .carrierNum {
+      filter: brightness(1.8) grayscale(1) opacity(.7);
+
+      // &:hover {
+      //   filter: brightness(1.2) grayscale(.5) opacity(.9);
+      // }
+    }
+    img {
+      height: 40px;
+      justify-content: center;
+    }
+  }
+}
