@@ -65,6 +65,8 @@ page-list {
   
       p {
         color: black;
+        height: 20px;
+        vertical-align: middle;
       }
 
       &.full {
@@ -82,7 +84,7 @@ page-list {
       }
 
       img {
-        height: 16px
+        height: 20px;
       }
     }
   }

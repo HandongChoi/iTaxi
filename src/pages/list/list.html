@@ -73,9 +73,13 @@
               <p *ngIf="room.transportType == 'taxi'">> {{room.arrive}}</p>
               <p *ngIf="room.transportType == 'carpool'">> {{room.arrive}} ( {{room.price}}원 )</p>
             </ion-col>
-            <ion-col col-3>
-              <p><img src="assets/img/carrier-s.png">{{room['carrierS']}}개</p>
-              <p><img src="assets/img/carrier-l.png">{{room['carrierL']}}개</p>
+            <ion-col col-1>
+              <p><img src="assets/img/carrier-s.png"> </p>
+              <p><img src="assets/img/carrier-l.png"> </p>
+            </ion-col>
+            <ion-col col-2>
+              <p>{{room['carrierS']}}개</p>
+              <p>{{room['carrierL']}}개</p>
             </ion-col>
             <ion-col col-2>
               <p>{{room.currentPeople}} / {{room.capacity}}</p>
