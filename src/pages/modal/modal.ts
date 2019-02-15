@@ -46,7 +46,7 @@ export class ModalPage {
       carrierSize == 'S' ? this.carrierS = carrier : this.carrierL = carrier;
     }else{
       let alert = this.alertCtrl.create({
-        message: "캐리어는 최대 3개만 차에 실을 수 있습니다.",
+        message: "트렁크에 캐리어는 최대 3개만 실을 수 있어요 T.T",
         buttons: [{
           text: '확인',
           handler: () => {}
