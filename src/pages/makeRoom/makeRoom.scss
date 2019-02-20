@@ -109,7 +109,7 @@ page-make-room {
   }
 
   #carrier {
-    .carrierNum {
+    .carrier-number {
       filter: brightness(1.8) grayscale(1) opacity(.7);
 
       &:hover {
