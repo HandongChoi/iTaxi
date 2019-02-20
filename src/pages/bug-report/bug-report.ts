@@ -53,7 +53,7 @@ export class BugReportPage {
   fieldModify(){
     console.log('click')
     var count = 0;
-    var date = '2019-02-16';
+    var date = '2019-02-15';
     var roomName = 'taxiChatrooms';
     this.af.list(`/${roomName}/${date}`).subscribe( room => {
       room.forEach( data => {

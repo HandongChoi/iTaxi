@@ -10,7 +10,7 @@
   <ion-grid id="room-info">
     cra.handong.service@gmail.com<br>위의 메일로도 신고 받습니다.
   </ion-grid>
-  <!-- <button (click)="fieldModify()">
+  <!-- <button (click)="secretFunction(12345678, 'tester')">
     Secret Function
   </button> -->
 </ion-header>
@@ -18,21 +18,31 @@
 <ion-content>
   <ion-list>
     <div class="message-wrap" *ngFor="let chat of chats | async as Chats; let i = index;">
-      <!-- 밑에 주석처리 되어있는 부분이 내가 말한 내용이면 오른쪽, 상대가 말한 내용이면 왼쪽 선택하게한다. -->
-      <div class="message" [ngClass]="chat.userID == userID ? 'right' : (chat.userID != 'CRA' ? 'left' : 'testing')">
-        <!-- 한 유저의 연속된 메시지는 첫 메시지만 이름 띄움 -->
-        <div class="user-info" *ngIf="chat.userID != 'CRA' && (i == 0 ? true : Chats[i-1].userID != chat.userID)">
-          {{ chat.userName }}
+      <div *ngIf="chat.userID == '21000763';else elseBlock">
+        <div class="manager-name" *ngIf="chat.userID != 'CRA' && (i == 0 ? true : Chats[i-1].userID != chat.userID)">
+          <img src="assets/img/crown_gold.png" alt="CRA">CRA<img src="assets/img/crown_gold.png" alt="CRA">
         </div>
-        <div class="msg-content">
-          <!-- 디자인상으로 왼쪽 오른쪽 span태그의 위치가 달라져서 똑같은 태그 반복 -->
-          <span *ngIf="chat.userID == userID">{{chat.dateTime | DatePipe}}</span>
-          <div class="msg-info" [ngClass]="{'notification': chat.userID == 'CRA'}" (press)="copyToClipboard(chat.content)">
-            {{chat.content}}
-          </div>
-          <span *ngIf="chat.userID != 'CRA' && chat.userID != userID ">{{chat.dateTime | DatePipe}}</span>
+        <div class="manager-content">
+          {{chat.content}}
         </div>
       </div>
+      <ng-template #elseBlock>
+        <!-- 밑에 주석처리 되어있는 부분이 내가 말한 내용이면 오른쪽, 상대가 말한 내용이면 왼쪽 선택하게한다. -->
+        <div class="message" [ngClass]="chat.userID == userID ? 'right' : (chat.userID != 'CRA' ? 'left' : 'testing')" *ngIf="chat.userID != '21000763'">
+          <!-- 한 유저의 연속된 메시지는 첫 메시지만 이름 띄움 -->
+          <div class="user-info" *ngIf="chat.userID != 'CRA' && (i == 0 ? true : Chats[i-1].userID != chat.userID)">
+            {{ chat.userName }}
+          </div>
+          <div class="msg-content">
+            <!-- 디자인상으로 왼쪽 오른쪽 span태그의 위치가 달라져서 똑같은 태그 반복 -->
+            <span *ngIf="chat.userID == userID">{{chat.dateTime | DatePipe}}</span>
+            <div class="msg-info" [ngClass]="{'notification': chat.userID == 'CRA'}" (press)="copyToClipboard(chat.content)">
+              {{chat.content}}
+            </div>
+            <span *ngIf="chat.userID != 'CRA' && chat.userID != userID ">{{chat.dateTime | DatePipe}}</span>
+          </div>
+        </div>
+      </ng-template>
     </div>
   </ion-list>
 </ion-content>
