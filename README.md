@@ -5,6 +5,8 @@
 3. iTaxi 폴더 안에서 npm install(우리 프로젝트에 있는 모듈들을 다운 받아야 실행이된다.)
 4. ionic serve -c(이걸로 기존 프로젝트가 정상적으로 작동하는지 확인하기)
 
+------
+
 ### 안드로이드 배포(Windows 환경 기준)
 
 1. android studio와 jdk를 설치해야한다.
@@ -36,6 +38,8 @@
 12. 로그인 후 왼쪽 앱 버전을 클릭 후 프로덕션 관리를 클릭한다.
 13. 버전 수정 혹은 새 버전 출시를 눌러서 진행 하면 끝!
 
+------
+
 ### 웹 업데이트 방법
 
 1. ionic serve를 한다.(www 폴더 내용을 빌딩하는 과정)
@@ -52,6 +56,8 @@
 - etc/apache2/에 설정파일들이 있다.
 - 경로에 관한 것은 apache2.conf파일과 sites-enabled/000-default.conf 파일에서 수정하면된다.
 - 경로를 수정한 후에는 sudo service apache2 restart로 서버가 경로 변경사항을 인지할 수 있도록 한다.
+
+------
 
 ### 각 페이지에 관한 접근 경로
 - Main 접근 경로 1) Login 2) Signup 3) Appcomponent by auth
