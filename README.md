@@ -68,3 +68,27 @@ cd /Users/sam-koh/Library/Android/sdk/build-tools/27.0.3/
 # android studio와 jdk를 설치해야한다.
 # 안드 스튜디오를 설치 후에는 프로그램 시작후 아래 configuration에서 sdk manager로 가고 v4.4(KiKat)이상 다 설치하도록 한다.
 # 설치 후 JAVA_HOME, ANDROID_HOME의 환경 변수 설정을 해주어야한다. 제어판 -> 시스템 -> 고급 시스템 설정 -> 환경변수 (이 정도는 java 환경변수 설정, android sdk 환경변수 설정에 관해 검색해봐라.)
+# 안드 설치 할 때 ANDROID_HOME에 관한 sdk폴더 위치를 잘 잡아야하고 경로에 한글이 들어갈 수 없으니 애초에 윈도우 로그인 계정을 영어로 하던지 다른 경로에 설치하고 기억을 하던지해라.
+# ionic cordova build android --release (release꼭 붙여야한다. debug용으로 빌드하면 아래 과정에서 실패나옴.)
+# cd C:\Users\Public\Android\sdk\build-tools\28.0.3 (이거는 위에서 말한 sdk 위치에 따라 달라진다.)
+# ./zipalign -v -p 4 android-release-unsigned.apk iTaxi.apk
+# ./apksigner sign —ks iTaxi.jks iTaxi.apk (이때 비밀번호 쳐라고 나오는데 우주최강206 하면 된다.)
+# ./apksigner verify —verbose iTaxi.apk
+# https://developer.android.com/distribute/console/?hl=ko 여기에 cra.handong.service로 접속하고 비밀번호는 전통 그대로다.
+# 로그인 후 왼쪽 앱 버전을 클릭 후 프로덕션 관리를 클릭한다.
+# 버전 수정 혹은 새 버전 출시를 눌러서 진행 하면 끝!
+
+* 웹 업데이트 방법
+# ionic serve를 한다.(www 폴더 내용을 빌딩하는 과정)
+# 아이택시 서버는 203.252.99.214(2019년 2월 기준)으로 scp -r과 같은 명령어로 www폴더를 우선 서버 위에 올린다. (scp -r www cra@203.252.99.214 or cra@itaxi.handong.edu)
+# 아이택시 웹 서버 경로는 /var/www/iTaxi로 설정되어 있으므로 빌딩된 www폴더를 iTaxi폴더와 바꾸기만 하면된다.
+
+* 웹 업데이트시 주의사항
+- 새로운 버전의 폴더를 옮길때에는 기존 아이택시 폴더는 iTaxi_2019_02_15와 같이 이름을 바꾸어 백업 폴더로 두고 지우지는 않는다.
+- 이전 버전을 백업 폴더로 두고 새로운것을 옮긴 이후에 새로운 버전에 문제가 있으면 재빨리 새로운 폴더를 지우고 백업 폴더를 다시 iTaxi로 이름을 바꿔서 서비스에 지장을 주지 않는다.
+
+* 웹 서버 경로 설정(아파치 설정)
+- etc/apache2/에 설정파일들이 있다.
+- 경로에 관한 것은 apache2.conf파일과 sites-enabled/000-default.conf 파일에서 수정하면된다.
+- 경로를 수정한 후에는 sudo service apache2 restart로 서버가 경로 변경사항을 인지할 수 있도록 한다.
+
