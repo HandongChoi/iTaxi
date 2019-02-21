@@ -20,7 +20,7 @@ export class MakeRoomPage {
   depart: string = "";
   selectDestination: Object = {key:"포항역", value:""};
   arrive: string = "";
-  maxPeople: string = "3";
+  maxPeople: number = "3";
   price: string = "0"; 
   msg: string="";
 
@@ -65,7 +65,7 @@ export class MakeRoomPage {
                "본인 캐리어 갯수 : " + "S " + this.carrierS + "개 / L " + this.carrierL + "개" + "<br>"
               
     if(this.transportType == 'carpool'){ this.msg += `가격 : ${this.price}원<br>`}
-    
+
     //지금 시간 보다 전 시간으로 예약하는 경우 처리
     if((this.nowDate+this.nowTime)>(this.bookingDate+this.bookingTime)){
       let alert = this.alertCtrl.create({
@@ -116,7 +116,7 @@ export class MakeRoomPage {
                                     fromTo: this.depart + '>' + this.arrive,
                                     departDate: this.bookingDate,
                                     departTime: this.bookingTime,
-                                    capacity: Number(this.maxPeople) + 1,
+                                    capacity: this.maxPeople + 1,
                                     currentPeople: 1,
                                     hostName: this.userServices.userInfo['korName'],
                                     host: this.userID,
@@ -140,7 +140,6 @@ export class MakeRoomPage {
   setDepartureDefault(){ this.selectDeparture = {key:"한동대학교", value:""}; }
   setDestinationDefault(){ this.selectDestination = {key:"포항역", value:""}; }
   swapPlace(){ [this.selectDeparture, this.selectDestination] = [this.selectDestination, this.selectDeparture]; }
-  setPeople(num) { this.maxPeople = String(num); }
   carrierCapacityCheck(carrier, carrierSize){
     var carrierCapacity = 3;
     var sumOfCarrier = carrierSize == 'S' ?  carrier + this.carrierL : this.carrierS + carrier; 

@@ -49,14 +49,10 @@ page-modal {
   }
 
   #carrier {
-    .carrier-image{
-      text-align: center;
-    }
-
+    text-align: center;
+    
     .carrier-number {
       filter: brightness(1.8) grayscale(1) opacity(.7);
-
-      text-align: center;
 
       &:hover {
         filter: brightness(1.2) grayscale(.5) opacity(.9);
