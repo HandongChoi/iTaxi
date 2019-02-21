@@ -86,7 +86,6 @@ export class ListPage {
 
   goChatroom(room) {
     if (!this.isEntered(room['participants'])) { //처음 참여
-      
       var modalPage = this.modalCtrl.create('ModalPage', {room: room});
       modalPage.onDidDismiss(data => {
         if(data){
@@ -117,7 +116,6 @@ export class ListPage {
           }
       });
       modalPage.present();
-
     } else{ // 참여중
       this.navCtrl.push(ChatRoomPage, {room: room});
     }

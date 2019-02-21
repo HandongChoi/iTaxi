@@ -88,7 +88,6 @@ export class ChatRoomPage {
     this.chatPrevKey = null;
     // 이미 만들어진 방에 처음 입장했을 때, 방에 noti를 날린다.
     if (this.navParams.data.isFirst == true) this.sendNotification(`${this.userServices.userInfo['korName']}님이 입장하셨습니다.`);
-
     this.af.object(`/rideHistory/${this.userID}/${this.roomKey}`).subscribe(userRoom => {
       if(userRoom.$value === null){
       }else{
@@ -96,7 +95,6 @@ export class ChatRoomPage {
         this.userCarrierL = userRoom['carrierL'];
       }
     });
-
     this.content.resize();
   }
   
