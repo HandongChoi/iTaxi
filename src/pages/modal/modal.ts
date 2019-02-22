@@ -41,6 +41,10 @@ export class ModalPage {
   }
 
   carrierCapacityCheck(carrier, carrierSize){
+    //ver1.0과 2.0의 호환을 위한 디펜스코드
+    if(isNaN(this.roomCarrierS)) this.roomCarrierS = 0;
+    if(isNaN(this.roomCarrierL)) this.roomCarrierL = 0;
+    
     var carrierCapacity = 3 - (this.roomCarrierS + this.roomCarrierL);
     var sumOfCarrier = carrierSize == 'S' ?  carrier + this.selectedCarrierL : this.selectedCarrierS + carrier;
     if(sumOfCarrier <= carrierCapacity){
