@@ -43,18 +43,18 @@
     </ion-row>
     <ion-row>
       <span col-2><img src="assets/img/carrier-s.png"></span>
-      <span col-2 [ngClass]="{'carrier-number': carrierS!=0}" (click)="carrierCapacityCheck(0, 'S')"><img src="assets/img/0.png"></span>
-      <span col-2 [ngClass]="{'carrier-number': carrierS!=1}" (click)="carrierCapacityCheck(1, 'S')"><img src="assets/img/1.png"></span>
-      <span col-2 [ngClass]="{'carrier-number': carrierS!=2}" (click)="carrierCapacityCheck(2, 'S')"><img src="assets/img/2.png"></span>
-      <span col-2 [ngClass]="{'carrier-number': carrierS!=3}" (click)="carrierCapacityCheck(3, 'S')"><img src="assets/img/3.png"></span>
+      <span col-2 [ngClass]="{'carrier-number': selectedCarrierS != 0}" (click)="carrierCapacityCheck(0, 'S')"><img src="assets/img/0.png"></span>
+      <span col-2 [ngClass]="{'carrier-number': selectedCarrierS != 1}" (click)="carrierCapacityCheck(1, 'S')"><img src="assets/img/1.png"></span>
+      <span col-2 [ngClass]="{'carrier-number': selectedCarrierS != 2}" (click)="carrierCapacityCheck(2, 'S')"><img src="assets/img/2.png"></span>
+      <span col-2 [ngClass]="{'carrier-number': selectedCarrierS != 3}" (click)="carrierCapacityCheck(3, 'S')"><img src="assets/img/3.png"></span>
       <span col-3></span>
     </ion-row>
     <ion-row>
       <span col-2><img src="assets/img/carrier-l.png"></span>
-      <span col-2 [ngClass]="{'carrier-number': carrierL!=0}" (click)="carrierCapacityCheck(0, 'L')"><img src="assets/img/0.png"></span>
-      <span col-2 [ngClass]="{'carrier-number': carrierL!=1}" (click)="carrierCapacityCheck(1, 'L')"><img src="assets/img/1.png"></span>
-      <span col-2 [ngClass]="{'carrier-number': carrierL!=2}" (click)="carrierCapacityCheck(2, 'L')"><img src="assets/img/2.png"></span>
-      <span col-2 [ngClass]="{'carrier-number': carrierL!=3}" (click)="carrierCapacityCheck(3, 'L')"><img src="assets/img/3.png"></span>
+      <span col-2 [ngClass]="{'carrier-number': selectedCarrierL != 0}" (click)="carrierCapacityCheck(0, 'L')"><img src="assets/img/0.png"></span>
+      <span col-2 [ngClass]="{'carrier-number': selectedCarrierL != 1}" (click)="carrierCapacityCheck(1, 'L')"><img src="assets/img/1.png"></span>
+      <span col-2 [ngClass]="{'carrier-number': selectedCarrierL != 2}" (click)="carrierCapacityCheck(2, 'L')"><img src="assets/img/2.png"></span>
+      <span col-2 [ngClass]="{'carrier-number': selectedCarrierL != 3}" (click)="carrierCapacityCheck(3, 'L')"><img src="assets/img/3.png"></span>
       <span col-3></span>
     </ion-row>
   </div>
