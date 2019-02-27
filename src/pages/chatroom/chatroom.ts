@@ -1,7 +1,8 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, Content, NavParams, Platform, AlertController, List, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, Content, NavParams, Platform, AlertController, List, ToastController, ModalController } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { MainPage } from '../../pages/main/main';
+import { MakeRoomPage } from '../../pages/makeRoom/makeRoom';
 import { UsersProvider } from '../../providers/users/users';
 import { DateProvider } from '../../providers/date/date';
 import { RoomsProvider } from '../../providers/rooms/rooms';
@@ -42,7 +43,7 @@ export class ChatRoomPage {
   constructor(public navCtrl: NavController, public af:AngularFireDatabase, public navParams: NavParams, public platform:Platform,
               public roomServices: RoomsProvider, public dateServices: DateProvider, public userServices: UsersProvider,
               public alertCtrl: AlertController, public sms: SMS, public toastCtrl : ToastController, public http: Http,
-              public clipboard: Clipboard) {
+              public clipboard: Clipboard, public modalCtrl: ModalController) {
     let backAction = platform.registerBackButtonAction(() => {
       this.navCtrl.pop();
       backAction();
@@ -239,6 +240,40 @@ export class ChatRoomPage {
     });
     alert.present();
   }
+
+  modify(){
+    var modalPage = this.modalCtrl.create('MakeRoomPage', {room: this.room, userID: this.userID});
+    modalPage.onDidDismiss(data => {
+      if(data){
+        // let members:Array<any> = this.room['participants'];
+
+        // //ver1.x과 ver2.0에서 에러날 것에 관한 디펜스 코드. 앱 업데이트가 된다면 위에 주석처리한걸 풀고 이걸 지워야된다.
+        // this.room['carrierS'] = isNaN(this.room['carrierS']) ? data['carrierS'] : this.room['carrierS'] + data['carrierS'] 
+        // this.room['carrierL'] = isNaN(this.room['carrierL']) ? data['carrierL'] : this.room['carrierL'] + data['carrierL'] 
+
+        // //들어가는 방 정보 업데이트
+        // this.af.object(`/${this.room.transportType}Chatrooms/${this.room.departDate}/${this.room.$key}`).set(this.room);
+        // //타고 있던 사람들 rideHistory 업데이트
+        // members.forEach(studentID => {
+        //   if(this.userID == studentID){
+        //     this.af.object(`/rideHistory/${studentID}/${this.room.$key}`).set(this.room);
+        //     this.af.object(`/rideHistory/${studentID}/${this.room.$key}`).update({carrierS: data['carrierS'], carrierL: data['carrierL']});
+        //   } else{
+        //     this.af.object(`/rideHistory/${studentID}/${this.room.$key}`).update({participants: this.room['participants'], currentPeople: this.room['currentPeople']});
+        //   }          
+        // });
+        let toast = this.toastCtrl.create({
+          message: "방 정보가 수정되었습니다.",
+          duration: 2000,
+          position: "bottom"
+        })
+        toast.present();
+      }
+    });
+    modalPage.present();
+  }
+  
+  
 
   removeUserFromRoom(room){
     let index = room['participants'].indexOf(this.userServices.userInfo['studentID']);

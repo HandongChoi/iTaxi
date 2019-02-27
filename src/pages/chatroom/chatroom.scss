@@ -13,10 +13,28 @@ page-chatroom {
   #room-info{
     background-color: #FFFFFF;
     border-bottom: solid 2px #ddd9d9;
-    padding: 14px;
+    padding: 3px;
     text-align: center;
     p {
       margin: 2px;
+    }
+
+    .text
+    {
+      position:absolute;
+      left: 0;
+      right: 0;
+      margin:0 auto;
+      top:50%;
+      transform:translateY(-50%);
+    }
+
+    .room-button
+    {
+      button {
+        padding: 10px 15px;
+        height: 35px;
+      }
     }
   }
 

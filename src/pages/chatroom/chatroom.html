@@ -12,26 +12,31 @@
   <!-- 방 정보 -->
   <ion-grid id="room-info">
     <ion-row>
-      <ion-col justify-content-center padding-left>
-        {{displayDate}} {{displayTime}}
-        <p><b>{{room.depart}} &nbsp; <ion-icon name="arrow-forward"></ion-icon>
-           &nbsp; {{room.arrive}}
-        </b></p>
-        <p>캐리어  S: {{room['carrierS']}}개 / L: {{room['carrierL']}}개</p>
-        <p *ngIf="room.transportType == 'carpool'">{{room.price}}원</p>
+      <ion-col col-8>
+        <div class="text">
+          <p>{{displayDate}} {{displayTime}}</p>
+          <p><b>{{room.depart}} &nbsp; <ion-icon name="arrow-forward"></ion-icon> &nbsp; {{room.arrive}}</b></p>
+          <p>캐리어  S: {{room['carrierS']}}개 / L: {{room['carrierL']}}개</p>
+          <p *ngIf="room.transportType == 'carpool'">{{room.price}}원</p>
+        </div>
       </ion-col>
-      <ion-col col-auto>
-        <ion-buttons right icon-only>
-          <!-- 먹튀 방지용으로 방나가기는 택시 이용 시간 직전까지만 사용 가능-->
-          <button class="quit" *ngIf="room.departDate + room.departTime > dateServices.nowDate + dateServices.nowTime" 
-          ion-button (click)='quit(room.transportType)'>
-            <span>방나가기</span>
-          </button>
-          <!-- 택시 타고 난 이후 정산 기능-->
-          <button class="payment" *ngIf="room.departDate + room.departTime <= dateServices.nowDate + dateServices.nowTime" 
-          ion-button (click)='payment(room.transportType)' [hidden] ="room.transportType=='carpool' && userID != room.host">
+      <ion-col col-4 class="room-button">
+        <ion-buttons>
+          <ion-row row-auto>
+            <button *ngIf="room.departDate + room.departTime >= dateServices.nowDate + dateServices.nowTime" ion-button (click)='modify(room)'>
+              <span>정보변경</span>
+            </button>      
+          </ion-row>
+          <ion-row row-auto>
+            <!-- 먹튀 방지용으로 방나가기는 택시 이용 시간 직전까지만 사용 가능-->
+            <button *ngIf="room.departDate + room.departTime >= dateServices.nowDate + dateServices.nowTime" ion-button (click)='quit(room.transportType)'>
+              <span>방나가기</span>
+            </button>
+            <!-- 택시 타고 난 이후 정산 기능-->
+            <button *ngIf="room.departDate + room.departTime < dateServices.nowDate + dateServices.nowTime" ion-button (click)='payment(room.transportType)' [hidden] ="room.transportType=='carpool' && userID != room.host">
               <span>정산하기</span>
             </button>
+          </ion-row>
         </ion-buttons>
       </ion-col>
     </ion-row>

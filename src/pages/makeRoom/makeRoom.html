@@ -44,26 +44,7 @@
     </ion-row>
   </div>
 
-  <div class="wrapper" id="date">
-    <ion-row>
-      <span class="label">출발날짜</span>
-    </ion-row>
-    <ion-row class="cont">
-        <ion-datetime padding class="my-date" displayFormat="YYYY년 M월 D일 ({{dateServices.getKToday(bookingDate)}})" pickerFormat="YYYY-MM-DD" min={{min}} max={{max}} 
-        placeholder={{nowDate}} [(ngModel)]="bookingDate" (ngModelChange)="dateServices.getKToday()"></ion-datetime>
-    </ion-row>
-  </div>
-
-  <div class="wrapper" id="time">
-    <ion-row>
-      <span class="label">출발시간</span>
-    </ion-row>
-    <ion-row>
-      <span class="cont">
-        <ion-datetime padding class="my-time"  displayFormat="HH:mm" pickerFomat="HH mm" placeholder={{nowTime}} [(ngModel)]="bookingTime"></ion-datetime>
-      </span>
-    </ion-row>
-  </div>
+  
 
   <div class="wrapper" id="taxi" *ngIf="transportType == 'taxi'">
     <ion-row>
