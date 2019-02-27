@@ -16,7 +16,6 @@ import { UsersProvider } from '../../providers/users/users';
 export class SettingPage {
   @ViewChild(Content) content: Content;
   user: Object;
-  userData: FirebaseObjectObservable<any>;
   isNotiToggled: boolean;
   isPushToggled: boolean;
 
@@ -52,7 +51,6 @@ export class SettingPage {
         {
           text: '확인',
           handler: () => {
-            this.userData.remove();
             this.authProvider.delete();
             let a = this.alertCtrl.create({
               title: "탈퇴 완료",
