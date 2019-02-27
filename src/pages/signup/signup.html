@@ -6,7 +6,7 @@
   </ion-navbar>
   <ion-toolbar no-border-top>
     <ion-segment [(ngModel)]="procedure">
-      <ion-segment-button value="terms" [disabled] = termsDisable (click)='termsAvail(test)'>
+      <ion-segment-button value="terms" [disabled] = termsDisable (click)='termsActive()'>
         약관확인
       </ion-segment-button>
       <ion-segment-button value="info" [disabled] = infoDisable>

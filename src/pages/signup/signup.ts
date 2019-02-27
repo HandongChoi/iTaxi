@@ -94,7 +94,7 @@ export class SignupPage {
     alert.present();
   }
 
-  termsAvail(){
+  termsActive(){
     this.procedure='terms';
     this.termsDisable=false;
     this.infoDisable=true;
