@@ -15,7 +15,6 @@ import { RoomsProvider } from '../../providers/rooms/rooms'
 })
 export class RideHistoryPage {
   @ViewChild(Content) content: Content;
-  rideHistory: FirebaseListObservable<Object[]>;
   history: string = "future";
   userID: string;
   taxiRooms: FirebaseListObservable<any[]>;
