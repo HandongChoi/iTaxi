@@ -19,7 +19,6 @@ import { AccountBankValidator } from '../../validators/accountBank';
 export class SignupPage {
   procedure: string = "terms";
   signUpForm:FormGroup;
-  loading:Loading;
 
   termsDisable: boolean = false;
   infoDisable: boolean = true;
@@ -100,7 +99,7 @@ export class SignupPage {
     this.infoDisable=true;
   }
 
-  allAvail(){
+  termsNInfoActive(){
     this.procedure='info';
     this.termsDisable=false;
     this.infoDisable=false;

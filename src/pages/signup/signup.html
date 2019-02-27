@@ -28,16 +28,16 @@
         </ion-card>
         <div ion-item no-lines class="agree_check">
           <ion-label>약관을 모두 읽었으며 동의합니다.</ion-label>
-          <ion-checkbox [(ngModel)]='firstChecking' color="primary" checked="false"></ion-checkbox>
+          <ion-checkbox [(ngModel)]='firstCheck' color="primary" checked="false"></ion-checkbox>
         </div>
         <ion-card class="terms_content">
           <pre>{{text2}}</pre>
         </ion-card>
         <div ion-item no-lines class="agree_check">
           <ion-label>약관을 모두 읽었으며 동의합니다.</ion-label>
-          <ion-checkbox [(ngModel)]='secondChecking' color="primary" checked="false"></ion-checkbox>
+          <ion-checkbox [(ngModel)]='secondCheck' color="primary" checked="false"></ion-checkbox>
         </div>
-        <button ion-button medium round color="primary" [disabled]="!firstChecking || !secondChecking" round (click)="allAvail()">
+        <button ion-button medium round color="primary" [disabled]="!firstCheck || !secondCheck" round (click)="termsNInfoActive()">
           다음단계
         </button>
       </div>
