@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform, AlertController, Content } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
-import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 import { LoginPage } from '../login/login';
 import { PersonalInfoPage } from '../personal-info/personal-info'
