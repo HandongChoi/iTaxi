@@ -291,7 +291,7 @@ export class SignupPage {
 
     이 　　　름　:　최 효 은
     소속 / 직위　:　한동대학교 CRA / iTaxi 팀장
-    E - M A I L　:　hguitaxi@gmail.com
+    E - M A I L　:　cra.handong.service@gmail.com
   `
 
   text2 = `iTaxi 개인정보보호정책
@@ -414,6 +414,6 @@ export class SignupPage {
 
   이 　　름　: 최 효 은
   소속 / 직위　:　한동대학교 CRA / iTaxi 팀장
-  E - M A I L　:　hguitaxi@gmail.com
+  E - M A I L　: cra.handong.service@gmail.com
   `
 }
