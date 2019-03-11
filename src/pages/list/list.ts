@@ -86,36 +86,55 @@ export class ListPage {
 
   goChatroom(room) {
     if (!this.isEntered(room['participants'])) { //처음 참여
-      var modalPage = this.modalCtrl.create('ModalPage', {room: room});
-      modalPage.onDidDismiss(data => {
-        if(data){
-          let members:Array<any> = room['participants'];
-          members.push(this.userID);
-          room['participants'] = members;
-          room['currentPeople']++;
-          
-          // room['carrierS'] += data['carrierS'];
-          // room['carrierL'] += data['carrierL']; 
-
-          //ver1.x과 ver2.0에서 에러날 것에 관한 디펜스 코드. 앱 업데이트가 된다면 위에 주석처리한걸 풀고 이걸 지워야된다.
-          room['carrierS'] = isNaN(room['carrierS']) ? data['carrierS'] : room['carrierS'] + data['carrierS'] 
-          room['carrierL'] = isNaN(room['carrierL']) ? data['carrierL'] : room['carrierL'] + data['carrierL'] 
-
-          //들어가는 방 정보 업데이트
-          this.af.object(`/${room.transportType}Chatrooms/${room.departDate}/${room.$key}`).set(room);
-          //타고 있던 사람들 rideHistory 업데이트
-          members.forEach(studentID => {
-            if(this.userID == studentID){
-              this.af.object(`/rideHistory/${studentID}/${room.$key}`).set(room);
-              this.af.object(`/rideHistory/${studentID}/${room.$key}`).update({carrierS: data['carrierS'], carrierL: data['carrierL']});
-            } else{
-              this.af.object(`/rideHistory/${studentID}/${room.$key}`).update({participants: room['participants'], currentPeople: room['currentPeople']});
-            }          
-          });
-          this.navCtrl.push(ChatRoomPage, {room: room, isFirst: true});
-          }
+      
+      let members:Array<any> = room['participants'];
+      members.push(this.userID);
+      room['participants'] = members;
+      room['currentPeople']++;
+      
+      //들어가는 방 정보 업데이트
+      this.af.object(`/${room.transportType}Chatrooms/${room.departDate}/${room.$key}`).set(room);
+      //타고 있던 사람들 rideHistory 업데이트
+      members.forEach(studentID => {
+        if(this.userID == studentID){
+          this.af.object(`/rideHistory/${studentID}/${room.$key}`).set(room);
+        } else{
+          this.af.object(`/rideHistory/${studentID}/${room.$key}`).update({participants: room['participants'], currentPeople: room['currentPeople']});
+        }          
       });
-      modalPage.present();
+      this.navCtrl.push(ChatRoomPage, {room: room, isFirst: true});
+        
+      
+      // 현재 앵귤러 라이브러리 고장으로 아래 코드는 안 쓰고 모달은 잠시 못쓰는걸로 하자.
+      // modalPage.onDidDismiss(data => {
+      //   if(data){
+      //     let members:Array<any> = room['participants'];
+      //     members.push(this.userID);
+      //     room['participants'] = members;
+      //     room['currentPeople']++;
+          
+      //     // room['carrierS'] += data['carrierS'];
+      //     // room['carrierL'] += data['carrierL']; 
+
+      //     //ver1.x과 ver2.0에서 에러날 것에 관한 디펜스 코드. 앱 업데이트가 된다면 위에 주석처리한걸 풀고 이걸 지워야된다.
+      //     room['carrierS'] = isNaN(room['carrierS']) ? data['carrierS'] : room['carrierS'] + data['carrierS'] 
+      //     room['carrierL'] = isNaN(room['carrierL']) ? data['carrierL'] : room['carrierL'] + data['carrierL'] 
+
+      //     //들어가는 방 정보 업데이트
+      //     this.af.object(`/${room.transportType}Chatrooms/${room.departDate}/${room.$key}`).set(room);
+      //     //타고 있던 사람들 rideHistory 업데이트
+      //     members.forEach(studentID => {
+      //       if(this.userID == studentID){
+      //         this.af.object(`/rideHistory/${studentID}/${room.$key}`).set(room);
+      //         this.af.object(`/rideHistory/${studentID}/${room.$key}`).update({carrierS: data['carrierS'], carrierL: data['carrierL']});
+      //       } else{
+      //         this.af.object(`/rideHistory/${studentID}/${room.$key}`).update({participants: room['participants'], currentPeople: room['currentPeople']});
+      //       }          
+      //     });
+      //     this.navCtrl.push(ChatRoomPage, {room: room, isFirst: true});
+      //     }
+      // });
+      // modalPage.present();
     } else{ // 참여중
       this.navCtrl.push(ChatRoomPage, {room: room});
     }
