@@ -79,7 +79,7 @@
 <ion-footer>
   <form (ngSubmit)="send()">
     <ion-item>
-      <ion-input type="text" name="contents" [(ngModel)]="chatContent" fixed transportType="text" ></ion-input>
+      <ion-input type="text" name="contents" [(ngModel)]="chatContent" fixed transportType="text" placeholder="보낼 메시지를 입력하세요."></ion-input>
       <button type="submit" ion-button clear item-right > send </button>
     </ion-item>
   </form>
