@@ -4,6 +4,12 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { LoginPage } from '../pages/login/login';
 import { ChatRoomPage } from '../pages/chatroom/chatroom';
+import { MainPage } from '../pages/main/main';
+import { ListPage } from '../pages/list/list';
+import { MakeRoomPage } from '../pages/makeRoom/makeRoom';
+import { BugReportPage } from '../pages/bug-report/bug-report';
+import { RideHistoryPage } from '../pages/ride-history/ride-history';
+import { SettingPage } from '../pages/setting/setting';
 
 import { AuthProvider } from '../providers/auth/auth';
 import { UsersProvider } from '../providers/users/users';
@@ -14,11 +20,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 import firebase from 'firebase';
-
-import { MainPage } from '../pages/main/main';
-import { ListPage } from '../pages/list/list';
-import { MakeRoomPage } from '../pages/makeRoom/makeRoom';
-import { BugReportPage } from '../pages/bug-report/bug-report';
 
 import { OneSignal as OneSignalNative } from '@ionic-native/onesignal';
 declare var OneSignal;
@@ -159,6 +160,11 @@ export class MyApp {
   }
 
   setRoot(Page) { this.navCtrl.setRoot(Page); }
+
+  //위에 것을 써야 되지만 현재 앵귤러 라이브러리 문제로 위의 로직이 작동이 안 되어 아래의 로직으로 임시대체한다.
+  tempRide() { this.navCtrl.setRoot(RideHistoryPage)}
+  tempSetting() { this.navCtrl.setRoot(SettingPage)}
+
   goChatroomPage(room){
     this.menuCtrl.close();
     this.navCtrl.push(ChatRoomPage, {room: room});
